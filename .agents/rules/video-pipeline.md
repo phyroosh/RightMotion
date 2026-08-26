@@ -51,3 +51,58 @@ Always leverage the dedicated NVIDIA RTX GPU:
 - Automatically serves `out/<topic>_video.mp4` with pre-generated viral metadata from `studio/metadata.json`.
 - Dynamically adapts video player for 16:9 Widescreen and 9:16 Shorts.
 - 1-click publishing via Google OAuth 2.0 and YouTube Data API v3.
+
+---
+
+## 6. ⚠️ MANDATORY METADATA STEP — NEVER SKIP, NEVER FALLBACK TO DEFAULTS
+
+Every new clip MUST have its metadata entry added to `studio/metadata.json` **before or immediately after rendering**. The studio server falls back to a useless generic placeholder when no metadata exists. That is completely unacceptable.
+
+### Metadata Entry Template
+Add an entry keyed exactly as `"<topic>_video.mp4"`:
+
+```json
+"<topic>_video.mp4": {
+  "topic": "<topic>",
+  "title": "<Title with strong hook, 1 relevant emoji, and #Shorts — max 100 chars>",
+  "description": "<Full YouTube description — see format below>",
+  "tags": ["Shorts", "<3-4 core topic tags>", "Mental Health", "Psychology", "Mindset", "Personal Growth", "Self Improvement", "<2-3 specific niche tags>"],
+  "categoryId": "27",
+  "privacyStatus": "public"
+}
+```
+
+### Title Rules (make it viral)
+- **Pattern:** `<Provocative curiosity hook> <1 strong emoji> #Shorts`
+- **Target:** 60–90 characters total (never exceed 100).
+- **Hooks that crush it:** "Why You...", "The Real Reason...", "What Nobody Tells You About...", "This Is Why..."
+- **Examples:** `Why Men & Women Handle Emotions So Differently 🧠 #Shorts`, `The Real Reason You Can't Break Bad Habits 🧠 #Shorts`
+
+### Description Rules
+The description follows this exact 5-part formula:
+```
+[PART 1 — HOOK, 2-3 sentences]: Mirror the opening script line. Establish the relatable human tension.
+
+[PART 2 — INSIGHT, 2-3 sentences]: Deliver the core psychological/emotional reframe.
+
+[PART 3 — KEY TAKEAWAY, 1-3 bullet lines]: Pull out the most shareable quote or principle. Use a 🔑 emoji.
+
+[PART 4 — CLOSING WISDOM, 1-2 sentences]: End with warmth, not urgency. 1 fitting emoji.
+
+[PART 5 — HASHTAGS]: Space-separated inline hashtags on the final line. 
+Format: #Shorts #<MainTopic> #<Niche1> #<Niche2> #Psychology #MentalHealth #Mindset #PersonalGrowth #<Specific3> #<Specific4>
+```
+
+### Tags Rules (10–14 tags, keyword research optimised)
+- Always include: `"Shorts"`, `"Mental Health"`, `"Psychology"`, `"Mindset"`, `"Personal Growth"`, `"Self Improvement"`.
+- 4–6 topic-specific tags drawn from actual search queries (e.g. `"Emotional Intelligence"`, `"Gender Psychology"`, `"Atomic Habits"`, `"ADHD"`, etc.).
+- No duplicates. No generic filler.
+
+### Agent Self-Prompt for Writing Metadata
+When creating metadata for a new clip, think through these questions:
+1. **What is the single most surprising / counterintuitive truth in this script?** → That becomes the title hook.
+2. **What is the viewer's painful relatable feeling before watching this?** → That opens the description.
+3. **What is the single most retweetable/shareable sentence in the script?** → That is the 🔑 KEY TAKEAWAY.
+4. **Which YouTube search queries would someone type to find this video?** → Those become the tags.
+5. **What emotional state should the viewer leave with?** → That closes the description.
+
