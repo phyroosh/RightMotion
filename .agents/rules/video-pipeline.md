@@ -23,7 +23,7 @@ public/
     └── sfx/               # mouse_click.mp3 tactile SFX for key visual triggers
 ```
 
-## 2. Voice & Audio Mixing Standard (Natural Speed + Zero Awkward Pauses)
+## 2. Voice & Layered Sound Design Standard (Natural Speed + Layered SFX)
 - **Voiceover Persona:** Female Neural Voice (`en-US-JennyNeural` via Edge-TTS) with natural conversational speed (`rate="+0%"` or natural rate). **DO NOT artificially speed up her voice.**
 - **Mandatory Silence / Pause Compression (CRITICAL RULE):**
   - Raw Neural TTS naturally inserts long, sluggish pauses (500ms–1000ms) between paragraphs and sentences.
@@ -34,17 +34,31 @@ public/
 - **Background Music (BGM):**
   - **Shorts (9:16):** Permanently include subtle BGM from `public/audio/bgm/` (`volume={0.12}` with 1s fade-in/fade-out).
   - **Long-Form (16:9):** Omit BGM by default unless requested.
-- **Tactile Click SFX:** Set `volume={0.28}` on key visual triggers.
+- **Layered Sound Design Engine (`SoundDesignEngine.tsx`):**
+  - Renders frame-synced sound effects from `public/audio/sfx/`:
+    - `whoosh_fast.wav` (`volume={0.35}`) — Snappy card / element reveals
+    - `whoosh_deep.wav` (`volume={0.30}`) — Scene transitions & presenter entries
+    - `whoosh_sparkle.wav` (`volume={0.32}`) — Revelations & perspective shifts
+    - `impact_hit.wav` (`volume={0.38}`) — Heavy statements, card slams, warning guardrails
+    - `whoosh_cinematic.wav` (`volume={0.35}`) — Cinematic horizon intros & climax builds
+    - `mouse_click.mp3` (`volume={0.28}`) — Chip / pill activations & step ticks
 
 ## 3. GPU Hardware Acceleration Standard
 Always leverage the dedicated NVIDIA RTX GPU:
 - **Audio Transcription:** Run `faster-whisper` on CUDA (`device="cuda"`, `compute_type="float16"`).
 - **Remotion Video Rendering:** Render with Chromium ANGLE/D3D11 GPU acceleration (`Config.setChromiumOpenGlRenderer("angle")`).
 
-## 4. Multi-Pose Avatar Switching
-- `character_pointing.png` — Intros, direct takeaways, action triggers.
-- `character_crossed.png` — Questioning excuses, skeptical analysis, evaluating problem.
-- `character_open.png` — Core revelations, compassionate reframes, closing wisdom.
+## 4. Multi-Pose Avatar System + Organic Eye Blink Engine
+- **6-Pose Doctrine:**
+  - `character_fullbody_pointing.png` — **Intro only** (baseHeight: 1550)
+  - `character_fullbody_open.png` — **Outro only** (baseHeight: 1550)
+  - `character_fullbody_casual.png` — **Intro/Outro** warm alternative (baseHeight: 1550)
+  - `character_pointing.png` — **Mid-video bust** (baseHeight: 1200)
+  - `character_crossed.png` — **Mid-video bust** (baseHeight: 1200)
+  - `character_open.png` — **Mid-video bust** (baseHeight: 1200)
+- **Judy Eye Blink Engine:**
+  - Animated automatically in `CharacterKeyframeAnimator.tsx` via `public/character_*_blink.png` layers.
+  - Naturally triggers every ~3.8s for an organic 4-frame blink (closing → closed → opening → open).
 
 ## 5. YouTube Studio Web UI Publisher
 - Located at `studio/` (`node studio/server.js`, port 4000).

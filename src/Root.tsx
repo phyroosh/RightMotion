@@ -16,10 +16,12 @@ import { GogginsComposition } from "./clips/goggins";
 import { BreaksComposition } from "./clips/breaks";
 import { StrengthComposition } from "./clips/strength";
 import { EmotionsComposition } from "./clips/emotions";
+import { ChaptersComposition } from "./clips/chapters";
 import gogginsTranscript from "./clips/goggins/transcript.json";
 import breaksTranscript from "./clips/breaks/transcript.json";
 import strengthTranscript from "./clips/strength/transcript.json";
 import emotionsTranscript from "./clips/emotions/transcript.json";
+import chaptersTranscript from "./clips/chapters/transcript.json";
 import { WordTimestamp } from "./types";
 import "./style.css";
 
@@ -34,6 +36,7 @@ const calculateDurationInFrames = (transcript: WordTimestamp[], fps: number): nu
 
 export const RemotionRoot: React.FC = () => {
   const fps = 30;
+  const chaptersDuration = calculateDurationInFrames(chaptersTranscript as WordTimestamp[], fps);
   const emotionsDuration = calculateDurationInFrames(emotionsTranscript as WordTimestamp[], fps);
   const strengthDuration = calculateDurationInFrames(strengthTranscript as WordTimestamp[], fps);
   const gogginsDuration = calculateDurationInFrames(gogginsTranscript as WordTimestamp[], fps);
@@ -47,7 +50,17 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
-      {/* 0. Emotional Processing & Clarity Video (9:16 Shorts) */}
+      {/* 0. Unfinished Chapters & Starting Line Video (9:16 Shorts) */}
+      <Composition
+        id="ChaptersVideo"
+        component={ChaptersComposition}
+        durationInFrames={chaptersDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      {/* 0a. Emotional Processing & Clarity Video (9:16 Shorts) */}
       <Composition
         id="EmotionsVideo"
         component={EmotionsComposition}
