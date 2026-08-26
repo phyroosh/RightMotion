@@ -14,16 +14,42 @@ Never squish the avatar in a corner or have graphics fighting for space on scree
 
 ### A-Roll Presenter Shots (The Human Connection)
 - **Voice Character:** Always use the female neural network voice (`en-US-JennyNeural` with natural conversational speed `rate="+0%"`, DO NOT speed up the voice) matching Judy.
-- **Smart Multi-Pose Switching:**
-  1. `character_pointing.png` — Directing attention, opening hooks, action directives ("Do 5 minutes anyway").
-  2. `character_crossed.png` — Arms crossed for analytical evaluation, addressing excuses, skepticism ("I'm just lazy", "Did you magically become disciplined?").
-  3. `character_open.png` — Open palms for explaining, questioning, empathetic reframes ("You don't hate the task, you hate how it makes you feel"), and compassionate closing wisdom.
+- **Smart Multi-Pose Switching — 6-Pose System:**
+
+  **BUST CUTOUTS (mid-video explanatory A-Roll):**
+  1. `character_pointing.png` — Directing attention, hooks, action directives.
+  2. `character_crossed.png` — Arms crossed for analytical evaluation, skepticism, addressing excuses.
+  3. `character_open.png` — Open palms for explaining, questioning, empathetic reframes, compassionate wisdom.
+
+  **FULL BODY (intro hook & outro finale ONLY — the money shots):**
+  4. `character_fullbody_pointing.png` — Confident pointing up, strong for opening hooks and calls to action.
+  5. `character_fullbody_open.png` — Both palms open/shrug, empathetic outros, question-framing moments.
+  6. `character_fullbody_casual.png` — Touching hair, relaxed and warm — humanizing bookend moments.
+
+  **⚠️ FULL BODY DOCTRINE — THIS IS THE STANDARD STRUCTURE:**
+  - **Intro (~first 3-5s):** Use `fullbody_pointing` or `fullbody_casual`. She appears full body, centered and impactful, welcoming the viewer in.
+  - **Mid-video explanatory A-Roll (scattered throughout):** Switch to bust cutouts (`pointing`, `crossed`, `open`) as she slides in/out. These feel more dynamic and tight for mid-explanation punches.
+  - **Outro (~last 3-5s):** Return to `fullbody_open` or `fullbody_casual`. She reappears full body for the emotional send-off.
+  - **Bust `baseHeight`:** Keep `baseHeight={1200}` as before — she appears waist-up, filling the lower portion.
 - **Visual Treatment during A-Roll:**
-  - **Hero Presenter Framing:** Centered prominently (`w-[900px] h-[1080px]` in 16:9 widescreen or `w-[760px] h-[1200px]` in 9:16 Shorts).
-  - **Frosted Glass Blur Backdrop:** Full-screen frosted glass blur (`backdrop-blur-3xl bg-white/40`) over smooth, gently breathing liquid mesh gradients.
+
+  **⚠️ CRITICAL PERMANENT LAYOUT RULE — ALWAYS USE `CharacterKeyframeAnimator` — NEVER DEVIATE:**
+  - The Presenter component wrapper MUST be `className="absolute inset-0 pointer-events-none z-30 flex flex-col items-center justify-end overflow-hidden"`. The `justify-end` anchors the character to the BOTTOM of the frame so she grows upward naturally. NEVER use absolute `top-[X%]` to position the character.
+  - **Full body intro/outro keyframe sets:** use `baseHeight={1550}` so the full body image fills more of the frame. **Bust cutout mid-video keyframe sets:** use `baseHeight={1200}`. You can conditionally switch the rendered `CharacterKeyframeAnimator`'s height by tracking the current segment's pose type, or simply render two separate `CharacterKeyframeAnimator` groups — one for full body, one for busts — each with their own keyframes and heights.
+  - Keyframes control entrance/exit via `y` (start `y: 80` → `y: 0` = slides up from below) and `opacity` (0 → 1). Scale subtly (`1.0 → 1.06`) during the hold for cinematic push-in.
+  - ALWAYS pass `currentMs` as a prop from the composition (`index.tsx`). Compute it there: `const currentMs = (frame / fps) * 1000;`.
+  - **Canonical Reference:** Always copy the structure from `src/clips/goggins/Presenter.tsx`. That is the gold standard.
+
+  **⚠️ CRITICAL BADGE RULE — Apple Glass Style ONLY:**
+  - Presenter scene badges MUST use `apple-glass` CSS class. NEVER use colored `bg-gradient-to-r` pill buttons on the presenter screen.
+  - Correct badge: `<div className="absolute top-[13%] apple-glass flex items-center border-[5px] border-[accent-color] shadow-2xl z-40" style={{ padding: "26px 60px", borderRadius: 48, gap: 24 }}>`
+  - Badge icon: Lucide icon at `style={{ width: 60, height: 60 }}`.
+  - Badge text: `<span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 44 }}>TITLE</span>`
+
+  - **Frosted Glass Blur Backdrop:** `<div className="absolute inset-0 backdrop-blur-2xl bg-white/35 pointer-events-none" />` inside the presenter wrapper, behind the character.
+  - **Soft Ambient Halo:** `absolute bottom-0 left-1/2 -translate-x-1/2 w-[850px] h-[850px] rounded-full blur-[120px]` radial gradient glow behind the character feet.
   - **Zero Graphic Clutter:** Do NOT show motion graphics cards or floating diagram clutter while she is on screen.
-  - **Large High-Contrast Presenter Badges (CRITICAL RULE for Mobile & 480p):** Badges and pills accompanying the presenter MUST NEVER be tiny. Use large, prominent styling: `px-12 py-5 rounded-[28px] border-[3px] shadow-2xl`, icons `w-10 h-10` to `w-12 h-12`, typography `text-2xl` to `text-3xl font-black uppercase tracking-wider`.
-  - **Dynamic Camera Cuts:** Punch in slightly (`1.0x -> 1.08x`) on major breakthrough realizations.
+  - **Dynamic Camera Cuts:** Punch in slightly (`scale: 1.0 → 1.08` in keyframes) on major breakthrough realizations.
 
 ### B-Roll Motion Graphics Shots (Single-Concept Visual Metaphors)
 - **When it appears:** During all intermediate explanatory scenes, comparisons, examples, and breakdowns.

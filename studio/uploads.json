@@ -53,5 +53,16 @@
     "publishAt": "2026-08-26T19:30:00.000Z",
     "isScheduled": true,
     "publishedAt": "2026-08-26T06:17:04Z"
+  },
+  "strength_video.mp4": {
+    "uploaded": true,
+    "videoId": "SU7cdTjXd-A",
+    "youtubeUrl": "https://youtu.be/SU7cdTjXd-A",
+    "shortsUrl": "https://youtube.com/shorts/SU7cdTjXd-A",
+    "title": "What Real Strength Actually Looks Like 🛡️ #Shorts",
+    "privacyStatus": "public",
+    "publishAt": null,
+    "isScheduled": false,
+    "publishedAt": "2026-08-26T08:16:19Z"
   }
 }

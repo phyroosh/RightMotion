@@ -1,111 +1,127 @@
 import React from "react";
-import { interpolate, spring, staticFile, useCurrentFrame, useVideoConfig, Img } from "remotion";
+import { spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { CharacterKeyframeAnimator, KeyframePoint } from "../../components/CharacterKeyframeAnimator";
 import { HelpCircle, Sparkles, Feather } from "lucide-react";
-import { WordTimestamp } from "../../types";
 
 interface PresenterProps {
-  transcript: WordTimestamp[];
+  currentMs: number;
 }
 
-export const StrengthPresenter: React.FC<PresenterProps> = () => {
+export const StrengthPresenter: React.FC<PresenterProps> = ({ currentMs }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const currentMs = (frame / fps) * 1000;
 
-  // A-Roll Active Intervals:
-  // 1. 0 - 3,500ms (Intro Hook)
-  // 2. 9,100 - 15,400ms (Real Strength Reframe & Asking for Help)
-  // 3. 30,100 - 33,600ms (Carry Alone Myth / Unburdening)
-  const isIntro = currentMs < 3500;
-  const isReframe = currentMs >= 9100 && currentMs < 15400;
-  const isAloneMyth = currentMs >= 30100 && currentMs < 33600;
+  // A-Roll keyframe tracks (character slides in/out from bottom)
+  // A-Roll Intervals:
+  // 1. 0 - 3,500ms: Intro Hook (pointing pose)
+  // 2. 9,100 - 15,400ms: Real Strength Reframe (open palms)
+  // 3. 30,100 - 33,600ms: Carry Alone / Unburden (crossed)
+  const keyframes: KeyframePoint[] = [
+    // 1. Intro Hook (0s - 3.5s): Pointing — directing attention
+    { timeMs: 0,    pose: "pointing", scale: 0.94, y: 80, rotate: -2, opacity: 0 },
+    { timeMs: 300,  pose: "pointing", scale: 1.0,  y: 0,  rotate: 0,  opacity: 1 },
+    { timeMs: 3000, pose: "pointing", scale: 1.02, y: -4, rotate: 1,  opacity: 1 },
+    { timeMs: 3500, pose: "pointing", scale: 0.94, y: 90, rotate: 2,  opacity: 0 },
 
-  const isARoll = isIntro || isReframe || isAloneMyth;
-  if (!isARoll) return null;
+    // 2. Real Strength Reframe (9.1s - 15.4s): Open palms — compassionate reframe
+    { timeMs: 9100,  pose: "open", scale: 0.94, y: 80, rotate: -2, opacity: 0 },
+    { timeMs: 9700,  pose: "open", scale: 1.04, y: 0,  rotate: 0,  opacity: 1 },
+    { timeMs: 14800, pose: "open", scale: 1.06, y: -5, rotate: 1,  opacity: 1 },
+    { timeMs: 15400, pose: "open", scale: 0.94, y: 90, rotate: 2,  opacity: 0 },
 
-  // Dynamic Avatar Poses & Badges
-  let pose = "character_pointing.png";
-  let badgeTitle = "THE SILENT STRUGGLE";
-  let badgeSub = "MEN'S EMOTIONAL PARADOX";
-  let badgeColor = "from-indigo-600 via-blue-600 to-sky-600";
-  let IconComponent = HelpCircle;
+    // 3. Unburden Yourself (30.1s - 33.6s): Crossed — analytical skepticism of the alone-myth
+    { timeMs: 30100, pose: "crossed", scale: 0.94, y: 90, rotate: 2,  opacity: 0 },
+    { timeMs: 30700, pose: "crossed", scale: 1.05, y: 0,  rotate: 0,  opacity: 1 },
+    { timeMs: 33000, pose: "crossed", scale: 1.07, y: -5, rotate: -1, opacity: 1 },
+    { timeMs: 33600, pose: "crossed", scale: 0.94, y: 90, rotate: -2, opacity: 0 },
+  ];
 
-  if (isReframe) {
-    pose = "character_open.png";
-    badgeTitle = "STRATEGIC INTELLIGENCE";
-    badgeSub = "THE REAL STRENGTH REFRAME";
-    badgeColor = "from-sky-600 via-indigo-600 to-blue-700";
-    IconComponent = Sparkles;
-  } else if (isAloneMyth) {
-    pose = "character_crossed.png";
-    badgeTitle = "UNBURDEN YOURSELF";
-    badgeSub = "YOU HAVE NOTHING TO PROVE";
-    badgeColor = "from-indigo-700 via-purple-700 to-sky-600";
-    IconComponent = Feather;
-  }
+  const isIntro     = currentMs >= 0      && currentMs < 3500;
+  const isReframe   = currentMs >= 9100   && currentMs < 15400;
+  const isUnburden  = currentMs >= 30100  && currentMs < 33600;
+  const isPresenterActive = isIntro || isReframe || isUnburden;
 
-  // Entrance spring animation
-  const activeStartMs = isIntro ? 0 : isReframe ? 9100 : 30100;
-  const startFrame = Math.floor((activeStartMs / 1000) * fps);
-  const spr = spring({
-    frame: Math.max(0, frame - startFrame),
-    fps,
-    config: { damping: 18, stiffness: 110, mass: 0.8 },
-  });
+  const badgeSpring = spring({ frame, fps, config: { damping: 18, mass: 0.8, stiffness: 110 } });
 
-  const slideY = interpolate(spr, [0, 1], [70, 0]);
-  const opacity = interpolate(spr, [0, 1], [0, 1]);
-
-  // Subtle punch-in camera effect during the reframe beat
-  const punchScale = isReframe
-    ? interpolate(currentMs, [9100, 12000], [1.0, 1.05], {
-        extrapolateLeft: "clamp",
-        extrapolateRight: "clamp",
-      })
-    : 1.0;
-
-  const baseScale = interpolate(spr, [0, 1], [0.94, 1.0]) * punchScale;
-
-  // Gentle idle breathing
-  const idleY = Math.sin((frame / fps) * 2.5) * 5;
+  if (!isPresenterActive) return null;
 
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none z-10 flex flex-col items-center justify-center select-none">
-      {/* Upper Large Context Badge (Mobile-optimized high readability) */}
-      <div
-        className="absolute top-[14%] flex flex-col items-center gap-3 z-30"
-        style={{
-          transform: `translateY(${slideY * 0.3}px)`,
-          opacity,
-        }}
-      >
-        <div className="px-10 py-3 rounded-full bg-slate-950/95 text-sky-400 font-mono text-base font-black uppercase tracking-widest border-2 border-slate-700 shadow-2xl flex items-center gap-3 backdrop-blur-xl">
-          <span className="w-3 h-3 rounded-full bg-sky-400 animate-ping" />
-          {badgeSub}
-        </div>
-        <div
-          className={`px-12 py-5 rounded-[28px] bg-gradient-to-r ${badgeColor} text-white font-black text-3xl uppercase tracking-wider shadow-[0_20px_50px_rgba(0,113,227,0.35)] border-[3px] border-white/60 flex items-center gap-4`}
-        >
-          <IconComponent className="w-9 h-9 text-white drop-shadow-md shrink-0" />
-          <span>{badgeTitle}</span>
-        </div>
-      </div>
+    <div className="absolute inset-0 pointer-events-none z-30 flex flex-col items-center justify-end overflow-hidden">
+      {/* 1. Frosted Glass Backdrop Overlay */}
+      <div className="absolute inset-0 backdrop-blur-2xl bg-white/35 pointer-events-none transition-all duration-500" />
 
-      {/* Main Avatar Presenter Shot */}
+      {/* 2. Soft Ambient Radial Light Halo (anchored at bottom behind character) */}
       <div
-        className="absolute top-[20%] w-[720px] h-[880px] flex items-center justify-center"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[850px] h-[850px] rounded-full pointer-events-none blur-[120px]"
         style={{
-          transform: `translateY(${slideY + idleY}px) scale(${baseScale})`,
-          opacity,
+          background: isReframe
+            ? "radial-gradient(circle, rgba(0,113,227,0.32) 0%, rgba(99,102,241,0.2) 60%, transparent 80%)"
+            : isUnburden
+            ? "radial-gradient(circle, rgba(99,102,241,0.3) 0%, rgba(244,63,94,0.2) 60%, transparent 80%)"
+            : "radial-gradient(circle, rgba(245,158,11,0.35) 0%, rgba(0,113,227,0.2) 60%, transparent 80%)",
         }}
-      >
-        <div className="relative w-full h-full flex items-center justify-center filter drop-shadow-[0_30px_60px_rgba(0,113,227,0.25)]">
-          <Img
-            src={staticFile(pose)}
-            className="w-full h-full object-contain"
-          />
+      />
+
+      {/* 3. Apple Glass Scene Badge (top-anchored, large text, high contrast for mobile/480p) */}
+      {isIntro && (
+        <div
+          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(245,158,11,0.24)] border-[5px] border-amber-300 z-40"
+          style={{
+            transform: `translateY(${(1 - badgeSpring) * -20}px) scale(${0.96 + badgeSpring * 0.04})`,
+            padding: "26px 60px",
+            borderRadius: 48,
+            gap: 24,
+          }}
+        >
+          <HelpCircle className="text-indigo-600" style={{ width: 60, height: 60 }} />
+          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 44 }}>
+            THE SILENT STRUGGLE
+          </span>
         </div>
-      </div>
+      )}
+
+      {isReframe && (
+        <div
+          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(0,113,227,0.24)] border-[5px] border-sky-300 z-40"
+          style={{
+            transform: `translateY(${(1 - badgeSpring) * -20}px) scale(${0.96 + badgeSpring * 0.04})`,
+            padding: "26px 60px",
+            borderRadius: 48,
+            gap: 24,
+          }}
+        >
+          <Sparkles className="text-sky-600 animate-spin" style={{ width: 60, height: 60 }} />
+          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 44 }}>
+            REAL STRENGTH REFRAME
+          </span>
+        </div>
+      )}
+
+      {isUnburden && (
+        <div
+          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(99,102,241,0.24)] border-[5px] border-indigo-300 z-40"
+          style={{
+            transform: `translateY(${(1 - badgeSpring) * -20}px) scale(${0.96 + badgeSpring * 0.04})`,
+            padding: "26px 60px",
+            borderRadius: 48,
+            gap: 24,
+          }}
+        >
+          <Feather className="text-indigo-600" style={{ width: 60, height: 60 }} />
+          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 44 }}>
+            UNBURDEN YOURSELF
+          </span>
+        </div>
+      )}
+
+      {/* 4. Animated Character — bottom-anchored, grows upward from the floor */}
+      <CharacterKeyframeAnimator
+        currentMs={currentMs}
+        keyframes={keyframes}
+        baseWidth={780}
+        baseHeight={1200}
+        className="-mb-6"
+      />
     </div>
   );
 };

@@ -30,6 +30,7 @@ const SFX_FRAMES = [
 export const StrengthComposition: React.FC = () => {
   const { width, height, fps, durationInFrames } = useVideoConfig();
   const frame = useCurrentFrame();
+  const currentMs = (frame / fps) * 1000;
 
   return (
     <div
@@ -70,7 +71,7 @@ export const StrengthComposition: React.FC = () => {
       <StrengthCanvas transcript={transcript} />
 
       {/* 7. A-Roll Hero Presenter with Keyframe Animation & Multi-Pose Switching */}
-      <StrengthPresenter transcript={transcript} />
+      <StrengthPresenter currentMs={currentMs} />
 
       {/* 8. Central Kinetic Typography with Apple Blue Glow */}
       <AppleKineticCaptions transcript={transcript} />

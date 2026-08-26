@@ -1,7 +1,15 @@
 import React from "react";
 import { Easing, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 
-export type CharacterPose = "pointing" | "crossed" | "open";
+export type CharacterPose =
+  // Bust / waist-up cutouts (mid-video explanatory A-Roll)
+  | "pointing"
+  | "crossed"
+  | "open"
+  // Full body shots (intro hook & outro finale only)
+  | "fullbody_pointing"   // finger up — confident intro hook, calls to action
+  | "fullbody_open"       // open palms shrug — empathetic outros, question frames
+  | "fullbody_casual";    // touching hair — warm humanizing bookend moments
 
 export interface KeyframePoint {
   timeMs: number; // millisecond in timeline
@@ -124,6 +132,13 @@ export const CharacterKeyframeAnimator: React.FC<CharacterKeyframeAnimatorProps>
         return staticFile("character_crossed.png");
       case "open":
         return staticFile("character_open.png");
+      // Full body shots — intro hook & outro finale
+      case "fullbody_pointing":
+        return staticFile("character_fullbody_pointing.png");
+      case "fullbody_open":
+        return staticFile("character_fullbody_open.png");
+      case "fullbody_casual":
+        return staticFile("character_fullbody_casual.png");
       case "pointing":
       default:
         return staticFile("character_pointing.png");
