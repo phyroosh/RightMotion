@@ -1,0 +1,647 @@
+[
+  {
+    "word": "A",
+    "startMs": 0,
+    "endMs": 260
+  },
+  {
+    "word": "lot",
+    "startMs": 260,
+    "endMs": 440
+  },
+  {
+    "word": "of",
+    "startMs": 440,
+    "endMs": 580
+  },
+  {
+    "word": "men",
+    "startMs": 580,
+    "endMs": 740
+  },
+  {
+    "word": "think",
+    "startMs": 740,
+    "endMs": 1040
+  },
+  {
+    "word": "being",
+    "startMs": 1040,
+    "endMs": 1220
+  },
+  {
+    "word": "strong",
+    "startMs": 1220,
+    "endMs": 1560
+  },
+  {
+    "word": "means",
+    "startMs": 1560,
+    "endMs": 1880
+  },
+  {
+    "word": "never",
+    "startMs": 1880,
+    "endMs": 2220
+  },
+  {
+    "word": "admitting",
+    "startMs": 2220,
+    "endMs": 2540
+  },
+  {
+    "word": "they're",
+    "startMs": 2540,
+    "endMs": 2840
+  },
+  {
+    "word": "struggling.",
+    "startMs": 2840,
+    "endMs": 3220
+  },
+  {
+    "word": "You",
+    "startMs": 3680,
+    "endMs": 3740
+  },
+  {
+    "word": "keep",
+    "startMs": 3740,
+    "endMs": 3900
+  },
+  {
+    "word": "everything",
+    "startMs": 3900,
+    "endMs": 4200
+  },
+  {
+    "word": "inside.",
+    "startMs": 4200,
+    "endMs": 4700
+  },
+  {
+    "word": "You",
+    "startMs": 5280,
+    "endMs": 5280
+  },
+  {
+    "word": "act",
+    "startMs": 5280,
+    "endMs": 5480
+  },
+  {
+    "word": "like",
+    "startMs": 5480,
+    "endMs": 5680
+  },
+  {
+    "word": "nothing",
+    "startMs": 5680,
+    "endMs": 6040
+  },
+  {
+    "word": "bothers",
+    "startMs": 6040,
+    "endMs": 6300
+  },
+  {
+    "word": "you,",
+    "startMs": 6300,
+    "endMs": 6680
+  },
+  {
+    "word": "because",
+    "startMs": 6680,
+    "endMs": 7180
+  },
+  {
+    "word": "somehow,",
+    "startMs": 7180,
+    "endMs": 7600
+  },
+  {
+    "word": "opening",
+    "startMs": 7860,
+    "endMs": 8100
+  },
+  {
+    "word": "up",
+    "startMs": 8100,
+    "endMs": 8320
+  },
+  {
+    "word": "feels",
+    "startMs": 8320,
+    "endMs": 8540
+  },
+  {
+    "word": "weak.",
+    "startMs": 8540,
+    "endMs": 8820
+  },
+  {
+    "word": "But",
+    "startMs": 9260,
+    "endMs": 9280
+  },
+  {
+    "word": "real",
+    "startMs": 9280,
+    "endMs": 9440
+  },
+  {
+    "word": "strength",
+    "startMs": 9440,
+    "endMs": 9740
+  },
+  {
+    "word": "isn't",
+    "startMs": 9740,
+    "endMs": 10220
+  },
+  {
+    "word": "pretending",
+    "startMs": 10220,
+    "endMs": 10500
+  },
+  {
+    "word": "you",
+    "startMs": 10500,
+    "endMs": 10860
+  },
+  {
+    "word": "don't",
+    "startMs": 10860,
+    "endMs": 11100
+  },
+  {
+    "word": "have",
+    "startMs": 11100,
+    "endMs": 11240
+  },
+  {
+    "word": "problems.",
+    "startMs": 11240,
+    "endMs": 11560
+  },
+  {
+    "word": "It's",
+    "startMs": 12100,
+    "endMs": 12280
+  },
+  {
+    "word": "knowing",
+    "startMs": 12280,
+    "endMs": 12440
+  },
+  {
+    "word": "when",
+    "startMs": 12440,
+    "endMs": 12680
+  },
+  {
+    "word": "you",
+    "startMs": 12680,
+    "endMs": 12840
+  },
+  {
+    "word": "need",
+    "startMs": 12840,
+    "endMs": 12980
+  },
+  {
+    "word": "help",
+    "startMs": 12980,
+    "endMs": 13240
+  },
+  {
+    "word": "and",
+    "startMs": 13240,
+    "endMs": 13660
+  },
+  {
+    "word": "being",
+    "startMs": 13660,
+    "endMs": 13820
+  },
+  {
+    "word": "smart",
+    "startMs": 13820,
+    "endMs": 14140
+  },
+  {
+    "word": "enough",
+    "startMs": 14140,
+    "endMs": 14420
+  },
+  {
+    "word": "to",
+    "startMs": 14420,
+    "endMs": 14620
+  },
+  {
+    "word": "ask",
+    "startMs": 14620,
+    "endMs": 14820
+  },
+  {
+    "word": "for",
+    "startMs": 14820,
+    "endMs": 15100
+  },
+  {
+    "word": "it.",
+    "startMs": 15100,
+    "endMs": 15280
+  },
+  {
+    "word": "A",
+    "startMs": 15480,
+    "endMs": 15600
+  },
+  {
+    "word": "man",
+    "startMs": 15600,
+    "endMs": 15780
+  },
+  {
+    "word": "who",
+    "startMs": 15780,
+    "endMs": 15980
+  },
+  {
+    "word": "can",
+    "startMs": 15980,
+    "endMs": 16140
+  },
+  {
+    "word": "calmly",
+    "startMs": 16140,
+    "endMs": 16379
+  },
+  {
+    "word": "say,",
+    "startMs": 16379,
+    "endMs": 16780
+  },
+  {
+    "word": "I'm",
+    "startMs": 17140,
+    "endMs": 17220
+  },
+  {
+    "word": "not",
+    "startMs": 17220,
+    "endMs": 17420
+  },
+  {
+    "word": "okay,",
+    "startMs": 17420,
+    "endMs": 17720
+  },
+  {
+    "word": "isn't",
+    "startMs": 18060,
+    "endMs": 18300
+  },
+  {
+    "word": "less",
+    "startMs": 18300,
+    "endMs": 18500
+  },
+  {
+    "word": "masculine.",
+    "startMs": 18500,
+    "endMs": 18960
+  },
+  {
+    "word": "He's",
+    "startMs": 19500,
+    "endMs": 19600
+  },
+  {
+    "word": "self",
+    "startMs": 19600,
+    "endMs": 19780
+  },
+  {
+    "word": "-aware.",
+    "startMs": 19780,
+    "endMs": 20060
+  },
+  {
+    "word": "He",
+    "startMs": 20480,
+    "endMs": 20520
+  },
+  {
+    "word": "knows",
+    "startMs": 20520,
+    "endMs": 20700
+  },
+  {
+    "word": "that",
+    "startMs": 20700,
+    "endMs": 20920
+  },
+  {
+    "word": "ignoring",
+    "startMs": 20920,
+    "endMs": 21160
+  },
+  {
+    "word": "a",
+    "startMs": 21160,
+    "endMs": 21420
+  },
+  {
+    "word": "problem",
+    "startMs": 21420,
+    "endMs": 21720
+  },
+  {
+    "word": "doesn't",
+    "startMs": 21720,
+    "endMs": 22200
+  },
+  {
+    "word": "make",
+    "startMs": 22200,
+    "endMs": 22320
+  },
+  {
+    "word": "it",
+    "startMs": 22320,
+    "endMs": 22480
+  },
+  {
+    "word": "disappear.",
+    "startMs": 22480,
+    "endMs": 22860
+  },
+  {
+    "word": "Sometimes",
+    "startMs": 23400,
+    "endMs": 23700
+  },
+  {
+    "word": "the",
+    "startMs": 23700,
+    "endMs": 23980
+  },
+  {
+    "word": "strongest",
+    "startMs": 23980,
+    "endMs": 24260
+  },
+  {
+    "word": "thing",
+    "startMs": 24260,
+    "endMs": 24660
+  },
+  {
+    "word": "you",
+    "startMs": 24660,
+    "endMs": 24840
+  },
+  {
+    "word": "can",
+    "startMs": 24840,
+    "endMs": 24960
+  },
+  {
+    "word": "do",
+    "startMs": 24960,
+    "endMs": 25180
+  },
+  {
+    "word": "is",
+    "startMs": 25180,
+    "endMs": 25460
+  },
+  {
+    "word": "talk",
+    "startMs": 25460,
+    "endMs": 25660
+  },
+  {
+    "word": "to",
+    "startMs": 25660,
+    "endMs": 25880
+  },
+  {
+    "word": "someone",
+    "startMs": 25880,
+    "endMs": 26120
+  },
+  {
+    "word": "you",
+    "startMs": 26120,
+    "endMs": 26300
+  },
+  {
+    "word": "trust,",
+    "startMs": 26300,
+    "endMs": 26560
+  },
+  {
+    "word": "think",
+    "startMs": 26940,
+    "endMs": 27140
+  },
+  {
+    "word": "clearly,",
+    "startMs": 27140,
+    "endMs": 27460
+  },
+  {
+    "word": "and",
+    "startMs": 27920,
+    "endMs": 28080
+  },
+  {
+    "word": "deal",
+    "startMs": 28080,
+    "endMs": 28240
+  },
+  {
+    "word": "with",
+    "startMs": 28240,
+    "endMs": 28420
+  },
+  {
+    "word": "the",
+    "startMs": 28420,
+    "endMs": 28520
+  },
+  {
+    "word": "problem",
+    "startMs": 28520,
+    "endMs": 28780
+  },
+  {
+    "word": "instead",
+    "startMs": 28780,
+    "endMs": 29200
+  },
+  {
+    "word": "of",
+    "startMs": 29200,
+    "endMs": 29459
+  },
+  {
+    "word": "hiding",
+    "startMs": 29460,
+    "endMs": 29740
+  },
+  {
+    "word": "it.",
+    "startMs": 29740,
+    "endMs": 29940
+  },
+  {
+    "word": "You",
+    "startMs": 30240,
+    "endMs": 30300
+  },
+  {
+    "word": "don't",
+    "startMs": 30300,
+    "endMs": 30520
+  },
+  {
+    "word": "have",
+    "startMs": 30520,
+    "endMs": 30640
+  },
+  {
+    "word": "to",
+    "startMs": 30640,
+    "endMs": 30780
+  },
+  {
+    "word": "carry",
+    "startMs": 30780,
+    "endMs": 31020
+  },
+  {
+    "word": "everything",
+    "startMs": 31020,
+    "endMs": 31460
+  },
+  {
+    "word": "alone",
+    "startMs": 31460,
+    "endMs": 31800
+  },
+  {
+    "word": "just",
+    "startMs": 31800,
+    "endMs": 32180
+  },
+  {
+    "word": "to",
+    "startMs": 32180,
+    "endMs": 32340
+  },
+  {
+    "word": "prove",
+    "startMs": 32340,
+    "endMs": 32560
+  },
+  {
+    "word": "you",
+    "startMs": 32560,
+    "endMs": 32700
+  },
+  {
+    "word": "can",
+    "startMs": 32700,
+    "endMs": 32840
+  },
+  {
+    "word": "carry",
+    "startMs": 32840,
+    "endMs": 33160
+  },
+  {
+    "word": "it.",
+    "startMs": 33160,
+    "endMs": 33400
+  },
+  {
+    "word": "Real",
+    "startMs": 33720,
+    "endMs": 33800
+  },
+  {
+    "word": "strength",
+    "startMs": 33800,
+    "endMs": 34080
+  },
+  {
+    "word": "isn't",
+    "startMs": 34080,
+    "endMs": 34600
+  },
+  {
+    "word": "having",
+    "startMs": 34600,
+    "endMs": 34740
+  },
+  {
+    "word": "no",
+    "startMs": 34740,
+    "endMs": 35000
+  },
+  {
+    "word": "weakness.",
+    "startMs": 35000,
+    "endMs": 35260
+  },
+  {
+    "word": "It's",
+    "startMs": 35840,
+    "endMs": 36000
+  },
+  {
+    "word": "having",
+    "startMs": 36000,
+    "endMs": 36120
+  },
+  {
+    "word": "the",
+    "startMs": 36120,
+    "endMs": 36320
+  },
+  {
+    "word": "courage",
+    "startMs": 36320,
+    "endMs": 36580
+  },
+  {
+    "word": "to",
+    "startMs": 36580,
+    "endMs": 36860
+  },
+  {
+    "word": "face",
+    "startMs": 36860,
+    "endMs": 37020
+  },
+  {
+    "word": "what's",
+    "startMs": 37020,
+    "endMs": 37380
+  },
+  {
+    "word": "actually",
+    "startMs": 37380,
+    "endMs": 37700
+  },
+  {
+    "word": "there.",
+    "startMs": 37700,
+    "endMs": 38000
+  }
+]

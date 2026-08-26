@@ -1,0 +1,572 @@
+[
+  {
+    "word": "you",
+    "startMs": 0,
+    "endMs": 280
+  },
+  {
+    "word": "think",
+    "startMs": 280,
+    "endMs": 460
+  },
+  {
+    "word": "you",
+    "startMs": 460,
+    "endMs": 580
+  },
+  {
+    "word": "need",
+    "startMs": 580,
+    "endMs": 760
+  },
+  {
+    "word": "motivation",
+    "startMs": 760,
+    "endMs": 980
+  },
+  {
+    "word": "to",
+    "startMs": 980,
+    "endMs": 1420
+  },
+  {
+    "word": "start.",
+    "startMs": 1420,
+    "endMs": 1660
+  },
+  {
+    "word": "But",
+    "startMs": 2680,
+    "endMs": 2840
+  },
+  {
+    "word": "honestly,",
+    "startMs": 2840,
+    "endMs": 3140
+  },
+  {
+    "word": "motivation",
+    "startMs": 3540,
+    "endMs": 3860
+  },
+  {
+    "word": "usually",
+    "startMs": 3860,
+    "endMs": 4280
+  },
+  {
+    "word": "shows",
+    "startMs": 4280,
+    "endMs": 4720
+  },
+  {
+    "word": "up",
+    "startMs": 4720,
+    "endMs": 4920
+  },
+  {
+    "word": "after",
+    "startMs": 4920,
+    "endMs": 5180
+  },
+  {
+    "word": "you",
+    "startMs": 5180,
+    "endMs": 5300
+  },
+  {
+    "word": "start.",
+    "startMs": 5300,
+    "endMs": 5520
+  },
+  {
+    "word": "Because",
+    "startMs": 6580,
+    "endMs": 6820
+  },
+  {
+    "word": "when",
+    "startMs": 6820,
+    "endMs": 7020
+  },
+  {
+    "word": "something",
+    "startMs": 7020,
+    "endMs": 7300
+  },
+  {
+    "word": "feels",
+    "startMs": 7300,
+    "endMs": 7600
+  },
+  {
+    "word": "difficult,",
+    "startMs": 7600,
+    "endMs": 7980
+  },
+  {
+    "word": "your",
+    "startMs": 8320,
+    "endMs": 8480
+  },
+  {
+    "word": "brain",
+    "startMs": 8480,
+    "endMs": 8780
+  },
+  {
+    "word": "keeps",
+    "startMs": 8780,
+    "endMs": 9000
+  },
+  {
+    "word": "waiting",
+    "startMs": 9000,
+    "endMs": 9320
+  },
+  {
+    "word": "for",
+    "startMs": 9320,
+    "endMs": 9580
+  },
+  {
+    "word": "that",
+    "startMs": 9580,
+    "endMs": 9740
+  },
+  {
+    "word": "magical",
+    "startMs": 9740,
+    "endMs": 10040
+  },
+  {
+    "word": "moment",
+    "startMs": 10040,
+    "endMs": 10420
+  },
+  {
+    "word": "when",
+    "startMs": 10420,
+    "endMs": 10720
+  },
+  {
+    "word": "you",
+    "startMs": 10720,
+    "endMs": 10880
+  },
+  {
+    "word": "suddenly",
+    "startMs": 10880,
+    "endMs": 11080
+  },
+  {
+    "word": "feel",
+    "startMs": 11080,
+    "endMs": 11460
+  },
+  {
+    "word": "like",
+    "startMs": 11460,
+    "endMs": 11640
+  },
+  {
+    "word": "doing",
+    "startMs": 11640,
+    "endMs": 11820
+  },
+  {
+    "word": "it.",
+    "startMs": 11820,
+    "endMs": 12140
+  },
+  {
+    "word": "And",
+    "startMs": 12820,
+    "endMs": 13180
+  },
+  {
+    "word": "it",
+    "startMs": 13180,
+    "endMs": 13280
+  },
+  {
+    "word": "rarely",
+    "startMs": 13280,
+    "endMs": 13440
+  },
+  {
+    "word": "comes.",
+    "startMs": 13440,
+    "endMs": 13880
+  },
+  {
+    "word": "You",
+    "startMs": 14760,
+    "endMs": 15140
+  },
+  {
+    "word": "do",
+    "startMs": 15140,
+    "endMs": 15260
+  },
+  {
+    "word": "a",
+    "startMs": 15260,
+    "endMs": 15360
+  },
+  {
+    "word": "tiny",
+    "startMs": 15360,
+    "endMs": 15600
+  },
+  {
+    "word": "bit",
+    "startMs": 15600,
+    "endMs": 15840
+  },
+  {
+    "word": "anyway,",
+    "startMs": 15840,
+    "endMs": 16059
+  },
+  {
+    "word": "and",
+    "startMs": 16480,
+    "endMs": 16640
+  },
+  {
+    "word": "then",
+    "startMs": 16640,
+    "endMs": 16740
+  },
+  {
+    "word": "your",
+    "startMs": 16740,
+    "endMs": 16880
+  },
+  {
+    "word": "brain",
+    "startMs": 16880,
+    "endMs": 17100
+  },
+  {
+    "word": "goes,",
+    "startMs": 17100,
+    "endMs": 17340
+  },
+  {
+    "word": "oh,",
+    "startMs": 17720,
+    "endMs": 17840
+  },
+  {
+    "word": "we're",
+    "startMs": 18620,
+    "endMs": 19000
+  },
+  {
+    "word": "actually",
+    "startMs": 19000,
+    "endMs": 19240
+  },
+  {
+    "word": "doing",
+    "startMs": 19240,
+    "endMs": 19600
+  },
+  {
+    "word": "this.",
+    "startMs": 19600,
+    "endMs": 19900
+  },
+  {
+    "word": "That's",
+    "startMs": 20780,
+    "endMs": 21220
+  },
+  {
+    "word": "why",
+    "startMs": 21220,
+    "endMs": 21340
+  },
+  {
+    "word": "action",
+    "startMs": 21340,
+    "endMs": 21600
+  },
+  {
+    "word": "creates",
+    "startMs": 21600,
+    "endMs": 22060
+  },
+  {
+    "word": "motivation",
+    "startMs": 22060,
+    "endMs": 22400
+  },
+  {
+    "word": "more",
+    "startMs": 22400,
+    "endMs": 22900
+  },
+  {
+    "word": "often",
+    "startMs": 22900,
+    "endMs": 23220
+  },
+  {
+    "word": "than",
+    "startMs": 23220,
+    "endMs": 23440
+  },
+  {
+    "word": "motivation",
+    "startMs": 23440,
+    "endMs": 23640
+  },
+  {
+    "word": "creates",
+    "startMs": 23640,
+    "endMs": 24320
+  },
+  {
+    "word": "action.",
+    "startMs": 24320,
+    "endMs": 24560
+  },
+  {
+    "word": "So",
+    "startMs": 25440,
+    "endMs": 25960
+  },
+  {
+    "word": "don't",
+    "startMs": 25960,
+    "endMs": 26220
+  },
+  {
+    "word": "ask,",
+    "startMs": 26220,
+    "endMs": 26380
+  },
+  {
+    "word": "do",
+    "startMs": 26720,
+    "endMs": 26800
+  },
+  {
+    "word": "I",
+    "startMs": 26800,
+    "endMs": 26920
+  },
+  {
+    "word": "feel",
+    "startMs": 26920,
+    "endMs": 27080
+  },
+  {
+    "word": "motivated?",
+    "startMs": 27080,
+    "endMs": 27300
+  },
+  {
+    "word": "Ask,",
+    "startMs": 28260,
+    "endMs": 28640
+  },
+  {
+    "word": "what's",
+    "startMs": 28900,
+    "endMs": 29140
+  },
+  {
+    "word": "the",
+    "startMs": 29140,
+    "endMs": 29240
+  },
+  {
+    "word": "smallest",
+    "startMs": 29240,
+    "endMs": 29540
+  },
+  {
+    "word": "thing",
+    "startMs": 29540,
+    "endMs": 29820
+  },
+  {
+    "word": "I",
+    "startMs": 29820,
+    "endMs": 29940
+  },
+  {
+    "word": "can",
+    "startMs": 29940,
+    "endMs": 30080
+  },
+  {
+    "word": "do",
+    "startMs": 30080,
+    "endMs": 30180
+  },
+  {
+    "word": "right",
+    "startMs": 30180,
+    "endMs": 30360
+  },
+  {
+    "word": "now?",
+    "startMs": 30360,
+    "endMs": 30620
+  },
+  {
+    "word": "You",
+    "startMs": 31440,
+    "endMs": 31680
+  },
+  {
+    "word": "don't",
+    "startMs": 31680,
+    "endMs": 31880
+  },
+  {
+    "word": "need",
+    "startMs": 31880,
+    "endMs": 32000
+  },
+  {
+    "word": "to",
+    "startMs": 32000,
+    "endMs": 32100
+  },
+  {
+    "word": "feel",
+    "startMs": 32100,
+    "endMs": 32299
+  },
+  {
+    "word": "ready.",
+    "startMs": 32299,
+    "endMs": 32540
+  },
+  {
+    "word": "You",
+    "startMs": 33500,
+    "endMs": 33720
+  },
+  {
+    "word": "just",
+    "startMs": 33720,
+    "endMs": 33920
+  },
+  {
+    "word": "need",
+    "startMs": 33920,
+    "endMs": 34060
+  },
+  {
+    "word": "to",
+    "startMs": 34060,
+    "endMs": 34220
+  },
+  {
+    "word": "make",
+    "startMs": 34220,
+    "endMs": 34340
+  },
+  {
+    "word": "starting",
+    "startMs": 34340,
+    "endMs": 34600
+  },
+  {
+    "word": "feel",
+    "startMs": 34600,
+    "endMs": 34880
+  },
+  {
+    "word": "easy.",
+    "startMs": 34880,
+    "endMs": 35220
+  },
+  {
+    "word": "And",
+    "startMs": 36300,
+    "endMs": 36380
+  },
+  {
+    "word": "hey,",
+    "startMs": 36380,
+    "endMs": 36560
+  },
+  {
+    "word": "if",
+    "startMs": 36940,
+    "endMs": 37080
+  },
+  {
+    "word": "today",
+    "startMs": 37080,
+    "endMs": 37220
+  },
+  {
+    "word": "feels",
+    "startMs": 37220,
+    "endMs": 37520
+  },
+  {
+    "word": "a",
+    "startMs": 37520,
+    "endMs": 37680
+  },
+  {
+    "word": "little",
+    "startMs": 37680,
+    "endMs": 37820
+  },
+  {
+    "word": "heavy,",
+    "startMs": 37820,
+    "endMs": 38140
+  },
+  {
+    "word": "that's",
+    "startMs": 38460,
+    "endMs": 38680
+  },
+  {
+    "word": "okay.",
+    "startMs": 38680,
+    "endMs": 38920
+  },
+  {
+    "word": "You",
+    "startMs": 39700,
+    "endMs": 40100
+  },
+  {
+    "word": "can",
+    "startMs": 40100,
+    "endMs": 40220
+  },
+  {
+    "word": "start",
+    "startMs": 40220,
+    "endMs": 40460
+  },
+  {
+    "word": "small.",
+    "startMs": 40460,
+    "endMs": 40740
+  },
+  {
+    "word": "Really",
+    "startMs": 41760,
+    "endMs": 42020
+  },
+  {
+    "word": "small.",
+    "startMs": 42020,
+    "endMs": 42380
+  }
+]

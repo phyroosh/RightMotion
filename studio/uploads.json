@@ -1,0 +1,57 @@
+{
+  "goggins_video.mp4": {
+    "uploaded": true,
+    "videoId": "FGYFQ07_97E",
+    "youtubeUrl": "https://youtu.be/FGYFQ07_97E",
+    "shortsUrl": "https://youtube.com/shorts/FGYFQ07_97E",
+    "title": "David Goggins' Secret Weapon Isn't Adrenaline 🍪 #Shorts",
+    "publishedAt": "2026-08-26T04:04:40Z",
+    "privacyStatus": "public",
+    "publishAt": null,
+    "isScheduled": false
+  },
+  "motivation_video.mp4": {
+    "uploaded": true,
+    "videoId": "PRbv0aiJMKA",
+    "youtubeUrl": "https://youtu.be/PRbv0aiJMKA",
+    "shortsUrl": "https://youtube.com/shorts/PRbv0aiJMKA",
+    "title": "Why Motivation Is A Lie (Do This Instead) ⚡ #Shorts",
+    "publishedAt": "2026-08-25T14:25:04Z",
+    "privacyStatus": "public",
+    "publishAt": null,
+    "isScheduled": false
+  },
+  "maturity_video.mp4": {
+    "uploaded": true,
+    "videoId": "5n8wJWXMkoI",
+    "youtubeUrl": "https://youtu.be/5n8wJWXMkoI",
+    "shortsUrl": "https://youtube.com/shorts/5n8wJWXMkoI",
+    "title": "Why Some People Mature Faster Than Others 🧠 #Shorts",
+    "publishedAt": "2026-08-25T14:24:29Z",
+    "privacyStatus": "public",
+    "publishAt": null,
+    "isScheduled": false
+  },
+  "adhd_video.mp4": {
+    "uploaded": true,
+    "videoId": "g-u-UA-CajM",
+    "youtubeUrl": "https://youtu.be/g-u-UA-CajM",
+    "shortsUrl": "https://youtube.com/shorts/g-u-UA-CajM",
+    "title": "ADHD Isn't Just Being Distracted (The Real Reason) 🧠 #Shorts",
+    "publishedAt": "2026-08-25T14:23:55Z",
+    "privacyStatus": "public",
+    "publishAt": null,
+    "isScheduled": false
+  },
+  "breaks_video.mp4": {
+    "uploaded": true,
+    "videoId": "SxQrCVpCcb0",
+    "youtubeUrl": "https://youtu.be/SxQrCVpCcb0",
+    "shortsUrl": "https://youtube.com/shorts/SxQrCVpCcb0",
+    "title": "Why Taking A Long Break Isn't Quitting 🌿 #Shorts",
+    "privacyStatus": "scheduled",
+    "publishAt": "2026-08-26T19:30:00.000Z",
+    "isScheduled": true,
+    "publishedAt": "2026-08-26T06:17:04Z"
+  }
+}

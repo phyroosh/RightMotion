@@ -1,0 +1,677 @@
+[
+  {
+    "word": "People",
+    "startMs": 0,
+    "endMs": 280
+  },
+  {
+    "word": "think",
+    "startMs": 280,
+    "endMs": 580
+  },
+  {
+    "word": "David",
+    "startMs": 580,
+    "endMs": 860
+  },
+  {
+    "word": "Goggins",
+    "startMs": 860,
+    "endMs": 1320
+  },
+  {
+    "word": "is",
+    "startMs": 1320,
+    "endMs": 1480
+  },
+  {
+    "word": "just",
+    "startMs": 1480,
+    "endMs": 1660
+  },
+  {
+    "word": "running",
+    "startMs": 1660,
+    "endMs": 1960
+  },
+  {
+    "word": "on",
+    "startMs": 1960,
+    "endMs": 2140
+  },
+  {
+    "word": "adrenaline",
+    "startMs": 2140,
+    "endMs": 2260
+  },
+  {
+    "word": "all",
+    "startMs": 2260,
+    "endMs": 2800
+  },
+  {
+    "word": "the",
+    "startMs": 2800,
+    "endMs": 2900
+  },
+  {
+    "word": "time.",
+    "startMs": 2900,
+    "endMs": 3220
+  },
+  {
+    "word": "Like",
+    "startMs": 4180,
+    "endMs": 4360
+  },
+  {
+    "word": "somehow",
+    "startMs": 4360,
+    "endMs": 4640
+  },
+  {
+    "word": "he",
+    "startMs": 4640,
+    "endMs": 4900
+  },
+  {
+    "word": "feels",
+    "startMs": 4900,
+    "endMs": 5120
+  },
+  {
+    "word": "insanely",
+    "startMs": 5120,
+    "endMs": 5280
+  },
+  {
+    "word": "motivated,",
+    "startMs": 5280,
+    "endMs": 5940
+  },
+  {
+    "word": "and",
+    "startMs": 6400,
+    "endMs": 6580
+  },
+  {
+    "word": "that's",
+    "startMs": 6580,
+    "endMs": 6820
+  },
+  {
+    "word": "why",
+    "startMs": 6820,
+    "endMs": 6920
+  },
+  {
+    "word": "he",
+    "startMs": 6920,
+    "endMs": 7060
+  },
+  {
+    "word": "can",
+    "startMs": 7060,
+    "endMs": 7220
+  },
+  {
+    "word": "keep",
+    "startMs": 7220,
+    "endMs": 7400
+  },
+  {
+    "word": "going",
+    "startMs": 7400,
+    "endMs": 7660
+  },
+  {
+    "word": "when",
+    "startMs": 7660,
+    "endMs": 7900
+  },
+  {
+    "word": "everyone",
+    "startMs": 7900,
+    "endMs": 8180
+  },
+  {
+    "word": "else",
+    "startMs": 8180,
+    "endMs": 8440
+  },
+  {
+    "word": "stops.",
+    "startMs": 8440,
+    "endMs": 8760
+  },
+  {
+    "word": "But",
+    "startMs": 9680,
+    "endMs": 10000
+  },
+  {
+    "word": "that's",
+    "startMs": 10000,
+    "endMs": 10300
+  },
+  {
+    "word": "not",
+    "startMs": 10300,
+    "endMs": 10420
+  },
+  {
+    "word": "how",
+    "startMs": 10420,
+    "endMs": 10600
+  },
+  {
+    "word": "he",
+    "startMs": 10600,
+    "endMs": 10760
+  },
+  {
+    "word": "explains",
+    "startMs": 10760,
+    "endMs": 11020
+  },
+  {
+    "word": "it.",
+    "startMs": 11020,
+    "endMs": 11440
+  },
+  {
+    "word": "He",
+    "startMs": 12360,
+    "endMs": 12500
+  },
+  {
+    "word": "uses",
+    "startMs": 12500,
+    "endMs": 12720
+  },
+  {
+    "word": "something",
+    "startMs": 12720,
+    "endMs": 13040
+  },
+  {
+    "word": "he",
+    "startMs": 13040,
+    "endMs": 13280
+  },
+  {
+    "word": "calls",
+    "startMs": 13280,
+    "endMs": 13460
+  },
+  {
+    "word": "the",
+    "startMs": 13460,
+    "endMs": 13660
+  },
+  {
+    "word": "cookie",
+    "startMs": 13660,
+    "endMs": 13860
+  },
+  {
+    "word": "jar.",
+    "startMs": 13860,
+    "endMs": 14140
+  },
+  {
+    "word": "When",
+    "startMs": 14860,
+    "endMs": 15340
+  },
+  {
+    "word": "things",
+    "startMs": 15340,
+    "endMs": 15560
+  },
+  {
+    "word": "get",
+    "startMs": 15560,
+    "endMs": 15740
+  },
+  {
+    "word": "brutally",
+    "startMs": 15740,
+    "endMs": 15960
+  },
+  {
+    "word": "hard,",
+    "startMs": 15960,
+    "endMs": 16440
+  },
+  {
+    "word": "he",
+    "startMs": 16720,
+    "endMs": 16820
+  },
+  {
+    "word": "mentally",
+    "startMs": 16820,
+    "endMs": 17060
+  },
+  {
+    "word": "goes",
+    "startMs": 17060,
+    "endMs": 17360
+  },
+  {
+    "word": "back",
+    "startMs": 17360,
+    "endMs": 17600
+  },
+  {
+    "word": "to",
+    "startMs": 17600,
+    "endMs": 17800
+  },
+  {
+    "word": "moments",
+    "startMs": 17800,
+    "endMs": 18000
+  },
+  {
+    "word": "when",
+    "startMs": 18000,
+    "endMs": 18340
+  },
+  {
+    "word": "he",
+    "startMs": 18340,
+    "endMs": 18460
+  },
+  {
+    "word": "already",
+    "startMs": 18460,
+    "endMs": 18740
+  },
+  {
+    "word": "survived",
+    "startMs": 18740,
+    "endMs": 19060
+  },
+  {
+    "word": "something",
+    "startMs": 19060,
+    "endMs": 19480
+  },
+  {
+    "word": "difficult.",
+    "startMs": 19480,
+    "endMs": 19960
+  },
+  {
+    "word": "His",
+    "startMs": 21060,
+    "endMs": 21200
+  },
+  {
+    "word": "past",
+    "startMs": 21200,
+    "endMs": 21400
+  },
+  {
+    "word": "wins",
+    "startMs": 21400,
+    "endMs": 21720
+  },
+  {
+    "word": "remind",
+    "startMs": 21720,
+    "endMs": 21980
+  },
+  {
+    "word": "him,",
+    "startMs": 21980,
+    "endMs": 22380
+  },
+  {
+    "word": "I've",
+    "startMs": 22560,
+    "endMs": 22700
+  },
+  {
+    "word": "been",
+    "startMs": 22700,
+    "endMs": 22800
+  },
+  {
+    "word": "here",
+    "startMs": 22800,
+    "endMs": 22960
+  },
+  {
+    "word": "before.",
+    "startMs": 22960,
+    "endMs": 23100
+  },
+  {
+    "word": "I",
+    "startMs": 24020,
+    "endMs": 24500
+  },
+  {
+    "word": "know",
+    "startMs": 24500,
+    "endMs": 24620
+  },
+  {
+    "word": "I",
+    "startMs": 24620,
+    "endMs": 24760
+  },
+  {
+    "word": "can",
+    "startMs": 24760,
+    "endMs": 24900
+  },
+  {
+    "word": "handle",
+    "startMs": 24900,
+    "endMs": 25140
+  },
+  {
+    "word": "this.",
+    "startMs": 25140,
+    "endMs": 25440
+  },
+  {
+    "word": "And",
+    "startMs": 26080,
+    "endMs": 26600
+  },
+  {
+    "word": "sometimes,",
+    "startMs": 26600,
+    "endMs": 26980
+  },
+  {
+    "word": "he",
+    "startMs": 27480,
+    "endMs": 27540
+  },
+  {
+    "word": "deliberately",
+    "startMs": 27540,
+    "endMs": 27820
+  },
+  {
+    "word": "remembers",
+    "startMs": 27820,
+    "endMs": 28400
+  },
+  {
+    "word": "the",
+    "startMs": 28400,
+    "endMs": 28660
+  },
+  {
+    "word": "emotions",
+    "startMs": 28660,
+    "endMs": 28960
+  },
+  {
+    "word": "from",
+    "startMs": 28960,
+    "endMs": 29300
+  },
+  {
+    "word": "those",
+    "startMs": 29300,
+    "endMs": 29480
+  },
+  {
+    "word": "victories,",
+    "startMs": 29480,
+    "endMs": 29840
+  },
+  {
+    "word": "using",
+    "startMs": 30280,
+    "endMs": 30520
+  },
+  {
+    "word": "them",
+    "startMs": 30520,
+    "endMs": 30740
+  },
+  {
+    "word": "to",
+    "startMs": 30740,
+    "endMs": 30880
+  },
+  {
+    "word": "reignite",
+    "startMs": 30880,
+    "endMs": 31340
+  },
+  {
+    "word": "that",
+    "startMs": 31340,
+    "endMs": 31520
+  },
+  {
+    "word": "drive",
+    "startMs": 31520,
+    "endMs": 31740
+  },
+  {
+    "word": "when",
+    "startMs": 31740,
+    "endMs": 32000
+  },
+  {
+    "word": "his",
+    "startMs": 32000,
+    "endMs": 32100
+  },
+  {
+    "word": "body",
+    "startMs": 32100,
+    "endMs": 32380
+  },
+  {
+    "word": "and",
+    "startMs": 32380,
+    "endMs": 32700
+  },
+  {
+    "word": "mind",
+    "startMs": 32700,
+    "endMs": 32880
+  },
+  {
+    "word": "start",
+    "startMs": 32880,
+    "endMs": 33180
+  },
+  {
+    "word": "baking",
+    "startMs": 33180,
+    "endMs": 33420
+  },
+  {
+    "word": "him",
+    "startMs": 33420,
+    "endMs": 33720
+  },
+  {
+    "word": "to",
+    "startMs": 33720,
+    "endMs": 33840
+  },
+  {
+    "word": "stop.",
+    "startMs": 33840,
+    "endMs": 34080
+  },
+  {
+    "word": "So",
+    "startMs": 34980,
+    "endMs": 35300
+  },
+  {
+    "word": "maybe",
+    "startMs": 35300,
+    "endMs": 35440
+  },
+  {
+    "word": "the",
+    "startMs": 35440,
+    "endMs": 35680
+  },
+  {
+    "word": "secret",
+    "startMs": 35680,
+    "endMs": 35920
+  },
+  {
+    "word": "isn't",
+    "startMs": 35920,
+    "endMs": 36300
+  },
+  {
+    "word": "being",
+    "startMs": 36300,
+    "endMs": 36460
+  },
+  {
+    "word": "fearless.",
+    "startMs": 36460,
+    "endMs": 36820
+  },
+  {
+    "word": "It's",
+    "startMs": 37900,
+    "endMs": 38180
+  },
+  {
+    "word": "having",
+    "startMs": 38180,
+    "endMs": 38320
+  },
+  {
+    "word": "enough",
+    "startMs": 38320,
+    "endMs": 38600
+  },
+  {
+    "word": "evidence",
+    "startMs": 38600,
+    "endMs": 38860
+  },
+  {
+    "word": "from",
+    "startMs": 38860,
+    "endMs": 39160
+  },
+  {
+    "word": "your",
+    "startMs": 39160,
+    "endMs": 39300
+  },
+  {
+    "word": "own",
+    "startMs": 39300,
+    "endMs": 39460
+  },
+  {
+    "word": "life",
+    "startMs": 39460,
+    "endMs": 39680
+  },
+  {
+    "word": "to",
+    "startMs": 39680,
+    "endMs": 39860
+  },
+  {
+    "word": "know.",
+    "startMs": 39860,
+    "endMs": 40040
+  },
+  {
+    "word": "I've",
+    "startMs": 40720,
+    "endMs": 41220
+  },
+  {
+    "word": "gotten",
+    "startMs": 41220,
+    "endMs": 41320
+  },
+  {
+    "word": "through",
+    "startMs": 41320,
+    "endMs": 41580
+  },
+  {
+    "word": "hard",
+    "startMs": 41580,
+    "endMs": 41760
+  },
+  {
+    "word": "things",
+    "startMs": 41760,
+    "endMs": 42000
+  },
+  {
+    "word": "before.",
+    "startMs": 42000,
+    "endMs": 42380
+  },
+  {
+    "word": "And",
+    "startMs": 43420,
+    "endMs": 43640
+  },
+  {
+    "word": "that",
+    "startMs": 43640,
+    "endMs": 43780
+  },
+  {
+    "word": "can",
+    "startMs": 43780,
+    "endMs": 43940
+  },
+  {
+    "word": "be",
+    "startMs": 43940,
+    "endMs": 44080
+  },
+  {
+    "word": "surprisingly",
+    "startMs": 44080,
+    "endMs": 44260
+  },
+  {
+    "word": "powerful",
+    "startMs": 44260,
+    "endMs": 45000
+  },
+  {
+    "word": "when",
+    "startMs": 45000,
+    "endMs": 45400
+  },
+  {
+    "word": "today",
+    "startMs": 45400,
+    "endMs": 45580
+  },
+  {
+    "word": "gets",
+    "startMs": 45580,
+    "endMs": 45820
+  },
+  {
+    "word": "heavy.",
+    "startMs": 45820,
+    "endMs": 46100
+  }
+]

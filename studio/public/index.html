@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RightClips — YouTube Studio & Video Publisher</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #090d16;
+      color: #f8fafc;
+    }
+
+    .glass-panel {
+      background: rgba(18, 24, 38, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-input {
+      background: rgba(10, 15, 26, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s ease;
+    }
+    .glass-input:focus {
+      border-color: #0071e3;
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.25);
+      outline: none;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .gradient-border-btn {
+      background: linear-gradient(135deg, #0071e3 0%, #6366f1 100%);
+      box-shadow: 0 10px 30px -5px rgba(0, 113, 227, 0.4);
+      transition: all 0.2s ease;
+    }
+    .gradient-border-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 15px 35px -5px rgba(0, 113, 227, 0.6);
+    }
+    .gradient-border-btn:active {
+      transform: translateY(0);
+    }
+
+    .tab-btn.active {
+      background: #0071e3;
+      color: #ffffff;
+      border-color: #0071e3;
+      box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased custom-scrollbar">
+
+  <!-- TOP APP BAR -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-white/10 px-8 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#0071e3] to-[#6366f1] flex items-center justify-center text-white shadow-lg shadow-sky-500/20">
+        <i data-lucide="sparkles" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-extrabold text-lg tracking-tight text-white">RightClips Studio</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#0071e3]/20 text-[#38bdf8] border border-[#0071e3]/30">V2.2</span>
+        </div>
+        <p class="text-xs text-slate-400 font-medium">Automated YouTube Publisher • 1-Click Publishing & Scheduled Releases</p>
+      </div>
+    </div>
+
+    <!-- YouTube Auth Profile / Connect Button -->
+    <div id="authSection" class="flex items-center gap-3">
+      <div class="flex items-center gap-2 text-slate-400 text-xs">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        Connecting to YouTube channel...
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STUDIO WORKSPACE -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    
+    <!-- LEFT COLUMN: VIDEO SELECTOR & LIVE PREVIEW (5 Cols) -->
+    <section class="lg:col-span-5 flex flex-col gap-6">
+      
+      <!-- Video Selector Card List with Tabs -->
+      <div class="glass-panel rounded-3xl p-5 flex flex-col gap-3.5 shadow-xl">
+        
+        <!-- Header & Sync Buttons -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
+            <i data-lucide="film" class="w-4 h-4 text-[#0071e3]"></i>
+            Rendered Video Library
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              id="syncYtBtn"
+              onclick="syncWithYouTube()"
+              class="text-xs px-2.5 py-1 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 transition font-bold"
+              title="Sync upload & schedule status directly with YouTube channel"
+            >
+              <i data-lucide="refresh-cw" class="w-3 h-3"></i> Sync YT
+            </button>
+            <button id="refreshVideosBtn" onclick="loadVideos()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
+              <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> Reload
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Segmented Tabs -->
+        <div class="grid grid-cols-5 gap-1 p-1 bg-black/40 rounded-2xl border border-white/5 text-[11px] font-bold">
+          <button
+            id="tab-all"
+            onclick="setTab('all')"
+            class="tab-btn active py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-300"
+          >
+            <span>All</span>
+            <span id="badge-count-all" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-white/20">0</span>
+          </button>
+          <button
+            id="tab-unuploaded"
+            onclick="setTab('unuploaded')"
+            class="tab-btn py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            title="Videos ready to be posted"
+          >
+            <span class="text-amber-400">⏳ Ready</span>
+            <span id="badge-count-unuploaded" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-amber-500/20 text-amber-300">0</span>
+          </button>
+          <button
+            id="tab-scheduled"
+            onclick="setTab('scheduled')"
+            class="tab-btn py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            title="Videos scheduled for future publish"
+          >
+            <span class="text-purple-400">📅 Sched</span>
+            <span id="badge-count-scheduled" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-purple-500/20 text-purple-300">0</span>
+          </button>
+          <button
+            id="tab-uploaded"
+            onclick="setTab('uploaded')"
+            class="tab-btn py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            title="Videos already uploaded to YouTube"
+          >
+            <span class="text-emerald-400">✅ Live</span>
+            <span id="badge-count-uploaded" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300">0</span>
+          </button>
+          <button
+            id="tab-longform"
+            onclick="setTab('longform')"
+            class="tab-btn py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+          >
+            <span class="text-sky-400">16:9</span>
+            <span id="badge-count-longform" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-sky-500/20 text-sky-300">0</span>
+          </button>
+        </div>
+
+        <!-- Categorized List Container (Sorted by Date Newest First) -->
+        <div id="videoList" class="flex flex-col gap-2.5 max-h-80 overflow-y-auto custom-scrollbar pr-1">
+          <div class="p-6 rounded-2xl glass-input text-center text-slate-400 text-xs">
+            Loading rendered videos...
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Video Player Preview (Adaptive 16:9 / 9:16 Ratio) -->
+      <div class="glass-panel rounded-3xl p-5 flex flex-col items-center gap-4 shadow-xl">
+        <div class="w-full flex items-center justify-between text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
+          <span id="playerFormatLabel" class="flex items-center gap-2">
+            <i data-lucide="play-circle" class="w-4 h-4 text-emerald-400"></i>
+            Video Preview Player
+          </span>
+          <span id="videoStatsBadge" class="text-slate-500 text-[11px]">No video selected</span>
+        </div>
+
+        <!-- Video Container -->
+        <div id="videoContainer" class="relative w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-2xl flex items-center justify-center group transition-all duration-300">
+          <video
+            id="videoPlayer"
+            class="w-full h-full object-contain bg-black"
+            controls
+            playsinline
+            preload="metadata"
+          ></video>
+          <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-slate-500 pointer-events-none">
+            <i data-lucide="video-off" class="w-10 h-10 mb-2 stroke-[1.5]"></i>
+            <span class="text-xs">Select a clip above to preview</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT COLUMN: VIRAL METADATA & POSTING / SCHEDULING STATION (7 Cols) -->
+    <section class="lg:col-span-7 flex flex-col gap-6">
+      
+      <div class="glass-panel rounded-3xl p-6 md:p-7 flex flex-col gap-6 shadow-xl">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <div class="flex items-center gap-2.5">
+            <div class="p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
+              <i data-lucide="file-text" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h2 class="text-base font-bold text-white">Publishing & Scheduling Station</h2>
+              <p class="text-xs text-slate-400">Viral metadata generator, instant publishing & scheduled release</p>
+            </div>
+          </div>
+          <span id="activeFormatBadge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
+            <i data-lucide="zap" class="w-3 h-3"></i> 9:16 Shorts
+          </span>
+        </div>
+
+        <!-- UPLOAD / SCHEDULE STATUS BANNER -->
+        <div id="uploadStatusBanner" class="p-4 rounded-2xl border transition flex items-center justify-between gap-3">
+          <!-- Dynamic Status Banner populated by selectVideo() -->
+        </div>
+
+        <!-- Viral Title -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-300">
+            <label for="metaTitle" class="flex items-center gap-1.5">
+              <span>Video Title</span>
+              <span class="text-[#38bdf8]">*</span>
+            </label>
+            <span id="titleCharCount" class="font-mono text-slate-500 text-[11px]">0 / 100</span>
+          </div>
+          <input
+            type="text"
+            id="metaTitle"
+            maxlength="100"
+            placeholder="Enter viral title..."
+            class="w-full px-4 py-3 rounded-2xl glass-input text-sm text-white font-medium placeholder:text-slate-600"
+          />
+        </div>
+
+        <!-- Description & Hashtags / Chapters -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-300">
+            <label for="metaDescription" class="flex items-center gap-1.5">
+              <span>Description, Chapters & Viral Hashtags</span>
+            </label>
+            <span class="text-[11px] text-slate-500 font-mono">Includes SEO hashtags</span>
+          </div>
+          <textarea
+            id="metaDescription"
+            rows="6"
+            placeholder="Paste or edit description..."
+            class="w-full px-4 py-3 rounded-2xl glass-input text-xs text-slate-200 font-medium placeholder:text-slate-600 leading-relaxed custom-scrollbar"
+          ></textarea>
+        </div>
+
+        <!-- Tags Manager -->
+        <div class="flex flex-col gap-2">
+          <label class="text-xs font-bold text-slate-300 flex items-center justify-between">
+            <span>Tags & Keywords</span>
+            <span class="text-[11px] text-slate-500 font-normal">Press Enter to add tag</span>
+          </label>
+          <div id="tagsContainer" class="p-3 rounded-2xl glass-input min-h-[50px] flex flex-wrap gap-2 items-center">
+            <!-- Tag chips inserted via JS -->
+            <input
+              type="text"
+              id="tagInput"
+              placeholder="+ Add tag..."
+              class="bg-transparent text-xs text-white placeholder:text-slate-600 outline-none flex-1 min-w-[90px]"
+            />
+          </div>
+        </div>
+
+        <!-- Settings Row: Visibility / Scheduling & Category -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+          
+          <!-- Visibility Status with Scheduled Option -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-bold text-slate-300 flex items-center justify-between">
+              <span>Visibility & Schedule</span>
+              <span id="schedModeBadge" class="hidden text-[10px] font-mono font-bold text-purple-400">📅 AUTO-TIMER</span>
+            </label>
+            <select
+              id="metaPrivacy"
+              onchange="onPrivacyChange()"
+              class="px-4 py-3 rounded-2xl glass-input text-xs text-white font-semibold cursor-pointer"
+            >
+              <option value="public" class="bg-slate-900 text-emerald-400">🌐 Public (Immediate Live)</option>
+              <option value="scheduled" class="bg-slate-900 text-purple-400">📅 Scheduled Release (Upload now, publish later)</option>
+              <option value="unlisted" class="bg-slate-900 text-sky-400">🔗 Unlisted (Link Only)</option>
+              <option value="private" class="bg-slate-900 text-amber-400">🔒 Private (Draft)</option>
+            </select>
+          </div>
+
+          <!-- YouTube Category -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-bold text-slate-300">Category</label>
+            <select
+              id="metaCategory"
+              class="px-4 py-3 rounded-2xl glass-input text-xs text-white font-semibold cursor-pointer"
+            >
+              <option value="27" class="bg-slate-900">🎓 Education & Self Improvement</option>
+              <option value="22" class="bg-slate-900">👤 People & Blogs</option>
+              <option value="24" class="bg-slate-900">🎬 Entertainment</option>
+              <option value="26" class="bg-slate-900">💡 Howto & Style</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- DEDICATED SCHEDULING CONTROL PANEL (Revealed when 'scheduled' is selected) -->
+        <div id="scheduleControlBox" class="hidden p-5 rounded-2xl glass-input border border-purple-500/40 bg-purple-500/10 flex flex-col gap-4 shadow-xl">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-xs font-extrabold text-purple-300 uppercase tracking-wide">
+              <i data-lucide="calendar-clock" class="w-4 h-4 text-purple-400"></i>
+              <span>Scheduled Auto-Publish Timer</span>
+            </div>
+            <span class="text-[10px] font-mono text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded-full border border-purple-500/30">
+              YouTube Native Scheduler
+            </span>
+          </div>
+
+          <!-- Date-Time Input with Direct Picker -->
+          <div class="flex flex-col sm:flex-row items-center gap-3">
+            <input
+              type="datetime-local"
+              id="scheduleDateTime"
+              onchange="updateSchedulePreview()"
+              class="w-full sm:flex-1 px-4 py-3 rounded-2xl glass-input text-sm text-white font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
+            />
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <button
+                type="button"
+                onclick="setQuickSchedule(1)"
+                class="flex-1 sm:flex-initial px-3 py-2.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 text-xs font-bold border border-purple-500/30 transition whitespace-nowrap"
+                title="Schedule in 1 hour"
+              >
+                +1 Hour
+              </button>
+              <button
+                type="button"
+                onclick="setQuickSchedule(2)"
+                class="flex-1 sm:flex-initial px-3 py-2.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 text-xs font-bold border border-purple-500/30 transition whitespace-nowrap"
+                title="Schedule in 2 hours"
+              >
+                +2 Hours
+              </button>
+            </div>
+          </div>
+
+          <!-- User's Exact 5 Quick Time Slot Options -->
+          <div class="flex flex-col gap-2 pt-1 border-t border-purple-500/20">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono font-extrabold uppercase text-purple-300 tracking-wider flex items-center gap-1.5">
+                <i data-lucide="zap" class="w-3 h-3 text-yellow-400"></i>
+                Select Peak Time Slot:
+              </span>
+              <span class="text-[10px] text-slate-400 font-mono">Auto-picks upcoming slot</span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+              <!-- 1. 1:00 AM -->
+              <button
+                type="button"
+                onclick="setQuickTargetTime(1, 0)"
+                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+              >
+                <div class="flex items-center gap-1 text-purple-300 font-black">
+                  <span>🌙</span>
+                  <span class="text-sm font-black tracking-tight text-white group-hover:text-purple-200">1:00 AM</span>
+                </div>
+                <span class="text-[9px] text-slate-400 font-mono">Night Slot</span>
+              </button>
+
+              <!-- 2. 2:00 AM -->
+              <button
+                type="button"
+                onclick="setQuickTargetTime(2, 0)"
+                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+              >
+                <div class="flex items-center gap-1 text-purple-300 font-black">
+                  <span>🌙</span>
+                  <span class="text-sm font-black tracking-tight text-white group-hover:text-purple-200">2:00 AM</span>
+                </div>
+                <span class="text-[9px] text-slate-400 font-mono">Late Night</span>
+              </button>
+
+              <!-- 3. 7:00 AM -->
+              <button
+                type="button"
+                onclick="setQuickTargetTime(7, 0)"
+                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+              >
+                <div class="flex items-center gap-1 text-amber-300 font-black">
+                  <span>🌅</span>
+                  <span class="text-sm font-black tracking-tight text-white group-hover:text-amber-200">7:00 AM</span>
+                </div>
+                <span class="text-[9px] text-slate-400 font-mono">Morning Rush</span>
+              </button>
+
+              <!-- 4. 2:00 PM -->
+              <button
+                type="button"
+                onclick="setQuickTargetTime(14, 0)"
+                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+              >
+                <div class="flex items-center gap-1 text-sky-300 font-black">
+                  <span>☀️</span>
+                  <span class="text-sm font-black tracking-tight text-white group-hover:text-sky-200">2:00 PM</span>
+                </div>
+                <span class="text-[9px] text-slate-400 font-mono">Afternoon</span>
+              </button>
+
+              <!-- 5. 9:00 PM -->
+              <button
+                type="button"
+                onclick="setQuickTargetTime(21, 0)"
+                class="col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+              >
+                <div class="flex items-center gap-1 text-rose-300 font-black">
+                  <span>🌆</span>
+                  <span class="text-sm font-black tracking-tight text-white group-hover:text-rose-200">9:00 PM</span>
+                </div>
+                <span class="text-[9px] text-slate-400 font-mono">Prime Evening</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Timezone & Confirmation Callout -->
+          <div id="schedulePreviewText" class="text-xs text-purple-200 font-medium flex items-center gap-2 pt-1 border-t border-purple-500/20">
+            <i data-lucide="info" class="w-4 h-4 text-purple-400 flex-shrink-0"></i>
+            <span>Video will upload immediately in private status; YouTube will automatically make it public at your chosen time.</span>
+          </div>
+        </div>
+
+        <!-- POST / SCHEDULE ACTION BAR -->
+        <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-4">
+          <button
+            onclick="saveMetadataOnly()"
+            class="px-5 py-3 rounded-2xl glass-input hover:bg-white/5 text-slate-300 text-xs font-bold transition flex items-center gap-2"
+          >
+            <i data-lucide="save" class="w-4 h-4"></i>
+            Save Metadata Draft
+          </button>
+
+          <button
+            id="uploadBtn"
+            onclick="uploadVideoToYouTube()"
+            class="px-8 py-3.5 rounded-2xl gradient-border-btn text-white text-sm font-extrabold flex items-center gap-2.5 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            <i id="uploadBtnIcon" data-lucide="upload-cloud" class="w-4 h-4"></i>
+            <span id="uploadBtnText">Post to YouTube</span>
+          </button>
+        </div>
+
+        <!-- Live Upload Progress Card -->
+        <div id="uploadProgressCard" class="hidden p-4 rounded-2xl glass-input flex flex-col gap-3 border-[#0071e3]/40 bg-[#0071e3]/5">
+          <div class="flex items-center justify-between text-xs font-bold">
+            <span id="uploadStageText" class="text-sky-300 flex items-center gap-2">
+              <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
+              Uploading to YouTube...
+            </span>
+            <span id="uploadPercentText" class="font-mono text-white">0%</span>
+          </div>
+          <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div id="uploadProgressBar" class="h-full bg-gradient-to-r from-[#0071e3] to-emerald-400 transition-all duration-300" style="width: 0%"></div>
+          </div>
+          <div id="uploadResultLink" class="hidden text-xs text-emerald-400 font-bold flex items-center gap-2 mt-1"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- NOTIFICATION TOAST -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 glass-panel px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-white flex items-center gap-3">
+    <i data-lucide="info" class="w-4 h-4 text-[#38bdf8]"></i>
+    <span id="toastMessage">Notification</span>
+  </div>
+
+  <script>
+    let videosData = [];
+    let longFormsData = [];
+    let shortsData = [];
+    let uploadedData = [];
+    let scheduledData = [];
+    let unuploadedData = [];
+    let selectedVideo = null;
+    let currentTags = [];
+    let isConnected = false;
+    let activeChannel = null;
+    let activeTab = 'all'; // 'all', 'unuploaded', 'scheduled', 'uploaded', 'longform'
+
+    // Format Relative & Absolute Date
+    function formatDateTime(dateStr) {
+      if (!dateStr) return 'Recent';
+      const d = new Date(dateStr);
+      const now = new Date();
+      const diffMs = now - d;
+      const diffMins = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMins / 60);
+
+      let timeAgo = '';
+      if (diffMins < 1) timeAgo = 'Just now';
+      else if (diffMins < 60) timeAgo = `${diffMins}m ago`;
+      else if (diffHours < 24) timeAgo = `${diffHours}h ago`;
+      else timeAgo = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+      const timeStr = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      return `${timeAgo} • ${timeStr}`;
+    }
+
+    // Format Future Scheduled Date
+    function formatScheduleTime(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      const day = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      return `${day} at ${time}`;
+    }
+
+    // Convert Date to Local ISO String suitable for <input type="datetime-local">
+    function toLocalISOString(date) {
+      const d = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+      return d.toISOString().slice(0, 16);
+    }
+
+    // 1. Check Auth Status on Load & Render Live Channel PFP
+    async function checkAuthStatus() {
+      const authSection = document.getElementById('authSection');
+      try {
+        const res = await fetch('/api/auth-status?t=' + Date.now());
+        const data = await res.json();
+
+        if (data.authenticated && data.channel) {
+          isConnected = true;
+          activeChannel = data.channel;
+          
+          const channelName = data.channel.title || 'Judy Insights';
+          const customUrl = data.channel.customUrl || '@thejudyinsights';
+          const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(channelName)}&background=0071e3&color=fff&bold=true`;
+          const avatarUrl = data.channel.avatar || data.channel.directAvatar || fallbackAvatar;
+
+          authSection.innerHTML = `
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <img
+                  id="channelAvatarImg"
+                  src="${avatarUrl}"
+                  alt="${channelName}"
+                  referrerpolicy="no-referrer"
+                  crossorigin="anonymous"
+                  onerror="this.onerror=null; this.src='${fallbackAvatar}';"
+                  class="w-10 h-10 rounded-full border-2 border-emerald-400 object-cover shadow-lg shadow-emerald-500/10 bg-slate-800"
+                />
+                <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-[#090d16] flex items-center justify-center">
+                  <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                </span>
+              </div>
+              <div class="text-left">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-extrabold text-white">${channelName}</span>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-400 fill-emerald-400/20"></i>
+                </div>
+                <div class="flex items-center gap-1.5 text-[11px] text-slate-400 font-mono">
+                  <span class="text-sky-300 font-semibold">${customUrl}</span>
+                  <span>•</span>
+                  <span>${data.channel.subscriberCount ? parseInt(data.channel.subscriberCount).toLocaleString() + ' subs' : 'Active'}</span>
+                </div>
+              </div>
+              <button onclick="logout()" title="Switch / Disconnect Account" class="p-2 rounded-xl glass-input text-slate-400 hover:text-rose-400 transition ml-1">
+                <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          `;
+        } else {
+          isConnected = false;
+          activeChannel = null;
+          authSection.innerHTML = `
+            <button onclick="connectYouTube()" class="px-4 py-2 rounded-xl gradient-border-btn text-white text-xs font-bold flex items-center gap-2 shadow-lg">
+              <i data-lucide="link" class="w-3.5 h-3.5"></i>
+              Connect YouTube Studio
+            </button>
+          `;
+        }
+        lucide.createIcons();
+      } catch (err) {
+        authSection.innerHTML = `<span class="text-xs text-rose-400">Offline</span>`;
+      }
+    }
+
+    async function connectYouTube() {
+      try {
+        const res = await fetch('/api/auth-url');
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        }
+      } catch (err) {
+        showToast('Failed to get auth URL: ' + err.message);
+      }
+    }
+
+    async function logout() {
+      if (!confirm('Disconnect current YouTube account to reconnect with another channel?')) return;
+      await fetch('/api/logout', { method: 'POST' });
+      showToast('Logged out of YouTube. Reconnect to choose channel.');
+      checkAuthStatus();
+    }
+
+    // Force Sync with YouTube
+    async function syncWithYouTube() {
+      const syncBtn = document.getElementById('syncYtBtn');
+      syncBtn.disabled = true;
+      syncBtn.innerHTML = `<i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i> Syncing...`;
+      lucide.createIcons();
+
+      try {
+        const res = await fetch('/api/sync-uploads', { method: 'POST' });
+        const data = await res.json();
+        showToast(`✅ Synced with YouTube! ${data.count || 0} upload records updated.`);
+        await loadVideos();
+      } catch (err) {
+        showToast('Sync error: ' + err.message);
+      } finally {
+        syncBtn.disabled = false;
+        syncBtn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> Sync YT`;
+        lucide.createIcons();
+      }
+    }
+
+    // Switch Tab Filter
+    function setTab(tab) {
+      activeTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-white'));
+      document.getElementById(`tab-${tab}`).classList.add('active', 'text-white');
+      renderVideoList();
+    }
+
+    // 2. Fetch Videos with Live Upload & Schedule Status
+    async function loadVideos() {
+      const videoList = document.getElementById('videoList');
+      try {
+        const res = await fetch('/api/videos');
+        const data = await res.json();
+        videosData = data.videos || [];
+        longFormsData = data.longForms || [];
+        shortsData = data.shorts || [];
+        uploadedData = data.uploadedVideos || [];
+        scheduledData = data.scheduledVideos || [];
+        unuploadedData = data.unuploadedVideos || [];
+
+        // Update counts
+        document.getElementById('badge-count-all').textContent = videosData.length;
+        document.getElementById('badge-count-unuploaded').textContent = unuploadedData.length;
+        document.getElementById('badge-count-scheduled').textContent = scheduledData.length;
+        document.getElementById('badge-count-uploaded').textContent = uploadedData.length;
+        document.getElementById('badge-count-longform').textContent = longFormsData.length;
+
+        renderVideoList();
+
+        // Select first available item if none selected, or keep current
+        if (videosData.length > 0) {
+          if (!selectedVideo) {
+            selectVideo(videosData[0].filename);
+          } else {
+            const stillExists = videosData.find(v => v.filename === selectedVideo.filename);
+            if (stillExists) selectVideo(stillExists.filename);
+            else selectVideo(videosData[0].filename);
+          }
+        }
+      } catch (err) {
+        videoList.innerHTML = `<div class="p-4 text-center text-xs text-rose-400">Failed to load videos: ${err.message}</div>`;
+      }
+    }
+
+    // Render Video List by Active Tab & Clear Visual Separation
+    function renderVideoList() {
+      const videoList = document.getElementById('videoList');
+      
+      let listToRender = [];
+      if (activeTab === 'unuploaded') listToRender = unuploadedData;
+      else if (activeTab === 'scheduled') listToRender = scheduledData;
+      else if (activeTab === 'uploaded') listToRender = uploadedData;
+      else if (activeTab === 'longform') listToRender = longFormsData;
+      else listToRender = videosData;
+
+      if (listToRender.length === 0) {
+        videoList.innerHTML = `
+          <div class="p-8 text-center text-slate-500 text-xs flex flex-col items-center gap-2">
+            <i data-lucide="inbox" class="w-8 h-8 opacity-40"></i>
+            <span>No videos found in this filter tab.</span>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      // Render cards
+      videoList.innerHTML = listToRender.map(v => renderCardHtml(v)).join('');
+      lucide.createIcons();
+
+      // Highlight currently selected card
+      if (selectedVideo) {
+        const activeCard = document.getElementById(`video-card-${selectedVideo.filename}`);
+        if (activeCard) {
+          activeCard.classList.add('border-[#0071e3]', 'bg-[#0071e3]/15');
+        }
+      }
+    }
+
+    function renderCardHtml(v) {
+      const isSelected = selectedVideo && selectedVideo.filename === v.filename;
+      const isLong = v.isLongForm;
+      const isSched = v.isScheduled;
+      const isUp = v.isUploaded && !isSched;
+      const dateFormatted = formatDateTime(v.modifiedAt);
+
+      return `
+        <div
+          onclick="selectVideo('${v.filename}')"
+          id="video-card-${v.filename}"
+          class="video-card p-3.5 rounded-2xl glass-input hover:bg-white/5 cursor-pointer transition flex items-center justify-between gap-3 ${isSelected ? 'border-[#0071e3] bg-[#0071e3]/15 shadow-lg shadow-sky-500/10' : ''}"
+        >
+          <div class="flex items-center gap-3 min-w-0 flex-1">
+            <!-- Format Icon -->
+            <div class="w-10 h-10 rounded-xl ${isLong ? 'bg-sky-500/15 text-sky-400 border border-sky-500/30' : 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'} flex items-center justify-center flex-shrink-0">
+              <i data-lucide="${isLong ? 'tv' : 'smartphone'}" class="w-4 h-4"></i>
+            </div>
+
+            <!-- Filename & Details -->
+            <div class="text-left min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-extrabold text-white tracking-tight truncate">${v.filename}</span>
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono mt-1 flex items-center gap-2 flex-wrap">
+                <span class="${isLong ? 'text-sky-300 font-bold' : 'text-emerald-300 font-bold'}">${v.format}</span>
+                <span>•</span>
+                <span>${v.sizeMb} MB</span>
+                <span>•</span>
+                <span class="text-slate-500">${dateFormatted}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- UPLOAD / SCHEDULE STATUS BADGE -->
+          <div class="flex items-center gap-2 flex-shrink-0">
+            ${isSched ? `
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-black uppercase bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1.5 shadow-sm">
+                <i data-lucide="calendar-clock" class="w-3 h-3 text-purple-400"></i>
+                SCHED
+              </span>
+            ` : isUp ? `
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-black uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                LIVE
+              </span>
+            ` : `
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-black uppercase bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3 text-amber-400"></i>
+                READY
+              </span>
+            `}
+            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+          </div>
+        </div>
+      `;
+    }
+
+    // 3. Select Video & Populate Metadata & Show Live / Scheduled Status
+    function selectVideo(filename) {
+      selectedVideo = videosData.find((v) => v.filename === filename);
+      if (!selectedVideo) return;
+
+      // Highlight active card
+      document.querySelectorAll('.video-card').forEach((el) => {
+        el.classList.remove('border-[#0071e3]', 'bg-[#0071e3]/15', 'shadow-lg', 'shadow-sky-500/10');
+      });
+      const activeCard = document.getElementById(`video-card-${filename}`);
+      if (activeCard) {
+        activeCard.classList.add('border-[#0071e3]', 'bg-[#0071e3]/15', 'shadow-lg', 'shadow-sky-500/10');
+      }
+
+      // Update Video Player
+      const player = document.getElementById('videoPlayer');
+      const container = document.getElementById('videoContainer');
+      const placeholder = document.getElementById('videoPlaceholder');
+      const stats = document.getElementById('videoStatsBadge');
+      const formatLabel = document.getElementById('playerFormatLabel');
+      const activeBadge = document.getElementById('activeFormatBadge');
+
+      const isWidescreen = selectedVideo.isLongForm;
+
+      if (isWidescreen) {
+        container.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-2xl flex items-center justify-center group transition-all duration-300";
+        formatLabel.innerHTML = `
+          <i data-lucide="tv" class="w-4 h-4 text-sky-400"></i>
+          16:9 Long-Form Video Essay (1080p)
+        `;
+        activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20 flex items-center gap-1.5";
+        activeBadge.innerHTML = `<i data-lucide="tv" class="w-3 h-3"></i> 16:9 Long-Form Essay`;
+      } else {
+        container.className = "relative w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-2xl flex items-center justify-center group transition-all duration-300";
+        formatLabel.innerHTML = `
+          <i data-lucide="smartphone" class="w-4 h-4 text-emerald-400"></i>
+          9:16 YouTube Shorts
+        `;
+        activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5";
+        activeBadge.innerHTML = `<i data-lucide="zap" class="w-3 h-3"></i> 9:16 Shorts`;
+      }
+
+      player.src = `/api/video-file/${filename}`;
+      placeholder.style.display = 'none';
+      stats.textContent = `${selectedVideo.sizeMb} MB • ${isWidescreen ? '16:9 Widescreen' : '9:16 Shorts'}`;
+
+      // Update Live / Scheduled Status Banner
+      const statusBanner = document.getElementById('uploadStatusBanner');
+      const uploadBtnText = document.getElementById('uploadBtnText');
+      const uploadBtnIcon = document.getElementById('uploadBtnIcon');
+      const isSched = selectedVideo.isScheduled;
+      const isUp = selectedVideo.isUploaded && !isSched;
+
+      if (isSched && selectedVideo.uploadInfo) {
+        const up = selectedVideo.uploadInfo;
+        const watchUrl = selectedVideo.isLongForm ? up.youtubeUrl : (up.shortsUrl || up.youtubeUrl);
+        const schedTimeStr = formatScheduleTime(up.publishAt);
+
+        statusBanner.className = "p-4 rounded-2xl border border-purple-500/30 bg-purple-500/10 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg shadow-purple-500/5";
+        statusBanner.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-purple-500 text-slate-950 flex items-center justify-center flex-shrink-0 font-bold">
+              <i data-lucide="calendar-clock" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="text-xs font-black text-purple-300 uppercase tracking-wide flex items-center gap-2">
+                <span>Scheduled On YouTube</span>
+                <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+              </div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">
+                Goes Public: <span class="text-white font-bold">${schedTimeStr}</span> • Video ID: <span class="text-purple-300">${up.videoId}</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <a
+              href="${watchUrl}"
+              target="_blank"
+              class="px-3.5 py-1.5 rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-950 font-extrabold text-xs flex items-center gap-1.5 shadow-md transition"
+            >
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Preview Link
+            </a>
+            <a
+              href="https://studio.youtube.com/video/${up.videoId}/edit"
+              target="_blank"
+              class="px-3 py-1.5 rounded-xl glass-input hover:bg-white/10 text-slate-300 font-bold text-xs flex items-center gap-1 transition"
+            >
+              <i data-lucide="settings" class="w-3.5 h-3.5"></i> YT Studio
+            </a>
+          </div>
+        `;
+        uploadBtnText.textContent = "Re-Schedule / Update Video";
+        uploadBtnIcon.setAttribute('data-lucide', 'calendar-clock');
+      } else if (isUp && selectedVideo.uploadInfo) {
+        const up = selectedVideo.uploadInfo;
+        const watchUrl = selectedVideo.isLongForm ? up.youtubeUrl : (up.shortsUrl || up.youtubeUrl);
+
+        statusBanner.className = "p-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg shadow-emerald-500/5";
+        statusBanner.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center flex-shrink-0 font-bold">
+              <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="text-xs font-black text-emerald-300 uppercase tracking-wide flex items-center gap-2">
+                <span>Live On YouTube Channel</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              </div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5">
+                Video ID: <span class="text-white font-bold">${up.videoId}</span> • Published ${formatDateTime(up.publishedAt)}
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <a
+              href="${watchUrl}"
+              target="_blank"
+              class="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs flex items-center gap-1.5 shadow-md transition"
+            >
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Watch Live
+            </a>
+            <a
+              href="https://studio.youtube.com/video/${up.videoId}/edit"
+              target="_blank"
+              class="px-3 py-1.5 rounded-xl glass-input hover:bg-white/10 text-slate-300 font-bold text-xs flex items-center gap-1 transition"
+            >
+              <i data-lucide="settings" class="w-3.5 h-3.5"></i> YT Studio
+            </a>
+          </div>
+        `;
+        uploadBtnText.textContent = "Re-Upload / Update Video";
+        uploadBtnIcon.setAttribute('data-lucide', 'upload-cloud');
+      } else {
+        statusBanner.className = "p-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-white flex items-center justify-between gap-3";
+        statusBanner.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-400/30 flex items-center justify-center flex-shrink-0 font-bold">
+              <i data-lucide="clock" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="text-xs font-black text-amber-300 uppercase tracking-wide">
+                Unpublished • Ready To Upload
+              </div>
+              <div class="text-[11px] text-slate-400 font-medium">
+                This clip has not been published yet. Post immediately or schedule release.
+              </div>
+            </div>
+          </div>
+          <span class="px-3 py-1 rounded-xl bg-amber-400/15 text-amber-300 font-mono text-[10px] font-bold uppercase">
+            NOT ON YOUTUBE
+          </span>
+        `;
+        onPrivacyChange(); // sets correct button text depending on select dropdown
+      }
+
+      // Populate Metadata
+      const meta = selectedVideo.metadata;
+      document.getElementById('metaTitle').value = meta.title || '';
+      document.getElementById('metaDescription').value = meta.description || '';
+      document.getElementById('metaPrivacy').value = meta.privacyStatus || 'public';
+      document.getElementById('metaCategory').value = meta.categoryId || '27';
+      currentTags = Array.isArray(meta.tags) ? [...meta.tags] : ['Shorts'];
+      
+      // Initialize default schedule time to +2 hours from now
+      const defaultDate = new Date();
+      defaultDate.setHours(defaultDate.getHours() + 2);
+      document.getElementById('scheduleDateTime').value = toLocalISOString(defaultDate);
+
+      onPrivacyChange();
+      updateTagsUI();
+      updateTitleCharCount();
+      lucide.createIcons();
+    }
+
+    // Handle Visibility Dropdown change
+    function onPrivacyChange() {
+      const privacy = document.getElementById('metaPrivacy').value;
+      const schedBox = document.getElementById('scheduleControlBox');
+      const schedBadge = document.getElementById('schedModeBadge');
+      const uploadBtnText = document.getElementById('uploadBtnText');
+      const uploadBtnIcon = document.getElementById('uploadBtnIcon');
+
+      if (privacy === 'scheduled') {
+        schedBox.classList.remove('hidden');
+        schedBadge.classList.remove('hidden');
+        uploadBtnText.textContent = "Schedule Video on YouTube";
+        uploadBtnIcon.setAttribute('data-lucide', 'calendar-clock');
+        updateSchedulePreview();
+      } else {
+        schedBox.classList.add('hidden');
+        schedBadge.classList.add('hidden');
+        if (selectedVideo && selectedVideo.isUploaded) {
+          uploadBtnText.textContent = "Re-Upload / Update Video";
+        } else {
+          uploadBtnText.textContent = "Post to YouTube";
+        }
+        uploadBtnIcon.setAttribute('data-lucide', 'upload-cloud');
+      }
+      lucide.createIcons();
+    }
+
+    // Set Quick Schedule Hours Offset
+    function setQuickSchedule(hours) {
+      const d = new Date();
+      d.setHours(d.getHours() + hours);
+      document.getElementById('scheduleDateTime').value = toLocalISOString(d);
+      updateSchedulePreview();
+    }
+
+    // Smart Set Specific Target Peak Times (1AM, 2AM, 7AM, 2PM, 9PM)
+    function setQuickTargetTime(targetHour, targetMinute = 0) {
+      const d = new Date();
+      d.setHours(targetHour, targetMinute, 0, 0);
+      
+      // If target time has already passed today (or is within next 5 minutes), auto-set for tomorrow!
+      if (d.getTime() <= Date.now() + 5 * 60 * 1000) {
+        d.setDate(d.getDate() + 1);
+      }
+      
+      document.getElementById('scheduleDateTime').value = toLocalISOString(d);
+      updateSchedulePreview();
+    }
+
+    // Update Schedule Preview Text
+    function updateSchedulePreview() {
+      const val = document.getElementById('scheduleDateTime').value;
+      const previewText = document.getElementById('schedulePreviewText');
+      if (!val) return;
+
+      const schedDate = new Date(val);
+      const now = new Date();
+      if (schedDate.getTime() <= now.getTime()) {
+        previewText.innerHTML = `
+          <span class="text-rose-400 font-bold flex items-center gap-1.5">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Please choose a future time (at least 5 minutes ahead).
+          </span>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      const formatted = formatScheduleTime(val);
+      previewText.innerHTML = `
+        <span class="text-purple-300 font-bold flex items-center gap-1.5">
+          <i data-lucide="calendar-check" class="w-4 h-4 text-purple-400"></i>
+          Will automatically go PUBLIC on YouTube on <strong>${formatted}</strong> (Local Time)
+        </span>
+      `;
+      lucide.createIcons();
+    }
+
+    // Title Char Count
+    function updateTitleCharCount() {
+      const input = document.getElementById('metaTitle');
+      const count = document.getElementById('titleCharCount');
+      count.textContent = `${input.value.length} / 100`;
+    }
+    document.getElementById('metaTitle').addEventListener('input', updateTitleCharCount);
+
+    // Tags UI
+    function updateTagsUI() {
+      const container = document.getElementById('tagsContainer');
+      const input = document.getElementById('tagInput');
+      
+      container.querySelectorAll('.tag-chip').forEach((c) => c.remove());
+
+      currentTags.forEach((tag, idx) => {
+        const chip = document.createElement('span');
+        chip.className = 'tag-chip px-2.5 py-1 rounded-xl bg-sky-500/15 border border-sky-500/30 text-[11px] font-mono font-bold text-sky-300 flex items-center gap-1.5';
+        chip.innerHTML = `
+          <span>#${tag}</span>
+          <button onclick="removeTag(${idx})" class="hover:text-rose-400">×</button>
+        `;
+        container.insertBefore(chip, input);
+      });
+    }
+
+    function removeTag(index) {
+      currentTags.splice(index, 1);
+      updateTagsUI();
+    }
+
+    document.getElementById('tagInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ',') {
+        e.preventDefault();
+        const val = e.target.value.trim().replace(/^#/, '');
+        if (val && !currentTags.includes(val)) {
+          currentTags.push(val);
+          updateTagsUI();
+          e.target.value = '';
+        }
+      }
+    });
+
+    // Save Metadata Draft
+    async function saveMetadataOnly() {
+      if (!selectedVideo) return;
+      const metadata = {
+        topic: selectedVideo.metadata.topic,
+        title: document.getElementById('metaTitle').value.trim(),
+        description: document.getElementById('metaDescription').value.trim(),
+        tags: currentTags,
+        categoryId: document.getElementById('metaCategory').value,
+        privacyStatus: document.getElementById('metaPrivacy').value,
+      };
+
+      try {
+        const res = await fetch('/api/save-metadata', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ filename: selectedVideo.filename, metadata }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          selectedVideo.metadata = metadata;
+          showToast('✅ Metadata draft saved successfully!');
+        }
+      } catch (err) {
+        showToast('Error saving metadata: ' + err.message);
+      }
+    }
+
+    // Upload or Schedule Video to YouTube
+    async function uploadVideoToYouTube() {
+      if (!selectedVideo) {
+        showToast('Please select a video clip first');
+        return;
+      }
+      if (!isConnected) {
+        showToast('⚠️ Please connect your YouTube account first');
+        return;
+      }
+
+      if (selectedVideo.isUploaded) {
+        if (!confirm(`This video has already been uploaded to YouTube (${selectedVideo.filename}). Do you want to post/schedule it again as a new upload?`)) {
+          return;
+        }
+      }
+
+      const title = document.getElementById('metaTitle').value.trim();
+      const description = document.getElementById('metaDescription').value.trim();
+      const categoryId = document.getElementById('metaCategory').value;
+      const privacyStatus = document.getElementById('metaPrivacy').value;
+
+      if (!title) {
+        showToast('Title is required');
+        return;
+      }
+
+      let publishAt = null;
+      if (privacyStatus === 'scheduled') {
+        const scheduleVal = document.getElementById('scheduleDateTime').value;
+        if (!scheduleVal) {
+          showToast('Please select a date and time for scheduled release.');
+          return;
+        }
+        const schedDate = new Date(scheduleVal);
+        if (schedDate.getTime() <= Date.now() + 60 * 1000) {
+          showToast('Scheduled time must be at least 2 minutes in the future.');
+          return;
+        }
+        publishAt = schedDate.toISOString();
+      }
+
+      const uploadBtn = document.getElementById('uploadBtn');
+      const progressCard = document.getElementById('uploadProgressCard');
+      const progressBar = document.getElementById('uploadProgressBar');
+      const stageText = document.getElementById('uploadStageText');
+      const percentText = document.getElementById('uploadPercentText');
+      const resultLink = document.getElementById('uploadResultLink');
+
+      uploadBtn.disabled = true;
+      progressCard.classList.remove('hidden');
+      resultLink.classList.add('hidden');
+
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filename: selectedVideo.filename,
+            title,
+            description,
+            tags: currentTags,
+            categoryId,
+            privacyStatus,
+            publishAt,
+          }),
+        });
+
+        const data = await res.json();
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        // Start polling upload status
+        const pollInterval = setInterval(async () => {
+          const statusRes = await fetch('/api/upload-status');
+          const statusData = await statusRes.json();
+
+          stageText.innerHTML = `
+            <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
+            ${statusData.stage || 'Processing...'}
+          `;
+          percentText.textContent = `${statusData.progress || 0}%`;
+          progressBar.style.width = `${statusData.progress || 0}%`;
+          lucide.createIcons();
+
+          if (!statusData.inProgress) {
+            clearInterval(pollInterval);
+            uploadBtn.disabled = false;
+
+            if (statusData.error) {
+              stageText.innerHTML = `<span class="text-rose-400">❌ ${statusData.error}</span>`;
+              showToast('Upload failed: ' + statusData.error);
+            } else if (statusData.result) {
+              const url = selectedVideo.isLongForm ? statusData.result.youtubeUrl : statusData.result.shortsUrl;
+              const isSched = statusData.result.isScheduled;
+
+              if (isSched) {
+                const schedFormatted = formatScheduleTime(statusData.result.publishAt);
+                stageText.innerHTML = `<span class="text-purple-400 font-bold">🎉 Video Uploaded & Scheduled for ${schedFormatted}!</span>`;
+                resultLink.classList.remove('hidden');
+                resultLink.innerHTML = `
+                  <a href="${url}" target="_blank" class="hover:underline flex items-center gap-1.5 text-purple-300 font-extrabold">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> Preview on YouTube (Private until ${schedFormatted})
+                  </a>
+                `;
+                showToast(`🎉 Video uploaded and scheduled for ${schedFormatted}!`);
+              } else {
+                stageText.innerHTML = `<span class="text-emerald-400">🎉 Video Published Live!</span>`;
+                resultLink.classList.remove('hidden');
+                resultLink.innerHTML = `
+                  <a href="${url}" target="_blank" class="hover:underline flex items-center gap-1.5 text-sky-400 font-extrabold">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> View Live on YouTube: ${url}
+                  </a>
+                `;
+                showToast('🎉 Video published successfully to YouTube!');
+              }
+
+              lucide.createIcons();
+              // Reload video list to reflect live/scheduled badges
+              await loadVideos();
+            }
+          }
+        }, 1200);
+
+      } catch (err) {
+        uploadBtn.disabled = false;
+        stageText.innerHTML = `<span class="text-rose-400">❌ ${err.message}</span>`;
+        showToast('Error: ' + err.message);
+      }
+    }
+
+    // Toast Notification
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMessage').textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 4000);
+    }
+
+    // Init on Page Load
+    window.addEventListener('DOMContentLoaded', () => {
+      checkAuthStatus();
+      loadVideos();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

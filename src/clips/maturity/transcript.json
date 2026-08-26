@@ -1,0 +1,667 @@
+[
+  {
+    "word": "Ever",
+    "startMs": 0,
+    "endMs": 340
+  },
+  {
+    "word": "notice",
+    "startMs": 340,
+    "endMs": 520
+  },
+  {
+    "word": "how",
+    "startMs": 520,
+    "endMs": 840
+  },
+  {
+    "word": "some",
+    "startMs": 840,
+    "endMs": 1040
+  },
+  {
+    "word": "people",
+    "startMs": 1040,
+    "endMs": 1260
+  },
+  {
+    "word": "seem",
+    "startMs": 1260,
+    "endMs": 1480
+  },
+  {
+    "word": "way",
+    "startMs": 1480,
+    "endMs": 1680
+  },
+  {
+    "word": "older",
+    "startMs": 1680,
+    "endMs": 1900
+  },
+  {
+    "word": "than",
+    "startMs": 1900,
+    "endMs": 2140
+  },
+  {
+    "word": "they",
+    "startMs": 2140,
+    "endMs": 2260
+  },
+  {
+    "word": "actually",
+    "startMs": 2260,
+    "endMs": 2560
+  },
+  {
+    "word": "are,",
+    "startMs": 2560,
+    "endMs": 2880
+  },
+  {
+    "word": "while",
+    "startMs": 3400,
+    "endMs": 4019
+  },
+  {
+    "word": "others",
+    "startMs": 4019,
+    "endMs": 4260
+  },
+  {
+    "word": "can",
+    "startMs": 4260,
+    "endMs": 4480
+  },
+  {
+    "word": "be",
+    "startMs": 4480,
+    "endMs": 4620
+  },
+  {
+    "word": "40",
+    "startMs": 4620,
+    "endMs": 4840
+  },
+  {
+    "word": "and",
+    "startMs": 4840,
+    "endMs": 5120
+  },
+  {
+    "word": "still",
+    "startMs": 5120,
+    "endMs": 5320
+  },
+  {
+    "word": "act",
+    "startMs": 5320,
+    "endMs": 5520
+  },
+  {
+    "word": "like",
+    "startMs": 5520,
+    "endMs": 5720
+  },
+  {
+    "word": "a",
+    "startMs": 5720,
+    "endMs": 5840
+  },
+  {
+    "word": "teenager?",
+    "startMs": 5840,
+    "endMs": 6080
+  },
+  {
+    "word": "It's",
+    "startMs": 7220,
+    "endMs": 7460
+  },
+  {
+    "word": "not",
+    "startMs": 7460,
+    "endMs": 7580
+  },
+  {
+    "word": "just",
+    "startMs": 7580,
+    "endMs": 7820
+  },
+  {
+    "word": "age.",
+    "startMs": 7820,
+    "endMs": 8080
+  },
+  {
+    "word": "A",
+    "startMs": 9160,
+    "endMs": 9300
+  },
+  {
+    "word": "lot",
+    "startMs": 9300,
+    "endMs": 9480
+  },
+  {
+    "word": "of",
+    "startMs": 9480,
+    "endMs": 9580
+  },
+  {
+    "word": "maturity",
+    "startMs": 9580,
+    "endMs": 9880
+  },
+  {
+    "word": "comes",
+    "startMs": 9880,
+    "endMs": 10240
+  },
+  {
+    "word": "from",
+    "startMs": 10240,
+    "endMs": 10460
+  },
+  {
+    "word": "what",
+    "startMs": 10460,
+    "endMs": 10620
+  },
+  {
+    "word": "life",
+    "startMs": 10620,
+    "endMs": 10880
+  },
+  {
+    "word": "makes",
+    "startMs": 10880,
+    "endMs": 11100
+  },
+  {
+    "word": "you",
+    "startMs": 11100,
+    "endMs": 11280
+  },
+  {
+    "word": "deal",
+    "startMs": 11280,
+    "endMs": 11420
+  },
+  {
+    "word": "with.",
+    "startMs": 11420,
+    "endMs": 11740
+  },
+  {
+    "word": "When",
+    "startMs": 12440,
+    "endMs": 12820
+  },
+  {
+    "word": "someone",
+    "startMs": 12820,
+    "endMs": 13080
+  },
+  {
+    "word": "has",
+    "startMs": 13080,
+    "endMs": 13320
+  },
+  {
+    "word": "to",
+    "startMs": 13320,
+    "endMs": 13480
+  },
+  {
+    "word": "handle",
+    "startMs": 13480,
+    "endMs": 13700
+  },
+  {
+    "word": "responsibility,",
+    "startMs": 13700,
+    "endMs": 14140
+  },
+  {
+    "word": "disappointment,",
+    "startMs": 14820,
+    "endMs": 15120
+  },
+  {
+    "word": "or",
+    "startMs": 15680,
+    "endMs": 15880
+  },
+  {
+    "word": "difficult",
+    "startMs": 15880,
+    "endMs": 16120
+  },
+  {
+    "word": "situations",
+    "startMs": 16120,
+    "endMs": 16520
+  },
+  {
+    "word": "early,",
+    "startMs": 16520,
+    "endMs": 17200
+  },
+  {
+    "word": "they",
+    "startMs": 17500,
+    "endMs": 17620
+  },
+  {
+    "word": "often",
+    "startMs": 17620,
+    "endMs": 17820
+  },
+  {
+    "word": "learn",
+    "startMs": 17820,
+    "endMs": 18100
+  },
+  {
+    "word": "to",
+    "startMs": 18100,
+    "endMs": 18280
+  },
+  {
+    "word": "think",
+    "startMs": 18280,
+    "endMs": 18440
+  },
+  {
+    "word": "ahead",
+    "startMs": 18440,
+    "endMs": 18600
+  },
+  {
+    "word": "sooner.",
+    "startMs": 18600,
+    "endMs": 18980
+  },
+  {
+    "word": "But",
+    "startMs": 19860,
+    "endMs": 20160
+  },
+  {
+    "word": "if",
+    "startMs": 20160,
+    "endMs": 20260
+  },
+  {
+    "word": "someone",
+    "startMs": 20260,
+    "endMs": 20500
+  },
+  {
+    "word": "rarely",
+    "startMs": 20500,
+    "endMs": 20800
+  },
+  {
+    "word": "has",
+    "startMs": 20800,
+    "endMs": 21120
+  },
+  {
+    "word": "to",
+    "startMs": 21120,
+    "endMs": 21280
+  },
+  {
+    "word": "face",
+    "startMs": 21280,
+    "endMs": 21480
+  },
+  {
+    "word": "consequences,",
+    "startMs": 21480,
+    "endMs": 21820
+  },
+  {
+    "word": "they",
+    "startMs": 22640,
+    "endMs": 22780
+  },
+  {
+    "word": "can",
+    "startMs": 22780,
+    "endMs": 22920
+  },
+  {
+    "word": "keep",
+    "startMs": 22920,
+    "endMs": 23120
+  },
+  {
+    "word": "avoiding",
+    "startMs": 23120,
+    "endMs": 23360
+  },
+  {
+    "word": "uncomfortable",
+    "startMs": 23360,
+    "endMs": 23940
+  },
+  {
+    "word": "things,",
+    "startMs": 23940,
+    "endMs": 24480
+  },
+  {
+    "word": "even",
+    "startMs": 24480,
+    "endMs": 25120
+  },
+  {
+    "word": "as",
+    "startMs": 25120,
+    "endMs": 25280
+  },
+  {
+    "word": "they",
+    "startMs": 25280,
+    "endMs": 25420
+  },
+  {
+    "word": "get",
+    "startMs": 25420,
+    "endMs": 25560
+  },
+  {
+    "word": "older.",
+    "startMs": 25560,
+    "endMs": 25720
+  },
+  {
+    "word": "And",
+    "startMs": 26540,
+    "endMs": 26960
+  },
+  {
+    "word": "that's",
+    "startMs": 26960,
+    "endMs": 27220
+  },
+  {
+    "word": "the",
+    "startMs": 27220,
+    "endMs": 29980
+  },
+  {
+    "word": "and",
+    "startMs": 29980,
+    "endMs": 30360
+  },
+  {
+    "word": "an",
+    "startMs": 30360,
+    "endMs": 30460
+  },
+  {
+    "word": "old",
+    "startMs": 30460,
+    "endMs": 30600
+  },
+  {
+    "word": "mind.",
+    "startMs": 30600,
+    "endMs": 30880
+  },
+  {
+    "word": "Someone",
+    "startMs": 31860,
+    "endMs": 32140
+  },
+  {
+    "word": "else",
+    "startMs": 32140,
+    "endMs": 32380
+  },
+  {
+    "word": "can",
+    "startMs": 32380,
+    "endMs": 32600
+  },
+  {
+    "word": "have",
+    "startMs": 32600,
+    "endMs": 32759
+  },
+  {
+    "word": "an",
+    "startMs": 32759,
+    "endMs": 32840
+  },
+  {
+    "word": "adult",
+    "startMs": 32840,
+    "endMs": 33040
+  },
+  {
+    "word": "life,",
+    "startMs": 33040,
+    "endMs": 33400
+  },
+  {
+    "word": "but",
+    "startMs": 33740,
+    "endMs": 33860
+  },
+  {
+    "word": "never",
+    "startMs": 33860,
+    "endMs": 34020
+  },
+  {
+    "word": "really",
+    "startMs": 34020,
+    "endMs": 34360
+  },
+  {
+    "word": "grow",
+    "startMs": 34360,
+    "endMs": 34560
+  },
+  {
+    "word": "up",
+    "startMs": 34560,
+    "endMs": 34720
+  },
+  {
+    "word": "emotionally.",
+    "startMs": 34720,
+    "endMs": 35140
+  },
+  {
+    "word": "So",
+    "startMs": 36080,
+    "endMs": 36460
+  },
+  {
+    "word": "maturity",
+    "startMs": 36460,
+    "endMs": 36640
+  },
+  {
+    "word": "isn't",
+    "startMs": 36640,
+    "endMs": 37200
+  },
+  {
+    "word": "really",
+    "startMs": 37200,
+    "endMs": 37380
+  },
+  {
+    "word": "about",
+    "startMs": 37380,
+    "endMs": 37660
+  },
+  {
+    "word": "how",
+    "startMs": 37660,
+    "endMs": 37860
+  },
+  {
+    "word": "many",
+    "startMs": 37860,
+    "endMs": 38000
+  },
+  {
+    "word": "birthdays",
+    "startMs": 38000,
+    "endMs": 38440
+  },
+  {
+    "word": "you've",
+    "startMs": 38440,
+    "endMs": 38640
+  },
+  {
+    "word": "had.",
+    "startMs": 38640,
+    "endMs": 38920
+  },
+  {
+    "word": "It's",
+    "startMs": 39620,
+    "endMs": 39980
+  },
+  {
+    "word": "about",
+    "startMs": 39980,
+    "endMs": 40160
+  },
+  {
+    "word": "how",
+    "startMs": 40160,
+    "endMs": 40360
+  },
+  {
+    "word": "much",
+    "startMs": 40360,
+    "endMs": 40520
+  },
+  {
+    "word": "you've",
+    "startMs": 40520,
+    "endMs": 40680
+  },
+  {
+    "word": "learned",
+    "startMs": 40680,
+    "endMs": 40880
+  },
+  {
+    "word": "to",
+    "startMs": 40880,
+    "endMs": 41020
+  },
+  {
+    "word": "handle.",
+    "startMs": 41020,
+    "endMs": 41260
+  },
+  {
+    "word": "And",
+    "startMs": 42320,
+    "endMs": 42420
+  },
+  {
+    "word": "if",
+    "startMs": 42420,
+    "endMs": 42540
+  },
+  {
+    "word": "you",
+    "startMs": 42540,
+    "endMs": 42640
+  },
+  {
+    "word": "feel",
+    "startMs": 42640,
+    "endMs": 42800
+  },
+  {
+    "word": "like",
+    "startMs": 42800,
+    "endMs": 42980
+  },
+  {
+    "word": "you",
+    "startMs": 42980,
+    "endMs": 43120
+  },
+  {
+    "word": "had",
+    "startMs": 43120,
+    "endMs": 43280
+  },
+  {
+    "word": "to",
+    "startMs": 43280,
+    "endMs": 43400
+  },
+  {
+    "word": "grow",
+    "startMs": 43400,
+    "endMs": 43540
+  },
+  {
+    "word": "up",
+    "startMs": 43540,
+    "endMs": 43680
+  },
+  {
+    "word": "too",
+    "startMs": 43680,
+    "endMs": 43860
+  },
+  {
+    "word": "fast,",
+    "startMs": 43860,
+    "endMs": 44200
+  },
+  {
+    "word": "you're",
+    "startMs": 44640,
+    "endMs": 44760
+  },
+  {
+    "word": "allowed",
+    "startMs": 44760,
+    "endMs": 44920
+  },
+  {
+    "word": "to",
+    "startMs": 44920,
+    "endMs": 45140
+  },
+  {
+    "word": "slow",
+    "startMs": 45140,
+    "endMs": 45280
+  },
+  {
+    "word": "down",
+    "startMs": 45280,
+    "endMs": 45540
+  },
+  {
+    "word": "now,",
+    "startMs": 45540,
+    "endMs": 45740
+  },
+  {
+    "word": "too.",
+    "startMs": 46080,
+    "endMs": 46260
+  }
+]

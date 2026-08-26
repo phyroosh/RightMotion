@@ -1,0 +1,633 @@
+const express = require('express');
+const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
+const { google } = require('googleapis');
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+const CLIENT_SECRETS_PATH = path.join(__dirname, 'client_secrets.json');
+const TOKEN_PATH = path.join(__dirname, 'token.json');
+const METADATA_PATH = path.join(__dirname, 'metadata.json');
+const UPLOADS_PATH = path.join(__dirname, 'uploads.json');
+const OUT_DIR = path.resolve(__dirname, '..', 'out');
+
+// Helper to get persistent uploads record
+function getUploadsRecord() {
+  if (fs.existsSync(UPLOADS_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(UPLOADS_PATH, 'utf-8'));
+    } catch (e) {
+      console.error('Error reading uploads.json:', e);
+    }
+  }
+  return {};
+}
+
+function saveUploadsRecord(record) {
+  try {
+    fs.writeFileSync(UPLOADS_PATH, JSON.stringify(record, null, 2));
+  } catch (e) {
+    console.error('Error saving uploads.json:', e);
+  }
+}
+
+// Helper to get OAuth2 client
+function getOAuth2Client() {
+  if (!fs.existsSync(CLIENT_SECRETS_PATH)) {
+    throw new Error('client_secrets.json not found in studio directory');
+  }
+  const fileContent = fs.readFileSync(CLIENT_SECRETS_PATH, 'utf-8');
+  const credentials = JSON.parse(fileContent);
+  const installed = credentials.installed || credentials.web;
+  
+  const redirectUri = `http://localhost:${PORT}/oauth2callback`;
+  const oauth2Client = new google.auth.OAuth2(
+    installed.client_id,
+    installed.client_secret,
+    redirectUri
+  );
+
+  if (fs.existsSync(TOKEN_PATH)) {
+    try {
+      const tokens = JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf-8'));
+      oauth2Client.setCredentials(tokens);
+    } catch (e) {
+      console.error('Failed to parse token.json:', e);
+    }
+  }
+
+  return oauth2Client;
+}
+
+// Sync uploads with live YouTube channel
+async function syncYouTubeUploads() {
+  if (!fs.existsSync(TOKEN_PATH)) return;
+
+  try {
+    const oauth2Client = getOAuth2Client();
+    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+
+    const channelRes = await youtube.channels.list({
+      part: 'contentDetails,snippet',
+      mine: true,
+    });
+
+    const channel = channelRes.data.items?.[0];
+    const uploadsPlaylistId = channel?.contentDetails?.relatedPlaylists?.uploads;
+    if (!uploadsPlaylistId) return;
+
+    const playlistRes = await youtube.playlistItems.list({
+      part: 'snippet,status',
+      playlistId: uploadsPlaylistId,
+      maxResults: 50,
+    });
+
+    const ytVideos = playlistRes.data.items || [];
+    let uploads = getUploadsRecord();
+    let savedMetadata = {};
+    if (fs.existsSync(METADATA_PATH)) {
+      savedMetadata = JSON.parse(fs.readFileSync(METADATA_PATH, 'utf-8'));
+    }
+
+    // Match YouTube videos with local files via metadata titles or keywords
+    for (const yt of ytVideos) {
+      const ytTitle = yt.snippet.title.trim();
+      const ytVideoId = yt.snippet.resourceId.videoId;
+      const ytPublishedAt = yt.snippet.publishedAt;
+      const ytPrivacy = yt.status?.privacyStatus || 'public';
+
+      // Find matching local file in metadata.json
+      for (const [filename, meta] of Object.entries(savedMetadata)) {
+        const metaTitle = (meta.title || '').trim();
+        const metaTopic = (meta.topic || '').trim().toLowerCase();
+
+        const isExactTitle = metaTitle && ytTitle.toLowerCase() === metaTitle.toLowerCase();
+        const isTopicMatch = metaTopic && ytTitle.toLowerCase().includes(metaTopic);
+        const isCleanMatch =
+          (metaTopic === 'goggins' && ytTitle.toLowerCase().includes('goggins')) ||
+          (metaTopic === 'motivation' && ytTitle.toLowerCase().includes('motivation')) ||
+          (metaTopic === 'maturity' && ytTitle.toLowerCase().includes('mature')) ||
+          (metaTopic === 'adhd' && ytTitle.toLowerCase().includes('adhd')) ||
+          (metaTopic === 'breaks' && (ytTitle.toLowerCase().includes('break') || ytTitle.toLowerCase().includes('quitting'))) ||
+          (metaTopic === 'comparison' && ytTitle.toLowerCase().includes('comparison')) ||
+          (metaTopic === 'habits' && ytTitle.toLowerCase().includes('habit')) ||
+          (metaTopic === 'procrastination' && ytTitle.toLowerCase().includes('procrastinat'));
+
+        if (isExactTitle || isTopicMatch || isCleanMatch) {
+          const existing = uploads[filename] || {};
+          uploads[filename] = {
+            ...existing,
+            uploaded: true,
+            videoId: ytVideoId,
+            youtubeUrl: `https://youtu.be/${ytVideoId}`,
+            shortsUrl: `https://youtube.com/shorts/${ytVideoId}`,
+            title: ytTitle,
+            privacyStatus: existing.privacyStatus || ytPrivacy,
+            publishAt: existing.publishAt || null,
+            isScheduled: existing.isScheduled || false,
+            publishedAt: ytPublishedAt,
+          };
+          break;
+        }
+      }
+    }
+
+    saveUploadsRecord(uploads);
+  } catch (err) {
+    console.error('Auto YouTube sync error:', err.message);
+  }
+}
+
+// Current upload state for progress polling
+let activeUpload = {
+  inProgress: false,
+  progress: 0,
+  stage: '',
+  result: null,
+  error: null,
+};
+
+// 1. API: List all rendered videos sorted by date (newest first) & categorized with live upload and schedule status
+app.get('/api/videos', async (req, res) => {
+  try {
+    if (!fs.existsSync(OUT_DIR)) {
+      return res.json({
+        videos: [],
+        longForms: [],
+        shorts: [],
+        uploadedVideos: [],
+        unuploadedVideos: [],
+        scheduledVideos: [],
+        totalCount: 0,
+        uploadedCount: 0,
+        unuploadedCount: 0,
+        scheduledCount: 0,
+      });
+    }
+
+    // Try auto-syncing with YouTube if authenticated
+    await syncYouTubeUploads().catch(() => {});
+
+    let savedMetadata = {};
+    if (fs.existsSync(METADATA_PATH)) {
+      savedMetadata = JSON.parse(fs.readFileSync(METADATA_PATH, 'utf-8'));
+    }
+
+    const uploads = getUploadsRecord();
+    const files = fs.readdirSync(OUT_DIR);
+    // Filter out temporary test images and keep only valid mp4 videos
+    const videoFiles = files.filter((f) => f.endsWith('.mp4'));
+
+    const now = new Date();
+
+    const videos = videoFiles.map((filename) => {
+      const filePath = path.join(OUT_DIR, filename);
+      const stats = fs.statSync(filePath);
+      const meta = savedMetadata[filename] || {
+        topic: filename.replace('.mp4', '').replace('_video', ''),
+        title: filename.replace('.mp4', '').replace(/_/g, ' ').toUpperCase() + ' #Shorts',
+        description: 'Auto-generated motion graphics video by RightClips.\n\n#Shorts #Viral',
+        tags: ['Shorts', 'Viral', 'Video'],
+        categoryId: '27',
+        privacyStatus: 'public',
+      };
+
+      const uploadInfo = uploads[filename] || null;
+      const isUploaded = !!(uploadInfo && uploadInfo.uploaded && uploadInfo.videoId);
+      
+      // Determine if video is scheduled for a future time
+      const isScheduled = !!(
+        isUploaded &&
+        uploadInfo.publishAt &&
+        new Date(uploadInfo.publishAt) > now
+      );
+
+      const isLongForm =
+        filename.includes('procrastination') ||
+        (meta.title && meta.title.includes('Visual Essay')) ||
+        (meta.topic && meta.topic.includes('essay')) ||
+        stats.size > 50 * 1024 * 1024; // > 50MB typically long form
+
+      return {
+        filename,
+        sizeMb: (stats.size / (1024 * 1024)).toFixed(2),
+        modifiedAt: stats.mtime,
+        mtimeMs: stats.mtimeMs,
+        isLongForm,
+        format: isLongForm ? '16:9 Long-Form' : '9:16 Shorts',
+        metadata: meta,
+        isUploaded,
+        isScheduled,
+        uploadInfo: isUploaded ? uploadInfo : null,
+      };
+    });
+
+    // Sort strictly by modification date (newest first)
+    videos.sort((a, b) => b.mtimeMs - a.mtimeMs);
+
+    const longForms = videos.filter((v) => v.isLongForm);
+    const shorts = videos.filter((v) => !v.isLongForm);
+    const uploadedVideos = videos.filter((v) => v.isUploaded && !v.isScheduled);
+    const scheduledVideos = videos.filter((v) => v.isScheduled);
+    const unuploadedVideos = videos.filter((v) => !v.isUploaded);
+
+    res.json({
+      videos,
+      longForms,
+      shorts,
+      uploadedVideos,
+      scheduledVideos,
+      unuploadedVideos,
+      totalCount: videos.length,
+      uploadedCount: uploadedVideos.length,
+      scheduledCount: scheduledVideos.length,
+      unuploadedCount: unuploadedVideos.length,
+      longFormCount: longForms.length,
+      shortsCount: shorts.length,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 1b. API: Force Sync with YouTube channel
+app.post('/api/sync-uploads', async (req, res) => {
+  try {
+    await syncYouTubeUploads();
+    const uploads = getUploadsRecord();
+    res.json({ success: true, count: Object.keys(uploads).length, uploads });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 2. Stream video file for HTML5 preview
+app.get('/api/video-file/:filename', (req, res) => {
+  const filePath = path.join(OUT_DIR, req.params.filename);
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).send('Video not found');
+  }
+
+  const stat = fs.statSync(filePath);
+  const fileSize = stat.size;
+  const range = req.headers.range;
+
+  if (range) {
+    const parts = range.replace(/bytes=/, '').split('-');
+    const start = parseInt(parts[0], 10);
+    const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+    const chunksize = end - start + 1;
+    const file = fs.createReadStream(filePath, { start, end });
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    };
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    };
+    res.writeHead(200, head);
+    fs.createReadStream(filePath).pipe(res);
+  }
+});
+
+// 3. API: Auth status & Channel Profile
+app.get('/api/auth-status', async (req, res) => {
+  try {
+    if (!fs.existsSync(TOKEN_PATH)) {
+      return res.json({ authenticated: false });
+    }
+
+    const oauth2Client = getOAuth2Client();
+    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+    
+    // Fetch channel profile info
+    const response = await youtube.channels.list({
+      part: 'snippet,statistics',
+      mine: true,
+    });
+
+    if (response.data.items && response.data.items.length > 0) {
+      const channel = response.data.items[0];
+      const avatarUrl =
+        channel.snippet.thumbnails?.high?.url ||
+        channel.snippet.thumbnails?.medium?.url ||
+        channel.snippet.thumbnails?.default?.url;
+
+      return res.json({
+        authenticated: true,
+        channel: {
+          title: channel.snippet.title,
+          customUrl: channel.snippet.customUrl || `@${channel.snippet.title.replace(/\s+/g, '').toLowerCase()}`,
+          avatar: `/api/channel-avatar?t=${Date.now()}`,
+          directAvatar: avatarUrl,
+          channelId: channel.id,
+          subscriberCount: channel.statistics?.subscriberCount,
+          videoCount: channel.statistics?.videoCount,
+        },
+      });
+    }
+
+    res.json({ authenticated: true, channel: null });
+  } catch (err) {
+    console.error('Auth verification error:', err.message);
+    res.json({ authenticated: false, error: err.message });
+  }
+});
+
+// Proxy channel avatar with NO CACHE to always serve current channel PFP
+app.get('/api/channel-avatar', async (req, res) => {
+  try {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+
+    if (!fs.existsSync(TOKEN_PATH)) {
+      return res.redirect('https://ui-avatars.com/api/?name=YouTube&background=0071e3&color=fff');
+    }
+    const oauth2Client = getOAuth2Client();
+    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+    const response = await youtube.channels.list({
+      part: 'snippet',
+      mine: true,
+    });
+    const channel = response.data.items?.[0];
+    const avatarUrl =
+      channel?.snippet?.thumbnails?.high?.url ||
+      channel?.snippet?.thumbnails?.medium?.url ||
+      channel?.snippet?.thumbnails?.default?.url;
+
+    if (!avatarUrl) {
+      const name = encodeURIComponent(channel?.snippet?.title || 'YouTube');
+      return res.redirect(`https://ui-avatars.com/api/?name=${name}&background=0071e3&color=fff`);
+    }
+
+    const imgRes = await fetch(avatarUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+      },
+    });
+    const arrayBuffer = await imgRes.arrayBuffer();
+    res.setHeader('Content-Type', imgRes.headers.get('content-type') || 'image/jpeg');
+    res.send(Buffer.from(arrayBuffer));
+  } catch (err) {
+    console.error('Failed to proxy avatar:', err);
+    res.redirect('https://ui-avatars.com/api/?name=Judy+Insights&background=0071e3&color=fff');
+  }
+});
+
+// 4. API: Get Google OAuth URL
+app.get('/api/auth-url', (req, res) => {
+  try {
+    const oauth2Client = getOAuth2Client();
+    const scopes = [
+      'https://www.googleapis.com/auth/youtube.upload',
+      'https://www.googleapis.com/auth/youtube.readonly',
+      'https://www.googleapis.com/auth/youtube',
+      'https://www.googleapis.com/auth/userinfo.profile',
+    ];
+
+    const url = oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      prompt: 'consent',
+      scope: scopes,
+    });
+
+    res.json({ url });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 5. OAuth Callback Handler
+app.get('/oauth2callback', async (req, res) => {
+  const code = req.query.code;
+  if (!code) {
+    return res.status(400).send('Authorization code missing');
+  }
+
+  try {
+    const oauth2Client = getOAuth2Client();
+    const { tokens } = await oauth2Client.getToken(code);
+    oauth2Client.setCredentials(tokens);
+    fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokens, null, 2));
+
+    // Automatically sync uploads with the new channel
+    await syncYouTubeUploads().catch(() => {});
+
+    res.send(`
+      <html>
+        <head><title>YouTube Connected</title></head>
+        <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#0f172a; color:white;">
+          <div style="background:#1e293b; padding:40px 60px; border-radius:24px; text-align:center; box-shadow:0 20px 50px rgba(0,0,0,0.5); border:1px solid #334155;">
+            <h1 style="color:#10b981; margin-bottom:12px;">✅ YouTube Studio Connected!</h1>
+            <p style="color:#94a3b8; font-size:16px; margin-bottom:24px;">Your YouTube account has been updated and synced.</p>
+            <a href="/" style="background:#0071e3; color:white; padding:12px 30px; border-radius:12px; text-decoration:none; font-weight:bold; font-size:15px;">Return to Studio</a>
+          </div>
+          <script>
+            setTimeout(() => { window.location.href = '/'; }, 1500);
+          </script>
+        </body>
+      </html>
+    `);
+  } catch (err) {
+    console.error('Error exchanging token:', err);
+    res.status(500).send(`Authentication Failed: ${err.message}`);
+  }
+});
+
+// 6. API: Save Metadata
+app.post('/api/save-metadata', (req, res) => {
+  const { filename, metadata } = req.body;
+  if (!filename || !metadata) {
+    return res.status(400).json({ error: 'filename and metadata required' });
+  }
+
+  try {
+    let saved = {};
+    if (fs.existsSync(METADATA_PATH)) {
+      saved = JSON.parse(fs.readFileSync(METADATA_PATH, 'utf-8'));
+    }
+    saved[filename] = metadata;
+    fs.writeFileSync(METADATA_PATH, JSON.stringify(saved, null, 2));
+    res.json({ success: true, metadata: saved[filename] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 7. API: Upload Progress Status
+app.get('/api/upload-status', (req, res) => {
+  res.json(activeUpload);
+});
+
+// 8. API: Upload or Schedule Video to YouTube
+app.post('/api/upload', async (req, res) => {
+  const { filename, title, description, tags, categoryId, privacyStatus, publishAt } = req.body;
+
+  if (!filename) {
+    return res.status(400).json({ error: 'Filename is required' });
+  }
+
+  const filePath = path.join(OUT_DIR, filename);
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: `Video file ${filename} not found in out/` });
+  }
+
+  if (activeUpload.inProgress) {
+    return res.status(409).json({ error: 'Another upload is already in progress' });
+  }
+
+  // Validate scheduled publish time if scheduling is requested
+  const isScheduling = privacyStatus === 'scheduled' || !!publishAt;
+  let isoPublishAt = null;
+  if (isScheduling) {
+    if (!publishAt) {
+      return res.status(400).json({ error: 'A valid future date and time is required for scheduled publishing.' });
+    }
+    const scheduleDate = new Date(publishAt);
+    if (isNaN(scheduleDate.getTime())) {
+      return res.status(400).json({ error: 'Invalid datetime format for scheduling.' });
+    }
+    if (scheduleDate.getTime() <= Date.now() + 60 * 1000) {
+      return res.status(400).json({ error: 'Scheduled publish time must be at least 2 minutes in the future.' });
+    }
+    isoPublishAt = scheduleDate.toISOString();
+  }
+
+  try {
+    const oauth2Client = getOAuth2Client();
+    if (!fs.existsSync(TOKEN_PATH)) {
+      return res.status(401).json({ error: 'Not authenticated with YouTube. Please connect your account first.' });
+    }
+
+    activeUpload = {
+      inProgress: true,
+      progress: 0,
+      stage: isScheduling ? 'Initializing YouTube scheduled upload session...' : 'Initializing YouTube API session...',
+      result: null,
+      error: null,
+    };
+
+    // Return immediately to client so UI can poll progress
+    res.json({ message: 'Upload started', filename, isScheduling, publishAt: isoPublishAt });
+
+    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+    const fileSize = fs.statSync(filePath).size;
+
+    activeUpload.stage = isScheduling
+      ? `Uploading video (Private mode for scheduled release on ${new Date(isoPublishAt).toLocaleString()})...`
+      : 'Uploading video chunks to YouTube...';
+
+    // Build YouTube status payload
+    // Note: YouTube requires privacyStatus to be 'private' when publishAt is provided!
+    const statusPayload = {
+      selfDeclaredMadeForKids: false,
+    };
+
+    if (isScheduling) {
+      statusPayload.privacyStatus = 'private';
+      statusPayload.publishAt = isoPublishAt;
+    } else {
+      statusPayload.privacyStatus = privacyStatus || 'public';
+    }
+
+    const response = await youtube.videos.insert(
+      {
+        part: 'snippet,status',
+        notifySubscribers: true,
+        requestBody: {
+          snippet: {
+            title: title || filename,
+            description: description || '',
+            tags: tags || ['Shorts'],
+            categoryId: categoryId || '27', // 27 = Education, 22 = People & Blogs
+            defaultLanguage: 'en',
+            defaultAudioLanguage: 'en',
+          },
+          status: statusPayload,
+        },
+        media: {
+          body: fs.createReadStream(filePath),
+        },
+      },
+      {
+        onUploadProgress: (evt) => {
+          const progress = Math.min(99, Math.round((evt.bytesRead / fileSize) * 100));
+          activeUpload.progress = progress;
+          activeUpload.stage = isScheduling
+            ? `Uploading: ${progress}% • Will publish live on ${new Date(isoPublishAt).toLocaleDateString()} at ${new Date(isoPublishAt).toLocaleTimeString()}`
+            : `Uploading: ${progress}% (${(evt.bytesRead / (1024 * 1024)).toFixed(1)}MB / ${(fileSize / (1024 * 1024)).toFixed(1)}MB)`;
+        },
+      }
+    );
+
+    const videoId = response.data.id;
+    activeUpload.inProgress = false;
+    activeUpload.progress = 100;
+    activeUpload.stage = isScheduling
+      ? `🎉 Upload Complete! Scheduled to publish on ${new Date(isoPublishAt).toLocaleString()}`
+      : 'Upload Complete! Video is live on YouTube.';
+      
+    activeUpload.result = {
+      videoId,
+      youtubeUrl: `https://youtu.be/${videoId}`,
+      shortsUrl: `https://youtube.com/shorts/${videoId}`,
+      title: response.data.snippet.title,
+      privacyStatus: response.data.status.privacyStatus,
+      publishAt: isoPublishAt,
+      isScheduled: isScheduling,
+      publishedAt: response.data.snippet.publishedAt || new Date().toISOString(),
+    };
+
+    // Save record to persistent uploads.json
+    let uploads = getUploadsRecord();
+    uploads[filename] = {
+      uploaded: true,
+      videoId,
+      youtubeUrl: `https://youtu.be/${videoId}`,
+      shortsUrl: `https://youtube.com/shorts/${videoId}`,
+      title: response.data.snippet.title,
+      privacyStatus: isScheduling ? 'scheduled' : response.data.status.privacyStatus,
+      publishAt: isoPublishAt,
+      isScheduled: isScheduling,
+      publishedAt: activeUpload.result.publishedAt,
+    };
+    saveUploadsRecord(uploads);
+
+    console.log('✅ Video uploaded and recorded successfully:', activeUpload.result);
+  } catch (err) {
+    console.error('❌ Upload error:', err);
+    activeUpload.inProgress = false;
+    activeUpload.error = err.message || 'Upload failed';
+  }
+});
+
+// Logout / Disconnect YouTube
+app.post('/api/logout', (req, res) => {
+  try {
+    if (fs.existsSync(TOKEN_PATH)) {
+      fs.unlinkSync(TOKEN_PATH);
+    }
+    res.json({ success: true, message: 'Logged out successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`\n========================================================`);
+  console.log(`🚀 RightClips Studio is running at: http://localhost:${PORT}`);
+  console.log(`========================================================\n`);
+});

@@ -1,0 +1,602 @@
+[
+  {
+    "word": "You",
+    "startMs": 0,
+    "endMs": 240
+  },
+  {
+    "word": "know",
+    "startMs": 240,
+    "endMs": 360
+  },
+  {
+    "word": "what's",
+    "startMs": 360,
+    "endMs": 580
+  },
+  {
+    "word": "underrated?",
+    "startMs": 580,
+    "endMs": 820
+  },
+  {
+    "word": "Taking",
+    "startMs": 1860,
+    "endMs": 2140
+  },
+  {
+    "word": "a",
+    "startMs": 2140,
+    "endMs": 2300
+  },
+  {
+    "word": "really",
+    "startMs": 2300,
+    "endMs": 2500
+  },
+  {
+    "word": "long",
+    "startMs": 2500,
+    "endMs": 2800
+  },
+  {
+    "word": "break.",
+    "startMs": 2800,
+    "endMs": 3100
+  },
+  {
+    "word": "Not",
+    "startMs": 4120,
+    "endMs": 4340
+  },
+  {
+    "word": "quitting.",
+    "startMs": 4340,
+    "endMs": 4600
+  },
+  {
+    "word": "Just",
+    "startMs": 5660,
+    "endMs": 5940
+  },
+  {
+    "word": "stepping",
+    "startMs": 5940,
+    "endMs": 6400
+  },
+  {
+    "word": "away",
+    "startMs": 6400,
+    "endMs": 6720
+  },
+  {
+    "word": "for",
+    "startMs": 6720,
+    "endMs": 6960
+  },
+  {
+    "word": "a",
+    "startMs": 6960,
+    "endMs": 7040
+  },
+  {
+    "word": "while.",
+    "startMs": 7040,
+    "endMs": 7300
+  },
+  {
+    "word": "Because",
+    "startMs": 8260,
+    "endMs": 8520
+  },
+  {
+    "word": "sometimes",
+    "startMs": 8520,
+    "endMs": 8820
+  },
+  {
+    "word": "you're",
+    "startMs": 8820,
+    "endMs": 9100
+  },
+  {
+    "word": "not",
+    "startMs": 9100,
+    "endMs": 9300
+  },
+  {
+    "word": "lazy.",
+    "startMs": 9300,
+    "endMs": 9560
+  },
+  {
+    "word": "You're",
+    "startMs": 10580,
+    "endMs": 10860
+  },
+  {
+    "word": "exhausted.",
+    "startMs": 10860,
+    "endMs": 11140
+  },
+  {
+    "word": "And",
+    "startMs": 12380,
+    "endMs": 12480
+  },
+  {
+    "word": "forcing",
+    "startMs": 12480,
+    "endMs": 12680
+  },
+  {
+    "word": "yourself",
+    "startMs": 12680,
+    "endMs": 13100
+  },
+  {
+    "word": "to",
+    "startMs": 13100,
+    "endMs": 13420
+  },
+  {
+    "word": "keep",
+    "startMs": 13420,
+    "endMs": 13560
+  },
+  {
+    "word": "going",
+    "startMs": 13560,
+    "endMs": 13800
+  },
+  {
+    "word": "doesn't",
+    "startMs": 13800,
+    "endMs": 14220
+  },
+  {
+    "word": "always",
+    "startMs": 14220,
+    "endMs": 14420
+  },
+  {
+    "word": "make",
+    "startMs": 14420,
+    "endMs": 14660
+  },
+  {
+    "word": "you",
+    "startMs": 14660,
+    "endMs": 14820
+  },
+  {
+    "word": "stronger.",
+    "startMs": 14820,
+    "endMs": 15060
+  },
+  {
+    "word": "Sometimes",
+    "startMs": 16239,
+    "endMs": 16560
+  },
+  {
+    "word": "it",
+    "startMs": 16560,
+    "endMs": 16800
+  },
+  {
+    "word": "just",
+    "startMs": 16800,
+    "endMs": 16960
+  },
+  {
+    "word": "makes",
+    "startMs": 16960,
+    "endMs": 17140
+  },
+  {
+    "word": "you",
+    "startMs": 17140,
+    "endMs": 17340
+  },
+  {
+    "word": "hate",
+    "startMs": 17340,
+    "endMs": 17500
+  },
+  {
+    "word": "the",
+    "startMs": 17500,
+    "endMs": 17660
+  },
+  {
+    "word": "thing",
+    "startMs": 17660,
+    "endMs": 17820
+  },
+  {
+    "word": "you",
+    "startMs": 17820,
+    "endMs": 17960
+  },
+  {
+    "word": "once",
+    "startMs": 17960,
+    "endMs": 18120
+  },
+  {
+    "word": "cared",
+    "startMs": 18120,
+    "endMs": 18360
+  },
+  {
+    "word": "about.",
+    "startMs": 18360,
+    "endMs": 19000
+  },
+  {
+    "word": "Rest.",
+    "startMs": 19560,
+    "endMs": 19860
+  },
+  {
+    "word": "Disappear",
+    "startMs": 21200,
+    "endMs": 21420
+  },
+  {
+    "word": "for",
+    "startMs": 21420,
+    "endMs": 21560
+  },
+  {
+    "word": "a",
+    "startMs": 21560,
+    "endMs": 21660
+  },
+  {
+    "word": "bit.",
+    "startMs": 21660,
+    "endMs": 21840
+  },
+  {
+    "word": "Take",
+    "startMs": 22900,
+    "endMs": 23000
+  },
+  {
+    "word": "the",
+    "startMs": 23000,
+    "endMs": 23140
+  },
+  {
+    "word": "pressure",
+    "startMs": 23140,
+    "endMs": 23320
+  },
+  {
+    "word": "off.",
+    "startMs": 23320,
+    "endMs": 23680
+  },
+  {
+    "word": "But",
+    "startMs": 24600,
+    "endMs": 24860
+  },
+  {
+    "word": "keep",
+    "startMs": 24860,
+    "endMs": 25020
+  },
+  {
+    "word": "one",
+    "startMs": 25020,
+    "endMs": 25260
+  },
+  {
+    "word": "tiny",
+    "startMs": 25260,
+    "endMs": 25560
+  },
+  {
+    "word": "part",
+    "startMs": 25560,
+    "endMs": 25820
+  },
+  {
+    "word": "of",
+    "startMs": 25820,
+    "endMs": 25980
+  },
+  {
+    "word": "you",
+    "startMs": 25980,
+    "endMs": 26080
+  },
+  {
+    "word": "that",
+    "startMs": 26080,
+    "endMs": 26240
+  },
+  {
+    "word": "still",
+    "startMs": 26240,
+    "endMs": 26500
+  },
+  {
+    "word": "says,",
+    "startMs": 26500,
+    "endMs": 26840
+  },
+  {
+    "word": "I'm",
+    "startMs": 27160,
+    "endMs": 27300
+  },
+  {
+    "word": "not",
+    "startMs": 27300,
+    "endMs": 27440
+  },
+  {
+    "word": "done.",
+    "startMs": 27440,
+    "endMs": 27680
+  },
+  {
+    "word": "You",
+    "startMs": 28360,
+    "endMs": 28840
+  },
+  {
+    "word": "can",
+    "startMs": 28840,
+    "endMs": 29000
+  },
+  {
+    "word": "stop",
+    "startMs": 29000,
+    "endMs": 29200
+  },
+  {
+    "word": "for",
+    "startMs": 29200,
+    "endMs": 29400
+  },
+  {
+    "word": "weeks.",
+    "startMs": 29400,
+    "endMs": 29640
+  },
+  {
+    "word": "You",
+    "startMs": 30680,
+    "endMs": 30860
+  },
+  {
+    "word": "can",
+    "startMs": 30860,
+    "endMs": 30980
+  },
+  {
+    "word": "lose",
+    "startMs": 30980,
+    "endMs": 31160
+  },
+  {
+    "word": "momentum.",
+    "startMs": 31160,
+    "endMs": 31540
+  },
+  {
+    "word": "You",
+    "startMs": 32520,
+    "endMs": 32820
+  },
+  {
+    "word": "can",
+    "startMs": 32820,
+    "endMs": 32940
+  },
+  {
+    "word": "even",
+    "startMs": 32940,
+    "endMs": 33140
+  },
+  {
+    "word": "feel",
+    "startMs": 33140,
+    "endMs": 33400
+  },
+  {
+    "word": "like",
+    "startMs": 33400,
+    "endMs": 33620
+  },
+  {
+    "word": "you've",
+    "startMs": 33620,
+    "endMs": 33760
+  },
+  {
+    "word": "fallen",
+    "startMs": 33760,
+    "endMs": 34040
+  },
+  {
+    "word": "behind.",
+    "startMs": 34040,
+    "endMs": 34360
+  },
+  {
+    "word": "And",
+    "startMs": 35360,
+    "endMs": 35620
+  },
+  {
+    "word": "when",
+    "startMs": 35620,
+    "endMs": 35740
+  },
+  {
+    "word": "you're",
+    "startMs": 35740,
+    "endMs": 35860
+  },
+  {
+    "word": "ready,",
+    "startMs": 35860,
+    "endMs": 36140
+  },
+  {
+    "word": "you",
+    "startMs": 36440,
+    "endMs": 36500
+  },
+  {
+    "word": "can",
+    "startMs": 36500,
+    "endMs": 36640
+  },
+  {
+    "word": "start",
+    "startMs": 36640,
+    "endMs": 36840
+  },
+  {
+    "word": "again.",
+    "startMs": 36840,
+    "endMs": 37160
+  },
+  {
+    "word": "Your",
+    "startMs": 38180,
+    "endMs": 38320
+  },
+  {
+    "word": "journey",
+    "startMs": 38320,
+    "endMs": 38640
+  },
+  {
+    "word": "doesn't",
+    "startMs": 38640,
+    "endMs": 39000
+  },
+  {
+    "word": "become",
+    "startMs": 39000,
+    "endMs": 39220
+  },
+  {
+    "word": "meaningless",
+    "startMs": 39220,
+    "endMs": 39560
+  },
+  {
+    "word": "just",
+    "startMs": 39560,
+    "endMs": 39920
+  },
+  {
+    "word": "because",
+    "startMs": 39920,
+    "endMs": 40200
+  },
+  {
+    "word": "you",
+    "startMs": 40200,
+    "endMs": 40460
+  },
+  {
+    "word": "paused",
+    "startMs": 40460,
+    "endMs": 40700
+  },
+  {
+    "word": "it.",
+    "startMs": 40700,
+    "endMs": 40940
+  },
+  {
+    "word": "Sometimes",
+    "startMs": 41840,
+    "endMs": 42120
+  },
+  {
+    "word": "the",
+    "startMs": 42120,
+    "endMs": 42480
+  },
+  {
+    "word": "healthiest",
+    "startMs": 42480,
+    "endMs": 42840
+  },
+  {
+    "word": "thing",
+    "startMs": 42840,
+    "endMs": 43060
+  },
+  {
+    "word": "you",
+    "startMs": 43060,
+    "endMs": 43220
+  },
+  {
+    "word": "can",
+    "startMs": 43220,
+    "endMs": 43360
+  },
+  {
+    "word": "do.",
+    "startMs": 43360,
+    "endMs": 43560
+  },
+  {
+    "word": "Is",
+    "startMs": 44480,
+    "endMs": 44660
+  },
+  {
+    "word": "rest",
+    "startMs": 44660,
+    "endMs": 44820
+  },
+  {
+    "word": "long",
+    "startMs": 44820,
+    "endMs": 45120
+  },
+  {
+    "word": "enough",
+    "startMs": 45120,
+    "endMs": 45340
+  },
+  {
+    "word": "to",
+    "startMs": 45340,
+    "endMs": 45580
+  },
+  {
+    "word": "want",
+    "startMs": 45580,
+    "endMs": 45720
+  },
+  {
+    "word": "to",
+    "startMs": 45720,
+    "endMs": 45860
+  },
+  {
+    "word": "come",
+    "startMs": 45860,
+    "endMs": 46000
+  },
+  {
+    "word": "back.",
+    "startMs": 46000,
+    "endMs": 46240
+  }
+]

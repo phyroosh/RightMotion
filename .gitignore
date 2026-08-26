@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Secrets & OAuth Credentials (DO NOT COMMIT SENSITIVE TOKENS)
+studio/token.json
+studio/client_secrets.json
+.env
+.env.*
+*.pem
+*.key
+
+# Rendered Video Outputs & Snapshot Dumps
+out/*.mp4
+out/*.png
+out/reference/
+
+# Remotion & Build Artifacts
+.remotion/
+dist/
+build/
+
+# Python Caches & Virtual Envs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.log

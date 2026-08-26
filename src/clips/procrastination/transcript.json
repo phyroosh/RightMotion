@@ -1,0 +1,6927 @@
+[
+  {
+    "word": "You",
+    "startMs": 0,
+    "endMs": 260
+  },
+  {
+    "word": "know",
+    "startMs": 260,
+    "endMs": 380
+  },
+  {
+    "word": "that",
+    "startMs": 380,
+    "endMs": 520
+  },
+  {
+    "word": "thing",
+    "startMs": 520,
+    "endMs": 720
+  },
+  {
+    "word": "where",
+    "startMs": 720,
+    "endMs": 880
+  },
+  {
+    "word": "you",
+    "startMs": 880,
+    "endMs": 1000
+  },
+  {
+    "word": "have",
+    "startMs": 1000,
+    "endMs": 1120
+  },
+  {
+    "word": "something",
+    "startMs": 1120,
+    "endMs": 1340
+  },
+  {
+    "word": "you",
+    "startMs": 1340,
+    "endMs": 1580
+  },
+  {
+    "word": "genuinely",
+    "startMs": 1580,
+    "endMs": 1860
+  },
+  {
+    "word": "need",
+    "startMs": 1860,
+    "endMs": 2240
+  },
+  {
+    "word": "to",
+    "startMs": 2240,
+    "endMs": 2380
+  },
+  {
+    "word": "do.",
+    "startMs": 2380,
+    "endMs": 2540
+  },
+  {
+    "word": "And",
+    "startMs": 3400,
+    "endMs": 3700
+  },
+  {
+    "word": "somehow,",
+    "startMs": 3700,
+    "endMs": 3920
+  },
+  {
+    "word": "the",
+    "startMs": 4320,
+    "endMs": 4420
+  },
+  {
+    "word": "moment",
+    "startMs": 4420,
+    "endMs": 4620
+  },
+  {
+    "word": "you",
+    "startMs": 4620,
+    "endMs": 4840
+  },
+  {
+    "word": "sit",
+    "startMs": 4840,
+    "endMs": 4980
+  },
+  {
+    "word": "down",
+    "startMs": 4980,
+    "endMs": 5200
+  },
+  {
+    "word": "to",
+    "startMs": 5200,
+    "endMs": 5360
+  },
+  {
+    "word": "do",
+    "startMs": 5360,
+    "endMs": 5500
+  },
+  {
+    "word": "it,",
+    "startMs": 5500,
+    "endMs": 5660
+  },
+  {
+    "word": "your",
+    "startMs": 5860,
+    "endMs": 5980
+  },
+  {
+    "word": "brain",
+    "startMs": 5980,
+    "endMs": 6220
+  },
+  {
+    "word": "suddenly",
+    "startMs": 6220,
+    "endMs": 6540
+  },
+  {
+    "word": "discovers",
+    "startMs": 6540,
+    "endMs": 6880
+  },
+  {
+    "word": "17",
+    "startMs": 6880,
+    "endMs": 7340
+  },
+  {
+    "word": "other",
+    "startMs": 7340,
+    "endMs": 7800
+  },
+  {
+    "word": "priorities?",
+    "startMs": 7800,
+    "endMs": 8180
+  },
+  {
+    "word": "Your",
+    "startMs": 9060,
+    "endMs": 9540
+  },
+  {
+    "word": "room",
+    "startMs": 9540,
+    "endMs": 9760
+  },
+  {
+    "word": "looks",
+    "startMs": 9760,
+    "endMs": 9940
+  },
+  {
+    "word": "like",
+    "startMs": 9940,
+    "endMs": 10160
+  },
+  {
+    "word": "it",
+    "startMs": 10160,
+    "endMs": 10240
+  },
+  {
+    "word": "desperately",
+    "startMs": 10240,
+    "endMs": 10560
+  },
+  {
+    "word": "needs",
+    "startMs": 10560,
+    "endMs": 10980
+  },
+  {
+    "word": "cleaning.",
+    "startMs": 10980,
+    "endMs": 11280
+  },
+  {
+    "word": "Your",
+    "startMs": 12380,
+    "endMs": 12520
+  },
+  {
+    "word": "phone",
+    "startMs": 12520,
+    "endMs": 12740
+  },
+  {
+    "word": "feels",
+    "startMs": 12740,
+    "endMs": 13040
+  },
+  {
+    "word": "unusually",
+    "startMs": 13040,
+    "endMs": 13280
+  },
+  {
+    "word": "interesting.",
+    "startMs": 13280,
+    "endMs": 14080
+  },
+  {
+    "word": "You",
+    "startMs": 15200,
+    "endMs": 15260
+  },
+  {
+    "word": "remember",
+    "startMs": 15260,
+    "endMs": 15400
+  },
+  {
+    "word": "that",
+    "startMs": 15400,
+    "endMs": 15740
+  },
+  {
+    "word": "one",
+    "startMs": 15740,
+    "endMs": 15900
+  },
+  {
+    "word": "video",
+    "startMs": 15900,
+    "endMs": 16219
+  },
+  {
+    "word": "you",
+    "startMs": 16219,
+    "endMs": 16420
+  },
+  {
+    "word": "wanted",
+    "startMs": 16420,
+    "endMs": 16600
+  },
+  {
+    "word": "to",
+    "startMs": 16600,
+    "endMs": 16800
+  },
+  {
+    "word": "watch.",
+    "startMs": 16800,
+    "endMs": 17040
+  },
+  {
+    "word": "You",
+    "startMs": 17900,
+    "endMs": 18280
+  },
+  {
+    "word": "suddenly",
+    "startMs": 18280,
+    "endMs": 18540
+  },
+  {
+    "word": "become",
+    "startMs": 18540,
+    "endMs": 18900
+  },
+  {
+    "word": "very",
+    "startMs": 18900,
+    "endMs": 19160
+  },
+  {
+    "word": "curious",
+    "startMs": 19160,
+    "endMs": 19540
+  },
+  {
+    "word": "about",
+    "startMs": 19540,
+    "endMs": 19940
+  },
+  {
+    "word": "reorganizing",
+    "startMs": 19940,
+    "endMs": 20560
+  },
+  {
+    "word": "your",
+    "startMs": 20560,
+    "endMs": 20700
+  },
+  {
+    "word": "folders.",
+    "startMs": 20700,
+    "endMs": 21000
+  },
+  {
+    "word": "And",
+    "startMs": 22180,
+    "endMs": 22280
+  },
+  {
+    "word": "then",
+    "startMs": 22280,
+    "endMs": 22420
+  },
+  {
+    "word": "you",
+    "startMs": 22420,
+    "endMs": 22580
+  },
+  {
+    "word": "tell",
+    "startMs": 22580,
+    "endMs": 22720
+  },
+  {
+    "word": "yourself,",
+    "startMs": 22720,
+    "endMs": 23000
+  },
+  {
+    "word": "okay,",
+    "startMs": 23420,
+    "endMs": 23640
+  },
+  {
+    "word": "I'll",
+    "startMs": 23960,
+    "endMs": 24080
+  },
+  {
+    "word": "start",
+    "startMs": 24080,
+    "endMs": 24280
+  },
+  {
+    "word": "in",
+    "startMs": 24280,
+    "endMs": 24440
+  },
+  {
+    "word": "10",
+    "startMs": 24440,
+    "endMs": 24660
+  },
+  {
+    "word": "minutes.",
+    "startMs": 24660,
+    "endMs": 24900
+  },
+  {
+    "word": "10",
+    "startMs": 25700,
+    "endMs": 26180
+  },
+  {
+    "word": "minutes",
+    "startMs": 26180,
+    "endMs": 26420
+  },
+  {
+    "word": "becomes",
+    "startMs": 26420,
+    "endMs": 26700
+  },
+  {
+    "word": "30.",
+    "startMs": 26700,
+    "endMs": 27100
+  },
+  {
+    "word": "30",
+    "startMs": 27100,
+    "endMs": 27240
+  },
+  {
+    "word": "becomes",
+    "startMs": 27240,
+    "endMs": 28720
+  },
+  {
+    "word": "two",
+    "startMs": 28720,
+    "endMs": 28980
+  },
+  {
+    "word": "hours.",
+    "startMs": 28980,
+    "endMs": 29300
+  },
+  {
+    "word": "And",
+    "startMs": 30260,
+    "endMs": 30500
+  },
+  {
+    "word": "now",
+    "startMs": 30500,
+    "endMs": 30660
+  },
+  {
+    "word": "you're",
+    "startMs": 30660,
+    "endMs": 30780
+  },
+  {
+    "word": "not",
+    "startMs": 30780,
+    "endMs": 30980
+  },
+  {
+    "word": "only",
+    "startMs": 30980,
+    "endMs": 31180
+  },
+  {
+    "word": "behind",
+    "startMs": 31180,
+    "endMs": 31460
+  },
+  {
+    "word": "on",
+    "startMs": 31460,
+    "endMs": 31680
+  },
+  {
+    "word": "the",
+    "startMs": 31680,
+    "endMs": 31780
+  },
+  {
+    "word": "thing",
+    "startMs": 31780,
+    "endMs": 31960
+  },
+  {
+    "word": "you",
+    "startMs": 31960,
+    "endMs": 32100
+  },
+  {
+    "word": "needed",
+    "startMs": 32100,
+    "endMs": 32299
+  },
+  {
+    "word": "to",
+    "startMs": 32299,
+    "endMs": 32460
+  },
+  {
+    "word": "do.",
+    "startMs": 32460,
+    "endMs": 32600
+  },
+  {
+    "word": "You're",
+    "startMs": 33480,
+    "endMs": 33780
+  },
+  {
+    "word": "also",
+    "startMs": 33780,
+    "endMs": 34020
+  },
+  {
+    "word": "annoyed",
+    "startMs": 34020,
+    "endMs": 34300
+  },
+  {
+    "word": "with",
+    "startMs": 34300,
+    "endMs": 34500
+  },
+  {
+    "word": "yourself",
+    "startMs": 34500,
+    "endMs": 34740
+  },
+  {
+    "word": "for",
+    "startMs": 34740,
+    "endMs": 35040
+  },
+  {
+    "word": "not",
+    "startMs": 35040,
+    "endMs": 35200
+  },
+  {
+    "word": "doing",
+    "startMs": 35200,
+    "endMs": 35420
+  },
+  {
+    "word": "it.",
+    "startMs": 35420,
+    "endMs": 35660
+  },
+  {
+    "word": "And",
+    "startMs": 36400,
+    "endMs": 36740
+  },
+  {
+    "word": "that's",
+    "startMs": 36740,
+    "endMs": 36980
+  },
+  {
+    "word": "usually",
+    "startMs": 36980,
+    "endMs": 37220
+  },
+  {
+    "word": "the",
+    "startMs": 37220,
+    "endMs": 37440
+  },
+  {
+    "word": "moment",
+    "startMs": 37440,
+    "endMs": 37660
+  },
+  {
+    "word": "where",
+    "startMs": 37660,
+    "endMs": 37900
+  },
+  {
+    "word": "we",
+    "startMs": 37900,
+    "endMs": 38020
+  },
+  {
+    "word": "reach",
+    "startMs": 38020,
+    "endMs": 38220
+  },
+  {
+    "word": "the",
+    "startMs": 38220,
+    "endMs": 38400
+  },
+  {
+    "word": "conclusion.",
+    "startMs": 38400,
+    "endMs": 38580
+  },
+  {
+    "word": "I'm",
+    "startMs": 39900,
+    "endMs": 40080
+  },
+  {
+    "word": "just",
+    "startMs": 40080,
+    "endMs": 40240
+  },
+  {
+    "word": "lazy.",
+    "startMs": 40240,
+    "endMs": 40480
+  },
+  {
+    "word": "I'm",
+    "startMs": 41680,
+    "endMs": 41800
+  },
+  {
+    "word": "terrible",
+    "startMs": 41800,
+    "endMs": 42000
+  },
+  {
+    "word": "at",
+    "startMs": 42000,
+    "endMs": 42340
+  },
+  {
+    "word": "discipline.",
+    "startMs": 42340,
+    "endMs": 42620
+  },
+  {
+    "word": "Why",
+    "startMs": 43720,
+    "endMs": 43980
+  },
+  {
+    "word": "can't",
+    "startMs": 43980,
+    "endMs": 44200
+  },
+  {
+    "word": "I",
+    "startMs": 44200,
+    "endMs": 44280
+  },
+  {
+    "word": "just",
+    "startMs": 44280,
+    "endMs": 44440
+  },
+  {
+    "word": "make",
+    "startMs": 44440,
+    "endMs": 44580
+  },
+  {
+    "word": "myself",
+    "startMs": 44580,
+    "endMs": 44980
+  },
+  {
+    "word": "do",
+    "startMs": 44980,
+    "endMs": 45120
+  },
+  {
+    "word": "normal",
+    "startMs": 45120,
+    "endMs": 45300
+  },
+  {
+    "word": "things?",
+    "startMs": 45300,
+    "endMs": 45660
+  },
+  {
+    "word": "But",
+    "startMs": 46720,
+    "endMs": 46880
+  },
+  {
+    "word": "there's",
+    "startMs": 46880,
+    "endMs": 47080
+  },
+  {
+    "word": "something",
+    "startMs": 47080,
+    "endMs": 47280
+  },
+  {
+    "word": "interesting",
+    "startMs": 47280,
+    "endMs": 47640
+  },
+  {
+    "word": "here.",
+    "startMs": 47640,
+    "endMs": 48140
+  },
+  {
+    "word": "Because",
+    "startMs": 48880,
+    "endMs": 49320
+  },
+  {
+    "word": "sometimes,",
+    "startMs": 49320,
+    "endMs": 49700
+  },
+  {
+    "word": "you",
+    "startMs": 50140,
+    "endMs": 50260
+  },
+  {
+    "word": "don't",
+    "startMs": 50260,
+    "endMs": 50480
+  },
+  {
+    "word": "actually",
+    "startMs": 50480,
+    "endMs": 50720
+  },
+  {
+    "word": "hate",
+    "startMs": 50720,
+    "endMs": 51020
+  },
+  {
+    "word": "the",
+    "startMs": 51020,
+    "endMs": 51180
+  },
+  {
+    "word": "task.",
+    "startMs": 51180,
+    "endMs": 51400
+  },
+  {
+    "word": "You",
+    "startMs": 52240,
+    "endMs": 52680
+  },
+  {
+    "word": "hate",
+    "startMs": 52680,
+    "endMs": 52860
+  },
+  {
+    "word": "how",
+    "startMs": 52860,
+    "endMs": 53060
+  },
+  {
+    "word": "the",
+    "startMs": 53060,
+    "endMs": 53160
+  },
+  {
+    "word": "task",
+    "startMs": 53160,
+    "endMs": 53380
+  },
+  {
+    "word": "makes",
+    "startMs": 53380,
+    "endMs": 53680
+  },
+  {
+    "word": "you",
+    "startMs": 53680,
+    "endMs": 53880
+  },
+  {
+    "word": "feel.",
+    "startMs": 53880,
+    "endMs": 54140
+  },
+  {
+    "word": "And",
+    "startMs": 54940,
+    "endMs": 55280
+  },
+  {
+    "word": "that",
+    "startMs": 55280,
+    "endMs": 55420
+  },
+  {
+    "word": "difference",
+    "startMs": 55420,
+    "endMs": 55740
+  },
+  {
+    "word": "changes",
+    "startMs": 55740,
+    "endMs": 56160
+  },
+  {
+    "word": "the",
+    "startMs": 56160,
+    "endMs": 56320
+  },
+  {
+    "word": "whole",
+    "startMs": 56320,
+    "endMs": 56480
+  },
+  {
+    "word": "way",
+    "startMs": 56480,
+    "endMs": 56700
+  },
+  {
+    "word": "you",
+    "startMs": 56700,
+    "endMs": 56820
+  },
+  {
+    "word": "look",
+    "startMs": 56820,
+    "endMs": 57000
+  },
+  {
+    "word": "at",
+    "startMs": 57000,
+    "endMs": 57100
+  },
+  {
+    "word": "procrastination.",
+    "startMs": 57100,
+    "endMs": 57720
+  },
+  {
+    "word": "Think",
+    "startMs": 58840,
+    "endMs": 59060
+  },
+  {
+    "word": "about",
+    "startMs": 59060,
+    "endMs": 59280
+  },
+  {
+    "word": "something",
+    "startMs": 59280,
+    "endMs": 59580
+  },
+  {
+    "word": "you've",
+    "startMs": 59580,
+    "endMs": 59880
+  },
+  {
+    "word": "been",
+    "startMs": 59880,
+    "endMs": 59960
+  },
+  {
+    "word": "avoiding",
+    "startMs": 59960,
+    "endMs": 60220
+  },
+  {
+    "word": "lately.",
+    "startMs": 60220,
+    "endMs": 60540
+  },
+  {
+    "word": "Maybe",
+    "startMs": 61720,
+    "endMs": 61880
+  },
+  {
+    "word": "it's",
+    "startMs": 61880,
+    "endMs": 62180
+  },
+  {
+    "word": "studying.",
+    "startMs": 62180,
+    "endMs": 62480
+  },
+  {
+    "word": "Maybe",
+    "startMs": 63500,
+    "endMs": 63720
+  },
+  {
+    "word": "it's",
+    "startMs": 63720,
+    "endMs": 63960
+  },
+  {
+    "word": "answering",
+    "startMs": 63960,
+    "endMs": 64300
+  },
+  {
+    "word": "an",
+    "startMs": 64300,
+    "endMs": 64459
+  },
+  {
+    "word": "important",
+    "startMs": 64459,
+    "endMs": 64720
+  },
+  {
+    "word": "email.",
+    "startMs": 64720,
+    "endMs": 65019
+  },
+  {
+    "word": "Starting",
+    "startMs": 66080,
+    "endMs": 66380
+  },
+  {
+    "word": "a",
+    "startMs": 66380,
+    "endMs": 66620
+  },
+  {
+    "word": "project.",
+    "startMs": 66620,
+    "endMs": 66940
+  },
+  {
+    "word": "Going",
+    "startMs": 68000,
+    "endMs": 68240
+  },
+  {
+    "word": "to",
+    "startMs": 68240,
+    "endMs": 68420
+  },
+  {
+    "word": "the",
+    "startMs": 68420,
+    "endMs": 68520
+  },
+  {
+    "word": "gym.",
+    "startMs": 68520,
+    "endMs": 68760
+  },
+  {
+    "word": "Applying",
+    "startMs": 69820,
+    "endMs": 70160
+  },
+  {
+    "word": "for",
+    "startMs": 70160,
+    "endMs": 70380
+  },
+  {
+    "word": "something.",
+    "startMs": 70380,
+    "endMs": 70680
+  },
+  {
+    "word": "Having",
+    "startMs": 71780,
+    "endMs": 71980
+  },
+  {
+    "word": "an",
+    "startMs": 71980,
+    "endMs": 72160
+  },
+  {
+    "word": "uncomfortable",
+    "startMs": 72160,
+    "endMs": 72500
+  },
+  {
+    "word": "conversation.",
+    "startMs": 72500,
+    "endMs": 73220
+  },
+  {
+    "word": "Whatever",
+    "startMs": 74360,
+    "endMs": 74580
+  },
+  {
+    "word": "it",
+    "startMs": 74580,
+    "endMs": 74860
+  },
+  {
+    "word": "is,",
+    "startMs": 74860,
+    "endMs": 75120
+  },
+  {
+    "word": "imagine",
+    "startMs": 75240,
+    "endMs": 75480
+  },
+  {
+    "word": "yourself",
+    "startMs": 75480,
+    "endMs": 75940
+  },
+  {
+    "word": "sitting",
+    "startMs": 75940,
+    "endMs": 76180
+  },
+  {
+    "word": "down",
+    "startMs": 76180,
+    "endMs": 76560
+  },
+  {
+    "word": "and",
+    "startMs": 76560,
+    "endMs": 76800
+  },
+  {
+    "word": "finally",
+    "startMs": 76800,
+    "endMs": 77140
+  },
+  {
+    "word": "starting.",
+    "startMs": 77140,
+    "endMs": 77480
+  },
+  {
+    "word": "Notice",
+    "startMs": 78520,
+    "endMs": 78880
+  },
+  {
+    "word": "what",
+    "startMs": 78880,
+    "endMs": 79100
+  },
+  {
+    "word": "shows",
+    "startMs": 79100,
+    "endMs": 79300
+  },
+  {
+    "word": "up",
+    "startMs": 79300,
+    "endMs": 79520
+  },
+  {
+    "word": "before",
+    "startMs": 79520,
+    "endMs": 79740
+  },
+  {
+    "word": "you've",
+    "startMs": 79740,
+    "endMs": 80080
+  },
+  {
+    "word": "even",
+    "startMs": 80080,
+    "endMs": 80240
+  },
+  {
+    "word": "done",
+    "startMs": 80240,
+    "endMs": 80420
+  },
+  {
+    "word": "anything.",
+    "startMs": 80420,
+    "endMs": 80680
+  },
+  {
+    "word": "Maybe",
+    "startMs": 81520,
+    "endMs": 82040
+  },
+  {
+    "word": "it's",
+    "startMs": 82040,
+    "endMs": 82280
+  },
+  {
+    "word": "boredom.",
+    "startMs": 82280,
+    "endMs": 82480
+  },
+  {
+    "word": "Maybe",
+    "startMs": 83240,
+    "endMs": 83720
+  },
+  {
+    "word": "it's",
+    "startMs": 83720,
+    "endMs": 84060
+  },
+  {
+    "word": "anxiety.",
+    "startMs": 84060,
+    "endMs": 84160
+  },
+  {
+    "word": "Maybe",
+    "startMs": 85420,
+    "endMs": 85700
+  },
+  {
+    "word": "it's",
+    "startMs": 85700,
+    "endMs": 86020
+  },
+  {
+    "word": "that",
+    "startMs": 86020,
+    "endMs": 86140
+  },
+  {
+    "word": "tiny",
+    "startMs": 86140,
+    "endMs": 86340
+  },
+  {
+    "word": "feeling",
+    "startMs": 86340,
+    "endMs": 86740
+  },
+  {
+    "word": "of,",
+    "startMs": 86740,
+    "endMs": 86980
+  },
+  {
+    "word": "what",
+    "startMs": 87180,
+    "endMs": 87300
+  },
+  {
+    "word": "if",
+    "startMs": 87300,
+    "endMs": 87380
+  },
+  {
+    "word": "I'm",
+    "startMs": 87380,
+    "endMs": 87500
+  },
+  {
+    "word": "not",
+    "startMs": 87500,
+    "endMs": 87660
+  },
+  {
+    "word": "good",
+    "startMs": 87660,
+    "endMs": 87820
+  },
+  {
+    "word": "enough",
+    "startMs": 87820,
+    "endMs": 88060
+  },
+  {
+    "word": "at",
+    "startMs": 88060,
+    "endMs": 88200
+  },
+  {
+    "word": "this.",
+    "startMs": 88200,
+    "endMs": 88380
+  },
+  {
+    "word": "Maybe",
+    "startMs": 89220,
+    "endMs": 89620
+  },
+  {
+    "word": "the",
+    "startMs": 89620,
+    "endMs": 89840
+  },
+  {
+    "word": "task",
+    "startMs": 89840,
+    "endMs": 90060
+  },
+  {
+    "word": "feels",
+    "startMs": 90060,
+    "endMs": 90340
+  },
+  {
+    "word": "so",
+    "startMs": 90340,
+    "endMs": 90600
+  },
+  {
+    "word": "big",
+    "startMs": 90600,
+    "endMs": 90820
+  },
+  {
+    "word": "that",
+    "startMs": 90820,
+    "endMs": 91000
+  },
+  {
+    "word": "your",
+    "startMs": 91000,
+    "endMs": 91140
+  },
+  {
+    "word": "brain",
+    "startMs": 91140,
+    "endMs": 91440
+  },
+  {
+    "word": "doesn't",
+    "startMs": 91440,
+    "endMs": 91820
+  },
+  {
+    "word": "even",
+    "startMs": 91820,
+    "endMs": 91900
+  },
+  {
+    "word": "know",
+    "startMs": 91900,
+    "endMs": 92180
+  },
+  {
+    "word": "where",
+    "startMs": 92180,
+    "endMs": 92360
+  },
+  {
+    "word": "to",
+    "startMs": 92360,
+    "endMs": 92460
+  },
+  {
+    "word": "begin.",
+    "startMs": 92460,
+    "endMs": 92700
+  },
+  {
+    "word": "Or",
+    "startMs": 93660,
+    "endMs": 93900
+  },
+  {
+    "word": "maybe",
+    "startMs": 93900,
+    "endMs": 94060
+  },
+  {
+    "word": "you",
+    "startMs": 94060,
+    "endMs": 94280
+  },
+  {
+    "word": "already",
+    "startMs": 94280,
+    "endMs": 94520
+  },
+  {
+    "word": "know",
+    "startMs": 94520,
+    "endMs": 94860
+  },
+  {
+    "word": "you'll",
+    "startMs": 94860,
+    "endMs": 95080
+  },
+  {
+    "word": "have",
+    "startMs": 95080,
+    "endMs": 95200
+  },
+  {
+    "word": "to",
+    "startMs": 95200,
+    "endMs": 95320
+  },
+  {
+    "word": "struggle",
+    "startMs": 95320,
+    "endMs": 95540
+  },
+  {
+    "word": "for",
+    "startMs": 95540,
+    "endMs": 95820
+  },
+  {
+    "word": "an",
+    "startMs": 95820,
+    "endMs": 95920
+  },
+  {
+    "word": "hour",
+    "startMs": 95920,
+    "endMs": 96140
+  },
+  {
+    "word": "before",
+    "startMs": 96140,
+    "endMs": 96380
+  },
+  {
+    "word": "you",
+    "startMs": 96380,
+    "endMs": 96680
+  },
+  {
+    "word": "see",
+    "startMs": 96680,
+    "endMs": 96840
+  },
+  {
+    "word": "any",
+    "startMs": 96840,
+    "endMs": 97040
+  },
+  {
+    "word": "progress.",
+    "startMs": 97040,
+    "endMs": 97420
+  },
+  {
+    "word": "So",
+    "startMs": 98480,
+    "endMs": 98780
+  },
+  {
+    "word": "your",
+    "startMs": 98780,
+    "endMs": 98880
+  },
+  {
+    "word": "brain",
+    "startMs": 98880,
+    "endMs": 99120
+  },
+  {
+    "word": "notices",
+    "startMs": 99120,
+    "endMs": 99460
+  },
+  {
+    "word": "something",
+    "startMs": 99460,
+    "endMs": 99800
+  },
+  {
+    "word": "much",
+    "startMs": 99800,
+    "endMs": 100080
+  },
+  {
+    "word": "simpler.",
+    "startMs": 100080,
+    "endMs": 100420
+  },
+  {
+    "word": "There",
+    "startMs": 101480,
+    "endMs": 101640
+  },
+  {
+    "word": "are",
+    "startMs": 101640,
+    "endMs": 101760
+  },
+  {
+    "word": "two",
+    "startMs": 101760,
+    "endMs": 101920
+  },
+  {
+    "word": "options.",
+    "startMs": 101920,
+    "endMs": 102300
+  },
+  {
+    "word": "Stay",
+    "startMs": 103680,
+    "endMs": 103700
+  },
+  {
+    "word": "with",
+    "startMs": 103700,
+    "endMs": 103860
+  },
+  {
+    "word": "this",
+    "startMs": 103860,
+    "endMs": 104000
+  },
+  {
+    "word": "uncomfortable",
+    "startMs": 104000,
+    "endMs": 104200
+  },
+  {
+    "word": "feeling.",
+    "startMs": 104200,
+    "endMs": 105020
+  },
+  {
+    "word": "Or",
+    "startMs": 105880,
+    "endMs": 106140
+  },
+  {
+    "word": "do",
+    "startMs": 106140,
+    "endMs": 106300
+  },
+  {
+    "word": "something",
+    "startMs": 106300,
+    "endMs": 106520
+  },
+  {
+    "word": "that",
+    "startMs": 106520,
+    "endMs": 106820
+  },
+  {
+    "word": "makes",
+    "startMs": 106820,
+    "endMs": 106980
+  },
+  {
+    "word": "the",
+    "startMs": 106980,
+    "endMs": 107180
+  },
+  {
+    "word": "feeling",
+    "startMs": 107180,
+    "endMs": 107440
+  },
+  {
+    "word": "disappear.",
+    "startMs": 107440,
+    "endMs": 107720
+  },
+  {
+    "word": "Check",
+    "startMs": 109000,
+    "endMs": 109180
+  },
+  {
+    "word": "your",
+    "startMs": 109180,
+    "endMs": 109360
+  },
+  {
+    "word": "phone.",
+    "startMs": 109360,
+    "endMs": 109640
+  },
+  {
+    "word": "Watch",
+    "startMs": 110780,
+    "endMs": 110880
+  },
+  {
+    "word": "something.",
+    "startMs": 110880,
+    "endMs": 111220
+  },
+  {
+    "word": "Get",
+    "startMs": 111920,
+    "endMs": 112440
+  },
+  {
+    "word": "a",
+    "startMs": 112440,
+    "endMs": 112520
+  },
+  {
+    "word": "snack.",
+    "startMs": 112520,
+    "endMs": 112800
+  },
+  {
+    "word": "Open",
+    "startMs": 113620,
+    "endMs": 114120
+  },
+  {
+    "word": "another",
+    "startMs": 114120,
+    "endMs": 114360
+  },
+  {
+    "word": "tab.",
+    "startMs": 114360,
+    "endMs": 114680
+  },
+  {
+    "word": "Tell",
+    "startMs": 115600,
+    "endMs": 115880
+  },
+  {
+    "word": "yourself",
+    "startMs": 115880,
+    "endMs": 116180
+  },
+  {
+    "word": "you'll",
+    "startMs": 116180,
+    "endMs": 116420
+  },
+  {
+    "word": "do",
+    "startMs": 116420,
+    "endMs": 116520
+  },
+  {
+    "word": "it",
+    "startMs": 116520,
+    "endMs": 116660
+  },
+  {
+    "word": "later.",
+    "startMs": 116660,
+    "endMs": 116880
+  },
+  {
+    "word": "And",
+    "startMs": 117980,
+    "endMs": 118040
+  },
+  {
+    "word": "the",
+    "startMs": 118040,
+    "endMs": 118140
+  },
+  {
+    "word": "important",
+    "startMs": 118140,
+    "endMs": 118340
+  },
+  {
+    "word": "part",
+    "startMs": 118340,
+    "endMs": 118700
+  },
+  {
+    "word": "is.",
+    "startMs": 118700,
+    "endMs": 118960
+  },
+  {
+    "word": "The",
+    "startMs": 119980,
+    "endMs": 120080
+  },
+  {
+    "word": "second",
+    "startMs": 120080,
+    "endMs": 120320
+  },
+  {
+    "word": "you",
+    "startMs": 120320,
+    "endMs": 120520
+  },
+  {
+    "word": "walk",
+    "startMs": 120520,
+    "endMs": 120680
+  },
+  {
+    "word": "away",
+    "startMs": 120680,
+    "endMs": 120860
+  },
+  {
+    "word": "from",
+    "startMs": 120860,
+    "endMs": 121100
+  },
+  {
+    "word": "the",
+    "startMs": 121100,
+    "endMs": 121220
+  },
+  {
+    "word": "task,",
+    "startMs": 121220,
+    "endMs": 121440
+  },
+  {
+    "word": "you",
+    "startMs": 121880,
+    "endMs": 121980
+  },
+  {
+    "word": "feel",
+    "startMs": 121980,
+    "endMs": 122140
+  },
+  {
+    "word": "a",
+    "startMs": 122140,
+    "endMs": 122280
+  },
+  {
+    "word": "little",
+    "startMs": 122280,
+    "endMs": 122460
+  },
+  {
+    "word": "better.",
+    "startMs": 122460,
+    "endMs": 122680
+  },
+  {
+    "word": "Not",
+    "startMs": 123640,
+    "endMs": 123880
+  },
+  {
+    "word": "dramatically",
+    "startMs": 123880,
+    "endMs": 124160
+  },
+  {
+    "word": "better.",
+    "startMs": 124160,
+    "endMs": 124700
+  },
+  {
+    "word": "Just,",
+    "startMs": 125700,
+    "endMs": 126000
+  },
+  {
+    "word": "relieved.",
+    "startMs": 126260,
+    "endMs": 126380
+  },
+  {
+    "word": "And",
+    "startMs": 127500,
+    "endMs": 127720
+  },
+  {
+    "word": "that",
+    "startMs": 127720,
+    "endMs": 127840
+  },
+  {
+    "word": "relief",
+    "startMs": 127840,
+    "endMs": 128100
+  },
+  {
+    "word": "is",
+    "startMs": 128100,
+    "endMs": 128340
+  },
+  {
+    "word": "the",
+    "startMs": 128340,
+    "endMs": 128460
+  },
+  {
+    "word": "part",
+    "startMs": 128460,
+    "endMs": 128620
+  },
+  {
+    "word": "people",
+    "startMs": 128620,
+    "endMs": 128840
+  },
+  {
+    "word": "often",
+    "startMs": 128840,
+    "endMs": 129240
+  },
+  {
+    "word": "miss.",
+    "startMs": 129240,
+    "endMs": 129500
+  },
+  {
+    "word": "Because",
+    "startMs": 130440,
+    "endMs": 130840
+  },
+  {
+    "word": "procrastination",
+    "startMs": 130840,
+    "endMs": 131400
+  },
+  {
+    "word": "isn't",
+    "startMs": 131400,
+    "endMs": 131980
+  },
+  {
+    "word": "always",
+    "startMs": 131980,
+    "endMs": 132220
+  },
+  {
+    "word": "about",
+    "startMs": 132220,
+    "endMs": 132480
+  },
+  {
+    "word": "choosing",
+    "startMs": 132480,
+    "endMs": 132760
+  },
+  {
+    "word": "something",
+    "startMs": 132760,
+    "endMs": 133180
+  },
+  {
+    "word": "fun",
+    "startMs": 133180,
+    "endMs": 133460
+  },
+  {
+    "word": "over",
+    "startMs": 133460,
+    "endMs": 133720
+  },
+  {
+    "word": "something",
+    "startMs": 133720,
+    "endMs": 134040
+  },
+  {
+    "word": "important.",
+    "startMs": 134040,
+    "endMs": 134420
+  },
+  {
+    "word": "Sometimes",
+    "startMs": 135360,
+    "endMs": 135880
+  },
+  {
+    "word": "it's",
+    "startMs": 135880,
+    "endMs": 136160
+  },
+  {
+    "word": "about",
+    "startMs": 136160,
+    "endMs": 136320
+  },
+  {
+    "word": "escaping",
+    "startMs": 136320,
+    "endMs": 136620
+  },
+  {
+    "word": "something",
+    "startMs": 136620,
+    "endMs": 137100
+  },
+  {
+    "word": "unpleasant.",
+    "startMs": 137100,
+    "endMs": 137300
+  },
+  {
+    "word": "And",
+    "startMs": 138560,
+    "endMs": 138820
+  },
+  {
+    "word": "once",
+    "startMs": 138820,
+    "endMs": 138960
+  },
+  {
+    "word": "you",
+    "startMs": 138960,
+    "endMs": 139180
+  },
+  {
+    "word": "see",
+    "startMs": 139180,
+    "endMs": 139320
+  },
+  {
+    "word": "that,",
+    "startMs": 139320,
+    "endMs": 139580
+  },
+  {
+    "word": "procrastination",
+    "startMs": 139800,
+    "endMs": 140280
+  },
+  {
+    "word": "starts",
+    "startMs": 140280,
+    "endMs": 140900
+  },
+  {
+    "word": "making",
+    "startMs": 140900,
+    "endMs": 141220
+  },
+  {
+    "word": "a",
+    "startMs": 141220,
+    "endMs": 141360
+  },
+  {
+    "word": "weird",
+    "startMs": 141360,
+    "endMs": 141540
+  },
+  {
+    "word": "amount",
+    "startMs": 141540,
+    "endMs": 141760
+  },
+  {
+    "word": "of",
+    "startMs": 141760,
+    "endMs": 141920
+  },
+  {
+    "word": "sense.",
+    "startMs": 141920,
+    "endMs": 142160
+  },
+  {
+    "word": "Imagine",
+    "startMs": 143240,
+    "endMs": 143520
+  },
+  {
+    "word": "you",
+    "startMs": 143520,
+    "endMs": 143840
+  },
+  {
+    "word": "have",
+    "startMs": 143840,
+    "endMs": 144000
+  },
+  {
+    "word": "an",
+    "startMs": 144000,
+    "endMs": 144060
+  },
+  {
+    "word": "assignment",
+    "startMs": 144060,
+    "endMs": 144380
+  },
+  {
+    "word": "due",
+    "startMs": 144380,
+    "endMs": 144620
+  },
+  {
+    "word": "tomorrow.",
+    "startMs": 144620,
+    "endMs": 144940
+  },
+  {
+    "word": "You",
+    "startMs": 146060,
+    "endMs": 146180
+  },
+  {
+    "word": "open",
+    "startMs": 146180,
+    "endMs": 146340
+  },
+  {
+    "word": "the",
+    "startMs": 146340,
+    "endMs": 146580
+  },
+  {
+    "word": "document.",
+    "startMs": 146580,
+    "endMs": 146860
+  },
+  {
+    "word": "You",
+    "startMs": 147980,
+    "endMs": 148200
+  },
+  {
+    "word": "read",
+    "startMs": 148200,
+    "endMs": 148360
+  },
+  {
+    "word": "the",
+    "startMs": 148360,
+    "endMs": 148500
+  },
+  {
+    "word": "first",
+    "startMs": 148500,
+    "endMs": 148700
+  },
+  {
+    "word": "question.",
+    "startMs": 148700,
+    "endMs": 149200
+  },
+  {
+    "word": "And",
+    "startMs": 150260,
+    "endMs": 150380
+  },
+  {
+    "word": "suddenly",
+    "startMs": 150380,
+    "endMs": 150620
+  },
+  {
+    "word": "you",
+    "startMs": 150620,
+    "endMs": 150920
+  },
+  {
+    "word": "feel",
+    "startMs": 150920,
+    "endMs": 151100
+  },
+  {
+    "word": "that",
+    "startMs": 151100,
+    "endMs": 151340
+  },
+  {
+    "word": "little",
+    "startMs": 151340,
+    "endMs": 151560
+  },
+  {
+    "word": "wave",
+    "startMs": 151560,
+    "endMs": 151740
+  },
+  {
+    "word": "of",
+    "startMs": 151740,
+    "endMs": 151880
+  },
+  {
+    "word": "pressure.",
+    "startMs": 151880,
+    "endMs": 152180
+  },
+  {
+    "word": "Ugg.",
+    "startMs": 153060,
+    "endMs": 153540
+  },
+  {
+    "word": "I",
+    "startMs": 154060,
+    "endMs": 154500
+  },
+  {
+    "word": "don't",
+    "startMs": 154500,
+    "endMs": 154660
+  },
+  {
+    "word": "know",
+    "startMs": 154660,
+    "endMs": 154780
+  },
+  {
+    "word": "how",
+    "startMs": 154780,
+    "endMs": 154920
+  },
+  {
+    "word": "to",
+    "startMs": 154920,
+    "endMs": 155020
+  },
+  {
+    "word": "do",
+    "startMs": 155020,
+    "endMs": 155160
+  },
+  {
+    "word": "this.",
+    "startMs": 155160,
+    "endMs": 155360
+  },
+  {
+    "word": "So",
+    "startMs": 156360,
+    "endMs": 156580
+  },
+  {
+    "word": "you",
+    "startMs": 156580,
+    "endMs": 156720
+  },
+  {
+    "word": "close",
+    "startMs": 156720,
+    "endMs": 156920
+  },
+  {
+    "word": "it.",
+    "startMs": 156920,
+    "endMs": 157200
+  },
+  {
+    "word": "You",
+    "startMs": 158180,
+    "endMs": 158320
+  },
+  {
+    "word": "open",
+    "startMs": 158320,
+    "endMs": 158540
+  },
+  {
+    "word": "YouTube",
+    "startMs": 158540,
+    "endMs": 158780
+  },
+  {
+    "word": "instead.",
+    "startMs": 158780,
+    "endMs": 159240
+  },
+  {
+    "word": "And",
+    "startMs": 160400,
+    "endMs": 160460
+  },
+  {
+    "word": "immediately.",
+    "startMs": 160460,
+    "endMs": 160760
+  },
+  {
+    "word": "The",
+    "startMs": 162140,
+    "endMs": 162160
+  },
+  {
+    "word": "pressure",
+    "startMs": 162160,
+    "endMs": 162320
+  },
+  {
+    "word": "drops.",
+    "startMs": 162320,
+    "endMs": 162740
+  },
+  {
+    "word": "Your",
+    "startMs": 163960,
+    "endMs": 163980
+  },
+  {
+    "word": "brain",
+    "startMs": 163980,
+    "endMs": 164200
+  },
+  {
+    "word": "basically",
+    "startMs": 164200,
+    "endMs": 164600
+  },
+  {
+    "word": "learns.",
+    "startMs": 164600,
+    "endMs": 165040
+  },
+  {
+    "word": "Task",
+    "startMs": 166400,
+    "endMs": 166400
+  },
+  {
+    "word": "equals",
+    "startMs": 166400,
+    "endMs": 166720
+  },
+  {
+    "word": "uncomfortable",
+    "startMs": 166720,
+    "endMs": 167160
+  },
+  {
+    "word": "feeling.",
+    "startMs": 167160,
+    "endMs": 167780
+  },
+  {
+    "word": "Avoid",
+    "startMs": 168519,
+    "endMs": 169040
+  },
+  {
+    "word": "task",
+    "startMs": 169040,
+    "endMs": 169360
+  },
+  {
+    "word": "equals",
+    "startMs": 169360,
+    "endMs": 169700
+  },
+  {
+    "word": "relief.",
+    "startMs": 169700,
+    "endMs": 170120
+  },
+  {
+    "word": "And",
+    "startMs": 171120,
+    "endMs": 171360
+  },
+  {
+    "word": "because",
+    "startMs": 171360,
+    "endMs": 171580
+  },
+  {
+    "word": "the",
+    "startMs": 171580,
+    "endMs": 171720
+  },
+  {
+    "word": "avoidance",
+    "startMs": 171720,
+    "endMs": 172000
+  },
+  {
+    "word": "produced",
+    "startMs": 172000,
+    "endMs": 172320
+  },
+  {
+    "word": "relief,",
+    "startMs": 172320,
+    "endMs": 172800
+  },
+  {
+    "word": "your",
+    "startMs": 173220,
+    "endMs": 173280
+  },
+  {
+    "word": "brain",
+    "startMs": 173280,
+    "endMs": 173560
+  },
+  {
+    "word": "has",
+    "startMs": 173560,
+    "endMs": 173760
+  },
+  {
+    "word": "just",
+    "startMs": 173760,
+    "endMs": 173960
+  },
+  {
+    "word": "received",
+    "startMs": 173960,
+    "endMs": 174140
+  },
+  {
+    "word": "a",
+    "startMs": 174140,
+    "endMs": 174140
+  },
+  {
+    "word": "tiny",
+    "startMs": 174140,
+    "endMs": 174680
+  },
+  {
+    "word": "reward",
+    "startMs": 174680,
+    "endMs": 175020
+  },
+  {
+    "word": "for",
+    "startMs": 175020,
+    "endMs": 175280
+  },
+  {
+    "word": "avoiding.",
+    "startMs": 175280,
+    "endMs": 175560
+  },
+  {
+    "word": "That's",
+    "startMs": 176540,
+    "endMs": 176920
+  },
+  {
+    "word": "an",
+    "startMs": 176920,
+    "endMs": 177000
+  },
+  {
+    "word": "avoidance",
+    "startMs": 177000,
+    "endMs": 177220
+  },
+  {
+    "word": "learning",
+    "startMs": 177220,
+    "endMs": 177540
+  },
+  {
+    "word": "loop.",
+    "startMs": 177540,
+    "endMs": 177900
+  },
+  {
+    "word": "You",
+    "startMs": 178660,
+    "endMs": 179000
+  },
+  {
+    "word": "don't",
+    "startMs": 179000,
+    "endMs": 179140
+  },
+  {
+    "word": "even",
+    "startMs": 179140,
+    "endMs": 179320
+  },
+  {
+    "word": "have",
+    "startMs": 179320,
+    "endMs": 179540
+  },
+  {
+    "word": "to",
+    "startMs": 179540,
+    "endMs": 179660
+  },
+  {
+    "word": "consciously",
+    "startMs": 179660,
+    "endMs": 179940
+  },
+  {
+    "word": "think,",
+    "startMs": 179940,
+    "endMs": 180380
+  },
+  {
+    "word": "I'm",
+    "startMs": 180700,
+    "endMs": 180860
+  },
+  {
+    "word": "going",
+    "startMs": 180860,
+    "endMs": 181040
+  },
+  {
+    "word": "to",
+    "startMs": 181040,
+    "endMs": 181180
+  },
+  {
+    "word": "avoid",
+    "startMs": 181180,
+    "endMs": 181400
+  },
+  {
+    "word": "this",
+    "startMs": 181400,
+    "endMs": 181660
+  },
+  {
+    "word": "because",
+    "startMs": 181660,
+    "endMs": 181960
+  },
+  {
+    "word": "it",
+    "startMs": 181960,
+    "endMs": 182160
+  },
+  {
+    "word": "makes",
+    "startMs": 182160,
+    "endMs": 182280
+  },
+  {
+    "word": "me",
+    "startMs": 182280,
+    "endMs": 182480
+  },
+  {
+    "word": "anxious.",
+    "startMs": 182480,
+    "endMs": 182740
+  },
+  {
+    "word": "Your",
+    "startMs": 183700,
+    "endMs": 184100
+  },
+  {
+    "word": "brain",
+    "startMs": 184100,
+    "endMs": 184360
+  },
+  {
+    "word": "can",
+    "startMs": 184360,
+    "endMs": 184580
+  },
+  {
+    "word": "learn",
+    "startMs": 184580,
+    "endMs": 184760
+  },
+  {
+    "word": "the",
+    "startMs": 184760,
+    "endMs": 184900
+  },
+  {
+    "word": "pattern",
+    "startMs": 184900,
+    "endMs": 185200
+  },
+  {
+    "word": "without",
+    "startMs": 185200,
+    "endMs": 185420
+  },
+  {
+    "word": "asking",
+    "startMs": 185420,
+    "endMs": 185860
+  },
+  {
+    "word": "permission.",
+    "startMs": 185860,
+    "endMs": 186080
+  },
+  {
+    "word": "And",
+    "startMs": 187340,
+    "endMs": 187500
+  },
+  {
+    "word": "this",
+    "startMs": 187500,
+    "endMs": 187640
+  },
+  {
+    "word": "is",
+    "startMs": 187640,
+    "endMs": 187760
+  },
+  {
+    "word": "why",
+    "startMs": 187760,
+    "endMs": 187920
+  },
+  {
+    "word": "telling",
+    "startMs": 187920,
+    "endMs": 188140
+  },
+  {
+    "word": "yourself",
+    "startMs": 188140,
+    "endMs": 188600
+  },
+  {
+    "word": "to",
+    "startMs": 188600,
+    "endMs": 188820
+  },
+  {
+    "word": "just",
+    "startMs": 188820,
+    "endMs": 189060
+  },
+  {
+    "word": "have",
+    "startMs": 189060,
+    "endMs": 189220
+  },
+  {
+    "word": "more",
+    "startMs": 189220,
+    "endMs": 189380
+  },
+  {
+    "word": "discipline",
+    "startMs": 189380,
+    "endMs": 189700
+  },
+  {
+    "word": "can",
+    "startMs": 189700,
+    "endMs": 190260
+  },
+  {
+    "word": "sometimes",
+    "startMs": 190260,
+    "endMs": 190560
+  },
+  {
+    "word": "miss",
+    "startMs": 190560,
+    "endMs": 190900
+  },
+  {
+    "word": "the",
+    "startMs": 190900,
+    "endMs": 191060
+  },
+  {
+    "word": "actual",
+    "startMs": 191060,
+    "endMs": 191240
+  },
+  {
+    "word": "problem.",
+    "startMs": 191240,
+    "endMs": 191820
+  },
+  {
+    "word": "Because",
+    "startMs": 192640,
+    "endMs": 193020
+  },
+  {
+    "word": "discipline",
+    "startMs": 193020,
+    "endMs": 193340
+  },
+  {
+    "word": "is",
+    "startMs": 193340,
+    "endMs": 193720
+  },
+  {
+    "word": "being",
+    "startMs": 193720,
+    "endMs": 193900
+  },
+  {
+    "word": "asked",
+    "startMs": 193900,
+    "endMs": 194180
+  },
+  {
+    "word": "to",
+    "startMs": 194180,
+    "endMs": 194460
+  },
+  {
+    "word": "fight",
+    "startMs": 194460,
+    "endMs": 194660
+  },
+  {
+    "word": "an",
+    "startMs": 194660,
+    "endMs": 194800
+  },
+  {
+    "word": "emotional",
+    "startMs": 194800,
+    "endMs": 195000
+  },
+  {
+    "word": "reaction",
+    "startMs": 195000,
+    "endMs": 195540
+  },
+  {
+    "word": "that",
+    "startMs": 195540,
+    "endMs": 195920
+  },
+  {
+    "word": "hasn't",
+    "startMs": 195920,
+    "endMs": 196300
+  },
+  {
+    "word": "even",
+    "startMs": 196300,
+    "endMs": 196420
+  },
+  {
+    "word": "been",
+    "startMs": 196420,
+    "endMs": 196600
+  },
+  {
+    "word": "addressed.",
+    "startMs": 196600,
+    "endMs": 196820
+  },
+  {
+    "word": "And",
+    "startMs": 198120,
+    "endMs": 198220
+  },
+  {
+    "word": "here's",
+    "startMs": 198220,
+    "endMs": 198500
+  },
+  {
+    "word": "where",
+    "startMs": 198500,
+    "endMs": 198640
+  },
+  {
+    "word": "it",
+    "startMs": 198640,
+    "endMs": 198740
+  },
+  {
+    "word": "gets",
+    "startMs": 198740,
+    "endMs": 198880
+  },
+  {
+    "word": "even",
+    "startMs": 198880,
+    "endMs": 199140
+  },
+  {
+    "word": "more",
+    "startMs": 199140,
+    "endMs": 199300
+  },
+  {
+    "word": "interesting.",
+    "startMs": 199300,
+    "endMs": 199760
+  },
+  {
+    "word": "The",
+    "startMs": 200860,
+    "endMs": 200960
+  },
+  {
+    "word": "task",
+    "startMs": 200960,
+    "endMs": 201160
+  },
+  {
+    "word": "can",
+    "startMs": 201160,
+    "endMs": 201460
+  },
+  {
+    "word": "change",
+    "startMs": 201460,
+    "endMs": 201700
+  },
+  {
+    "word": "depending",
+    "startMs": 201700,
+    "endMs": 201960
+  },
+  {
+    "word": "on",
+    "startMs": 201960,
+    "endMs": 202380
+  },
+  {
+    "word": "how",
+    "startMs": 202380,
+    "endMs": 202540
+  },
+  {
+    "word": "you",
+    "startMs": 202540,
+    "endMs": 202640
+  },
+  {
+    "word": "feel",
+    "startMs": 202640,
+    "endMs": 202800
+  },
+  {
+    "word": "about",
+    "startMs": 202800,
+    "endMs": 203060
+  },
+  {
+    "word": "yourself.",
+    "startMs": 203060,
+    "endMs": 203300
+  },
+  {
+    "word": "Suppose",
+    "startMs": 204460,
+    "endMs": 204880
+  },
+  {
+    "word": "you're",
+    "startMs": 204880,
+    "endMs": 205080
+  },
+  {
+    "word": "studying",
+    "startMs": 205080,
+    "endMs": 205400
+  },
+  {
+    "word": "for",
+    "startMs": 205400,
+    "endMs": 205640
+  },
+  {
+    "word": "an",
+    "startMs": 205640,
+    "endMs": 205740
+  },
+  {
+    "word": "exam.",
+    "startMs": 205740,
+    "endMs": 206000
+  },
+  {
+    "word": "On",
+    "startMs": 207000,
+    "endMs": 207200
+  },
+  {
+    "word": "a",
+    "startMs": 207200,
+    "endMs": 207300
+  },
+  {
+    "word": "good",
+    "startMs": 207300,
+    "endMs": 207440
+  },
+  {
+    "word": "day,",
+    "startMs": 207440,
+    "endMs": 207680
+  },
+  {
+    "word": "studying",
+    "startMs": 207980,
+    "endMs": 208280
+  },
+  {
+    "word": "might",
+    "startMs": 208280,
+    "endMs": 208520
+  },
+  {
+    "word": "just",
+    "startMs": 208520,
+    "endMs": 208760
+  },
+  {
+    "word": "feel",
+    "startMs": 208760,
+    "endMs": 208980
+  },
+  {
+    "word": "like",
+    "startMs": 208980,
+    "endMs": 209160
+  },
+  {
+    "word": "studying.",
+    "startMs": 209160,
+    "endMs": 209520
+  },
+  {
+    "word": "But",
+    "startMs": 210560,
+    "endMs": 210700
+  },
+  {
+    "word": "on",
+    "startMs": 210700,
+    "endMs": 210820
+  },
+  {
+    "word": "a",
+    "startMs": 210820,
+    "endMs": 210940
+  },
+  {
+    "word": "day",
+    "startMs": 210940,
+    "endMs": 211100
+  },
+  {
+    "word": "when",
+    "startMs": 211100,
+    "endMs": 211300
+  },
+  {
+    "word": "you're",
+    "startMs": 211300,
+    "endMs": 211420
+  },
+  {
+    "word": "already",
+    "startMs": 211420,
+    "endMs": 211720
+  },
+  {
+    "word": "questioning",
+    "startMs": 211720,
+    "endMs": 212160
+  },
+  {
+    "word": "yourself.",
+    "startMs": 212160,
+    "endMs": 212520
+  },
+  {
+    "word": "The",
+    "startMs": 213760,
+    "endMs": 213880
+  },
+  {
+    "word": "exact",
+    "startMs": 213880,
+    "endMs": 214040
+  },
+  {
+    "word": "same",
+    "startMs": 214040,
+    "endMs": 214460
+  },
+  {
+    "word": "chapter",
+    "startMs": 214460,
+    "endMs": 214860
+  },
+  {
+    "word": "can",
+    "startMs": 214860,
+    "endMs": 215140
+  },
+  {
+    "word": "feel",
+    "startMs": 215140,
+    "endMs": 215340
+  },
+  {
+    "word": "completely",
+    "startMs": 215340,
+    "endMs": 215600
+  },
+  {
+    "word": "different.",
+    "startMs": 215600,
+    "endMs": 216180
+  },
+  {
+    "word": "Now",
+    "startMs": 217240,
+    "endMs": 217420
+  },
+  {
+    "word": "it's",
+    "startMs": 217420,
+    "endMs": 217640
+  },
+  {
+    "word": "not",
+    "startMs": 217640,
+    "endMs": 217780
+  },
+  {
+    "word": "just.",
+    "startMs": 217780,
+    "endMs": 217980
+  },
+  {
+    "word": "I",
+    "startMs": 218780,
+    "endMs": 219260
+  },
+  {
+    "word": "need",
+    "startMs": 219260,
+    "endMs": 219400
+  },
+  {
+    "word": "to",
+    "startMs": 219400,
+    "endMs": 219560
+  },
+  {
+    "word": "learn",
+    "startMs": 219560,
+    "endMs": 219740
+  },
+  {
+    "word": "this.",
+    "startMs": 219740,
+    "endMs": 219980
+  },
+  {
+    "word": "It",
+    "startMs": 220920,
+    "endMs": 221160
+  },
+  {
+    "word": "becomes.",
+    "startMs": 221160,
+    "endMs": 221460
+  },
+  {
+    "word": "What",
+    "startMs": 222560,
+    "endMs": 222780
+  },
+  {
+    "word": "if",
+    "startMs": 222780,
+    "endMs": 222880
+  },
+  {
+    "word": "I",
+    "startMs": 222880,
+    "endMs": 223000
+  },
+  {
+    "word": "can't",
+    "startMs": 223000,
+    "endMs": 223280
+  },
+  {
+    "word": "understand",
+    "startMs": 223280,
+    "endMs": 223520
+  },
+  {
+    "word": "it?",
+    "startMs": 223520,
+    "endMs": 223900
+  },
+  {
+    "word": "What",
+    "startMs": 224660,
+    "endMs": 224960
+  },
+  {
+    "word": "if",
+    "startMs": 224960,
+    "endMs": 225080
+  },
+  {
+    "word": "I'm",
+    "startMs": 225080,
+    "endMs": 225200
+  },
+  {
+    "word": "behind?",
+    "startMs": 225200,
+    "endMs": 225440
+  },
+  {
+    "word": "What",
+    "startMs": 226340,
+    "endMs": 226680
+  },
+  {
+    "word": "if",
+    "startMs": 226680,
+    "endMs": 226800
+  },
+  {
+    "word": "everyone",
+    "startMs": 226800,
+    "endMs": 227060
+  },
+  {
+    "word": "else",
+    "startMs": 227060,
+    "endMs": 227280
+  },
+  {
+    "word": "is",
+    "startMs": 227280,
+    "endMs": 227460
+  },
+  {
+    "word": "doing",
+    "startMs": 227460,
+    "endMs": 227620
+  },
+  {
+    "word": "better",
+    "startMs": 227620,
+    "endMs": 227840
+  },
+  {
+    "word": "than",
+    "startMs": 227840,
+    "endMs": 228100
+  },
+  {
+    "word": "me?",
+    "startMs": 228100,
+    "endMs": 228280
+  },
+  {
+    "word": "What",
+    "startMs": 228880,
+    "endMs": 229340
+  },
+  {
+    "word": "if",
+    "startMs": 229340,
+    "endMs": 229440
+  },
+  {
+    "word": "I",
+    "startMs": 229440,
+    "endMs": 229560
+  },
+  {
+    "word": "try",
+    "startMs": 229560,
+    "endMs": 229680
+  },
+  {
+    "word": "seriously",
+    "startMs": 229680,
+    "endMs": 230140
+  },
+  {
+    "word": "and",
+    "startMs": 230140,
+    "endMs": 230560
+  },
+  {
+    "word": "still",
+    "startMs": 230560,
+    "endMs": 230780
+  },
+  {
+    "word": "fail?",
+    "startMs": 230780,
+    "endMs": 231060
+  },
+  {
+    "word": "Now",
+    "startMs": 231940,
+    "endMs": 232260
+  },
+  {
+    "word": "the",
+    "startMs": 232260,
+    "endMs": 232400
+  },
+  {
+    "word": "task",
+    "startMs": 232400,
+    "endMs": 232620
+  },
+  {
+    "word": "isn't",
+    "startMs": 232620,
+    "endMs": 233020
+  },
+  {
+    "word": "just",
+    "startMs": 233020,
+    "endMs": 233200
+  },
+  {
+    "word": "demanding",
+    "startMs": 233200,
+    "endMs": 233400
+  },
+  {
+    "word": "your",
+    "startMs": 233400,
+    "endMs": 233760
+  },
+  {
+    "word": "time.",
+    "startMs": 233760,
+    "endMs": 234060
+  },
+  {
+    "word": "It's",
+    "startMs": 234980,
+    "endMs": 235260
+  },
+  {
+    "word": "brushing",
+    "startMs": 235260,
+    "endMs": 235420
+  },
+  {
+    "word": "up",
+    "startMs": 235420,
+    "endMs": 235700
+  },
+  {
+    "word": "against",
+    "startMs": 235700,
+    "endMs": 235940
+  },
+  {
+    "word": "your",
+    "startMs": 235940,
+    "endMs": 236140
+  },
+  {
+    "word": "sense",
+    "startMs": 236140,
+    "endMs": 236320
+  },
+  {
+    "word": "of",
+    "startMs": 236320,
+    "endMs": 236520
+  },
+  {
+    "word": "competence.",
+    "startMs": 236520,
+    "endMs": 236840
+  },
+  {
+    "word": "And",
+    "startMs": 237920,
+    "endMs": 238180
+  },
+  {
+    "word": "suddenly",
+    "startMs": 238180,
+    "endMs": 238420
+  },
+  {
+    "word": "avoiding",
+    "startMs": 238420,
+    "endMs": 238780
+  },
+  {
+    "word": "the",
+    "startMs": 238780,
+    "endMs": 239060
+  },
+  {
+    "word": "chapter",
+    "startMs": 239060,
+    "endMs": 239280
+  },
+  {
+    "word": "gives",
+    "startMs": 239280,
+    "endMs": 239640
+  },
+  {
+    "word": "you",
+    "startMs": 239640,
+    "endMs": 239800
+  },
+  {
+    "word": "something",
+    "startMs": 239800,
+    "endMs": 240040
+  },
+  {
+    "word": "valuable.",
+    "startMs": 240040,
+    "endMs": 240420
+  },
+  {
+    "word": "For",
+    "startMs": 241360,
+    "endMs": 241680
+  },
+  {
+    "word": "a",
+    "startMs": 241680,
+    "endMs": 241800
+  },
+  {
+    "word": "few",
+    "startMs": 241800,
+    "endMs": 241960
+  },
+  {
+    "word": "minutes,",
+    "startMs": 241960,
+    "endMs": 242220
+  },
+  {
+    "word": "you",
+    "startMs": 242560,
+    "endMs": 242640
+  },
+  {
+    "word": "don't",
+    "startMs": 242640,
+    "endMs": 242860
+  },
+  {
+    "word": "have",
+    "startMs": 242860,
+    "endMs": 242980
+  },
+  {
+    "word": "to",
+    "startMs": 242980,
+    "endMs": 243100
+  },
+  {
+    "word": "feel",
+    "startMs": 243100,
+    "endMs": 243260
+  },
+  {
+    "word": "like",
+    "startMs": 243260,
+    "endMs": 243460
+  },
+  {
+    "word": "you're",
+    "startMs": 243460,
+    "endMs": 243620
+  },
+  {
+    "word": "behind.",
+    "startMs": 243620,
+    "endMs": 243900
+  },
+  {
+    "word": "You",
+    "startMs": 244640,
+    "endMs": 245120
+  },
+  {
+    "word": "don't",
+    "startMs": 245120,
+    "endMs": 245340
+  },
+  {
+    "word": "have",
+    "startMs": 245340,
+    "endMs": 245460
+  },
+  {
+    "word": "to",
+    "startMs": 245460,
+    "endMs": 245600
+  },
+  {
+    "word": "confront",
+    "startMs": 245600,
+    "endMs": 245840
+  },
+  {
+    "word": "the",
+    "startMs": 245840,
+    "endMs": 246080
+  },
+  {
+    "word": "possibility",
+    "startMs": 246080,
+    "endMs": 246420
+  },
+  {
+    "word": "that",
+    "startMs": 246420,
+    "endMs": 246880
+  },
+  {
+    "word": "something",
+    "startMs": 246880,
+    "endMs": 247200
+  },
+  {
+    "word": "might",
+    "startMs": 247200,
+    "endMs": 247440
+  },
+  {
+    "word": "be",
+    "startMs": 247440,
+    "endMs": 247600
+  },
+  {
+    "word": "difficult.",
+    "startMs": 247600,
+    "endMs": 247840
+  },
+  {
+    "word": "You",
+    "startMs": 249000,
+    "endMs": 249180
+  },
+  {
+    "word": "don't",
+    "startMs": 249180,
+    "endMs": 249380
+  },
+  {
+    "word": "have",
+    "startMs": 249380,
+    "endMs": 249520
+  },
+  {
+    "word": "to",
+    "startMs": 249520,
+    "endMs": 249660
+  },
+  {
+    "word": "feel",
+    "startMs": 249660,
+    "endMs": 249860
+  },
+  {
+    "word": "inadequate.",
+    "startMs": 249860,
+    "endMs": 250000
+  },
+  {
+    "word": "You",
+    "startMs": 251320,
+    "endMs": 251520
+  },
+  {
+    "word": "can",
+    "startMs": 251520,
+    "endMs": 251620
+  },
+  {
+    "word": "just",
+    "startMs": 251620,
+    "endMs": 251840
+  },
+  {
+    "word": "scroll.",
+    "startMs": 251840,
+    "endMs": 252120
+  },
+  {
+    "word": "And",
+    "startMs": 253320,
+    "endMs": 253480
+  },
+  {
+    "word": "when",
+    "startMs": 253480,
+    "endMs": 253600
+  },
+  {
+    "word": "you're",
+    "startMs": 253600,
+    "endMs": 253760
+  },
+  {
+    "word": "scrolling,",
+    "startMs": 253760,
+    "endMs": 254140
+  },
+  {
+    "word": "you're",
+    "startMs": 254500,
+    "endMs": 254580
+  },
+  {
+    "word": "not",
+    "startMs": 254580,
+    "endMs": 254740
+  },
+  {
+    "word": "failing",
+    "startMs": 254740,
+    "endMs": 255020
+  },
+  {
+    "word": "at",
+    "startMs": 255020,
+    "endMs": 255260
+  },
+  {
+    "word": "anything.",
+    "startMs": 255260,
+    "endMs": 255460
+  },
+  {
+    "word": "There's",
+    "startMs": 256500,
+    "endMs": 256860
+  },
+  {
+    "word": "nothing",
+    "startMs": 256860,
+    "endMs": 257100
+  },
+  {
+    "word": "to",
+    "startMs": 257100,
+    "endMs": 257300
+  },
+  {
+    "word": "judge.",
+    "startMs": 257300,
+    "endMs": 257519
+  },
+  {
+    "word": "That's",
+    "startMs": 258459,
+    "endMs": 258940
+  },
+  {
+    "word": "why",
+    "startMs": 258940,
+    "endMs": 259040
+  },
+  {
+    "word": "sometimes",
+    "startMs": 259040,
+    "endMs": 259399
+  },
+  {
+    "word": "the",
+    "startMs": 259399,
+    "endMs": 259640
+  },
+  {
+    "word": "task",
+    "startMs": 259640,
+    "endMs": 259779
+  },
+  {
+    "word": "you've",
+    "startMs": 259779,
+    "endMs": 260140
+  },
+  {
+    "word": "been",
+    "startMs": 260140,
+    "endMs": 260220
+  },
+  {
+    "word": "avoiding",
+    "startMs": 260220,
+    "endMs": 260480
+  },
+  {
+    "word": "isn't",
+    "startMs": 260480,
+    "endMs": 260940
+  },
+  {
+    "word": "even",
+    "startMs": 260940,
+    "endMs": 261140
+  },
+  {
+    "word": "that",
+    "startMs": 261140,
+    "endMs": 261320
+  },
+  {
+    "word": "hard.",
+    "startMs": 261320,
+    "endMs": 261640
+  },
+  {
+    "word": "It's",
+    "startMs": 262360,
+    "endMs": 262820
+  },
+  {
+    "word": "emotionally",
+    "startMs": 262820,
+    "endMs": 262960
+  },
+  {
+    "word": "expensive.",
+    "startMs": 262960,
+    "endMs": 263660
+  },
+  {
+    "word": "And",
+    "startMs": 264860,
+    "endMs": 265040
+  },
+  {
+    "word": "this",
+    "startMs": 265040,
+    "endMs": 265180
+  },
+  {
+    "word": "explains",
+    "startMs": 265180,
+    "endMs": 265440
+  },
+  {
+    "word": "something",
+    "startMs": 265440,
+    "endMs": 265880
+  },
+  {
+    "word": "that",
+    "startMs": 265880,
+    "endMs": 266160
+  },
+  {
+    "word": "can",
+    "startMs": 266160,
+    "endMs": 266340
+  },
+  {
+    "word": "feel",
+    "startMs": 266340,
+    "endMs": 266540
+  },
+  {
+    "word": "really",
+    "startMs": 266540,
+    "endMs": 266800
+  },
+  {
+    "word": "confusing.",
+    "startMs": 266800,
+    "endMs": 267180
+  },
+  {
+    "word": "You",
+    "startMs": 268400,
+    "endMs": 268560
+  },
+  {
+    "word": "procrastinate",
+    "startMs": 268560,
+    "endMs": 269120
+  },
+  {
+    "word": "all",
+    "startMs": 269120,
+    "endMs": 269400
+  },
+  {
+    "word": "day.",
+    "startMs": 269400,
+    "endMs": 269640
+  },
+  {
+    "word": "And",
+    "startMs": 270219,
+    "endMs": 270780
+  },
+  {
+    "word": "then,",
+    "startMs": 270780,
+    "endMs": 270980
+  },
+  {
+    "word": "at",
+    "startMs": 271260,
+    "endMs": 271340
+  },
+  {
+    "word": "11",
+    "startMs": 271340,
+    "endMs": 271560
+  },
+  {
+    "word": ".47",
+    "startMs": 271560,
+    "endMs": 272020
+  },
+  {
+    "word": "p",
+    "startMs": 272020,
+    "endMs": 272020
+  },
+  {
+    "word": ".m.,",
+    "startMs": 272020,
+    "endMs": 272960
+  },
+  {
+    "word": "when",
+    "startMs": 272960,
+    "endMs": 273100
+  },
+  {
+    "word": "the",
+    "startMs": 273100,
+    "endMs": 273220
+  },
+  {
+    "word": "deadline",
+    "startMs": 273220,
+    "endMs": 273420
+  },
+  {
+    "word": "is",
+    "startMs": 273420,
+    "endMs": 273820
+  },
+  {
+    "word": "terrifyingly",
+    "startMs": 273820,
+    "endMs": 274500
+  },
+  {
+    "word": "close,",
+    "startMs": 274500,
+    "endMs": 274820
+  },
+  {
+    "word": "you",
+    "startMs": 275220,
+    "endMs": 275300
+  },
+  {
+    "word": "suddenly",
+    "startMs": 275300,
+    "endMs": 275560
+  },
+  {
+    "word": "become",
+    "startMs": 275560,
+    "endMs": 275940
+  },
+  {
+    "word": "incredibly",
+    "startMs": 275940,
+    "endMs": 276320
+  },
+  {
+    "word": "productive.",
+    "startMs": 276320,
+    "endMs": 276840
+  },
+  {
+    "word": "What",
+    "startMs": 277980,
+    "endMs": 278220
+  },
+  {
+    "word": "happened?",
+    "startMs": 278220,
+    "endMs": 278520
+  },
+  {
+    "word": "Did",
+    "startMs": 279500,
+    "endMs": 279720
+  },
+  {
+    "word": "you",
+    "startMs": 279720,
+    "endMs": 279820
+  },
+  {
+    "word": "magically",
+    "startMs": 279820,
+    "endMs": 280080
+  },
+  {
+    "word": "become",
+    "startMs": 280080,
+    "endMs": 280540
+  },
+  {
+    "word": "disciplined?",
+    "startMs": 280540,
+    "endMs": 280820
+  },
+  {
+    "word": "Probably",
+    "startMs": 281880,
+    "endMs": 282280
+  },
+  {
+    "word": "not.",
+    "startMs": 282280,
+    "endMs": 282660
+  },
+  {
+    "word": "The",
+    "startMs": 283620,
+    "endMs": 283800
+  },
+  {
+    "word": "emotional",
+    "startMs": 283800,
+    "endMs": 283980
+  },
+  {
+    "word": "situation",
+    "startMs": 283980,
+    "endMs": 284540
+  },
+  {
+    "word": "changed.",
+    "startMs": 284540,
+    "endMs": 285120
+  },
+  {
+    "word": "Before",
+    "startMs": 286260,
+    "endMs": 286500
+  },
+  {
+    "word": "the",
+    "startMs": 286500,
+    "endMs": 286700
+  },
+  {
+    "word": "deadline,",
+    "startMs": 286700,
+    "endMs": 286980
+  },
+  {
+    "word": "you",
+    "startMs": 287360,
+    "endMs": 287460
+  },
+  {
+    "word": "had",
+    "startMs": 287460,
+    "endMs": 287580
+  },
+  {
+    "word": "uncertainty.",
+    "startMs": 287580,
+    "endMs": 287880
+  },
+  {
+    "word": "You",
+    "startMs": 289120,
+    "endMs": 289260
+  },
+  {
+    "word": "could",
+    "startMs": 289260,
+    "endMs": 289380
+  },
+  {
+    "word": "always",
+    "startMs": 289380,
+    "endMs": 289640
+  },
+  {
+    "word": "do",
+    "startMs": 289640,
+    "endMs": 289900
+  },
+  {
+    "word": "it",
+    "startMs": 289900,
+    "endMs": 290020
+  },
+  {
+    "word": "later.",
+    "startMs": 290020,
+    "endMs": 290220
+  },
+  {
+    "word": "You",
+    "startMs": 291160,
+    "endMs": 291440
+  },
+  {
+    "word": "could",
+    "startMs": 291440,
+    "endMs": 291580
+  },
+  {
+    "word": "avoid",
+    "startMs": 291580,
+    "endMs": 291780
+  },
+  {
+    "word": "the",
+    "startMs": 291780,
+    "endMs": 292000
+  },
+  {
+    "word": "discomfort.",
+    "startMs": 292000,
+    "endMs": 292300
+  },
+  {
+    "word": "But",
+    "startMs": 293240,
+    "endMs": 293620
+  },
+  {
+    "word": "now",
+    "startMs": 293620,
+    "endMs": 293780
+  },
+  {
+    "word": "the",
+    "startMs": 293780,
+    "endMs": 293920
+  },
+  {
+    "word": "consequence",
+    "startMs": 293920,
+    "endMs": 294220
+  },
+  {
+    "word": "of",
+    "startMs": 294220,
+    "endMs": 294600
+  },
+  {
+    "word": "not",
+    "startMs": 294600,
+    "endMs": 294780
+  },
+  {
+    "word": "doing",
+    "startMs": 294780,
+    "endMs": 295060
+  },
+  {
+    "word": "it",
+    "startMs": 295060,
+    "endMs": 295180
+  },
+  {
+    "word": "is",
+    "startMs": 295180,
+    "endMs": 295300
+  },
+  {
+    "word": "more",
+    "startMs": 295300,
+    "endMs": 295460
+  },
+  {
+    "word": "uncomfortable",
+    "startMs": 295460,
+    "endMs": 295860
+  },
+  {
+    "word": "than",
+    "startMs": 295860,
+    "endMs": 296260
+  },
+  {
+    "word": "the",
+    "startMs": 296260,
+    "endMs": 296360
+  },
+  {
+    "word": "task",
+    "startMs": 296360,
+    "endMs": 296560
+  },
+  {
+    "word": "itself.",
+    "startMs": 296560,
+    "endMs": 296980
+  },
+  {
+    "word": "So",
+    "startMs": 298120,
+    "endMs": 298280
+  },
+  {
+    "word": "finally,",
+    "startMs": 298280,
+    "endMs": 298660
+  },
+  {
+    "word": "starting",
+    "startMs": 299040,
+    "endMs": 299280
+  },
+  {
+    "word": "becomes",
+    "startMs": 299280,
+    "endMs": 299620
+  },
+  {
+    "word": "the",
+    "startMs": 299620,
+    "endMs": 299860
+  },
+  {
+    "word": "easier",
+    "startMs": 299860,
+    "endMs": 300100
+  },
+  {
+    "word": "option.",
+    "startMs": 300100,
+    "endMs": 300520
+  },
+  {
+    "word": "That",
+    "startMs": 301560,
+    "endMs": 301740
+  },
+  {
+    "word": "doesn't",
+    "startMs": 301740,
+    "endMs": 302080
+  },
+  {
+    "word": "mean",
+    "startMs": 302080,
+    "endMs": 302220
+  },
+  {
+    "word": "procrastination",
+    "startMs": 302220,
+    "endMs": 302780
+  },
+  {
+    "word": "is",
+    "startMs": 302780,
+    "endMs": 303180
+  },
+  {
+    "word": "good.",
+    "startMs": 303180,
+    "endMs": 303420
+  },
+  {
+    "word": "It",
+    "startMs": 304300,
+    "endMs": 304540
+  },
+  {
+    "word": "just",
+    "startMs": 304540,
+    "endMs": 304660
+  },
+  {
+    "word": "shows",
+    "startMs": 304660,
+    "endMs": 304940
+  },
+  {
+    "word": "us",
+    "startMs": 304940,
+    "endMs": 305140
+  },
+  {
+    "word": "that",
+    "startMs": 305140,
+    "endMs": 305280
+  },
+  {
+    "word": "behavior",
+    "startMs": 305280,
+    "endMs": 305460
+  },
+  {
+    "word": "often",
+    "startMs": 305460,
+    "endMs": 306000
+  },
+  {
+    "word": "follows",
+    "startMs": 306000,
+    "endMs": 306420
+  },
+  {
+    "word": "emotion",
+    "startMs": 306420,
+    "endMs": 306600
+  },
+  {
+    "word": "more",
+    "startMs": 306600,
+    "endMs": 307040
+  },
+  {
+    "word": "closely",
+    "startMs": 307040,
+    "endMs": 307260
+  },
+  {
+    "word": "than",
+    "startMs": 307260,
+    "endMs": 307660
+  },
+  {
+    "word": "we",
+    "startMs": 307660,
+    "endMs": 307760
+  },
+  {
+    "word": "realize.",
+    "startMs": 307760,
+    "endMs": 308040
+  },
+  {
+    "word": "And",
+    "startMs": 309080,
+    "endMs": 309400
+  },
+  {
+    "word": "there's",
+    "startMs": 309400,
+    "endMs": 309600
+  },
+  {
+    "word": "another",
+    "startMs": 309600,
+    "endMs": 309820
+  },
+  {
+    "word": "trap",
+    "startMs": 309820,
+    "endMs": 310100
+  },
+  {
+    "word": "here.",
+    "startMs": 310100,
+    "endMs": 310400
+  },
+  {
+    "word": "After",
+    "startMs": 311380,
+    "endMs": 311600
+  },
+  {
+    "word": "procrastinating,",
+    "startMs": 311600,
+    "endMs": 312240
+  },
+  {
+    "word": "people",
+    "startMs": 312680,
+    "endMs": 312860
+  },
+  {
+    "word": "often",
+    "startMs": 312860,
+    "endMs": 313120
+  },
+  {
+    "word": "feel",
+    "startMs": 313120,
+    "endMs": 313440
+  },
+  {
+    "word": "guilty.",
+    "startMs": 313440,
+    "endMs": 313760
+  },
+  {
+    "word": "So",
+    "startMs": 314880,
+    "endMs": 315000
+  },
+  {
+    "word": "now",
+    "startMs": 315000,
+    "endMs": 315140
+  },
+  {
+    "word": "you",
+    "startMs": 315140,
+    "endMs": 315320
+  },
+  {
+    "word": "have",
+    "startMs": 315320,
+    "endMs": 315460
+  },
+  {
+    "word": "the",
+    "startMs": 315460,
+    "endMs": 315560
+  },
+  {
+    "word": "original",
+    "startMs": 315560,
+    "endMs": 315800
+  },
+  {
+    "word": "discomfort.",
+    "startMs": 315800,
+    "endMs": 316260
+  },
+  {
+    "word": "Plus",
+    "startMs": 317480,
+    "endMs": 317640
+  },
+  {
+    "word": "shame",
+    "startMs": 317640,
+    "endMs": 317880
+  },
+  {
+    "word": "about",
+    "startMs": 317880,
+    "endMs": 318080
+  },
+  {
+    "word": "avoiding",
+    "startMs": 318080,
+    "endMs": 318380
+  },
+  {
+    "word": "it.",
+    "startMs": 318380,
+    "endMs": 318680
+  },
+  {
+    "word": "Which",
+    "startMs": 319620,
+    "endMs": 319760
+  },
+  {
+    "word": "makes",
+    "startMs": 319760,
+    "endMs": 319960
+  },
+  {
+    "word": "the",
+    "startMs": 319960,
+    "endMs": 320200
+  },
+  {
+    "word": "task",
+    "startMs": 320200,
+    "endMs": 320380
+  },
+  {
+    "word": "feel",
+    "startMs": 320380,
+    "endMs": 320720
+  },
+  {
+    "word": "even",
+    "startMs": 320720,
+    "endMs": 320980
+  },
+  {
+    "word": "worse.",
+    "startMs": 320980,
+    "endMs": 321260
+  },
+  {
+    "word": "Which",
+    "startMs": 322280,
+    "endMs": 322520
+  },
+  {
+    "word": "makes",
+    "startMs": 322520,
+    "endMs": 322700
+  },
+  {
+    "word": "you",
+    "startMs": 322700,
+    "endMs": 322920
+  },
+  {
+    "word": "want",
+    "startMs": 322920,
+    "endMs": 323060
+  },
+  {
+    "word": "to",
+    "startMs": 323060,
+    "endMs": 323200
+  },
+  {
+    "word": "avoid",
+    "startMs": 323200,
+    "endMs": 323460
+  },
+  {
+    "word": "it",
+    "startMs": 323460,
+    "endMs": 323600
+  },
+  {
+    "word": "even",
+    "startMs": 323600,
+    "endMs": 323760
+  },
+  {
+    "word": "more.",
+    "startMs": 323760,
+    "endMs": 324060
+  },
+  {
+    "word": "So",
+    "startMs": 324780,
+    "endMs": 325260
+  },
+  {
+    "word": "the",
+    "startMs": 325260,
+    "endMs": 325380
+  },
+  {
+    "word": "loop",
+    "startMs": 325380,
+    "endMs": 325540
+  },
+  {
+    "word": "becomes",
+    "startMs": 325540,
+    "endMs": 325960
+  },
+  {
+    "word": "task,",
+    "startMs": 325960,
+    "endMs": 327280
+  },
+  {
+    "word": "discomfort,",
+    "startMs": 327740,
+    "endMs": 328840
+  },
+  {
+    "word": "avoidance,",
+    "startMs": 329260,
+    "endMs": 330320
+  },
+  {
+    "word": "relief,",
+    "startMs": 330740,
+    "endMs": 331700
+  },
+  {
+    "word": "guilt,",
+    "startMs": 332120,
+    "endMs": 333000
+  },
+  {
+    "word": "more",
+    "startMs": 333380,
+    "endMs": 334200
+  },
+  {
+    "word": "discomfort,",
+    "startMs": 334200,
+    "endMs": 334620
+  },
+  {
+    "word": "more",
+    "startMs": 335120,
+    "endMs": 335920
+  },
+  {
+    "word": "avoidance.",
+    "startMs": 335920,
+    "endMs": 336380
+  },
+  {
+    "word": "And",
+    "startMs": 337360,
+    "endMs": 337620
+  },
+  {
+    "word": "now",
+    "startMs": 337620,
+    "endMs": 337780
+  },
+  {
+    "word": "you're",
+    "startMs": 337780,
+    "endMs": 337960
+  },
+  {
+    "word": "not",
+    "startMs": 337960,
+    "endMs": 338100
+  },
+  {
+    "word": "fighting",
+    "startMs": 338100,
+    "endMs": 338380
+  },
+  {
+    "word": "one",
+    "startMs": 338380,
+    "endMs": 338580
+  },
+  {
+    "word": "problem.",
+    "startMs": 338580,
+    "endMs": 338920
+  },
+  {
+    "word": "You're",
+    "startMs": 339860,
+    "endMs": 340120
+  },
+  {
+    "word": "fighting",
+    "startMs": 340120,
+    "endMs": 340360
+  },
+  {
+    "word": "the",
+    "startMs": 340360,
+    "endMs": 340560
+  },
+  {
+    "word": "task",
+    "startMs": 340560,
+    "endMs": 340880
+  },
+  {
+    "word": "and",
+    "startMs": 340880,
+    "endMs": 341160
+  },
+  {
+    "word": "everything",
+    "startMs": 341160,
+    "endMs": 341440
+  },
+  {
+    "word": "you",
+    "startMs": 341440,
+    "endMs": 341720
+  },
+  {
+    "word": "feel",
+    "startMs": 341720,
+    "endMs": 341900
+  },
+  {
+    "word": "about",
+    "startMs": 341900,
+    "endMs": 342140
+  },
+  {
+    "word": "the",
+    "startMs": 342140,
+    "endMs": 342300
+  },
+  {
+    "word": "task.",
+    "startMs": 342300,
+    "endMs": 342560
+  },
+  {
+    "word": "That's",
+    "startMs": 343520,
+    "endMs": 343960
+  },
+  {
+    "word": "exhausting.",
+    "startMs": 343960,
+    "endMs": 344240
+  },
+  {
+    "word": "So",
+    "startMs": 345420,
+    "endMs": 345620
+  },
+  {
+    "word": "what",
+    "startMs": 345620,
+    "endMs": 345760
+  },
+  {
+    "word": "actually",
+    "startMs": 345760,
+    "endMs": 346060
+  },
+  {
+    "word": "helps?",
+    "startMs": 346060,
+    "endMs": 346420
+  },
+  {
+    "word": "Not",
+    "startMs": 347460,
+    "endMs": 347680
+  },
+  {
+    "word": "yelling",
+    "startMs": 347680,
+    "endMs": 347980
+  },
+  {
+    "word": "at",
+    "startMs": 347980,
+    "endMs": 348180
+  },
+  {
+    "word": "yourself.",
+    "startMs": 348180,
+    "endMs": 348380
+  },
+  {
+    "word": "Not",
+    "startMs": 354100,
+    "endMs": 354760
+  },
+  {
+    "word": "calling",
+    "startMs": 354760,
+    "endMs": 354760
+  },
+  {
+    "word": "system.",
+    "startMs": 354760,
+    "endMs": 355080
+  },
+  {
+    "word": "A",
+    "startMs": 355940,
+    "endMs": 356160
+  },
+  {
+    "word": "better",
+    "startMs": 356160,
+    "endMs": 356380
+  },
+  {
+    "word": "starting",
+    "startMs": 356380,
+    "endMs": 356700
+  },
+  {
+    "word": "point",
+    "startMs": 356700,
+    "endMs": 357020
+  },
+  {
+    "word": "is",
+    "startMs": 357020,
+    "endMs": 357240
+  },
+  {
+    "word": "asking",
+    "startMs": 357240,
+    "endMs": 357540
+  },
+  {
+    "word": "a",
+    "startMs": 357540,
+    "endMs": 357720
+  },
+  {
+    "word": "slightly",
+    "startMs": 357720,
+    "endMs": 357960
+  },
+  {
+    "word": "different",
+    "startMs": 357960,
+    "endMs": 358320
+  },
+  {
+    "word": "question.",
+    "startMs": 358320,
+    "endMs": 358620
+  },
+  {
+    "word": "Instead",
+    "startMs": 359880,
+    "endMs": 360180
+  },
+  {
+    "word": "of,",
+    "startMs": 360180,
+    "endMs": 360400
+  },
+  {
+    "word": "why",
+    "startMs": 360700,
+    "endMs": 361520
+  },
+  {
+    "word": "can't",
+    "startMs": 361520,
+    "endMs": 361760
+  },
+  {
+    "word": "I",
+    "startMs": 361760,
+    "endMs": 361840
+  },
+  {
+    "word": "make",
+    "startMs": 361840,
+    "endMs": 361940
+  },
+  {
+    "word": "myself",
+    "startMs": 361940,
+    "endMs": 362280
+  },
+  {
+    "word": "do",
+    "startMs": 362280,
+    "endMs": 362500
+  },
+  {
+    "word": "this?",
+    "startMs": 362500,
+    "endMs": 362760
+  },
+  {
+    "word": "Ask?",
+    "startMs": 363580,
+    "endMs": 364020
+  },
+  {
+    "word": "What",
+    "startMs": 364900,
+    "endMs": 365180
+  },
+  {
+    "word": "feeling",
+    "startMs": 365180,
+    "endMs": 365420
+  },
+  {
+    "word": "am",
+    "startMs": 365420,
+    "endMs": 365620
+  },
+  {
+    "word": "I",
+    "startMs": 365620,
+    "endMs": 365720
+  },
+  {
+    "word": "trying",
+    "startMs": 365720,
+    "endMs": 365920
+  },
+  {
+    "word": "not",
+    "startMs": 365920,
+    "endMs": 366160
+  },
+  {
+    "word": "to",
+    "startMs": 366160,
+    "endMs": 366320
+  },
+  {
+    "word": "experience",
+    "startMs": 366320,
+    "endMs": 366580
+  },
+  {
+    "word": "right",
+    "startMs": 366580,
+    "endMs": 367020
+  },
+  {
+    "word": "now?",
+    "startMs": 367020,
+    "endMs": 367280
+  },
+  {
+    "word": "That",
+    "startMs": 368140,
+    "endMs": 368360
+  },
+  {
+    "word": "question",
+    "startMs": 368360,
+    "endMs": 368640
+  },
+  {
+    "word": "can",
+    "startMs": 368640,
+    "endMs": 368960
+  },
+  {
+    "word": "get",
+    "startMs": 368960,
+    "endMs": 369140
+  },
+  {
+    "word": "surprisingly",
+    "startMs": 369140,
+    "endMs": 369320
+  },
+  {
+    "word": "specific.",
+    "startMs": 369320,
+    "endMs": 370160
+  },
+  {
+    "word": "Am",
+    "startMs": 371320,
+    "endMs": 371440
+  },
+  {
+    "word": "I",
+    "startMs": 371440,
+    "endMs": 371580
+  },
+  {
+    "word": "bored?",
+    "startMs": 371580,
+    "endMs": 371780
+  },
+  {
+    "word": "Am",
+    "startMs": 372820,
+    "endMs": 372840
+  },
+  {
+    "word": "I",
+    "startMs": 372840,
+    "endMs": 373000
+  },
+  {
+    "word": "overwhelmed?",
+    "startMs": 373000,
+    "endMs": 373320
+  },
+  {
+    "word": "Am",
+    "startMs": 374500,
+    "endMs": 374560
+  },
+  {
+    "word": "I",
+    "startMs": 374560,
+    "endMs": 374700
+  },
+  {
+    "word": "scared",
+    "startMs": 374700,
+    "endMs": 374860
+  },
+  {
+    "word": "I'll",
+    "startMs": 374860,
+    "endMs": 375100
+  },
+  {
+    "word": "do",
+    "startMs": 375100,
+    "endMs": 375220
+  },
+  {
+    "word": "it",
+    "startMs": 375220,
+    "endMs": 375300
+  },
+  {
+    "word": "badly?",
+    "startMs": 375300,
+    "endMs": 375500
+  },
+  {
+    "word": "Does",
+    "startMs": 376700,
+    "endMs": 376720
+  },
+  {
+    "word": "starting",
+    "startMs": 376720,
+    "endMs": 376940
+  },
+  {
+    "word": "make",
+    "startMs": 376940,
+    "endMs": 377140
+  },
+  {
+    "word": "me",
+    "startMs": 377140,
+    "endMs": 377300
+  },
+  {
+    "word": "feel",
+    "startMs": 377300,
+    "endMs": 377520
+  },
+  {
+    "word": "behind?",
+    "startMs": 377520,
+    "endMs": 377740
+  },
+  {
+    "word": "Do",
+    "startMs": 378640,
+    "endMs": 378960
+  },
+  {
+    "word": "I",
+    "startMs": 378960,
+    "endMs": 379080
+  },
+  {
+    "word": "feel",
+    "startMs": 379080,
+    "endMs": 379240
+  },
+  {
+    "word": "like",
+    "startMs": 379240,
+    "endMs": 379440
+  },
+  {
+    "word": "this",
+    "startMs": 379440,
+    "endMs": 379600
+  },
+  {
+    "word": "is",
+    "startMs": 379600,
+    "endMs": 379760
+  },
+  {
+    "word": "going",
+    "startMs": 379760,
+    "endMs": 379920
+  },
+  {
+    "word": "to",
+    "startMs": 379920,
+    "endMs": 380100
+  },
+  {
+    "word": "take",
+    "startMs": 380100,
+    "endMs": 380260
+  },
+  {
+    "word": "forever?",
+    "startMs": 380260,
+    "endMs": 380580
+  },
+  {
+    "word": "Because",
+    "startMs": 381540,
+    "endMs": 381900
+  },
+  {
+    "word": "once",
+    "startMs": 381900,
+    "endMs": 382080
+  },
+  {
+    "word": "you",
+    "startMs": 382080,
+    "endMs": 382300
+  },
+  {
+    "word": "identify",
+    "startMs": 382300,
+    "endMs": 382540
+  },
+  {
+    "word": "the",
+    "startMs": 382540,
+    "endMs": 382940
+  },
+  {
+    "word": "feeling,",
+    "startMs": 382940,
+    "endMs": 383240
+  },
+  {
+    "word": "the",
+    "startMs": 383540,
+    "endMs": 383640
+  },
+  {
+    "word": "solution",
+    "startMs": 383640,
+    "endMs": 383880
+  },
+  {
+    "word": "can",
+    "startMs": 383880,
+    "endMs": 384240
+  },
+  {
+    "word": "change.",
+    "startMs": 384240,
+    "endMs": 384580
+  },
+  {
+    "word": "If",
+    "startMs": 385660,
+    "endMs": 385820
+  },
+  {
+    "word": "you're",
+    "startMs": 385820,
+    "endMs": 385920
+  },
+  {
+    "word": "overwhelmed,",
+    "startMs": 385920,
+    "endMs": 386300
+  },
+  {
+    "word": "maybe",
+    "startMs": 386400,
+    "endMs": 386860
+  },
+  {
+    "word": "the",
+    "startMs": 386860,
+    "endMs": 387060
+  },
+  {
+    "word": "problem",
+    "startMs": 387060,
+    "endMs": 387300
+  },
+  {
+    "word": "isn't",
+    "startMs": 387300,
+    "endMs": 387680
+  },
+  {
+    "word": "motivation.",
+    "startMs": 387680,
+    "endMs": 387940
+  },
+  {
+    "word": "Maybe",
+    "startMs": 389200,
+    "endMs": 389380
+  },
+  {
+    "word": "the",
+    "startMs": 389380,
+    "endMs": 389600
+  },
+  {
+    "word": "first",
+    "startMs": 389600,
+    "endMs": 389820
+  },
+  {
+    "word": "step",
+    "startMs": 389820,
+    "endMs": 390120
+  },
+  {
+    "word": "is",
+    "startMs": 390120,
+    "endMs": 390300
+  },
+  {
+    "word": "simply",
+    "startMs": 390300,
+    "endMs": 390560
+  },
+  {
+    "word": "too",
+    "startMs": 390560,
+    "endMs": 390780
+  },
+  {
+    "word": "large.",
+    "startMs": 390780,
+    "endMs": 391120
+  },
+  {
+    "word": "If",
+    "startMs": 392120,
+    "endMs": 392300
+  },
+  {
+    "word": "you're",
+    "startMs": 392300,
+    "endMs": 392440
+  },
+  {
+    "word": "afraid",
+    "startMs": 392440,
+    "endMs": 392640
+  },
+  {
+    "word": "of",
+    "startMs": 392640,
+    "endMs": 392820
+  },
+  {
+    "word": "doing",
+    "startMs": 392820,
+    "endMs": 393020
+  },
+  {
+    "word": "it",
+    "startMs": 393020,
+    "endMs": 393140
+  },
+  {
+    "word": "badly,",
+    "startMs": 393140,
+    "endMs": 393340
+  },
+  {
+    "word": "maybe",
+    "startMs": 393760,
+    "endMs": 393960
+  },
+  {
+    "word": "you",
+    "startMs": 393960,
+    "endMs": 394140
+  },
+  {
+    "word": "need",
+    "startMs": 394140,
+    "endMs": 394280
+  },
+  {
+    "word": "permission",
+    "startMs": 394280,
+    "endMs": 394440
+  },
+  {
+    "word": "to",
+    "startMs": 394440,
+    "endMs": 394960
+  },
+  {
+    "word": "make",
+    "startMs": 394960,
+    "endMs": 395080
+  },
+  {
+    "word": "an",
+    "startMs": 395080,
+    "endMs": 395220
+  },
+  {
+    "word": "ugly",
+    "startMs": 395220,
+    "endMs": 395480
+  },
+  {
+    "word": "first",
+    "startMs": 395480,
+    "endMs": 395740
+  },
+  {
+    "word": "draft.",
+    "startMs": 395740,
+    "endMs": 396020
+  },
+  {
+    "word": "If",
+    "startMs": 397060,
+    "endMs": 397320
+  },
+  {
+    "word": "you're",
+    "startMs": 397320,
+    "endMs": 397460
+  },
+  {
+    "word": "bored,",
+    "startMs": 397460,
+    "endMs": 397660
+  },
+  {
+    "word": "maybe",
+    "startMs": 397760,
+    "endMs": 398140
+  },
+  {
+    "word": "you",
+    "startMs": 398140,
+    "endMs": 398360
+  },
+  {
+    "word": "need",
+    "startMs": 398360,
+    "endMs": 398480
+  },
+  {
+    "word": "a",
+    "startMs": 398480,
+    "endMs": 398580
+  },
+  {
+    "word": "different",
+    "startMs": 398580,
+    "endMs": 398820
+  },
+  {
+    "word": "environment",
+    "startMs": 398820,
+    "endMs": 399280
+  },
+  {
+    "word": "or",
+    "startMs": 399280,
+    "endMs": 399600
+  },
+  {
+    "word": "a",
+    "startMs": 399600,
+    "endMs": 399700
+  },
+  {
+    "word": "shorter",
+    "startMs": 399700,
+    "endMs": 399920
+  },
+  {
+    "word": "work",
+    "startMs": 399920,
+    "endMs": 400160
+  },
+  {
+    "word": "period.",
+    "startMs": 400160,
+    "endMs": 400520
+  },
+  {
+    "word": "And",
+    "startMs": 401540,
+    "endMs": 401760
+  },
+  {
+    "word": "sometimes,",
+    "startMs": 401760,
+    "endMs": 402020
+  },
+  {
+    "word": "you",
+    "startMs": 402680,
+    "endMs": 403420
+  },
+  {
+    "word": "don't",
+    "startMs": 403420,
+    "endMs": 403600
+  },
+  {
+    "word": "even",
+    "startMs": 403600,
+    "endMs": 403780
+  },
+  {
+    "word": "need",
+    "startMs": 403780,
+    "endMs": 403980
+  },
+  {
+    "word": "to",
+    "startMs": 403980,
+    "endMs": 404120
+  },
+  {
+    "word": "make",
+    "startMs": 404120,
+    "endMs": 404240
+  },
+  {
+    "word": "the",
+    "startMs": 404240,
+    "endMs": 404380
+  },
+  {
+    "word": "feeling",
+    "startMs": 404380,
+    "endMs": 404640
+  },
+  {
+    "word": "disappear.",
+    "startMs": 404640,
+    "endMs": 404920
+  },
+  {
+    "word": "That's",
+    "startMs": 406040,
+    "endMs": 406520
+  },
+  {
+    "word": "the",
+    "startMs": 406520,
+    "endMs": 406600
+  },
+  {
+    "word": "really",
+    "startMs": 406600,
+    "endMs": 406820
+  },
+  {
+    "word": "important",
+    "startMs": 406820,
+    "endMs": 407020
+  },
+  {
+    "word": "part.",
+    "startMs": 407020,
+    "endMs": 407500
+  },
+  {
+    "word": "You",
+    "startMs": 408220,
+    "endMs": 408660
+  },
+  {
+    "word": "can",
+    "startMs": 408660,
+    "endMs": 408800
+  },
+  {
+    "word": "feel",
+    "startMs": 408800,
+    "endMs": 408960
+  },
+  {
+    "word": "uncomfortable",
+    "startMs": 408960,
+    "endMs": 409300
+  },
+  {
+    "word": "and",
+    "startMs": 409300,
+    "endMs": 409840
+  },
+  {
+    "word": "still",
+    "startMs": 409840,
+    "endMs": 410060
+  },
+  {
+    "word": "begin.",
+    "startMs": 410060,
+    "endMs": 410260
+  },
+  {
+    "word": "You",
+    "startMs": 411380,
+    "endMs": 411520
+  },
+  {
+    "word": "don't",
+    "startMs": 411520,
+    "endMs": 411740
+  },
+  {
+    "word": "have",
+    "startMs": 411740,
+    "endMs": 411880
+  },
+  {
+    "word": "to",
+    "startMs": 411880,
+    "endMs": 411980
+  },
+  {
+    "word": "wait",
+    "startMs": 411980,
+    "endMs": 412180
+  },
+  {
+    "word": "until",
+    "startMs": 412180,
+    "endMs": 412360
+  },
+  {
+    "word": "studying",
+    "startMs": 412360,
+    "endMs": 412840
+  },
+  {
+    "word": "feels",
+    "startMs": 412840,
+    "endMs": 413120
+  },
+  {
+    "word": "interesting.",
+    "startMs": 413120,
+    "endMs": 413460
+  },
+  {
+    "word": "You",
+    "startMs": 414680,
+    "endMs": 414840
+  },
+  {
+    "word": "don't",
+    "startMs": 414840,
+    "endMs": 415040
+  },
+  {
+    "word": "have",
+    "startMs": 415040,
+    "endMs": 415180
+  },
+  {
+    "word": "to",
+    "startMs": 415180,
+    "endMs": 415280
+  },
+  {
+    "word": "wait",
+    "startMs": 415280,
+    "endMs": 415460
+  },
+  {
+    "word": "until",
+    "startMs": 415460,
+    "endMs": 415660
+  },
+  {
+    "word": "you're",
+    "startMs": 415660,
+    "endMs": 415860
+  },
+  {
+    "word": "confident.",
+    "startMs": 415860,
+    "endMs": 416220
+  },
+  {
+    "word": "You",
+    "startMs": 417240,
+    "endMs": 417480
+  },
+  {
+    "word": "don't",
+    "startMs": 417480,
+    "endMs": 417700
+  },
+  {
+    "word": "have",
+    "startMs": 417700,
+    "endMs": 417820
+  },
+  {
+    "word": "to",
+    "startMs": 417820,
+    "endMs": 417960
+  },
+  {
+    "word": "suddenly",
+    "startMs": 417960,
+    "endMs": 418200
+  },
+  {
+    "word": "become",
+    "startMs": 418200,
+    "endMs": 418560
+  },
+  {
+    "word": "the",
+    "startMs": 418560,
+    "endMs": 418720
+  },
+  {
+    "word": "kind",
+    "startMs": 418720,
+    "endMs": 418920
+  },
+  {
+    "word": "of",
+    "startMs": 418920,
+    "endMs": 419040
+  },
+  {
+    "word": "person",
+    "startMs": 419040,
+    "endMs": 419360
+  },
+  {
+    "word": "who",
+    "startMs": 419360,
+    "endMs": 419600
+  },
+  {
+    "word": "loves",
+    "startMs": 419600,
+    "endMs": 419800
+  },
+  {
+    "word": "difficult",
+    "startMs": 419800,
+    "endMs": 420120
+  },
+  {
+    "word": "things.",
+    "startMs": 420120,
+    "endMs": 420500
+  },
+  {
+    "word": "You",
+    "startMs": 421340,
+    "endMs": 421760
+  },
+  {
+    "word": "can",
+    "startMs": 421760,
+    "endMs": 421900
+  },
+  {
+    "word": "sit",
+    "startMs": 421900,
+    "endMs": 422100
+  },
+  {
+    "word": "there",
+    "startMs": 422100,
+    "endMs": 422300
+  },
+  {
+    "word": "and",
+    "startMs": 422300,
+    "endMs": 422460
+  },
+  {
+    "word": "think.",
+    "startMs": 422460,
+    "endMs": 422680
+  },
+  {
+    "word": "Yeah,",
+    "startMs": 423540,
+    "endMs": 423980
+  },
+  {
+    "word": "I",
+    "startMs": 424360,
+    "endMs": 425000
+  },
+  {
+    "word": "really",
+    "startMs": 425000,
+    "endMs": 425180
+  },
+  {
+    "word": "don't",
+    "startMs": 425180,
+    "endMs": 425480
+  },
+  {
+    "word": "want",
+    "startMs": 425480,
+    "endMs": 425600
+  },
+  {
+    "word": "to",
+    "startMs": 425600,
+    "endMs": 425740
+  },
+  {
+    "word": "do",
+    "startMs": 425740,
+    "endMs": 425880
+  },
+  {
+    "word": "this.",
+    "startMs": 425880,
+    "endMs": 426100
+  },
+  {
+    "word": "And",
+    "startMs": 426960,
+    "endMs": 427280
+  },
+  {
+    "word": "then",
+    "startMs": 427280,
+    "endMs": 427440
+  },
+  {
+    "word": "do",
+    "startMs": 427440,
+    "endMs": 427620
+  },
+  {
+    "word": "five",
+    "startMs": 427620,
+    "endMs": 427860
+  },
+  {
+    "word": "minutes",
+    "startMs": 427860,
+    "endMs": 428100
+  },
+  {
+    "word": "anyway.",
+    "startMs": 428100,
+    "endMs": 428400
+  },
+  {
+    "word": "That's",
+    "startMs": 429360,
+    "endMs": 429760
+  },
+  {
+    "word": "a",
+    "startMs": 429760,
+    "endMs": 429820
+  },
+  {
+    "word": "very",
+    "startMs": 429820,
+    "endMs": 430020
+  },
+  {
+    "word": "different",
+    "startMs": 430020,
+    "endMs": 430280
+  },
+  {
+    "word": "relationship",
+    "startMs": 430280,
+    "endMs": 430960
+  },
+  {
+    "word": "with",
+    "startMs": 430960,
+    "endMs": 431160
+  },
+  {
+    "word": "discomfort.",
+    "startMs": 431160,
+    "endMs": 431360
+  },
+  {
+    "word": "You're",
+    "startMs": 432359,
+    "endMs": 432840
+  },
+  {
+    "word": "no",
+    "startMs": 432840,
+    "endMs": 432960
+  },
+  {
+    "word": "longer",
+    "startMs": 432960,
+    "endMs": 433280
+  },
+  {
+    "word": "saying,",
+    "startMs": 433280,
+    "endMs": 433580
+  },
+  {
+    "word": "I",
+    "startMs": 434580,
+    "endMs": 434760
+  },
+  {
+    "word": "need",
+    "startMs": 434760,
+    "endMs": 434860
+  },
+  {
+    "word": "to",
+    "startMs": 434860,
+    "endMs": 434980
+  },
+  {
+    "word": "feel",
+    "startMs": 434980,
+    "endMs": 435140
+  },
+  {
+    "word": "better",
+    "startMs": 435140,
+    "endMs": 435380
+  },
+  {
+    "word": "before",
+    "startMs": 435380,
+    "endMs": 435600
+  },
+  {
+    "word": "I",
+    "startMs": 435600,
+    "endMs": 435880
+  },
+  {
+    "word": "can",
+    "startMs": 435880,
+    "endMs": 436000
+  },
+  {
+    "word": "start.",
+    "startMs": 436000,
+    "endMs": 436260
+  },
+  {
+    "word": "You're",
+    "startMs": 437240,
+    "endMs": 437540
+  },
+  {
+    "word": "saying,",
+    "startMs": 437540,
+    "endMs": 437820
+  },
+  {
+    "word": "I",
+    "startMs": 438760,
+    "endMs": 438960
+  },
+  {
+    "word": "can",
+    "startMs": 438960,
+    "endMs": 439100
+  },
+  {
+    "word": "feel",
+    "startMs": 439100,
+    "endMs": 439280
+  },
+  {
+    "word": "this",
+    "startMs": 439280,
+    "endMs": 439560
+  },
+  {
+    "word": "and",
+    "startMs": 439560,
+    "endMs": 439840
+  },
+  {
+    "word": "still",
+    "startMs": 439840,
+    "endMs": 440040
+  },
+  {
+    "word": "take",
+    "startMs": 440040,
+    "endMs": 440280
+  },
+  {
+    "word": "one",
+    "startMs": 440280,
+    "endMs": 440460
+  },
+  {
+    "word": "step.",
+    "startMs": 440460,
+    "endMs": 440820
+  },
+  {
+    "word": "And",
+    "startMs": 441780,
+    "endMs": 441940
+  },
+  {
+    "word": "ironically,",
+    "startMs": 441940,
+    "endMs": 442200
+  },
+  {
+    "word": "that",
+    "startMs": 442820,
+    "endMs": 442920
+  },
+  {
+    "word": "can",
+    "startMs": 442920,
+    "endMs": 443080
+  },
+  {
+    "word": "make",
+    "startMs": 443080,
+    "endMs": 443240
+  },
+  {
+    "word": "the",
+    "startMs": 443240,
+    "endMs": 443380
+  },
+  {
+    "word": "task",
+    "startMs": 443380,
+    "endMs": 443560
+  },
+  {
+    "word": "feel",
+    "startMs": 443560,
+    "endMs": 443920
+  },
+  {
+    "word": "less",
+    "startMs": 443920,
+    "endMs": 444180
+  },
+  {
+    "word": "threatening",
+    "startMs": 444180,
+    "endMs": 444460
+  },
+  {
+    "word": "over",
+    "startMs": 444460,
+    "endMs": 444780
+  },
+  {
+    "word": "time.",
+    "startMs": 444780,
+    "endMs": 445140
+  },
+  {
+    "word": "Because",
+    "startMs": 446100,
+    "endMs": 446260
+  },
+  {
+    "word": "your",
+    "startMs": 446260,
+    "endMs": 446500
+  },
+  {
+    "word": "brain",
+    "startMs": 446500,
+    "endMs": 446800
+  },
+  {
+    "word": "gets",
+    "startMs": 446800,
+    "endMs": 447000
+  },
+  {
+    "word": "a",
+    "startMs": 447000,
+    "endMs": 447140
+  },
+  {
+    "word": "new",
+    "startMs": 447140,
+    "endMs": 447260
+  },
+  {
+    "word": "experience.",
+    "startMs": 447260,
+    "endMs": 447720
+  },
+  {
+    "word": "You",
+    "startMs": 448880,
+    "endMs": 449040
+  },
+  {
+    "word": "felt",
+    "startMs": 449040,
+    "endMs": 449220
+  },
+  {
+    "word": "anxiety.",
+    "startMs": 449220,
+    "endMs": 449560
+  },
+  {
+    "word": "And",
+    "startMs": 450720,
+    "endMs": 450940
+  },
+  {
+    "word": "nothing",
+    "startMs": 450940,
+    "endMs": 451180
+  },
+  {
+    "word": "terrible",
+    "startMs": 451180,
+    "endMs": 451540
+  },
+  {
+    "word": "happened.",
+    "startMs": 451540,
+    "endMs": 451920
+  },
+  {
+    "word": "You",
+    "startMs": 453100,
+    "endMs": 453160
+  },
+  {
+    "word": "felt",
+    "startMs": 453160,
+    "endMs": 453320
+  },
+  {
+    "word": "boredom.",
+    "startMs": 453320,
+    "endMs": 453560
+  },
+  {
+    "word": "And",
+    "startMs": 454800,
+    "endMs": 454860
+  },
+  {
+    "word": "you",
+    "startMs": 454860,
+    "endMs": 455020
+  },
+  {
+    "word": "stayed.",
+    "startMs": 455020,
+    "endMs": 455220
+  },
+  {
+    "word": "You",
+    "startMs": 456360,
+    "endMs": 456440
+  },
+  {
+    "word": "felt",
+    "startMs": 456440,
+    "endMs": 456620
+  },
+  {
+    "word": "uncertain.",
+    "startMs": 456620,
+    "endMs": 456880
+  },
+  {
+    "word": "And",
+    "startMs": 458060,
+    "endMs": 458220
+  },
+  {
+    "word": "you",
+    "startMs": 458220,
+    "endMs": 458340
+  },
+  {
+    "word": "started",
+    "startMs": 458340,
+    "endMs": 458580
+  },
+  {
+    "word": "anyway.",
+    "startMs": 458580,
+    "endMs": 458920
+  },
+  {
+    "word": "That",
+    "startMs": 459700,
+    "endMs": 460180
+  },
+  {
+    "word": "matters.",
+    "startMs": 460180,
+    "endMs": 460600
+  },
+  {
+    "word": "Because",
+    "startMs": 461540,
+    "endMs": 461920
+  },
+  {
+    "word": "eventually",
+    "startMs": 461920,
+    "endMs": 462240
+  },
+  {
+    "word": "the",
+    "startMs": 462240,
+    "endMs": 462580
+  },
+  {
+    "word": "association",
+    "startMs": 462580,
+    "endMs": 463020
+  },
+  {
+    "word": "can",
+    "startMs": 463020,
+    "endMs": 463460
+  },
+  {
+    "word": "begin",
+    "startMs": 463460,
+    "endMs": 463700
+  },
+  {
+    "word": "to",
+    "startMs": 463700,
+    "endMs": 463860
+  },
+  {
+    "word": "change.",
+    "startMs": 463860,
+    "endMs": 464140
+  },
+  {
+    "word": "Task",
+    "startMs": 465220,
+    "endMs": 465460
+  },
+  {
+    "word": "doesn't",
+    "startMs": 465460,
+    "endMs": 465880
+  },
+  {
+    "word": "always",
+    "startMs": 465880,
+    "endMs": 466100
+  },
+  {
+    "word": "have",
+    "startMs": 466100,
+    "endMs": 466320
+  },
+  {
+    "word": "to",
+    "startMs": 466320,
+    "endMs": 466440
+  },
+  {
+    "word": "mean",
+    "startMs": 466440,
+    "endMs": 466580
+  },
+  {
+    "word": "danger.",
+    "startMs": 466580,
+    "endMs": 466940
+  },
+  {
+    "word": "Task",
+    "startMs": 467740,
+    "endMs": 468180
+  },
+  {
+    "word": "doesn't",
+    "startMs": 468180,
+    "endMs": 468620
+  },
+  {
+    "word": "always",
+    "startMs": 468620,
+    "endMs": 468820
+  },
+  {
+    "word": "have",
+    "startMs": 468820,
+    "endMs": 469040
+  },
+  {
+    "word": "to",
+    "startMs": 469040,
+    "endMs": 469160
+  },
+  {
+    "word": "mean",
+    "startMs": 469160,
+    "endMs": 469320
+  },
+  {
+    "word": "judgment.",
+    "startMs": 469320,
+    "endMs": 469560
+  },
+  {
+    "word": "Task",
+    "startMs": 470500,
+    "endMs": 470980
+  },
+  {
+    "word": "doesn't",
+    "startMs": 470980,
+    "endMs": 471420
+  },
+  {
+    "word": "always",
+    "startMs": 471420,
+    "endMs": 471640
+  },
+  {
+    "word": "have",
+    "startMs": 471640,
+    "endMs": 471840
+  },
+  {
+    "word": "to",
+    "startMs": 471840,
+    "endMs": 471960
+  },
+  {
+    "word": "mean",
+    "startMs": 471960,
+    "endMs": 472120
+  },
+  {
+    "word": "proving",
+    "startMs": 472120,
+    "endMs": 472340
+  },
+  {
+    "word": "something",
+    "startMs": 472340,
+    "endMs": 472660
+  },
+  {
+    "word": "about",
+    "startMs": 472660,
+    "endMs": 473040
+  },
+  {
+    "word": "yourself.",
+    "startMs": 473040,
+    "endMs": 473300
+  },
+  {
+    "word": "Sometimes",
+    "startMs": 474500,
+    "endMs": 474900
+  },
+  {
+    "word": "it's",
+    "startMs": 474900,
+    "endMs": 475200
+  },
+  {
+    "word": "just",
+    "startMs": 475200,
+    "endMs": 475380
+  },
+  {
+    "word": "a",
+    "startMs": 475380,
+    "endMs": 476320
+  },
+  {
+    "word": "thing",
+    "startMs": 476320,
+    "endMs": 476720
+  },
+  {
+    "word": "you're",
+    "startMs": 476720,
+    "endMs": 476860
+  },
+  {
+    "word": "doing.",
+    "startMs": 476860,
+    "endMs": 477160
+  },
+  {
+    "word": "And",
+    "startMs": 478060,
+    "endMs": 478280
+  },
+  {
+    "word": "I",
+    "startMs": 478280,
+    "endMs": 478420
+  },
+  {
+    "word": "think",
+    "startMs": 478420,
+    "endMs": 478560
+  },
+  {
+    "word": "that's",
+    "startMs": 478560,
+    "endMs": 478840
+  },
+  {
+    "word": "one",
+    "startMs": 478840,
+    "endMs": 478960
+  },
+  {
+    "word": "of",
+    "startMs": 478960,
+    "endMs": 479080
+  },
+  {
+    "word": "the",
+    "startMs": 479080,
+    "endMs": 479160
+  },
+  {
+    "word": "kinder",
+    "startMs": 479160,
+    "endMs": 479460
+  },
+  {
+    "word": "ways",
+    "startMs": 479460,
+    "endMs": 479660
+  },
+  {
+    "word": "to",
+    "startMs": 479660,
+    "endMs": 479860
+  },
+  {
+    "word": "understand",
+    "startMs": 479860,
+    "endMs": 480040
+  },
+  {
+    "word": "procrastination.",
+    "startMs": 480040,
+    "endMs": 480900
+  },
+  {
+    "word": "Not",
+    "startMs": 482040,
+    "endMs": 482320
+  },
+  {
+    "word": "as",
+    "startMs": 482320,
+    "endMs": 482460
+  },
+  {
+    "word": "proof",
+    "startMs": 482460,
+    "endMs": 482640
+  },
+  {
+    "word": "that",
+    "startMs": 482640,
+    "endMs": 482840
+  },
+  {
+    "word": "you're",
+    "startMs": 482840,
+    "endMs": 483020
+  },
+  {
+    "word": "lazy.",
+    "startMs": 483020,
+    "endMs": 483240
+  },
+  {
+    "word": "Not",
+    "startMs": 484240,
+    "endMs": 484520
+  },
+  {
+    "word": "as",
+    "startMs": 484520,
+    "endMs": 484680
+  },
+  {
+    "word": "proof",
+    "startMs": 484680,
+    "endMs": 484840
+  },
+  {
+    "word": "that",
+    "startMs": 484840,
+    "endMs": 485060
+  },
+  {
+    "word": "you're",
+    "startMs": 485060,
+    "endMs": 485240
+  },
+  {
+    "word": "broken.",
+    "startMs": 485240,
+    "endMs": 485540
+  },
+  {
+    "word": "But",
+    "startMs": 486520,
+    "endMs": 486680
+  },
+  {
+    "word": "as",
+    "startMs": 486680,
+    "endMs": 486820
+  },
+  {
+    "word": "a",
+    "startMs": 486820,
+    "endMs": 486860
+  },
+  {
+    "word": "pattern,",
+    "startMs": 486860,
+    "endMs": 487160
+  },
+  {
+    "word": "your",
+    "startMs": 487300,
+    "endMs": 487320
+  },
+  {
+    "word": "brain",
+    "startMs": 487320,
+    "endMs": 487580
+  },
+  {
+    "word": "learned",
+    "startMs": 487580,
+    "endMs": 487840
+  },
+  {
+    "word": "because",
+    "startMs": 487840,
+    "endMs": 488140
+  },
+  {
+    "word": "at",
+    "startMs": 488140,
+    "endMs": 488680
+  },
+  {
+    "word": "some",
+    "startMs": 488680,
+    "endMs": 488880
+  },
+  {
+    "word": "point",
+    "startMs": 488880,
+    "endMs": 489220
+  },
+  {
+    "word": "avoiding",
+    "startMs": 489220,
+    "endMs": 489540
+  },
+  {
+    "word": "discomfort",
+    "startMs": 489540,
+    "endMs": 490080
+  },
+  {
+    "word": "worked,",
+    "startMs": 490080,
+    "endMs": 490460
+  },
+  {
+    "word": "it",
+    "startMs": 491540,
+    "endMs": 491680
+  },
+  {
+    "word": "gave",
+    "startMs": 491680,
+    "endMs": 491820
+  },
+  {
+    "word": "you",
+    "startMs": 491820,
+    "endMs": 492020
+  },
+  {
+    "word": "relief.",
+    "startMs": 492020,
+    "endMs": 492280
+  },
+  {
+    "word": "The",
+    "startMs": 493380,
+    "endMs": 493520
+  },
+  {
+    "word": "problem",
+    "startMs": 493520,
+    "endMs": 493800
+  },
+  {
+    "word": "is",
+    "startMs": 493800,
+    "endMs": 494040
+  },
+  {
+    "word": "that",
+    "startMs": 494040,
+    "endMs": 494160
+  },
+  {
+    "word": "relief",
+    "startMs": 494160,
+    "endMs": 494400
+  },
+  {
+    "word": "is",
+    "startMs": 494400,
+    "endMs": 494660
+  },
+  {
+    "word": "very",
+    "startMs": 494660,
+    "endMs": 494900
+  },
+  {
+    "word": "short",
+    "startMs": 494900,
+    "endMs": 495140
+  },
+  {
+    "word": "term.",
+    "startMs": 495140,
+    "endMs": 495420
+  },
+  {
+    "word": "The",
+    "startMs": 496400,
+    "endMs": 496520
+  },
+  {
+    "word": "deadline",
+    "startMs": 496520,
+    "endMs": 496780
+  },
+  {
+    "word": "doesn't",
+    "startMs": 496780,
+    "endMs": 497280
+  },
+  {
+    "word": "disappear.",
+    "startMs": 497280,
+    "endMs": 497640
+  },
+  {
+    "word": "The",
+    "startMs": 498780,
+    "endMs": 498900
+  },
+  {
+    "word": "assignment",
+    "startMs": 498900,
+    "endMs": 499180
+  },
+  {
+    "word": "doesn't",
+    "startMs": 499180,
+    "endMs": 499640
+  },
+  {
+    "word": "disappear.",
+    "startMs": 499640,
+    "endMs": 500020
+  },
+  {
+    "word": "The",
+    "startMs": 501180,
+    "endMs": 501260
+  },
+  {
+    "word": "conversation",
+    "startMs": 501260,
+    "endMs": 501560
+  },
+  {
+    "word": "doesn't",
+    "startMs": 501560,
+    "endMs": 502240
+  },
+  {
+    "word": "disappear.",
+    "startMs": 502240,
+    "endMs": 502600
+  },
+  {
+    "word": "The",
+    "startMs": 503760,
+    "endMs": 503880
+  },
+  {
+    "word": "anxiety",
+    "startMs": 503880,
+    "endMs": 504180
+  },
+  {
+    "word": "usually",
+    "startMs": 504180,
+    "endMs": 504680
+  },
+  {
+    "word": "comes",
+    "startMs": 504680,
+    "endMs": 504980
+  },
+  {
+    "word": "back,",
+    "startMs": 504980,
+    "endMs": 505300
+  },
+  {
+    "word": "often",
+    "startMs": 505920,
+    "endMs": 506600
+  },
+  {
+    "word": "with",
+    "startMs": 506600,
+    "endMs": 506760
+  },
+  {
+    "word": "interest.",
+    "startMs": 506760,
+    "endMs": 507040
+  },
+  {
+    "word": "So",
+    "startMs": 507980,
+    "endMs": 508360
+  },
+  {
+    "word": "the",
+    "startMs": 508360,
+    "endMs": 508480
+  },
+  {
+    "word": "goal",
+    "startMs": 508480,
+    "endMs": 508640
+  },
+  {
+    "word": "isn't",
+    "startMs": 508640,
+    "endMs": 509020
+  },
+  {
+    "word": "to",
+    "startMs": 509020,
+    "endMs": 509120
+  },
+  {
+    "word": "become",
+    "startMs": 509120,
+    "endMs": 509220
+  },
+  {
+    "word": "someone",
+    "startMs": 509220,
+    "endMs": 509740
+  },
+  {
+    "word": "who",
+    "startMs": 509740,
+    "endMs": 509900
+  },
+  {
+    "word": "never",
+    "startMs": 509900,
+    "endMs": 510080
+  },
+  {
+    "word": "procrastinates.",
+    "startMs": 510080,
+    "endMs": 510800
+  },
+  {
+    "word": "It's",
+    "startMs": 511659,
+    "endMs": 512140
+  },
+  {
+    "word": "to",
+    "startMs": 512140,
+    "endMs": 512220
+  },
+  {
+    "word": "become",
+    "startMs": 512220,
+    "endMs": 512340
+  },
+  {
+    "word": "a",
+    "startMs": 512340,
+    "endMs": 512559
+  },
+  {
+    "word": "little",
+    "startMs": 512559,
+    "endMs": 512740
+  },
+  {
+    "word": "better",
+    "startMs": 512740,
+    "endMs": 512960
+  },
+  {
+    "word": "at",
+    "startMs": 512960,
+    "endMs": 513159
+  },
+  {
+    "word": "noticing",
+    "startMs": 513159,
+    "endMs": 513500
+  },
+  {
+    "word": "what",
+    "startMs": 513500,
+    "endMs": 513780
+  },
+  {
+    "word": "happens",
+    "startMs": 513780,
+    "endMs": 514100
+  },
+  {
+    "word": "in",
+    "startMs": 514100,
+    "endMs": 514299
+  },
+  {
+    "word": "that",
+    "startMs": 514299,
+    "endMs": 514440
+  },
+  {
+    "word": "moment",
+    "startMs": 514440,
+    "endMs": 514720
+  },
+  {
+    "word": "right",
+    "startMs": 514720,
+    "endMs": 514960
+  },
+  {
+    "word": "before",
+    "startMs": 514960,
+    "endMs": 515280
+  },
+  {
+    "word": "you",
+    "startMs": 515280,
+    "endMs": 515500
+  },
+  {
+    "word": "escape.",
+    "startMs": 515500,
+    "endMs": 515780
+  },
+  {
+    "word": "That",
+    "startMs": 516880,
+    "endMs": 517020
+  },
+  {
+    "word": "tiny",
+    "startMs": 517020,
+    "endMs": 517260
+  },
+  {
+    "word": "moment",
+    "startMs": 517260,
+    "endMs": 517640
+  },
+  {
+    "word": "where",
+    "startMs": 517640,
+    "endMs": 517900
+  },
+  {
+    "word": "you",
+    "startMs": 517900,
+    "endMs": 518039
+  },
+  {
+    "word": "open",
+    "startMs": 518039,
+    "endMs": 518240
+  },
+  {
+    "word": "the",
+    "startMs": 518240,
+    "endMs": 518400
+  },
+  {
+    "word": "task.",
+    "startMs": 518400,
+    "endMs": 518640
+  },
+  {
+    "word": "Feel",
+    "startMs": 519700,
+    "endMs": 519919
+  },
+  {
+    "word": "something",
+    "startMs": 519919,
+    "endMs": 520220
+  },
+  {
+    "word": "uncomfortable.",
+    "startMs": 520220,
+    "endMs": 520659
+  },
+  {
+    "word": "And",
+    "startMs": 521900,
+    "endMs": 522100
+  },
+  {
+    "word": "reach",
+    "startMs": 522100,
+    "endMs": 522260
+  },
+  {
+    "word": "for",
+    "startMs": 522260,
+    "endMs": 522480
+  },
+  {
+    "word": "your",
+    "startMs": 522480,
+    "endMs": 522580
+  },
+  {
+    "word": "phone.",
+    "startMs": 522580,
+    "endMs": 522919
+  },
+  {
+    "word": "Pause",
+    "startMs": 523940,
+    "endMs": 524240
+  },
+  {
+    "word": "there.",
+    "startMs": 524240,
+    "endMs": 524520
+  },
+  {
+    "word": "Not",
+    "startMs": 525420,
+    "endMs": 525660
+  },
+  {
+    "word": "to",
+    "startMs": 525660,
+    "endMs": 525840
+  },
+  {
+    "word": "judge",
+    "startMs": 525840,
+    "endMs": 525980
+  },
+  {
+    "word": "yourself.",
+    "startMs": 525980,
+    "endMs": 526360
+  },
+  {
+    "word": "Just",
+    "startMs": 527520,
+    "endMs": 527700
+  },
+  {
+    "word": "to",
+    "startMs": 527700,
+    "endMs": 527860
+  },
+  {
+    "word": "notice.",
+    "startMs": 527860,
+    "endMs": 528080
+  },
+  {
+    "word": "What",
+    "startMs": 529100,
+    "endMs": 529380
+  },
+  {
+    "word": "am",
+    "startMs": 529380,
+    "endMs": 529480
+  },
+  {
+    "word": "I",
+    "startMs": 529480,
+    "endMs": 529600
+  },
+  {
+    "word": "feeling",
+    "startMs": 529600,
+    "endMs": 529800
+  },
+  {
+    "word": "right",
+    "startMs": 529800,
+    "endMs": 530060
+  },
+  {
+    "word": "now?",
+    "startMs": 530060,
+    "endMs": 530360
+  },
+  {
+    "word": "Because",
+    "startMs": 531160,
+    "endMs": 531500
+  },
+  {
+    "word": "sometimes",
+    "startMs": 531500,
+    "endMs": 531760
+  },
+  {
+    "word": "the",
+    "startMs": 531760,
+    "endMs": 532080
+  },
+  {
+    "word": "thing",
+    "startMs": 532080,
+    "endMs": 532240
+  },
+  {
+    "word": "standing",
+    "startMs": 532240,
+    "endMs": 532480
+  },
+  {
+    "word": "between",
+    "startMs": 532480,
+    "endMs": 532960
+  },
+  {
+    "word": "you",
+    "startMs": 532960,
+    "endMs": 533220
+  },
+  {
+    "word": "and",
+    "startMs": 533220,
+    "endMs": 533420
+  },
+  {
+    "word": "the",
+    "startMs": 533420,
+    "endMs": 533500
+  },
+  {
+    "word": "task",
+    "startMs": 533500,
+    "endMs": 533720
+  },
+  {
+    "word": "isn't",
+    "startMs": 533720,
+    "endMs": 534180
+  },
+  {
+    "word": "a",
+    "startMs": 534180,
+    "endMs": 534260
+  },
+  {
+    "word": "lack",
+    "startMs": 534260,
+    "endMs": 534440
+  },
+  {
+    "word": "of",
+    "startMs": 534440,
+    "endMs": 534580
+  },
+  {
+    "word": "discipline.",
+    "startMs": 534580,
+    "endMs": 534900
+  },
+  {
+    "word": "It's",
+    "startMs": 535800,
+    "endMs": 536220
+  },
+  {
+    "word": "a",
+    "startMs": 536220,
+    "endMs": 536260
+  },
+  {
+    "word": "feeling",
+    "startMs": 536260,
+    "endMs": 536520
+  },
+  {
+    "word": "you're",
+    "startMs": 536520,
+    "endMs": 536760
+  },
+  {
+    "word": "trying",
+    "startMs": 536760,
+    "endMs": 536980
+  },
+  {
+    "word": "not",
+    "startMs": 536980,
+    "endMs": 537200
+  },
+  {
+    "word": "to",
+    "startMs": 537200,
+    "endMs": 537360
+  },
+  {
+    "word": "feel.",
+    "startMs": 537360,
+    "endMs": 537620
+  },
+  {
+    "word": "And",
+    "startMs": 538540,
+    "endMs": 538760
+  },
+  {
+    "word": "once",
+    "startMs": 538760,
+    "endMs": 538920
+  },
+  {
+    "word": "you",
+    "startMs": 538920,
+    "endMs": 539100
+  },
+  {
+    "word": "understand",
+    "startMs": 539100,
+    "endMs": 539300
+  },
+  {
+    "word": "that,",
+    "startMs": 539300,
+    "endMs": 539800
+  },
+  {
+    "word": "you",
+    "startMs": 540360,
+    "endMs": 540900
+  },
+  {
+    "word": "can",
+    "startMs": 540900,
+    "endMs": 541040
+  },
+  {
+    "word": "finally",
+    "startMs": 541040,
+    "endMs": 541380
+  },
+  {
+    "word": "work",
+    "startMs": 541380,
+    "endMs": 541680
+  },
+  {
+    "word": "on",
+    "startMs": 541680,
+    "endMs": 541840
+  },
+  {
+    "word": "the",
+    "startMs": 541840,
+    "endMs": 541940
+  },
+  {
+    "word": "problem",
+    "startMs": 541940,
+    "endMs": 542220
+  },
+  {
+    "word": "underneath",
+    "startMs": 542220,
+    "endMs": 542600
+  },
+  {
+    "word": "the",
+    "startMs": 542600,
+    "endMs": 542840
+  },
+  {
+    "word": "procrastination",
+    "startMs": 542840,
+    "endMs": 543460
+  },
+  {
+    "word": "instead",
+    "startMs": 543460,
+    "endMs": 544200
+  },
+  {
+    "word": "of",
+    "startMs": 544200,
+    "endMs": 544420
+  },
+  {
+    "word": "spending",
+    "startMs": 544420,
+    "endMs": 544700
+  },
+  {
+    "word": "your",
+    "startMs": 544700,
+    "endMs": 544920
+  },
+  {
+    "word": "whole",
+    "startMs": 544920,
+    "endMs": 545100
+  },
+  {
+    "word": "life",
+    "startMs": 545100,
+    "endMs": 545400
+  },
+  {
+    "word": "blaming",
+    "startMs": 545400,
+    "endMs": 545620
+  },
+  {
+    "word": "yourself",
+    "startMs": 545620,
+    "endMs": 546040
+  },
+  {
+    "word": "for",
+    "startMs": 546040,
+    "endMs": 546340
+  },
+  {
+    "word": "the",
+    "startMs": 546340,
+    "endMs": 546440
+  },
+  {
+    "word": "symptom.",
+    "startMs": 546440,
+    "endMs": 546700
+  },
+  {
+    "word": "Maybe",
+    "startMs": 547780,
+    "endMs": 547940
+  },
+  {
+    "word": "you",
+    "startMs": 547940,
+    "endMs": 548160
+  },
+  {
+    "word": "don't",
+    "startMs": 548160,
+    "endMs": 548340
+  },
+  {
+    "word": "need",
+    "startMs": 548340,
+    "endMs": 548480
+  },
+  {
+    "word": "to",
+    "startMs": 548480,
+    "endMs": 548580
+  },
+  {
+    "word": "become",
+    "startMs": 548580,
+    "endMs": 548720
+  },
+  {
+    "word": "harder",
+    "startMs": 548720,
+    "endMs": 549080
+  },
+  {
+    "word": "on",
+    "startMs": 549080,
+    "endMs": 549300
+  },
+  {
+    "word": "yourself.",
+    "startMs": 549300,
+    "endMs": 549620
+  },
+  {
+    "word": "Maybe",
+    "startMs": 550560,
+    "endMs": 550920
+  },
+  {
+    "word": "you",
+    "startMs": 550920,
+    "endMs": 551160
+  },
+  {
+    "word": "just",
+    "startMs": 551160,
+    "endMs": 551380
+  },
+  {
+    "word": "need",
+    "startMs": 551380,
+    "endMs": 551520
+  },
+  {
+    "word": "to",
+    "startMs": 551520,
+    "endMs": 551660
+  },
+  {
+    "word": "become",
+    "startMs": 551660,
+    "endMs": 551820
+  },
+  {
+    "word": "a",
+    "startMs": 551820,
+    "endMs": 552020
+  },
+  {
+    "word": "little",
+    "startMs": 552020,
+    "endMs": 552200
+  },
+  {
+    "word": "more",
+    "startMs": 552200,
+    "endMs": 552380
+  },
+  {
+    "word": "honest",
+    "startMs": 552380,
+    "endMs": 552620
+  },
+  {
+    "word": "about",
+    "startMs": 552620,
+    "endMs": 552900
+  },
+  {
+    "word": "what",
+    "startMs": 552900,
+    "endMs": 553160
+  },
+  {
+    "word": "you're",
+    "startMs": 553160,
+    "endMs": 553280
+  },
+  {
+    "word": "feeling.",
+    "startMs": 553280,
+    "endMs": 553640
+  },
+  {
+    "word": "And",
+    "startMs": 554620,
+    "endMs": 554760
+  },
+  {
+    "word": "a",
+    "startMs": 554760,
+    "endMs": 554880
+  },
+  {
+    "word": "little",
+    "startMs": 554880,
+    "endMs": 555000
+  },
+  {
+    "word": "more",
+    "startMs": 555000,
+    "endMs": 555240
+  },
+  {
+    "word": "willing",
+    "startMs": 555240,
+    "endMs": 555480
+  },
+  {
+    "word": "to",
+    "startMs": 555480,
+    "endMs": 555660
+  },
+  {
+    "word": "begin",
+    "startMs": 555660,
+    "endMs": 555820
+  },
+  {
+    "word": "while",
+    "startMs": 555820,
+    "endMs": 556100
+  },
+  {
+    "word": "that",
+    "startMs": 556100,
+    "endMs": 556260
+  },
+  {
+    "word": "feeling",
+    "startMs": 556260,
+    "endMs": 556540
+  },
+  {
+    "word": "is",
+    "startMs": 556540,
+    "endMs": 556740
+  },
+  {
+    "word": "still",
+    "startMs": 556740,
+    "endMs": 556940
+  },
+  {
+    "word": "there.",
+    "startMs": 556940,
+    "endMs": 557200
+  }
+]

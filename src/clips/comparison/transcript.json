@@ -1,0 +1,717 @@
+[
+  {
+    "word": "You",
+    "startMs": 0,
+    "endMs": 260
+  },
+  {
+    "word": "know",
+    "startMs": 260,
+    "endMs": 380
+  },
+  {
+    "word": "why",
+    "startMs": 380,
+    "endMs": 520
+  },
+  {
+    "word": "comparing",
+    "startMs": 520,
+    "endMs": 720
+  },
+  {
+    "word": "yourself",
+    "startMs": 720,
+    "endMs": 1240
+  },
+  {
+    "word": "to",
+    "startMs": 1240,
+    "endMs": 1500
+  },
+  {
+    "word": "other",
+    "startMs": 1500,
+    "endMs": 1680
+  },
+  {
+    "word": "people",
+    "startMs": 1680,
+    "endMs": 1900
+  },
+  {
+    "word": "never",
+    "startMs": 1900,
+    "endMs": 2220
+  },
+  {
+    "word": "really",
+    "startMs": 2220,
+    "endMs": 2480
+  },
+  {
+    "word": "stops?",
+    "startMs": 2480,
+    "endMs": 2820
+  },
+  {
+    "word": "Because",
+    "startMs": 3820,
+    "endMs": 4180
+  },
+  {
+    "word": "every",
+    "startMs": 4180,
+    "endMs": 4400
+  },
+  {
+    "word": "time",
+    "startMs": 4400,
+    "endMs": 4700
+  },
+  {
+    "word": "you",
+    "startMs": 4700,
+    "endMs": 4840
+  },
+  {
+    "word": "become",
+    "startMs": 4840,
+    "endMs": 4960
+  },
+  {
+    "word": "better,",
+    "startMs": 4960,
+    "endMs": 5400
+  },
+  {
+    "word": "your",
+    "startMs": 5720,
+    "endMs": 5880
+  },
+  {
+    "word": "brain",
+    "startMs": 5880,
+    "endMs": 6180
+  },
+  {
+    "word": "just",
+    "startMs": 6180,
+    "endMs": 6400
+  },
+  {
+    "word": "finds",
+    "startMs": 6400,
+    "endMs": 6620
+  },
+  {
+    "word": "someone",
+    "startMs": 6620,
+    "endMs": 6940
+  },
+  {
+    "word": "new",
+    "startMs": 6940,
+    "endMs": 7180
+  },
+  {
+    "word": "to",
+    "startMs": 7180,
+    "endMs": 7340
+  },
+  {
+    "word": "compare",
+    "startMs": 7340,
+    "endMs": 7560
+  },
+  {
+    "word": "you",
+    "startMs": 7560,
+    "endMs": 7840
+  },
+  {
+    "word": "to.",
+    "startMs": 7840,
+    "endMs": 8000
+  },
+  {
+    "word": "You",
+    "startMs": 8740,
+    "endMs": 9080
+  },
+  {
+    "word": "get",
+    "startMs": 9080,
+    "endMs": 9220
+  },
+  {
+    "word": "fit?",
+    "startMs": 9220,
+    "endMs": 9460
+  },
+  {
+    "word": "Now",
+    "startMs": 10180,
+    "endMs": 10660
+  },
+  {
+    "word": "you",
+    "startMs": 10660,
+    "endMs": 10840
+  },
+  {
+    "word": "notice",
+    "startMs": 10840,
+    "endMs": 11020
+  },
+  {
+    "word": "someone",
+    "startMs": 11020,
+    "endMs": 11320
+  },
+  {
+    "word": "fitter.",
+    "startMs": 11320,
+    "endMs": 11640
+  },
+  {
+    "word": "You",
+    "startMs": 12440,
+    "endMs": 12800
+  },
+  {
+    "word": "make",
+    "startMs": 12800,
+    "endMs": 12920
+  },
+  {
+    "word": "more",
+    "startMs": 12920,
+    "endMs": 13160
+  },
+  {
+    "word": "money?",
+    "startMs": 13160,
+    "endMs": 13460
+  },
+  {
+    "word": "Suddenly",
+    "startMs": 14460,
+    "endMs": 14680
+  },
+  {
+    "word": "you're",
+    "startMs": 14680,
+    "endMs": 14960
+  },
+  {
+    "word": "looking",
+    "startMs": 14960,
+    "endMs": 15220
+  },
+  {
+    "word": "at",
+    "startMs": 15220,
+    "endMs": 15400
+  },
+  {
+    "word": "someone",
+    "startMs": 15400,
+    "endMs": 15620
+  },
+  {
+    "word": "richer.",
+    "startMs": 15620,
+    "endMs": 15860
+  },
+  {
+    "word": "You",
+    "startMs": 16900,
+    "endMs": 17120
+  },
+  {
+    "word": "finally",
+    "startMs": 17120,
+    "endMs": 17340
+  },
+  {
+    "word": "feel",
+    "startMs": 17340,
+    "endMs": 17720
+  },
+  {
+    "word": "confident?",
+    "startMs": 17720,
+    "endMs": 18100
+  },
+  {
+    "word": "And",
+    "startMs": 19220,
+    "endMs": 19380
+  },
+  {
+    "word": "then",
+    "startMs": 19380,
+    "endMs": 19520
+  },
+  {
+    "word": "you",
+    "startMs": 19520,
+    "endMs": 19680
+  },
+  {
+    "word": "meet",
+    "startMs": 19680,
+    "endMs": 19800
+  },
+  {
+    "word": "someone",
+    "startMs": 19800,
+    "endMs": 20120
+  },
+  {
+    "word": "who",
+    "startMs": 20120,
+    "endMs": 20320
+  },
+  {
+    "word": "seems",
+    "startMs": 20320,
+    "endMs": 20520
+  },
+  {
+    "word": "effortlessly",
+    "startMs": 20520,
+    "endMs": 20880
+  },
+  {
+    "word": "confident.",
+    "startMs": 20880,
+    "endMs": 21540
+  },
+  {
+    "word": "So",
+    "startMs": 22540,
+    "endMs": 22860
+  },
+  {
+    "word": "the",
+    "startMs": 22860,
+    "endMs": 22960
+  },
+  {
+    "word": "finish",
+    "startMs": 22960,
+    "endMs": 23180
+  },
+  {
+    "word": "line",
+    "startMs": 23180,
+    "endMs": 23460
+  },
+  {
+    "word": "keeps",
+    "startMs": 23460,
+    "endMs": 23700
+  },
+  {
+    "word": "moving.",
+    "startMs": 23700,
+    "endMs": 24100
+  },
+  {
+    "word": "That's",
+    "startMs": 25060,
+    "endMs": 25420
+  },
+  {
+    "word": "the",
+    "startMs": 25420,
+    "endMs": 25520
+  },
+  {
+    "word": "trap.",
+    "startMs": 25520,
+    "endMs": 25760
+  },
+  {
+    "word": "Comparison",
+    "startMs": 26840,
+    "endMs": 27280
+  },
+  {
+    "word": "doesn't",
+    "startMs": 27280,
+    "endMs": 27720
+  },
+  {
+    "word": "actually",
+    "startMs": 27720,
+    "endMs": 27960
+  },
+  {
+    "word": "disappear",
+    "startMs": 27960,
+    "endMs": 28400
+  },
+  {
+    "word": "when",
+    "startMs": 28400,
+    "endMs": 28740
+  },
+  {
+    "word": "your",
+    "startMs": 28740,
+    "endMs": 28860
+  },
+  {
+    "word": "life",
+    "startMs": 28860,
+    "endMs": 29100
+  },
+  {
+    "word": "gets",
+    "startMs": 29100,
+    "endMs": 29300
+  },
+  {
+    "word": "better.",
+    "startMs": 29300,
+    "endMs": 29620
+  },
+  {
+    "word": "Because",
+    "startMs": 30580,
+    "endMs": 30840
+  },
+  {
+    "word": "the",
+    "startMs": 30840,
+    "endMs": 31000
+  },
+  {
+    "word": "problem",
+    "startMs": 31000,
+    "endMs": 31300
+  },
+  {
+    "word": "isn't",
+    "startMs": 31300,
+    "endMs": 31640
+  },
+  {
+    "word": "always",
+    "startMs": 31640,
+    "endMs": 31860
+  },
+  {
+    "word": "that",
+    "startMs": 31860,
+    "endMs": 32060
+  },
+  {
+    "word": "you're",
+    "startMs": 32060,
+    "endMs": 32180
+  },
+  {
+    "word": "behind.",
+    "startMs": 32180,
+    "endMs": 32500
+  },
+  {
+    "word": "Sometimes,",
+    "startMs": 33540,
+    "endMs": 33980
+  },
+  {
+    "word": "your",
+    "startMs": 34360,
+    "endMs": 34500
+  },
+  {
+    "word": "brain",
+    "startMs": 34500,
+    "endMs": 34780
+  },
+  {
+    "word": "has",
+    "startMs": 34780,
+    "endMs": 34960
+  },
+  {
+    "word": "just",
+    "startMs": 34960,
+    "endMs": 35160
+  },
+  {
+    "word": "learned",
+    "startMs": 35160,
+    "endMs": 35380
+  },
+  {
+    "word": "to",
+    "startMs": 35380,
+    "endMs": 35540
+  },
+  {
+    "word": "look",
+    "startMs": 35540,
+    "endMs": 35680
+  },
+  {
+    "word": "sideways",
+    "startMs": 35680,
+    "endMs": 35920
+  },
+  {
+    "word": "before",
+    "startMs": 35920,
+    "endMs": 36380
+  },
+  {
+    "word": "it",
+    "startMs": 36380,
+    "endMs": 36680
+  },
+  {
+    "word": "looks",
+    "startMs": 36680,
+    "endMs": 36800
+  },
+  {
+    "word": "at",
+    "startMs": 36800,
+    "endMs": 36980
+  },
+  {
+    "word": "you.",
+    "startMs": 36980,
+    "endMs": 37140
+  },
+  {
+    "word": "So",
+    "startMs": 37900,
+    "endMs": 38260
+  },
+  {
+    "word": "maybe",
+    "startMs": 38260,
+    "endMs": 38400
+  },
+  {
+    "word": "don't",
+    "startMs": 38400,
+    "endMs": 38780
+  },
+  {
+    "word": "ask,",
+    "startMs": 38780,
+    "endMs": 39060
+  },
+  {
+    "word": "am",
+    "startMs": 39300,
+    "endMs": 39380
+  },
+  {
+    "word": "I",
+    "startMs": 39380,
+    "endMs": 39480
+  },
+  {
+    "word": "doing",
+    "startMs": 39480,
+    "endMs": 39580
+  },
+  {
+    "word": "better",
+    "startMs": 39580,
+    "endMs": 39800
+  },
+  {
+    "word": "than",
+    "startMs": 39800,
+    "endMs": 40080
+  },
+  {
+    "word": "them?",
+    "startMs": 40080,
+    "endMs": 40220
+  },
+  {
+    "word": "Ask,",
+    "startMs": 41020,
+    "endMs": 41400
+  },
+  {
+    "word": "am",
+    "startMs": 41680,
+    "endMs": 41740
+  },
+  {
+    "word": "I",
+    "startMs": 41740,
+    "endMs": 41860
+  },
+  {
+    "word": "doing",
+    "startMs": 41860,
+    "endMs": 41960
+  },
+  {
+    "word": "better",
+    "startMs": 41960,
+    "endMs": 42200
+  },
+  {
+    "word": "than",
+    "startMs": 42200,
+    "endMs": 42440
+  },
+  {
+    "word": "the",
+    "startMs": 42440,
+    "endMs": 42520
+  },
+  {
+    "word": "version",
+    "startMs": 42520,
+    "endMs": 42700
+  },
+  {
+    "word": "of",
+    "startMs": 42700,
+    "endMs": 42920
+  },
+  {
+    "word": "me",
+    "startMs": 42920,
+    "endMs": 43020
+  },
+  {
+    "word": "who",
+    "startMs": 43020,
+    "endMs": 43160
+  },
+  {
+    "word": "started?",
+    "startMs": 43160,
+    "endMs": 43400
+  },
+  {
+    "word": "That's",
+    "startMs": 44440,
+    "endMs": 44720
+  },
+  {
+    "word": "a",
+    "startMs": 44720,
+    "endMs": 44760
+  },
+  {
+    "word": "race",
+    "startMs": 44760,
+    "endMs": 44960
+  },
+  {
+    "word": "you",
+    "startMs": 44960,
+    "endMs": 45140
+  },
+  {
+    "word": "can",
+    "startMs": 45140,
+    "endMs": 45300
+  },
+  {
+    "word": "actually",
+    "startMs": 45300,
+    "endMs": 45540
+  },
+  {
+    "word": "finish.",
+    "startMs": 45540,
+    "endMs": 46000
+  },
+  {
+    "word": "And",
+    "startMs": 47120,
+    "endMs": 47260
+  },
+  {
+    "word": "honestly,",
+    "startMs": 47260,
+    "endMs": 47500
+  },
+  {
+    "word": "you",
+    "startMs": 48020,
+    "endMs": 48120
+  },
+  {
+    "word": "don't",
+    "startMs": 48120,
+    "endMs": 48320
+  },
+  {
+    "word": "need",
+    "startMs": 48320,
+    "endMs": 48440
+  },
+  {
+    "word": "to",
+    "startMs": 48440,
+    "endMs": 48560
+  },
+  {
+    "word": "win",
+    "startMs": 48560,
+    "endMs": 48740
+  },
+  {
+    "word": "someone",
+    "startMs": 48740,
+    "endMs": 48940
+  },
+  {
+    "word": "else's",
+    "startMs": 48940,
+    "endMs": 49360
+  },
+  {
+    "word": "life",
+    "startMs": 49360,
+    "endMs": 49580
+  },
+  {
+    "word": "to",
+    "startMs": 49580,
+    "endMs": 49800
+  },
+  {
+    "word": "feel",
+    "startMs": 49800,
+    "endMs": 49960
+  },
+  {
+    "word": "like",
+    "startMs": 49960,
+    "endMs": 50140
+  },
+  {
+    "word": "yours",
+    "startMs": 50140,
+    "endMs": 50300
+  },
+  {
+    "word": "is",
+    "startMs": 50300,
+    "endMs": 50500
+  },
+  {
+    "word": "enough.",
+    "startMs": 50500,
+    "endMs": 50740
+  }
+]

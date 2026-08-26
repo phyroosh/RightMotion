@@ -1,0 +1,592 @@
+[
+  {
+    "word": "Everyone",
+    "startMs": 100,
+    "endMs": 839
+  },
+  {
+    "word": "gets",
+    "startMs": 839,
+    "endMs": 1208
+  },
+  {
+    "word": "distracted.",
+    "startMs": 1208,
+    "endMs": 2225
+  },
+  {
+    "word": "You",
+    "startMs": 2175,
+    "endMs": 2385
+  },
+  {
+    "word": "open",
+    "startMs": 2385,
+    "endMs": 2665
+  },
+  {
+    "word": "your",
+    "startMs": 2665,
+    "endMs": 2945
+  },
+  {
+    "word": "phone",
+    "startMs": 2945,
+    "endMs": 3295
+  },
+  {
+    "word": "for",
+    "startMs": 3295,
+    "endMs": 3505
+  },
+  {
+    "word": "one",
+    "startMs": 3505,
+    "endMs": 3715
+  },
+  {
+    "word": "thing…",
+    "startMs": 3715,
+    "endMs": 4136
+  },
+  {
+    "word": "and",
+    "startMs": 4136,
+    "endMs": 4346
+  },
+  {
+    "word": "somehow",
+    "startMs": 4346,
+    "endMs": 4837
+  },
+  {
+    "word": "twenty",
+    "startMs": 4837,
+    "endMs": 5258
+  },
+  {
+    "word": "minutes",
+    "startMs": 5258,
+    "endMs": 5749
+  },
+  {
+    "word": "disappear.",
+    "startMs": 5749,
+    "endMs": 6457
+  },
+  {
+    "word": "But",
+    "startMs": 6458,
+    "endMs": 6719
+  },
+  {
+    "word": "ADHD",
+    "startMs": 6719,
+    "endMs": 7067
+  },
+  {
+    "word": "isn’t",
+    "startMs": 7067,
+    "endMs": 7502
+  },
+  {
+    "word": "simply",
+    "startMs": 7502,
+    "endMs": 8024
+  },
+  {
+    "word": "getting",
+    "startMs": 8024,
+    "endMs": 8720
+  },
+  {
+    "word": "distracted",
+    "startMs": 8720,
+    "endMs": 9590
+  },
+  {
+    "word": "a",
+    "startMs": 9590,
+    "endMs": 9764
+  },
+  {
+    "word": "lot.",
+    "startMs": 9764,
+    "endMs": 10115
+  },
+  {
+    "word": "For",
+    "startMs": 10115,
+    "endMs": 10375
+  },
+  {
+    "word": "someone",
+    "startMs": 10375,
+    "endMs": 10981
+  },
+  {
+    "word": "with",
+    "startMs": 10981,
+    "endMs": 11327
+  },
+  {
+    "word": "ADHD,",
+    "startMs": 11327,
+    "endMs": 11760
+  },
+  {
+    "word": "the",
+    "startMs": 11760,
+    "endMs": 12020
+  },
+  {
+    "word": "problem",
+    "startMs": 12020,
+    "endMs": 12626
+  },
+  {
+    "word": "can",
+    "startMs": 12626,
+    "endMs": 12886
+  },
+  {
+    "word": "be",
+    "startMs": 12886,
+    "endMs": 13059
+  },
+  {
+    "word": "much",
+    "startMs": 13059,
+    "endMs": 13405
+  },
+  {
+    "word": "deeper.",
+    "startMs": 13405,
+    "endMs": 14015
+  },
+  {
+    "word": "They",
+    "startMs": 14016,
+    "endMs": 14281
+  },
+  {
+    "word": "might",
+    "startMs": 14281,
+    "endMs": 14613
+  },
+  {
+    "word": "genuinely",
+    "startMs": 14613,
+    "endMs": 15211
+  },
+  {
+    "word": "want",
+    "startMs": 15211,
+    "endMs": 15476
+  },
+  {
+    "word": "to",
+    "startMs": 15476,
+    "endMs": 15608
+  },
+  {
+    "word": "start",
+    "startMs": 15608,
+    "endMs": 15940
+  },
+  {
+    "word": "something,",
+    "startMs": 15940,
+    "endMs": 16604
+  },
+  {
+    "word": "know",
+    "startMs": 16604,
+    "endMs": 16869
+  },
+  {
+    "word": "exactly",
+    "startMs": 16869,
+    "endMs": 17334
+  },
+  {
+    "word": "what",
+    "startMs": 17334,
+    "endMs": 17599
+  },
+  {
+    "word": "they",
+    "startMs": 17599,
+    "endMs": 17864
+  },
+  {
+    "word": "need",
+    "startMs": 17864,
+    "endMs": 18129
+  },
+  {
+    "word": "to",
+    "startMs": 18129,
+    "endMs": 18261
+  },
+  {
+    "word": "do…",
+    "startMs": 18261,
+    "endMs": 18460
+  },
+  {
+    "word": "and",
+    "startMs": 18460,
+    "endMs": 18659
+  },
+  {
+    "word": "still",
+    "startMs": 18659,
+    "endMs": 18991
+  },
+  {
+    "word": "feel",
+    "startMs": 18991,
+    "endMs": 19256
+  },
+  {
+    "word": "almost",
+    "startMs": 19256,
+    "endMs": 19654
+  },
+  {
+    "word": "physically",
+    "startMs": 19654,
+    "endMs": 20318
+  },
+  {
+    "word": "stuck.",
+    "startMs": 20318,
+    "endMs": 20728
+  },
+  {
+    "word": "And",
+    "startMs": 20729,
+    "endMs": 20920
+  },
+  {
+    "word": "sometimes,",
+    "startMs": 20920,
+    "endMs": 21558
+  },
+  {
+    "word": "they",
+    "startMs": 21558,
+    "endMs": 21813
+  },
+  {
+    "word": "can",
+    "startMs": 21813,
+    "endMs": 22004
+  },
+  {
+    "word": "focus",
+    "startMs": 22004,
+    "endMs": 22323
+  },
+  {
+    "word": "for",
+    "startMs": 22323,
+    "endMs": 22514
+  },
+  {
+    "word": "hours",
+    "startMs": 22514,
+    "endMs": 22833
+  },
+  {
+    "word": "on",
+    "startMs": 22833,
+    "endMs": 22960
+  },
+  {
+    "word": "something",
+    "startMs": 22960,
+    "endMs": 23534
+  },
+  {
+    "word": "they’re",
+    "startMs": 23534,
+    "endMs": 23980
+  },
+  {
+    "word": "really",
+    "startMs": 23980,
+    "endMs": 24362
+  },
+  {
+    "word": "interested",
+    "startMs": 24362,
+    "endMs": 25000
+  },
+  {
+    "word": "in.",
+    "startMs": 25000,
+    "endMs": 25196
+  },
+  {
+    "word": "That’s",
+    "startMs": 25196,
+    "endMs": 25760
+  },
+  {
+    "word": "the",
+    "startMs": 25760,
+    "endMs": 26042
+  },
+  {
+    "word": "confusing",
+    "startMs": 26042,
+    "endMs": 26888
+  },
+  {
+    "word": "part.",
+    "startMs": 26888,
+    "endMs": 27360
+  },
+  {
+    "word": "It’s",
+    "startMs": 27361,
+    "endMs": 27643
+  },
+  {
+    "word": "not",
+    "startMs": 27643,
+    "endMs": 27854
+  },
+  {
+    "word": "always",
+    "startMs": 27854,
+    "endMs": 28277
+  },
+  {
+    "word": "about",
+    "startMs": 28277,
+    "endMs": 28629
+  },
+  {
+    "word": "how",
+    "startMs": 28629,
+    "endMs": 28840
+  },
+  {
+    "word": "much",
+    "startMs": 28840,
+    "endMs": 29122
+  },
+  {
+    "word": "attention",
+    "startMs": 29122,
+    "endMs": 29756
+  },
+  {
+    "word": "they",
+    "startMs": 29756,
+    "endMs": 30038
+  },
+  {
+    "word": "have.",
+    "startMs": 30038,
+    "endMs": 30393
+  },
+  {
+    "word": "It’s",
+    "startMs": 30393,
+    "endMs": 30658
+  },
+  {
+    "word": "often",
+    "startMs": 30658,
+    "endMs": 30989
+  },
+  {
+    "word": "about",
+    "startMs": 30989,
+    "endMs": 31320
+  },
+  {
+    "word": "how",
+    "startMs": 31320,
+    "endMs": 31518
+  },
+  {
+    "word": "difficult",
+    "startMs": 31518,
+    "endMs": 32114
+  },
+  {
+    "word": "it",
+    "startMs": 32114,
+    "endMs": 32246
+  },
+  {
+    "word": "is",
+    "startMs": 32246,
+    "endMs": 32378
+  },
+  {
+    "word": "to",
+    "startMs": 32378,
+    "endMs": 32510
+  },
+  {
+    "word": "control",
+    "startMs": 32510,
+    "endMs": 32973
+  },
+  {
+    "word": "where",
+    "startMs": 32973,
+    "endMs": 33304
+  },
+  {
+    "word": "that",
+    "startMs": 33304,
+    "endMs": 33569
+  },
+  {
+    "word": "attention",
+    "startMs": 33569,
+    "endMs": 34165
+  },
+  {
+    "word": "goes.",
+    "startMs": 34165,
+    "endMs": 34501
+  },
+  {
+    "word": "So",
+    "startMs": 34502,
+    "endMs": 34652
+  },
+  {
+    "word": "if",
+    "startMs": 34652,
+    "endMs": 34802
+  },
+  {
+    "word": "your",
+    "startMs": 34802,
+    "endMs": 35103
+  },
+  {
+    "word": "brain",
+    "startMs": 35103,
+    "endMs": 35479
+  },
+  {
+    "word": "feels",
+    "startMs": 35479,
+    "endMs": 35855
+  },
+  {
+    "word": "impossible",
+    "startMs": 35855,
+    "endMs": 36608
+  },
+  {
+    "word": "to",
+    "startMs": 36608,
+    "endMs": 36758
+  },
+  {
+    "word": "steer",
+    "startMs": 36758,
+    "endMs": 37134
+  },
+  {
+    "word": "sometimes…",
+    "startMs": 37134,
+    "endMs": 37893
+  },
+  {
+    "word": "that",
+    "startMs": 37893,
+    "endMs": 38165
+  },
+  {
+    "word": "doesn’t",
+    "startMs": 38165,
+    "endMs": 38642
+  },
+  {
+    "word": "automatically",
+    "startMs": 38642,
+    "endMs": 39527
+  },
+  {
+    "word": "mean",
+    "startMs": 39527,
+    "endMs": 39799
+  },
+  {
+    "word": "you’re",
+    "startMs": 39799,
+    "endMs": 40207
+  },
+  {
+    "word": "lazy",
+    "startMs": 40207,
+    "endMs": 40479
+  },
+  {
+    "word": "or",
+    "startMs": 40479,
+    "endMs": 40615
+  },
+  {
+    "word": "undisciplined.",
+    "startMs": 40615,
+    "endMs": 41573
+  },
+  {
+    "word": "Your",
+    "startMs": 41574,
+    "endMs": 41820
+  },
+  {
+    "word": "experience",
+    "startMs": 41820,
+    "endMs": 42435
+  },
+  {
+    "word": "might",
+    "startMs": 42435,
+    "endMs": 42742
+  },
+  {
+    "word": "be",
+    "startMs": 42742,
+    "endMs": 42865
+  },
+  {
+    "word": "telling",
+    "startMs": 42865,
+    "endMs": 43296
+  },
+  {
+    "word": "you",
+    "startMs": 43296,
+    "endMs": 43480
+  },
+  {
+    "word": "something",
+    "startMs": 43480,
+    "endMs": 44034
+  },
+  {
+    "word": "worth",
+    "startMs": 44034,
+    "endMs": 44341
+  },
+  {
+    "word": "understanding.",
+    "startMs": 44341,
+    "endMs": 45208
+  }
+]
