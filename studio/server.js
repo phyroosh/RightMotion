@@ -37,6 +37,18 @@ function saveUploadsRecord(record) {
   }
 }
 
+// Helper to get persistent metadata record with safe fallback
+function getSavedMetadata() {
+  if (fs.existsSync(METADATA_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(METADATA_PATH, 'utf-8'));
+    } catch (e) {
+      console.error('Error reading metadata.json:', e.message);
+    }
+  }
+  return {};
+}
+
 // Helper to get OAuth2 client
 function getOAuth2Client() {
   if (!fs.existsSync(CLIENT_SECRETS_PATH)) {
@@ -90,10 +102,7 @@ async function syncYouTubeUploads() {
 
     const ytVideos = playlistRes.data.items || [];
     let uploads = getUploadsRecord();
-    let savedMetadata = {};
-    if (fs.existsSync(METADATA_PATH)) {
-      savedMetadata = JSON.parse(fs.readFileSync(METADATA_PATH, 'utf-8'));
-    }
+    let savedMetadata = getSavedMetadata();
 
     // Match YouTube videos with local files via metadata titles or keywords
     for (const yt of ytVideos) {
@@ -173,12 +182,7 @@ app.get('/api/videos', async (req, res) => {
 
     // Try auto-syncing with YouTube if authenticated
     await syncYouTubeUploads().catch(() => {});
-
-    let savedMetadata = {};
-    if (fs.existsSync(METADATA_PATH)) {
-      savedMetadata = JSON.parse(fs.readFileSync(METADATA_PATH, 'utf-8'));
-    }
-
+    const savedMetadata = getSavedMetadata();
     const uploads = getUploadsRecord();
     const files = fs.readdirSync(OUT_DIR);
     // Filter out temporary test images and keep only valid mp4 videos
@@ -455,10 +459,7 @@ app.post('/api/save-metadata', (req, res) => {
   }
 
   try {
-    let saved = {};
-    if (fs.existsSync(METADATA_PATH)) {
-      saved = JSON.parse(fs.readFileSync(METADATA_PATH, 'utf-8'));
-    }
+    const saved = getSavedMetadata();
     saved[filename] = metadata;
     fs.writeFileSync(METADATA_PATH, JSON.stringify(saved, null, 2));
     res.json({ success: true, metadata: saved[filename] });
