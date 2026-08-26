@@ -17,7 +17,7 @@ const SFX_CUES: SfxCue[] = [
   { frame: 0,    type: "whoosh_deep",      volume: 0.32 }, // 0.0s: Intro Full-Body Presenter entrance
   { frame: 12,   type: "click",            volume: 0.28 }, // 0.4s: Badge pop
   { frame: 216,  type: "whoosh_fast",      volume: 0.34 }, // 7.2s: Scene 1 Highlight Reel entrance
-  { frame: 339,  type: "impact_hit",       volume: 0.36 }, // 11.3s: "Behind-the-scenes" card slam
+  { frame: 339,  type: "impact_hit",       volume: 0.22 }, // 11.3s: "Behind-the-scenes" card slam
   { frame: 450,  type: "click",            volume: 0.26 }, // 15.0s: "Money" chip
   { frame: 468,  type: "click",            volume: 0.26 }, // 15.6s: "Fun" chip
   { frame: 492,  type: "click",            volume: 0.26 }, // 16.4s: "Vacations" chip
@@ -25,11 +25,11 @@ const SFX_CUES: SfxCue[] = [
   { frame: 555,  type: "whoosh_deep",      volume: 0.32 }, // 18.5s: Scene 2 Starting Line entrance
   { frame: 585,  type: "click",            volume: 0.26 }, // 19.5s: Lane 1 Money
   { frame: 735,  type: "click",            volume: 0.26 }, // 24.5s: Lane 2 Opportunities
-  { frame: 780,  type: "impact_hit",       volume: 0.38 }, // 26.0s: Lane 3 Built Resilience
+  { frame: 780,  type: "impact_hit",       volume: 0.22 }, // 26.0s: Lane 3 Built Resilience
   { frame: 864,  type: "whoosh_fast",      volume: 0.34 }, // 28.8s: Interlude Bust Presenter entrance
   { frame: 966,  type: "whoosh_sparkle",   volume: 0.32 }, // 32.2s: "What can I build with what I have?"
   { frame: 1119, type: "whoosh_cinematic", volume: 0.35 }, // 37.3s: Scene 3 Unfinished Book entrance
-  { frame: 1206, type: "impact_hit",       volume: 0.36 }, // 40.2s: "A difficult chapter isn't the whole story"
+  { frame: 1206, type: "impact_hit",       volume: 0.22 }, // 40.2s: "A difficult chapter isn't the whole story"
   { frame: 1269, type: "whoosh_sparkle",   volume: 0.35 }, // 42.3s: Outro Full-Body Presenter entrance
 ];
 

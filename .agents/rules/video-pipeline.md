@@ -39,7 +39,7 @@ public/
     - `whoosh_fast.wav` (`volume={0.35}`) — Snappy card / element reveals
     - `whoosh_deep.wav` (`volume={0.30}`) — Scene transitions & presenter entries
     - `whoosh_sparkle.wav` (`volume={0.32}`) — Revelations & perspective shifts
-    - `impact_hit.wav` (`volume={0.38}`) — Heavy statements, card slams, warning guardrails
+    - `impact_hit.wav` (`volume={0.22}`) — Balanced punchy card slams & reality checks (lowered to blend smoothly)
     - `whoosh_cinematic.wav` (`volume={0.35}`) — Cinematic horizon intros & climax builds
     - `mouse_click.mp3` (`volume={0.28}`) — Chip / pill activations & step ticks
 

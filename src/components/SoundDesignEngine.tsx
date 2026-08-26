@@ -38,7 +38,7 @@ const SFX_CONFIG: Record<SfxType, { src: string; defaultVolume: number; duration
   },
   impact_hit: {
     src: "audio/sfx/impact_hit.wav",
-    defaultVolume: 0.38,
+    defaultVolume: 0.22,
     durationFrames: 30,
   },
   whoosh_cinematic: {
