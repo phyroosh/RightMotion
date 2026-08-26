@@ -48,17 +48,13 @@ Always leverage the dedicated NVIDIA RTX GPU:
 - **Audio Transcription:** Run `faster-whisper` on CUDA (`device="cuda"`, `compute_type="float16"`).
 - **Remotion Video Rendering:** Render with Chromium ANGLE/D3D11 GPU acceleration (`Config.setChromiumOpenGlRenderer("angle")`).
 
-## 4. Multi-Pose Avatar System + Organic Eye Blink Engine
-- **6-Pose Doctrine:**
-  - `character_fullbody_pointing.png` — **Intro only** (baseHeight: 1550)
-  - `character_fullbody_open.png` — **Outro only** (baseHeight: 1550)
-  - `character_fullbody_casual.png` — **Intro/Outro** warm alternative (baseHeight: 1550)
-  - `character_pointing.png` — **Mid-video bust** (baseHeight: 1200)
-  - `character_crossed.png` — **Mid-video bust** (baseHeight: 1200)
-  - `character_open.png` — **Mid-video bust** (baseHeight: 1200)
-- **Judy Eye Blink Engine:**
-  - Animated automatically in `CharacterKeyframeAnimator.tsx` via `public/character_*_blink.png` layers.
-  - Naturally triggers every ~3.8s for an organic 4-frame blink (closing → closed → opening → open).
+## 4. Multi-Pose Avatar System (6-Pose Doctrine)
+- `character_fullbody_pointing.png` — **Intro only** (baseHeight: 1550)
+- `character_fullbody_open.png` — **Outro only** (baseHeight: 1550)
+- `character_fullbody_casual.png` — **Intro/Outro** warm alternative (baseHeight: 1550)
+- `character_pointing.png` — **Mid-video bust** (baseHeight: 1200)
+- `character_crossed.png` — **Mid-video bust** (baseHeight: 1200)
+- `character_open.png` — **Mid-video bust** (baseHeight: 1200)
 
 ## 5. YouTube Studio Web UI Publisher
 - Located at `studio/` (`node studio/server.js`, port 4000).

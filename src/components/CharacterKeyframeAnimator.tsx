@@ -124,16 +124,7 @@ export const CharacterKeyframeAnimator: React.FC<CharacterKeyframeAnimatorProps>
   const microSway = Math.cos(t * 1.8) * 0.35;
   const subtleXFloat = Math.sin(t * 1.2) * 2;
 
-  // Natural Organic Eye Blink Engine (Blinks every ~3.8s for a realistic 4-frame window)
-  const blinkCycleFrame = frame % 115;
-  let blinkOpacity = 0;
-  if (blinkCycleFrame === 45) {
-    blinkOpacity = 0.85; // Eyelids closing
-  } else if (blinkCycleFrame === 46) {
-    blinkOpacity = 1.0;  // Fully closed
-  } else if (blinkCycleFrame === 47) {
-    blinkOpacity = 0.55; // Eyelids reopening
-  }
+  if (targetOpacity <= 0.001) return null;
 
   const getPoseSrc = (pose: CharacterPose) => {
     switch (pose) {
@@ -151,24 +142,6 @@ export const CharacterKeyframeAnimator: React.FC<CharacterKeyframeAnimatorProps>
       case "pointing":
       default:
         return staticFile("character_pointing.png");
-    }
-  };
-
-  const getBlinkPoseSrc = (pose: CharacterPose) => {
-    switch (pose) {
-      case "crossed":
-        return staticFile("character_crossed_blink.png");
-      case "open":
-        return staticFile("character_open_blink.png");
-      case "fullbody_pointing":
-        return staticFile("character_fullbody_pointing_blink.png");
-      case "fullbody_open":
-        return staticFile("character_fullbody_open_blink.png");
-      case "fullbody_casual":
-        return staticFile("character_fullbody_casual_blink.png");
-      case "pointing":
-      default:
-        return staticFile("character_pointing_blink.png");
     }
   };
 
@@ -197,20 +170,6 @@ export const CharacterKeyframeAnimator: React.FC<CharacterKeyframeAnimatorProps>
           alt="Judy Character"
         />
       </div>
-
-      {/* 1b. Organic Eye Blink Layer */}
-      {blinkOpacity > 0 && (
-        <div
-          className="absolute inset-0 flex items-end justify-center pointer-events-none"
-          style={{ opacity: blinkOpacity * (1 - poseTransitionProgress) }}
-        >
-          <Img
-            src={getBlinkPoseSrc(currentPose)}
-            className="w-full h-full object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.22)]"
-            alt="Judy Blink"
-          />
-        </div>
-      )}
 
       {/* 2. Secondary Cross-Fading Next Pose (Buttery Smooth Morphing) */}
       {poseTransitionProgress > 0 && poseTransitionProgress < 1 && (
