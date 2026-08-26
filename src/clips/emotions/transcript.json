@@ -1,0 +1,727 @@
+[
+  {
+    "word": "Girls",
+    "startMs": 0,
+    "endMs": 340
+  },
+  {
+    "word": "and",
+    "startMs": 340,
+    "endMs": 520
+  },
+  {
+    "word": "guys",
+    "startMs": 520,
+    "endMs": 700
+  },
+  {
+    "word": "can",
+    "startMs": 700,
+    "endMs": 1040
+  },
+  {
+    "word": "go",
+    "startMs": 1040,
+    "endMs": 1220
+  },
+  {
+    "word": "through",
+    "startMs": 1220,
+    "endMs": 1360
+  },
+  {
+    "word": "the",
+    "startMs": 1360,
+    "endMs": 1480
+  },
+  {
+    "word": "same",
+    "startMs": 1480,
+    "endMs": 1700
+  },
+  {
+    "word": "emotion",
+    "startMs": 1700,
+    "endMs": 1960
+  },
+  {
+    "word": "and",
+    "startMs": 1960,
+    "endMs": 2580
+  },
+  {
+    "word": "handle",
+    "startMs": 2580,
+    "endMs": 2900
+  },
+  {
+    "word": "it",
+    "startMs": 2900,
+    "endMs": 3060
+  },
+  {
+    "word": "completely",
+    "startMs": 3060,
+    "endMs": 3400
+  },
+  {
+    "word": "differently.",
+    "startMs": 3400,
+    "endMs": 3900
+  },
+  {
+    "word": "A",
+    "startMs": 4460,
+    "endMs": 4460
+  },
+  {
+    "word": "lot",
+    "startMs": 4460,
+    "endMs": 4640
+  },
+  {
+    "word": "of",
+    "startMs": 4640,
+    "endMs": 4800
+  },
+  {
+    "word": "women",
+    "startMs": 4800,
+    "endMs": 5020
+  },
+  {
+    "word": "are",
+    "startMs": 5020,
+    "endMs": 5300
+  },
+  {
+    "word": "more",
+    "startMs": 5300,
+    "endMs": 5460
+  },
+  {
+    "word": "likely",
+    "startMs": 5460,
+    "endMs": 5820
+  },
+  {
+    "word": "to",
+    "startMs": 5820,
+    "endMs": 6080
+  },
+  {
+    "word": "process",
+    "startMs": 6080,
+    "endMs": 6400
+  },
+  {
+    "word": "emotions",
+    "startMs": 6400,
+    "endMs": 6760
+  },
+  {
+    "word": "by",
+    "startMs": 6760,
+    "endMs": 7200
+  },
+  {
+    "word": "talking,",
+    "startMs": 7200,
+    "endMs": 7500
+  },
+  {
+    "word": "connecting,",
+    "startMs": 7500,
+    "endMs": 8300
+  },
+  {
+    "word": "and",
+    "startMs": 8680,
+    "endMs": 8800
+  },
+  {
+    "word": "trying",
+    "startMs": 8800,
+    "endMs": 9000
+  },
+  {
+    "word": "to",
+    "startMs": 9000,
+    "endMs": 9220
+  },
+  {
+    "word": "understand",
+    "startMs": 9220,
+    "endMs": 9540
+  },
+  {
+    "word": "what",
+    "startMs": 9540,
+    "endMs": 9920
+  },
+  {
+    "word": "they're",
+    "startMs": 9920,
+    "endMs": 10060
+  },
+  {
+    "word": "feeling.",
+    "startMs": 10060,
+    "endMs": 10440
+  },
+  {
+    "word": "Men",
+    "startMs": 10760,
+    "endMs": 10920
+  },
+  {
+    "word": "are",
+    "startMs": 10920,
+    "endMs": 11160
+  },
+  {
+    "word": "often",
+    "startMs": 11160,
+    "endMs": 11520
+  },
+  {
+    "word": "taught",
+    "startMs": 11520,
+    "endMs": 11760
+  },
+  {
+    "word": "to",
+    "startMs": 11760,
+    "endMs": 11980
+  },
+  {
+    "word": "deal",
+    "startMs": 11980,
+    "endMs": 12180
+  },
+  {
+    "word": "with",
+    "startMs": 12180,
+    "endMs": 12380
+  },
+  {
+    "word": "difficult",
+    "startMs": 12380,
+    "endMs": 12720
+  },
+  {
+    "word": "emotions",
+    "startMs": 12720,
+    "endMs": 13020
+  },
+  {
+    "word": "by",
+    "startMs": 13020,
+    "endMs": 13580
+  },
+  {
+    "word": "staying",
+    "startMs": 13580,
+    "endMs": 13880
+  },
+  {
+    "word": "quiet,",
+    "startMs": 13880,
+    "endMs": 14380
+  },
+  {
+    "word": "distracting",
+    "startMs": 14640,
+    "endMs": 14960
+  },
+  {
+    "word": "themselves,",
+    "startMs": 14960,
+    "endMs": 15480
+  },
+  {
+    "word": "or",
+    "startMs": 16040,
+    "endMs": 16180
+  },
+  {
+    "word": "trying",
+    "startMs": 16180,
+    "endMs": 16440
+  },
+  {
+    "word": "to",
+    "startMs": 16440,
+    "endMs": 16660
+  },
+  {
+    "word": "fix",
+    "startMs": 16660,
+    "endMs": 16840
+  },
+  {
+    "word": "the",
+    "startMs": 16840,
+    "endMs": 17040
+  },
+  {
+    "word": "problem.",
+    "startMs": 17040,
+    "endMs": 17360
+  },
+  {
+    "word": "That",
+    "startMs": 17800,
+    "endMs": 17880
+  },
+  {
+    "word": "doesn't",
+    "startMs": 17880,
+    "endMs": 18260
+  },
+  {
+    "word": "mean",
+    "startMs": 18260,
+    "endMs": 18400
+  },
+  {
+    "word": "one",
+    "startMs": 18400,
+    "endMs": 18620
+  },
+  {
+    "word": "is",
+    "startMs": 18620,
+    "endMs": 18780
+  },
+  {
+    "word": "emotional",
+    "startMs": 18780,
+    "endMs": 19080
+  },
+  {
+    "word": "and",
+    "startMs": 19080,
+    "endMs": 19540
+  },
+  {
+    "word": "the",
+    "startMs": 19540,
+    "endMs": 19640
+  },
+  {
+    "word": "other",
+    "startMs": 19640,
+    "endMs": 19800
+  },
+  {
+    "word": "isn't.",
+    "startMs": 19800,
+    "endMs": 20280
+  },
+  {
+    "word": "A",
+    "startMs": 20460,
+    "endMs": 20560
+  },
+  {
+    "word": "lot",
+    "startMs": 20560,
+    "endMs": 20740
+  },
+  {
+    "word": "of",
+    "startMs": 20740,
+    "endMs": 20880
+  },
+  {
+    "word": "this",
+    "startMs": 20880,
+    "endMs": 21040
+  },
+  {
+    "word": "comes",
+    "startMs": 21040,
+    "endMs": 21280
+  },
+  {
+    "word": "from",
+    "startMs": 21280,
+    "endMs": 21480
+  },
+  {
+    "word": "how",
+    "startMs": 21480,
+    "endMs": 21660
+  },
+  {
+    "word": "we're",
+    "startMs": 21660,
+    "endMs": 21780
+  },
+  {
+    "word": "taught",
+    "startMs": 21780,
+    "endMs": 22000
+  },
+  {
+    "word": "to",
+    "startMs": 22000,
+    "endMs": 22200
+  },
+  {
+    "word": "handle",
+    "startMs": 22200,
+    "endMs": 22420
+  },
+  {
+    "word": "emotions,",
+    "startMs": 22420,
+    "endMs": 22720
+  },
+  {
+    "word": "not",
+    "startMs": 23340,
+    "endMs": 23560
+  },
+  {
+    "word": "simply",
+    "startMs": 23560,
+    "endMs": 23900
+  },
+  {
+    "word": "biology.",
+    "startMs": 23900,
+    "endMs": 24160
+  },
+  {
+    "word": "And",
+    "startMs": 24880,
+    "endMs": 24960
+  },
+  {
+    "word": "here's",
+    "startMs": 24960,
+    "endMs": 25240
+  },
+  {
+    "word": "the",
+    "startMs": 25240,
+    "endMs": 25340
+  },
+  {
+    "word": "important",
+    "startMs": 25340,
+    "endMs": 25480
+  },
+  {
+    "word": "part.",
+    "startMs": 25480,
+    "endMs": 25960
+  },
+  {
+    "word": "When",
+    "startMs": 26300,
+    "endMs": 26440
+  },
+  {
+    "word": "you're",
+    "startMs": 26440,
+    "endMs": 26580
+  },
+  {
+    "word": "going",
+    "startMs": 26580,
+    "endMs": 26780
+  },
+  {
+    "word": "through",
+    "startMs": 26780,
+    "endMs": 26980
+  },
+  {
+    "word": "an",
+    "startMs": 26980,
+    "endMs": 27120
+  },
+  {
+    "word": "emotional",
+    "startMs": 27120,
+    "endMs": 27320
+  },
+  {
+    "word": "phase,",
+    "startMs": 27320,
+    "endMs": 27860
+  },
+  {
+    "word": "don't",
+    "startMs": 27860,
+    "endMs": 28460
+  },
+  {
+    "word": "make",
+    "startMs": 28460,
+    "endMs": 28600
+  },
+  {
+    "word": "permanent",
+    "startMs": 28600,
+    "endMs": 28940
+  },
+  {
+    "word": "decisions",
+    "startMs": 28940,
+    "endMs": 29360
+  },
+  {
+    "word": "from",
+    "startMs": 29360,
+    "endMs": 29760
+  },
+  {
+    "word": "a",
+    "startMs": 29760,
+    "endMs": 29840
+  },
+  {
+    "word": "temporary",
+    "startMs": 29840,
+    "endMs": 30140
+  },
+  {
+    "word": "state.",
+    "startMs": 30140,
+    "endMs": 30600
+  },
+  {
+    "word": "First,",
+    "startMs": 31060,
+    "endMs": 31220
+  },
+  {
+    "word": "let",
+    "startMs": 31340,
+    "endMs": 31700
+  },
+  {
+    "word": "the",
+    "startMs": 31700,
+    "endMs": 31840
+  },
+  {
+    "word": "emotion",
+    "startMs": 31840,
+    "endMs": 32000
+  },
+  {
+    "word": "settle.",
+    "startMs": 32000,
+    "endMs": 32580
+  },
+  {
+    "word": "Then",
+    "startMs": 33040,
+    "endMs": 33040
+  },
+  {
+    "word": "ask",
+    "startMs": 33040,
+    "endMs": 33300
+  },
+  {
+    "word": "yourself,",
+    "startMs": 33300,
+    "endMs": 33720
+  },
+  {
+    "word": "what",
+    "startMs": 34080,
+    "endMs": 34160
+  },
+  {
+    "word": "am",
+    "startMs": 34160,
+    "endMs": 34280
+  },
+  {
+    "word": "I",
+    "startMs": 34280,
+    "endMs": 34380
+  },
+  {
+    "word": "actually",
+    "startMs": 34380,
+    "endMs": 34640
+  },
+  {
+    "word": "feeling,",
+    "startMs": 34640,
+    "endMs": 35140
+  },
+  {
+    "word": "and",
+    "startMs": 35460,
+    "endMs": 35580
+  },
+  {
+    "word": "what",
+    "startMs": 35580,
+    "endMs": 35740
+  },
+  {
+    "word": "do",
+    "startMs": 35740,
+    "endMs": 35880
+  },
+  {
+    "word": "I",
+    "startMs": 35880,
+    "endMs": 36020
+  },
+  {
+    "word": "need?",
+    "startMs": 36020,
+    "endMs": 36240
+  },
+  {
+    "word": "You",
+    "startMs": 36600,
+    "endMs": 36660
+  },
+  {
+    "word": "don't",
+    "startMs": 36660,
+    "endMs": 36900
+  },
+  {
+    "word": "have",
+    "startMs": 36900,
+    "endMs": 37040
+  },
+  {
+    "word": "to",
+    "startMs": 37040,
+    "endMs": 37200
+  },
+  {
+    "word": "suppress",
+    "startMs": 37200,
+    "endMs": 37420
+  },
+  {
+    "word": "it,",
+    "startMs": 37420,
+    "endMs": 37820
+  },
+  {
+    "word": "and",
+    "startMs": 37820,
+    "endMs": 38220
+  },
+  {
+    "word": "you",
+    "startMs": 38220,
+    "endMs": 38320
+  },
+  {
+    "word": "don't",
+    "startMs": 38320,
+    "endMs": 38540
+  },
+  {
+    "word": "have",
+    "startMs": 38540,
+    "endMs": 38680
+  },
+  {
+    "word": "to",
+    "startMs": 38680,
+    "endMs": 38820
+  },
+  {
+    "word": "drown",
+    "startMs": 38820,
+    "endMs": 39020
+  },
+  {
+    "word": "in",
+    "startMs": 39020,
+    "endMs": 39180
+  },
+  {
+    "word": "it",
+    "startMs": 39180,
+    "endMs": 39300
+  },
+  {
+    "word": "either.",
+    "startMs": 39300,
+    "endMs": 39540
+  },
+  {
+    "word": "Sometimes",
+    "startMs": 39900,
+    "endMs": 40120
+  },
+  {
+    "word": "you",
+    "startMs": 40120,
+    "endMs": 40420
+  },
+  {
+    "word": "just",
+    "startMs": 40420,
+    "endMs": 40640
+  },
+  {
+    "word": "need",
+    "startMs": 40640,
+    "endMs": 40840
+  },
+  {
+    "word": "a",
+    "startMs": 40840,
+    "endMs": 40960
+  },
+  {
+    "word": "little",
+    "startMs": 40960,
+    "endMs": 41120
+  },
+  {
+    "word": "time,",
+    "startMs": 41120,
+    "endMs": 41560
+  },
+  {
+    "word": "before",
+    "startMs": 41820,
+    "endMs": 41960
+  },
+  {
+    "word": "your",
+    "startMs": 41960,
+    "endMs": 42280
+  },
+  {
+    "word": "mind",
+    "startMs": 42280,
+    "endMs": 42560
+  },
+  {
+    "word": "becomes",
+    "startMs": 42560,
+    "endMs": 42920
+  },
+  {
+    "word": "clear",
+    "startMs": 42920,
+    "endMs": 43240
+  },
+  {
+    "word": "again.",
+    "startMs": 43240,
+    "endMs": 43560
+  }
+]

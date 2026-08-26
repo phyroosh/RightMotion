@@ -15,9 +15,11 @@ import procrastinationTranscript from "./clips/procrastination/transcript.json";
 import { GogginsComposition } from "./clips/goggins";
 import { BreaksComposition } from "./clips/breaks";
 import { StrengthComposition } from "./clips/strength";
+import { EmotionsComposition } from "./clips/emotions";
 import gogginsTranscript from "./clips/goggins/transcript.json";
 import breaksTranscript from "./clips/breaks/transcript.json";
 import strengthTranscript from "./clips/strength/transcript.json";
+import emotionsTranscript from "./clips/emotions/transcript.json";
 import { WordTimestamp } from "./types";
 import "./style.css";
 
@@ -32,6 +34,7 @@ const calculateDurationInFrames = (transcript: WordTimestamp[], fps: number): nu
 
 export const RemotionRoot: React.FC = () => {
   const fps = 30;
+  const emotionsDuration = calculateDurationInFrames(emotionsTranscript as WordTimestamp[], fps);
   const strengthDuration = calculateDurationInFrames(strengthTranscript as WordTimestamp[], fps);
   const gogginsDuration = calculateDurationInFrames(gogginsTranscript as WordTimestamp[], fps);
   const breaksDuration = calculateDurationInFrames(breaksTranscript as WordTimestamp[], fps);
@@ -44,7 +47,17 @@ export const RemotionRoot: React.FC = () => {
 
   return (
     <>
-      {/* 0. Real Strength & Vulnerability Video (9:16 Shorts) */}
+      {/* 0. Emotional Processing & Clarity Video (9:16 Shorts) */}
+      <Composition
+        id="EmotionsVideo"
+        component={EmotionsComposition}
+        durationInFrames={emotionsDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      {/* 0a. Real Strength & Vulnerability Video (9:16 Shorts) */}
       <Composition
         id="StrengthVideo"
         component={StrengthComposition}

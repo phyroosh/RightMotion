@@ -56,6 +56,12 @@ Never squish the avatar in a corner or have graphics fighting for space on scree
 - **Avatar is completely hidden:** She slides out smoothly.
 - **Single-Focused Statement Pacing:** Spotlight **one** hero prop or visual metaphor at a time that mirrors the exact words being spoken. Animate in on beat, hold for comprehension, and morph/whoosh cleanly to the next concept.
 
+**⚠️ CRITICAL PERMANENT MOTION GRAPHICS RULE — USE `MotionKeyframeBox` (NO CSS TRANSITIONS):**
+- **NEVER use Tailwind/CSS `transition-all duration-X` or CSS keyframe animations for video elements.** In Remotion's frame-by-frame rendering, CSS transitions produce stuttering and jumping when booleans or timestamps change.
+- **Always animate cards, chips, badges, and meters with `<MotionKeyframeBox currentMs={currentMs} keyframes={[...]} />`** from `src/components/MotionKeyframeBox.tsx`.
+- Define continuous mathematical keyframe tracks: `[{ timeMs: enterMs, opacity: 0, scale: 0.92, y: 40 }, { timeMs: holdStart, opacity: 1, scale: 1.0, y: 0 }, { timeMs: holdEnd, opacity: 1, scale: 1.02, y: -4 }, { timeMs: exitMs, opacity: 0, scale: 0.94, y: 30 }]`.
+- For numeric values (progress bars, widths, opacities, counter values), use `interpolateTrack(currentMs, points)` for buttery-smooth cubic bezier interpolation across every exported frame.
+
 ## 2. Think in tactile props, not generic panels
 Stop reaching for static rounded-rectangle info-cards as your default unit. Physical, tactile objects are the hero of the frame:
 - Room cleaning brush / phone mockup / video playcard / expanding folder tree.
