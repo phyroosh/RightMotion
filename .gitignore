@@ -9,7 +9,9 @@ studio/client_secrets.json
 *.pem
 *.key
 
-# Rendered Video Outputs & Snapshot Dumps
+# Rendered Video Outputs & Snapshot Dumps (DO NOT PUSH VIDEOS OR PICTURES)
+out/*
+!out/.gitkeep
 out/*.mp4
 out/*.png
 out/reference/

@@ -1,0 +1,5 @@
+# RightClips Engine Python Dependencies
+edge-tts>=6.1.12
+faster-whisper>=1.0.3
+ctranslate2>=4.4.0
+soundfile>=0.12.1

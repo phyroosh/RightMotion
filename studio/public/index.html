@@ -88,11 +88,25 @@
       </div>
     </div>
 
-    <!-- YouTube Auth Profile / Connect Button -->
-    <div id="authSection" class="flex items-center gap-3">
-      <div class="flex items-center gap-2 text-slate-400 text-xs">
-        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-        Connecting to YouTube channel...
+    <!-- Right Header Actions: Settings & YouTube Auth Profile -->
+    <div class="flex items-center gap-3">
+      <!-- Settings & API Button -->
+      <button
+        onclick="openSettingsModal()"
+        class="px-3.5 py-2 rounded-2xl glass-input hover:bg-white/10 text-xs font-bold text-slate-200 border border-white/10 hover:border-sky-400/50 transition flex items-center gap-2 shadow-md cursor-pointer"
+        title="Configure YouTube API & Studio Settings"
+      >
+        <i data-lucide="settings" class="w-4 h-4 text-sky-400"></i>
+        <span>Settings & API</span>
+        <span id="settingsStatusDot" class="w-2 h-2 rounded-full bg-amber-400"></span>
+      </button>
+
+      <!-- YouTube Auth Profile / Connect Button -->
+      <div id="authSection" class="flex items-center gap-3">
+        <div class="flex items-center gap-2 text-slate-400 text-xs">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          Connecting to YouTube...
+        </div>
       </div>
     </div>
   </header>
@@ -598,6 +612,124 @@
 
   </main>
 
+  <!-- SETTINGS & YOUTUBE API MODAL -->
+  <div id="settingsModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-panel w-full max-w-3xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-lg font-black text-white tracking-tight">Studio Settings & YouTube API</h2>
+            <p class="text-xs text-slate-400">Configure your Google Cloud client_secrets.json to connect your YouTube Channel</p>
+          </div>
+        </div>
+        <button
+          onclick="closeSettingsModal()"
+          class="p-2 rounded-xl glass-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- STEP BY STEP GUIDE -->
+      <div class="flex flex-col gap-3">
+        <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
+          <i data-lucide="help-circle" class="w-4 h-4 text-sky-400"></i>
+          How to get your YouTube API Credentials (3 Simple Steps)
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <!-- Step 1 -->
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">1</span>
+              <span class="text-xs font-bold text-white">Enable API</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Open <a href="https://console.cloud.google.com" target="_blank" class="text-sky-400 underline font-bold">Google Cloud</a>, create a project, and enable <strong>YouTube Data API v3</strong> in the Library.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">2</span>
+              <span class="text-xs font-bold text-white">OAuth Consent</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Set User Type to <strong>External</strong>, add YouTube upload scopes, and add your Google Email under <strong>Test Users</strong>.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">3</span>
+              <span class="text-xs font-bold text-white">Download JSON</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Click <strong>Create Credentials</strong> &gt; <strong>OAuth Client ID</strong> &gt; <strong>Desktop App</strong> &gt; Download JSON file.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- JSON INPUT BOX & FILE SELECTOR -->
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold text-slate-200 flex items-center gap-2">
+            <span>Paste client_secrets.json Content</span>
+            <span class="text-sky-400">*</span>
+          </label>
+          <label class="cursor-pointer text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1.5 transition">
+            <i data-lucide="folder-open" class="w-3.5 h-3.5"></i>
+            <span>Or browse file</span>
+            <input type="file" id="secretsFileInput" accept=".json" class="hidden" onchange="handleSecretsFile(event)" />
+          </label>
+        </div>
+
+        <textarea
+          id="clientSecretsText"
+          rows="5"
+          placeholder='{"installed":{"client_id":"YOUR_CLIENT_ID.apps.googleusercontent.com","project_id":"...","client_secret":"YOUR_CLIENT_SECRET",...}}'
+          class="w-full px-4 py-3 rounded-2xl glass-input text-xs font-mono text-slate-200 placeholder:text-slate-600 focus:border-sky-400 custom-scrollbar leading-relaxed"
+        ></textarea>
+
+        <div class="flex items-center justify-between gap-3">
+          <button
+            type="button"
+            onclick="saveYoutubeSecrets()"
+            id="saveSecretsBtn"
+            class="px-6 py-3 rounded-2xl gradient-border-btn text-white text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
+          >
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <span>Add this YT studio API</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="resetYoutubeSecrets()"
+            class="px-4 py-2.5 rounded-2xl glass-input hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+            title="Reset existing credentials"
+          >
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <span>Reset API</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ACTIVE CONNECTION & CONFIRMATION BOX -->
+      <div id="settingsConnectionCard" class="p-5 rounded-2xl border transition flex flex-col gap-3">
+        <!-- Dynamically rendered by updateSettingsUI() -->
+      </div>
+
+    </div>
+  </div>
+
   <!-- NOTIFICATION TOAST -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 glass-panel px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-white flex items-center gap-3">
     <i data-lucide="info" class="w-4 h-4 text-[#38bdf8]"></i>
@@ -649,6 +781,193 @@
     function toLocalISOString(date) {
       const d = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
       return d.toISOString().slice(0, 16);
+    }
+
+    // ═══════════════════════════════════════════════════
+    // SETTINGS & YOUTUBE API MODAL HANDLERS
+    // ═══════════════════════════════════════════════════
+    let settingsData = null;
+
+    async function openSettingsModal() {
+      const modal = document.getElementById('settingsModal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      await loadSettingsStatus();
+      lucide.createIcons();
+    }
+
+    function closeSettingsModal() {
+      const modal = document.getElementById('settingsModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // Load current YouTube API & Channel connection status
+    async function loadSettingsStatus() {
+      const card = document.getElementById('settingsConnectionCard');
+      const statusDot = document.getElementById('settingsStatusDot');
+      try {
+        const res = await fetch('/api/settings/youtube?t=' + Date.now());
+        settingsData = await res.json();
+
+        if (statusDot) {
+          statusDot.className = settingsData.isConnected
+            ? 'w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]'
+            : settingsData.hasSecrets
+            ? 'w-2 h-2 rounded-full bg-amber-400'
+            : 'w-2 h-2 rounded-full bg-rose-500';
+        }
+
+        if (settingsData.isConnected && settingsData.channel) {
+          const ch = settingsData.channel;
+          const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff&bold=true`;
+          card.className = "p-5 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 flex flex-col gap-3 shadow-lg shadow-emerald-500/5";
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-xs font-mono font-black text-emerald-400 uppercase tracking-wider">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse"></span>
+                <span>Active Connected Channel</span>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                100% READY
+              </span>
+            </div>
+
+            <div class="flex items-center gap-4 pt-1">
+              <img
+                src="${ch.thumbnail || fallbackAvatar}"
+                alt="${ch.title}"
+                class="w-14 h-14 rounded-full border-2 border-emerald-400 object-cover shadow-lg shadow-emerald-500/20"
+                onerror="this.src='${fallbackAvatar}';"
+              />
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-black text-white">${ch.title}</span>
+                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-400 fill-emerald-400/20"></i>
+                </div>
+                <div class="text-xs text-slate-300 font-mono mt-0.5">
+                  <span class="text-sky-300 font-bold">${ch.customUrl || ch.id}</span> • <span>${parseInt(ch.subscriberCount || 0).toLocaleString()} subscribers</span>
+                </div>
+                <div class="text-[10px] text-slate-400 font-mono mt-1">
+                  ${parseInt(ch.videoCount || 0).toLocaleString()} videos published • API Quota Active
+                </div>
+              </div>
+
+              <button
+                onclick="logout()"
+                class="px-3.5 py-2 rounded-xl glass-input hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+              >
+                <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+                <span>Switch</span>
+              </button>
+            </div>
+          `;
+        } else if (settingsData.hasSecrets && settingsData.authUrl) {
+          card.className = "p-5 rounded-2xl border border-amber-500/40 bg-amber-500/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg shadow-amber-500/5";
+          card.innerHTML = `
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0 font-black">
+                <i data-lucide="key" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs font-black text-amber-300 uppercase tracking-wide">
+                  Credentials Loaded • Ready To Connect
+                </div>
+                <p class="text-xs text-slate-300 mt-0.5">
+                  Click confirm below to authorize with Google and select your YouTube channel.
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="${settingsData.authUrl}"
+              class="px-6 py-3 rounded-2xl gradient-border-btn text-white text-xs font-extrabold flex items-center gap-2 shadow-xl shrink-0 cursor-pointer"
+            >
+              <i data-lucide="log-in" class="w-4 h-4"></i>
+              <span>Confirm & Connect Channel</span>
+            </a>
+          `;
+        } else {
+          card.className = "p-5 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400";
+          card.innerHTML = `
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-2xl bg-slate-800 text-slate-400 border border-white/10 flex items-center justify-center shrink-0">
+                <i data-lucide="alert-circle" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-slate-200">No YouTube Credentials Configured</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Paste client_secrets.json above and click "Add this YT studio API" to enable 1-click uploads.</div>
+              </div>
+            </div>
+          `;
+        }
+      } catch (err) {
+        card.innerHTML = `<div class="text-xs text-rose-400">Settings error: ${err.message}</div>`;
+      }
+      lucide.createIcons();
+    }
+
+    // Handle file picker selection for client_secrets.json
+    function handleSecretsFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('clientSecretsText').value = e.target.result;
+        showToast('📄 client_secrets.json loaded into text box. Click "Add this YT studio API" to confirm.');
+      };
+      reader.readAsText(file);
+    }
+
+    // Save client_secrets.json to server
+    async function saveYoutubeSecrets() {
+      const text = document.getElementById('clientSecretsText').value.trim();
+      if (!text) {
+        showToast('⚠️ Please paste your client_secrets.json content first.');
+        return;
+      }
+
+      const saveBtn = document.getElementById('saveSecretsBtn');
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Saving...`;
+      lucide.createIcons();
+
+      try {
+        const res = await fetch('/api/settings/save-secrets', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ jsonContent: text }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to save API credentials');
+
+        showToast('✅ ' + data.message);
+        document.getElementById('clientSecretsText').value = '';
+        await loadSettingsStatus();
+        await checkAuthStatus();
+
+        if (data.authUrl) {
+          window.location.href = data.authUrl;
+        }
+      } catch (err) {
+        showToast('❌ Error: ' + err.message);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = `<i data-lucide="plus-circle" class="w-4 h-4"></i> <span>Add this YT studio API</span>`;
+        lucide.createIcons();
+      }
+    }
+
+    // Reset API credentials
+    async function resetYoutubeSecrets() {
+      if (!confirm('Are you sure you want to remove your YouTube API credentials and disconnect?')) return;
+      try {
+        const res = await fetch('/api/settings/reset-secrets', { method: 'POST' });
+        const data = await res.json();
+        showToast('🗑️ ' + data.message);
+        await loadSettingsStatus();
+        await checkAuthStatus();
+      } catch (err) {
+        showToast('Error resetting API: ' + err.message);
+      }
     }
 
     // 1. Check Auth Status on Load & Render Live Channel PFP

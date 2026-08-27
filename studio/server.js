@@ -704,6 +704,137 @@ app.post('/api/logout', (req, res) => {
   }
 });
 
+// ========================================================
+// 9. API: Settings & YouTube API Credentials Configuration
+// ========================================================
+
+// GET Settings status & active channel info
+app.get('/api/settings/youtube', async (req, res) => {
+  const hasSecrets = fs.existsSync(CLIENT_SECRETS_PATH);
+  const hasToken = fs.existsSync(TOKEN_PATH);
+
+  let authUrl = null;
+  let isConnected = false;
+  let channel = null;
+
+  if (hasSecrets) {
+    try {
+      const oauth2Client = getOAuth2Client();
+      authUrl = oauth2Client.generateAuthUrl({
+        access_type: 'offline',
+        prompt: 'consent',
+        scope: [
+          'https://www.googleapis.com/auth/youtube.upload',
+          'https://www.googleapis.com/auth/youtube',
+          'https://www.googleapis.com/auth/youtube.readonly',
+        ],
+      });
+
+      if (hasToken) {
+        try {
+          const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+          const channelRes = await youtube.channels.list({
+            part: 'snippet,statistics',
+            mine: true,
+          });
+          const item = channelRes.data.items?.[0];
+          if (item) {
+            isConnected = true;
+            channel = {
+              id: item.id,
+              title: item.snippet.title,
+              description: item.snippet.description,
+              customUrl: item.snippet.customUrl,
+              thumbnail: item.snippet.thumbnails?.default?.url || item.snippet.thumbnails?.medium?.url,
+              subscriberCount: item.statistics?.subscriberCount || '0',
+              videoCount: item.statistics?.videoCount || '0',
+              viewCount: item.statistics?.viewCount || '0',
+            };
+          }
+        } catch (e) {
+          console.warn('Could not fetch YouTube channel details:', e.message);
+        }
+      }
+    } catch (e) {
+      console.warn('OAuth2 client generation warning:', e.message);
+    }
+  }
+
+  res.json({
+    hasSecrets,
+    hasToken,
+    isConnected,
+    channel,
+    authUrl,
+  });
+});
+
+// POST Save YouTube client_secrets.json directly from UI paste/upload
+app.post('/api/settings/save-secrets', (req, res) => {
+  let { jsonContent } = req.body;
+  if (!jsonContent) {
+    return res.status(400).json({ error: 'Please paste your client_secrets.json content.' });
+  }
+
+  try {
+    let parsed;
+    if (typeof jsonContent === 'string') {
+      parsed = JSON.parse(jsonContent);
+    } else {
+      parsed = jsonContent;
+    }
+
+    const installed = parsed.installed || parsed.web;
+    if (!installed || !installed.client_id || !installed.client_secret) {
+      return res.status(400).json({
+        error: 'Invalid format! The JSON must contain "installed" (Desktop App) or "web" with "client_id" and "client_secret".',
+      });
+    }
+
+    // Save secrets file
+    fs.writeFileSync(CLIENT_SECRETS_PATH, JSON.stringify(parsed, null, 2), 'utf-8');
+
+    // Remove old token so user can authenticate with the new project
+    if (fs.existsSync(TOKEN_PATH)) {
+      try {
+        fs.unlinkSync(TOKEN_PATH);
+      } catch (e) {}
+    }
+
+    // Generate new auth URL
+    const oauth2Client = getOAuth2Client();
+    const authUrl = oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      prompt: 'consent',
+      scope: [
+        'https://www.googleapis.com/auth/youtube.upload',
+        'https://www.googleapis.com/auth/youtube',
+        'https://www.googleapis.com/auth/youtube.readonly',
+      ],
+    });
+
+    console.log('✅ YouTube client_secrets.json successfully saved via Settings UI');
+    res.json({
+      success: true,
+      message: 'YouTube API credentials saved! Click "Confirm & Connect Channel" to authenticate.',
+      authUrl,
+    });
+  } catch (err) {
+    res.status(400).json({ error: 'Failed to parse JSON: ' + err.message });
+  }
+});
+
+// POST Reset YouTube Credentials
+app.post('/api/settings/reset-secrets', (req, res) => {
+  try {
+    if (fs.existsSync(CLIENT_SECRETS_PATH)) fs.unlinkSync(CLIENT_SECRETS_PATH);
+    if (fs.existsSync(TOKEN_PATH)) fs.unlinkSync(TOKEN_PATH);
+    res.json({ success: true, message: 'YouTube API credentials and connection reset.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`\n========================================================`);
   console.log(`🚀 RightClips Studio is running at: http://localhost:${PORT}`);
