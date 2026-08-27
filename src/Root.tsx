@@ -8,6 +8,7 @@ import { MaturityComposition } from "./clips/maturity";
 import { ProcrastinationComposition } from "./clips/procrastination";
 import { NeuroproductivityComposition } from "./clips/neuroproductivity";
 import { LofiSongComposition } from "./clips/lofi_song";
+import { PromisesComposition } from "./clips/promises";
 import {
   NeuroproductivityThumbnail,
   ProcrastinationThumbnail,
@@ -22,6 +23,7 @@ import {
   EmotionsThumbnail,
   StrengthThumbnail,
   ChaptersThumbnail,
+  PromisesThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -31,6 +33,7 @@ import maturityTranscript from "./clips/maturity/transcript.json";
 import procrastinationTranscript from "./clips/procrastination/transcript.json";
 import neuroproductivityTranscript from "./clips/neuroproductivity/transcript.json";
 import lofiSongTranscript from "./clips/lofi_song/transcript.json";
+import promisesTranscript from "./clips/promises/transcript.json";
 import { GogginsComposition } from "./clips/goggins";
 import { BreaksComposition } from "./clips/breaks";
 import { StrengthComposition } from "./clips/strength";
@@ -44,11 +47,12 @@ import chaptersTranscript from "./clips/chapters/transcript.json";
 import { WordTimestamp } from "./types";
 import "./style.css";
 
-const calculateDurationInFrames = (transcript: WordTimestamp[], fps: number): number => {
+const calculateDurationInFrames = (transcript: any[], fps: number): number => {
   if (!transcript || transcript.length === 0) {
     return 150;
   }
-  const lastWordEndMs = transcript[transcript.length - 1]?.endMs || 5000;
+  const lastWord = transcript[transcript.length - 1];
+  const lastWordEndMs = lastWord?.end || lastWord?.endMs || 5000;
   const totalDurationMs = lastWordEndMs + 800; // 0.8s outro padding
   return Math.ceil((totalDurationMs / 1000) * fps);
 };
@@ -68,9 +72,20 @@ export const RemotionRoot: React.FC = () => {
   const procrastinationDuration = calculateDurationInFrames(procrastinationTranscript as WordTimestamp[], fps);
   const neuroproductivityDuration = calculateDurationInFrames(neuroproductivityTranscript as WordTimestamp[], fps);
   const lofiSongDuration = Math.ceil(130.86 * fps); // 130.86s audio = 3926 frames
+  const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
 
   return (
     <>
+      {/* 0. Broken Promises & Self-Trust Video (9:16 Shorts) */}
+      <Composition
+        id="PromisesVideo"
+        component={PromisesComposition}
+        durationInFrames={promisesDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
       {/* 9. Lofi Red Aesthetics Lyric Music Video (16:9 Long-Form Masterclass with Solid Red Colors & AE Camera) */}
       <Composition
         id="LofiSongVideo"
@@ -282,6 +297,12 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="ChaptersThumbnail"
         component={ChaptersThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="PromisesThumbnail"
+        component={PromisesThumbnail}
         width={1080}
         height={1920}
       />

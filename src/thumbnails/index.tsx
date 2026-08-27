@@ -275,3 +275,20 @@ export const ChaptersThumbnail: React.FC = () => (
     extraBadge="REMEMBER THIS"
   />
 );
+
+// 14. PROMISES & SELF-TRUST (9:16 Shorts)
+export const PromisesThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY YOU CAN'T KEEP YOUR PROMISES"
+    highlightWord="PROMISES"
+    highlightColor="rose"
+    subtitle="You're Not Lazy — Your Brain Expects Failure"
+    categoryBadge="SELF-TRUST PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="obsidian"
+    aspectRatio="9:16"
+    extraBadge="REBUILD TRUST"
+  />
+);
+

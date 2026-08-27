@@ -22,6 +22,7 @@ const THUMBNAIL_MAP = {
   'emotions_video.mp4': 'EmotionsThumbnail',
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
+  'promises_video.mp4': 'PromisesThumbnail',
 };
 
 // Target single video or all

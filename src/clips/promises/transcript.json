@@ -1,0 +1,602 @@
+[
+  {
+    "word": "Why",
+    "start": 0,
+    "end": 360,
+    "confidence": 0.864
+  },
+  {
+    "word": "does",
+    "start": 360,
+    "end": 480,
+    "confidence": 0.994
+  },
+  {
+    "word": "breaking",
+    "start": 480,
+    "end": 680,
+    "confidence": 0.981
+  },
+  {
+    "word": "your",
+    "start": 680,
+    "end": 1000,
+    "confidence": 0.992
+  },
+  {
+    "word": "own",
+    "start": 1000,
+    "end": 1120,
+    "confidence": 0.966
+  },
+  {
+    "word": "promises",
+    "start": 1120,
+    "end": 1480,
+    "confidence": 0.997
+  },
+  {
+    "word": "start",
+    "start": 1480,
+    "end": 1900,
+    "confidence": 0.992
+  },
+  {
+    "word": "to",
+    "start": 1900,
+    "end": 2060,
+    "confidence": 0.999
+  },
+  {
+    "word": "feel",
+    "start": 2060,
+    "end": 2220,
+    "confidence": 0.999
+  },
+  {
+    "word": "like",
+    "start": 2220,
+    "end": 2420,
+    "confidence": 0.997
+  },
+  {
+    "word": "proof",
+    "start": 2420,
+    "end": 2660,
+    "confidence": 0.986
+  },
+  {
+    "word": "that",
+    "start": 2660,
+    "end": 2980,
+    "confidence": 0.982
+  },
+  {
+    "word": "you",
+    "start": 2980,
+    "end": 3080,
+    "confidence": 0.999
+  },
+  {
+    "word": "just",
+    "start": 3080,
+    "end": 3260,
+    "confidence": 0.986
+  },
+  {
+    "word": "can't",
+    "start": 3260,
+    "end": 3600,
+    "confidence": 0.995
+  },
+  {
+    "word": "change?",
+    "start": 3600,
+    "end": 3840,
+    "confidence": 1.0
+  },
+  {
+    "word": "You",
+    "start": 4520,
+    "end": 4640,
+    "confidence": 0.984
+  },
+  {
+    "word": "tell",
+    "start": 4640,
+    "end": 4780,
+    "confidence": 0.998
+  },
+  {
+    "word": "yourself,",
+    "start": 4780,
+    "end": 5020,
+    "confidence": 0.998
+  },
+  {
+    "word": "tomorrow,",
+    "start": 5420,
+    "end": 5680,
+    "confidence": 0.265
+  },
+  {
+    "word": "I'll",
+    "start": 5800,
+    "end": 6220,
+    "confidence": 0.989
+  },
+  {
+    "word": "do",
+    "start": 6220,
+    "end": 6380,
+    "confidence": 0.999
+  },
+  {
+    "word": "it.",
+    "start": 6380,
+    "end": 6540,
+    "confidence": 0.999
+  },
+  {
+    "word": "Then",
+    "start": 7000,
+    "end": 7200,
+    "confidence": 0.991
+  },
+  {
+    "word": "tomorrow",
+    "start": 7200,
+    "end": 7420,
+    "confidence": 0.967
+  },
+  {
+    "word": "comes,",
+    "start": 7420,
+    "end": 7820,
+    "confidence": 0.99
+  },
+  {
+    "word": "and",
+    "start": 8200,
+    "end": 8400,
+    "confidence": 0.997
+  },
+  {
+    "word": "you",
+    "start": 8400,
+    "end": 8520,
+    "confidence": 0.999
+  },
+  {
+    "word": "don't.",
+    "start": 8520,
+    "end": 8860,
+    "confidence": 0.999
+  },
+  {
+    "word": "After",
+    "start": 9240,
+    "end": 9480,
+    "confidence": 0.993
+  },
+  {
+    "word": "doing",
+    "start": 9480,
+    "end": 9760,
+    "confidence": 0.999
+  },
+  {
+    "word": "that",
+    "start": 9760,
+    "end": 9940,
+    "confidence": 0.999
+  },
+  {
+    "word": "for",
+    "start": 9940,
+    "end": 10100,
+    "confidence": 0.999
+  },
+  {
+    "word": "years,",
+    "start": 10100,
+    "end": 10320,
+    "confidence": 0.996
+  },
+  {
+    "word": "you",
+    "start": 10380,
+    "end": 10980,
+    "confidence": 0.995
+  },
+  {
+    "word": "stop",
+    "start": 10980,
+    "end": 11180,
+    "confidence": 0.954
+  },
+  {
+    "word": "trusting",
+    "start": 11180,
+    "end": 11480,
+    "confidence": 0.999
+  },
+  {
+    "word": "yourself.",
+    "start": 11480,
+    "end": 11880,
+    "confidence": 0.999
+  },
+  {
+    "word": "But",
+    "start": 12660,
+    "end": 12820,
+    "confidence": 0.991
+  },
+  {
+    "word": "here's",
+    "start": 12820,
+    "end": 13180,
+    "confidence": 0.984
+  },
+  {
+    "word": "the",
+    "start": 13180,
+    "end": 13280,
+    "confidence": 0.997
+  },
+  {
+    "word": "part",
+    "start": 13280,
+    "end": 13420,
+    "confidence": 1.0
+  },
+  {
+    "word": "people",
+    "start": 13420,
+    "end": 13600,
+    "confidence": 0.992
+  },
+  {
+    "word": "miss.",
+    "start": 13600,
+    "end": 13920,
+    "confidence": 0.996
+  },
+  {
+    "word": "You're",
+    "start": 14460,
+    "end": 14480,
+    "confidence": 0.995
+  },
+  {
+    "word": "not",
+    "start": 14480,
+    "end": 14640,
+    "confidence": 0.997
+  },
+  {
+    "word": "failing",
+    "start": 14640,
+    "end": 14900,
+    "confidence": 0.998
+  },
+  {
+    "word": "because",
+    "start": 14900,
+    "end": 15240,
+    "confidence": 0.97
+  },
+  {
+    "word": "you're",
+    "start": 15240,
+    "end": 15560,
+    "confidence": 0.998
+  },
+  {
+    "word": "lazy.",
+    "start": 15560,
+    "end": 15760,
+    "confidence": 0.999
+  },
+  {
+    "word": "You've",
+    "start": 16580,
+    "end": 16700,
+    "confidence": 0.993
+  },
+  {
+    "word": "trained",
+    "start": 16700,
+    "end": 16880,
+    "confidence": 0.991
+  },
+  {
+    "word": "your",
+    "start": 16880,
+    "end": 17100,
+    "confidence": 0.997
+  },
+  {
+    "word": "brain",
+    "start": 17100,
+    "end": 17320,
+    "confidence": 0.999
+  },
+  {
+    "word": "to",
+    "start": 17320,
+    "end": 17540,
+    "confidence": 1.0
+  },
+  {
+    "word": "expect",
+    "start": 17540,
+    "end": 17840,
+    "confidence": 0.995
+  },
+  {
+    "word": "your",
+    "start": 17840,
+    "end": 18100,
+    "confidence": 0.996
+  },
+  {
+    "word": "promises",
+    "start": 18100,
+    "end": 18500,
+    "confidence": 0.999
+  },
+  {
+    "word": "won't",
+    "start": 18500,
+    "end": 18940,
+    "confidence": 0.999
+  },
+  {
+    "word": "last.",
+    "start": 18940,
+    "end": 19140,
+    "confidence": 1.0
+  },
+  {
+    "word": "So",
+    "start": 19800,
+    "end": 20020,
+    "confidence": 0.993
+  },
+  {
+    "word": "don't",
+    "start": 20020,
+    "end": 20360,
+    "confidence": 0.899
+  },
+  {
+    "word": "rebuild",
+    "start": 20360,
+    "end": 20520,
+    "confidence": 0.998
+  },
+  {
+    "word": "your",
+    "start": 20520,
+    "end": 20780,
+    "confidence": 0.997
+  },
+  {
+    "word": "whole",
+    "start": 20780,
+    "end": 20900,
+    "confidence": 0.999
+  },
+  {
+    "word": "life",
+    "start": 20900,
+    "end": 21140,
+    "confidence": 1.0
+  },
+  {
+    "word": "overnight.",
+    "start": 21140,
+    "end": 21380,
+    "confidence": 0.981
+  },
+  {
+    "word": "Make",
+    "start": 22200,
+    "end": 22240,
+    "confidence": 0.995
+  },
+  {
+    "word": "one",
+    "start": 22240,
+    "end": 22460,
+    "confidence": 0.996
+  },
+  {
+    "word": "tiny",
+    "start": 22460,
+    "end": 22680,
+    "confidence": 0.989
+  },
+  {
+    "word": "promise",
+    "start": 22680,
+    "end": 23080,
+    "confidence": 0.998
+  },
+  {
+    "word": "today,",
+    "start": 23080,
+    "end": 23380,
+    "confidence": 0.998
+  },
+  {
+    "word": "and",
+    "start": 23380,
+    "end": 23960,
+    "confidence": 0.994
+  },
+  {
+    "word": "actually",
+    "start": 23960,
+    "end": 24360,
+    "confidence": 0.995
+  },
+  {
+    "word": "keep",
+    "start": 24360,
+    "end": 24680,
+    "confidence": 0.975
+  },
+  {
+    "word": "it.",
+    "start": 24680,
+    "end": 24880,
+    "confidence": 1.0
+  },
+  {
+    "word": "Not",
+    "start": 25300,
+    "end": 25600,
+    "confidence": 0.995
+  },
+  {
+    "word": "because",
+    "start": 25600,
+    "end": 25900,
+    "confidence": 0.999
+  },
+  {
+    "word": "that",
+    "start": 25900,
+    "end": 26120,
+    "confidence": 0.994
+  },
+  {
+    "word": "one",
+    "start": 26120,
+    "end": 26340,
+    "confidence": 0.993
+  },
+  {
+    "word": "thing",
+    "start": 26340,
+    "end": 26560,
+    "confidence": 1.0
+  },
+  {
+    "word": "changes",
+    "start": 26560,
+    "end": 26820,
+    "confidence": 1.0
+  },
+  {
+    "word": "everything.",
+    "start": 26820,
+    "end": 27260,
+    "confidence": 0.998
+  },
+  {
+    "word": "Because",
+    "start": 27900,
+    "end": 28260,
+    "confidence": 0.17
+  },
+  {
+    "word": "every",
+    "start": 28260,
+    "end": 28540,
+    "confidence": 0.966
+  },
+  {
+    "word": "time",
+    "start": 28540,
+    "end": 28940,
+    "confidence": 0.982
+  },
+  {
+    "word": "you",
+    "start": 28940,
+    "end": 29120,
+    "confidence": 0.999
+  },
+  {
+    "word": "keep",
+    "start": 29120,
+    "end": 29260,
+    "confidence": 0.996
+  },
+  {
+    "word": "your",
+    "start": 29260,
+    "end": 29460,
+    "confidence": 0.985
+  },
+  {
+    "word": "word",
+    "start": 29460,
+    "end": 29640,
+    "confidence": 0.97
+  },
+  {
+    "word": "to",
+    "start": 29640,
+    "end": 29800,
+    "confidence": 0.993
+  },
+  {
+    "word": "yourself,",
+    "start": 29800,
+    "end": 30140,
+    "confidence": 0.993
+  },
+  {
+    "word": "you",
+    "start": 30620,
+    "end": 30800,
+    "confidence": 0.986
+  },
+  {
+    "word": "slowly",
+    "start": 30800,
+    "end": 31100,
+    "confidence": 0.99
+  },
+  {
+    "word": "become",
+    "start": 31100,
+    "end": 31560,
+    "confidence": 0.991
+  },
+  {
+    "word": "someone",
+    "start": 31560,
+    "end": 31960,
+    "confidence": 0.996
+  },
+  {
+    "word": "you",
+    "start": 31960,
+    "end": 32120,
+    "confidence": 0.998
+  },
+  {
+    "word": "can",
+    "start": 32120,
+    "end": 32240,
+    "confidence": 0.996
+  },
+  {
+    "word": "trust",
+    "start": 32240,
+    "end": 32440,
+    "confidence": 0.999
+  },
+  {
+    "word": "again.",
+    "start": 32440,
+    "end": 32860,
+    "confidence": 0.996
+  }
+]
