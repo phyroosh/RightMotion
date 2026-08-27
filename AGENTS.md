@@ -51,23 +51,20 @@ Create 4 modular files:
 3. `Presenter.tsx`: Judy multi-pose animations (`character_pointing.png`, `character_talking.png`, `character_casual.png`, `character_open.png`) with Apple Glass floating badges.
 4. `index.tsx`: Main Composition uniting voiceover, BGM, **PRO MULTI-SFX layer** (see below), `AppleProgressBar`, and `AppleKineticCaptions`.
 
-**🔊 PRO SOUND DESIGN RULE (MANDATORY — PERMANENT):**
-Every `index.tsx` MUST include a full multi-SFX layer auto-calculated from the video duration. **NEVER use only one SFX.** The rules:
+**🔊 SOUND DESIGN POLICY (GENTLE, MINIMAL, EVENT-DRIVEN — PERMANENT):**
+- **Never spam or force SFX blindly based on math timers or duration intervals.**
+- **ONLY trigger an SFX when an actual visual element moves or enters the screen** (e.g. Topic Badge spring, Storyboard Card pop, Presenter Re-Entry).
+- Use gentle tactile Apple-style clicks (`audio/sfx/mouse_click.mp3` @ volume `0.20 - 0.24`) for UI card pops.
+- Keep audio gentle, crisp, and ducked so it complements rather than overpowers the voiceover.
+- An entire Short should typically have **only 2 to 4 subtle, perfectly-placed tactile cues** corresponding 1-to-1 with actual visual entrances in `Presenter.tsx` and `Canvas.tsx`.
 
-| Position | SFX File | Volume | Why |
-|---|---|---|---|
-| Frame 0 (intro) | `audio/sfx/whoosh_fast.wav` | 0.32 | Energetic swipe-in opening |
-| Every scene change (~4.5s apart) | `audio/sfx/mouse_click.mp3` | 0.28 | Tactile UI feedback at visual beat |
-| Emotional peak (~60% of duration) | `audio/sfx/impact_hit.wav` | 0.22 | Cinematic gut-punch at key insight |
-| Finale (~2.5s before end) | `audio/sfx/whoosh_sparkle.wav` | 0.30 | Triumphant sparkle outro |
-| Climax fallback (if no peak assigned) | `audio/sfx/whoosh_deep.wav` | 0.20 | Deep whoosh at emotional climax |
-
-**Available SFX** (`public/audio/sfx/`): `mouse_click.mp3`, `impact_hit.wav`, `whoosh_cinematic.wav`, `whoosh_deep.wav`, `whoosh_fast.wav`, `whoosh_sparkle.wav`
-
-The `scripts/create_clip.py` auto-generates all SFX Sequences correctly. If writing `index.tsx` manually, calculate `SFX_FRAMES` like this:
 ```tsx
-// Auto-calculated at ~4.5s intervals; whoosh_fast opens, impact_hit at 60%, whoosh_sparkle closes
-const SFX_FRAMES = [0, 135, 270, 405, ...]; // frame = Math.round(sec * 30)
+// Attached strictly to visual card entrances in Presenter.tsx and Canvas.tsx
+const SFX_FRAMES = [
+  0,    // Intro Topic Badge Entrance
+  144,  // Canvas Storyboard Card Pop (4.8s)
+  825,  // Finale Presenter Re-Entry
+];
 ```
 
 #### Step 3: Register in `src/Root.tsx`

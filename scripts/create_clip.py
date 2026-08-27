@@ -236,76 +236,11 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
     (clip_dir / "Canvas.tsx").write_text(canvas_code, encoding="utf-8")
 
     # ─────────────────────────────────────────────────────────────────────────────
-    # 4. index.tsx  — PRO MULTI-SFX SOUND DESIGN (auto-calculated from duration)
+    # 4. index.tsx  — GENTLE EVENT-DRIVEN SOUND DESIGN
     # ─────────────────────────────────────────────────────────────────────────────
     fps = 30
-    total_frames = round(duration_sec * fps)
-
-    # ── Scene change timestamps (every ~4.5s = natural emotional beat for 30fps shorts)
-    interval_sec = 4.5
-    num_scenes = max(1, round(duration_sec / interval_sec))
-    # Always include: frame 0 (intro), the emotional midpoint, and finale
-    scene_sec = [0.0]
-    for i in range(1, num_scenes):
-        scene_sec.append(round(i * (duration_sec / num_scenes), 2))
-    scene_sec.append(max(0, duration_sec - 2.5))  # finale transition
-
-    # ── Assign SFX types professionally by position in video:
-    #   • Frame 0        → whoosh_fast    (energetic opening swipe-in)
-    #   • Scene 1        → mouse_click    (first visual beat / problem intro)
-    #   • Middle scenes  → mouse_click    (tactile UI feedback at each card pop)
-    #   • Emotional peak (~60% mark) → impact_hit (cinematic gut-punch)
-    #   • Finale         → whoosh_sparkle (triumphant sparkle outro)
-    sfx_lines = []
-    peak_frame = round(duration_sec * 0.60 * fps)
-    added_peak = False
-
-    for idx, sec in enumerate(scene_sec):
-        frame_at = round(sec * fps)
-
-        # Pick SFX
-        if idx == 0:
-            sfx_file = "audio/sfx/whoosh_fast.wav"
-            vol = 0.32
-            dur = 20
-            label = "Energetic opening swipe-in"
-        elif idx == len(scene_sec) - 1:
-            sfx_file = "audio/sfx/whoosh_sparkle.wav"
-            vol = 0.30
-            dur = 25
-            label = "Triumphant sparkle outro"
-        else:
-            # Check if this scene is near the emotional peak
-            if abs(frame_at - peak_frame) < round(interval_sec * fps * 0.5) and not added_peak:
-                sfx_file = "audio/sfx/impact_hit.wav"
-                vol = 0.22
-                dur = 30
-                label = "Cinematic impact at emotional peak"
-                added_peak = True
-            else:
-                sfx_file = "audio/sfx/mouse_click.mp3"
-                vol = 0.28
-                dur = 15
-                label = "Tactile click at visual scene change"
-
-        sfx_lines.append(
-            f'      // {label} @ {sec:.1f}s (frame {frame_at})\n'
-            f'      <Sequence key="sfx-{idx}" from={{{frame_at}}} durationInFrames={{{dur}}}>\n'
-            f'        <Audio src={{staticFile("{sfx_file}")}} volume={{{vol}}} />\n'
-            f'      </Sequence>'
-        )
-
-    # Also add a deep whoosh at the emotional climax if we haven't already
-    if not added_peak:
-        whoosh_frame = round(duration_sec * 0.55 * fps)
-        sfx_lines.append(
-            f'      // Deep whoosh at climax @ {duration_sec * 0.55:.1f}s\n'
-            f'      <Sequence key="sfx-climax" from={{{whoosh_frame}}} durationInFrames={{25}}>\n'
-            f'        <Audio src={{staticFile("audio/sfx/whoosh_deep.wav")}} volume={{0.20}} />\n'
-            f'      </Sequence>'
-        )
-
-    sfx_block = "\n".join(sfx_lines)
+    mid_scene_frame = 144  # 4.8s (Canvas Storyboard Pop)
+    finale_frame = max(mid_scene_frame + 60, round((duration_sec - 5.0) * fps))  # Finale Presenter Re-Entry
 
     idx_code = f"""import React from "react";
 import {{ Audio, interpolate, Sequence, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
@@ -324,10 +259,13 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({{
   endMs: t.endMs ?? t.end,
 }}));
 
-// ─── PRO SOUND DESIGN ──────────────────────────────────────────────────────
-// Auto-generated multi-SFX layer: opening whoosh, tactile clicks at every
-// visual scene change, cinematic impact at emotional peak, sparkle outro.
-// ───────────────────────────────────────────────────────────────────────────
+// Gentle tactile audio triggers — tied strictly to actual visual card entrances
+const SFX_FRAMES = [
+  0,                  // 0.0s: Intro Topic Badge Entrance
+  {mid_scene_frame},  // 4.8s: Storyboard Psychology Card Pop
+  {finale_frame},     // Finale Presenter Re-Entry
+];
+
 export const {pascal_name}Composition: React.FC = () => {{
   const {{ width, height, fps, durationInFrames }} = useVideoConfig();
   const frame = useCurrentFrame();
@@ -338,10 +276,10 @@ export const {pascal_name}Composition: React.FC = () => {{
       className="relative w-full h-full bg-[#fbfbfd] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans"
       style={{{{ width, height }}}}
     >
-      {{/* 1. Voiceover */}}
+      {{/* 1. Voiceover Audio Track */}}
       <Audio src={{staticFile("{name}/voiceover.mp3")}} volume={{1.3}} />
 
-      {{/* 2. Ducked Ambient BGM */}}
+      {{/* 2. Ducked Background Ambient Music */}}
       <Audio
         src={{staticFile("audio/bgm/monume-documentary-documentary-music-547923.mp3")}}
         volume={{(f) =>
@@ -355,22 +293,26 @@ export const {pascal_name}Composition: React.FC = () => {{
         loop
       />
 
-      {{/* 3. PRO MULTI-SFX LAYER — scene changes, peak impact, sparkle outro */}}
-{sfx_block}
+      {{/* 3. Gentle Tactile Audio Feedback (Subtle Apple-style clicks on real visual shifts) */}}
+      {{SFX_FRAMES.map((f, idx) => (
+        <Sequence key={`sfx-${{idx}}`} from={{f}} durationInFrames={{15}}>
+          <Audio src={{staticFile("audio/sfx/mouse_click.mp3")}} volume={{0.22}} />
+        </Sequence>
+      ))}}
 
-      {{/* 4. Progress Bar */}}
+      {{/* 4. Top Apple Sleek Progress Bar */}}
       <AppleProgressBar />
 
-      {{/* 5. Background */}}
+      {{/* 5. Apple Studio Mesh Background */}}
       <{pascal_name}Background />
 
-      {{/* 6. Motion Graphics Canvas */}}
+      {{/* 6. Motion Graphics Storyboard Canvas */}}
       <{pascal_name}Canvas transcript={{transcript}} />
 
       {{/* 7. Multi-Pose Character Presenter */}}
       <{pascal_name}Presenter currentMs={{currentMs}} />
 
-      {{/* 8. Kinetic Apple Captions */}}
+      {{/* 8. Kinetic Captions with Neon Apple Glow */}}
       <AppleKineticCaptions transcript={{transcript}} />
     </div>
   );
