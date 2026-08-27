@@ -292,3 +292,20 @@ export const PromisesThumbnail: React.FC = () => (
   />
 );
 
+
+// 15. BOUNDARIES & SELF-PEACE (9:16 Shorts)
+export const BoundariesThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY YOU STRUGGLE TO SET BOUNDARIES"
+    highlightWord="BOUNDARIES"
+    highlightColor="emerald"
+    subtitle="Saying 'No' Without Writing An Essay Defending It"
+    categoryBadge="BOUNDARIES PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="obsidian"
+    aspectRatio="9:16"
+    extraBadge="PROTECT YOUR PEACE"
+  />
+);
+

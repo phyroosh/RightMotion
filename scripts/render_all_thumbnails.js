@@ -23,6 +23,7 @@ const THUMBNAIL_MAP = {
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
   'promises_video.mp4': 'PromisesThumbnail',
+  'boundaries_video.mp4': 'BoundariesThumbnail',
 };
 
 // Target single video or all

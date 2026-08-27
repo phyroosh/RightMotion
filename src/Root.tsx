@@ -8,6 +8,8 @@ import { MaturityComposition } from "./clips/maturity";
 import { ProcrastinationComposition } from "./clips/procrastination";
 import { NeuroproductivityComposition } from "./clips/neuroproductivity";
 import { LofiSongComposition } from "./clips/lofi_song";
+import { BoundariesComposition } from "./clips/boundaries";
+import boundariesTranscript from "./clips/boundaries/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import {
   NeuroproductivityThumbnail,
@@ -24,6 +26,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  BoundariesThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -72,10 +75,22 @@ export const RemotionRoot: React.FC = () => {
   const procrastinationDuration = calculateDurationInFrames(procrastinationTranscript as WordTimestamp[], fps);
   const neuroproductivityDuration = calculateDurationInFrames(neuroproductivityTranscript as WordTimestamp[], fps);
   const lofiSongDuration = Math.ceil(130.86 * fps); // 130.86s audio = 3926 frames
+  
+  const boundariesDuration = calculateDurationInFrames(boundariesTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
 
   return (
     <>
+      
+      <Composition
+        id="BoundariesVideo"
+        component={BoundariesComposition}
+        durationInFrames={boundariesDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
       {/* 0. Broken Promises & Self-Trust Video (9:16 Shorts) */}
       <Composition
         id="PromisesVideo"
@@ -303,6 +318,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="PromisesThumbnail"
         component={PromisesThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="BoundariesThumbnail"
+        component={BoundariesThumbnail}
         width={1080}
         height={1920}
       />

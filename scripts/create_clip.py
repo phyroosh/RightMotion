@@ -9,10 +9,16 @@ import asyncio
 import json
 import os
 import re
-import site
 import sys
+import site
 import subprocess
 from pathlib import Path
+
+# Force UTF-8 output encoding for Windows terminals
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
 
 # Automatically configure NVIDIA CUDA library paths for Windows ctranslate2
 for s in site.getsitepackages():
