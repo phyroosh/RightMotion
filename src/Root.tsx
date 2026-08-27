@@ -1,17 +1,36 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
 import { ADHDComposition } from "./clips/adhd";
 import { ComparisonComposition } from "./clips/comparison";
 import { HabitComposition } from "./clips/habits";
 import { MotivationComposition } from "./clips/motivation";
 import { MaturityComposition } from "./clips/maturity";
 import { ProcrastinationComposition } from "./clips/procrastination";
+import { NeuroproductivityComposition } from "./clips/neuroproductivity";
+import { LofiSongComposition } from "./clips/lofi_song";
+import {
+  NeuroproductivityThumbnail,
+  ProcrastinationThumbnail,
+  LofiSongThumbnail,
+  ADHDThumbnail,
+  GogginsThumbnail,
+  BreaksThumbnail,
+  MotivationThumbnail,
+  MaturityThumbnail,
+  ComparisonThumbnail,
+  HabitThumbnail,
+  EmotionsThumbnail,
+  StrengthThumbnail,
+  ChaptersThumbnail,
+} from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
 import habitTranscript from "./clips/habits/transcript.json";
 import motivationTranscript from "./clips/motivation/transcript.json";
 import maturityTranscript from "./clips/maturity/transcript.json";
 import procrastinationTranscript from "./clips/procrastination/transcript.json";
+import neuroproductivityTranscript from "./clips/neuroproductivity/transcript.json";
+import lofiSongTranscript from "./clips/lofi_song/transcript.json";
 import { GogginsComposition } from "./clips/goggins";
 import { BreaksComposition } from "./clips/breaks";
 import { StrengthComposition } from "./clips/strength";
@@ -47,9 +66,30 @@ export const RemotionRoot: React.FC = () => {
   const motivationDuration = calculateDurationInFrames(motivationTranscript as WordTimestamp[], fps);
   const maturityDuration = calculateDurationInFrames(maturityTranscript as WordTimestamp[], fps);
   const procrastinationDuration = calculateDurationInFrames(procrastinationTranscript as WordTimestamp[], fps);
+  const neuroproductivityDuration = calculateDurationInFrames(neuroproductivityTranscript as WordTimestamp[], fps);
+  const lofiSongDuration = Math.ceil(130.86 * fps); // 130.86s audio = 3926 frames
 
   return (
     <>
+      {/* 9. Lofi Red Aesthetics Lyric Music Video (16:9 Long-Form Masterclass with Solid Red Colors & AE Camera) */}
+      <Composition
+        id="LofiSongVideo"
+        component={LofiSongComposition}
+        durationInFrames={lofiSongDuration}
+        fps={fps}
+        width={1920}
+        height={1080}
+      />
+
+      {/* 8. Neuroproductivity Video Essay (16:9 Long-Form Masterclass with Solid Colors & AE Camera) */}
+      <Composition
+        id="NeuroproductivityVideo"
+        component={NeuroproductivityComposition}
+        durationInFrames={neuroproductivityDuration}
+        fps={fps}
+        width={1920}
+        height={1080}
+      />
       {/* 0. Unfinished Chapters & Starting Line Video (9:16 Shorts) */}
       <Composition
         id="ChaptersVideo"
@@ -158,6 +198,92 @@ export const RemotionRoot: React.FC = () => {
         fps={fps}
         width={1920}
         height={1080}
+      />
+
+      {/* ======================================================== */}
+      {/* 16:9 WIDESCREEN THUMBNAILS (Long-Form Masterclasses)     */}
+      {/* ======================================================== */}
+      <Still
+        id="NeuroproductivityThumbnail"
+        component={NeuroproductivityThumbnail}
+        width={1920}
+        height={1080}
+      />
+      <Still
+        id="ProcrastinationThumbnail"
+        component={ProcrastinationThumbnail}
+        width={1920}
+        height={1080}
+      />
+      <Still
+        id="LofiSongThumbnail"
+        component={LofiSongThumbnail}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ======================================================== */}
+      {/* 9:16 VERTICAL THUMBNAILS (YouTube Shorts / Reels Covers) */}
+      {/* ======================================================== */}
+      <Still
+        id="ADHDThumbnail"
+        component={ADHDThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="GogginsThumbnail"
+        component={GogginsThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="BreaksThumbnail"
+        component={BreaksThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="MotivationThumbnail"
+        component={MotivationThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="MaturityThumbnail"
+        component={MaturityThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="ComparisonThumbnail"
+        component={ComparisonThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="HabitThumbnail"
+        component={HabitThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="EmotionsThumbnail"
+        component={EmotionsThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="StrengthThumbnail"
+        component={StrengthThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="ChaptersThumbnail"
+        component={ChaptersThumbnail}
+        width={1080}
+        height={1920}
       />
     </>
   );

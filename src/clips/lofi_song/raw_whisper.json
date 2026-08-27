@@ -1,0 +1,1297 @@
+[
+  {
+    "text": "I say everything is fine",
+    "startMs": 30000,
+    "endMs": 32000,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 30000,
+        "endMs": 30340
+      },
+      {
+        "word": "say",
+        "startMs": 30340,
+        "endMs": 30660
+      },
+      {
+        "word": "everything",
+        "startMs": 30660,
+        "endMs": 31240
+      },
+      {
+        "word": "is",
+        "startMs": 31240,
+        "endMs": 31240
+      },
+      {
+        "word": "fine",
+        "startMs": 31240,
+        "endMs": 32000
+      }
+    ]
+  },
+  {
+    "text": "But the weather of my friends",
+    "startMs": 33500,
+    "endMs": 35600,
+    "words": [
+      {
+        "word": "But",
+        "startMs": 33180,
+        "endMs": 33740
+      },
+      {
+        "word": "the",
+        "startMs": 33740,
+        "endMs": 34160
+      },
+      {
+        "word": "weather",
+        "startMs": 34160,
+        "endMs": 34160
+      },
+      {
+        "word": "of",
+        "startMs": 34160,
+        "endMs": 35600
+      },
+      {
+        "word": "my",
+        "startMs": 35600,
+        "endMs": 35600
+      },
+      {
+        "word": "friends",
+        "startMs": 35600,
+        "endMs": 35600
+      }
+    ]
+  },
+  {
+    "text": "When does he hide it?",
+    "startMs": 36500,
+    "endMs": 38860,
+    "words": [
+      {
+        "word": "When",
+        "startMs": 35980,
+        "endMs": 36540
+      },
+      {
+        "word": "does",
+        "startMs": 36540,
+        "endMs": 36540
+      },
+      {
+        "word": "he",
+        "startMs": 36540,
+        "endMs": 37020
+      },
+      {
+        "word": "hide",
+        "startMs": 37020,
+        "endMs": 38060
+      },
+      {
+        "word": "it?",
+        "startMs": 38060,
+        "endMs": 38860
+      }
+    ]
+  },
+  {
+    "text": "Every little thing he does",
+    "startMs": 39000,
+    "endMs": 41340,
+    "words": [
+      {
+        "word": "Every",
+        "startMs": 39000,
+        "endMs": 39860
+      },
+      {
+        "word": "little",
+        "startMs": 39860,
+        "endMs": 40600
+      },
+      {
+        "word": "thing",
+        "startMs": 40600,
+        "endMs": 41340
+      },
+      {
+        "word": "he",
+        "startMs": 41340,
+        "endMs": 41340
+      },
+      {
+        "word": "does",
+        "startMs": 41340,
+        "endMs": 41340
+      }
+    ]
+  },
+  {
+    "text": "I go somewhere",
+    "startMs": 41340,
+    "endMs": 43060,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 41340,
+        "endMs": 42000
+      },
+      {
+        "word": "go",
+        "startMs": 42000,
+        "endMs": 42820
+      },
+      {
+        "word": "somewhere",
+        "startMs": 42820,
+        "endMs": 43060
+      }
+    ]
+  },
+  {
+    "text": "Now just",
+    "startMs": 44500,
+    "endMs": 45280,
+    "words": [
+      {
+        "word": "Now",
+        "startMs": 43980,
+        "endMs": 44540
+      },
+      {
+        "word": "just",
+        "startMs": 44540,
+        "endMs": 45280
+      }
+    ]
+  },
+  {
+    "text": "The hands go away",
+    "startMs": 45280,
+    "endMs": 47360,
+    "words": [
+      {
+        "word": "The",
+        "startMs": 45280,
+        "endMs": 45300
+      },
+      {
+        "word": "hands",
+        "startMs": 45300,
+        "endMs": 45840
+      },
+      {
+        "word": "go",
+        "startMs": 45840,
+        "endMs": 45840
+      },
+      {
+        "word": "away",
+        "startMs": 45840,
+        "endMs": 47360
+      }
+    ]
+  },
+  {
+    "text": "And I become a chariot",
+    "startMs": 48000,
+    "endMs": 50000,
+    "words": [
+      {
+        "word": "And",
+        "startMs": 47839,
+        "endMs": 48400
+      },
+      {
+        "word": "I",
+        "startMs": 48400,
+        "endMs": 48900
+      },
+      {
+        "word": "become",
+        "startMs": 48900,
+        "endMs": 48900
+      },
+      {
+        "word": "a",
+        "startMs": 48900,
+        "endMs": 49240
+      },
+      {
+        "word": "chariot",
+        "startMs": 49240,
+        "endMs": 50000
+      }
+    ]
+  },
+  {
+    "text": "He gets angry, he gets angry",
+    "startMs": 50860,
+    "endMs": 52580,
+    "words": [
+      {
+        "word": "He",
+        "startMs": 50860,
+        "endMs": 51360
+      },
+      {
+        "word": "gets",
+        "startMs": 51360,
+        "endMs": 51840
+      },
+      {
+        "word": "angry,",
+        "startMs": 51840,
+        "endMs": 51880
+      },
+      {
+        "word": "he",
+        "startMs": 51940,
+        "endMs": 51940
+      },
+      {
+        "word": "gets",
+        "startMs": 51940,
+        "endMs": 52580
+      },
+      {
+        "word": "angry",
+        "startMs": 52580,
+        "endMs": 52580
+      }
+    ]
+  },
+  {
+    "text": "If you don't understand, then talk",
+    "startMs": 52580,
+    "endMs": 55820,
+    "words": [
+      {
+        "word": "If",
+        "startMs": 52580,
+        "endMs": 53080
+      },
+      {
+        "word": "you",
+        "startMs": 53080,
+        "endMs": 53360
+      },
+      {
+        "word": "don't",
+        "startMs": 53360,
+        "endMs": 53360
+      },
+      {
+        "word": "understand,",
+        "startMs": 53360,
+        "endMs": 54000
+      },
+      {
+        "word": "then",
+        "startMs": 54960,
+        "endMs": 55100
+      },
+      {
+        "word": "talk",
+        "startMs": 55100,
+        "endMs": 55820
+      }
+    ]
+  },
+  {
+    "text": "That he gets tired",
+    "startMs": 55820,
+    "endMs": 57240,
+    "words": [
+      {
+        "word": "That",
+        "startMs": 55820,
+        "endMs": 56320
+      },
+      {
+        "word": "he",
+        "startMs": 56320,
+        "endMs": 56700
+      },
+      {
+        "word": "gets",
+        "startMs": 56700,
+        "endMs": 57140
+      },
+      {
+        "word": "tired",
+        "startMs": 57140,
+        "endMs": 57240
+      }
+    ]
+  },
+  {
+    "text": "If you want to become a chariot",
+    "startMs": 57240,
+    "endMs": 59240,
+    "words": [
+      {
+        "word": "If",
+        "startMs": 57240,
+        "endMs": 57880
+      },
+      {
+        "word": "you",
+        "startMs": 57880,
+        "endMs": 57980
+      },
+      {
+        "word": "want",
+        "startMs": 57980,
+        "endMs": 57980
+      },
+      {
+        "word": "to",
+        "startMs": 57980,
+        "endMs": 58200
+      },
+      {
+        "word": "become",
+        "startMs": 58200,
+        "endMs": 58860
+      },
+      {
+        "word": "a",
+        "startMs": 58860,
+        "endMs": 58860
+      },
+      {
+        "word": "chariot",
+        "startMs": 58860,
+        "endMs": 59320
+      }
+    ]
+  },
+  {
+    "text": "Then you get up",
+    "startMs": 59960,
+    "endMs": 61900,
+    "words": [
+      {
+        "word": "Then",
+        "startMs": 59960,
+        "endMs": 61080
+      },
+      {
+        "word": "you",
+        "startMs": 61080,
+        "endMs": 61160
+      },
+      {
+        "word": "get",
+        "startMs": 61160,
+        "endMs": 61760
+      },
+      {
+        "word": "up",
+        "startMs": 61760,
+        "endMs": 61900
+      }
+    ]
+  },
+  {
+    "text": "And give me your rap",
+    "startMs": 61900,
+    "endMs": 64300,
+    "words": [
+      {
+        "word": "And",
+        "startMs": 61900,
+        "endMs": 62340
+      },
+      {
+        "word": "give",
+        "startMs": 62340,
+        "endMs": 62720
+      },
+      {
+        "word": "me",
+        "startMs": 62720,
+        "endMs": 63320
+      },
+      {
+        "word": "your",
+        "startMs": 63320,
+        "endMs": 63880
+      },
+      {
+        "word": "rap",
+        "startMs": 63880,
+        "endMs": 64300
+      }
+    ]
+  },
+  {
+    "text": "My life is like this",
+    "startMs": 64300,
+    "endMs": 67200,
+    "words": [
+      {
+        "word": "My",
+        "startMs": 64300,
+        "endMs": 64940
+      },
+      {
+        "word": "life",
+        "startMs": 64940,
+        "endMs": 65360
+      },
+      {
+        "word": "is",
+        "startMs": 65360,
+        "endMs": 66500
+      },
+      {
+        "word": "like",
+        "startMs": 66500,
+        "endMs": 66520
+      },
+      {
+        "word": "this",
+        "startMs": 66520,
+        "endMs": 67200
+      }
+    ]
+  },
+  {
+    "text": "I'm a motorbike",
+    "startMs": 67200,
+    "endMs": 69240,
+    "words": [
+      {
+        "word": "I'm",
+        "startMs": 67200,
+        "endMs": 67660
+      },
+      {
+        "word": "a",
+        "startMs": 67660,
+        "endMs": 67680
+      },
+      {
+        "word": "motorbike",
+        "startMs": 67680,
+        "endMs": 69240
+      }
+    ]
+  },
+  {
+    "text": "I don't talk to anyone",
+    "startMs": 70480,
+    "endMs": 72640,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 70480,
+        "endMs": 70560
+      },
+      {
+        "word": "don't",
+        "startMs": 70560,
+        "endMs": 70800
+      },
+      {
+        "word": "talk",
+        "startMs": 70800,
+        "endMs": 70800
+      },
+      {
+        "word": "to",
+        "startMs": 70800,
+        "endMs": 70800
+      },
+      {
+        "word": "anyone",
+        "startMs": 70800,
+        "endMs": 72640
+      }
+    ]
+  },
+  {
+    "text": "As much as I want to",
+    "startMs": 73240,
+    "endMs": 76220,
+    "words": [
+      {
+        "word": "As",
+        "startMs": 73240,
+        "endMs": 73760
+      },
+      {
+        "word": "much",
+        "startMs": 73760,
+        "endMs": 74080
+      },
+      {
+        "word": "as",
+        "startMs": 74080,
+        "endMs": 74080
+      },
+      {
+        "word": "I",
+        "startMs": 74080,
+        "endMs": 74720
+      },
+      {
+        "word": "want",
+        "startMs": 74720,
+        "endMs": 75400
+      },
+      {
+        "word": "to",
+        "startMs": 75400,
+        "endMs": 76220
+      }
+    ]
+  },
+  {
+    "text": "I say what I want to say",
+    "startMs": 76220,
+    "endMs": 78300,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 76220,
+        "endMs": 76220
+      },
+      {
+        "word": "say",
+        "startMs": 76220,
+        "endMs": 76400
+      },
+      {
+        "word": "what",
+        "startMs": 76400,
+        "endMs": 77180
+      },
+      {
+        "word": "I",
+        "startMs": 77180,
+        "endMs": 77640
+      },
+      {
+        "word": "want",
+        "startMs": 77640,
+        "endMs": 77640
+      },
+      {
+        "word": "to",
+        "startMs": 77640,
+        "endMs": 78300
+      },
+      {
+        "word": "say",
+        "startMs": 78300,
+        "endMs": 78300
+      }
+    ]
+  },
+  {
+    "text": "I say it with a smile",
+    "startMs": 78300,
+    "endMs": 79060,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 78300,
+        "endMs": 78300
+      },
+      {
+        "word": "say",
+        "startMs": 78300,
+        "endMs": 78680
+      },
+      {
+        "word": "it",
+        "startMs": 78680,
+        "endMs": 79060
+      },
+      {
+        "word": "with",
+        "startMs": 79060,
+        "endMs": 79060
+      },
+      {
+        "word": "a",
+        "startMs": 79060,
+        "endMs": 79060
+      },
+      {
+        "word": "smile",
+        "startMs": 79060,
+        "endMs": 79060
+      }
+    ]
+  },
+  {
+    "text": "I just talk in the words of the words",
+    "startMs": 79740,
+    "endMs": 82200,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 79740,
+        "endMs": 80860
+      },
+      {
+        "word": "just",
+        "startMs": 80860,
+        "endMs": 81260
+      },
+      {
+        "word": "talk",
+        "startMs": 81260,
+        "endMs": 82040
+      },
+      {
+        "word": "in",
+        "startMs": 82040,
+        "endMs": 82200
+      },
+      {
+        "word": "the",
+        "startMs": 82200,
+        "endMs": 82200
+      },
+      {
+        "word": "words",
+        "startMs": 82200,
+        "endMs": 82200
+      },
+      {
+        "word": "of",
+        "startMs": 82200,
+        "endMs": 82200
+      },
+      {
+        "word": "the",
+        "startMs": 82200,
+        "endMs": 82200
+      },
+      {
+        "word": "words",
+        "startMs": 82200,
+        "endMs": 82200
+      }
+    ]
+  },
+  {
+    "text": "You keep talking",
+    "startMs": 82200,
+    "endMs": 83380,
+    "words": [
+      {
+        "word": "You",
+        "startMs": 82200,
+        "endMs": 82820
+      },
+      {
+        "word": "keep",
+        "startMs": 82820,
+        "endMs": 83260
+      },
+      {
+        "word": "talking",
+        "startMs": 83260,
+        "endMs": 83380
+      }
+    ]
+  },
+  {
+    "text": "But I can't hear your voice",
+    "startMs": 83380,
+    "endMs": 85120,
+    "words": [
+      {
+        "word": "But",
+        "startMs": 83380,
+        "endMs": 83660
+      },
+      {
+        "word": "I",
+        "startMs": 83660,
+        "endMs": 83940
+      },
+      {
+        "word": "can't",
+        "startMs": 83940,
+        "endMs": 83940
+      },
+      {
+        "word": "hear",
+        "startMs": 83940,
+        "endMs": 83940
+      },
+      {
+        "word": "your",
+        "startMs": 83940,
+        "endMs": 84440
+      },
+      {
+        "word": "voice",
+        "startMs": 84440,
+        "endMs": 85120
+      }
+    ]
+  },
+  {
+    "text": "I think",
+    "startMs": 85120,
+    "endMs": 85920,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 85120,
+        "endMs": 85580
+      },
+      {
+        "word": "think",
+        "startMs": 85580,
+        "endMs": 85920
+      }
+    ]
+  },
+  {
+    "text": "I feel a little less",
+    "startMs": 85920,
+    "endMs": 87000,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 85920,
+        "endMs": 86320
+      },
+      {
+        "word": "feel",
+        "startMs": 86320,
+        "endMs": 86320
+      },
+      {
+        "word": "a",
+        "startMs": 86320,
+        "endMs": 86640
+      },
+      {
+        "word": "little",
+        "startMs": 86640,
+        "endMs": 86820
+      },
+      {
+        "word": "less",
+        "startMs": 86820,
+        "endMs": 87000
+      }
+    ]
+  },
+  {
+    "text": "I have skills",
+    "startMs": 87000,
+    "endMs": 88420,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 87000,
+        "endMs": 87260
+      },
+      {
+        "word": "have",
+        "startMs": 87260,
+        "endMs": 87980
+      },
+      {
+        "word": "skills",
+        "startMs": 87980,
+        "endMs": 88420
+      }
+    ]
+  },
+  {
+    "text": "Maybe",
+    "startMs": 89120,
+    "endMs": 89360,
+    "words": [
+      {
+        "word": "Maybe",
+        "startMs": 88920,
+        "endMs": 89360
+      }
+    ]
+  },
+  {
+    "text": "Maybe the name of a friend is also a friend",
+    "startMs": 89360,
+    "endMs": 91920,
+    "words": [
+      {
+        "word": "Maybe",
+        "startMs": 89360,
+        "endMs": 89560
+      },
+      {
+        "word": "the",
+        "startMs": 89560,
+        "endMs": 89560
+      },
+      {
+        "word": "name",
+        "startMs": 89560,
+        "endMs": 89560
+      },
+      {
+        "word": "of",
+        "startMs": 89560,
+        "endMs": 89560
+      },
+      {
+        "word": "a",
+        "startMs": 89560,
+        "endMs": 89940
+      },
+      {
+        "word": "friend",
+        "startMs": 89940,
+        "endMs": 89960
+      },
+      {
+        "word": "is",
+        "startMs": 89960,
+        "endMs": 90840
+      },
+      {
+        "word": "also",
+        "startMs": 90840,
+        "endMs": 91100
+      },
+      {
+        "word": "a",
+        "startMs": 91100,
+        "endMs": 91880
+      },
+      {
+        "word": "friend",
+        "startMs": 91880,
+        "endMs": 91920
+      }
+    ]
+  },
+  {
+    "text": "If we leave everything in the morning, then we will break",
+    "startMs": 92620,
+    "endMs": 94380,
+    "words": [
+      {
+        "word": "If",
+        "startMs": 92380,
+        "endMs": 92820
+      },
+      {
+        "word": "we",
+        "startMs": 92820,
+        "endMs": 93040
+      },
+      {
+        "word": "leave",
+        "startMs": 93040,
+        "endMs": 93460
+      },
+      {
+        "word": "everything",
+        "startMs": 93460,
+        "endMs": 93460
+      },
+      {
+        "word": "in",
+        "startMs": 93460,
+        "endMs": 93600
+      },
+      {
+        "word": "the",
+        "startMs": 93600,
+        "endMs": 93600
+      },
+      {
+        "word": "morning,",
+        "startMs": 93600,
+        "endMs": 93600
+      },
+      {
+        "word": "then",
+        "startMs": 94140,
+        "endMs": 94140
+      },
+      {
+        "word": "we",
+        "startMs": 94140,
+        "endMs": 94140
+      },
+      {
+        "word": "will",
+        "startMs": 94140,
+        "endMs": 94320
+      },
+      {
+        "word": "break",
+        "startMs": 94320,
+        "endMs": 94380
+      }
+    ]
+  },
+  {
+    "text": "Yes, yes",
+    "startMs": 95120,
+    "endMs": 96140,
+    "words": [
+      {
+        "word": "Yes,",
+        "startMs": 95020,
+        "endMs": 95460
+      },
+      {
+        "word": "yes",
+        "startMs": 95780,
+        "endMs": 96140
+      }
+    ]
+  },
+  {
+    "text": "But",
+    "startMs": 96140,
+    "endMs": 96400,
+    "words": [
+      {
+        "word": "But",
+        "startMs": 96140,
+        "endMs": 96400
+      }
+    ]
+  },
+  {
+    "text": "I don't know what to do",
+    "startMs": 96400,
+    "endMs": 98380,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 96400,
+        "endMs": 96400
+      },
+      {
+        "word": "don't",
+        "startMs": 96400,
+        "endMs": 96400
+      },
+      {
+        "word": "know",
+        "startMs": 96400,
+        "endMs": 96600
+      },
+      {
+        "word": "what",
+        "startMs": 96600,
+        "endMs": 97700
+      },
+      {
+        "word": "to",
+        "startMs": 97700,
+        "endMs": 98380
+      },
+      {
+        "word": "do",
+        "startMs": 98380,
+        "endMs": 98380
+      }
+    ]
+  },
+  {
+    "text": "My name is also a friend",
+    "startMs": 98380,
+    "endMs": 99940,
+    "words": [
+      {
+        "word": "My",
+        "startMs": 98380,
+        "endMs": 98500
+      },
+      {
+        "word": "name",
+        "startMs": 98500,
+        "endMs": 99020
+      },
+      {
+        "word": "is",
+        "startMs": 99020,
+        "endMs": 99020
+      },
+      {
+        "word": "also",
+        "startMs": 99020,
+        "endMs": 99740
+      },
+      {
+        "word": "a",
+        "startMs": 99740,
+        "endMs": 99760
+      },
+      {
+        "word": "friend",
+        "startMs": 99760,
+        "endMs": 99940
+      }
+    ]
+  },
+  {
+    "text": "I love you",
+    "startMs": 99940,
+    "endMs": 101320,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 99940,
+        "endMs": 100420
+      },
+      {
+        "word": "love",
+        "startMs": 100420,
+        "endMs": 100920
+      },
+      {
+        "word": "you",
+        "startMs": 100920,
+        "endMs": 101320
+      }
+    ]
+  },
+  {
+    "text": "I don't talk to anyone",
+    "startMs": 101320,
+    "endMs": 104280,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 101320,
+        "endMs": 102320
+      },
+      {
+        "word": "don't",
+        "startMs": 102320,
+        "endMs": 102560
+      },
+      {
+        "word": "talk",
+        "startMs": 102560,
+        "endMs": 102560
+      },
+      {
+        "word": "to",
+        "startMs": 102560,
+        "endMs": 102560
+      },
+      {
+        "word": "anyone",
+        "startMs": 102560,
+        "endMs": 104280
+      }
+    ]
+  },
+  {
+    "text": "As much as I want to",
+    "startMs": 105500,
+    "endMs": 106840,
+    "words": [
+      {
+        "word": "As",
+        "startMs": 105500,
+        "endMs": 106380
+      },
+      {
+        "word": "much",
+        "startMs": 106380,
+        "endMs": 106380
+      },
+      {
+        "word": "as",
+        "startMs": 106380,
+        "endMs": 106840
+      },
+      {
+        "word": "I",
+        "startMs": 106840,
+        "endMs": 106840
+      },
+      {
+        "word": "want",
+        "startMs": 106840,
+        "endMs": 106840
+      },
+      {
+        "word": "to",
+        "startMs": 106840,
+        "endMs": 106840
+      }
+    ]
+  },
+  {
+    "text": "I say what I want to say",
+    "startMs": 106840,
+    "endMs": 108960,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 106840,
+        "endMs": 106840
+      },
+      {
+        "word": "say",
+        "startMs": 106840,
+        "endMs": 106840
+      },
+      {
+        "word": "what",
+        "startMs": 106840,
+        "endMs": 106840
+      },
+      {
+        "word": "I",
+        "startMs": 106840,
+        "endMs": 107500
+      },
+      {
+        "word": "want",
+        "startMs": 107500,
+        "endMs": 107600
+      },
+      {
+        "word": "to",
+        "startMs": 107600,
+        "endMs": 107600
+      },
+      {
+        "word": "say",
+        "startMs": 107600,
+        "endMs": 108960
+      }
+    ]
+  },
+  {
+    "text": "I say it with a smile",
+    "startMs": 108960,
+    "endMs": 111660,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 108960,
+        "endMs": 109220
+      },
+      {
+        "word": "say",
+        "startMs": 109220,
+        "endMs": 109660
+      },
+      {
+        "word": "it",
+        "startMs": 109660,
+        "endMs": 110140
+      },
+      {
+        "word": "with",
+        "startMs": 110140,
+        "endMs": 110640
+      },
+      {
+        "word": "a",
+        "startMs": 110640,
+        "endMs": 110700
+      },
+      {
+        "word": "smile",
+        "startMs": 110700,
+        "endMs": 111660
+      }
+    ]
+  },
+  {
+    "text": "As much as I want to",
+    "startMs": 111660,
+    "endMs": 114180,
+    "words": [
+      {
+        "word": "As",
+        "startMs": 111660,
+        "endMs": 112440
+      },
+      {
+        "word": "much",
+        "startMs": 112440,
+        "endMs": 112960
+      },
+      {
+        "word": "as",
+        "startMs": 112960,
+        "endMs": 112960
+      },
+      {
+        "word": "I",
+        "startMs": 112960,
+        "endMs": 113420
+      },
+      {
+        "word": "want",
+        "startMs": 113420,
+        "endMs": 113420
+      },
+      {
+        "word": "to",
+        "startMs": 113420,
+        "endMs": 114180
+      }
+    ]
+  },
+  {
+    "text": "I say it with a smile",
+    "startMs": 115120,
+    "endMs": 117360,
+    "words": [
+      {
+        "word": "I",
+        "startMs": 115120,
+        "endMs": 115620
+      },
+      {
+        "word": "say",
+        "startMs": 115620,
+        "endMs": 115980
+      },
+      {
+        "word": "it",
+        "startMs": 115980,
+        "endMs": 116360
+      },
+      {
+        "word": "with",
+        "startMs": 116360,
+        "endMs": 116440
+      },
+      {
+        "word": "a",
+        "startMs": 116440,
+        "endMs": 116660
+      },
+      {
+        "word": "smile",
+        "startMs": 116660,
+        "endMs": 117360
+      }
+    ]
+  }
+]

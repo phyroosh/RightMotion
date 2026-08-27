@@ -4,16 +4,21 @@ import { WordChunk, WordTimestamp } from "../types";
 
 interface KineticCaptionsProps {
   transcript: WordTimestamp[];
+  theme?: "light" | "dark";
 }
 
-export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({ transcript }) => {
+export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
+  transcript,
+  theme = "light",
+}) => {
   const frame = useCurrentFrame();
   const { fps, width } = useVideoConfig();
   const currentMs = (frame / fps) * 1000;
 
   const isWidescreen = width > 1200; // 1920x1080 widescreen mode
+  const isDark = theme === "dark";
 
-  // Build clean 2-3 word chunks with natural sentence holds
+  // Build clean 2-4 word chunks with natural sentence holds
   const chunks: WordChunk[] = useMemo(() => {
     if (!transcript || transcript.length === 0) return [];
     const result: WordChunk[] = [];
@@ -67,7 +72,14 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({ transcrip
 
   const bottomClass = isWidescreen ? "bottom-[10%]" : "bottom-[16%]";
   const maxWidthClass = isWidescreen ? "max-w-[1200px]" : "max-w-[800px]";
-  const fontSize = isWidescreen ? "clamp(36px, 3.2vw, 48px)" : "clamp(48px, 9.5vw, 68px)";
+  const fontSize = isWidescreen ? "clamp(34px, 3.0vw, 46px)" : "clamp(48px, 9.5vw, 68px)";
+
+  const passedColor = isDark ? "#f8fafc" : "#09090b";
+  const inactiveColor = isDark ? "rgba(248, 250, 252, 0.42)" : "rgba(15, 23, 42, 0.38)";
+  const activeColor = isDark ? "#38bdf8" : "#0071e3";
+  const glowShadow = isDark
+    ? "0 0 35px rgba(56,189,248,0.75), 0 2px 10px rgba(0,0,0,0.6)"
+    : "0 0 35px rgba(0,113,227,0.55), 0 2px 10px rgba(255,255,255,0.9), 0 1px 3px rgba(0,0,0,0.12)";
 
   return (
     <div className={`absolute inset-x-0 ${bottomClass} flex items-end justify-center pointer-events-none z-40 px-10`}>
@@ -90,10 +102,8 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({ transcrip
                 fontSize,
                 letterSpacing: "-0.025em",
                 lineHeight: 1.1,
-                color: isActive ? "#0071e3" : isPassed ? "#0f172a" : "rgba(15,23,42,0.32)",
-                textShadow: isActive
-                  ? "0 0 35px rgba(0,113,227,0.5), 0 2px 8px rgba(0,0,0,0.08)"
-                  : "0 2px 6px rgba(0,0,0,0.04)",
+                color: isActive ? activeColor : isPassed ? passedColor : inactiveColor,
+                textShadow: isActive ? glowShadow : isDark ? "0 2px 8px rgba(0,0,0,0.6)" : "0 2px 6px rgba(0,0,0,0.04)",
                 transform: isActive ? "scale(1.04)" : "scale(1)",
                 transition: "transform 0.1s ease-out, color 0.08s ease-out",
               }}
@@ -101,8 +111,11 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({ transcrip
               {item.word}
               {isActive && (
                 <span
-                  className="absolute -bottom-1.5 left-0 right-0 h-[4px] bg-[#0071e3] rounded-full"
-                  style={{ boxShadow: "0 0 16px rgba(0,113,227,0.9)" }}
+                  className="absolute -bottom-1.5 left-0 right-0 h-[4px] rounded-full"
+                  style={{
+                    backgroundColor: activeColor,
+                    boxShadow: isDark ? "0 0 18px rgba(56,189,248,1)" : "0 0 16px rgba(0,113,227,0.9)",
+                  }}
                 />
               )}
             </span>

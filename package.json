@@ -6,7 +6,9 @@
     "start": "remotion preview",
     "studio": "node studio/server.js",
     "build": "remotion render MainComposition out/video.mp4",
-    "generate": "python generate_assets.py"
+    "generate": "python generate_assets.py",
+    "render:thumbnails": "node scripts/render_all_thumbnails.js",
+    "render:thumbnail": "node scripts/render_all_thumbnails.js"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.240",

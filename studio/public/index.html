@@ -100,17 +100,64 @@
   <!-- MAIN STUDIO WORKSPACE -->
   <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
     
-    <!-- LEFT COLUMN: VIDEO SELECTOR & LIVE PREVIEW (5 Cols) -->
+    <!-- LEFT COLUMN: DUAL-FORMAT WORKSPACE & LIVE PREVIEW (5 Cols) -->
     <section class="lg:col-span-5 flex flex-col gap-6">
       
-      <!-- Video Selector Card List with Tabs -->
+      <!-- DUAL FORMAT MASTER HUB TILES -->
+      <div class="grid grid-cols-2 gap-3.5">
+        <!-- 16:9 Long-Form Tile -->
+        <button
+          id="tile-longform"
+          onclick="filterByFormat('longform')"
+          class="format-tile p-4 rounded-3xl glass-panel border border-sky-500/30 hover:border-sky-400/60 bg-gradient-to-br from-sky-950/40 via-slate-900/70 to-black flex flex-col gap-2 text-left transition-all duration-300 shadow-xl group cursor-pointer relative overflow-hidden"
+        >
+          <div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-sky-500/15 blur-2xl group-hover:bg-sky-500/30 transition duration-300"></div>
+          <div class="flex items-center justify-between z-10">
+            <div class="w-9 h-9 rounded-2xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center shadow-lg shadow-sky-500/10">
+              <i data-lucide="tv" class="w-4 h-4"></i>
+            </div>
+            <span id="tile-longform-count" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-black bg-sky-500/20 text-sky-300 border border-sky-500/30">0</span>
+          </div>
+          <div class="z-10 mt-1">
+            <div class="text-xs font-black text-white tracking-tight flex items-center gap-1.5 group-hover:text-sky-300 transition">
+              <span>16:9 Long-Form</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+            </div>
+            <div class="text-[10px] text-slate-400 font-mono mt-0.5">Masterclass & Essays</div>
+          </div>
+        </button>
+
+        <!-- 9:16 Shorts Tile -->
+        <button
+          id="tile-shorts"
+          onclick="filterByFormat('shorts')"
+          class="format-tile p-4 rounded-3xl glass-panel border border-emerald-500/30 hover:border-emerald-400/60 bg-gradient-to-br from-emerald-950/40 via-slate-900/70 to-black flex flex-col gap-2 text-left transition-all duration-300 shadow-xl group cursor-pointer relative overflow-hidden"
+        >
+          <div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-emerald-500/15 blur-2xl group-hover:bg-emerald-500/30 transition duration-300"></div>
+          <div class="flex items-center justify-between z-10">
+            <div class="w-9 h-9 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shadow-lg shadow-emerald-500/10">
+              <i data-lucide="smartphone" class="w-4 h-4"></i>
+            </div>
+            <span id="tile-shorts-count" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">0</span>
+          </div>
+          <div class="z-10 mt-1">
+            <div class="text-xs font-black text-white tracking-tight flex items-center gap-1.5 group-hover:text-emerald-300 transition">
+              <span>9:16 Shorts</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            </div>
+            <div class="text-[10px] text-slate-400 font-mono mt-0.5">Viral Retention Loops</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Video Selector Card List with Separate Format Sections -->
       <div class="glass-panel rounded-3xl p-5 flex flex-col gap-3.5 shadow-xl">
         
         <!-- Header & Sync Buttons -->
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2 text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
             <i data-lucide="film" class="w-4 h-4 text-[#0071e3]"></i>
-            Rendered Video Library
+            Production Library
           </div>
           <div class="flex items-center gap-2">
             <button
@@ -132,52 +179,53 @@
           <button
             id="tab-all"
             onclick="setTab('all')"
-            class="tab-btn active py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-300"
+            class="tab-btn active py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-300"
           >
             <span>All</span>
             <span id="badge-count-all" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-white/20">0</span>
           </button>
           <button
+            id="tab-longform"
+            onclick="setTab('longform')"
+            class="tab-btn py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            title="16:9 Long-Form Productions"
+          >
+            <span class="text-sky-400">🎬 16:9</span>
+            <span id="badge-count-longform" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-sky-500/20 text-sky-300">0</span>
+          </button>
+          <button
+            id="tab-shorts"
+            onclick="setTab('shorts')"
+            class="tab-btn py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            title="9:16 Vertical Shorts"
+          >
+            <span class="text-emerald-400">📱 Shorts</span>
+            <span id="badge-count-shorts" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300">0</span>
+          </button>
+          <button
             id="tab-unuploaded"
             onclick="setTab('unuploaded')"
-            class="tab-btn py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            class="tab-btn py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
             title="Videos ready to be posted"
           >
             <span class="text-amber-400">⏳ Ready</span>
             <span id="badge-count-unuploaded" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-amber-500/20 text-amber-300">0</span>
           </button>
           <button
-            id="tab-scheduled"
-            onclick="setTab('scheduled')"
-            class="tab-btn py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
-            title="Videos scheduled for future publish"
-          >
-            <span class="text-purple-400">📅 Sched</span>
-            <span id="badge-count-scheduled" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-purple-500/20 text-purple-300">0</span>
-          </button>
-          <button
             id="tab-uploaded"
             onclick="setTab('uploaded')"
-            class="tab-btn py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
-            title="Videos already uploaded to YouTube"
+            class="tab-btn py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            title="Videos already uploaded or scheduled"
           >
-            <span class="text-emerald-400">✅ Live</span>
-            <span id="badge-count-uploaded" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300">0</span>
-          </button>
-          <button
-            id="tab-longform"
-            onclick="setTab('longform')"
-            class="tab-btn py-2 px-1.5 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
-          >
-            <span class="text-sky-400">16:9</span>
-            <span id="badge-count-longform" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-sky-500/20 text-sky-300">0</span>
+            <span class="text-purple-400">✅ Live/Sched</span>
+            <span id="badge-count-uploaded" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-purple-500/20 text-purple-300">0</span>
           </button>
         </div>
 
-        <!-- Categorized List Container (Sorted by Date Newest First) -->
-        <div id="videoList" class="flex flex-col gap-2.5 max-h-80 overflow-y-auto custom-scrollbar pr-1">
+        <!-- Categorized List Container (Separate Sections for Long-Form & Shorts) -->
+        <div id="videoList" class="flex flex-col gap-3.5 max-h-[380px] overflow-y-auto custom-scrollbar pr-1">
           <div class="p-6 rounded-2xl glass-input text-center text-slate-400 text-xs">
-            Loading rendered videos...
+            Loading production library...
           </div>
         </div>
       </div>
@@ -205,6 +253,65 @@
             <i data-lucide="video-off" class="w-10 h-10 mb-2 stroke-[1.5]"></i>
             <span class="text-xs">Select a clip above to preview</span>
           </div>
+        </div>
+      </div>
+
+      <!-- High-Converting Thumbnail Studio Card (Adaptive 9:16 Shorts / 16:9 Long-Form) -->
+      <div class="glass-panel rounded-3xl p-5 flex flex-col gap-3.5 shadow-xl">
+        <div class="w-full flex items-center justify-between text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
+          <span class="flex items-center gap-2">
+            <i data-lucide="image" class="w-4 h-4 text-amber-400"></i>
+            Thumbnail & Visual Cover
+          </span>
+          <span id="thumbnailBadge" class="text-emerald-400 text-[11px] font-mono font-bold flex items-center gap-1">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Ready
+          </span>
+        </div>
+
+        <!-- Thumbnail Display Container (Adaptive Ratio) -->
+        <div id="thumbnailContainer" class="relative w-full max-w-[260px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300">
+          <img
+            id="thumbnailImg"
+            src=""
+            alt="Thumbnail Preview"
+            class="w-full h-full object-contain transition duration-300 group-hover:scale-[1.02]"
+            style="display: none;"
+          />
+          <div id="thumbnailPlaceholder" class="flex flex-col items-center justify-center p-6 text-center text-slate-500">
+            <i data-lucide="image-plus" class="w-10 h-10 mb-2 stroke-[1.5] text-slate-600"></i>
+            <span class="text-xs">Generating thumbnail...</span>
+          </div>
+
+          <!-- Overlay Hover Controls -->
+          <div id="thumbnailOverlay" class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2.5 backdrop-blur-[2px]">
+            <button
+              onclick="downloadThumbnail()"
+              id="downloadThumbBtn"
+              class="px-3 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white backdrop-blur-md transition shadow-lg flex items-center gap-1.5 text-xs font-bold"
+              title="Download 4K Thumbnail PNG"
+            >
+              <i data-lucide="download" class="w-3.5 h-3.5"></i> Download
+            </button>
+            <a
+              id="viewThumbFullBtn"
+              href="#"
+              target="_blank"
+              class="px-3 py-1.5 rounded-xl bg-sky-500/30 hover:bg-sky-500/40 text-sky-200 backdrop-blur-md border border-sky-400/30 transition shadow-lg flex items-center gap-1.5 text-xs font-bold"
+            >
+              <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> View
+            </a>
+          </div>
+        </div>
+
+        <!-- Thumbnail Info & Auto-Upload Status -->
+        <div class="flex items-center justify-between gap-3 pt-1 border-t border-white/5">
+          <div class="flex items-center gap-2 text-[11px] text-slate-400 font-mono">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
+            <span>Auto-attached on YouTube Upload</span>
+          </div>
+          <span id="thumbnailRatioBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 font-bold">
+            9:16 Shorts
+          </span>
         </div>
       </div>
 
@@ -648,11 +755,34 @@
       }
     }
 
+    // Switch Format Filter from Master Tiles
+    function filterByFormat(format) {
+      setTab(format);
+    }
+
     // Switch Tab Filter
     function setTab(tab) {
       activeTab = tab;
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-white'));
-      document.getElementById(`tab-${tab}`).classList.add('active', 'text-white');
+      const activeBtn = document.getElementById(`tab-${tab}`);
+      if (activeBtn) activeBtn.classList.add('active', 'text-white');
+
+      // Highlight active master tile
+      const longTile = document.getElementById('tile-longform');
+      const shortsTile = document.getElementById('tile-shorts');
+      if (longTile && shortsTile) {
+        if (tab === 'longform') {
+          longTile.classList.add('ring-2', 'ring-sky-400', 'shadow-sky-500/20');
+          shortsTile.classList.remove('ring-2', 'ring-emerald-400', 'shadow-emerald-500/20');
+        } else if (tab === 'shorts') {
+          shortsTile.classList.add('ring-2', 'ring-emerald-400', 'shadow-emerald-500/20');
+          longTile.classList.remove('ring-2', 'ring-sky-400', 'shadow-sky-500/20');
+        } else {
+          longTile.classList.remove('ring-2', 'ring-sky-400', 'shadow-sky-500/20');
+          shortsTile.classList.remove('ring-2', 'ring-emerald-400', 'shadow-emerald-500/20');
+        }
+      }
+
       renderVideoList();
     }
 
@@ -670,11 +800,21 @@
         unuploadedData = data.unuploadedVideos || [];
 
         // Update counts
-        document.getElementById('badge-count-all').textContent = videosData.length;
-        document.getElementById('badge-count-unuploaded').textContent = unuploadedData.length;
-        document.getElementById('badge-count-scheduled').textContent = scheduledData.length;
-        document.getElementById('badge-count-uploaded').textContent = uploadedData.length;
-        document.getElementById('badge-count-longform').textContent = longFormsData.length;
+        const allCount = document.getElementById('badge-count-all');
+        const unupCount = document.getElementById('badge-count-unuploaded');
+        const upCount = document.getElementById('badge-count-uploaded');
+        const longCount = document.getElementById('badge-count-longform');
+        const shortsCount = document.getElementById('badge-count-shorts');
+        const tileLongCount = document.getElementById('tile-longform-count');
+        const tileShortsCount = document.getElementById('tile-shorts-count');
+
+        if (allCount) allCount.textContent = videosData.length;
+        if (unupCount) unupCount.textContent = unuploadedData.length;
+        if (upCount) upCount.textContent = (uploadedData.length + scheduledData.length);
+        if (longCount) longCount.textContent = longFormsData.length;
+        if (shortsCount) shortsCount.textContent = shortsData.length;
+        if (tileLongCount) tileLongCount.textContent = longFormsData.length;
+        if (tileShortsCount) tileShortsCount.textContent = shortsData.length;
 
         renderVideoList();
 
@@ -693,30 +833,95 @@
       }
     }
 
-    // Render Video List by Active Tab & Clear Visual Separation
+    // Render Video List with Dedicated Visual Sections
     function renderVideoList() {
       const videoList = document.getElementById('videoList');
       
-      let listToRender = [];
-      if (activeTab === 'unuploaded') listToRender = unuploadedData;
-      else if (activeTab === 'scheduled') listToRender = scheduledData;
-      else if (activeTab === 'uploaded') listToRender = uploadedData;
-      else if (activeTab === 'longform') listToRender = longFormsData;
-      else listToRender = videosData;
-
-      if (listToRender.length === 0) {
+      if (activeTab === 'longform') {
+        if (longFormsData.length === 0) {
+          videoList.innerHTML = renderEmptyState('No 16:9 long-form videos rendered yet.');
+          lucide.createIcons();
+          return;
+        }
         videoList.innerHTML = `
-          <div class="p-8 text-center text-slate-500 text-xs flex flex-col items-center gap-2">
-            <i data-lucide="inbox" class="w-8 h-8 opacity-40"></i>
-            <span>No videos found in this filter tab.</span>
+          <div class="flex items-center justify-between px-1 pt-1 pb-0.5">
+            <div class="flex items-center gap-2 text-xs font-mono font-black uppercase text-sky-400 tracking-wider">
+              <i data-lucide="tv" class="w-3.5 h-3.5"></i> 16:9 Long-Form Productions
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/30">${longFormsData.length}</span>
+          </div>
+          <div class="flex flex-col gap-2.5">
+            ${longFormsData.map(v => renderCardHtml(v)).join('')}
           </div>
         `;
-        lucide.createIcons();
-        return;
+      } else if (activeTab === 'shorts') {
+        if (shortsData.length === 0) {
+          videoList.innerHTML = renderEmptyState('No 9:16 vertical shorts rendered yet.');
+          lucide.createIcons();
+          return;
+        }
+        videoList.innerHTML = `
+          <div class="flex items-center justify-between px-1 pt-1 pb-0.5">
+            <div class="flex items-center gap-2 text-xs font-mono font-black uppercase text-emerald-400 tracking-wider">
+              <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> 9:16 YouTube Shorts
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">${shortsData.length}</span>
+          </div>
+          <div class="flex flex-col gap-2.5">
+            ${shortsData.map(v => renderCardHtml(v)).join('')}
+          </div>
+        `;
+      } else if (activeTab === 'unuploaded') {
+        renderFilteredSection(unuploadedData, '⏳ Ready To Publish', 'text-amber-400', 'bg-amber-500/15 text-amber-300 border-amber-500/30');
+      } else if (activeTab === 'uploaded') {
+        const liveAndSched = [...scheduledData, ...uploadedData];
+        renderFilteredSection(liveAndSched, '✅ Live & Scheduled', 'text-purple-400', 'bg-purple-500/15 text-purple-300 border-purple-500/30');
+      } else {
+        // ALL VIEW — Display Separate Dedicated Sections for Long-Form and Shorts!
+        const longItems = videosData.filter(v => v.isLongForm);
+        const shortItems = videosData.filter(v => !v.isLongForm);
+
+        let html = '';
+
+        if (longItems.length > 0) {
+          html += `
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between px-1 pt-1">
+                <div class="flex items-center gap-2 text-xs font-mono font-black uppercase text-sky-400 tracking-wider">
+                  <i data-lucide="tv" class="w-3.5 h-3.5"></i> 16:9 Long-Form Masterclasses
+                </div>
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/30">${longItems.length}</span>
+              </div>
+              <div class="flex flex-col gap-2">
+                ${longItems.map(v => renderCardHtml(v)).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        if (shortItems.length > 0) {
+          html += `
+            <div class="flex flex-col gap-2 pt-2 border-t border-white/5">
+              <div class="flex items-center justify-between px-1 pt-1">
+                <div class="flex items-center gap-2 text-xs font-mono font-black uppercase text-emerald-400 tracking-wider">
+                  <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> 9:16 YouTube Shorts & Reels
+                </div>
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">${shortItems.length}</span>
+              </div>
+              <div class="flex flex-col gap-2">
+                ${shortItems.map(v => renderCardHtml(v)).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        if (videosData.length === 0) {
+          html = renderEmptyState('No videos found in library.');
+        }
+
+        videoList.innerHTML = html;
       }
 
-      // Render cards
-      videoList.innerHTML = listToRender.map(v => renderCardHtml(v)).join('');
       lucide.createIcons();
 
       // Highlight currently selected card
@@ -726,6 +931,35 @@
           activeCard.classList.add('border-[#0071e3]', 'bg-[#0071e3]/15');
         }
       }
+    }
+
+    function renderFilteredSection(list, title, titleColor, badgeClass) {
+      const videoList = document.getElementById('videoList');
+      if (list.length === 0) {
+        videoList.innerHTML = renderEmptyState(`No videos under ${title}.`);
+        lucide.createIcons();
+        return;
+      }
+      videoList.innerHTML = `
+        <div class="flex items-center justify-between px-1 pt-1 pb-0.5">
+          <div class="flex items-center gap-2 text-xs font-mono font-black uppercase ${titleColor} tracking-wider">
+            <i data-lucide="filter" class="w-3.5 h-3.5"></i> ${title}
+          </div>
+          <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${badgeClass}">${list.length}</span>
+        </div>
+        <div class="flex flex-col gap-2.5">
+          ${list.map(v => renderCardHtml(v)).join('')}
+        </div>
+      `;
+    }
+
+    function renderEmptyState(msg) {
+      return `
+        <div class="p-8 text-center text-slate-500 text-xs flex flex-col items-center gap-2">
+          <i data-lucide="inbox" class="w-8 h-8 opacity-40"></i>
+          <span>${msg}</span>
+        </div>
+      `;
     }
 
     function renderCardHtml(v) {
@@ -739,21 +973,28 @@
         <div
           onclick="selectVideo('${v.filename}')"
           id="video-card-${v.filename}"
-          class="video-card p-3.5 rounded-2xl glass-input hover:bg-white/5 cursor-pointer transition flex items-center justify-between gap-3 ${isSelected ? 'border-[#0071e3] bg-[#0071e3]/15 shadow-lg shadow-sky-500/10' : ''}"
+          class="video-card p-3 rounded-2xl glass-input hover:bg-white/5 cursor-pointer transition flex items-center justify-between gap-3 ${isSelected ? 'border-[#0071e3] bg-[#0071e3]/15 shadow-lg shadow-sky-500/10' : ''}"
         >
           <div class="flex items-center gap-3 min-w-0 flex-1">
-            <!-- Format Icon -->
-            <div class="w-10 h-10 rounded-xl ${isLong ? 'bg-sky-500/15 text-sky-400 border border-sky-500/30' : 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'} flex items-center justify-center flex-shrink-0">
-              <i data-lucide="${isLong ? 'tv' : 'smartphone'}" class="w-4 h-4"></i>
+            <!-- Thumbnail Visual Preview Tile -->
+            <div class="relative ${isLong ? 'w-16 h-10' : 'w-9 h-14'} rounded-xl overflow-hidden bg-black/90 border border-white/10 shrink-0 flex items-center justify-center shadow-md">
+              ${v.hasThumbnail ? `
+                <img src="${v.thumbnailUrl}" class="w-full h-full object-cover" alt="Thumbnail" />
+              ` : `
+                <i data-lucide="${isLong ? 'tv' : 'smartphone'}" class="w-4 h-4 ${isLong ? 'text-sky-400' : 'text-emerald-400'}"></i>
+              `}
+              ${v.hasThumbnail ? `
+                <span class="absolute bottom-0.5 right-0.5 px-1 py-0.2 rounded text-[8px] font-mono font-black bg-black/80 text-amber-300">4K</span>
+              ` : ''}
             </div>
 
             <!-- Filename & Details -->
             <div class="text-left min-w-0 flex-1">
               <div class="flex items-center gap-2">
-                <span class="text-xs font-extrabold text-white tracking-tight truncate">${v.filename}</span>
+                <span class="text-xs font-black text-white tracking-tight truncate">${v.filename}</span>
               </div>
-              <div class="text-[10px] text-slate-400 font-mono mt-1 flex items-center gap-2 flex-wrap">
-                <span class="${isLong ? 'text-sky-300 font-bold' : 'text-emerald-300 font-bold'}">${v.format}</span>
+              <div class="text-[10px] text-slate-400 font-mono mt-1 flex items-center gap-1.5 flex-wrap">
+                <span class="${isLong ? 'text-sky-300 font-bold' : 'text-emerald-300 font-bold'}">${isLong ? '16:9 Long-Form' : '9:16 Short'}</span>
                 <span>•</span>
                 <span>${v.sizeMb} MB</span>
                 <span>•</span>
@@ -816,16 +1057,28 @@
           <i data-lucide="tv" class="w-4 h-4 text-sky-400"></i>
           16:9 Long-Form Video Essay (1080p)
         `;
-        activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20 flex items-center gap-1.5";
-        activeBadge.innerHTML = `<i data-lucide="tv" class="w-3 h-3"></i> 16:9 Long-Form Essay`;
+        activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-sky-500/15 text-sky-300 border border-sky-500/30 flex items-center gap-1.5 shadow-sm";
+        activeBadge.innerHTML = `<i data-lucide="tv" class="w-3.5 h-3.5 text-sky-400"></i> 16:9 Long-Form Essay`;
       } else {
         container.className = "relative w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-2xl flex items-center justify-center group transition-all duration-300";
         formatLabel.innerHTML = `
           <i data-lucide="smartphone" class="w-4 h-4 text-emerald-400"></i>
           9:16 YouTube Shorts
         `;
-        activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5";
-        activeBadge.innerHTML = `<i data-lucide="zap" class="w-3 h-3"></i> 9:16 Shorts`;
+        activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 shadow-sm";
+        activeBadge.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-400"></i> 9:16 Shorts`;
+      }
+
+      const longTile = document.getElementById('tile-longform');
+      const shortsTile = document.getElementById('tile-shorts');
+      if (longTile && shortsTile && (activeTab === 'all' || activeTab === 'unuploaded' || activeTab === 'uploaded')) {
+        if (isWidescreen) {
+          longTile.classList.add('border-sky-400/70', 'shadow-sky-500/10');
+          shortsTile.classList.remove('border-emerald-400/70', 'shadow-emerald-500/10');
+        } else {
+          shortsTile.classList.add('border-emerald-400/70', 'shadow-emerald-500/10');
+          longTile.classList.remove('border-sky-400/70', 'shadow-sky-500/10');
+        }
       }
 
       player.src = `/api/video-file/${filename}`;
@@ -954,10 +1207,68 @@
       defaultDate.setHours(defaultDate.getHours() + 2);
       document.getElementById('scheduleDateTime').value = toLocalISOString(defaultDate);
 
+      // Update Thumbnail UI
+      updateThumbnailUI();
+
       onPrivacyChange();
       updateTagsUI();
       updateTitleCharCount();
       lucide.createIcons();
+    }
+
+    function updateThumbnailUI() {
+      if (!selectedVideo) return;
+      const thumbContainer = document.getElementById('thumbnailContainer');
+      const thumbImg = document.getElementById('thumbnailImg');
+      const thumbPlaceholder = document.getElementById('thumbnailPlaceholder');
+      const thumbBadge = document.getElementById('thumbnailBadge');
+      const ratioBadge = document.getElementById('thumbnailRatioBadge');
+      const viewFullBtn = document.getElementById('viewThumbFullBtn');
+
+      const isLong = selectedVideo.isLongForm;
+
+      if (isLong) {
+        thumbContainer.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
+        if (ratioBadge) {
+          ratioBadge.textContent = "16:9 Long-Form";
+          ratioBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/20 font-bold";
+        }
+      } else {
+        thumbContainer.className = "relative w-full max-w-[260px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
+        if (ratioBadge) {
+          ratioBadge.textContent = "9:16 Shorts";
+          ratioBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-bold";
+        }
+      }
+
+      if (selectedVideo.hasThumbnail) {
+        const url = `${selectedVideo.thumbnailUrl}?t=${Date.now()}`;
+        thumbImg.src = url;
+        thumbImg.style.display = 'block';
+        thumbPlaceholder.style.display = 'none';
+        thumbBadge.innerHTML = `<span class="text-emerald-400 font-bold flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> ${isLong ? '16:9 Cover Ready' : '9:16 Shorts Cover Ready'}</span>`;
+        if (viewFullBtn) viewFullBtn.href = url;
+      } else {
+        thumbImg.style.display = 'none';
+        thumbPlaceholder.style.display = 'flex';
+        thumbBadge.innerHTML = `<span class="text-slate-400 font-mono">Auto Generating...</span>`;
+        if (viewFullBtn) viewFullBtn.href = '#';
+      }
+      lucide.createIcons();
+    }
+
+    function downloadThumbnail() {
+      if (!selectedVideo || !selectedVideo.hasThumbnail) {
+        showToast('⚠️ No thumbnail rendered yet. Click Re-Render first!');
+        return;
+      }
+      const a = document.createElement('a');
+      a.href = selectedVideo.thumbnailUrl;
+      a.download = selectedVideo.thumbnailFile || `${selectedVideo.filename.replace('.mp4','')}_thumbnail.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('⬇️ Downloading high-resolution thumbnail .PNG');
     }
 
     // Handle Visibility Dropdown change

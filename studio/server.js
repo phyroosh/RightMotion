@@ -214,9 +214,16 @@ app.get('/api/videos', async (req, res) => {
 
       const isLongForm =
         filename.includes('procrastination') ||
-        (meta.title && meta.title.includes('Visual Essay')) ||
-        (meta.topic && meta.topic.includes('essay')) ||
+        filename.includes('neuroproductivity') ||
+        filename.includes('lofi_song') ||
+        (meta.title && (meta.title.includes('Visual Essay') || meta.title.includes('Masterclass') || meta.title.includes('Lyric Video'))) ||
+        (meta.topic && (meta.topic.includes('essay') || meta.topic.includes('neuroproductivity') || meta.topic.includes('lofi'))) ||
         stats.size > 50 * 1024 * 1024; // > 50MB typically long form
+
+      const baseName = filename.replace(/\.mp4$/i, '');
+      const thumbFile = `${baseName}_thumbnail.png`;
+      const thumbPath = path.join(OUT_DIR, thumbFile);
+      const hasThumbnail = fs.existsSync(thumbPath);
 
       return {
         filename,
@@ -229,6 +236,9 @@ app.get('/api/videos', async (req, res) => {
         isUploaded,
         isScheduled,
         uploadInfo: isUploaded ? uploadInfo : null,
+        hasThumbnail,
+        thumbnailFile: hasThumbnail ? thumbFile : null,
+        thumbnailUrl: hasThumbnail ? `/api/thumbnail/${thumbFile}` : null,
       };
     });
 
@@ -304,6 +314,44 @@ app.get('/api/video-file/:filename', (req, res) => {
     res.writeHead(200, head);
     fs.createReadStream(filePath).pipe(res);
   }
+});
+
+// 2b. Serve thumbnail image file
+app.get('/api/thumbnail/:filename', (req, res) => {
+  const thumbPath = path.join(OUT_DIR, req.params.filename);
+  if (!fs.existsSync(thumbPath)) {
+    return res.status(404).send('Thumbnail not found');
+  }
+  res.setHeader('Content-Type', 'image/png');
+  res.setHeader('Cache-Control', 'no-cache');
+  fs.createReadStream(thumbPath).pipe(res);
+});
+
+// 2c. Render or Re-render Thumbnail on Demand
+app.post('/api/render-thumbnail', (req, res) => {
+  const { filename } = req.body;
+  if (!filename) {
+    return res.status(400).json({ error: 'filename is required' });
+  }
+
+  const { exec } = require('child_process');
+  const baseName = filename.replace(/\.mp4$/i, '');
+  const cmd = `node scripts/render_all_thumbnails.js "${filename}"`;
+
+  exec(cmd, { cwd: path.resolve(__dirname, '..') }, (error, stdout, stderr) => {
+    if (error) {
+      console.error('Thumbnail render error:', stderr || error.message);
+      return res.status(500).json({ error: error.message, stderr });
+    }
+
+    const thumbFile = `${baseName}_thumbnail.png`;
+    res.json({
+      success: true,
+      filename,
+      thumbnailFile: thumbFile,
+      thumbnailUrl: `/api/thumbnail/${thumbFile}?t=${Date.now()}`,
+    });
+  });
 });
 
 // 3. API: Auth status & Channel Profile
@@ -575,11 +623,38 @@ app.post('/api/upload', async (req, res) => {
     );
 
     const videoId = response.data.id;
+
+    // Attach Custom Thumbnail to YouTube Video if available
+    const baseName = filename.replace(/\.mp4$/i, '');
+    const thumbPath = path.join(OUT_DIR, `${baseName}_thumbnail.png`);
+    let thumbnailAttached = false;
+
+    if (fs.existsSync(thumbPath)) {
+      try {
+        activeUpload.stage = isScheduling
+          ? `Attaching custom high-converting thumbnail to scheduled release...`
+          : 'Attaching custom high-converting thumbnail to YouTube video...';
+        console.log(`🖼️ Uploading custom thumbnail for video ${videoId} from ${thumbPath}...`);
+        
+        await youtube.thumbnails.set({
+          videoId,
+          media: {
+            mimeType: 'image/png',
+            body: fs.createReadStream(thumbPath),
+          },
+        });
+        thumbnailAttached = true;
+        console.log('✅ Custom thumbnail attached to YouTube video successfully!');
+      } catch (thumbErr) {
+        console.warn('⚠️ Custom thumbnail could not be attached automatically via YouTube API (may require channel phone verification):', thumbErr.message);
+      }
+    }
+
     activeUpload.inProgress = false;
     activeUpload.progress = 100;
     activeUpload.stage = isScheduling
-      ? `🎉 Upload Complete! Scheduled to publish on ${new Date(isoPublishAt).toLocaleString()}`
-      : 'Upload Complete! Video is live on YouTube.';
+      ? `🎉 Upload Complete! Scheduled with custom thumbnail for ${new Date(isoPublishAt).toLocaleString()}`
+      : `🎉 Upload Complete! Video ${thumbnailAttached ? 'with custom thumbnail ' : ''}is live on YouTube.`;
       
     activeUpload.result = {
       videoId,
@@ -590,6 +665,7 @@ app.post('/api/upload', async (req, res) => {
       publishAt: isoPublishAt,
       isScheduled: isScheduling,
       publishedAt: response.data.snippet.publishedAt || new Date().toISOString(),
+      thumbnailAttached,
     };
 
     // Save record to persistent uploads.json
@@ -604,6 +680,7 @@ app.post('/api/upload', async (req, res) => {
       publishAt: isoPublishAt,
       isScheduled: isScheduling,
       publishedAt: activeUpload.result.publishedAt,
+      thumbnailAttached,
     };
     saveUploadsRecord(uploads);
 

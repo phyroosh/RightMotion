@@ -52,7 +52,7 @@
     "privacyStatus": "scheduled",
     "publishAt": "2026-08-26T19:30:00.000Z",
     "isScheduled": true,
-    "publishedAt": "2026-08-26T06:17:04Z"
+    "publishedAt": "2026-08-26T19:30:05Z"
   },
   "strength_video.mp4": {
     "uploaded": true,
@@ -64,5 +64,27 @@
     "publishAt": null,
     "isScheduled": false,
     "publishedAt": "2026-08-26T08:17:24Z"
+  },
+  "emotions_video.mp4": {
+    "uploaded": true,
+    "videoId": "AiONTEwu90w",
+    "youtubeUrl": "https://youtu.be/AiONTEwu90w",
+    "shortsUrl": "https://youtube.com/shorts/AiONTEwu90w",
+    "title": "Why Men & Women Handle Emotions So Differently 🧠 #Shorts",
+    "privacyStatus": "public",
+    "publishAt": null,
+    "isScheduled": false,
+    "publishedAt": "2026-08-27T10:13:32Z"
+  },
+  "chapters_video.mp4": {
+    "uploaded": true,
+    "videoId": "JR_jOvnPNPc",
+    "youtubeUrl": "https://youtu.be/JR_jOvnPNPc",
+    "shortsUrl": "https://youtube.com/shorts/JR_jOvnPNPc",
+    "title": "When Life Feels Unfair (Remember This) ⏳ #Shorts",
+    "privacyStatus": "scheduled",
+    "publishAt": "2026-08-27T19:30:00.000Z",
+    "isScheduled": true,
+    "publishedAt": "2026-08-27T10:17:11Z"
   }
 }
