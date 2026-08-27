@@ -49,7 +49,26 @@ Create 4 modular files:
 1. `Background.tsx`: Clean Apple Studio mesh background (`bg-[#f8fafc]` with subtle amber/indigo ambient orbs and dot-grid).
 2. `Canvas.tsx`: High-retention motion graphics storyboard illustrating the core psychological models (Comparison cards, Progress meters, Diagnostic badges, Micro-action blueprints).
 3. `Presenter.tsx`: Judy multi-pose animations (`character_pointing.png`, `character_talking.png`, `character_casual.png`, `character_open.png`) with Apple Glass floating badges.
-4. `index.tsx`: Main Composition uniting voiceover, BGM (`monume-documentary-documentary-music-547923.mp3`), tactile click SFX at scene changes, `AppleProgressBar`, and `AppleKineticCaptions`.
+4. `index.tsx`: Main Composition uniting voiceover, BGM, **PRO MULTI-SFX layer** (see below), `AppleProgressBar`, and `AppleKineticCaptions`.
+
+**🔊 PRO SOUND DESIGN RULE (MANDATORY — PERMANENT):**
+Every `index.tsx` MUST include a full multi-SFX layer auto-calculated from the video duration. **NEVER use only one SFX.** The rules:
+
+| Position | SFX File | Volume | Why |
+|---|---|---|---|
+| Frame 0 (intro) | `audio/sfx/whoosh_fast.wav` | 0.32 | Energetic swipe-in opening |
+| Every scene change (~4.5s apart) | `audio/sfx/mouse_click.mp3` | 0.28 | Tactile UI feedback at visual beat |
+| Emotional peak (~60% of duration) | `audio/sfx/impact_hit.wav` | 0.22 | Cinematic gut-punch at key insight |
+| Finale (~2.5s before end) | `audio/sfx/whoosh_sparkle.wav` | 0.30 | Triumphant sparkle outro |
+| Climax fallback (if no peak assigned) | `audio/sfx/whoosh_deep.wav` | 0.20 | Deep whoosh at emotional climax |
+
+**Available SFX** (`public/audio/sfx/`): `mouse_click.mp3`, `impact_hit.wav`, `whoosh_cinematic.wav`, `whoosh_deep.wav`, `whoosh_fast.wav`, `whoosh_sparkle.wav`
+
+The `scripts/create_clip.py` auto-generates all SFX Sequences correctly. If writing `index.tsx` manually, calculate `SFX_FRAMES` like this:
+```tsx
+// Auto-calculated at ~4.5s intervals; whoosh_fast opens, impact_hit at 60%, whoosh_sparkle closes
+const SFX_FRAMES = [0, 135, 270, 405, ...]; // frame = Math.round(sec * 30)
+```
 
 #### Step 3: Register in `src/Root.tsx`
 1. Add `<Composition id="<Name>Video" component={<Name>Composition} durationInFrames={duration} fps={30} width={1080} height={1920} />`
