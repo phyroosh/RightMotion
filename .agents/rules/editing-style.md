@@ -56,6 +56,16 @@ Never squish the avatar in a corner or have graphics fighting for space on scree
 - **Avatar is completely hidden:** She slides out smoothly.
 - **Single-Focused Statement Pacing:** Spotlight **one** hero prop or visual metaphor at a time that mirrors the exact words being spoken. Animate in on beat, hold for comprehension, and morph/whoosh cleanly to the next concept.
 
+**⚠️ CRITICAL PERMANENT MOBILE CANVAS & TYPOGRAPHY STANDARDS (iPhone 11 Small-Display Rule):**
+- **Spacious Canvas Bounds**: Never clamp cards into narrow horizontal widths (`w-[980px] - w-[1020px]`, `px-6` margin). Never cram items into tiny vertical bands at the top; use the full vertical clearance from `top: 15%` to `top: 76%` (~1150px above captions).
+- **Zero Tiny Text**: NEVER use `text-xs` (12px), `text-sm` (14px), or `text-[10px]` anywhere in Remotion video compositions.
+- **Strict Mobile Font Scale**:
+  - Main titles: `48px - 58px` (`text-5xl`), `font-black`.
+  - Item labels: `32px - 40px` (`text-2xl` to `text-3xl`), `font-black`.
+  - Badges & chips: **MINIMUM 24px - 30px** (`text-xl font-black` or `text-2xl font-black`).
+  - Icons: `w-8 h-8` to `w-10 h-10` icons inside `w-14 h-14` to `w-16 h-16` badge pedestals.
+  - Script quotes: `28px - 36px` (`text-3xl font-serif italic font-black`).
+
 **⚠️ CRITICAL PERMANENT MOTION GRAPHICS RULE — USE `MotionKeyframeBox` (NO CSS TRANSITIONS):**
 - **NEVER use Tailwind/CSS `transition-all duration-X` or CSS keyframe animations for video elements.** In Remotion's frame-by-frame rendering, CSS transitions produce stuttering and jumping when booleans or timestamps change.
 - **Always animate cards, chips, badges, and meters with `<MotionKeyframeBox currentMs={currentMs} keyframes={[...]} />`** from `src/components/MotionKeyframeBox.tsx`.

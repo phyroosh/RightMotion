@@ -6,6 +6,7 @@ import { ChaptersPresenter } from "./Presenter";
 import { AppleProgressBar } from "../../components/AppleProgressBar";
 import { AppleKineticCaptions } from "../../components/AppleKineticCaptions";
 import { SoundDesignEngine, SfxCue } from "../../components/SoundDesignEngine";
+import { ChaptersThumbnail } from "../../thumbnails";
 import rawTranscript from "./transcript.json";
 import { WordTimestamp } from "../../types";
 import "../../style.css";
@@ -43,6 +44,13 @@ export const ChaptersComposition: React.FC = () => {
       className="relative w-full h-full bg-[#f8fafc] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans"
       style={{ width, height }}
     >
+      {/* 0. High-Converting 4K Thumbnail First-Frame (Captured automatically by YouTube Shorts) */}
+      {frame === 0 && (
+        <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">
+          <ChaptersThumbnail />
+        </div>
+      )}
+
       {/* 1. Voiceover Audio Track (Natural Female Neural +0% speed, +30% boost, silence-compressed) */}
       <Audio src={staticFile("chapters/voiceover.mp3")} volume={1.3} />
 

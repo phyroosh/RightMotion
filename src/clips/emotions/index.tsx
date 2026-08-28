@@ -5,6 +5,7 @@ import { EmotionsCanvas } from "./Canvas";
 import { EmotionsPresenter } from "./Presenter";
 import { AppleProgressBar } from "../../components/AppleProgressBar";
 import { AppleKineticCaptions } from "../../components/AppleKineticCaptions";
+import { EmotionsThumbnail } from "../../thumbnails";
 import rawTranscript from "./transcript.json";
 import { WordTimestamp } from "../../types";
 import "../../style.css";
@@ -42,6 +43,13 @@ export const EmotionsComposition: React.FC = () => {
       className="relative w-full h-full bg-[#f8fafc] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans"
       style={{ width, height }}
     >
+      {/* 0. High-Converting 4K Thumbnail First-Frame (Captured automatically by YouTube Shorts) */}
+      {frame === 0 && (
+        <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">
+          <EmotionsThumbnail />
+        </div>
+      )}
+
       {/* 1. Voiceover Audio Track (Female Neural, Natural Rate +0%, Boosted +30%, Silence-Compressed) */}
       <Audio src={staticFile("emotions/voiceover.mp3")} volume={1.3} />
 

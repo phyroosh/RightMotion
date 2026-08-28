@@ -62,16 +62,16 @@ export const PromisesPresenter: React.FC<PresenterProps> = ({ currentMs }) => {
       {/* 3. Floating Apple Glass Badge */}
       {isIntro && (
         <div
-          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(244,63,94,0.22)] border-[5px] border-white z-40"
+          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(244,63,94,0.25)] border-[5px] border-white z-40"
           style={{
             transform: `translateY(${(1 - badgeSpring) * -20}px) scale(${0.96 + badgeSpring * 0.04})`,
-            padding: "24px 54px",
-            borderRadius: 44,
-            gap: 20,
+            padding: "26px 60px",
+            borderRadius: 48,
+            gap: 24,
           }}
         >
-          <Sparkles className="text-rose-500 animate-spin" style={{ width: 52, height: 52, animationDuration: "8s" }} />
-          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 38 }}>
+          <Sparkles className="text-rose-500 animate-spin" style={{ width: 60, height: 60, animationDuration: "8s" }} />
+          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 44 }}>
             THE SELF-TRUST PARADOX
           </span>
         </div>
@@ -79,16 +79,16 @@ export const PromisesPresenter: React.FC<PresenterProps> = ({ currentMs }) => {
 
       {isNeuralReframe && (
         <div
-          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(245,158,11,0.22)] border-[5px] border-amber-300 z-40"
+          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(245,158,11,0.25)] border-[5px] border-amber-300 z-40"
           style={{
             transform: `translateY(${(1 - badgeSpring) * -20}px) scale(${0.96 + badgeSpring * 0.04})`,
-            padding: "24px 54px",
-            borderRadius: 44,
-            gap: 20,
+            padding: "26px 60px",
+            borderRadius: 48,
+            gap: 24,
           }}
         >
-          <Brain className="text-amber-500" style={{ width: 52, height: 52 }} />
-          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 38 }}>
+          <Brain className="text-amber-500" style={{ width: 60, height: 60 }} />
+          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 44 }}>
             CONDITIONED BRAIN
           </span>
         </div>
@@ -96,17 +96,17 @@ export const PromisesPresenter: React.FC<PresenterProps> = ({ currentMs }) => {
 
       {isFinale && (
         <div
-          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(16,185,129,0.22)] border-[5px] border-emerald-400 z-40"
+          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(16,185,129,0.25)] border-[5px] border-emerald-400 z-40"
           style={{
             transform: `translateY(${(1 - badgeSpring) * -20}px) scale(${0.96 + badgeSpring * 0.04})`,
-            padding: "24px 54px",
-            borderRadius: 44,
-            gap: 20,
+            padding: "26px 60px",
+            borderRadius: 48,
+            gap: 24,
           }}
         >
-          <ShieldCheck className="text-emerald-500" style={{ width: 52, height: 52 }} />
-          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 38 }}>
-            UNSHAKABLE SELF-TRUST
+          <HeartHandshake className="text-emerald-500 animate-bounce" style={{ width: 60, height: 60 }} />
+          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 44 }}>
+            BECOMING TRUSTWORTHY
           </span>
         </div>
       )}

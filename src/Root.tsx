@@ -11,6 +11,11 @@ import { LofiSongComposition } from "./clips/lofi_song";
 import { BoundariesComposition } from "./clips/boundaries";
 import boundariesTranscript from "./clips/boundaries/transcript.json";
 import { PromisesComposition } from "./clips/promises";
+import promisesTranscript from "./clips/promises/transcript.json";
+import { PatternsComposition } from "./clips/patterns";
+import patternsTranscript from "./clips/patterns/transcript.json";
+import { TeenageComposition } from "./clips/teenage";
+import teenageTranscript from "./clips/teenage/transcript.json";
 import {
   NeuroproductivityThumbnail,
   ProcrastinationThumbnail,
@@ -27,6 +32,8 @@ import {
   ChaptersThumbnail,
   PromisesThumbnail,
   BoundariesThumbnail,
+  PatternsThumbnail,
+  TeenageThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -36,7 +43,6 @@ import maturityTranscript from "./clips/maturity/transcript.json";
 import procrastinationTranscript from "./clips/procrastination/transcript.json";
 import neuroproductivityTranscript from "./clips/neuroproductivity/transcript.json";
 import lofiSongTranscript from "./clips/lofi_song/transcript.json";
-import promisesTranscript from "./clips/promises/transcript.json";
 import { GogginsComposition } from "./clips/goggins";
 import { BreaksComposition } from "./clips/breaks";
 import { StrengthComposition } from "./clips/strength";
@@ -78,9 +84,28 @@ export const RemotionRoot: React.FC = () => {
   
   const boundariesDuration = calculateDurationInFrames(boundariesTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
+  const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
+  const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
 
   return (
     <>
+      <Composition
+        id="TeenageVideo"
+        component={TeenageComposition}
+        durationInFrames={teenageDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      <Composition
+        id="PatternsVideo"
+        component={PatternsComposition}
+        durationInFrames={patternsDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
       
       <Composition
         id="BoundariesVideo"
@@ -325,6 +350,18 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="BoundariesThumbnail"
         component={BoundariesThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="PatternsThumbnail"
+        component={PatternsThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="TeenageThumbnail"
+        component={TeenageThumbnail}
         width={1080}
         height={1920}
       />

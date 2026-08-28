@@ -1,0 +1,572 @@
+[
+  {
+    "word": "Why",
+    "startMs": 0,
+    "endMs": 320
+  },
+  {
+    "word": "do",
+    "startMs": 320,
+    "endMs": 480
+  },
+  {
+    "word": "teenage",
+    "startMs": 480,
+    "endMs": 680
+  },
+  {
+    "word": "years",
+    "startMs": 680,
+    "endMs": 1080
+  },
+  {
+    "word": "somehow",
+    "startMs": 1080,
+    "endMs": 1340
+  },
+  {
+    "word": "feel",
+    "startMs": 1340,
+    "endMs": 1640
+  },
+  {
+    "word": "like",
+    "startMs": 1640,
+    "endMs": 1800
+  },
+  {
+    "word": "everything",
+    "startMs": 1800,
+    "endMs": 2120
+  },
+  {
+    "word": "is",
+    "startMs": 2120,
+    "endMs": 2360
+  },
+  {
+    "word": "happening",
+    "startMs": 2360,
+    "endMs": 2680
+  },
+  {
+    "word": "at",
+    "startMs": 2680,
+    "endMs": 2920
+  },
+  {
+    "word": "once?",
+    "startMs": 2920,
+    "endMs": 3100
+  },
+  {
+    "word": "Your",
+    "startMs": 3560,
+    "endMs": 3640
+  },
+  {
+    "word": "brain",
+    "startMs": 3640,
+    "endMs": 3940
+  },
+  {
+    "word": "is",
+    "startMs": 3940,
+    "endMs": 4140
+  },
+  {
+    "word": "still",
+    "startMs": 4140,
+    "endMs": 4340
+  },
+  {
+    "word": "developing,",
+    "startMs": 4340,
+    "endMs": 4740
+  },
+  {
+    "word": "but",
+    "startMs": 5200,
+    "endMs": 5340
+  },
+  {
+    "word": "suddenly",
+    "startMs": 5340,
+    "endMs": 5640
+  },
+  {
+    "word": "you're",
+    "startMs": 5640,
+    "endMs": 5940
+  },
+  {
+    "word": "expected",
+    "startMs": 5940,
+    "endMs": 6240
+  },
+  {
+    "word": "to",
+    "startMs": 6240,
+    "endMs": 6580
+  },
+  {
+    "word": "make",
+    "startMs": 6580,
+    "endMs": 6720
+  },
+  {
+    "word": "bigger",
+    "startMs": 6720,
+    "endMs": 6960
+  },
+  {
+    "word": "decisions,",
+    "startMs": 6960,
+    "endMs": 7460
+  },
+  {
+    "word": "handle",
+    "startMs": 7900,
+    "endMs": 8160
+  },
+  {
+    "word": "stronger",
+    "startMs": 8160,
+    "endMs": 8520
+  },
+  {
+    "word": "emotions,",
+    "startMs": 8520,
+    "endMs": 8920
+  },
+  {
+    "word": "and",
+    "startMs": 9440,
+    "endMs": 9600
+  },
+  {
+    "word": "figure",
+    "startMs": 9600,
+    "endMs": 9780
+  },
+  {
+    "word": "out",
+    "startMs": 9780,
+    "endMs": 10080
+  },
+  {
+    "word": "who",
+    "startMs": 10080,
+    "endMs": 10240
+  },
+  {
+    "word": "you",
+    "startMs": 10240,
+    "endMs": 10360
+  },
+  {
+    "word": "even",
+    "startMs": 10360,
+    "endMs": 10580
+  },
+  {
+    "word": "are.",
+    "startMs": 10580,
+    "endMs": 10840
+  },
+  {
+    "word": "You",
+    "startMs": 11240,
+    "endMs": 11260
+  },
+  {
+    "word": "care",
+    "startMs": 11260,
+    "endMs": 11420
+  },
+  {
+    "word": "deeply",
+    "startMs": 11420,
+    "endMs": 11700
+  },
+  {
+    "word": "about",
+    "startMs": 11700,
+    "endMs": 12080
+  },
+  {
+    "word": "what",
+    "startMs": 12080,
+    "endMs": 12260
+  },
+  {
+    "word": "people",
+    "startMs": 12260,
+    "endMs": 12400
+  },
+  {
+    "word": "think",
+    "startMs": 12400,
+    "endMs": 12760
+  },
+  {
+    "word": "of",
+    "startMs": 12760,
+    "endMs": 12940
+  },
+  {
+    "word": "you,",
+    "startMs": 12940,
+    "endMs": 13120
+  },
+  {
+    "word": "while",
+    "startMs": 13340,
+    "endMs": 13500
+  },
+  {
+    "word": "also",
+    "startMs": 13500,
+    "endMs": 13860
+  },
+  {
+    "word": "desperately",
+    "startMs": 13860,
+    "endMs": 14240
+  },
+  {
+    "word": "wanting",
+    "startMs": 14240,
+    "endMs": 14640
+  },
+  {
+    "word": "to",
+    "startMs": 14640,
+    "endMs": 14940
+  },
+  {
+    "word": "be",
+    "startMs": 14940,
+    "endMs": 15060
+  },
+  {
+    "word": "your",
+    "startMs": 15060,
+    "endMs": 15220
+  },
+  {
+    "word": "own",
+    "startMs": 15220,
+    "endMs": 15360
+  },
+  {
+    "word": "person.",
+    "startMs": 15360,
+    "endMs": 15760
+  },
+  {
+    "word": "Add",
+    "startMs": 16160,
+    "endMs": 16260
+  },
+  {
+    "word": "school",
+    "startMs": 16260,
+    "endMs": 16500
+  },
+  {
+    "word": "pressure,",
+    "startMs": 16500,
+    "endMs": 16780
+  },
+  {
+    "word": "friendships,",
+    "startMs": 17260,
+    "endMs": 17560
+  },
+  {
+    "word": "attraction,",
+    "startMs": 18000,
+    "endMs": 18240
+  },
+  {
+    "word": "family",
+    "startMs": 19080,
+    "endMs": 19080
+  },
+  {
+    "word": "expectations,",
+    "startMs": 19080,
+    "endMs": 19580
+  },
+  {
+    "word": "and",
+    "startMs": 19900,
+    "endMs": 20440
+  },
+  {
+    "word": "a",
+    "startMs": 20440,
+    "endMs": 20520
+  },
+  {
+    "word": "body",
+    "startMs": 20520,
+    "endMs": 20800
+  },
+  {
+    "word": "that's",
+    "startMs": 20800,
+    "endMs": 21120
+  },
+  {
+    "word": "changing",
+    "startMs": 21120,
+    "endMs": 21340
+  },
+  {
+    "word": "constantly.",
+    "startMs": 21340,
+    "endMs": 21820
+  },
+  {
+    "word": "Yeah,",
+    "startMs": 22460,
+    "endMs": 22580
+  },
+  {
+    "word": "it's",
+    "startMs": 22840,
+    "endMs": 23060
+  },
+  {
+    "word": "messy,",
+    "startMs": 23060,
+    "endMs": 23220
+  },
+  {
+    "word": "and",
+    "startMs": 23640,
+    "endMs": 23840
+  },
+  {
+    "word": "honestly,",
+    "startMs": 23840,
+    "endMs": 24160
+  },
+  {
+    "word": "being",
+    "startMs": 24620,
+    "endMs": 24820
+  },
+  {
+    "word": "confused",
+    "startMs": 24820,
+    "endMs": 25140
+  },
+  {
+    "word": "doesn't",
+    "startMs": 25140,
+    "endMs": 25780
+  },
+  {
+    "word": "mean",
+    "startMs": 25780,
+    "endMs": 25920
+  },
+  {
+    "word": "something",
+    "startMs": 25920,
+    "endMs": 26220
+  },
+  {
+    "word": "is",
+    "startMs": 26220,
+    "endMs": 26480
+  },
+  {
+    "word": "wrong",
+    "startMs": 26480,
+    "endMs": 26660
+  },
+  {
+    "word": "with",
+    "startMs": 26660,
+    "endMs": 26900
+  },
+  {
+    "word": "you.",
+    "startMs": 26900,
+    "endMs": 27120
+  },
+  {
+    "word": "You're",
+    "startMs": 27120,
+    "endMs": 27520
+  },
+  {
+    "word": "trying",
+    "startMs": 27520,
+    "endMs": 27780
+  },
+  {
+    "word": "out",
+    "startMs": 27780,
+    "endMs": 28000
+  },
+  {
+    "word": "different",
+    "startMs": 28000,
+    "endMs": 28160
+  },
+  {
+    "word": "versions",
+    "startMs": 28160,
+    "endMs": 28560
+  },
+  {
+    "word": "of",
+    "startMs": 28560,
+    "endMs": 28840
+  },
+  {
+    "word": "yourself",
+    "startMs": 28840,
+    "endMs": 29220
+  },
+  {
+    "word": "to",
+    "startMs": 29220,
+    "endMs": 29440
+  },
+  {
+    "word": "figure",
+    "startMs": 29440,
+    "endMs": 29600
+  },
+  {
+    "word": "out",
+    "startMs": 29600,
+    "endMs": 29880
+  },
+  {
+    "word": "which",
+    "startMs": 29880,
+    "endMs": 30100
+  },
+  {
+    "word": "one",
+    "startMs": 30100,
+    "endMs": 30300
+  },
+  {
+    "word": "actually",
+    "startMs": 30300,
+    "endMs": 30580
+  },
+  {
+    "word": "feels",
+    "startMs": 30580,
+    "endMs": 31040
+  },
+  {
+    "word": "like",
+    "startMs": 31040,
+    "endMs": 31300
+  },
+  {
+    "word": "you.",
+    "startMs": 31300,
+    "endMs": 31500
+  },
+  {
+    "word": "So",
+    "startMs": 31920,
+    "endMs": 32000
+  },
+  {
+    "word": "if",
+    "startMs": 32000,
+    "endMs": 32140
+  },
+  {
+    "word": "your",
+    "startMs": 32140,
+    "endMs": 32280
+  },
+  {
+    "word": "teenage",
+    "startMs": 32280,
+    "endMs": 32580
+  },
+  {
+    "word": "years",
+    "startMs": 32580,
+    "endMs": 32940
+  },
+  {
+    "word": "feel",
+    "startMs": 32940,
+    "endMs": 33220
+  },
+  {
+    "word": "chaotic",
+    "startMs": 33220,
+    "endMs": 33420
+  },
+  {
+    "word": "sometimes,",
+    "startMs": 33420,
+    "endMs": 34040
+  },
+  {
+    "word": "that",
+    "startMs": 34120,
+    "endMs": 34720
+  },
+  {
+    "word": "doesn't",
+    "startMs": 34720,
+    "endMs": 35080
+  },
+  {
+    "word": "mean",
+    "startMs": 35080,
+    "endMs": 35220
+  },
+  {
+    "word": "you're",
+    "startMs": 35220,
+    "endMs": 35360
+  },
+  {
+    "word": "falling",
+    "startMs": 35360,
+    "endMs": 35620
+  },
+  {
+    "word": "behind.",
+    "startMs": 35620,
+    "endMs": 35920
+  },
+  {
+    "word": "You're",
+    "startMs": 36500,
+    "endMs": 36560
+  },
+  {
+    "word": "still",
+    "startMs": 36560,
+    "endMs": 36780
+  },
+  {
+    "word": "becoming",
+    "startMs": 36780,
+    "endMs": 37160
+  },
+  {
+    "word": "you.",
+    "startMs": 37160,
+    "endMs": 37480
+  }
+]

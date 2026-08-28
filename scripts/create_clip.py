@@ -189,7 +189,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     # 3. Canvas
     canvas_code = f"""import React from "react";
 import {{ interpolate, spring, useCurrentFrame, useVideoConfig }} from "remotion";
-import {{ Target, Sparkles, Brain, CheckCircle2 }} from "lucide-react";
+import {{ Target, Sparkles, Brain, CheckCircle2, Zap }} from "lucide-react";
 import {{ WordTimestamp }} from "../../types";
 
 interface CanvasProps {{
@@ -201,31 +201,52 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const {{ fps, durationInFrames }} = useVideoConfig();
   const currentMs = (frame / fps) * 1000;
 
+  // Advanced Mathematical Camera Tracking & Ambient Float
   const cameraZoom = interpolate(frame, [0, durationInFrames], [1.0, 1.05], {{
     extrapolateRight: "clamp",
   }});
+  const ambientFloat = Math.sin(frame * 0.03) * 4;
+
+  // Mass-Spring-Damper Physics
+  const sp = (delayMs: number, d = 20, s = 90, m = 0.85) => {{
+    const df = Math.floor((delayMs / 1000) * fps);
+    return spring({{
+      frame: Math.max(0, frame - df),
+      fps,
+      config: {{ damping: d, stiffness: s, mass: m }},
+    }});
+  }};
 
   const isMidScene = currentMs >= 4800 && currentMs < {round((duration_sec - 5) * 1000)};
   if (!isMidScene) return null;
+
+  const sCard = sp(4800);
 
   return (
     <div
       className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
       style={{{{ transform: `scale(${{cameraZoom}})`, transformOrigin: "center center" }}}}
     >
-      <div className="absolute inset-x-0 top-[42%] -translate-y-1/2 flex flex-col items-center justify-center px-8">
-        <div className="w-full max-w-[940px] rounded-[44px] p-9 bg-white/98 border-3 border-amber-200 shadow-2xl flex flex-col gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-amber-500 flex items-center justify-center text-white shadow-lg">
-              <Brain className="w-8 h-8" />
-            </div>
-            <div>
-              <div className="text-xs font-mono font-black text-amber-600 uppercase">CORE PSYCHOLOGY</div>
-              <div className="text-3xl font-black text-slate-950">{topic}</div>
-            </div>
+      <div className="absolute inset-x-0 top-[44%] -translate-y-1/2 flex flex-col items-center justify-center px-6">
+        <div
+          className="w-full max-w-[980px] rounded-[52px] p-12 bg-white/98 border-[4px] border-amber-200 shadow-2xl flex flex-col items-center text-center gap-9"
+          style={{{{
+            transform: `translateY(${{(1 - sCard) * 50 + ambientFloat}}px)`,
+            opacity: Math.min(1, sCard * 1.5),
+          }}}}
+        >
+          <div className="px-9 py-4 rounded-full bg-slate-950 text-amber-300 font-mono text-xl font-black uppercase tracking-widest flex items-center gap-3.5 shadow-xl border border-amber-500/40">
+            <Zap className="w-8 h-8 text-amber-400" />
+            CORE PSYCHOLOGICAL MODEL
           </div>
-          <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-700 text-base font-semibold leading-relaxed">
-            Key insight: Consistent execution of small commitments compounds into permanent self-transformation.
+
+          <div className="text-5xl sm:text-6xl font-black text-slate-950 leading-tight">
+            {topic}
+          </div>
+
+          <div className="w-full py-6 rounded-3xl bg-amber-50 border-3 border-amber-200 text-amber-950 font-black text-3xl flex items-center justify-center gap-4">
+            <Sparkles className="w-9 h-9 text-amber-600 shrink-0" />
+            <span>1 MICRO-SHIFT TRANSFORMS THE SYSTEM</span>
           </div>
         </div>
       </div>
@@ -236,19 +257,23 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
     (clip_dir / "Canvas.tsx").write_text(canvas_code, encoding="utf-8")
 
     # ─────────────────────────────────────────────────────────────────────────────
-    # 4. index.tsx  — GENTLE EVENT-DRIVEN SOUND DESIGN
+    # 4. index.tsx  — RICH MULTI-SFX SOUND DESIGN ENGINE + FRAME 0 THUMBNAIL COVER
     # ─────────────────────────────────────────────────────────────────────────────
     fps = 30
     mid_scene_frame = 144  # 4.8s (Canvas Storyboard Pop)
-    finale_frame = max(mid_scene_frame + 60, round((duration_sec - 5.0) * fps))  # Finale Presenter Re-Entry
+    impact_frame = mid_scene_frame + 20
+    solution_frame = max(mid_scene_frame + 60, round((duration_sec * 0.6) * fps))
+    finale_frame = max(solution_frame + 60, round((duration_sec - 5.0) * fps))  # Finale Presenter Re-Entry
 
     idx_code = f"""import React from "react";
-import {{ Audio, interpolate, Sequence, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
+import {{ Audio, interpolate, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
 import {{ {pascal_name}Background }} from "./Background";
 import {{ {pascal_name}Canvas }} from "./Canvas";
 import {{ {pascal_name}Presenter }} from "./Presenter";
 import {{ AppleProgressBar }} from "../../components/AppleProgressBar";
 import {{ AppleKineticCaptions }} from "../../components/AppleKineticCaptions";
+import {{ SoundDesignEngine, SfxCue }} from "../../components/SoundDesignEngine";
+import {{ {pascal_name}Thumbnail }} from "../../thumbnails";
 import rawTranscript from "./transcript.json";
 import {{ WordTimestamp }} from "../../types";
 import "../../style.css";
@@ -259,11 +284,14 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({{
   endMs: t.endMs ?? t.end,
 }}));
 
-// Gentle tactile audio triggers — tied strictly to actual visual card entrances
-const SFX_FRAMES = [
-  0,                  // 0.0s: Intro Topic Badge Entrance
-  {mid_scene_frame},  // 4.8s: Storyboard Psychology Card Pop
-  {finale_frame},     // Finale Presenter Re-Entry
+// Rich multi-SFX audio triggers — tied strictly to actual visual card & presenter entrances
+const SFX_CUES: SfxCue[] = [
+  {{ frame: 0,                 type: "whoosh_deep",    volume: 0.32 }}, // 0.0s: Intro Presenter entrance
+  {{ frame: 12,                type: "click",          volume: 0.26 }}, // 0.4s: Topic badge spring pop
+  {{ frame: {mid_scene_frame}, type: "whoosh_fast",    volume: 0.34 }}, // Storyboard card entrance
+  {{ frame: {impact_frame},    type: "impact_hit",     volume: 0.22 }}, // Core diagnostic problem hit
+  {{ frame: {solution_frame},  type: "whoosh_sparkle", volume: 0.32 }}, // Core solution insight reveal
+  {{ frame: {finale_frame},    type: "whoosh_sparkle", volume: 0.35 }}, // Finale Presenter Re-Entry
 ];
 
 export const {pascal_name}Composition: React.FC = () => {{
@@ -276,6 +304,13 @@ export const {pascal_name}Composition: React.FC = () => {{
       className="relative w-full h-full bg-[#fbfbfd] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans"
       style={{{{ width, height }}}}
     >
+      {{/* 0. High-Converting 4K Thumbnail First-Frame (Captured automatically by YouTube Shorts) */}}
+      {{frame === 0 && (
+        <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">
+          <{pascal_name}Thumbnail />
+        </div>
+      )}}
+
       {{/* 1. Voiceover Audio Track */}}
       <Audio src={{staticFile("{name}/voiceover.mp3")}} volume={{1.3}} />
 
@@ -293,12 +328,8 @@ export const {pascal_name}Composition: React.FC = () => {{
         loop
       />
 
-      {{/* 3. Gentle Tactile Audio Feedback (Subtle Apple-style clicks on real visual shifts) */}}
-      {{SFX_FRAMES.map((f, idx) => (
-        <Sequence key={`sfx-${{idx}}`} from={{f}} durationInFrames={{15}}>
-          <Audio src={{staticFile("audio/sfx/mouse_click.mp3")}} volume={{0.22}} />
-        </Sequence>
-      ))}}
+      {{/* 3. Rich Layered Sound Design Engine (Whooshes, Hits, Sparkles & Tactile Clicks) */}}
+      <SoundDesignEngine cues={{SFX_CUES}} />
 
       {{/* 4. Top Apple Sleek Progress Bar */}}
       <AppleProgressBar />

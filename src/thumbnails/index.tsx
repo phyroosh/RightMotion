@@ -309,3 +309,37 @@ export const BoundariesThumbnail: React.FC = () => (
   />
 );
 
+// 16. BREAKING PATTERNS & HABIT LOOPS (9:16 Shorts)
+export const PatternsThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY YOU CAN'T BREAK OLD PATTERNS"
+    highlightWord="PATTERNS"
+    highlightColor="amber"
+    subtitle="Break The Loop At The Smallest Point — One Different Move"
+    categoryBadge="HABIT PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="obsidian"
+    aspectRatio="9:16"
+    extraBadge="MICRO-INTERRUPTION"
+  />
+);
+
+// 17. TEENAGE YEARS & THE BRAIN OVERLOAD (9:16 Shorts)
+export const TeenageThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY TEENAGE YEARS FEEL SO CHAOTIC"
+    highlightWord="CHAOTIC"
+    highlightColor="rose"
+    subtitle="Your Brain Is Still Developing — You're Still Becoming You"
+    categoryBadge="ADOLESCENT BRAIN"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="obsidian"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
+
+
+

@@ -5,6 +5,7 @@ import { ComparisonCanvas } from "./Canvas";
 import { ComparisonPresenter } from "./Presenter";
 import { AppleProgressBar } from "../../components/AppleProgressBar";
 import { AppleKineticCaptions } from "../../components/AppleKineticCaptions";
+import { ComparisonThumbnail } from "../../thumbnails";
 import rawTranscript from "./transcript.json";
 import { WordTimestamp } from "../../types";
 import "../../style.css";
@@ -33,6 +34,13 @@ export const ComparisonComposition: React.FC = () => {
       className="relative w-full h-full bg-[#fbfbfd] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans"
       style={{ width, height }}
     >
+      {/* 0. High-Converting 4K Thumbnail First-Frame (Captured automatically by YouTube Shorts) */}
+      {frame === 0 && (
+        <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">
+          <ComparisonThumbnail />
+        </div>
+      )}
+
       {/* 1. Voiceover Audio Track (Female Neural, Fast-Paced, Boosted +30%) */}
       <Audio src={staticFile("comparison/voiceover.mp3")} volume={1.3} />
 

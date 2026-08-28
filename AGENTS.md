@@ -49,21 +49,41 @@ Create 4 modular files:
 1. `Background.tsx`: Clean Apple Studio mesh background (`bg-[#f8fafc]` with subtle amber/indigo ambient orbs and dot-grid).
 2. `Canvas.tsx`: High-retention motion graphics storyboard illustrating the core psychological models (Comparison cards, Progress meters, Diagnostic badges, Micro-action blueprints).
 3. `Presenter.tsx`: Judy multi-pose animations (`character_pointing.png`, `character_talking.png`, `character_casual.png`, `character_open.png`) with Apple Glass floating badges.
-4. `index.tsx`: Main Composition uniting voiceover, BGM, **PRO MULTI-SFX layer** (see below), `AppleProgressBar`, and `AppleKineticCaptions`.
+4. `index.tsx`: Main Composition uniting voiceover, BGM, **PRO MULTI-SFX layer** (see below), `AppleProgressBar`, `AppleKineticCaptions`, and **FRAME 0 THUMBNAIL COVER** (see below).
 
-**🔊 SOUND DESIGN POLICY (GENTLE, MINIMAL, EVENT-DRIVEN — PERMANENT):**
+**🖼️ FRAME 0 THUMBNAIL COVER (PERMANENT RULE FOR 9:16 SHORTS):**
+- YouTube Shorts automatically captures the frame at `0:00` (Frame 0) as the video's default thumbnail cover on YouTube Studio and the Shorts feed.
+- Every vertical Shorts composition `index.tsx` MUST include the high-converting 4K ThumbnailCard at `frame === 0`:
+```tsx
+{/* 0. High-Converting 4K Thumbnail First-Frame (Captured automatically by YouTube Shorts) */}
+{frame === 0 && (
+  <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">
+    <<Name>Thumbnail />
+  </div>
+)}
+```
+
+**🔊 SOUND DESIGN POLICY (RICH, EVENT-DRIVEN, MULTI-SFX SUITE — PERMANENT):**
 - **Never spam or force SFX blindly based on math timers or duration intervals.**
-- **ONLY trigger an SFX when an actual visual element moves or enters the screen** (e.g. Topic Badge spring, Storyboard Card pop, Presenter Re-Entry).
-- Use gentle tactile Apple-style clicks (`audio/sfx/mouse_click.mp3` @ volume `0.20 - 0.24`) for UI card pops.
-- Keep audio gentle, crisp, and ducked so it complements rather than overpowers the voiceover.
-- An entire Short should typically have **only 2 to 4 subtle, perfectly-placed tactile cues** corresponding 1-to-1 with actual visual entrances in `Presenter.tsx` and `Canvas.tsx`.
+- **ONLY trigger an SFX when an actual visual element moves or enters the screen** (e.g. Presenter slide-in, Storyboard Card pop, Diagnostic hit, Solution sparkle).
+- **Leverage the full `public/audio/sfx/` library via `SoundDesignEngine`**:
+  - `whoosh_deep` / `whoosh_fast`: Presenter & major scene slide-ins (`volume: 0.30 - 0.34`)
+  - `impact_hit`: Core problem statements, diagnostic warnings, contrast slams (`volume: 0.20 - 0.24`)
+  - `click`: Tactile Apple-style UI chips, badges, checklist micro-actions (`volume: 0.24 - 0.28`)
+  - `whoosh_sparkle`: Key psychological revelations, neural rewiring, solutions, positive insights (`volume: 0.30 - 0.35`)
+  - `whoosh_cinematic`: Dramatic mid-video turning points or high-contrast structural pivots (`volume: 0.32 - 0.35`)
+- Keep all SFX ducked under the voiceover and strictly tied to visual elements in `Presenter.tsx` and `Canvas.tsx`.
 
 ```tsx
-// Attached strictly to visual card entrances in Presenter.tsx and Canvas.tsx
-const SFX_FRAMES = [
-  0,    // Intro Topic Badge Entrance
-  144,  // Canvas Storyboard Card Pop (4.8s)
-  825,  // Finale Presenter Re-Entry
+import { SoundDesignEngine, SfxCue } from "../../components/SoundDesignEngine";
+
+const SFX_CUES: SfxCue[] = [
+  { frame: 0,   type: "whoosh_deep",    volume: 0.32 }, // Intro Presenter entrance
+  { frame: 12,  type: "click",          volume: 0.26 }, // Topic Badge spring pop
+  { frame: 144, type: "whoosh_fast",    volume: 0.34 }, // Storyboard Card entrance
+  { frame: 170, type: "impact_hit",     volume: 0.22 }, // Problem diagnostic reveal
+  { frame: 450, type: "whoosh_sparkle", volume: 0.32 }, // Core solution insight
+  { frame: 825, type: "whoosh_sparkle", volume: 0.35 }, // Finale Presenter Re-Entry
 ];
 ```
 
@@ -108,11 +128,37 @@ Add the viral title (with `#Shorts`), high-CTR description, category (`27` Educa
 
 ### 📱 9:16 Shorts (Vertical)
 1. **Aspect Ratio**: Always `1080x1920` (9:16) at `30fps`.
-2. **Character Placement**:
+2. **Visual Metaphors & Canvas Proportions (CRITICAL FOR RETENTION & MOBILE READABILITY — PERMANENT)**:
+   - **Spacious Vertical & Horizontal Canvas Bounds (iPhone 11 Small-Display Rule)**:
+     - Always use wide, comfortable card bounds (`width: 980px - 1020px`, `max-w-[1000px]`, `px-6` margin).
+     - NEVER vertically compress or squish elements into tiny narrow bands at the top. The vertical safe focal zone extends from `top: 15%` down to `top: 76%` (~1150px of vertical space above captions).
+     - Utilize generous vertical padding (`p-10 - p-12`, `gap-6 - gap-8`) and large row heights (`min-h-[100px] - min-h-[120px]`).
+   - **Large Mobile Typography Standard (ABSOLUTELY NO TINY TEXT — PERMANENT)**:
+     - Every viewer on a 5.8"-6.1" phone (e.g. iPhone 11) must read all text effortlessly.
+     - **Card Titles & Headers**: `48px - 58px` (`text-5xl`), `font-black`.
+     - **Primary Row Labels & Items**: `32px - 40px` (`text-2xl` to `text-3xl`), `font-black`.
+     - **Badges, Tags, Chips & Category Pills**: **MINIMUM 24px - 30px** (`text-xl` / `text-2xl`, `font-black`), NEVER `text-xs` (12px), `text-sm` (14px), or `text-[10px]`.
+     - **Handwritten / Script Accents**: `28px - 36px` (`text-3xl font-serif italic font-black`).
+     - **Icons**: Minimum `w-8 h-8` to `w-10 h-10` inside `w-14 h-14` to `w-16 h-16` icon pedestals.
+   - **ZERO Paragraphs or Tiny Subtext**: Never fill cards with long sentences, sub-bullets, or textbook explanations. The voiceover speaks the story and captions display the words. The canvas must communicate visually through **cinematic graphic metaphors** (circular orbit loops, overload meters, laser slice cuts, branching neural highways, tactile switches).
+   - **Creative, Gentle, Clean & Minimal (MANDATORY AGENT DIRECTIVE)**:
+     - Approach every script with **high visual creativity**, crafting tailored diagrams and metaphors for the core psychological models.
+     - **Do NOT force or clutter**: Keep layouts gentle, instantly understandable, professional, and very minimal with generous breathing room and clean Apple Studio aesthetics.
+
+3. **Advanced Mathematical Keyframe System (SMOOTH MOTION STANDARD — PERMANENT)**:
+   - **Mass-Spring-Damper Physics**: Animate all elements using exact spring mechanics (`damping: 18 - 22`, `stiffness: 85 - 110`, `mass: 0.8 - 1.0`) for organic, buttery overshoot and smooth physical settling.
+   - **Continuous Mathematical Camera Momentum**: Apply continuous logarithmic camera push (`scale: 1.00 ➔ 1.05`) paired with subtle harmonic floating oscillations (`Math.sin(frame * 0.03) * 4px`) so the frame possesses continuous organic life.
+   - **Multi-Property Mathematical Coupling**: Always couple `translateY`, `scale`, `opacity`, and `rotate` through synchronized mathematical easing curves so elements move as unified physical objects with real inertia.
+
+4. **Character Placement**:
    - **Thumbnails**: Judy MUST be centered bottom-half (`left: 50%, transform: translateX(-50%)`), full-body grounded with NO text scrim fading over her upper body and NO footer clutter at the bottom.
    - **Video Presenter**: Judy cutouts enter with buttery spring animations, float keyframes, and frosted backdrop glass.
-3. **Captions**: Central `AppleKineticCaptions` with neon-blue active word pill glow.
-4. **Sound Design**: Tactile mouse click SFX at each visual shift; ducked ambient documentary BGM.
+
+5. **Captions**: Central `AppleKineticCaptions` with neon-blue active word pill glow.
+
+6. **Sound Design (Professional, Measured & Event-Driven — 10/10 Standard)**:
+   - Rich multi-SFX suite via `SoundDesignEngine` (`whoosh_deep` / `whoosh_fast` on scene pivots, `impact_hit` on diagnostic problem reveals, `click` on badge/chip springs, `whoosh_sparkle` on breakthroughs & finale return).
+   - Tied 1-to-1 to visual shifts; keep audio crisp, ducked, and non-cluttered so it feels documentary-grade.
 
 ### 🎬 16:9 Long-Form (Widescreen)
 1. **Aspect Ratio**: Always `1920x1080` (16:9) at `30fps`.

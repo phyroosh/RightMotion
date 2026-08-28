@@ -5,6 +5,7 @@ import { MaturityCanvas } from "./Canvas";
 import { MaturityPresenter } from "./Presenter";
 import { AppleProgressBar } from "../../components/AppleProgressBar";
 import { AppleKineticCaptions } from "../../components/AppleKineticCaptions";
+import { MaturityThumbnail } from "../../thumbnails";
 import rawTranscript from "./transcript.json";
 import { WordTimestamp } from "../../types";
 import "../../style.css";
@@ -32,6 +33,13 @@ export const MaturityComposition: React.FC = () => {
       className="relative w-full h-full bg-[#fbfbfd] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans"
       style={{ width, height }}
     >
+      {/* 0. High-Converting 4K Thumbnail First-Frame (Captured automatically by YouTube Shorts) */}
+      {frame === 0 && (
+        <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">
+          <MaturityThumbnail />
+        </div>
+      )}
+
       {/* 1. Voiceover Audio Track (Female Neural, Fast-Paced, Boosted +30%) */}
       <Audio src={staticFile("maturity/voiceover.mp3")} volume={1.3} />
 
