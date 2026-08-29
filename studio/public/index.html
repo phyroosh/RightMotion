@@ -4,10 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RightClips — YouTube Studio & Video Publisher</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Local & Fallback Tailwind CSS -->
+  <script src="/vendor/tailwind.js"></script>
+  <script>
+    if (typeof tailwind === 'undefined') {
+      document.write('<script src="https://cdn.tailwindcss.com"><\/script>');
+    }
+  </script>
+  <!-- Local & Fallback Lucide Icons -->
+  <script src="/vendor/lucide.min.js"></script>
+  <script>
+    if (typeof lucide === 'undefined') {
+      document.write('<script src="https://unpkg.com/lucide@latest"><\/script>');
+    }
+  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
 
@@ -1052,6 +1062,17 @@
     let activeChannel = null;
     let activeTab = 'all'; // 'all', 'unuploaded', 'scheduled', 'uploaded', 'longform'
 
+    // Safe Lucide Icon Renderer (never throws if Lucide is slow or absent)
+    function safeCreateIcons() {
+      if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+        try {
+          lucide.createIcons();
+        } catch (e) {
+          console.warn('Lucide icon warning:', e);
+        }
+      }
+    }
+
     // Format Relative & Absolute Date
     function formatDateTime(dateStr) {
       if (!dateStr) return 'Recent';
@@ -1159,7 +1180,7 @@
             `;
           }
         }
-        lucide.createIcons();
+        safeCreateIcons();
       } catch (e) {
         igSection.innerHTML = `<span class="text-xs text-rose-400 font-mono">IG Offline</span>`;
       }
@@ -1221,7 +1242,7 @@
         if (igContent) igContent.classList.remove('hidden');
         if (ytContent) ytContent.classList.add('hidden');
       }
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     // ═══════════════════════════════════════════════════
@@ -1234,7 +1255,7 @@
       modal.classList.remove('opacity-0', 'pointer-events-none');
       await loadSettingsStatus();
       await checkInstagramStatus();
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     function closeSettingsModal() {
@@ -1344,7 +1365,7 @@
       } catch (err) {
         card.innerHTML = `<div class="text-xs text-rose-400">Settings error: ${err.message}</div>`;
       }
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     // Handle file picker selection for client_secrets.json
@@ -1370,7 +1391,7 @@
       const saveBtn = document.getElementById('saveSecretsBtn');
       saveBtn.disabled = true;
       saveBtn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Saving...`;
-      lucide.createIcons();
+      safeCreateIcons();
 
       try {
         const res = await fetch('/api/settings/save-secrets', {
@@ -1394,7 +1415,7 @@
       } finally {
         saveBtn.disabled = false;
         saveBtn.innerHTML = `<i data-lucide="plus-circle" class="w-4 h-4"></i> <span>Add this YT studio API</span>`;
-        lucide.createIcons();
+        safeCreateIcons();
       }
     }
 
@@ -1470,7 +1491,7 @@
             </button>
           `;
         }
-        lucide.createIcons();
+        safeCreateIcons();
       } catch (err) {
         authSection.innerHTML = `<span class="text-xs text-rose-400">Offline</span>`;
       }
@@ -1500,7 +1521,7 @@
       const syncBtn = document.getElementById('syncYtBtn');
       syncBtn.disabled = true;
       syncBtn.innerHTML = `<i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i> Syncing...`;
-      lucide.createIcons();
+      safeCreateIcons();
 
       try {
         const res = await fetch('/api/sync-uploads', { method: 'POST' });
@@ -1512,7 +1533,7 @@
       } finally {
         syncBtn.disabled = false;
         syncBtn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> Sync YT`;
-        lucide.createIcons();
+        safeCreateIcons();
       }
     }
 
@@ -1601,7 +1622,7 @@
       if (activeTab === 'longform') {
         if (longFormsData.length === 0) {
           videoList.innerHTML = renderEmptyState('No 16:9 long-form videos rendered yet.');
-          lucide.createIcons();
+          safeCreateIcons();
           return;
         }
         videoList.innerHTML = `
@@ -1618,7 +1639,7 @@
       } else if (activeTab === 'shorts') {
         if (shortsData.length === 0) {
           videoList.innerHTML = renderEmptyState('No 9:16 vertical shorts rendered yet.');
-          lucide.createIcons();
+          safeCreateIcons();
           return;
         }
         videoList.innerHTML = `
@@ -1683,7 +1704,7 @@
         videoList.innerHTML = html;
       }
 
-      lucide.createIcons();
+      safeCreateIcons();
 
       // Highlight currently selected card
       if (selectedVideo) {
@@ -1698,7 +1719,7 @@
       const videoList = document.getElementById('videoList');
       if (list.length === 0) {
         videoList.innerHTML = renderEmptyState(`No videos under ${title}.`);
-        lucide.createIcons();
+        safeCreateIcons();
         return;
       }
       videoList.innerHTML = `
@@ -1920,7 +1941,7 @@
       onPrivacyChange();
       updateTagsUI();
       updateTitleCharCount();
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     function updateThumbnailUI() {
@@ -1965,7 +1986,7 @@
         if (thumbBadge) thumbBadge.innerHTML = `<span class="text-slate-400 font-mono">Auto Generating...</span>`;
         if (viewFullBtn) viewFullBtn.href = '#';
       }
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     function downloadThumbnail() {
@@ -2010,7 +2031,7 @@
         }
         if (uploadBtnIcon) uploadBtnIcon.setAttribute('data-lucide', 'upload-cloud');
       }
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     // Set Quick Schedule Hours Offset
@@ -2049,7 +2070,7 @@
             <i data-lucide="alert-triangle" class="w-4 h-4"></i> Please choose a future time (at least 5 minutes ahead).
           </span>
         `;
-        lucide.createIcons();
+        safeCreateIcons();
         return;
       }
 
@@ -2060,7 +2081,7 @@
           Will automatically go PUBLIC on YouTube on <strong>${formatted}</strong> (Local Time)
         </span>
       `;
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     // Title Char Count
@@ -2172,7 +2193,7 @@
       updateModalSchedulePreview();
 
       modal.classList.remove('opacity-0', 'pointer-events-none');
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     function closePublishModal() {
@@ -2204,7 +2225,7 @@
         schedBox.classList.add('hidden');
         confirmBtnText.textContent = "Save as Private Draft";
       }
-      lucide.createIcons();
+      safeCreateIcons();
     }
 
     function setModalQuickHours(hours) {
@@ -2295,7 +2316,7 @@
       stageText.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Initializing multi-platform publisher...`;
       percentText.textContent = `5%`;
       progressBar.style.width = `5%`;
-      lucide.createIcons();
+      safeCreateIcons();
 
       try {
         const res = await fetch('/api/publish-multi', {
@@ -2333,7 +2354,7 @@
           `;
           percentText.textContent = `${statusData.progress || 0}%`;
           progressBar.style.width = `${statusData.progress || 0}%`;
-          lucide.createIcons();
+          safeCreateIcons();
 
           if (!statusData.inProgress) {
             clearInterval(pollInterval);
@@ -2367,7 +2388,7 @@
 
               resultLink.innerHTML = linksHtml;
               showToast('🎉 Successfully processed multi-platform release!');
-              lucide.createIcons();
+              safeCreateIcons();
               await loadVideos();
             }
           }
@@ -2394,7 +2415,7 @@
       checkAuthStatus();
       checkInstagramStatus();
       loadVideos();
-      lucide.createIcons();
+      safeCreateIcons();
     });
   </script>
 </body>
