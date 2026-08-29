@@ -29,15 +29,31 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
   characterPosition = 'right',
   characterScale = 1.0,
   characterOffsetY = 0,
-  theme = 'obsidian',
+  theme = 'apple_studio',
   aspectRatio = '16:9',
   extraBadge,
-  extraBadgeColor = 'text-amber-400 border-amber-500/30 bg-amber-500/10',
+  extraBadgeColor,
   visualGraphic,
 }) => {
   const is16x9 = aspectRatio === '16:9';
 
   const themes = {
+    apple_studio: {
+      bg: '#f8fafc',
+      topGrad: 'radial-gradient(circle at 50% 15%, #ffffff 0%, #f1f5f9 45%, #e2e8f0 100%)',
+      charGrad: 'radial-gradient(ellipse at 50% 100%, rgba(241, 245, 249, 0.95) 0%, rgba(248, 250, 252, 0.3) 70%, transparent 100%)',
+      glow: 'rgba(245, 158, 11, 0.22)',
+      glowWide: 'rgba(14, 165, 233, 0.18)',
+      accent: '#0071e3',
+      cardBg: 'rgba(255, 255, 255, 0.92)',
+      cardBorder: 'rgba(15, 23, 42, 0.08)',
+      rimLight: 'rgba(14, 165, 233, 0.25)',
+      footerColor: '#64748b',
+      textColor: '#090d16',
+      subColor: '#1e293b',
+      scrimGrad: 'linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.88) 45%, rgba(248, 250, 252, 0) 100%)',
+      dotGrid: 'radial-gradient(rgba(15, 23, 42, 0.18) 1.5px, transparent 1.5px)',
+    },
     obsidian: {
       bg: '#080c14',
       topGrad: 'linear-gradient(180deg, #080c14 0%, #0d1929 60%, #080c14 100%)',
@@ -49,6 +65,10 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       cardBorder: 'rgba(56, 189, 248, 0.22)',
       rimLight: 'rgba(56, 189, 248, 0.35)',
       footerColor: '#94a3b8',
+      textColor: '#ffffff',
+      subColor: '#e2e8f0',
+      scrimGrad: 'linear-gradient(180deg, #080c14 0%, #080c14f5 40%, #080c14cc 70%, transparent 100%)',
+      dotGrid: 'radial-gradient(rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px)',
     },
     crimson: {
       bg: '#0a0208',
@@ -61,6 +81,10 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       cardBorder: 'rgba(244, 63, 94, 0.45)',
       rimLight: 'rgba(244, 63, 94, 0.45)',
       footerColor: '#fda4af',
+      textColor: '#ffffff',
+      subColor: '#e2e8f0',
+      scrimGrad: 'linear-gradient(180deg, #0a0208 0%, #0a0208f5 40%, #0a0208cc 70%, transparent 100%)',
+      dotGrid: 'radial-gradient(rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px)',
     },
     slate: {
       bg: '#0b0f19',
@@ -73,6 +97,10 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       cardBorder: 'rgba(99, 102, 241, 0.35)',
       rimLight: 'rgba(99, 102, 241, 0.40)',
       footerColor: '#94a3b8',
+      textColor: '#ffffff',
+      subColor: '#e2e8f0',
+      scrimGrad: 'linear-gradient(180deg, #0b0f19 0%, #0b0f19f5 40%, #0b0f19cc 70%, transparent 100%)',
+      dotGrid: 'radial-gradient(rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px)',
     },
     purple: {
       bg: '#0a0512',
@@ -85,6 +113,10 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       cardBorder: 'rgba(168, 85, 247, 0.42)',
       rimLight: 'rgba(192, 132, 252, 0.45)',
       footerColor: '#d8b4fe',
+      textColor: '#ffffff',
+      subColor: '#e2e8f0',
+      scrimGrad: 'linear-gradient(180deg, #0a0512 0%, #0a0512f5 40%, #0a0208cc 70%, transparent 100%)',
+      dotGrid: 'radial-gradient(rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px)',
     },
     emerald: {
       bg: '#021008',
@@ -97,6 +129,10 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       cardBorder: 'rgba(16, 185, 129, 0.40)',
       rimLight: 'rgba(52, 211, 153, 0.40)',
       footerColor: '#6ee7b7',
+      textColor: '#ffffff',
+      subColor: '#e2e8f0',
+      scrimGrad: 'linear-gradient(180deg, #021008 0%, #021008f5 40%, #021008cc 70%, transparent 100%)',
+      dotGrid: 'radial-gradient(rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px)',
     },
     amber: {
       bg: '#0f0800',
@@ -109,6 +145,10 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       cardBorder: 'rgba(245, 158, 11, 0.40)',
       rimLight: 'rgba(251, 191, 36, 0.45)',
       footerColor: '#fcd34d',
+      textColor: '#ffffff',
+      subColor: '#e2e8f0',
+      scrimGrad: 'linear-gradient(180deg, #0f0800 0%, #0f0800f5 40%, #0f0800cc 70%, transparent 100%)',
+      dotGrid: 'radial-gradient(rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px)',
     },
     blue: {
       bg: '#020b14',
@@ -121,20 +161,43 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       cardBorder: 'rgba(14, 165, 233, 0.40)',
       rimLight: 'rgba(56, 189, 248, 0.45)',
       footerColor: '#7dd3fc',
+      textColor: '#ffffff',
+      subColor: '#e2e8f0',
+      scrimGrad: 'linear-gradient(180deg, #020b14 0%, #020b14f5 40%, #020b14cc 70%, transparent 100%)',
+      dotGrid: 'radial-gradient(rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px)',
     },
     white: {
-      bg: '#f0f4f8',
-      topGrad: 'linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 60%, #f0f4f8 100%)',
-      charGrad: 'linear-gradient(0deg, #e2e8f0 0%, #f8fafc 55%)',
-      glow: 'rgba(0, 113, 227, 0.25)',
-      glowWide: 'rgba(0, 113, 227, 0.15)',
+      bg: '#f8fafc',
+      topGrad: 'radial-gradient(circle at 50% 15%, #ffffff 0%, #f1f5f9 45%, #e2e8f0 100%)',
+      charGrad: 'radial-gradient(ellipse at 50% 100%, rgba(241, 245, 249, 0.95) 0%, rgba(248, 250, 252, 0.3) 70%, transparent 100%)',
+      glow: 'rgba(245, 158, 11, 0.22)',
+      glowWide: 'rgba(14, 165, 233, 0.18)',
       accent: '#0071e3',
-      cardBg: 'rgba(255, 255, 255, 0.96)',
-      cardBorder: 'rgba(0, 0, 0, 0.12)',
-      rimLight: 'rgba(0, 113, 227, 0.20)',
+      cardBg: 'rgba(255, 255, 255, 0.92)',
+      cardBorder: 'rgba(15, 23, 42, 0.08)',
+      rimLight: 'rgba(14, 165, 233, 0.25)',
       footerColor: '#64748b',
+      textColor: '#090d16',
+      subColor: '#1e293b',
+      scrimGrad: 'linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.88) 45%, rgba(248, 250, 252, 0) 100%)',
+      dotGrid: 'radial-gradient(rgba(15, 23, 42, 0.18) 1.5px, transparent 1.5px)',
     },
-  }[theme];
+  }[theme || 'apple_studio'] || {
+    bg: '#f8fafc',
+    topGrad: 'radial-gradient(circle at 50% 15%, #ffffff 0%, #f1f5f9 45%, #e2e8f0 100%)',
+    charGrad: 'radial-gradient(ellipse at 50% 100%, rgba(241, 245, 249, 0.95) 0%, rgba(248, 250, 252, 0.3) 70%, transparent 100%)',
+    glow: 'rgba(245, 158, 11, 0.22)',
+    glowWide: 'rgba(14, 165, 233, 0.18)',
+    accent: '#0071e3',
+    cardBg: 'rgba(255, 255, 255, 0.92)',
+    cardBorder: 'rgba(15, 23, 42, 0.08)',
+    rimLight: 'rgba(14, 165, 233, 0.25)',
+    footerColor: '#64748b',
+    textColor: '#090d16',
+    subColor: '#1e293b',
+    scrimGrad: 'linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.88) 45%, rgba(248, 250, 252, 0) 100%)',
+    dotGrid: 'radial-gradient(rgba(15, 23, 42, 0.18) 1.5px, transparent 1.5px)',
+  };
 
   const highlightStyles = {
     amber: {
@@ -175,6 +238,8 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
     },
   }[highlightColor];
 
+  const isLight = theme === 'apple_studio' || theme === 'white';
+
   const renderTitleWords = (fontSize: number, lineHeight: number) => {
     if (!highlightWord) {
       return (
@@ -182,9 +247,9 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           fontSize,
           lineHeight,
           fontWeight: 900,
-          color: '#ffffff',
+          color: themes.textColor,
           letterSpacing: '-0.02em',
-          textShadow: '0 6px 30px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.8)',
+          textShadow: isLight ? '0 2px 10px rgba(15,23,42,0.06)' : '0 6px 30px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.8)',
           wordBreak: 'break-word',
         }}>
           {title}
@@ -226,9 +291,9 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
               key={i}
               style={{
                 fontWeight: 900,
-                color: '#ffffff',
+                color: themes.textColor,
                 letterSpacing: '-0.02em',
-                textShadow: '0 6px 30px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.8)',
+                textShadow: isLight ? '0 2px 10px rgba(15,23,42,0.06)' : '0 6px 30px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.8)',
                 display: 'inline',
               }}
             >
@@ -288,7 +353,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           background: themes.glow,
           filter: 'blur(120px)',
           zIndex: 3,
-          opacity: 0.85,
+          opacity: isLight ? 0.6 : 0.85,
         }} />
 
         {/* ─── LAYER 4: Top accent glow ─── */}
@@ -300,7 +365,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           width: '900px',
           height: '500px',
           borderRadius: '50%',
-          background: `rgba(255,255,255,0.04)`,
+          background: themes.glowWide,
           filter: 'blur(90px)',
           zIndex: 3,
         }} />
@@ -309,10 +374,10 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
         <div style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: 'radial-gradient(rgba(255,255,255,0.18) 1.5px, transparent 1.5px)',
+          backgroundImage: themes.dotGrid,
           backgroundSize: '38px 38px',
           zIndex: 4,
-          opacity: 0.12,
+          opacity: isLight ? 0.25 : 0.12,
         }} />
 
         {/* ─── LAYER 6: Rim light strip behind character (bottom center) ─── */}
@@ -349,7 +414,9 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
               height: '100%',
               objectFit: 'contain',
               objectPosition: 'bottom center',
-              filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.99)) drop-shadow(0 8px 24px rgba(0,0,0,0.85))',
+              filter: isLight
+                ? 'drop-shadow(0 20px 40px rgba(15,23,42,0.18)) drop-shadow(0 4px 12px rgba(15,23,42,0.12))'
+                : 'drop-shadow(0 40px 80px rgba(0,0,0,0.99)) drop-shadow(0 8px 24px rgba(0,0,0,0.85))',
             }}
             alt="Character"
           />
@@ -362,7 +429,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           left: 0,
           right: 0,
           height: '42%',
-          background: `linear-gradient(180deg, ${themes.bg} 0%, ${themes.bg}f5 40%, ${themes.bg}cc 70%, transparent 100%)`,
+          background: themes.scrimGrad,
           zIndex: 15,
         }} />
 
@@ -386,15 +453,15 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+            boxShadow: isLight ? '0 4px 20px rgba(15,23,42,0.06)' : '0 8px 32px rgba(0,0,0,0.5)',
           }}>
-            <Sparkles style={{ width: '22px', height: '22px', color: '#fbbf24' }} />
+            <Sparkles style={{ width: '22px', height: '22px', color: '#f59e0b' }} />
             <span style={{
               fontFamily: 'monospace',
               fontWeight: 800,
               fontSize: '22px',
               letterSpacing: '0.12em',
-              color: '#e2e8f0',
+              color: themes.subColor,
               textTransform: 'uppercase',
             }}>
               {categoryBadge}
@@ -414,7 +481,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
               letterSpacing: '0.1em',
               color: themes.accent,
               textTransform: 'uppercase',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+              boxShadow: isLight ? '0 4px 20px rgba(15,23,42,0.06)' : '0 8px 32px rgba(0,0,0,0.5)',
             }}>
               {extraBadge}
             </div>
@@ -447,14 +514,14 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
               background: themes.cardBg,
               border: `1.5px solid ${themes.cardBorder}`,
               backdropFilter: 'blur(20px)',
-              boxShadow: '0 12px 40px rgba(0,0,0,0.6)',
+              boxShadow: isLight ? '0 8px 30px rgba(15,23,42,0.08)' : '0 12px 40px rgba(0,0,0,0.6)',
               maxWidth: '900px',
             }}>
-              <Zap style={{ width: '24px', height: '24px', color: '#fbbf24', flexShrink: 0 }} />
+              <Zap style={{ width: '24px', height: '24px', color: '#f59e0b', flexShrink: 0 }} />
               <span style={{
                 fontSize: '26px',
                 fontWeight: 700,
-                color: '#e2e8f0',
+                color: themes.subColor,
                 letterSpacing: '-0.01em',
                 lineHeight: 1.35,
               }}>
@@ -470,7 +537,6 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
             </div>
           )}
         </div>
-
       </div>
     );
   }

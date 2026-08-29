@@ -126,7 +126,7 @@ export const ADHDThumbnail: React.FC = () => (
     categoryBadge="ADHD PARADOX"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="amber"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="BRAIN SCIENCE"
   />
@@ -142,7 +142,7 @@ export const GogginsThumbnail: React.FC = () => (
     categoryBadge="MENTAL TOUGHNESS"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="obsidian"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="STAY HARD"
   />
@@ -158,7 +158,7 @@ export const BreaksThumbnail: React.FC = () => (
     categoryBadge="BURNOUT RECOVERY"
     characterPose="character_fullbody_casual.png"
     characterScale={0.98}
-    theme="emerald"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="SELF CARE"
   />
@@ -174,7 +174,7 @@ export const MotivationThumbnail: React.FC = () => (
     categoryBadge="ACTION PSYCHOLOGY"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="slate"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="DO THIS INSTEAD"
   />
@@ -190,7 +190,7 @@ export const MaturityThumbnail: React.FC = () => (
     categoryBadge="EMOTIONAL MATURITY"
     characterPose="character_fullbody_open.png"
     characterScale={0.98}
-    theme="blue"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="GROWTH MINDSET"
   />
@@ -206,7 +206,7 @@ export const ComparisonThumbnail: React.FC = () => (
     categoryBadge="SELF WORTH"
     characterPose="character_fullbody_casual.png"
     characterScale={0.98}
-    theme="purple"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="FOCUS ON YOU"
   />
@@ -222,7 +222,7 @@ export const HabitThumbnail: React.FC = () => (
     categoryBadge="ATOMIC HABITS"
     characterPose="character_fullbody_open.png"
     characterScale={0.98}
-    theme="slate"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="BRAIN HACKS"
   />
@@ -238,7 +238,7 @@ export const EmotionsThumbnail: React.FC = () => (
     categoryBadge="EMOTIONAL PROCESSING"
     characterPose="character_fullbody_casual.png"
     characterScale={0.98}
-    theme="blue"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="RELATIONSHIPS"
   />
@@ -254,7 +254,7 @@ export const StrengthThumbnail: React.FC = () => (
     categoryBadge="RESILIENCE MINDSET"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="emerald"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="MINDSET"
   />
@@ -270,7 +270,7 @@ export const ChaptersThumbnail: React.FC = () => (
     categoryBadge="PERSPECTIVE"
     characterPose="character_fullbody_open.png"
     characterScale={0.98}
-    theme="amber"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="REMEMBER THIS"
   />
@@ -286,12 +286,11 @@ export const PromisesThumbnail: React.FC = () => (
     categoryBadge="SELF-TRUST PSYCHOLOGY"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="obsidian"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="REBUILD TRUST"
   />
 );
-
 
 // 15. BOUNDARIES & SELF-PEACE (9:16 Shorts)
 export const BoundariesThumbnail: React.FC = () => (
@@ -303,7 +302,7 @@ export const BoundariesThumbnail: React.FC = () => (
     categoryBadge="BOUNDARIES PSYCHOLOGY"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="obsidian"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="PROTECT YOUR PEACE"
   />
@@ -319,7 +318,7 @@ export const PatternsThumbnail: React.FC = () => (
     categoryBadge="HABIT PSYCHOLOGY"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="obsidian"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="MICRO-INTERRUPTION"
   />
@@ -335,7 +334,7 @@ export const TeenageThumbnail: React.FC = () => (
     categoryBadge="ADOLESCENT BRAIN"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="obsidian"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="MINDSET"
   />
