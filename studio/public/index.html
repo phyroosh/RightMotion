@@ -1851,58 +1851,68 @@
         }
       }
 
-      player.src = `/api/video-file/${filename}`;
-      placeholder.style.display = 'none';
-      stats.textContent = `${selectedVideo.sizeMb} MB • ${isWidescreen ? '16:9 Widescreen' : '9:16 Shorts'}`;
+      if (player) player.src = `/api/video-file/${filename}`;
+      if (placeholder) placeholder.style.display = 'none';
+      if (stats) stats.textContent = `${selectedVideo.sizeMb} MB • ${isWidescreen ? '16:9 Widescreen' : '9:16 Shorts'}`;
 
       // Update Live / Scheduled Multi-Platform Status Banner
       const statusBanner = document.getElementById('uploadStatusBanner');
       const yt = selectedVideo.youtube || {};
       const ig = selectedVideo.instagram || {};
 
-      let bannerHtml = `
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-[#0071e3] text-white flex items-center justify-center flex-shrink-0 font-bold">
-            <i data-lucide="activity" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <div class="text-xs font-black text-white uppercase tracking-wide flex items-center gap-2">
-              <span>Platform Release Status</span>
+      if (statusBanner) {
+        let bannerHtml = `
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-[#0071e3] text-white flex items-center justify-center flex-shrink-0 font-bold">
+              <i data-lucide="activity" class="w-5 h-5"></i>
             </div>
-            <div class="text-[11px] text-slate-300 font-mono mt-0.5 flex items-center gap-3">
-              <span>YT: <strong class="${yt.isUploaded ? 'text-red-400' : yt.isScheduled ? 'text-purple-400' : 'text-slate-400'}">${yt.isScheduled ? 'Scheduled' : yt.isUploaded ? 'Live' : 'Ready'}</strong></span>
-              <span>•</span>
-              <span>IG: <strong class="${ig.isUploaded ? 'text-pink-400' : ig.isScheduled ? 'text-purple-400' : 'text-slate-400'}">${ig.isScheduled ? 'Scheduled' : ig.isUploaded ? 'Reel Live' : 'Ready'}</strong></span>
+            <div>
+              <div class="text-xs font-black text-white uppercase tracking-wide flex items-center gap-2">
+                <span>Platform Release Status</span>
+              </div>
+              <div class="text-[11px] text-slate-300 font-mono mt-0.5 flex items-center gap-3">
+                <span>YT: <strong class="${yt.isUploaded ? 'text-red-400' : yt.isScheduled ? 'text-purple-400' : 'text-slate-400'}">${yt.isScheduled ? 'Scheduled' : yt.isUploaded ? 'Live' : 'Ready'}</strong></span>
+                <span>•</span>
+                <span>IG: <strong class="${ig.isUploaded ? 'text-pink-400' : ig.isScheduled ? 'text-purple-400' : 'text-slate-400'}">${ig.isScheduled ? 'Scheduled' : ig.isUploaded ? 'Reel Live' : 'Ready'}</strong></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="flex items-center gap-2">
-          ${yt.youtubeUrl ? `
-            <a href="${selectedVideo.isLongForm ? yt.youtubeUrl : (yt.shortsUrl || yt.youtubeUrl)}" target="_blank" class="px-3 py-1.5 rounded-xl bg-red-600/20 text-red-300 border border-red-500/40 text-xs font-bold flex items-center gap-1">
-              <i data-lucide="play" class="w-3 h-3"></i> YT
-            </a>
-          ` : ''}
-          ${ig.reelUrl ? `
-            <a href="${ig.reelUrl}" target="_blank" class="px-3 py-1.5 rounded-xl bg-pink-600/20 text-pink-300 border border-pink-500/40 text-xs font-bold flex items-center gap-1">
-              <i data-lucide="camera" class="w-3 h-3"></i> IG Reel
-            </a>
-          ` : ''}
-        </div>
-      `;
-      statusBanner.innerHTML = bannerHtml;
+          <div class="flex items-center gap-2">
+            ${yt.youtubeUrl ? `
+              <a href="${selectedVideo.isLongForm ? yt.youtubeUrl : (yt.shortsUrl || yt.youtubeUrl)}" target="_blank" class="px-3 py-1.5 rounded-xl bg-red-600/20 text-red-300 border border-red-500/40 text-xs font-bold flex items-center gap-1">
+                <i data-lucide="play" class="w-3 h-3"></i> YT
+              </a>
+            ` : ''}
+            ${ig.reelUrl ? `
+              <a href="${ig.reelUrl}" target="_blank" class="px-3 py-1.5 rounded-xl bg-pink-600/20 text-pink-300 border border-pink-500/40 text-xs font-bold flex items-center gap-1">
+                <i data-lucide="camera" class="w-3 h-3"></i> IG Reel
+              </a>
+            ` : ''}
+          </div>
+        `;
+        statusBanner.innerHTML = bannerHtml;
+      }
 
       // Populate Metadata
-      const meta = selectedVideo.metadata;
-      document.getElementById('metaTitle').value = meta.title || '';
-      document.getElementById('metaDescription').value = meta.description || '';
-      document.getElementById('metaPrivacy').value = meta.privacyStatus || 'public';
-      document.getElementById('metaCategory').value = meta.categoryId || '27';
+      const meta = selectedVideo.metadata || {};
+      const titleEl = document.getElementById('metaTitle');
+      const descEl = document.getElementById('metaDescription');
+      const privacyEl = document.getElementById('metaPrivacy');
+      const catEl = document.getElementById('metaCategory');
+      const schedDtEl = document.getElementById('scheduleDateTime');
+
+      if (titleEl) titleEl.value = meta.title || '';
+      if (descEl) descEl.value = meta.description || '';
+      if (privacyEl) privacyEl.value = meta.privacyStatus || 'public';
+      if (catEl) catEl.value = meta.categoryId || '27';
       currentTags = Array.isArray(meta.tags) ? [...meta.tags] : ['Shorts'];
       
       // Initialize default schedule time to +2 hours from now
-      const defaultDate = new Date();
-      defaultDate.setHours(defaultDate.getHours() + 2);
-      document.getElementById('scheduleDateTime').value = toLocalISOString(defaultDate);
+      if (schedDtEl) {
+        const defaultDate = new Date();
+        defaultDate.setHours(defaultDate.getHours() + 2);
+        schedDtEl.value = toLocalISOString(defaultDate);
+      }
 
       // Update Thumbnail UI
       updateThumbnailUI();
@@ -1924,31 +1934,35 @@
 
       const isLong = selectedVideo.isLongForm;
 
-      if (isLong) {
-        thumbContainer.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
-        if (ratioBadge) {
-          ratioBadge.textContent = "16:9 Long-Form";
-          ratioBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/20 font-bold";
-        }
-      } else {
-        thumbContainer.className = "relative w-full max-w-[260px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
-        if (ratioBadge) {
-          ratioBadge.textContent = "9:16 Shorts";
-          ratioBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-bold";
+      if (thumbContainer) {
+        if (isLong) {
+          thumbContainer.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
+          if (ratioBadge) {
+            ratioBadge.textContent = "16:9 Long-Form";
+            ratioBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/20 font-bold";
+          }
+        } else {
+          thumbContainer.className = "relative w-full max-w-[260px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
+          if (ratioBadge) {
+            ratioBadge.textContent = "9:16 Shorts";
+            ratioBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-bold";
+          }
         }
       }
 
       if (selectedVideo.hasThumbnail) {
         const url = `${selectedVideo.thumbnailUrl}?t=${Date.now()}`;
-        thumbImg.src = url;
-        thumbImg.style.display = 'block';
-        thumbPlaceholder.style.display = 'none';
-        thumbBadge.innerHTML = `<span class="text-emerald-400 font-bold flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> ${isLong ? '16:9 Cover Ready' : '9:16 Shorts Cover Ready'}</span>`;
+        if (thumbImg) {
+          thumbImg.src = url;
+          thumbImg.style.display = 'block';
+        }
+        if (thumbPlaceholder) thumbPlaceholder.style.display = 'none';
+        if (thumbBadge) thumbBadge.innerHTML = `<span class="text-emerald-400 font-bold flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> ${isLong ? '16:9 Cover Ready' : '9:16 Shorts Cover Ready'}</span>`;
         if (viewFullBtn) viewFullBtn.href = url;
       } else {
-        thumbImg.style.display = 'none';
-        thumbPlaceholder.style.display = 'flex';
-        thumbBadge.innerHTML = `<span class="text-slate-400 font-mono">Auto Generating...</span>`;
+        if (thumbImg) thumbImg.style.display = 'none';
+        if (thumbPlaceholder) thumbPlaceholder.style.display = 'flex';
+        if (thumbBadge) thumbBadge.innerHTML = `<span class="text-slate-400 font-mono">Auto Generating...</span>`;
         if (viewFullBtn) viewFullBtn.href = '#';
       }
       lucide.createIcons();
@@ -1970,27 +1984,31 @@
 
     // Handle Visibility Dropdown change
     function onPrivacyChange() {
-      const privacy = document.getElementById('metaPrivacy').value;
+      const privacyEl = document.getElementById('metaPrivacy');
+      if (!privacyEl) return;
+      const privacy = privacyEl.value;
       const schedBox = document.getElementById('scheduleControlBox');
       const schedBadge = document.getElementById('schedModeBadge');
       const uploadBtnText = document.getElementById('uploadBtnText');
       const uploadBtnIcon = document.getElementById('uploadBtnIcon');
 
       if (privacy === 'scheduled') {
-        schedBox.classList.remove('hidden');
-        schedBadge.classList.remove('hidden');
-        uploadBtnText.textContent = "Schedule Video on YouTube";
-        uploadBtnIcon.setAttribute('data-lucide', 'calendar-clock');
+        if (schedBox) schedBox.classList.remove('hidden');
+        if (schedBadge) schedBadge.classList.remove('hidden');
+        if (uploadBtnText) uploadBtnText.textContent = "Schedule Video on YouTube";
+        if (uploadBtnIcon) uploadBtnIcon.setAttribute('data-lucide', 'calendar-clock');
         updateSchedulePreview();
       } else {
-        schedBox.classList.add('hidden');
-        schedBadge.classList.add('hidden');
-        if (selectedVideo && selectedVideo.isUploaded) {
-          uploadBtnText.textContent = "Re-Upload / Update Video";
-        } else {
-          uploadBtnText.textContent = "Post to YouTube";
+        if (schedBox) schedBox.classList.add('hidden');
+        if (schedBadge) schedBadge.classList.add('hidden');
+        if (uploadBtnText) {
+          if (selectedVideo && selectedVideo.isUploaded) {
+            uploadBtnText.textContent = "Re-Upload / Update Video";
+          } else {
+            uploadBtnText.textContent = "Post to YouTube";
+          }
         }
-        uploadBtnIcon.setAttribute('data-lucide', 'upload-cloud');
+        if (uploadBtnIcon) uploadBtnIcon.setAttribute('data-lucide', 'upload-cloud');
       }
       lucide.createIcons();
     }
@@ -2049,14 +2067,18 @@
     function updateTitleCharCount() {
       const input = document.getElementById('metaTitle');
       const count = document.getElementById('titleCharCount');
-      count.textContent = `${input.value.length} / 100`;
+      if (input && count) {
+        count.textContent = `${input.value.length} / 100`;
+      }
     }
-    document.getElementById('metaTitle').addEventListener('input', updateTitleCharCount);
+    const metaTitleEl = document.getElementById('metaTitle');
+    if (metaTitleEl) metaTitleEl.addEventListener('input', updateTitleCharCount);
 
     // Tags UI
     function updateTagsUI() {
       const container = document.getElementById('tagsContainer');
       const input = document.getElementById('tagInput');
+      if (!container || !input) return;
       
       container.querySelectorAll('.tag-chip').forEach((c) => c.remove());
 
@@ -2076,17 +2098,20 @@
       updateTagsUI();
     }
 
-    document.getElementById('tagInput').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ',') {
-        e.preventDefault();
-        const val = e.target.value.trim().replace(/^#/, '');
-        if (val && !currentTags.includes(val)) {
-          currentTags.push(val);
-          updateTagsUI();
-          e.target.value = '';
+    const tagInputEl = document.getElementById('tagInput');
+    if (tagInputEl) {
+      tagInputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ',') {
+          e.preventDefault();
+          const val = e.target.value.trim().replace(/^#/, '');
+          if (val && !currentTags.includes(val)) {
+            currentTags.push(val);
+            updateTagsUI();
+            e.target.value = '';
+          }
         }
-      }
-    });
+      });
+    }
 
     // Save Metadata Draft
     async function saveMetadataOnly() {
