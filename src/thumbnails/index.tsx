@@ -340,5 +340,18 @@ export const TeenageThumbnail: React.FC = () => (
   />
 );
 
-
-
+// 18. ENVIRONMENT DESIGN & BAD CHOICES (9:16 Shorts)
+export const EnvironmentThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY SMART PEOPLE MAKE BAD CHOICES"
+    highlightWord="BAD CHOICES"
+    highlightColor="rose"
+    subtitle="It's Not A Lack Of Discipline — It's Your Environment"
+    categoryBadge="ENVIRONMENT PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="NEURAL ADAPTATION"
+  />
+);

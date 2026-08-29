@@ -16,6 +16,8 @@ import { PatternsComposition } from "./clips/patterns";
 import patternsTranscript from "./clips/patterns/transcript.json";
 import { TeenageComposition } from "./clips/teenage";
 import teenageTranscript from "./clips/teenage/transcript.json";
+import { EnvironmentComposition } from "./clips/environment";
+import environmentTranscript from "./clips/environment/transcript.json";
 import {
   NeuroproductivityThumbnail,
   ProcrastinationThumbnail,
@@ -34,6 +36,7 @@ import {
   BoundariesThumbnail,
   PatternsThumbnail,
   TeenageThumbnail,
+  EnvironmentThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -86,9 +89,19 @@ export const RemotionRoot: React.FC = () => {
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
+  const environmentDuration = calculateDurationInFrames(environmentTranscript as any[], fps);
 
   return (
     <>
+      <Composition
+        id="EnvironmentVideo"
+        component={EnvironmentComposition}
+        durationInFrames={environmentDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
       <Composition
         id="TeenageVideo"
         component={TeenageComposition}
@@ -362,6 +375,12 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="TeenageThumbnail"
         component={TeenageThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="EnvironmentThumbnail"
+        component={EnvironmentThumbnail}
         width={1080}
         height={1920}
       />

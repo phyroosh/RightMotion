@@ -1,0 +1,608 @@
+[
+  {
+    "word": "Why",
+    "start": 0,
+    "end": 320,
+    "confidence": 0.963
+  },
+  {
+    "word": "can",
+    "start": 320,
+    "end": 460,
+    "confidence": 0.997
+  },
+  {
+    "word": "a",
+    "start": 460,
+    "end": 560,
+    "confidence": 0.984
+  },
+  {
+    "word": "smart",
+    "start": 560,
+    "end": 760,
+    "confidence": 0.994
+  },
+  {
+    "word": "person",
+    "start": 760,
+    "end": 1160,
+    "confidence": 0.996
+  },
+  {
+    "word": "still",
+    "start": 1160,
+    "end": 1440,
+    "confidence": 0.995
+  },
+  {
+    "word": "keep",
+    "start": 1440,
+    "end": 1680,
+    "confidence": 0.998
+  },
+  {
+    "word": "making",
+    "start": 1680,
+    "end": 1980,
+    "confidence": 0.997
+  },
+  {
+    "word": "the",
+    "start": 1980,
+    "end": 2120,
+    "confidence": 0.998
+  },
+  {
+    "word": "same",
+    "start": 2120,
+    "end": 2360,
+    "confidence": 0.997
+  },
+  {
+    "word": "bad",
+    "start": 2360,
+    "end": 2620,
+    "confidence": 0.991
+  },
+  {
+    "word": "choices?",
+    "start": 2620,
+    "end": 2880,
+    "confidence": 0.998
+  },
+  {
+    "word": "Because",
+    "start": 3680,
+    "end": 3920,
+    "confidence": 0.985
+  },
+  {
+    "word": "your",
+    "start": 3920,
+    "end": 4160,
+    "confidence": 0.989
+  },
+  {
+    "word": "environment",
+    "start": 4160,
+    "end": 4600,
+    "confidence": 0.998
+  },
+  {
+    "word": "is",
+    "start": 4600,
+    "end": 4980,
+    "confidence": 0.995
+  },
+  {
+    "word": "quietly",
+    "start": 4980,
+    "end": 5400,
+    "confidence": 0.993
+  },
+  {
+    "word": "shaping",
+    "start": 5400,
+    "end": 6020,
+    "confidence": 0.998
+  },
+  {
+    "word": "you",
+    "start": 6020,
+    "end": 6300,
+    "confidence": 0.999
+  },
+  {
+    "word": "all",
+    "start": 6300,
+    "end": 6440,
+    "confidence": 0.998
+  },
+  {
+    "word": "the",
+    "start": 6440,
+    "end": 6540,
+    "confidence": 0.997
+  },
+  {
+    "word": "time.",
+    "start": 6540,
+    "end": 6840,
+    "confidence": 1.0
+  },
+  {
+    "word": "You",
+    "start": 7440,
+    "end": 7540,
+    "confidence": 0.993
+  },
+  {
+    "word": "can",
+    "start": 7540,
+    "end": 7640,
+    "confidence": 0.972
+  },
+  {
+    "word": "have",
+    "start": 7640,
+    "end": 7740,
+    "confidence": 0.999
+  },
+  {
+    "word": "discipline,",
+    "start": 7740,
+    "end": 8040,
+    "confidence": 0.997
+  },
+  {
+    "word": "goals,",
+    "start": 8440,
+    "end": 8580,
+    "confidence": 0.997
+  },
+  {
+    "word": "even",
+    "start": 9360,
+    "end": 9380,
+    "confidence": 0.97
+  },
+  {
+    "word": "a",
+    "start": 9380,
+    "end": 9500,
+    "confidence": 0.995
+  },
+  {
+    "word": "really",
+    "start": 9500,
+    "end": 9880,
+    "confidence": 0.985
+  },
+  {
+    "word": "strong",
+    "start": 9880,
+    "end": 10220,
+    "confidence": 0.998
+  },
+  {
+    "word": "mindset.",
+    "start": 10220,
+    "end": 10580,
+    "confidence": 0.996
+  },
+  {
+    "word": "But",
+    "start": 11280,
+    "end": 11400,
+    "confidence": 0.994
+  },
+  {
+    "word": "if",
+    "start": 11400,
+    "end": 11560,
+    "confidence": 0.917
+  },
+  {
+    "word": "the",
+    "start": 11560,
+    "end": 11700,
+    "confidence": 0.995
+  },
+  {
+    "word": "people",
+    "start": 11700,
+    "end": 11960,
+    "confidence": 0.998
+  },
+  {
+    "word": "around",
+    "start": 11960,
+    "end": 12220,
+    "confidence": 0.996
+  },
+  {
+    "word": "you",
+    "start": 12220,
+    "end": 12460,
+    "confidence": 0.997
+  },
+  {
+    "word": "normalize",
+    "start": 12460,
+    "end": 13100,
+    "confidence": 0.937
+  },
+  {
+    "word": "procrastination,",
+    "start": 13100,
+    "end": 14020,
+    "confidence": 0.999
+  },
+  {
+    "word": "negativity,",
+    "start": 14500,
+    "end": 14820,
+    "confidence": 0.993
+  },
+  {
+    "word": "or",
+    "start": 15400,
+    "end": 15480,
+    "confidence": 0.999
+  },
+  {
+    "word": "unhealthy",
+    "start": 15480,
+    "end": 15940,
+    "confidence": 0.983
+  },
+  {
+    "word": "habits,",
+    "start": 15940,
+    "end": 16480,
+    "confidence": 0.999
+  },
+  {
+    "word": "resisting",
+    "start": 16960,
+    "end": 17260,
+    "confidence": 0.996
+  },
+  {
+    "word": "that",
+    "start": 17260,
+    "end": 17660,
+    "confidence": 0.998
+  },
+  {
+    "word": "every",
+    "start": 17660,
+    "end": 18000,
+    "confidence": 0.725
+  },
+  {
+    "word": "day",
+    "start": 18000,
+    "end": 18380,
+    "confidence": 0.996
+  },
+  {
+    "word": "gets",
+    "start": 18380,
+    "end": 18580,
+    "confidence": 0.997
+  },
+  {
+    "word": "exhausting,",
+    "start": 18580,
+    "end": 18940,
+    "confidence": 0.998
+  },
+  {
+    "word": "your",
+    "start": 19720,
+    "end": 19860,
+    "confidence": 0.978
+  },
+  {
+    "word": "brain",
+    "start": 19860,
+    "end": 20160,
+    "confidence": 1.0
+  },
+  {
+    "word": "adapts",
+    "start": 20160,
+    "end": 20720,
+    "confidence": 0.991
+  },
+  {
+    "word": "to",
+    "start": 20720,
+    "end": 20840,
+    "confidence": 0.998
+  },
+  {
+    "word": "what",
+    "start": 20840,
+    "end": 20960,
+    "confidence": 0.999
+  },
+  {
+    "word": "feels",
+    "start": 20960,
+    "end": 21200,
+    "confidence": 0.998
+  },
+  {
+    "word": "normal.",
+    "start": 21200,
+    "end": 21620,
+    "confidence": 0.998
+  },
+  {
+    "word": "So",
+    "start": 22260,
+    "end": 22440,
+    "confidence": 0.986
+  },
+  {
+    "word": "sometimes",
+    "start": 22440,
+    "end": 22820,
+    "confidence": 0.883
+  },
+  {
+    "word": "you",
+    "start": 22820,
+    "end": 23420,
+    "confidence": 0.56
+  },
+  {
+    "word": "don't",
+    "start": 23420,
+    "end": 23620,
+    "confidence": 0.997
+  },
+  {
+    "word": "need",
+    "start": 23620,
+    "end": 23740,
+    "confidence": 1.0
+  },
+  {
+    "word": "more",
+    "start": 23740,
+    "end": 23940,
+    "confidence": 0.991
+  },
+  {
+    "word": "motivation.",
+    "start": 23940,
+    "end": 24240,
+    "confidence": 1.0
+  },
+  {
+    "word": "You",
+    "start": 25160,
+    "end": 25300,
+    "confidence": 0.993
+  },
+  {
+    "word": "need",
+    "start": 25300,
+    "end": 25420,
+    "confidence": 0.999
+  },
+  {
+    "word": "a",
+    "start": 25420,
+    "end": 25520,
+    "confidence": 0.999
+  },
+  {
+    "word": "different",
+    "start": 25520,
+    "end": 25780,
+    "confidence": 1.0
+  },
+  {
+    "word": "environment.",
+    "start": 25780,
+    "end": 26100,
+    "confidence": 1.0
+  },
+  {
+    "word": "Change",
+    "start": 27040,
+    "end": 27100,
+    "confidence": 0.977
+  },
+  {
+    "word": "what",
+    "start": 27100,
+    "end": 27420,
+    "confidence": 0.999
+  },
+  {
+    "word": "you",
+    "start": 27420,
+    "end": 27540,
+    "confidence": 1.0
+  },
+  {
+    "word": "see.",
+    "start": 27540,
+    "end": 27740,
+    "confidence": 0.998
+  },
+  {
+    "word": "Who",
+    "start": 28480,
+    "end": 28520,
+    "confidence": 0.984
+  },
+  {
+    "word": "you",
+    "start": 28520,
+    "end": 28600,
+    "confidence": 0.988
+  },
+  {
+    "word": "spend",
+    "start": 28600,
+    "end": 28780,
+    "confidence": 0.949
+  },
+  {
+    "word": "time",
+    "start": 28780,
+    "end": 29020,
+    "confidence": 0.999
+  },
+  {
+    "word": "with.",
+    "start": 29020,
+    "end": 29240,
+    "confidence": 1.0
+  },
+  {
+    "word": "What",
+    "start": 29240,
+    "end": 29940,
+    "confidence": 0.629
+  },
+  {
+    "word": "you",
+    "start": 29940,
+    "end": 30040,
+    "confidence": 0.947
+  },
+  {
+    "word": "make",
+    "start": 30040,
+    "end": 30160,
+    "confidence": 0.993
+  },
+  {
+    "word": "easy.",
+    "start": 30160,
+    "end": 30400,
+    "confidence": 0.986
+  },
+  {
+    "word": "Because",
+    "start": 31260,
+    "end": 31320,
+    "confidence": 0.975
+  },
+  {
+    "word": "even",
+    "start": 31320,
+    "end": 31700,
+    "confidence": 0.859
+  },
+  {
+    "word": "a",
+    "start": 31700,
+    "end": 31860,
+    "confidence": 0.781
+  },
+  {
+    "word": "very",
+    "start": 31860,
+    "end": 32160,
+    "confidence": 0.982
+  },
+  {
+    "word": "smart",
+    "start": 32160,
+    "end": 32480,
+    "confidence": 0.989
+  },
+  {
+    "word": "mind",
+    "start": 32480,
+    "end": 32700,
+    "confidence": 0.936
+  },
+  {
+    "word": "struggles",
+    "start": 32700,
+    "end": 33060,
+    "confidence": 0.986
+  },
+  {
+    "word": "when",
+    "start": 33060,
+    "end": 33400,
+    "confidence": 0.974
+  },
+  {
+    "word": "it's",
+    "start": 33400,
+    "end": 33580,
+    "confidence": 0.955
+  },
+  {
+    "word": "constantly",
+    "start": 33580,
+    "end": 34000,
+    "confidence": 0.994
+  },
+  {
+    "word": "surrounded",
+    "start": 34000,
+    "end": 34460,
+    "confidence": 0.996
+  },
+  {
+    "word": "by",
+    "start": 34460,
+    "end": 34840,
+    "confidence": 0.996
+  },
+  {
+    "word": "things",
+    "start": 34840,
+    "end": 35120,
+    "confidence": 0.993
+  },
+  {
+    "word": "pulling",
+    "start": 35120,
+    "end": 35440,
+    "confidence": 0.981
+  },
+  {
+    "word": "it",
+    "start": 35440,
+    "end": 35660,
+    "confidence": 0.988
+  },
+  {
+    "word": "in",
+    "start": 35660,
+    "end": 35820,
+    "confidence": 0.995
+  },
+  {
+    "word": "the",
+    "start": 35820,
+    "end": 35920,
+    "confidence": 0.998
+  },
+  {
+    "word": "wrong",
+    "start": 35920,
+    "end": 36060,
+    "confidence": 0.997
+  },
+  {
+    "word": "direction.",
+    "start": 36060,
+    "end": 36520,
+    "confidence": 0.999
+  }
+]

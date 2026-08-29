@@ -63,6 +63,26 @@
       transform: translateY(0);
     }
 
+    .ig-gradient-btn {
+      background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      box-shadow: 0 10px 30px -5px rgba(220, 39, 67, 0.4);
+      transition: all 0.2s ease;
+    }
+    .ig-gradient-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 15px 35px -5px rgba(220, 39, 67, 0.6);
+    }
+
+    .blast-gradient-btn {
+      background: linear-gradient(135deg, #ff007a 0%, #7928ca 50%, #0070f3 100%);
+      box-shadow: 0 10px 30px -5px rgba(121, 40, 202, 0.4);
+      transition: all 0.2s ease;
+    }
+    .blast-gradient-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 15px 35px -5px rgba(121, 40, 202, 0.6);
+    }
+
     .tab-btn.active {
       background: #0071e3;
       color: #ffffff;
@@ -82,14 +102,31 @@
       <div>
         <div class="flex items-center gap-2">
           <span class="font-extrabold text-lg tracking-tight text-white">RightClips Studio</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#0071e3]/20 text-[#38bdf8] border border-[#0071e3]/30">V2.2</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#0071e3]/20 text-[#38bdf8] border border-[#0071e3]/30">V3.0 • Multi-Platform</span>
         </div>
-        <p class="text-xs text-slate-400 font-medium">Automated YouTube Publisher • 1-Click Publishing & Scheduled Releases</p>
+        <p class="text-xs text-slate-400 font-medium">Automated Multi-Platform Publisher • YouTube Shorts & Instagram Reels</p>
       </div>
     </div>
 
-    <!-- Right Header Actions: Settings & YouTube Auth Profile -->
+    <!-- Right Header Actions: Instagram Status, YouTube Auth Profile & Settings -->
     <div class="flex items-center gap-3">
+      
+      <!-- Instagram Account Pill -->
+      <div id="instagramAuthSection" class="flex items-center gap-2">
+        <div class="flex items-center gap-2 text-slate-400 text-xs px-3 py-1.5 rounded-xl glass-input">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          Checking IG...
+        </div>
+      </div>
+
+      <!-- YouTube Auth Profile / Connect Button -->
+      <div id="authSection" class="flex items-center gap-3">
+        <div class="flex items-center gap-2 text-slate-400 text-xs">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          Connecting to YouTube...
+        </div>
+      </div>
+
       <!-- Settings & API Button -->
       <button
         onclick="openSettingsModal()"
@@ -100,14 +137,6 @@
         <span>Settings & API</span>
         <span id="settingsStatusDot" class="w-2 h-2 rounded-full bg-amber-400"></span>
       </button>
-
-      <!-- YouTube Auth Profile / Connect Button -->
-      <div id="authSection" class="flex items-center gap-3">
-        <div class="flex items-center gap-2 text-slate-400 text-xs">
-          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-          Connecting to YouTube...
-        </div>
-      </div>
     </div>
   </header>
 
@@ -571,24 +600,45 @@
           </div>
         </div>
 
-        <!-- POST / SCHEDULE ACTION BAR -->
-        <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-4">
+        <!-- 3 DEDICATED MULTI-PLATFORM PUBLISH BUTTONS -->
+        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <button
             onclick="saveMetadataOnly()"
-            class="px-5 py-3 rounded-2xl glass-input hover:bg-white/5 text-slate-300 text-xs font-bold transition flex items-center gap-2"
+            class="w-full sm:w-auto px-4 py-3 rounded-2xl glass-input hover:bg-white/5 text-slate-300 text-xs font-bold transition flex items-center justify-center gap-1.5"
           >
             <i data-lucide="save" class="w-4 h-4"></i>
-            Save Metadata Draft
+            Save Draft
           </button>
 
-          <button
-            id="uploadBtn"
-            onclick="uploadVideoToYouTube()"
-            class="px-8 py-3.5 rounded-2xl gradient-border-btn text-white text-sm font-extrabold flex items-center gap-2.5 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-          >
-            <i id="uploadBtnIcon" data-lucide="upload-cloud" class="w-4 h-4"></i>
-            <span id="uploadBtnText">Post to YouTube</span>
-          </button>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <!-- 1. Single YouTube Button -->
+            <button
+              onclick="openPublishModal('youtube')"
+              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl gradient-border-btn text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+            >
+              <i data-lucide="play" class="w-4 h-4"></i>
+              <span>YouTube</span>
+            </button>
+
+            <!-- 2. Single Instagram Button -->
+            <button
+              onclick="openPublishModal('instagram')"
+              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl ig-gradient-btn text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+            >
+              <i data-lucide="camera" class="w-4 h-4"></i>
+              <span>Instagram</span>
+            </button>
+
+            <!-- 3. BLAST BOTH PLATFORMS BUTTON -->
+            <button
+              onclick="openPublishModal('both')"
+              class="flex-1 sm:flex-initial px-5 py-3 rounded-2xl blast-gradient-btn text-white text-xs font-black flex items-center justify-center gap-2 shadow-xl cursor-pointer"
+              title="Publish or Schedule to BOTH YouTube & Instagram at once"
+            >
+              <i data-lucide="rocket" class="w-4 h-4"></i>
+              <span>Blast Both</span>
+            </button>
+          </div>
         </div>
 
         <!-- Live Upload Progress Card -->
@@ -611,6 +661,216 @@
     </section>
 
   </main>
+
+  <!-- ======================================================== -->
+  <!-- SMART MULTI-PLATFORM PUBLISH & SCHEDULE MODAL -->
+  <!-- ======================================================== -->
+  <div id="publishModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-panel w-full max-w-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-pink-500 to-[#0071e3] text-white flex items-center justify-center shadow-lg">
+            <i data-lucide="share-2" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-lg font-black text-white tracking-tight">Multi-Platform Publishing Hub</h2>
+            <p class="text-xs text-slate-400">Choose target platforms, instant publishing, or scheduled release times</p>
+          </div>
+        </div>
+        <button
+          onclick="closePublishModal()"
+          class="p-2 rounded-xl glass-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- 1. SELECT TARGET PLATFORMS -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-mono font-bold uppercase text-slate-300 tracking-wider">
+          1. Select Target Platforms
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          <!-- YouTube Checkbox Card -->
+          <label class="p-4 rounded-2xl glass-input border border-white/10 hover:border-sky-400/50 cursor-pointer flex items-center justify-between transition group">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center font-bold">
+                <i data-lucide="play" class="w-4 h-4 fill-red-400"></i>
+              </div>
+              <div>
+                <div class="text-xs font-black text-white">YouTube Shorts</div>
+                <div class="text-[10px] text-slate-400 font-mono">1080p + 4K Cover</div>
+              </div>
+            </div>
+            <input type="checkbox" id="modalTargetYt" checked class="w-5 h-5 rounded-lg accent-[#0071e3] cursor-pointer" />
+          </label>
+
+          <!-- Instagram Checkbox Card -->
+          <label class="p-4 rounded-2xl glass-input border border-white/10 hover:border-pink-400/50 cursor-pointer flex items-center justify-between transition group">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-pink-600/20 text-pink-400 border border-pink-500/30 flex items-center justify-center font-bold">
+                <i data-lucide="camera" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="text-xs font-black text-white">Instagram Reels</div>
+                <div class="text-[10px] text-slate-400 font-mono">Reels + Feed + 4K Cover</div>
+              </div>
+            </div>
+            <input type="checkbox" id="modalTargetIg" checked class="w-5 h-5 rounded-lg accent-[#e1306c] cursor-pointer" />
+          </label>
+        </div>
+      </div>
+
+      <!-- 2. SELECT PUBLISH TIMING -->
+      <div class="flex flex-col gap-2.5">
+        <label class="text-xs font-mono font-bold uppercase text-slate-300 tracking-wider">
+          2. Release Timing
+        </label>
+        
+        <div class="grid grid-cols-3 gap-2.5">
+          <!-- Instant Now -->
+          <button
+            type="button"
+            id="timingBtnNow"
+            onclick="setModalTiming('now')"
+            class="p-3.5 rounded-2xl glass-input border border-[#0071e3] bg-[#0071e3]/15 text-left flex flex-col gap-1 transition cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <i data-lucide="zap" class="w-4 h-4 text-sky-400"></i>
+              <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+            </div>
+            <div class="text-xs font-black text-white mt-1">Publish Now</div>
+            <div class="text-[10px] text-slate-400">Go live immediately</div>
+          </button>
+
+          <!-- Schedule Later -->
+          <button
+            type="button"
+            id="timingBtnSchedule"
+            onclick="setModalTiming('schedule')"
+            class="p-3.5 rounded-2xl glass-input border border-white/10 hover:border-purple-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <i data-lucide="calendar-clock" class="w-4 h-4 text-purple-400"></i>
+              <span class="w-2 h-2 rounded-full bg-purple-400 opacity-40"></span>
+            </div>
+            <div class="text-xs font-black text-white mt-1">Schedule Later</div>
+            <div class="text-[10px] text-slate-400">Choose date & peak slot</div>
+          </button>
+
+          <!-- Private Draft -->
+          <button
+            type="button"
+            id="timingBtnDraft"
+            onclick="setModalTiming('draft')"
+            class="p-3.5 rounded-2xl glass-input border border-white/10 hover:border-amber-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <i data-lucide="lock" class="w-4 h-4 text-amber-400"></i>
+              <span class="w-2 h-2 rounded-full bg-amber-400 opacity-40"></span>
+            </div>
+            <div class="text-xs font-black text-white mt-1">Private Draft</div>
+            <div class="text-[10px] text-slate-400">Hidden until manually posted</div>
+          </button>
+        </div>
+
+        <!-- Schedule Options Picker (Shown when Schedule is selected) -->
+        <div id="modalScheduleBox" class="hidden p-4 rounded-2xl border border-purple-500/40 bg-purple-500/10 flex flex-col gap-3.5 mt-1">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-200 flex items-center gap-1.5">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-purple-400"></i> Select Release Time
+            </span>
+            <span class="text-[10px] font-mono text-purple-300">Local Timezone</span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-2.5">
+            <input
+              type="datetime-local"
+              id="modalScheduleDateTime"
+              onchange="updateModalSchedulePreview()"
+              class="w-full sm:flex-1 px-4 py-2.5 rounded-xl glass-input text-xs text-white font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
+            />
+            <div class="flex items-center gap-1.5 w-full sm:w-auto">
+              <button
+                type="button"
+                onclick="setModalQuickHours(2)"
+                class="px-3 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs font-bold transition"
+              >
+                +2 Hrs
+              </button>
+              <button
+                type="button"
+                onclick="setModalQuickHours(4)"
+                class="px-3 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs font-bold transition"
+              >
+                +4 Hrs
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Peak Time Slots -->
+          <div class="grid grid-cols-5 gap-1.5">
+            <button type="button" onclick="setModalTargetTime(1, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-purple-300">1:00 AM</div>
+              <div class="text-[8px] text-slate-400">Night</div>
+            </button>
+            <button type="button" onclick="setModalTargetTime(2, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-purple-300">2:00 AM</div>
+              <div class="text-[8px] text-slate-400">Late</div>
+            </button>
+            <button type="button" onclick="setModalTargetTime(7, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-amber-300">7:00 AM</div>
+              <div class="text-[8px] text-slate-400">Morning</div>
+            </button>
+            <button type="button" onclick="setModalTargetTime(14, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-sky-300">2:00 PM</div>
+              <div class="text-[8px] text-slate-400">Afternoon</div>
+            </button>
+            <button type="button" onclick="setModalTargetTime(21, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-rose-300">9:00 PM</div>
+              <div class="text-[8px] text-slate-400">Prime</div>
+            </button>
+          </div>
+
+          <div id="modalSchedulePreviewText" class="text-[11px] text-purple-200 font-medium pt-1"></div>
+        </div>
+      </div>
+
+      <!-- Instagram Specific Settings (Share to Feed) -->
+      <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <i data-lucide="share" class="w-4 h-4 text-pink-400"></i>
+          <div>
+            <div class="text-xs font-bold text-white">Share Reel to Instagram Main Profile Feed</div>
+            <div class="text-[10px] text-slate-400">Displays on your Instagram main grid as well as the Reels tab</div>
+          </div>
+        </div>
+        <input type="checkbox" id="modalIgShareToFeed" checked class="w-5 h-5 rounded-lg accent-[#e1306c] cursor-pointer" />
+      </div>
+
+      <!-- Modal Footer Action -->
+      <div class="pt-4 border-t border-white/10 flex items-center justify-between gap-4">
+        <button
+          onclick="closePublishModal()"
+          class="px-5 py-3 rounded-2xl glass-input hover:bg-white/10 text-slate-400 hover:text-white text-xs font-bold transition"
+        >
+          Cancel
+        </button>
+
+        <button
+          id="confirmPublishBtn"
+          onclick="executeMultiPlatformPublish()"
+          class="px-8 py-3.5 rounded-2xl blast-gradient-btn text-white text-sm font-black flex items-center gap-2 shadow-2xl cursor-pointer"
+        >
+          <i data-lucide="rocket" class="w-4 h-4"></i>
+          <span id="confirmPublishBtnText">Publish to Selected Platforms</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- SETTINGS & YOUTUBE API MODAL -->
   <div id="settingsModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
@@ -635,96 +895,139 @@
         </button>
       </div>
 
-      <!-- STEP BY STEP GUIDE -->
-      <div class="flex flex-col gap-3">
-        <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
-          <i data-lucide="help-circle" class="w-4 h-4 text-sky-400"></i>
-          How to get your YouTube API Credentials (3 Simple Steps)
+      <!-- Modal Tabs (YouTube API vs Instagram Playwright) -->
+      <div class="grid grid-cols-2 p-1.5 rounded-2xl bg-black/50 border border-white/10 text-xs font-black">
+        <button
+          type="button"
+          id="settingsTabYt"
+          onclick="switchSettingsTab('youtube')"
+          class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#0071e3] text-white shadow-md cursor-pointer"
+        >
+          <i data-lucide="play" class="w-4 h-4 fill-white"></i>
+          <span>YouTube Channel API</span>
+        </button>
+        <button
+          type="button"
+          id="settingsTabIg"
+          onclick="switchSettingsTab('instagram')"
+          class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white cursor-pointer"
+        >
+          <i data-lucide="camera" class="w-4 h-4 text-pink-400"></i>
+          <span>Instagram Playwright Session</span>
+        </button>
+      </div>
+
+      <!-- 1. YOUTUBE SETTINGS TAB CONTENT -->
+      <div id="settingsYtContent" class="flex flex-col gap-6">
+        <!-- STEP BY STEP GUIDE -->
+        <div class="flex flex-col gap-3">
+          <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
+            <i data-lucide="help-circle" class="w-4 h-4 text-sky-400"></i>
+            How to get your YouTube API Credentials (3 Simple Steps)
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- Step 1 -->
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">1</span>
+                <span class="text-xs font-bold text-white">Enable API</span>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-relaxed">
+                Open <a href="https://console.cloud.google.com" target="_blank" class="text-sky-400 underline font-bold">Google Cloud</a>, create a project, and enable <strong>YouTube Data API v3</strong> in the Library.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">2</span>
+                <span class="text-xs font-bold text-white">OAuth Consent</span>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-relaxed">
+                Set User Type to <strong>External</strong>, add YouTube upload scopes, and add your Google Email under <strong>Test Users</strong>.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">3</span>
+                <span class="text-xs font-bold text-white">Download JSON</span>
+              </div>
+              <p class="text-[11px] text-slate-400 leading-relaxed">
+                Click <strong>Create Credentials</strong> &gt; <strong>OAuth Client ID</strong> &gt; <strong>Desktop App</strong> &gt; Download JSON file.
+              </p>
+            </div>
+          </div>
         </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <!-- Step 1 -->
-          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">1</span>
-              <span class="text-xs font-bold text-white">Enable API</span>
-            </div>
-            <p class="text-[11px] text-slate-400 leading-relaxed">
-              Open <a href="https://console.cloud.google.com" target="_blank" class="text-sky-400 underline font-bold">Google Cloud</a>, create a project, and enable <strong>YouTube Data API v3</strong> in the Library.
-            </p>
+
+        <!-- JSON INPUT BOX & FILE SELECTOR -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold text-slate-200 flex items-center gap-2">
+              <span>Paste client_secrets.json Content</span>
+              <span class="text-sky-400">*</span>
+            </label>
+            <label class="cursor-pointer text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1.5 transition">
+              <i data-lucide="folder-open" class="w-3.5 h-3.5"></i>
+              <span>Or browse file</span>
+              <input type="file" id="secretsFileInput" accept=".json" class="hidden" onchange="handleSecretsFile(event)" />
+            </label>
           </div>
 
-          <!-- Step 2 -->
-          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">2</span>
-              <span class="text-xs font-bold text-white">OAuth Consent</span>
-            </div>
-            <p class="text-[11px] text-slate-400 leading-relaxed">
-              Set User Type to <strong>External</strong>, add YouTube upload scopes, and add your Google Email under <strong>Test Users</strong>.
-            </p>
-          </div>
+          <textarea
+            id="clientSecretsText"
+            rows="5"
+            placeholder='{"installed":{"client_id":"YOUR_CLIENT_ID.apps.googleusercontent.com","project_id":"...","client_secret":"YOUR_CLIENT_SECRET",...}}'
+            class="w-full px-4 py-3 rounded-2xl glass-input text-xs font-mono text-slate-200 placeholder:text-slate-600 focus:border-sky-400 custom-scrollbar leading-relaxed"
+          ></textarea>
 
-          <!-- Step 3 -->
-          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
-            <div class="flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">3</span>
-              <span class="text-xs font-bold text-white">Download JSON</span>
-            </div>
-            <p class="text-[11px] text-slate-400 leading-relaxed">
-              Click <strong>Create Credentials</strong> &gt; <strong>OAuth Client ID</strong> &gt; <strong>Desktop App</strong> &gt; Download JSON file.
-            </p>
+          <div class="flex items-center justify-between gap-3">
+            <button
+              type="button"
+              onclick="saveYoutubeSecrets()"
+              id="saveSecretsBtn"
+              class="px-6 py-3 rounded-2xl gradient-border-btn text-white text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
+            >
+              <i data-lucide="plus-circle" class="w-4 h-4"></i>
+              <span>Add this YT studio API</span>
+            </button>
+
+            <button
+              type="button"
+              onclick="resetYoutubeSecrets()"
+              class="px-4 py-2.5 rounded-2xl glass-input hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+              title="Reset existing credentials"
+            >
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              <span>Reset API</span>
+            </button>
           </div>
+        </div>
+
+        <!-- ACTIVE CONNECTION & CONFIRMATION BOX -->
+        <div id="settingsConnectionCard" class="p-5 rounded-2xl border transition flex flex-col gap-3">
+          <!-- Dynamically rendered by updateSettingsUI() -->
         </div>
       </div>
 
-      <!-- JSON INPUT BOX & FILE SELECTOR -->
-      <div class="flex flex-col gap-3">
-        <div class="flex items-center justify-between">
-          <label class="text-xs font-bold text-slate-200 flex items-center gap-2">
-            <span>Paste client_secrets.json Content</span>
-            <span class="text-sky-400">*</span>
-          </label>
-          <label class="cursor-pointer text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1.5 transition">
-            <i data-lucide="folder-open" class="w-3.5 h-3.5"></i>
-            <span>Or browse file</span>
-            <input type="file" id="secretsFileInput" accept=".json" class="hidden" onchange="handleSecretsFile(event)" />
-          </label>
+      <!-- 2. INSTAGRAM SETTINGS TAB CONTENT -->
+      <div id="settingsIgContent" class="hidden flex flex-col gap-6">
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
+          <div class="text-xs font-black text-pink-400 uppercase tracking-wide flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            Native Playwright Interactive Login (Safe & Persistent)
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Clicking <strong>Connect Instagram</strong> opens a native Chromium browser window. Log into your Instagram account normally (supporting 2-Factor Authentication). Your session is encrypted and securely saved locally for 1-click multi-platform publishing.
+          </p>
         </div>
 
-        <textarea
-          id="clientSecretsText"
-          rows="5"
-          placeholder='{"installed":{"client_id":"YOUR_CLIENT_ID.apps.googleusercontent.com","project_id":"...","client_secret":"YOUR_CLIENT_SECRET",...}}'
-          class="w-full px-4 py-3 rounded-2xl glass-input text-xs font-mono text-slate-200 placeholder:text-slate-600 focus:border-sky-400 custom-scrollbar leading-relaxed"
-        ></textarea>
-
-        <div class="flex items-center justify-between gap-3">
-          <button
-            type="button"
-            onclick="saveYoutubeSecrets()"
-            id="saveSecretsBtn"
-            class="px-6 py-3 rounded-2xl gradient-border-btn text-white text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
-          >
-            <i data-lucide="plus-circle" class="w-4 h-4"></i>
-            <span>Add this YT studio API</span>
-          </button>
-
-          <button
-            type="button"
-            onclick="resetYoutubeSecrets()"
-            class="px-4 py-2.5 rounded-2xl glass-input hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
-            title="Reset existing credentials"
-          >
-            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-            <span>Reset API</span>
-          </button>
+        <!-- Instagram Connection State Card -->
+        <div id="settingsIgConnectionCard" class="p-5 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400">
+          <!-- Rendered dynamically by checkInstagramStatus() -->
         </div>
-      </div>
-
-      <!-- ACTIVE CONNECTION & CONFIRMATION BOX -->
-      <div id="settingsConnectionCard" class="p-5 rounded-2xl border transition flex flex-col gap-3">
-        <!-- Dynamically rendered by updateSettingsUI() -->
       </div>
 
     </div>
@@ -783,6 +1086,144 @@
       return d.toISOString().slice(0, 16);
     }
 
+    let isIgConnected = false;
+    let activeIgUser = null;
+    let currentModalTiming = 'now';
+
+    // ═══════════════════════════════════════════════════
+    // INSTAGRAM PLAYWRIGHT HANDLERS
+    // ═══════════════════════════════════════════════════
+    async function checkInstagramStatus() {
+      const igSection = document.getElementById('instagramAuthSection');
+      const card = document.getElementById('settingsIgConnectionCard');
+
+      try {
+        const res = await fetch('/api/instagram/status?t=' + Date.now());
+        const data = await res.json();
+        isIgConnected = data.isConnected;
+        activeIgUser = data;
+
+        if (isIgConnected) {
+          const uname = data.username || 'instagram_user';
+          const avatarUrl = data.profilePicUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(uname)}&background=e1306c&color=fff&bold=true`;
+
+          igSection.innerHTML = `
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded-2xl glass-input border-pink-500/30 bg-pink-500/10">
+              <img src="${avatarUrl}" class="w-5 h-5 rounded-full object-cover border border-pink-400" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(uname)}&background=e1306c&color=fff';" />
+              <span class="text-xs font-black text-pink-300">@${uname}</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]"></span>
+            </div>
+          `;
+
+          if (card) {
+            card.className = "p-5 rounded-2xl border border-pink-500/40 bg-pink-500/10 flex items-center justify-between gap-4 shadow-lg";
+            card.innerHTML = `
+              <div class="flex items-center gap-3">
+                <img src="${avatarUrl}" class="w-12 h-12 rounded-full border-2 border-pink-400 object-cover shadow-lg" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(uname)}&background=e1306c&color=fff';" />
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-black text-white">@${uname}</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">CONNECTED</span>
+                  </div>
+                  <div class="text-xs text-slate-300 font-mono mt-0.5">Automated Reels Publisher Ready</div>
+                </div>
+              </div>
+              <button onclick="disconnectInstagram()" class="px-3.5 py-2 rounded-xl glass-input hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-bold transition">
+                Disconnect
+              </button>
+            `;
+          }
+        } else {
+          igSection.innerHTML = `
+            <button onclick="loginInstagram()" class="px-3 py-1.5 rounded-2xl ig-gradient-btn text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer">
+              <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+              <span>Connect IG</span>
+            </button>
+          `;
+
+          if (card) {
+            card.className = "p-5 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400";
+            card.innerHTML = `
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-slate-800 text-pink-400 border border-pink-500/20 flex items-center justify-center">
+                  <i data-lucide="camera" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-slate-200">Instagram Not Connected</div>
+                  <div class="text-[11px] text-slate-400">Log in once via Playwright to enable 1-click Instagram Reels uploads.</div>
+                </div>
+              </div>
+              <button onclick="loginInstagram()" class="px-4 py-2.5 rounded-xl ig-gradient-btn text-white text-xs font-black flex items-center gap-1.5 shadow-lg">
+                <i data-lucide="log-in" class="w-4 h-4"></i> Connect IG
+              </button>
+            `;
+          }
+        }
+        lucide.createIcons();
+      } catch (e) {
+        igSection.innerHTML = `<span class="text-xs text-rose-400 font-mono">IG Offline</span>`;
+      }
+    }
+
+    async function loginInstagram() {
+      showToast('🚀 Launching interactive Instagram login window...');
+      try {
+        const res = await fetch('/api/instagram/login', { method: 'POST' });
+        const data = await res.json();
+        showToast(data.message || 'Login window opened');
+
+        const poll = setInterval(async () => {
+          const statusRes = await fetch('/api/upload-status');
+          const status = await statusRes.json();
+
+          if (!status.inProgress) {
+            clearInterval(poll);
+            await checkInstagramStatus();
+            if (status.error) {
+              showToast('❌ Login notice: ' + status.error);
+            } else {
+              showToast('🎉 Instagram connected successfully!');
+            }
+          }
+        }, 1500);
+      } catch (err) {
+        showToast('Login error: ' + err.message);
+      }
+    }
+
+    async function disconnectInstagram() {
+      if (!confirm('Disconnect your Instagram session?')) return;
+      try {
+        await fetch('/api/instagram/disconnect', { method: 'POST' });
+        showToast('Instagram session disconnected.');
+        await checkInstagramStatus();
+      } catch (e) {
+        showToast('Error: ' + e.message);
+      }
+    }
+
+    function switchSettingsTab(tab) {
+      const ytBtn = document.getElementById('settingsTabYt');
+      const igBtn = document.getElementById('settingsTabIg');
+      const ytContent = document.getElementById('settingsYtContent');
+      const igContent = document.getElementById('settingsIgContent');
+
+      if (!ytBtn || !igBtn) return;
+
+      if (tab === 'youtube') {
+        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#0071e3] text-white shadow-md";
+        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white";
+        if (ytContent) ytContent.classList.remove('hidden');
+        if (igContent) igContent.classList.add('hidden');
+      } else {
+        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 ig-gradient-btn text-white shadow-md";
+        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white";
+        if (igContent) igContent.classList.remove('hidden');
+        if (ytContent) ytContent.classList.add('hidden');
+      }
+      lucide.createIcons();
+    }
+
     // ═══════════════════════════════════════════════════
     // SETTINGS & YOUTUBE API MODAL HANDLERS
     // ═══════════════════════════════════════════════════
@@ -792,6 +1233,7 @@
       const modal = document.getElementById('settingsModal');
       modal.classList.remove('opacity-0', 'pointer-events-none');
       await loadSettingsStatus();
+      await checkInstagramStatus();
       lucide.createIcons();
     }
 
@@ -1284,9 +1726,8 @@
     function renderCardHtml(v) {
       const isSelected = selectedVideo && selectedVideo.filename === v.filename;
       const isLong = v.isLongForm;
-      const isSched = v.isScheduled;
-      const isUp = v.isUploaded && !isSched;
-      const dateFormatted = formatDateTime(v.modifiedAt);
+      const yt = v.youtube || {};
+      const ig = v.instagram || {};
 
       return `
         <div
@@ -1316,31 +1757,41 @@
                 <span class="${isLong ? 'text-sky-300 font-bold' : 'text-emerald-300 font-bold'}">${isLong ? '16:9 Long-Form' : '9:16 Short'}</span>
                 <span>•</span>
                 <span>${v.sizeMb} MB</span>
-                <span>•</span>
-                <span class="text-slate-500">${dateFormatted}</span>
               </div>
             </div>
           </div>
 
-          <!-- UPLOAD / SCHEDULE STATUS BADGE -->
-          <div class="flex items-center gap-2 flex-shrink-0">
-            ${isSched ? `
-              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-black uppercase bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1.5 shadow-sm">
-                <i data-lucide="calendar-clock" class="w-3 h-3 text-purple-400"></i>
-                SCHED
+          <!-- DUAL STATUS BADGES (YT & IG) -->
+          <div class="flex flex-col items-end gap-1 flex-shrink-0">
+            <!-- YouTube Status Pill -->
+            ${yt.isScheduled ? `
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1">
+                <i data-lucide="play" class="w-2.5 h-2.5 fill-purple-400"></i> YT SCHED
               </span>
-            ` : isUp ? `
-              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-black uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                LIVE
+            ` : yt.isUploaded ? `
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-red-500/20 text-red-300 border border-red-500/40 flex items-center gap-1">
+                <i data-lucide="play" class="w-2.5 h-2.5 fill-red-400"></i> YT LIVE
               </span>
             ` : `
-              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-black uppercase bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1">
-                <i data-lucide="clock" class="w-3 h-3 text-amber-400"></i>
-                READY
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-slate-400">
+                YT READY
               </span>
             `}
-            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+
+            <!-- Instagram Status Pill -->
+            ${ig.isScheduled ? `
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-pink-500/20 text-pink-300 border border-pink-500/40 flex items-center gap-1">
+                <i data-lucide="camera" class="w-2.5 h-2.5 text-pink-400"></i> IG SCHED
+              </span>
+            ` : ig.isUploaded ? `
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-pink-500/25 text-pink-300 border border-pink-500/50 flex items-center gap-1">
+                <i data-lucide="camera" class="w-2.5 h-2.5 text-pink-400"></i> IG REEL
+              </span>
+            ` : `
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-slate-400">
+                IG READY
+              </span>
+            `}
           </div>
         </div>
       `;
@@ -1404,114 +1855,41 @@
       placeholder.style.display = 'none';
       stats.textContent = `${selectedVideo.sizeMb} MB • ${isWidescreen ? '16:9 Widescreen' : '9:16 Shorts'}`;
 
-      // Update Live / Scheduled Status Banner
+      // Update Live / Scheduled Multi-Platform Status Banner
       const statusBanner = document.getElementById('uploadStatusBanner');
-      const uploadBtnText = document.getElementById('uploadBtnText');
-      const uploadBtnIcon = document.getElementById('uploadBtnIcon');
-      const isSched = selectedVideo.isScheduled;
-      const isUp = selectedVideo.isUploaded && !isSched;
+      const yt = selectedVideo.youtube || {};
+      const ig = selectedVideo.instagram || {};
 
-      if (isSched && selectedVideo.uploadInfo) {
-        const up = selectedVideo.uploadInfo;
-        const watchUrl = selectedVideo.isLongForm ? up.youtubeUrl : (up.shortsUrl || up.youtubeUrl);
-        const schedTimeStr = formatScheduleTime(up.publishAt);
-
-        statusBanner.className = "p-4 rounded-2xl border border-purple-500/30 bg-purple-500/10 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg shadow-purple-500/5";
-        statusBanner.innerHTML = `
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-purple-500 text-slate-950 flex items-center justify-center flex-shrink-0 font-bold">
-              <i data-lucide="calendar-clock" class="w-5 h-5"></i>
+      let bannerHtml = `
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-[#0071e3] text-white flex items-center justify-center flex-shrink-0 font-bold">
+            <i data-lucide="activity" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-xs font-black text-white uppercase tracking-wide flex items-center gap-2">
+              <span>Platform Release Status</span>
             </div>
-            <div>
-              <div class="text-xs font-black text-purple-300 uppercase tracking-wide flex items-center gap-2">
-                <span>Scheduled On YouTube</span>
-                <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
-              </div>
-              <div class="text-[11px] text-slate-300 font-mono mt-0.5">
-                Goes Public: <span class="text-white font-bold">${schedTimeStr}</span> • Video ID: <span class="text-purple-300">${up.videoId}</span>
-              </div>
+            <div class="text-[11px] text-slate-300 font-mono mt-0.5 flex items-center gap-3">
+              <span>YT: <strong class="${yt.isUploaded ? 'text-red-400' : yt.isScheduled ? 'text-purple-400' : 'text-slate-400'}">${yt.isScheduled ? 'Scheduled' : yt.isUploaded ? 'Live' : 'Ready'}</strong></span>
+              <span>•</span>
+              <span>IG: <strong class="${ig.isUploaded ? 'text-pink-400' : ig.isScheduled ? 'text-purple-400' : 'text-slate-400'}">${ig.isScheduled ? 'Scheduled' : ig.isUploaded ? 'Reel Live' : 'Ready'}</strong></span>
             </div>
           </div>
-          <div class="flex items-center gap-2">
-            <a
-              href="${watchUrl}"
-              target="_blank"
-              class="px-3.5 py-1.5 rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-950 font-extrabold text-xs flex items-center gap-1.5 shadow-md transition"
-            >
-              <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Preview Link
+        </div>
+        <div class="flex items-center gap-2">
+          ${yt.youtubeUrl ? `
+            <a href="${selectedVideo.isLongForm ? yt.youtubeUrl : (yt.shortsUrl || yt.youtubeUrl)}" target="_blank" class="px-3 py-1.5 rounded-xl bg-red-600/20 text-red-300 border border-red-500/40 text-xs font-bold flex items-center gap-1">
+              <i data-lucide="play" class="w-3 h-3"></i> YT
             </a>
-            <a
-              href="https://studio.youtube.com/video/${up.videoId}/edit"
-              target="_blank"
-              class="px-3 py-1.5 rounded-xl glass-input hover:bg-white/10 text-slate-300 font-bold text-xs flex items-center gap-1 transition"
-            >
-              <i data-lucide="settings" class="w-3.5 h-3.5"></i> YT Studio
+          ` : ''}
+          ${ig.reelUrl ? `
+            <a href="${ig.reelUrl}" target="_blank" class="px-3 py-1.5 rounded-xl bg-pink-600/20 text-pink-300 border border-pink-500/40 text-xs font-bold flex items-center gap-1">
+              <i data-lucide="camera" class="w-3 h-3"></i> IG Reel
             </a>
-          </div>
-        `;
-        uploadBtnText.textContent = "Re-Schedule / Update Video";
-        uploadBtnIcon.setAttribute('data-lucide', 'calendar-clock');
-      } else if (isUp && selectedVideo.uploadInfo) {
-        const up = selectedVideo.uploadInfo;
-        const watchUrl = selectedVideo.isLongForm ? up.youtubeUrl : (up.shortsUrl || up.youtubeUrl);
-
-        statusBanner.className = "p-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg shadow-emerald-500/5";
-        statusBanner.innerHTML = `
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center flex-shrink-0 font-bold">
-              <i data-lucide="check-circle-2" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <div class="text-xs font-black text-emerald-300 uppercase tracking-wide flex items-center gap-2">
-                <span>Live On YouTube Channel</span>
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              </div>
-              <div class="text-[11px] text-slate-300 font-mono mt-0.5">
-                Video ID: <span class="text-white font-bold">${up.videoId}</span> • Published ${formatDateTime(up.publishedAt)}
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-2">
-            <a
-              href="${watchUrl}"
-              target="_blank"
-              class="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs flex items-center gap-1.5 shadow-md transition"
-            >
-              <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Watch Live
-            </a>
-            <a
-              href="https://studio.youtube.com/video/${up.videoId}/edit"
-              target="_blank"
-              class="px-3 py-1.5 rounded-xl glass-input hover:bg-white/10 text-slate-300 font-bold text-xs flex items-center gap-1 transition"
-            >
-              <i data-lucide="settings" class="w-3.5 h-3.5"></i> YT Studio
-            </a>
-          </div>
-        `;
-        uploadBtnText.textContent = "Re-Upload / Update Video";
-        uploadBtnIcon.setAttribute('data-lucide', 'upload-cloud');
-      } else {
-        statusBanner.className = "p-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-white flex items-center justify-between gap-3";
-        statusBanner.innerHTML = `
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-400/30 flex items-center justify-center flex-shrink-0 font-bold">
-              <i data-lucide="clock" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <div class="text-xs font-black text-amber-300 uppercase tracking-wide">
-                Unpublished • Ready To Upload
-              </div>
-              <div class="text-[11px] text-slate-400 font-medium">
-                This clip has not been published yet. Post immediately or schedule release.
-              </div>
-            </div>
-          </div>
-          <span class="px-3 py-1 rounded-xl bg-amber-400/15 text-amber-300 font-mono text-[10px] font-bold uppercase">
-            NOT ON YOUTUBE
-          </span>
-        `;
-        onPrivacyChange(); // sets correct button text depending on select dropdown
-      }
+          ` : ''}
+        </div>
+      `;
+      statusBanner.innerHTML = bannerHtml;
 
       // Populate Metadata
       const meta = selectedVideo.metadata;
@@ -1738,87 +2116,195 @@
       }
     }
 
-    // Upload or Schedule Video to YouTube
-    async function uploadVideoToYouTube() {
+    // ═══════════════════════════════════════════════════
+    // MULTI-PLATFORM PUBLISH & SCHEDULE ENGINE
+    // ═══════════════════════════════════════════════════
+    function openPublishModal(mode = 'both') {
       if (!selectedVideo) {
-        showToast('Please select a video clip first');
-        return;
-      }
-      if (!isConnected) {
-        showToast('⚠️ Please connect your YouTube account first');
+        showToast('Please select a video from the library first');
         return;
       }
 
-      if (selectedVideo.isUploaded) {
-        if (!confirm(`This video has already been uploaded to YouTube (${selectedVideo.filename}). Do you want to post/schedule it again as a new upload?`)) {
-          return;
-        }
+      const modal = document.getElementById('publishModal');
+      const targetYt = document.getElementById('modalTargetYt');
+      const targetIg = document.getElementById('modalTargetIg');
+
+      if (mode === 'youtube') {
+        targetYt.checked = true;
+        targetIg.checked = false;
+      } else if (mode === 'instagram') {
+        targetYt.checked = false;
+        targetIg.checked = true;
+      } else {
+        targetYt.checked = true;
+        targetIg.checked = true;
       }
 
-      const title = document.getElementById('metaTitle').value.trim();
-      const description = document.getElementById('metaDescription').value.trim();
-      const categoryId = document.getElementById('metaCategory').value;
-      const privacyStatus = document.getElementById('metaPrivacy').value;
+      setModalTiming('now');
+      const defaultDate = new Date();
+      defaultDate.setHours(defaultDate.getHours() + 2);
+      document.getElementById('modalScheduleDateTime').value = toLocalISOString(defaultDate);
+      updateModalSchedulePreview();
 
-      if (!title) {
-        showToast('Title is required');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      lucide.createIcons();
+    }
+
+    function closePublishModal() {
+      document.getElementById('publishModal').classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    function setModalTiming(timing) {
+      currentModalTiming = timing;
+      const btnNow = document.getElementById('timingBtnNow');
+      const btnSched = document.getElementById('timingBtnSchedule');
+      const btnDraft = document.getElementById('timingBtnDraft');
+      const schedBox = document.getElementById('modalScheduleBox');
+      const confirmBtnText = document.getElementById('confirmPublishBtnText');
+
+      [btnNow, btnSched, btnDraft].forEach(b => {
+        b.className = "p-3.5 rounded-2xl glass-input border border-white/10 hover:border-sky-400/50 text-left flex flex-col gap-1 transition cursor-pointer";
+      });
+
+      if (timing === 'now') {
+        btnNow.className = "p-3.5 rounded-2xl glass-input border border-[#0071e3] bg-[#0071e3]/15 text-left flex flex-col gap-1 transition cursor-pointer";
+        schedBox.classList.add('hidden');
+        confirmBtnText.textContent = "Publish Live Now";
+      } else if (timing === 'schedule') {
+        btnSched.className = "p-3.5 rounded-2xl glass-input border border-purple-500 bg-purple-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
+        schedBox.classList.remove('hidden');
+        confirmBtnText.textContent = "Schedule Multi-Platform Release";
+      } else {
+        btnDraft.className = "p-3.5 rounded-2xl glass-input border border-amber-500 bg-amber-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
+        schedBox.classList.add('hidden');
+        confirmBtnText.textContent = "Save as Private Draft";
+      }
+      lucide.createIcons();
+    }
+
+    function setModalQuickHours(hours) {
+      const d = new Date();
+      d.setHours(d.getHours() + hours);
+      document.getElementById('modalScheduleDateTime').value = toLocalISOString(d);
+      updateModalSchedulePreview();
+    }
+
+    function setModalTargetTime(hour, minute = 0) {
+      const d = new Date();
+      d.setHours(hour, minute, 0, 0);
+      if (d.getTime() <= Date.now() + 5 * 60 * 1000) {
+        d.setDate(d.getDate() + 1);
+      }
+      document.getElementById('modalScheduleDateTime').value = toLocalISOString(d);
+      updateModalSchedulePreview();
+    }
+
+    function updateModalSchedulePreview() {
+      const val = document.getElementById('modalScheduleDateTime').value;
+      const preview = document.getElementById('modalSchedulePreviewText');
+      if (!val) return;
+      const d = new Date(val);
+      if (d.getTime() <= Date.now() + 60 * 1000) {
+        preview.innerHTML = `<span class="text-rose-400 font-bold">⚠️ Choose a future time (at least 2 mins ahead).</span>`;
+      } else {
+        preview.innerHTML = `<span class="text-purple-300 font-bold">🗓️ Will auto-publish on <strong>${formatScheduleTime(val)}</strong></span>`;
+      }
+    }
+
+    async function executeMultiPlatformPublish() {
+      if (!selectedVideo) return;
+
+      const targetYt = document.getElementById('modalTargetYt').checked;
+      const targetIg = document.getElementById('modalTargetIg').checked;
+
+      if (!targetYt && !targetIg) {
+        showToast('⚠️ Please select at least one target platform (YouTube or Instagram)');
         return;
       }
+
+      if (targetYt && !isConnected) {
+        showToast('⚠️ YouTube is not connected! Connect YouTube first in Settings.');
+        return;
+      }
+
+      if (targetIg && !isIgConnected) {
+        showToast('⚠️ Instagram is not connected! Click "Connect IG" first.');
+        return;
+      }
+
+      const platforms = [];
+      if (targetYt) platforms.push('youtube');
+      if (targetIg) platforms.push('instagram');
+
+      const title = document.getElementById('metaTitle').value.trim() || selectedVideo.filename;
+      const description = document.getElementById('metaDescription').value.trim() || '';
+      const tags = currentTags;
+      const categoryId = document.getElementById('metaCategory')?.value || '27';
+      const shareToFeed = document.getElementById('modalIgShareToFeed').checked;
 
       let publishAt = null;
-      if (privacyStatus === 'scheduled') {
-        const scheduleVal = document.getElementById('scheduleDateTime').value;
+      if (currentModalTiming === 'schedule') {
+        const scheduleVal = document.getElementById('modalScheduleDateTime').value;
         if (!scheduleVal) {
-          showToast('Please select a date and time for scheduled release.');
+          showToast('Please pick a date & time for scheduling.');
           return;
         }
         const schedDate = new Date(scheduleVal);
         if (schedDate.getTime() <= Date.now() + 60 * 1000) {
-          showToast('Scheduled time must be at least 2 minutes in the future.');
+          showToast('Scheduled time must be at least 2 minutes in future.');
           return;
         }
         publishAt = schedDate.toISOString();
       }
 
-      const uploadBtn = document.getElementById('uploadBtn');
+      closePublishModal();
+
       const progressCard = document.getElementById('uploadProgressCard');
       const progressBar = document.getElementById('uploadProgressBar');
       const stageText = document.getElementById('uploadStageText');
       const percentText = document.getElementById('uploadPercentText');
       const resultLink = document.getElementById('uploadResultLink');
 
-      uploadBtn.disabled = true;
       progressCard.classList.remove('hidden');
       resultLink.classList.add('hidden');
+      stageText.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Initializing multi-platform publisher...`;
+      percentText.textContent = `5%`;
+      progressBar.style.width = `5%`;
+      lucide.createIcons();
 
       try {
-        const res = await fetch('/api/upload', {
+        const res = await fetch('/api/publish-multi', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             filename: selectedVideo.filename,
-            title,
-            description,
-            tags: currentTags,
-            categoryId,
-            privacyStatus,
+            platforms,
+            timing: currentModalTiming,
             publishAt,
+            youtube: {
+              title,
+              description,
+              tags,
+              categoryId,
+              privacyStatus: currentModalTiming === 'draft' ? 'private' : 'public',
+            },
+            instagram: {
+              caption: `${title}\n\n${description}\n\n#Shorts #Reels #JudyInsights #Viral`,
+              shareToFeed,
+            },
           }),
         });
 
         const data = await res.json();
-        if (data.error) {
-          throw new Error(data.error);
-        }
+        if (data.error) throw new Error(data.error);
 
-        // Start polling upload status
         const pollInterval = setInterval(async () => {
           const statusRes = await fetch('/api/upload-status');
           const statusData = await statusRes.json();
 
           stageText.innerHTML = `
             <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
-            ${statusData.stage || 'Processing...'}
+            ${statusData.stage || 'Publishing in progress...'}
           `;
           percentText.textContent = `${statusData.progress || 0}%`;
           progressBar.style.width = `${statusData.progress || 0}%`;
@@ -1826,45 +2312,43 @@
 
           if (!statusData.inProgress) {
             clearInterval(pollInterval);
-            uploadBtn.disabled = false;
 
             if (statusData.error) {
               stageText.innerHTML = `<span class="text-rose-400">❌ ${statusData.error}</span>`;
-              showToast('Upload failed: ' + statusData.error);
-            } else if (statusData.result) {
-              const url = selectedVideo.isLongForm ? statusData.result.youtubeUrl : statusData.result.shortsUrl;
-              const isSched = statusData.result.isScheduled;
+              showToast('Publishing failed: ' + statusData.error);
+            } else {
+              stageText.innerHTML = `<span class="text-emerald-400">🎉 Multi-Platform Publishing Succeeded!</span>`;
+              resultLink.classList.remove('hidden');
 
-              if (isSched) {
-                const schedFormatted = formatScheduleTime(statusData.result.publishAt);
-                stageText.innerHTML = `<span class="text-purple-400 font-bold">🎉 Video Uploaded & Scheduled for ${schedFormatted}!</span>`;
-                resultLink.classList.remove('hidden');
-                resultLink.innerHTML = `
-                  <a href="${url}" target="_blank" class="hover:underline flex items-center gap-1.5 text-purple-300 font-extrabold">
-                    <i data-lucide="external-link" class="w-4 h-4"></i> Preview on YouTube (Private until ${schedFormatted})
+              let linksHtml = '';
+              if (statusData.result?.youtube) {
+                const yt = statusData.result.youtube;
+                const ytUrl = selectedVideo.isLongForm ? yt.youtubeUrl : (yt.shortsUrl || yt.youtubeUrl);
+                linksHtml += `
+                  <a href="${ytUrl}" target="_blank" class="hover:underline flex items-center gap-1.5 text-sky-400 font-extrabold">
+                    <i data-lucide="play" class="w-3.5 h-3.5"></i> YouTube: ${ytUrl} ${yt.isScheduled ? '(Scheduled)' : ''}
                   </a>
                 `;
-                showToast(`🎉 Video uploaded and scheduled for ${schedFormatted}!`);
-              } else {
-                stageText.innerHTML = `<span class="text-emerald-400">🎉 Video Published Live!</span>`;
-                resultLink.classList.remove('hidden');
-                resultLink.innerHTML = `
-                  <a href="${url}" target="_blank" class="hover:underline flex items-center gap-1.5 text-sky-400 font-extrabold">
-                    <i data-lucide="external-link" class="w-4 h-4"></i> View Live on YouTube: ${url}
-                  </a>
-                `;
-                showToast('🎉 Video published successfully to YouTube!');
               }
 
+              if (statusData.result?.instagram) {
+                const ig = statusData.result.instagram;
+                linksHtml += `
+                  <a href="${ig.reelUrl || 'https://instagram.com'}" target="_blank" class="hover:underline flex items-center gap-1.5 text-pink-400 font-extrabold">
+                    <i data-lucide="camera" class="w-3.5 h-3.5"></i> Instagram Reel: ${ig.reelUrl || 'Scheduled'}
+                  </a>
+                `;
+              }
+
+              resultLink.innerHTML = linksHtml;
+              showToast('🎉 Successfully processed multi-platform release!');
               lucide.createIcons();
-              // Reload video list to reflect live/scheduled badges
               await loadVideos();
             }
           }
         }, 1200);
 
       } catch (err) {
-        uploadBtn.disabled = false;
         stageText.innerHTML = `<span class="text-rose-400">❌ ${err.message}</span>`;
         showToast('Error: ' + err.message);
       }
@@ -1883,6 +2367,7 @@
     // Init on Page Load
     window.addEventListener('DOMContentLoaded', () => {
       checkAuthStatus();
+      checkInstagramStatus();
       loadVideos();
       lucide.createIcons();
     });

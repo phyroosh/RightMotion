@@ -110,5 +110,28 @@
     "isScheduled": false,
     "publishedAt": "2026-08-28T01:28:20Z",
     "thumbnailAttached": true
+  },
+  "promises_video.mp4": {
+    "uploaded": true,
+    "videoId": "O26QNkNYloQ",
+    "youtubeUrl": "https://youtu.be/O26QNkNYloQ",
+    "shortsUrl": "https://youtube.com/shorts/O26QNkNYloQ",
+    "title": "Why You Can't Keep Your Own Promises 🧠 #Shorts",
+    "privacyStatus": "public",
+    "publishAt": null,
+    "isScheduled": false,
+    "publishedAt": "2026-08-28T19:30:14Z"
+  },
+  "environment_video.mp4": {
+    "uploaded": true,
+    "videoId": "jqaHeAL5qx4",
+    "youtubeUrl": "https://youtu.be/jqaHeAL5qx4",
+    "shortsUrl": "https://youtube.com/shorts/jqaHeAL5qx4",
+    "title": "Why Smart People Keep Making Bad Choices (The Silent Trap) 🧠 #Shorts",
+    "privacyStatus": "scheduled",
+    "publishAt": "2026-08-29T19:30:00.000Z",
+    "isScheduled": true,
+    "publishedAt": "2026-08-29T10:14:20Z",
+    "thumbnailAttached": true
   }
 }
