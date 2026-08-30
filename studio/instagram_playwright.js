@@ -1,4 +1,4 @@
-﻿const { chromium } = require('playwright');
+const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
@@ -206,7 +206,7 @@ async function uploadReel({
   caption,
   shareToFeed = true,
   onProgress,
-  headless = true,
+  headless = false,
 }) {
   const session = getSavedSession();
   if (!session || !session.storageState) {
@@ -224,7 +224,11 @@ async function uploadReel({
 
     browser = await chromium.launch({
       headless: headless,
-      args: ['--disable-blink-features=AutomationControlled', '--no-default-browser-check'],
+      args: [
+        '--disable-blink-features=AutomationControlled',
+        '--no-default-browser-check',
+        '--start-maximized',
+      ],
     });
 
     const context = await browser.newContext({
@@ -238,21 +242,33 @@ async function uploadReel({
 
     if (onProgress) onProgress({ stage: 'Navigating to Instagram...', progress: 20 });
     await page.goto('https://www.instagram.com/', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(2000);
 
+    // Dismiss common dialogs (Not Now, Cookies, etc.)
     try {
-      const notNowBtn = await page.waitForSelector('button:has-text("Not Now"), button:has-text("Not now")', {
-        timeout: 4000,
-      });
-      if (notNowBtn) await notNowBtn.click().catch(() => {});
+      const dismissButtons = [
+        'button:has-text("Not Now")',
+        'button:has-text("Not now")',
+        'button:has-text("Cancel")',
+        'button:has-text("Decline optional cookies")',
+        'button:has-text("Allow all cookies")',
+      ];
+      for (const btnSel of dismissButtons) {
+        const btn = await page.$(btnSel);
+        if (btn) await btn.click().catch(() => {});
+      }
     } catch (e) {}
 
     if (onProgress) onProgress({ stage: 'Opening Create Reel dialog...', progress: 30 });
 
+    // Step 1: Click Create Button
     let createClicked = false;
     const createSelectors = [
       'svg[aria-label="New post"]',
       'svg[aria-label="Create"]',
+      'a[role="link"]:has-text("Create")',
       'span:has-text("Create")',
+      'div[role="button"]:has-text("Create")',
       'a[href="#"]:has-text("Create")',
     ];
 
@@ -267,68 +283,116 @@ async function uploadReel({
       } catch (e) {}
     }
 
-    if (!createClicked) {
-      await page.goto('https://www.instagram.com/?upload=1');
-    }
-
     await page.waitForTimeout(1000);
 
+    // If "Post" sub-option appears under Create menu, click it
     try {
-      const postOption = await page.waitForSelector('span:has-text("Post")', { timeout: 2000 });
+      const postOption = await page.$('span:has-text("Post"), div[role="menuitem"]:has-text("Post")');
       if (postOption) await postOption.click().catch(() => {});
     } catch (e) {}
 
     if (onProgress) onProgress({ stage: 'Selecting video file...', progress: 40 });
 
-    const fileInput = await page.waitForSelector('input[type="file"]', { timeout: 15000 });
-    await fileInput.setInputFiles(videoPath);
-
-    await page.waitForTimeout(2500);
+    // Step 2: Set video file onto input[type="file"]
+    // Instagram file inputs are attached to DOM but hidden (display: none).
+    // We use state: 'attached' and also trigger FileChooser if needed.
+    let fileSet = false;
 
     try {
-      const okBtn = await page.waitForSelector('button:has-text("OK"), button:has-text("Got it")', {
-        timeout: 3000,
+      const fileInput = await page.waitForSelector('input[type="file"]', {
+        state: 'attached',
+        timeout: 10000,
+      });
+      if (fileInput) {
+        await fileInput.setInputFiles(videoPath);
+        fileSet = true;
+      }
+    } catch (e) {}
+
+    if (!fileSet) {
+      // Fallback: Click "Select from computer" button with FileChooser listener
+      const [fileChooser] = await Promise.all([
+        page.waitForEvent('filechooser', { timeout: 10000 }).catch(() => null),
+        page.click('button:has-text("Select from computer"), div[role="button"]:has-text("Select from computer")').catch(() => null),
+      ]);
+      if (fileChooser) {
+        await fileChooser.setFiles(videoPath);
+        fileSet = true;
+      }
+    }
+
+    if (!fileSet) {
+      // Direct setInputFiles on page
+      await page.setInputFiles('input[type="file"]', videoPath);
+    }
+
+    await page.waitForTimeout(3000);
+
+    // Dismiss "Reels video sharing" prompt if it appears
+    try {
+      const okBtn = await page.waitForSelector('button:has-text("OK"), button:has-text("Got it"), button:has-text("Dismiss")', {
+        timeout: 4000,
       });
       if (okBtn) await okBtn.click().catch(() => {});
     } catch (e) {}
 
     if (onProgress) onProgress({ stage: 'Configuring 9:16 vertical aspect ratio...', progress: 50 });
 
+    // Step 3: Aspect Ratio / Crop (Set to 9:16 vertical)
     try {
-      const cropBtn = await page.waitForSelector('svg[aria-label="Select crop"]', { timeout: 3000 });
+      const cropBtn = await page.waitForSelector(
+        'svg[aria-label="Select crop"], button[aria-label="Select crop"], button:has(svg[aria-label="Select crop"])',
+        { timeout: 4000 }
+      );
       if (cropBtn) {
         await cropBtn.click();
-        await page.waitForTimeout(500);
-        const vertical916 = await page.waitForSelector('span:has-text("9:16"), button:has-text("9:16")', {
-          timeout: 2000,
-        });
+        await page.waitForTimeout(600);
+        const vertical916 = await page.waitForSelector(
+          'span:has-text("9:16"), button:has-text("9:16"), div[role="button"]:has-text("9:16"), span:has-text("Original")',
+          { timeout: 3000 }
+        );
         if (vertical916) await vertical916.click().catch(() => {});
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Crop ratio notice:', e.message);
+    }
 
-    const nextBtn1 = await page.waitForSelector('div[role="button"]:has-text("Next"), button:has-text("Next")', {
-      timeout: 10000,
-    });
-    await nextBtn1.click();
+    await page.waitForTimeout(1000);
+
+    // Step 4: Click Next (to Cover Photo step)
+    const nextBtn1 = await page.waitForSelector(
+      'div[role="button"]:has-text("Next"), button:has-text("Next"), div:has-text("Next")',
+      { timeout: 12000 }
+    );
+    if (nextBtn1) await nextBtn1.click();
     await page.waitForTimeout(2000);
 
     if (onProgress) onProgress({ stage: 'Applying 4K cover thumbnail...', progress: 65 });
 
+    // Step 5: Attach 4K Cover Photo if available
     if (coverPath && fs.existsSync(coverPath)) {
       try {
-        const coverTab = await page.waitForSelector('div:has-text("Cover photo"), span:has-text("Cover photo")', {
-          timeout: 3000,
-        });
+        const coverTab = await page.waitForSelector(
+          'div:has-text("Cover photo"), span:has-text("Cover photo"), button:has-text("Cover photo")',
+          { timeout: 4000 }
+        );
         if (coverTab) {
           await coverTab.click();
-          await page.waitForTimeout(800);
-          const selectFromComp = await page.waitForSelector('button:has-text("Select from computer"), input[type="file"]', {
-            timeout: 3000,
-          });
-          if (selectFromComp) {
-            const coverInput = await page.$('input[type="file"]');
-            if (coverInput) {
-              await coverInput.setInputFiles(coverPath);
+          await page.waitForTimeout(1000);
+
+          // Find cover file input or click "Select from computer"
+          const allInputs = await page.$$('input[type="file"]');
+          if (allInputs.length > 0) {
+            const lastInput = allInputs[allInputs.length - 1];
+            await lastInput.setInputFiles(coverPath);
+            await page.waitForTimeout(1500);
+          } else {
+            const [coverChooser] = await Promise.all([
+              page.waitForEvent('filechooser', { timeout: 4000 }).catch(() => null),
+              page.click('button:has-text("Select from computer"), div[role="button"]:has-text("Select from computer")').catch(() => null),
+            ]);
+            if (coverChooser) {
+              await coverChooser.setFiles(coverPath);
               await page.waitForTimeout(1500);
             }
           }
@@ -338,39 +402,46 @@ async function uploadReel({
       }
     }
 
-    const nextBtn2 = await page.waitForSelector('div[role="button"]:has-text("Next"), button:has-text("Next")', {
-      timeout: 10000,
-    });
-    await nextBtn2.click();
+    // Step 6: Click Next (to Caption & Settings step)
+    const nextBtn2 = await page.waitForSelector(
+      'div[role="button"]:has-text("Next"), button:has-text("Next"), div:has-text("Next")',
+      { timeout: 12000 }
+    );
+    if (nextBtn2) await nextBtn2.click();
     await page.waitForTimeout(2000);
 
     if (onProgress) onProgress({ stage: 'Writing caption & hashtags...', progress: 75 });
 
+    // Step 7: Type Caption
     try {
       const captionBox = await page.waitForSelector(
-        'div[aria-label="Write a caption..."], div[contenteditable="true"], textarea[placeholder="Write a caption..."]',
+        'div[aria-label="Write a caption..."], div[contenteditable="true"], div[role="textbox"], textarea[placeholder="Write a caption..."]',
         { timeout: 10000 }
       );
       if (captionBox) {
         await captionBox.click();
-        await page.keyboard.type(caption || '', { delay: 10 });
+        await page.waitForTimeout(400);
+        await page.keyboard.type(caption || '', { delay: 12 });
       }
     } catch (e) {
       console.warn('Caption typing notice:', e.message);
     }
 
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(1500);
 
     if (onProgress) onProgress({ stage: 'Sharing Reel to Instagram...', progress: 85 });
 
-    const shareBtn = await page.waitForSelector('div[role="button"]:has-text("Share"), button:has-text("Share")', {
-      timeout: 10000,
-    });
-    await shareBtn.click();
+    // Step 8: Click Share Button
+    const shareBtn = await page.waitForSelector(
+      'div[role="button"]:has-text("Share"), button:has-text("Share"), div:has-text("Share")',
+      { timeout: 12000 }
+    );
+    if (shareBtn) await shareBtn.click();
 
     if (onProgress) onProgress({ stage: 'Waiting for Instagram server processing...', progress: 92 });
 
-    const CONFIRM_TIMEOUT = 120000;
+    // Step 9: Wait for Upload / Share Completion
+    const CONFIRM_TIMEOUT = 120000; // 2 minutes for processing
     await page
       .waitForSelector(
         'span:has-text("Your reel has been shared"), span:has-text("Reel shared"), span:has-text("Your post has been shared"), svg[aria-label="Animated checkmark"]',
@@ -388,6 +459,7 @@ async function uploadReel({
       }
     } catch (e) {}
 
+    // Save updated session cookies
     const updatedStorageState = await context.storageState();
     saveSession({
       ...session,
@@ -396,7 +468,7 @@ async function uploadReel({
 
     if (onProgress) onProgress({ stage: 'Reel shared successfully!', progress: 100 });
 
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000);
     await browser.close().catch(() => {});
 
     console.log(`🎉 Instagram Reel successfully published: ${liveReelUrl}`);
