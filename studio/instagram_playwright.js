@@ -242,54 +242,33 @@ async function uploadReel({
 
     if (onProgress) onProgress({ stage: 'Navigating to Instagram...', progress: 20 });
     await page.goto('https://www.instagram.com/', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('svg[aria-label="Home"], svg[aria-label="Create"], svg[aria-label="New post"], a[href="/"]', { timeout: 30000 });
     await page.waitForTimeout(2000);
 
     // Dismiss common dialogs (Not Now, Cookies, etc.)
-    try {
-      const dismissButtons = [
-        'button:has-text("Not Now")',
-        'button:has-text("Not now")',
-        'button:has-text("Cancel")',
-        'button:has-text("Decline optional cookies")',
-        'button:has-text("Allow all cookies")',
-      ];
-      for (const btnSel of dismissButtons) {
-        const btn = await page.$(btnSel);
-        if (btn) await btn.click().catch(() => {});
-      }
-    } catch (e) {}
-
-    if (onProgress) onProgress({ stage: 'Opening Create Reel dialog...', progress: 30 });
-
-    // Step 1: Click Create Button
-    let createClicked = false;
-    const createSelectors = [
-      'svg[aria-label="New post"]',
-      'svg[aria-label="Create"]',
-      'a[role="link"]:has-text("Create")',
-      'span:has-text("Create")',
-      'div[role="button"]:has-text("Create")',
-      'a[href="#"]:has-text("Create")',
-    ];
-
-    for (const sel of createSelectors) {
+    for (let i = 0; i < 4; i++) {
       try {
-        const el = await page.$(sel);
-        if (el) {
-          await el.click();
-          createClicked = true;
-          break;
+        const btn = page.locator('button:has-text("Not Now"), button:has-text("Not now"), button:has-text("Cancel"), button:has-text("Decline optional cookies")');
+        if (await btn.count() > 0) {
+          await btn.first().click({ force: true, timeout: 2000 });
+          await page.waitForTimeout(1000);
         }
       } catch (e) {}
     }
 
-    await page.waitForTimeout(1000);
+    if (onProgress) onProgress({ stage: 'Opening Create Reel dialog...', progress: 30 });
 
-    // If "Post" sub-option appears under Create menu, click it
-    try {
-      const postOption = await page.$('span:has-text("Post"), div[role="menuitem"]:has-text("Post")');
-      if (postOption) await postOption.click().catch(() => {});
-    } catch (e) {}
+    // Step 1: Click Create Button
+    const create = page.locator('a._a6hd:has-text("Create"), a:has-text("Create"), span:has-text("Create")').first();
+    await create.click({ force: true });
+    await page.waitForTimeout(1500);
+
+    // Click Post submenu item
+    const postSvg = page.locator('svg[aria-label="Post"], a:has(svg[aria-label="Post"])').first();
+    if (await postSvg.count() > 0) {
+      await postSvg.click({ force: true });
+      await page.waitForTimeout(2500);
+    }
 
     if (onProgress) onProgress({ stage: 'Selecting video file...', progress: 40 });
 
@@ -440,14 +419,27 @@ async function uploadReel({
 
     if (onProgress) onProgress({ stage: 'Waiting for Instagram server processing...', progress: 92 });
 
-    // Step 9: Wait for Upload / Share Completion
-    const CONFIRM_TIMEOUT = 120000; // 2 minutes for processing
-    await page
-      .waitForSelector(
-        'span:has-text("Your reel has been shared"), span:has-text("Reel shared"), span:has-text("Your post has been shared"), svg[aria-label="Animated checkmark"]',
-        { timeout: CONFIRM_TIMEOUT }
-      )
-      .catch(() => null);
+    // Step 9: Wait for Upload / Share Completion (Progressive polling up to 3 minutes)
+    for (let s = 1; s <= 36; s++) {
+      await page.waitForTimeout(5000);
+      const dialogText = await page.evaluate(() => {
+        const d = document.querySelector('div[role="dialog"]');
+        return d ? d.innerText : null;
+      });
+
+      if (!dialogText) {
+        break; // Dialog dismissed, Reel successfully published
+      }
+
+      const lower = dialogText.toLowerCase();
+      if (lower.includes('shared') || lower.includes('post shared') || lower.includes('reel shared')) {
+        break;
+      }
+
+      if (onProgress) {
+        onProgress({ stage: `Uploading & processing Reel on Instagram... (${s * 5}s)`, progress: Math.min(98, 85 + Math.floor(s * 0.35)) });
+      }
+    }
 
     let liveReelUrl = `https://www.instagram.com/${session.username}/reels/`;
 
