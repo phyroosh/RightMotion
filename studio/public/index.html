@@ -711,10 +711,10 @@
               </div>
               <div>
                 <div class="text-xs font-black text-white">YouTube Shorts</div>
-                <div class="text-[10px] text-slate-400 font-mono">1080p + 4K Cover</div>
+                <div class="text-[10px] text-sky-400 font-mono">Native Cloud Scheduling</div>
               </div>
             </div>
-            <input type="checkbox" id="modalTargetYt" checked class="w-5 h-5 rounded-lg accent-[#0071e3] cursor-pointer" />
+            <input type="checkbox" id="modalTargetYt" onchange="onModalPlatformToggle()" checked class="w-5 h-5 rounded-lg accent-[#0071e3] cursor-pointer" />
           </label>
 
           <!-- Instagram Checkbox Card -->
@@ -725,10 +725,10 @@
               </div>
               <div>
                 <div class="text-xs font-black text-white">Instagram Reels</div>
-                <div class="text-[10px] text-slate-400 font-mono">Reels + Feed + 4K Cover</div>
+                <div class="text-[10px] text-pink-400 font-mono">Instant Live Upload</div>
               </div>
             </div>
-            <input type="checkbox" id="modalTargetIg" checked class="w-5 h-5 rounded-lg accent-[#e1306c] cursor-pointer" />
+            <input type="checkbox" id="modalTargetIg" onchange="onModalPlatformToggle()" checked class="w-5 h-5 rounded-lg accent-[#e1306c] cursor-pointer" />
           </label>
         </div>
       </div>
@@ -755,7 +755,7 @@
             <div class="text-[10px] text-slate-400">Go live immediately</div>
           </button>
 
-          <!-- Schedule Later -->
+          <!-- Schedule Later (YouTube Native) -->
           <button
             type="button"
             id="timingBtnSchedule"
@@ -766,8 +766,8 @@
               <i data-lucide="calendar-clock" class="w-4 h-4 text-purple-400"></i>
               <span class="w-2 h-2 rounded-full bg-purple-400 opacity-40"></span>
             </div>
-            <div class="text-xs font-black text-white mt-1">Schedule Later</div>
-            <div class="text-[10px] text-slate-400">Choose date & peak slot</div>
+            <div class="text-xs font-black text-white mt-1">Schedule (YouTube)</div>
+            <div class="text-[10px] text-slate-400">Native Google Cloud queue</div>
           </button>
 
           <!-- Private Draft -->
@@ -782,7 +782,7 @@
               <span class="w-2 h-2 rounded-full bg-amber-400 opacity-40"></span>
             </div>
             <div class="text-xs font-black text-white mt-1">Private Draft</div>
-            <div class="text-[10px] text-slate-400">Hidden until manually posted</div>
+            <div class="text-[10px] text-slate-400">Save unlisted on YouTube</div>
           </button>
         </div>
 
@@ -790,9 +790,9 @@
         <div id="modalScheduleBox" class="hidden p-4 rounded-2xl border border-purple-500/40 bg-purple-500/10 flex flex-col gap-3.5 mt-1">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold text-purple-200 flex items-center gap-1.5">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-purple-400"></i> Select Release Time
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-purple-400"></i> Select YouTube Release Time
             </span>
-            <span class="text-[10px] font-mono text-purple-300">Local Timezone</span>
+            <span class="text-[10px] font-mono text-purple-300">Google Cloud Release</span>
           </div>
 
           <div class="flex flex-col sm:flex-row items-center gap-2.5">
@@ -849,7 +849,7 @@
       </div>
 
       <!-- Instagram Specific Settings (Share to Feed) -->
-      <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+      <div id="modalIgOptionsBox" class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <i data-lucide="share" class="w-4 h-4 text-pink-400"></i>
           <div>
@@ -2186,7 +2186,9 @@
         targetIg.checked = true;
       }
 
+      onModalPlatformToggle();
       setModalTiming('now');
+
       const defaultDate = new Date();
       defaultDate.setHours(defaultDate.getHours() + 2);
       document.getElementById('modalScheduleDateTime').value = toLocalISOString(defaultDate);
@@ -2200,6 +2202,37 @@
       document.getElementById('publishModal').classList.add('opacity-0', 'pointer-events-none');
     }
 
+    function onModalPlatformToggle() {
+      const targetYt = document.getElementById('modalTargetYt')?.checked;
+      const targetIg = document.getElementById('modalTargetIg')?.checked;
+      const btnSched = document.getElementById('timingBtnSchedule');
+      const btnDraft = document.getElementById('timingBtnDraft');
+      const igOptionsBox = document.getElementById('modalIgOptionsBox');
+
+      if (igOptionsBox) {
+        igOptionsBox.classList.toggle('hidden', !targetIg);
+      }
+
+      // If ONLY Instagram is checked, disable Schedule and Draft (Instagram only supports instant Live upload)
+      if (!targetYt && targetIg) {
+        if (btnSched) {
+          btnSched.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        }
+        if (btnDraft) {
+          btnDraft.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        }
+        setModalTiming('now');
+      } else {
+        if (btnSched) {
+          btnSched.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        }
+        if (btnDraft) {
+          btnDraft.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        }
+        setModalTiming(currentModalTiming);
+      }
+    }
+
     function setModalTiming(timing) {
       currentModalTiming = timing;
       const btnNow = document.getElementById('timingBtnNow');
@@ -2207,23 +2240,32 @@
       const btnDraft = document.getElementById('timingBtnDraft');
       const schedBox = document.getElementById('modalScheduleBox');
       const confirmBtnText = document.getElementById('confirmPublishBtnText');
+      const targetYt = document.getElementById('modalTargetYt')?.checked ?? true;
+      const targetIg = document.getElementById('modalTargetIg')?.checked ?? true;
 
       [btnNow, btnSched, btnDraft].forEach(b => {
-        b.className = "p-3.5 rounded-2xl glass-input border border-white/10 hover:border-sky-400/50 text-left flex flex-col gap-1 transition cursor-pointer";
+        if (b) b.className = "p-3.5 rounded-2xl glass-input border border-white/10 hover:border-sky-400/50 text-left flex flex-col gap-1 transition cursor-pointer";
       });
 
       if (timing === 'now') {
-        btnNow.className = "p-3.5 rounded-2xl glass-input border border-[#0071e3] bg-[#0071e3]/15 text-left flex flex-col gap-1 transition cursor-pointer";
-        schedBox.classList.add('hidden');
-        confirmBtnText.textContent = "Publish Live Now";
+        if (btnNow) btnNow.className = "p-3.5 rounded-2xl glass-input border border-[#0071e3] bg-[#0071e3]/15 text-left flex flex-col gap-1 transition cursor-pointer";
+        if (schedBox) schedBox.classList.add('hidden');
+        if (confirmBtnText) {
+          if (targetYt && targetIg) confirmBtnText.textContent = "Publish Live to Both Platforms";
+          else if (targetIg) confirmBtnText.textContent = "Publish Instagram Reel Live Now";
+          else confirmBtnText.textContent = "Publish YouTube Shorts Live Now";
+        }
       } else if (timing === 'schedule') {
-        btnSched.className = "p-3.5 rounded-2xl glass-input border border-purple-500 bg-purple-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
-        schedBox.classList.remove('hidden');
-        confirmBtnText.textContent = "Schedule Multi-Platform Release";
+        if (btnSched) btnSched.className = "p-3.5 rounded-2xl glass-input border border-purple-500 bg-purple-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
+        if (schedBox) schedBox.classList.remove('hidden');
+        if (confirmBtnText) {
+          if (targetYt && targetIg) confirmBtnText.textContent = "Schedule YouTube & Publish IG Live";
+          else confirmBtnText.textContent = "Schedule YouTube Shorts Release";
+        }
       } else {
-        btnDraft.className = "p-3.5 rounded-2xl glass-input border border-amber-500 bg-amber-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
-        schedBox.classList.add('hidden');
-        confirmBtnText.textContent = "Save as Private Draft";
+        if (btnDraft) btnDraft.className = "p-3.5 rounded-2xl glass-input border border-amber-500 bg-amber-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
+        if (schedBox) schedBox.classList.add('hidden');
+        if (confirmBtnText) confirmBtnText.textContent = "Save as Private Draft (YouTube)";
       }
       safeCreateIcons();
     }
@@ -2248,13 +2290,37 @@
     function updateModalSchedulePreview() {
       const val = document.getElementById('modalScheduleDateTime').value;
       const preview = document.getElementById('modalSchedulePreviewText');
-      if (!val) return;
+      if (!val || !preview) return;
       const d = new Date(val);
       if (d.getTime() <= Date.now() + 60 * 1000) {
         preview.innerHTML = `<span class="text-rose-400 font-bold">⚠️ Choose a future time (at least 2 mins ahead).</span>`;
-      } else {
-        preview.innerHTML = `<span class="text-purple-300 font-bold">🗓️ Will auto-publish on <strong>${formatScheduleTime(val)}</strong></span>`;
+        return;
       }
+
+      const targetIg = document.getElementById('modalTargetIg')?.checked;
+      const formatted = formatScheduleTime(val);
+      if (targetIg) {
+        preview.innerHTML = `
+          <div class="flex flex-col gap-1">
+            <span class="text-purple-300 font-bold flex items-center gap-1.5">
+              <i data-lucide="calendar-check" class="w-4 h-4 text-purple-400"></i>
+              YouTube automatically goes public on <strong>${formatted}</strong> (Google Cloud Queue)
+            </span>
+            <span class="text-pink-300 font-semibold text-[10px] flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-3.5 h-3.5 text-pink-400"></i>
+              Instagram Reel will be published live immediately
+            </span>
+          </div>
+        `;
+      } else {
+        preview.innerHTML = `
+          <span class="text-purple-300 font-bold flex items-center gap-1.5">
+            <i data-lucide="calendar-check" class="w-4 h-4 text-purple-400"></i>
+            YouTube Shorts will automatically go public on <strong>${formatted}</strong> (Google Cloud Queue)
+          </span>
+        `;
+      }
+      safeCreateIcons();
     }
 
     async function executeMultiPlatformPublish() {

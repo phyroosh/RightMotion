@@ -206,28 +206,21 @@ app.get('/api/videos', async (req, res) => {
       const uploadInfo = uploads[filename] || {};
 
       // YouTube Status
-      const ytUploaded = !!(uploadInfo.uploaded || uploadInfo.youtube?.uploaded);
-      const ytVideoId = uploadInfo.videoId || uploadInfo.youtube?.videoId || null;
-      const ytPublishAt = uploadInfo.publishAt || uploadInfo.youtube?.publishAt || null;
+      const ytUploaded = !!(uploadInfo.youtube?.uploaded || uploadInfo.uploaded);
+      const ytVideoId = uploadInfo.youtube?.videoId || uploadInfo.videoId || null;
+      const ytPublishAt = uploadInfo.youtube?.publishAt || uploadInfo.publishAt || null;
       const ytIsScheduled = !!(
+        (uploadInfo.youtube?.isScheduled || uploadInfo.isScheduled) &&
         ytPublishAt &&
-        (uploadInfo.isScheduled || uploadInfo.youtube?.isScheduled) &&
         new Date(ytPublishAt) > now
       );
 
-      // Instagram Status
+      // Instagram Status (Always Live Immediate)
       const igUploaded = !!(uploadInfo.instagram && uploadInfo.instagram.uploaded);
       const igReelUrl = uploadInfo.instagram?.reelUrl || null;
-      const igPublishAt = uploadInfo.instagram?.publishAt || null;
-      const igIsScheduled = !!(
-        uploadInfo.instagram &&
-        uploadInfo.instagram.isScheduled &&
-        igPublishAt &&
-        new Date(igPublishAt) > now
-      );
 
       const isUploaded = ytUploaded || igUploaded;
-      const isScheduled = ytIsScheduled || igIsScheduled;
+      const isScheduled = ytIsScheduled;
 
       const isLongForm =
         filename.includes('procrastination') ||
@@ -263,10 +256,8 @@ app.get('/api/videos', async (req, res) => {
         },
         instagram: {
           isUploaded: igUploaded,
-          isScheduled: igIsScheduled,
           reelUrl: igReelUrl,
           username: uploadInfo.instagram?.username || null,
-          publishAt: igPublishAt,
           publishedAt: uploadInfo.instagram?.publishedAt || null,
         },
         uploadInfo: isUploaded ? uploadInfo : null,
@@ -1010,51 +1001,37 @@ app.post('/api/publish-multi', async (req, res) => {
       activeUpload.result.youtube = existing.youtube;
     }
 
-    // 2. Instagram Execution / Scheduling
+    // 2. Instagram Execution (Always Live Immediate Upload via Playwright)
     if (platforms.includes('instagram')) {
-      if (isScheduling) {
-        existing.instagram = {
-          ...(existing.instagram || {}),
-          uploaded: false,
-          isScheduled: true,
-          publishAt: isoPublishAt,
-          caption: instagram.caption || '',
-          shareToFeed: instagram.shareToFeed !== false,
-        };
-        activeUpload.stage = `Instagram Reel scheduled for ${new Date(isoPublishAt).toLocaleString()}`;
-        activeUpload.result.instagram = existing.instagram;
-      } else {
-        activeUpload.stage = 'Publishing Instagram Reel via Playwright...';
-        activeUpload.progress = 60;
+      activeUpload.stage = 'Publishing Instagram Reel via Playwright...';
+      activeUpload.progress = 60;
 
-        const igRes = await igPlaywright.uploadReel({
-          videoPath: filePath,
-          coverPath: fs.existsSync(thumbPath) ? thumbPath : null,
-          caption: instagram.caption || '',
-          shareToFeed: instagram.shareToFeed !== false,
-          onProgress: (p) => {
-            activeUpload.stage = `Instagram: ${p.stage}`;
-            activeUpload.progress = 50 + Math.round(p.progress * 0.5); // 50-100%
-          },
-          headless: true,
-        });
+      const igRes = await igPlaywright.uploadReel({
+        videoPath: filePath,
+        coverPath: fs.existsSync(thumbPath) ? thumbPath : null,
+        caption: instagram.caption || '',
+        shareToFeed: instagram.shareToFeed !== false,
+        onProgress: (p) => {
+          activeUpload.stage = `Instagram: ${p.stage}`;
+          activeUpload.progress = 50 + Math.round(p.progress * 0.5); // 50-100%
+        },
+        headless: false,
+      });
 
-        existing.instagram = {
-          uploaded: true,
-          isScheduled: false,
-          reelUrl: igRes.reelUrl,
-          username: igRes.username,
-          publishedAt: igRes.publishedAt || new Date().toISOString(),
-        };
-        activeUpload.result.instagram = existing.instagram;
-      }
+      existing.instagram = {
+        uploaded: true,
+        reelUrl: igRes.reelUrl,
+        username: igRes.username,
+        publishedAt: igRes.publishedAt || new Date().toISOString(),
+      };
+      activeUpload.result.instagram = existing.instagram;
     }
 
     saveUploadsRecord(uploads);
     activeUpload.inProgress = false;
     activeUpload.progress = 100;
     activeUpload.stage = isScheduling
-      ? `🎉 Successfully scheduled on [${platforms.join(' & ').toUpperCase()}]!`
+      ? `🎉 Successfully scheduled on YouTube & published to Instagram!`
       : `🎉 Successfully published to [${platforms.join(' & ').toUpperCase()}]!`;
   } catch (err) {
     console.error('Multi-platform publish error:', err);
@@ -1062,80 +1039,6 @@ app.post('/api/publish-multi', async (req, res) => {
     activeUpload.error = err.message || 'Publishing failed';
   }
 });
-
-// ========================================================
-// 8d. Background Scheduler Engine (Auto-fires every 30s)
-// ========================================================
-async function checkAndRunScheduledJobs() {
-  if (activeUpload.inProgress) return;
-
-  try {
-    const uploads = getUploadsRecord();
-    const now = new Date();
-
-    for (const [filename, record] of Object.entries(uploads)) {
-      // Check Instagram scheduled release
-      if (
-        record.instagram &&
-        record.instagram.isScheduled &&
-        !record.instagram.uploaded &&
-        record.instagram.publishAt &&
-        new Date(record.instagram.publishAt) <= now
-      ) {
-        const filePath = path.join(OUT_DIR, filename);
-        if (fs.existsSync(filePath)) {
-          console.log(`⏰ Scheduled Instagram post triggering for ${filename}...`);
-          const baseName = filename.replace(/\.mp4$/i, '');
-          const thumbPath = path.join(OUT_DIR, `${baseName}_thumbnail.png`);
-
-          activeUpload = {
-            inProgress: true,
-            platform: 'instagram',
-            progress: 10,
-            stage: `Auto-publishing scheduled Reel for ${filename}...`,
-            result: null,
-            error: null,
-          };
-
-          try {
-            const igRes = await igPlaywright.uploadReel({
-              videoPath: filePath,
-              coverPath: fs.existsSync(thumbPath) ? thumbPath : null,
-              caption: record.instagram.caption || '',
-              shareToFeed: record.instagram.shareToFeed !== false,
-              onProgress: (p) => {
-                activeUpload.stage = p.stage;
-                activeUpload.progress = p.progress;
-              },
-              headless: true,
-            });
-
-            record.instagram.uploaded = true;
-            record.instagram.isScheduled = false;
-            record.instagram.reelUrl = igRes.reelUrl;
-            record.instagram.publishedAt = new Date().toISOString();
-            saveUploadsRecord(uploads);
-
-            activeUpload.inProgress = false;
-            activeUpload.progress = 100;
-            activeUpload.stage = '🎉 Scheduled Instagram Reel published successfully!';
-            console.log(`✅ Scheduled Reel published: ${igRes.reelUrl}`);
-          } catch (e) {
-            console.error('Scheduled Instagram Reel failed:', e);
-            activeUpload.inProgress = false;
-            activeUpload.error = e.message;
-          }
-          break; // Process one at a time
-        }
-      }
-    }
-  } catch (err) {
-    console.error('Scheduler check error:', err.message);
-  }
-}
-
-// Start background cron loop (every 30 seconds)
-setInterval(checkAndRunScheduledJobs, 30000);
 
 // ========================================================
 // 9. API: Settings & YouTube API Credentials Configuration
