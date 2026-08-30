@@ -34,15 +34,7 @@ export const EnvironmentCanvas: React.FC<CanvasProps> = () => {
   const { fps, durationInFrames } = useVideoConfig();
   const currentMs = (frame / fps) * 1000;
 
-  // Continuous subtle cinematic slow camera push
-  const cameraZoom = interpolate(frame, [0, durationInFrames], [1.0, 1.05], {
-    extrapolateRight: "clamp",
-  });
-
-  // Soft continuous harmonic floating motion
-  const ambientFloat = Math.sin(frame * 0.03) * 4;
-
-  // Snappy spring helper with Apple mass-spring-damper physics
+  // Snappy spring helper with Apple mass-spring-damper physics (Clean Enter & Rock-Solid Stationary Lock)
   const sp = (delayMs: number, d = 20, s = 95, m = 0.85) => {
     const df = Math.floor((delayMs / 1000) * fps);
     return spring({
@@ -62,10 +54,7 @@ export const EnvironmentCanvas: React.FC<CanvasProps> = () => {
   if (!isCanvasActive) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 2: THE WILLPOWER STACK UNDER FRICTION (7,000 - 11,200ms)
           "You can have discipline, goals, even a really strong mindset..."
@@ -81,7 +70,7 @@ export const EnvironmentCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -185,7 +174,7 @@ export const EnvironmentCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -306,7 +295,7 @@ export const EnvironmentCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -412,7 +401,7 @@ export const EnvironmentCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >

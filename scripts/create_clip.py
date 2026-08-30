@@ -201,13 +201,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const {{ fps, durationInFrames }} = useVideoConfig();
   const currentMs = (frame / fps) * 1000;
 
-  // Advanced Mathematical Camera Tracking & Ambient Float
-  const cameraZoom = interpolate(frame, [0, durationInFrames], [1.0, 1.05], {{
-    extrapolateRight: "clamp",
-  }});
-  const ambientFloat = Math.sin(frame * 0.03) * 4;
-
-  // Mass-Spring-Damper Physics
+  // Mass-Spring-Damper Physics (Clean Enter & Rock-Solid Lock)
   const sp = (delayMs: number, d = 20, s = 90, m = 0.85) => {{
     const df = Math.floor((delayMs / 1000) * fps);
     return spring({{
@@ -223,15 +217,12 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const sCard = sp(4800);
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{{{ transform: `scale(${{cameraZoom}})`, transformOrigin: "center center" }}}}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       <div className="absolute inset-x-0 top-[44%] -translate-y-1/2 flex flex-col items-center justify-center px-6">
         <div
           className="w-full max-w-[980px] rounded-[52px] p-12 bg-white/98 border-[4px] border-amber-200 shadow-2xl flex flex-col items-center text-center gap-9"
           style={{{{
-            transform: `translateY(${{(1 - sCard) * 50 + ambientFloat}}px)`,
+            transform: `translateY(${{(1 - sCard) * 50}}px)`,
             opacity: Math.min(1, sCard * 1.5),
           }}}}
         >

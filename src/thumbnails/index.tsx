@@ -355,3 +355,19 @@ export const EnvironmentThumbnail: React.FC = () => (
     extraBadge="NEURAL ADAPTATION"
   />
 );
+
+// 19. DIGITAL LONELINESS & REAL CLOSENESS (9:16 Shorts)
+export const LonelinessThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="SURROUNDED ONLINE YET TOTALLY ALONE"
+    highlightWord="TOTALLY ALONE"
+    highlightColor="rose"
+    subtitle="Connection Without Closeness Is An Illusion"
+    categoryBadge="DIGITAL PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="REAL CONNECTION"
+  />
+);

@@ -1,6 +1,6 @@
 import json
 
-with open('src/clips/neuroproductivity/transcript.json', 'r', encoding='utf-8') as f:
+with open('src/clips/loneliness/transcript.json', 'r', encoding='utf-8') as f:
     words = json.load(f)
 
 # Group words into sentences based on punctuation

@@ -59,10 +59,7 @@ export const ComparisonCanvas: React.FC<CanvasProps> = () => {
   else if (currentMs >= 3600) scene = 2;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 2: THE CORE MECHANISM (3,600 - 8,600ms)
           "Because every time you become better… your brain just finds someone new to compare you to."

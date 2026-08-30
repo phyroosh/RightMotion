@@ -27,15 +27,7 @@ export const TeenageCanvas: React.FC<CanvasProps> = () => {
   const { fps, durationInFrames } = useVideoConfig();
   const currentMs = (frame / fps) * 1000;
 
-  // Cinematic slow camera push
-  const cameraZoom = interpolate(frame, [0, durationInFrames], [1.0, 1.05], {
-    extrapolateRight: "clamp",
-  });
-
-  // Ambient float
-  const ambientFloat = Math.sin(frame * 0.03) * 4;
-
-  // Snappy spring helper
+  // Snappy spring helper (Clean Enter & Rock-Solid Stationary Lock)
   const sp = (delayMs: number, d = 20, s = 95, m = 0.85) => {
     const df = Math.floor((delayMs / 1000) * fps);
     return spring({
@@ -55,10 +47,7 @@ export const TeenageCanvas: React.FC<CanvasProps> = () => {
   if (!isCanvasActive) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 2: THE NEURAL HARDWARE MISMATCH (5,200 - 11,240ms)
           "Your brain is still developing... bigger decisions, stronger emotions, who you even are"
@@ -77,7 +66,7 @@ export const TeenageCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 45 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 45}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -187,7 +176,7 @@ export const TeenageCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 45 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 45}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -275,7 +264,7 @@ export const TeenageCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 45 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 45}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -423,7 +412,7 @@ export const TeenageCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 45 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 45}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >

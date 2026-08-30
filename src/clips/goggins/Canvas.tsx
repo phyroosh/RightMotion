@@ -53,10 +53,7 @@ export const GogginsCanvas: React.FC<CanvasProps> = () => {
   if (!isBRollActive) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 1: THE ADRENALINE MYTH (3,300 - 9,600ms)
           "Like somehow he feels insanely motivated… and that’s why he can keep going when everyone else stops."

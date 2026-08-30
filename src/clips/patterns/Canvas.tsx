@@ -26,14 +26,7 @@ export const PatternsCanvas: React.FC<CanvasProps> = () => {
   const { fps, durationInFrames } = useVideoConfig();
   const currentMs = (frame / fps) * 1000;
 
-  // Cinematic slow camera push
-  const cameraZoom = interpolate(frame, [0, durationInFrames], [1.0, 1.05], {
-    extrapolateRight: "clamp",
-  });
-
-  const ambientFloat = Math.sin(frame * 0.03) * 4;
-
-  // Snappy spring helper
+  // Snappy spring helper (Clean Enter & Rock-Solid Stationary Lock)
   const sp = (delayMs: number, d = 20, s = 95, m = 0.85) => {
     const df = Math.floor((delayMs / 1000) * fps);
     return spring({
@@ -54,10 +47,7 @@ export const PatternsCanvas: React.FC<CanvasProps> = () => {
   if (!isCanvasActive) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 2: THE OVERLOAD GAUGE (5,800 - 9,100ms)
       =================================================================== */}
@@ -66,14 +56,14 @@ export const PatternsCanvas: React.FC<CanvasProps> = () => {
         const sMeter = sp(6400, 15, 120, 0.7);
 
         const needleRotation = interpolate(sMeter, [0, 1], [-70, 75]);
-        const shake = sMeter > 0.8 ? Math.sin(frame * 1.5) * 3 : 0;
+        const shake = sMeter > 0.8 && sMeter < 1.0 ? Math.sin(frame * 1.5) * 3 : 0;
 
         return (
           <div className="absolute inset-x-0 top-[46%] -translate-y-1/2 flex flex-col items-center justify-center px-6">
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat + shake}px)`,
+                transform: `translateY(${(1 - sCard) * 50 + shake}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -158,7 +148,7 @@ export const PatternsCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -271,7 +261,7 @@ export const PatternsCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -349,7 +339,7 @@ export const PatternsCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -442,7 +432,7 @@ export const PatternsCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >

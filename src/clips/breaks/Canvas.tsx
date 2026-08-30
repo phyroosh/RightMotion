@@ -54,10 +54,7 @@ export const BreaksCanvas: React.FC<CanvasProps> = () => {
   if (!isBRollActive) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 1: THE PAUSE VS QUIT SWITCH (5,660 - 8,260ms)
           "Just… stepping away for a while."

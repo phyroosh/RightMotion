@@ -12,7 +12,7 @@ export interface ThumbnailCardProps {
   characterPosition?: 'left' | 'right' | 'center';
   characterScale?: number;
   characterOffsetY?: number;
-  theme?: 'obsidian' | 'crimson' | 'slate' | 'purple' | 'emerald' | 'amber' | 'blue' | 'white';
+  theme?: 'obsidian' | 'crimson' | 'slate' | 'purple' | 'emerald' | 'amber' | 'blue' | 'white' | 'apple_studio';
   aspectRatio?: '16:9' | '9:16';
   extraBadge?: string;
   extraBadgeColor?: string;

@@ -24,36 +24,19 @@ export const BoundariesCanvas: React.FC<CanvasProps> = () => {
   const { fps, durationInFrames } = useVideoConfig();
   const currentMs = (frame / fps) * 1000;
 
-  // Global smooth camera push across the canvas
-  const cameraZoom = interpolateTrack(
-    currentMs,
-    [
-      { timeMs: 0, value: 1.0 },
-      { timeMs: durationInFrames * (1000 / fps), value: 1.04 },
-    ]
-  );
-
-  const ambientFloat = Math.sin(frame * 0.03) * 4;
-
   // Active check for B-Roll scenes in range (7.6s - 25.6s)
   const isBRollActive = currentMs >= 7600 && currentMs < 25600;
   if (!isBRollActive) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ========================================================================= */}
       {/* SCENE 1: THE CORE DEFINITION (7.6s - 14.4s)                               */}
       {/* "And boundaries aren't about controlling other people..."                  */}
       {/* ========================================================================= */}
       {currentMs >= 7600 && currentMs < 14400 && (
         <div className="absolute inset-x-0 top-[46%] -translate-y-1/2 flex flex-col items-center justify-center px-6">
-          <div
-            className="relative w-full max-w-[1000px] flex flex-col items-center"
-            style={{ transform: `translateY(${ambientFloat}px)` }}
-          >
+          <div className="relative w-full max-w-[1000px] flex flex-col items-center">
             {/* Header Pill */}
             <MotionKeyframeBox
               currentMs={currentMs}
@@ -191,10 +174,7 @@ export const BoundariesCanvas: React.FC<CanvasProps> = () => {
       {/* ========================================================================= */}
       {currentMs >= 14300 && currentMs < 20500 && (
         <div className="absolute inset-x-0 top-[46%] -translate-y-1/2 flex flex-col items-center justify-center px-6">
-          <div
-            className="relative w-full max-w-[1000px] flex flex-col items-center"
-            style={{ transform: `translateY(${ambientFloat}px)` }}
-          >
+          <div className="relative w-full max-w-[1000px] flex flex-col items-center">
             {/* Header Pill */}
             <MotionKeyframeBox
               currentMs={currentMs}
@@ -294,10 +274,7 @@ export const BoundariesCanvas: React.FC<CanvasProps> = () => {
       {/* ========================================================================= */}
       {currentMs >= 20400 && currentMs < 25600 && (
         <div className="absolute inset-x-0 top-[46%] -translate-y-1/2 flex flex-col items-center justify-center px-6">
-          <div
-            className="relative w-full max-w-[1000px] flex flex-col items-center"
-            style={{ transform: `translateY(${ambientFloat}px)` }}
-          >
+          <div className="relative w-full max-w-[1000px] flex flex-col items-center">
             {/* Header Pill */}
             <MotionKeyframeBox
               currentMs={currentMs}

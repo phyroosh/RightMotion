@@ -63,10 +63,7 @@ export const ProcrastinationCanvas: React.FC<CanvasProps> = () => {
   if (isARoll) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden flex items-center justify-center p-12"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           1. THE 17 PRIORITIES POP-IN (12,000 - 34,000ms)
           Editor Mindset: One hero prop on screen at a time, moving with words!

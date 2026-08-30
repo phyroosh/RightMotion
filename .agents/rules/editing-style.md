@@ -92,8 +92,10 @@ A massive, ultra-bold, low-opacity keyword sits behind headline text at ~4-6% op
 - **Warm Editorial:** `#f5ecd7` warm cream base, muted red accents, paper texture, charcoal text.
 
 ## 6. Motion & Spring Physics
-- Continuous slow cinematic push-in: `scale 1.00 -> 1.04` across the video.
-- Snappy, responsive springs: `damping: 18, mass: 0.8, stiffness: 110`. Fast-paced and buttery without sluggish delay.
+- **Clean Enter & Rock-Solid Stationary Lock (PERMANENT RULE):**
+  - Snappy, responsive entrance springs: `damping: 18, mass: 0.8, stiffness: 110`. Fast-paced and buttery without sluggish delay.
+  - **NEVER apply continuous `ambientFloat` (`Math.sin`), vertical bobbing, or breathing scale loops to editing cards, tiles, or text.**
+  - Once cards and visual tiles spring into their settled position, they **MUST hold 100% stationary, stable, and crisp** so text and layouts never breathe, vibrate, or warp while the viewer reads.
 
 ## 7. Audio Mixing & Sound Design Standards
 1. **Voiceover Track (Hero Speech — Natural Pace & Zero Dead Air):**

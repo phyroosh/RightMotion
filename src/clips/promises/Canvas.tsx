@@ -21,14 +21,7 @@ export const PromisesCanvas: React.FC<CanvasProps> = () => {
   const { fps, durationInFrames } = useVideoConfig();
   const currentMs = (frame / fps) * 1000;
 
-  // Cinematic slow camera push across entire video
-  const cameraZoom = interpolate(frame, [0, durationInFrames], [1.0, 1.05], {
-    extrapolateRight: "clamp",
-  });
-
-  const ambientFloat = Math.sin(frame * 0.03) * 4;
-
-  // Slow buttery spring helper
+  // Slow buttery spring helper (Clean Enter & Rock-Solid Stationary Lock)
   const sp = (delayMs: number, d = 20, s = 95, m = 0.85) => {
     const df = Math.floor((delayMs / 1000) * fps);
     return spring({
@@ -47,10 +40,7 @@ export const PromisesCanvas: React.FC<CanvasProps> = () => {
   if (!isBRollActive) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 2: THE "TOMORROW" PHANTOM LOOP (4,500 - 8,800ms)
       =================================================================== */}
@@ -63,7 +53,7 @@ export const PromisesCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -121,7 +111,7 @@ export const PromisesCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sGauge) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sGauge) * 50}px)`,
                 opacity: Math.min(1, sGauge * 1.5),
               }}
             >
@@ -180,7 +170,7 @@ export const PromisesCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sCard) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sCard) * 50}px)`,
                 opacity: Math.min(1, sCard * 1.5),
               }}
             >
@@ -221,7 +211,7 @@ export const PromisesCanvas: React.FC<CanvasProps> = () => {
             <div
               className="relative w-full max-w-[1000px] flex flex-col items-center"
               style={{
-                transform: `translateY(${(1 - sBlueprint) * 50 + ambientFloat}px)`,
+                transform: `translateY(${(1 - sBlueprint) * 50}px)`,
                 opacity: Math.min(1, sBlueprint * 1.5),
               }}
             >

@@ -62,10 +62,7 @@ export const MotionGraphicsCanvas: React.FC<MotionGraphicsCanvasProps> = () => {
   else if (currentMs >= 5000) scene = 2;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 1: THE PARADOX HOOK (0 - 5,000ms)
           "You know what's weird? You can know a habit is bad for you… and still do it again tonight."

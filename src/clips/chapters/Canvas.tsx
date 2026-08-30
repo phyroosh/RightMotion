@@ -51,10 +51,7 @@ export const ChaptersCanvas: React.FC<CanvasProps> = () => {
   if (!isBRollActive) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ========================================================================= */}
       {/* SCENE 1: The Asymmetric Filter (7.2s - 18.5s)                             */}
       {/* ========================================================================= */}

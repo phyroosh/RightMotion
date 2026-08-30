@@ -1,0 +1,874 @@
+[
+  {
+    "word": "Have",
+    "start": 0,
+    "end": 340,
+    "startMs": 0,
+    "endMs": 340,
+    "confidence": 0.824
+  },
+  {
+    "word": "you",
+    "start": 340,
+    "end": 440,
+    "startMs": 340,
+    "endMs": 440,
+    "confidence": 0.999
+  },
+  {
+    "word": "ever",
+    "start": 440,
+    "end": 580,
+    "startMs": 440,
+    "endMs": 580,
+    "confidence": 0.985
+  },
+  {
+    "word": "noticed",
+    "start": 580,
+    "end": 860,
+    "startMs": 580,
+    "endMs": 860,
+    "confidence": 0.998
+  },
+  {
+    "word": "how",
+    "start": 860,
+    "end": 1180,
+    "startMs": 860,
+    "endMs": 1180,
+    "confidence": 0.994
+  },
+  {
+    "word": "you",
+    "start": 1180,
+    "end": 1320,
+    "startMs": 1180,
+    "endMs": 1320,
+    "confidence": 0.998
+  },
+  {
+    "word": "can",
+    "start": 1320,
+    "end": 1420,
+    "startMs": 1320,
+    "endMs": 1420,
+    "confidence": 0.988
+  },
+  {
+    "word": "be",
+    "start": 1420,
+    "end": 1540,
+    "startMs": 1420,
+    "endMs": 1540,
+    "confidence": 0.996
+  },
+  {
+    "word": "surrounded",
+    "start": 1540,
+    "end": 1840,
+    "startMs": 1540,
+    "endMs": 1840,
+    "confidence": 0.999
+  },
+  {
+    "word": "by",
+    "start": 1840,
+    "end": 2160,
+    "startMs": 1840,
+    "endMs": 2160,
+    "confidence": 0.999
+  },
+  {
+    "word": "people",
+    "start": 2160,
+    "end": 2500,
+    "startMs": 2160,
+    "endMs": 2500,
+    "confidence": 0.998
+  },
+  {
+    "word": "online",
+    "start": 2500,
+    "end": 2720,
+    "startMs": 2500,
+    "endMs": 2720,
+    "confidence": 0.997
+  },
+  {
+    "word": "and",
+    "start": 2720,
+    "end": 3540,
+    "startMs": 2720,
+    "endMs": 3540,
+    "confidence": 0.809
+  },
+  {
+    "word": "still",
+    "start": 3540,
+    "end": 3820,
+    "startMs": 3540,
+    "endMs": 3820,
+    "confidence": 0.996
+  },
+  {
+    "word": "feel",
+    "start": 3820,
+    "end": 4100,
+    "startMs": 3820,
+    "endMs": 4100,
+    "confidence": 0.998
+  },
+  {
+    "word": "completely",
+    "start": 4100,
+    "end": 4500,
+    "startMs": 4100,
+    "endMs": 4500,
+    "confidence": 0.997
+  },
+  {
+    "word": "alone?",
+    "start": 4500,
+    "end": 5000,
+    "startMs": 4500,
+    "endMs": 5000,
+    "confidence": 0.999
+  },
+  {
+    "word": "Because",
+    "start": 5540,
+    "end": 5780,
+    "startMs": 5540,
+    "endMs": 5780,
+    "confidence": 0.966
+  },
+  {
+    "word": "social",
+    "start": 5780,
+    "end": 6120,
+    "startMs": 5780,
+    "endMs": 6120,
+    "confidence": 0.995
+  },
+  {
+    "word": "media",
+    "start": 6120,
+    "end": 6560,
+    "startMs": 6120,
+    "endMs": 6560,
+    "confidence": 0.996
+  },
+  {
+    "word": "gives",
+    "start": 6560,
+    "end": 6900,
+    "startMs": 6560,
+    "endMs": 6900,
+    "confidence": 0.993
+  },
+  {
+    "word": "us",
+    "start": 6900,
+    "end": 7080,
+    "startMs": 6900,
+    "endMs": 7080,
+    "confidence": 0.999
+  },
+  {
+    "word": "connection",
+    "start": 7080,
+    "end": 7300,
+    "startMs": 7080,
+    "endMs": 7300,
+    "confidence": 0.988
+  },
+  {
+    "word": "without",
+    "start": 7300,
+    "end": 7860,
+    "startMs": 7300,
+    "endMs": 7860,
+    "confidence": 0.896
+  },
+  {
+    "word": "always",
+    "start": 7860,
+    "end": 8440,
+    "startMs": 7860,
+    "endMs": 8440,
+    "confidence": 0.981
+  },
+  {
+    "word": "giving",
+    "start": 8440,
+    "end": 8700,
+    "startMs": 8440,
+    "endMs": 8700,
+    "confidence": 0.999
+  },
+  {
+    "word": "us",
+    "start": 8700,
+    "end": 8980,
+    "startMs": 8700,
+    "endMs": 8980,
+    "confidence": 0.999
+  },
+  {
+    "word": "closeness.",
+    "start": 8980,
+    "end": 9460,
+    "startMs": 8980,
+    "endMs": 9460,
+    "confidence": 0.993
+  },
+  {
+    "word": "You",
+    "start": 10220,
+    "end": 10300,
+    "startMs": 10220,
+    "endMs": 10300,
+    "confidence": 0.972
+  },
+  {
+    "word": "can",
+    "start": 10300,
+    "end": 10400,
+    "startMs": 10300,
+    "endMs": 10400,
+    "confidence": 0.969
+  },
+  {
+    "word": "watch",
+    "start": 10400,
+    "end": 10560,
+    "startMs": 10400,
+    "endMs": 10560,
+    "confidence": 0.999
+  },
+  {
+    "word": "someone's",
+    "start": 10560,
+    "end": 11080,
+    "startMs": 10560,
+    "endMs": 11080,
+    "confidence": 0.991
+  },
+  {
+    "word": "life,",
+    "start": 11080,
+    "end": 11300,
+    "startMs": 11080,
+    "endMs": 11300,
+    "confidence": 0.998
+  },
+  {
+    "word": "like",
+    "start": 11340,
+    "end": 11700,
+    "startMs": 11340,
+    "endMs": 11700,
+    "confidence": 0.998
+  },
+  {
+    "word": "their",
+    "start": 11700,
+    "end": 11900,
+    "startMs": 11700,
+    "endMs": 11900,
+    "confidence": 0.969
+  },
+  {
+    "word": "post,",
+    "start": 11900,
+    "end": 12140,
+    "startMs": 11900,
+    "endMs": 12140,
+    "confidence": 0.973
+  },
+  {
+    "word": "reply",
+    "start": 12580,
+    "end": 12780,
+    "startMs": 12580,
+    "endMs": 12780,
+    "confidence": 0.995
+  },
+  {
+    "word": "to",
+    "start": 12780,
+    "end": 13160,
+    "startMs": 12780,
+    "endMs": 13160,
+    "confidence": 0.999
+  },
+  {
+    "word": "their",
+    "start": 13160,
+    "end": 13260,
+    "startMs": 13160,
+    "endMs": 13260,
+    "confidence": 0.998
+  },
+  {
+    "word": "story,",
+    "start": 13260,
+    "end": 13660,
+    "startMs": 13260,
+    "endMs": 13660,
+    "confidence": 0.999
+  },
+  {
+    "word": "but",
+    "start": 14020,
+    "end": 14160,
+    "startMs": 14020,
+    "endMs": 14160,
+    "confidence": 0.972
+  },
+  {
+    "word": "still",
+    "start": 14160,
+    "end": 14420,
+    "startMs": 14160,
+    "endMs": 14420,
+    "confidence": 0.998
+  },
+  {
+    "word": "never",
+    "start": 14420,
+    "end": 14660,
+    "startMs": 14420,
+    "endMs": 14660,
+    "confidence": 0.997
+  },
+  {
+    "word": "have",
+    "start": 14660,
+    "end": 14900,
+    "startMs": 14660,
+    "endMs": 14900,
+    "confidence": 0.999
+  },
+  {
+    "word": "that",
+    "start": 14900,
+    "end": 15060,
+    "startMs": 14900,
+    "endMs": 15060,
+    "confidence": 0.998
+  },
+  {
+    "word": "one",
+    "start": 15060,
+    "end": 15260,
+    "startMs": 15060,
+    "endMs": 15260,
+    "confidence": 0.99
+  },
+  {
+    "word": "person",
+    "start": 15260,
+    "end": 15560,
+    "startMs": 15260,
+    "endMs": 15560,
+    "confidence": 1.0
+  },
+  {
+    "word": "you",
+    "start": 15560,
+    "end": 15760,
+    "startMs": 15560,
+    "endMs": 15760,
+    "confidence": 0.996
+  },
+  {
+    "word": "can",
+    "start": 15760,
+    "end": 15880,
+    "startMs": 15760,
+    "endMs": 15880,
+    "confidence": 0.99
+  },
+  {
+    "word": "actually",
+    "start": 15880,
+    "end": 16260,
+    "startMs": 15880,
+    "endMs": 16260,
+    "confidence": 0.998
+  },
+  {
+    "word": "sit",
+    "start": 16260,
+    "end": 16600,
+    "startMs": 16260,
+    "endMs": 16600,
+    "confidence": 0.997
+  },
+  {
+    "word": "with",
+    "start": 16600,
+    "end": 16800,
+    "startMs": 16600,
+    "endMs": 16800,
+    "confidence": 0.998
+  },
+  {
+    "word": "and",
+    "start": 16800,
+    "end": 16960,
+    "startMs": 16800,
+    "endMs": 16960,
+    "confidence": 0.988
+  },
+  {
+    "word": "say,",
+    "start": 16960,
+    "end": 17180,
+    "startMs": 16960,
+    "endMs": 17180,
+    "confidence": 1.0
+  },
+  {
+    "word": "I'm",
+    "start": 17580,
+    "end": 17780,
+    "startMs": 17580,
+    "endMs": 17780,
+    "confidence": 0.565
+  },
+  {
+    "word": "not",
+    "start": 17780,
+    "end": 17940,
+    "startMs": 17780,
+    "endMs": 17940,
+    "confidence": 0.994
+  },
+  {
+    "word": "okay.",
+    "start": 17940,
+    "end": 18220,
+    "startMs": 17940,
+    "endMs": 18220,
+    "confidence": 0.883
+  },
+  {
+    "word": "And",
+    "start": 18820,
+    "end": 19040,
+    "startMs": 18820,
+    "endMs": 19040,
+    "confidence": 0.978
+  },
+  {
+    "word": "because",
+    "start": 19040,
+    "end": 19520,
+    "startMs": 19040,
+    "endMs": 19520,
+    "confidence": 0.753
+  },
+  {
+    "word": "everyone",
+    "start": 19520,
+    "end": 19940,
+    "startMs": 19520,
+    "endMs": 19940,
+    "confidence": 0.997
+  },
+  {
+    "word": "looks",
+    "start": 19940,
+    "end": 20220,
+    "startMs": 19940,
+    "endMs": 20220,
+    "confidence": 0.998
+  },
+  {
+    "word": "like",
+    "start": 20220,
+    "end": 20460,
+    "startMs": 20220,
+    "endMs": 20460,
+    "confidence": 0.998
+  },
+  {
+    "word": "they're",
+    "start": 20460,
+    "end": 20620,
+    "startMs": 20460,
+    "endMs": 20620,
+    "confidence": 0.993
+  },
+  {
+    "word": "doing",
+    "start": 20620,
+    "end": 20820,
+    "startMs": 20620,
+    "endMs": 20820,
+    "confidence": 0.998
+  },
+  {
+    "word": "something,",
+    "start": 20820,
+    "end": 21120,
+    "startMs": 20820,
+    "endMs": 21120,
+    "confidence": 1.0
+  },
+  {
+    "word": "going",
+    "start": 21500,
+    "end": 21660,
+    "startMs": 21500,
+    "endMs": 21660,
+    "confidence": 0.999
+  },
+  {
+    "word": "somewhere,",
+    "start": 21660,
+    "end": 21940,
+    "startMs": 21660,
+    "endMs": 21940,
+    "confidence": 0.999
+  },
+  {
+    "word": "becoming",
+    "start": 22500,
+    "end": 22780,
+    "startMs": 22500,
+    "endMs": 22780,
+    "confidence": 0.997
+  },
+  {
+    "word": "someone,",
+    "start": 22780,
+    "end": 23240,
+    "startMs": 22780,
+    "endMs": 23240,
+    "confidence": 0.998
+  },
+  {
+    "word": "you",
+    "start": 23660,
+    "end": 23900,
+    "startMs": 23660,
+    "endMs": 23900,
+    "confidence": 0.998
+  },
+  {
+    "word": "start",
+    "start": 23900,
+    "end": 24060,
+    "startMs": 23900,
+    "endMs": 24060,
+    "confidence": 0.998
+  },
+  {
+    "word": "feeling",
+    "start": 24060,
+    "end": 24320,
+    "startMs": 24060,
+    "endMs": 24320,
+    "confidence": 0.999
+  },
+  {
+    "word": "like",
+    "start": 24320,
+    "end": 24680,
+    "startMs": 24320,
+    "endMs": 24680,
+    "confidence": 0.999
+  },
+  {
+    "word": "you're",
+    "start": 24680,
+    "end": 24920,
+    "startMs": 24680,
+    "endMs": 24920,
+    "confidence": 0.995
+  },
+  {
+    "word": "the",
+    "start": 24920,
+    "end": 25040,
+    "startMs": 24920,
+    "endMs": 25040,
+    "confidence": 0.999
+  },
+  {
+    "word": "only",
+    "start": 25040,
+    "end": 25240,
+    "startMs": 25040,
+    "endMs": 25240,
+    "confidence": 0.999
+  },
+  {
+    "word": "one",
+    "start": 25240,
+    "end": 25560,
+    "startMs": 25240,
+    "endMs": 25560,
+    "confidence": 0.996
+  },
+  {
+    "word": "who's",
+    "start": 25560,
+    "end": 25780,
+    "startMs": 25560,
+    "endMs": 25780,
+    "confidence": 0.986
+  },
+  {
+    "word": "lost.",
+    "start": 25780,
+    "end": 25980,
+    "startMs": 25780,
+    "endMs": 25980,
+    "confidence": 1.0
+  },
+  {
+    "word": "We're",
+    "start": 26580,
+    "end": 26840,
+    "startMs": 26580,
+    "endMs": 26840,
+    "confidence": 0.997
+  },
+  {
+    "word": "more",
+    "start": 26840,
+    "end": 27000,
+    "startMs": 26840,
+    "endMs": 27000,
+    "confidence": 1.0
+  },
+  {
+    "word": "connected",
+    "start": 27000,
+    "end": 27300,
+    "startMs": 27000,
+    "endMs": 27300,
+    "confidence": 0.999
+  },
+  {
+    "word": "than",
+    "start": 27300,
+    "end": 27680,
+    "startMs": 27300,
+    "endMs": 27680,
+    "confidence": 0.995
+  },
+  {
+    "word": "ever.",
+    "start": 27680,
+    "end": 28040,
+    "startMs": 27680,
+    "endMs": 28040,
+    "confidence": 0.999
+  },
+  {
+    "word": "But",
+    "start": 28040,
+    "end": 28760,
+    "startMs": 28040,
+    "endMs": 28760,
+    "confidence": 0.323
+  },
+  {
+    "word": "sometimes,",
+    "start": 28760,
+    "end": 29120,
+    "startMs": 28760,
+    "endMs": 29120,
+    "confidence": 0.958
+  },
+  {
+    "word": "what",
+    "start": 29680,
+    "end": 29920,
+    "startMs": 29680,
+    "endMs": 29920,
+    "confidence": 0.996
+  },
+  {
+    "word": "we",
+    "start": 29920,
+    "end": 30060,
+    "startMs": 29920,
+    "endMs": 30060,
+    "confidence": 0.999
+  },
+  {
+    "word": "really",
+    "start": 30060,
+    "end": 30260,
+    "startMs": 30060,
+    "endMs": 30260,
+    "confidence": 0.971
+  },
+  {
+    "word": "need",
+    "start": 30260,
+    "end": 30560,
+    "startMs": 30260,
+    "endMs": 30560,
+    "confidence": 0.999
+  },
+  {
+    "word": "isn't",
+    "start": 30560,
+    "end": 30880,
+    "startMs": 30560,
+    "endMs": 30880,
+    "confidence": 0.976
+  },
+  {
+    "word": "more",
+    "start": 30880,
+    "end": 31020,
+    "startMs": 30880,
+    "endMs": 31020,
+    "confidence": 0.999
+  },
+  {
+    "word": "people",
+    "start": 31020,
+    "end": 31340,
+    "startMs": 31020,
+    "endMs": 31340,
+    "confidence": 0.999
+  },
+  {
+    "word": "on",
+    "start": 31340,
+    "end": 31540,
+    "startMs": 31340,
+    "endMs": 31540,
+    "confidence": 0.998
+  },
+  {
+    "word": "a",
+    "start": 31540,
+    "end": 31620,
+    "startMs": 31540,
+    "endMs": 31620,
+    "confidence": 0.964
+  },
+  {
+    "word": "screen.",
+    "start": 31620,
+    "end": 31860,
+    "startMs": 31620,
+    "endMs": 31860,
+    "confidence": 0.999
+  },
+  {
+    "word": "It's",
+    "start": 32580,
+    "end": 32720,
+    "startMs": 32580,
+    "endMs": 32720,
+    "confidence": 0.991
+  },
+  {
+    "word": "one",
+    "start": 32720,
+    "end": 32860,
+    "startMs": 32720,
+    "endMs": 32860,
+    "confidence": 0.992
+  },
+  {
+    "word": "real",
+    "start": 32860,
+    "end": 33060,
+    "startMs": 32860,
+    "endMs": 33060,
+    "confidence": 0.997
+  },
+  {
+    "word": "person",
+    "start": 33060,
+    "end": 33440,
+    "startMs": 33060,
+    "endMs": 33440,
+    "confidence": 0.999
+  },
+  {
+    "word": "who",
+    "start": 33440,
+    "end": 33740,
+    "startMs": 33440,
+    "endMs": 33740,
+    "confidence": 0.984
+  },
+  {
+    "word": "makes",
+    "start": 33740,
+    "end": 33920,
+    "startMs": 33740,
+    "endMs": 33920,
+    "confidence": 0.997
+  },
+  {
+    "word": "you",
+    "start": 33920,
+    "end": 34120,
+    "startMs": 33920,
+    "endMs": 34120,
+    "confidence": 0.999
+  },
+  {
+    "word": "feel",
+    "start": 34120,
+    "end": 34340,
+    "startMs": 34120,
+    "endMs": 34340,
+    "confidence": 0.998
+  },
+  {
+    "word": "safe",
+    "start": 34340,
+    "end": 34600,
+    "startMs": 34340,
+    "endMs": 34600,
+    "confidence": 0.998
+  },
+  {
+    "word": "enough",
+    "start": 34600,
+    "end": 34880,
+    "startMs": 34600,
+    "endMs": 34880,
+    "confidence": 1.0
+  },
+  {
+    "word": "to",
+    "start": 34880,
+    "end": 35080,
+    "startMs": 34880,
+    "endMs": 35080,
+    "confidence": 0.998
+  },
+  {
+    "word": "be",
+    "start": 35080,
+    "end": 35180,
+    "startMs": 35080,
+    "endMs": 35180,
+    "confidence": 0.999
+  },
+  {
+    "word": "yourself.",
+    "start": 35180,
+    "end": 35500,
+    "startMs": 35180,
+    "endMs": 35500,
+    "confidence": 0.995
+  }
+]

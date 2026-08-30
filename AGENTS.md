@@ -145,10 +145,12 @@ Add the viral title (with `#Shorts`), high-CTR description, category (`27` Educa
      - Approach every script with **high visual creativity**, crafting tailored diagrams and metaphors for the core psychological models.
      - **Do NOT force or clutter**: Keep layouts gentle, instantly understandable, professional, and very minimal with generous breathing room and clean Apple Studio aesthetics.
 
-3. **Advanced Mathematical Keyframe System (SMOOTH MOTION STANDARD — PERMANENT)**:
-   - **Mass-Spring-Damper Physics**: Animate all elements using exact spring mechanics (`damping: 18 - 22`, `stiffness: 85 - 110`, `mass: 0.8 - 1.0`) for organic, buttery overshoot and smooth physical settling.
-   - **Continuous Mathematical Camera Momentum**: Apply continuous logarithmic camera push (`scale: 1.00 ➔ 1.05`) paired with subtle harmonic floating oscillations (`Math.sin(frame * 0.03) * 4px`) so the frame possesses continuous organic life.
-   - **Multi-Property Mathematical Coupling**: Always couple `translateY`, `scale`, `opacity`, and `rotate` through synchronized mathematical easing curves so elements move as unified physical objects with real inertia.
+3. **Advanced Mathematical Keyframe System (SMOOTH ENTER & ROCK-SOLID LOCK STANDARD — PERMANENT)**:
+   - **Mass-Spring-Damper Physics**: Animate all elements using exact spring mechanics (`damping: 18 - 22`, `stiffness: 85 - 110`, `mass: 0.8 - 1.0`) for organic, buttery entrance and smooth physical settling.
+   - **Rock-Solid Settled State (NO CONTINUOUS FLOATING / TEXT WARPING — PERMANENT)**:
+     - **NEVER apply continuous `ambientFloat` (`Math.sin`), vertical bobbing, or breathing scale loops to editing cards, tiles, or text**.
+     - Once cards and visual tiles enter the screen and settle, they **MUST remain 100% stationary, crisp, and rock-solid**. Viewers must never experience text compressing, decompressing, or floating up and down while reading.
+   - **Multi-Property Mathematical Coupling**: Couple `translateY`, `scale`, and `opacity` strictly during the initial entrance transition so elements move as unified physical objects with real inertia and then lock firmly in place.
 
 4. **Character Placement**:
    - **Thumbnails**: Judy MUST be centered bottom-half (`left: 50%, transform: translateX(-50%)`), full-body grounded with NO text scrim fading over her upper body and NO footer clutter at the bottom.

@@ -60,10 +60,7 @@ export const ComparisonMotionCanvas: React.FC<MotionGraphicsCanvasProps> = () =>
   else if (currentMs >= 3600) scene = 2;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 1: THE HOOK (0 - 3,600ms)
           "You know why comparing yourself to other people never really stops?"

@@ -61,10 +61,7 @@ export const HabitCanvas: React.FC<CanvasProps> = () => {
   else if (currentMs >= 5000) scene = 2;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 2: THE 3 FAMILIAR TRAPS (5,000 - 15,200ms)
       =================================================================== */}

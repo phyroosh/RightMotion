@@ -56,10 +56,7 @@ export const StrengthCanvas: React.FC<CanvasProps> = () => {
   if (!isBRollActive) return null;
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden"
-      style={{ transform: `scale(${cameraZoom})`, transformOrigin: "center center" }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden">
       {/* ===================================================================
           SCENE 1: THE EMOTIONAL CONTAINMENT TRAP (3,500 - 9,100ms)
           "You keep everything inside. You act like nothing bothers you. Because somehow, opening up feels weak."

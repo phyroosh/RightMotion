@@ -133,5 +133,16 @@
     "isScheduled": true,
     "publishedAt": "2026-08-29T19:30:11Z",
     "thumbnailAttached": true
+  },
+  "loneliness_video.mp4": {
+    "uploaded": true,
+    "videoId": "xrPJNE5QVYY",
+    "youtubeUrl": "https://youtu.be/xrPJNE5QVYY",
+    "shortsUrl": "https://youtube.com/shorts/xrPJNE5QVYY",
+    "title": "Surrounded Online Yet Totally Alone (The Silent Paradox) 🧠 #Shorts",
+    "privacyStatus": "private",
+    "publishAt": null,
+    "isScheduled": false,
+    "publishedAt": "2026-08-30T02:09:45Z"
   }
 }
