@@ -1,8 +1,8 @@
 import React from "react";
-import { spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { spring, useCurrentFrame, useVideoConfig, interpolate } from "remotion";
 import { CutoutAssetId } from "./CutoutLibrary";
 import { ProCutout, GlowColor } from "./ProCutout";
-import { ArrowRight, XCircle, CheckCircle2 } from "lucide-react";
+import { XCircle, CheckCircle2 } from "lucide-react";
 
 export interface PropComparisonProps {
   leftAssetId: CutoutAssetId | string;
@@ -20,6 +20,8 @@ export interface PropComparisonProps {
   centerDividerText?: string;
   currentMs?: number;
   startMs?: number;
+  revealRightMs?: number; // Milliseconds when container expands and right card reveals
+  progressive?: boolean;  // Enables progressive horizontal morph expansion
   className?: string;
 }
 
@@ -37,35 +39,76 @@ export const PropComparison: React.FC<PropComparisonProps> = ({
   rightGlow = "emerald",
 
   centerDividerText = "VS",
-  currentMs,
   startMs = 0,
+  revealRightMs,
+  progressive = true,
   className = "",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const currentMs = (frame / fps) * 1000;
 
+  // 1. Initial Left Entry Spring
   const startFrame = Math.floor((startMs / 1000) * fps);
-  const relFrame = Math.max(0, frame - startFrame);
+  const relLeftFrame = Math.max(0, frame - startFrame);
 
   const spLeft = spring({
-    frame: relFrame,
+    frame: relLeftFrame,
     fps,
     config: { damping: 18, mass: 0.8, stiffness: 100 },
   });
 
-  const spRight = spring({
-    frame: Math.max(0, relFrame - 8),
-    fps,
-    config: { damping: 18, mass: 0.8, stiffness: 100 },
-  });
+  // 2. Progressive Right Expansion Spring
+  const rightMs = revealRightMs ?? (startMs + 3500);
+  const rightStartFrame = Math.floor((rightMs / 1000) * fps);
+  const relRightFrame = Math.max(0, frame - rightStartFrame);
+
+  const spExpand = progressive
+    ? spring({
+        frame: relRightFrame,
+        fps,
+        config: { damping: 20, mass: 0.85, stiffness: 90 },
+      })
+    : 1;
+
+  const spRight = progressive
+    ? spring({
+        frame: Math.max(0, relRightFrame - 2),
+        fps,
+        config: { damping: 18, mass: 0.8, stiffness: 110 },
+      })
+    : spring({
+        frame: Math.max(0, relLeftFrame - 8),
+        fps,
+        config: { damping: 18, mass: 0.8, stiffness: 100 },
+      });
+
+  const spDivider = progressive
+    ? spring({
+        frame: Math.max(0, relRightFrame - 1),
+        fps,
+        config: { damping: 16, mass: 0.7, stiffness: 120 },
+      })
+    : spRight;
+
+  const isRightActive = !progressive || currentMs >= rightMs - 50;
+
+  // Container width smoothly morphs from 540px to 1020px
+  const containerWidth = progressive
+    ? interpolate(spExpand, [0, 1], [540, 1020], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })
+    : 1020;
 
   return (
     <div
-      className={`relative w-full max-w-[1020px] rounded-[52px] p-8 bg-white/95 backdrop-blur-2xl border-[4px] border-slate-200 shadow-2xl flex items-center justify-between gap-6 select-none ${className}`}
+      className={`relative rounded-[52px] p-7 bg-white/95 backdrop-blur-2xl border-[4px] border-slate-200 shadow-[0_30px_90px_rgba(0,0,0,0.12)] flex items-center justify-between gap-6 select-none overflow-hidden ${className}`}
+      style={{
+        width: `${containerWidth}px`,
+        maxWidth: "1020px",
+      }}
     >
       {/* Left Problem Card */}
       <div
-        className="flex-1 rounded-[38px] p-6 bg-rose-50/70 border-[3px] border-rose-200/80 flex flex-col items-center text-center gap-4 relative overflow-hidden"
+        className="flex-1 min-w-[360px] rounded-[38px] p-6 bg-rose-50/80 border-[3px] border-rose-200/90 flex flex-col items-center text-center gap-4 relative overflow-hidden shadow-md"
         style={{
           transform: `translateY(${(1 - spLeft) * 30}px) scale(${0.92 + spLeft * 0.08})`,
           opacity: Math.min(1, spLeft * 1.5),
@@ -90,51 +133,61 @@ export const PropComparison: React.FC<PropComparisonProps> = ({
           {leftTitle}
         </div>
         {leftSubtitle && (
-          <div className="text-lg font-medium text-rose-800 leading-snug">
+          <div className="text-lg font-bold text-rose-800/90 leading-snug">
             {leftSubtitle}
           </div>
         )}
       </div>
 
-      {/* Center Dynamic Pill Divider */}
-      <div className="flex flex-col items-center justify-center shrink-0 z-20">
-        <div className="w-14 h-14 rounded-full bg-slate-950 text-amber-300 font-mono font-black text-xl flex items-center justify-center shadow-xl border-2 border-amber-400">
-          {centerDividerText}
-        </div>
-      </div>
-
-      {/* Right Solution Card */}
-      <div
-        className="flex-1 rounded-[38px] p-6 bg-emerald-50/70 border-[3px] border-emerald-200/80 flex flex-col items-center text-center gap-4 relative overflow-hidden"
-        style={{
-          transform: `translateY(${(1 - spRight) * 30}px) scale(${0.92 + spRight * 0.08})`,
-          opacity: Math.min(1, spRight * 1.5),
-        }}
-      >
-        <div className="px-5 py-1.5 rounded-full bg-emerald-600 text-white font-mono text-[16px] font-black uppercase tracking-wider flex items-center gap-2 shadow-sm">
-          <CheckCircle2 className="w-5 h-5 text-white" />
-          {rightBadge}
-        </div>
-
-        <div className="w-48 h-48 my-2">
-          <ProCutout
-            assetId={rightAssetId}
-            glowColor={rightGlow}
-            animation="stamp_impact"
-            width="100%"
-            height="100%"
-          />
-        </div>
-
-        <div className="text-3xl font-black text-emerald-950 uppercase tracking-tight">
-          {rightTitle}
-        </div>
-        {rightSubtitle && (
-          <div className="text-lg font-medium text-emerald-800 leading-snug">
-            {rightSubtitle}
+      {/* Center Dynamic Pill Divider (Spins & Pops on expansion) */}
+      {isRightActive && (
+        <div
+          className="flex flex-col items-center justify-center shrink-0 z-20"
+          style={{
+            transform: `scale(${spDivider}) rotate(${(1 - spDivider) * -180}deg)`,
+            opacity: Math.min(1, spDivider * 1.8),
+          }}
+        >
+          <div className="w-14 h-14 rounded-full bg-slate-950 text-amber-300 font-mono font-black text-xl flex items-center justify-center shadow-xl border-2 border-amber-400">
+            {centerDividerText}
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
+      {/* Right Solution Card (Appears smoothly during expansion) */}
+      {isRightActive && (
+        <div
+          className="flex-1 min-w-[360px] rounded-[38px] p-6 bg-emerald-50/80 border-[3px] border-emerald-200/90 flex flex-col items-center text-center gap-4 relative overflow-hidden shadow-md"
+          style={{
+            transform: `translateY(${(1 - spRight) * 35}px) scale(${0.88 + spRight * 0.12})`,
+            opacity: Math.min(1, spRight * 1.5),
+          }}
+        >
+          <div className="px-5 py-1.5 rounded-full bg-emerald-600 text-white font-mono text-[16px] font-black uppercase tracking-wider flex items-center gap-2 shadow-sm">
+            <CheckCircle2 className="w-5 h-5 text-white" />
+            {rightBadge}
+          </div>
+
+          <div className="w-48 h-48 my-2">
+            <ProCutout
+              assetId={rightAssetId}
+              glowColor={rightGlow}
+              animation="stamp_impact"
+              width="100%"
+              height="100%"
+            />
+          </div>
+
+          <div className="text-3xl font-black text-emerald-950 uppercase tracking-tight">
+            {rightTitle}
+          </div>
+          {rightSubtitle && (
+            <div className="text-lg font-bold text-emerald-800/90 leading-snug">
+              {rightSubtitle}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -17,16 +17,17 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({
   endMs: t.endMs ?? t.end,
 }));
 
-// Multi-SFX audio cues synchronized with visual card & cutout entrances (en-US-AvaMultilingualNeural)
+// Multi-SFX audio cues synchronized with visual card, progressive expansion & cutout entrances
 const SFX_CUES: SfxCue[] = [
   { frame: 0,   type: "whoosh_deep",    volume: 0.32 }, // 0.0s: Intro Presenter entrance
   { frame: 12,  type: "click",          volume: 0.26 }, // 0.4s: Topic badge pop
-  { frame: 156, type: "whoosh_fast",    volume: 0.34 }, // 5.2s: Scene 1 Comparison Card entrance
-  { frame: 180, type: "impact_hit",     volume: 0.22 }, // 6.0s: Toxic circle problem hit
-  { frame: 300, type: "whoosh_sparkle", volume: 0.32 }, // 10.0s: Genuine friends solution reveal
-  { frame: 576, type: "whoosh_fast",    volume: 0.32 }, // 19.2s: Loneliness growth filter scene
+  { frame: 156, type: "whoosh_fast",    volume: 0.34 }, // 5.2s: Scene 1 Single Card entrance
+  { frame: 175, type: "impact_hit",     volume: 0.22 }, // 5.8s: Drama circle stamp hit
+  { frame: 294, type: "whoosh_fast",    volume: 0.32 }, // 9.8s: Card EXPANSION whoosh
+  { frame: 304, type: "whoosh_sparkle", volume: 0.35 }, // 10.1s: Genuine friends solution stamp
+  { frame: 576, type: "whoosh_fast",    volume: 0.32 }, // 19.2s: Scene 2 Loneliness filter transition
   { frame: 598, type: "impact_hit",     volume: 0.20 }, // 19.9s: Solitude reality hit
-  { frame: 744, type: "whoosh_sparkle", volume: 0.35 }, // 24.8s: Inner peace breakthrough reveal
+  { frame: 744, type: "whoosh_sparkle", volume: 0.35 }, // 24.8s: Scene 3 Inner peace breakthrough reveal
   { frame: 864, type: "whoosh_sparkle", volume: 0.35 }, // 28.8s: Finale Presenter Re-Entry
 ];
 
@@ -70,10 +71,10 @@ export const ShrinkingCircleComposition: React.FC = () => {
       {/* 4. Top Apple Progress Bar */}
       <AppleProgressBar />
 
-      {/* 5. Apple Studio Mesh Background */}
+      {/* 5. Apple Studio Mesh Background with Drifting Ambient Energy */}
       <ShrinkingCircleBackground />
 
-      {/* 6. Motion Graphics Storyboard Canvas with Pro Cutouts & PropComparison */}
+      {/* 6. Motion Graphics Storyboard Canvas with Progressive Morphing Cutouts */}
       <ShrinkingCircleCanvas transcript={transcript} />
 
       {/* 7. Multi-Pose Character Presenter */}
