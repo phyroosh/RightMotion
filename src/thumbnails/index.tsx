@@ -403,3 +403,18 @@ export const DopamineResetThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const ShrinkingCircleThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="SHRINK YOUR CIRCLE"
+    highlightWord="PEACE"
+    highlightColor="emerald"
+    subtitle="Why Having Fewer Friends Reclaims Your Life"
+    categoryBadge="RELATIONSHIPS"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="obsidian"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);

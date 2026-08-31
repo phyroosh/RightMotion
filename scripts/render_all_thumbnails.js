@@ -22,7 +22,7 @@ const THUMBNAIL_MAP = {
   'emotions_video.mp4': 'EmotionsThumbnail',
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
-  'promises_video.mp4': 'PromisesThumbnail',
+  'promises_video.mp4': 'PromisesThumbnail',\n  'shrinking_circle_video.mp4': 'ShrinkingCircleThumbnail',
   'dopamine_reset_video.mp4': 'DopamineResetThumbnail',
   'boundaries_video.mp4': 'BoundariesThumbnail',
   'patterns_video.mp4': 'PatternsThumbnail',

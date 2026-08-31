@@ -12,7 +12,9 @@ import { BoundariesComposition } from "./clips/boundaries";
 import boundariesTranscript from "./clips/boundaries/transcript.json";
 import { CutoutShowcase } from "./compositions/CutoutShowcase";
 import { DopamineResetComposition } from "./clips/dopamine_reset";
-import dopamine_resetTranscript from "./clips/dopamine_reset/transcript.json";
+import dopamineResetTranscript from "./clips/dopamine_reset/transcript.json";
+import { ShrinkingCircleComposition } from "./clips/shrinking_circle";
+import shrinkingCircleTranscript from "./clips/shrinking_circle/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -40,6 +42,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  ShrinkingCircleThumbnail,
   DopamineResetThumbnail,
   BoundariesThumbnail,
   PatternsThumbnail,
@@ -97,7 +100,8 @@ export const RemotionRoot: React.FC = () => {
   
   const boundariesDuration = calculateDurationInFrames(boundariesTranscript as any[], fps);
   
-  const dopamine_resetDuration = calculateDurationInFrames(dopamine_resetTranscript as any[], fps);
+  const dopamine_resetDuration = calculateDurationInFrames(dopamineResetTranscript as any[], fps);
+  const shrinkingCircleDuration = calculateDurationInFrames(shrinkingCircleTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -171,7 +175,15 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
 
-      {/* 0. Broken Promises & Self-Trust Video (9:16 Shorts) */}
+      
+      <Composition
+        id="ShrinkingCircleVideo"
+        component={ShrinkingCircleComposition}
+        durationInFrames={shrinkingCircleDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />\n\n      {/* 0. Broken Promises & Self-Trust Video (9:16 Shorts) */}
       <Composition
         id="PromisesVideo"
         component={PromisesComposition}
@@ -459,6 +471,12 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="DopamineResetThumbnail"
         component={DopamineResetThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="ShrinkingCircleThumbnail"
+        component={ShrinkingCircleThumbnail}
         width={1080}
         height={1920}
       />

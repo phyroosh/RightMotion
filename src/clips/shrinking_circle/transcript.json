@@ -1,0 +1,536 @@
+[
+  {
+    "word": "You",
+    "start": 0,
+    "end": 280,
+    "confidence": 0.753
+  },
+  {
+    "word": "know",
+    "start": 280,
+    "end": 420,
+    "confidence": 0.998
+  },
+  {
+    "word": "that",
+    "start": 420,
+    "end": 560,
+    "confidence": 0.992
+  },
+  {
+    "word": "high",
+    "start": 560,
+    "end": 740,
+    "confidence": 0.92
+  },
+  {
+    "word": "school",
+    "start": 740,
+    "end": 1040,
+    "confidence": 0.867
+  },
+  {
+    "word": "friend",
+    "start": 1040,
+    "end": 1360,
+    "confidence": 0.981
+  },
+  {
+    "word": "group",
+    "start": 1360,
+    "end": 1640,
+    "confidence": 0.985
+  },
+  {
+    "word": "where",
+    "start": 1640,
+    "end": 1880,
+    "confidence": 0.853
+  },
+  {
+    "word": "everyone",
+    "start": 1880,
+    "end": 2200,
+    "confidence": 0.994
+  },
+  {
+    "word": "knows",
+    "start": 2200,
+    "end": 2520,
+    "confidence": 0.99
+  },
+  {
+    "word": "everyone's",
+    "start": 2520,
+    "end": 3120,
+    "confidence": 0.992
+  },
+  {
+    "word": "business,",
+    "start": 3120,
+    "end": 3420,
+    "confidence": 0.998
+  },
+  {
+    "word": "and",
+    "start": 3900,
+    "end": 4060,
+    "confidence": 0.993
+  },
+  {
+    "word": "somehow",
+    "start": 4060,
+    "end": 4360,
+    "confidence": 0.99
+  },
+  {
+    "word": "there's",
+    "start": 4360,
+    "end": 4640,
+    "confidence": 0.988
+  },
+  {
+    "word": "always",
+    "start": 4640,
+    "end": 4900,
+    "confidence": 0.998
+  },
+  {
+    "word": "some",
+    "start": 4900,
+    "end": 5140,
+    "confidence": 0.999
+  },
+  {
+    "word": "drama?",
+    "start": 5140,
+    "end": 5380,
+    "confidence": 0.996
+  },
+  {
+    "word": "Honestly,",
+    "start": 6340,
+    "end": 6860,
+    "confidence": 0.96
+  },
+  {
+    "word": "you",
+    "start": 7220,
+    "end": 7360,
+    "confidence": 0.997
+  },
+  {
+    "word": "don't",
+    "start": 7360,
+    "end": 7560,
+    "confidence": 0.999
+  },
+  {
+    "word": "need",
+    "start": 7560,
+    "end": 7680,
+    "confidence": 1.0
+  },
+  {
+    "word": "a",
+    "start": 7680,
+    "end": 7780,
+    "confidence": 1.0
+  },
+  {
+    "word": "huge",
+    "start": 7780,
+    "end": 7980,
+    "confidence": 0.999
+  },
+  {
+    "word": "circle",
+    "start": 7980,
+    "end": 8280,
+    "confidence": 0.999
+  },
+  {
+    "word": "to",
+    "start": 8280,
+    "end": 8600,
+    "confidence": 1.0
+  },
+  {
+    "word": "have",
+    "start": 8600,
+    "end": 8760,
+    "confidence": 1.0
+  },
+  {
+    "word": "a",
+    "start": 8760,
+    "end": 8840,
+    "confidence": 1.0
+  },
+  {
+    "word": "good",
+    "start": 8840,
+    "end": 8980,
+    "confidence": 0.998
+  },
+  {
+    "word": "life.",
+    "start": 8980,
+    "end": 9320,
+    "confidence": 0.999
+  },
+  {
+    "word": "A",
+    "start": 10220,
+    "end": 10580,
+    "confidence": 0.979
+  },
+  {
+    "word": "few",
+    "start": 10580,
+    "end": 10760,
+    "confidence": 0.996
+  },
+  {
+    "word": "genuine",
+    "start": 10760,
+    "end": 11080,
+    "confidence": 0.999
+  },
+  {
+    "word": "friends",
+    "start": 11080,
+    "end": 11520,
+    "confidence": 0.999
+  },
+  {
+    "word": "who",
+    "start": 11520,
+    "end": 11780,
+    "confidence": 0.999
+  },
+  {
+    "word": "respect",
+    "start": 11780,
+    "end": 12000,
+    "confidence": 0.999
+  },
+  {
+    "word": "you,",
+    "start": 12000,
+    "end": 12420,
+    "confidence": 0.999
+  },
+  {
+    "word": "support",
+    "start": 12720,
+    "end": 12900,
+    "confidence": 0.997
+  },
+  {
+    "word": "you,",
+    "start": 12900,
+    "end": 13320,
+    "confidence": 1.0
+  },
+  {
+    "word": "and",
+    "start": 13640,
+    "end": 13760,
+    "confidence": 0.998
+  },
+  {
+    "word": "actually",
+    "start": 13760,
+    "end": 14080,
+    "confidence": 0.999
+  },
+  {
+    "word": "want",
+    "start": 14080,
+    "end": 14420,
+    "confidence": 0.999
+  },
+  {
+    "word": "to",
+    "start": 14420,
+    "end": 14580,
+    "confidence": 1.0
+  },
+  {
+    "word": "see",
+    "start": 14580,
+    "end": 14740,
+    "confidence": 1.0
+  },
+  {
+    "word": "you",
+    "start": 14740,
+    "end": 14860,
+    "confidence": 0.999
+  },
+  {
+    "word": "grow",
+    "start": 14860,
+    "end": 15100,
+    "confidence": 1.0
+  },
+  {
+    "word": "are",
+    "start": 15100,
+    "end": 15400,
+    "confidence": 0.923
+  },
+  {
+    "word": "worth",
+    "start": 15400,
+    "end": 15580,
+    "confidence": 0.975
+  },
+  {
+    "word": "way",
+    "start": 15580,
+    "end": 15860,
+    "confidence": 0.994
+  },
+  {
+    "word": "more",
+    "start": 15860,
+    "end": 16100,
+    "confidence": 1.0
+  },
+  {
+    "word": "than",
+    "start": 16100,
+    "end": 16300,
+    "confidence": 0.998
+  },
+  {
+    "word": "20",
+    "start": 16300,
+    "end": 16480,
+    "confidence": 0.864
+  },
+  {
+    "word": "people",
+    "start": 16480,
+    "end": 16940,
+    "confidence": 1.0
+  },
+  {
+    "word": "who",
+    "start": 16940,
+    "end": 17160,
+    "confidence": 0.998
+  },
+  {
+    "word": "only",
+    "start": 17160,
+    "end": 17400,
+    "confidence": 0.998
+  },
+  {
+    "word": "make",
+    "start": 17400,
+    "end": 17680,
+    "confidence": 0.999
+  },
+  {
+    "word": "you",
+    "start": 17680,
+    "end": 17840,
+    "confidence": 1.0
+  },
+  {
+    "word": "feel",
+    "start": 17840,
+    "end": 18020,
+    "confidence": 1.0
+  },
+  {
+    "word": "included",
+    "start": 18020,
+    "end": 18300,
+    "confidence": 0.997
+  },
+  {
+    "word": "when",
+    "start": 18300,
+    "end": 18760,
+    "confidence": 0.999
+  },
+  {
+    "word": "you're",
+    "start": 18760,
+    "end": 18920,
+    "confidence": 0.997
+  },
+  {
+    "word": "useful",
+    "start": 18920,
+    "end": 19180,
+    "confidence": 0.998
+  },
+  {
+    "word": "to",
+    "start": 19180,
+    "end": 19440,
+    "confidence": 1.0
+  },
+  {
+    "word": "them.",
+    "start": 19440,
+    "end": 19640,
+    "confidence": 1.0
+  },
+  {
+    "word": "And",
+    "start": 20640,
+    "end": 20860,
+    "confidence": 0.985
+  },
+  {
+    "word": "yeah,",
+    "start": 20860,
+    "end": 21020,
+    "confidence": 0.946
+  },
+  {
+    "word": "shrinking",
+    "start": 21340,
+    "end": 21540,
+    "confidence": 0.998
+  },
+  {
+    "word": "your",
+    "start": 21540,
+    "end": 21840,
+    "confidence": 0.999
+  },
+  {
+    "word": "circle",
+    "start": 21840,
+    "end": 22160,
+    "confidence": 1.0
+  },
+  {
+    "word": "can",
+    "start": 22160,
+    "end": 22420,
+    "confidence": 1.0
+  },
+  {
+    "word": "feel",
+    "start": 22420,
+    "end": 22640,
+    "confidence": 0.996
+  },
+  {
+    "word": "lonely",
+    "start": 22640,
+    "end": 22900,
+    "confidence": 0.999
+  },
+  {
+    "word": "at",
+    "start": 22900,
+    "end": 23140,
+    "confidence": 0.999
+  },
+  {
+    "word": "first.",
+    "start": 23140,
+    "end": 23380,
+    "confidence": 0.999
+  },
+  {
+    "word": "But",
+    "start": 24500,
+    "end": 24720,
+    "confidence": 0.996
+  },
+  {
+    "word": "sometimes,",
+    "start": 24720,
+    "end": 25060,
+    "confidence": 0.995
+  },
+  {
+    "word": "having",
+    "start": 25060,
+    "end": 25820,
+    "confidence": 0.999
+  },
+  {
+    "word": "fewer",
+    "start": 25820,
+    "end": 26040,
+    "confidence": 0.999
+  },
+  {
+    "word": "people",
+    "start": 26040,
+    "end": 26500,
+    "confidence": 1.0
+  },
+  {
+    "word": "around",
+    "start": 26500,
+    "end": 26760,
+    "confidence": 1.0
+  },
+  {
+    "word": "you",
+    "start": 26760,
+    "end": 27040,
+    "confidence": 1.0
+  },
+  {
+    "word": "isn't",
+    "start": 27040,
+    "end": 27380,
+    "confidence": 0.887
+  },
+  {
+    "word": "losing",
+    "start": 27380,
+    "end": 27600,
+    "confidence": 0.995
+  },
+  {
+    "word": "friends.",
+    "start": 27600,
+    "end": 28040,
+    "confidence": 0.996
+  },
+  {
+    "word": "It's",
+    "start": 29280,
+    "end": 29480,
+    "confidence": 0.978
+  },
+  {
+    "word": "finally",
+    "start": 29480,
+    "end": 29760,
+    "confidence": 0.998
+  },
+  {
+    "word": "getting",
+    "start": 29760,
+    "end": 30040,
+    "confidence": 0.999
+  },
+  {
+    "word": "some",
+    "start": 30040,
+    "end": 30360,
+    "confidence": 0.998
+  },
+  {
+    "word": "peace.",
+    "start": 30360,
+    "end": 30660,
+    "confidence": 0.987
+  }
+]
