@@ -17,18 +17,20 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({
   endMs: t.endMs ?? t.end,
 }));
 
-// Multi-SFX audio cues synchronized with visual card, progressive expansion & cutout entrances
+// SFX audio cues reduced by 50% for studio-balanced documentary sound design
 const SFX_CUES: SfxCue[] = [
-  { frame: 0,   type: "whoosh_deep",    volume: 0.32 }, // 0.0s: Intro Presenter entrance
-  { frame: 12,  type: "click",          volume: 0.26 }, // 0.4s: Topic badge pop
-  { frame: 156, type: "whoosh_fast",    volume: 0.34 }, // 5.2s: Scene 1 Single Card entrance
-  { frame: 175, type: "impact_hit",     volume: 0.22 }, // 5.8s: Drama circle stamp hit
-  { frame: 294, type: "whoosh_fast",    volume: 0.32 }, // 9.8s: Card EXPANSION whoosh
-  { frame: 304, type: "whoosh_sparkle", volume: 0.35 }, // 10.1s: Genuine friends solution stamp
-  { frame: 576, type: "whoosh_fast",    volume: 0.32 }, // 19.2s: Scene 2 Loneliness filter transition
-  { frame: 598, type: "impact_hit",     volume: 0.20 }, // 19.9s: Solitude reality hit
-  { frame: 744, type: "whoosh_sparkle", volume: 0.35 }, // 24.8s: Scene 3 Inner peace breakthrough reveal
-  { frame: 864, type: "whoosh_sparkle", volume: 0.35 }, // 28.8s: Finale Presenter Re-Entry
+  { frame: 0,   type: "whoosh_deep",    volume: 0.16 }, // 0.0s: Intro Presenter entrance
+  { frame: 12,  type: "click",          volume: 0.12 }, // 0.4s: Topic badge pop
+  { frame: 156, type: "whoosh_fast",    volume: 0.15 }, // 5.2s: Scene 1 3-Pillars Card entrance
+  { frame: 318, type: "click",          volume: 0.12 }, // 10.6s: Pillar 1 Respect stamp
+  { frame: 354, type: "click",          volume: 0.12 }, // 11.8s: Pillar 2 Support stamp
+  { frame: 402, type: "whoosh_sparkle", volume: 0.15 }, // 13.4s: Pillar 3 Growth stamp
+  { frame: 444, type: "whoosh_fast",    volume: 0.15 }, // 14.8s: Scene 2 Fake friends contrast
+  { frame: 504, type: "impact_hit",     volume: 0.12 }, // 16.8s: Warning chip stamp
+  { frame: 576, type: "whoosh_fast",    volume: 0.15 }, // 19.2s: Scene 3 Solitude filter transition
+  { frame: 598, type: "impact_hit",     volume: 0.10 }, // 19.9s: Solitude reality hit
+  { frame: 744, type: "whoosh_sparkle", volume: 0.16 }, // 24.8s: Scene 4 Peace epiphany reveal
+  { frame: 864, type: "whoosh_sparkle", volume: 0.16 }, // 28.8s: Finale Presenter Re-Entry
 ];
 
 export const ShrinkingCircleComposition: React.FC = () => {
@@ -58,14 +60,14 @@ export const ShrinkingCircleComposition: React.FC = () => {
           interpolate(
             f,
             [0, 25, durationInFrames - 35, durationInFrames],
-            [0, 0.12, 0.12, 0],
+            [0, 0.09, 0.09, 0],
             { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
           )
         }
         loop
       />
 
-      {/* 3. Rich Layered Sound Design Engine */}
+      {/* 3. Layered Subtle Sound Design Suite */}
       <SoundDesignEngine cues={SFX_CUES} />
 
       {/* 4. Top Apple Progress Bar */}
@@ -74,7 +76,7 @@ export const ShrinkingCircleComposition: React.FC = () => {
       {/* 5. Apple Studio Mesh Background with Drifting Ambient Energy */}
       <ShrinkingCircleBackground />
 
-      {/* 6. Motion Graphics Storyboard Canvas with Progressive Morphing Cutouts */}
+      {/* 6. Motion Graphics Storyboard Canvas with Progressive 3-Pillar & Contrast Storytelling */}
       <ShrinkingCircleCanvas transcript={transcript} />
 
       {/* 7. Multi-Pose Character Presenter */}
