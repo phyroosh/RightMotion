@@ -21,7 +21,7 @@ Think like an After Effects and Premiere Pro motion graphics editor first! Every
 Never squish the avatar in a corner or have graphics fighting for space on screen with the avatar. We edit like a top-tier video essayist with distinct A-Roll and B-Roll rhythm:
 
 ### A-Roll Presenter Shots (The Human Connection)
-- **Voice Character:** Always use the female neural network voice (`en-US-JennyNeural` with natural conversational speed `rate="+0%"`, DO NOT speed up the voice) matching Judy.
+- **Voice Character:** Always use the female neural network voice (`en-US-AvaMultilingualNeural` with natural conversational speed `rate="+0%"`, DO NOT speed up the voice) matching Judy.
 - **Smart Multi-Pose Switching — 6-Pose System:**
   **FULL BODY (intro hook & outro finale ONLY — the money shots):**
   1. `character_fullbody_pointing.png` — Confident pointing up, strong for opening hooks and calls to action.

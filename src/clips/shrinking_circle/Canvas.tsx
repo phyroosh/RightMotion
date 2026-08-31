@@ -3,7 +3,7 @@ import { spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { ProCutout } from "../../components/ProCutout";
 import { PropComparison } from "../../components/PropComparison";
 import { WordTimestamp } from "../../types";
-import { Sparkles, AlertCircle, HeartHandshake, ShieldCheck, Heart } from "lucide-react";
+import { Sparkles, AlertCircle, HeartHandshake, ShieldCheck } from "lucide-react";
 
 interface CanvasProps {
   transcript: WordTimestamp[];
@@ -14,13 +14,13 @@ export const ShrinkingCircleCanvas: React.FC<CanvasProps> = () => {
   const { fps } = useVideoConfig();
   const currentMs = (frame / fps) * 1000;
 
-  // Scene Timings:
-  // Scene 1 (The Quality Shift VS Card): 5,400ms - 19,800ms
-  // Scene 2 (The Loneliness Illusion Cutout): 19,800ms - 25,800ms
-  // Scene 3 (Reclaiming Inner Peace Cutout): 25,800ms - 30,800ms
-  const isScene1 = currentMs >= 5400 && currentMs < 19800;
-  const isScene2 = currentMs >= 19800 && currentMs < 25800;
-  const isScene3 = currentMs >= 25800 && currentMs < 30800;
+  // Scene Timings for en-US-AvaMultilingualNeural:
+  // Scene 1 (The Quality Shift VS Card): 5,200ms - 19,200ms
+  // Scene 2 (The Loneliness Illusion Cutout): 19,200ms - 24,800ms
+  // Scene 3 (Reclaiming Inner Peace Cutout): 24,800ms - 28,800ms
+  const isScene1 = currentMs >= 5200 && currentMs < 19200;
+  const isScene2 = currentMs >= 19200 && currentMs < 24800;
+  const isScene3 = currentMs >= 24800 && currentMs < 28800;
 
   const sp = (delayMs: number, d = 20, s = 90, m = 0.85) => {
     const df = Math.floor((delayMs / 1000) * fps);
@@ -36,10 +36,10 @@ export const ShrinkingCircleCanvas: React.FC<CanvasProps> = () => {
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden flex flex-col items-center justify-center px-6">
       {/* ─────────────────────────────────────────────────────────────
-          SCENE 1: DRAMA CIRCLE VS GENUINE FRIENDS (5.4s - 19.8s)
+          SCENE 1: DRAMA CIRCLE VS GENUINE FRIENDS (5.2s - 19.2s)
       ───────────────────────────────────────────────────────────── */}
       {isScene1 && (() => {
-        const sEnter = sp(5400);
+        const sEnter = sp(5200);
 
         return (
           <div className="w-full max-w-[1020px] flex flex-col items-center gap-7">
@@ -79,7 +79,7 @@ export const ShrinkingCircleCanvas: React.FC<CanvasProps> = () => {
                 rightBadge="REAL CORE"
                 rightGlow="emerald"
                 centerDividerText="VS"
-                startMs={5400}
+                startMs={5200}
               />
             </div>
           </div>
@@ -87,10 +87,10 @@ export const ShrinkingCircleCanvas: React.FC<CanvasProps> = () => {
       })()}
 
       {/* ─────────────────────────────────────────────────────────────
-          SCENE 2: THE LONELINESS ILLUSION (19.8s - 25.8s)
+          SCENE 2: THE LONELINESS ILLUSION (19.2s - 24.8s)
       ───────────────────────────────────────────────────────────── */}
       {isScene2 && (() => {
-        const sEnter = sp(19800);
+        const sEnter = sp(19200);
 
         return (
           <div className="w-full max-w-[1000px] flex flex-col items-center gap-7">
@@ -146,10 +146,10 @@ export const ShrinkingCircleCanvas: React.FC<CanvasProps> = () => {
       })()}
 
       {/* ─────────────────────────────────────────────────────────────
-          SCENE 3: RECLAIMING INNER PEACE (25.8s - 30.8s)
+          SCENE 3: RECLAIMING INNER PEACE (24.8s - 28.8s)
       ───────────────────────────────────────────────────────────── */}
       {isScene3 && (() => {
-        const sEnter = sp(25800);
+        const sEnter = sp(24800);
 
         return (
           <div className="w-full max-w-[1000px] flex flex-col items-center gap-7">

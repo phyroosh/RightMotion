@@ -74,7 +74,7 @@ def select_cutout_assets(topic: str, script: str):
 
     return problem_id, solution_id
 
-async def synthesize_speech(text: str, output_path: Path, voice: str = "en-US-JennyNeural"):
+async def synthesize_speech(text: str, output_path: Path, voice: str = "en-US-AvaMultilingualNeural"):
     import edge_tts
     output_path.parent.mkdir(parents=True, exist_ok=True)
     print(f"🎙️ [1/4] Synthesizing neural speech with voice '{voice}'...")
@@ -616,7 +616,7 @@ async def main():
     parser.add_argument("--topic", default=None, help="Display title / topic")
     parser.add_argument("--script", required=True, help="Voiceover script text")
     parser.add_argument("--format", choices=["shorts", "longform"], default="shorts")
-    parser.add_argument("--voice", default="en-US-JennyNeural")
+    parser.add_argument("--voice", default="en-US-AvaMultilingualNeural")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
 
     args = parser.parse_args()

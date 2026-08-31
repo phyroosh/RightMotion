@@ -1,7 +1,7 @@
 import React from "react";
 import { spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { CharacterKeyframeAnimator, KeyframePoint } from "../../components/CharacterKeyframeAnimator";
-import { Users, Sparkles } from "lucide-react";
+import { Users } from "lucide-react";
 
 interface PresenterProps {
   currentMs: number;
@@ -14,15 +14,15 @@ export const ShrinkingCirclePresenter: React.FC<PresenterProps> = ({ currentMs }
   const keyframes: KeyframePoint[] = [
     { timeMs: 0, pose: "fullbody_pointing", scale: 1.0, y: 80, rotate: -1, opacity: 0 },
     { timeMs: 350, pose: "fullbody_pointing", scale: 1.0, y: 0, rotate: 0, opacity: 1 },
-    { timeMs: 4600, pose: "fullbody_pointing", scale: 1.03, y: -4, rotate: 0, opacity: 1 },
-    { timeMs: 5400, pose: "fullbody_pointing", scale: 0.96, y: 90, rotate: 1, opacity: 0 },
-    { timeMs: 30800, pose: "fullbody_open", scale: 0.96, y: 80, rotate: -1, opacity: 0 },
-    { timeMs: 31200, pose: "fullbody_open", scale: 1.0, y: 0, rotate: 0, opacity: 1 },
-    { timeMs: 32500, pose: "fullbody_open", scale: 1.04, y: -6, rotate: 0, opacity: 1 },
+    { timeMs: 4400, pose: "fullbody_pointing", scale: 1.03, y: -4, rotate: 0, opacity: 1 },
+    { timeMs: 5200, pose: "fullbody_pointing", scale: 0.96, y: 90, rotate: 1, opacity: 0 },
+    { timeMs: 28800, pose: "fullbody_open", scale: 0.96, y: 80, rotate: -1, opacity: 0 },
+    { timeMs: 29200, pose: "fullbody_open", scale: 1.0, y: 0, rotate: 0, opacity: 1 },
+    { timeMs: 30500, pose: "fullbody_open", scale: 1.04, y: -6, rotate: 0, opacity: 1 },
   ];
 
-  const isIntro = currentMs >= 0 && currentMs < 5400;
-  const isFinale = currentMs >= 30800;
+  const isIntro = currentMs >= 0 && currentMs < 5200;
+  const isFinale = currentMs >= 28800;
   const isPresenterActive = isIntro || isFinale;
 
   const badgeSpring = spring({ frame, fps, config: { damping: 18, mass: 0.8, stiffness: 110 } });
