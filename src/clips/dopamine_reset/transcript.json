@@ -1,0 +1,128 @@
+[
+  {
+    "word": "Your",
+    "start": 0,
+    "end": 280,
+    "confidence": 0.785
+  },
+  {
+    "word": "phone",
+    "start": 280,
+    "end": 520,
+    "confidence": 0.999
+  },
+  {
+    "word": "is",
+    "start": 520,
+    "end": 680,
+    "confidence": 1.0
+  },
+  {
+    "word": "stealing",
+    "start": 680,
+    "end": 900,
+    "confidence": 0.987
+  },
+  {
+    "word": "your",
+    "start": 900,
+    "end": 1160,
+    "confidence": 0.996
+  },
+  {
+    "word": "focus",
+    "start": 1160,
+    "end": 1440,
+    "confidence": 0.955
+  },
+  {
+    "word": "through",
+    "start": 1440,
+    "end": 1700,
+    "confidence": 0.994
+  },
+  {
+    "word": "cheap",
+    "start": 1700,
+    "end": 1900,
+    "confidence": 0.965
+  },
+  {
+    "word": "dopamine",
+    "start": 1900,
+    "end": 2220,
+    "confidence": 0.983
+  },
+  {
+    "word": "spikes.",
+    "start": 2220,
+    "end": 2720,
+    "confidence": 0.999
+  },
+  {
+    "word": "Here",
+    "start": 3920,
+    "end": 4160,
+    "confidence": 0.985
+  },
+  {
+    "word": "is",
+    "start": 4160,
+    "end": 4320,
+    "confidence": 0.687
+  },
+  {
+    "word": "how",
+    "start": 4320,
+    "end": 4480,
+    "confidence": 0.99
+  },
+  {
+    "word": "to",
+    "start": 4480,
+    "end": 4580,
+    "confidence": 0.999
+  },
+  {
+    "word": "rewire",
+    "start": 4580,
+    "end": 5000,
+    "confidence": 0.979
+  },
+  {
+    "word": "your",
+    "start": 5000,
+    "end": 5180,
+    "confidence": 0.995
+  },
+  {
+    "word": "neural",
+    "start": 5180,
+    "end": 5360,
+    "confidence": 0.966
+  },
+  {
+    "word": "pathways",
+    "start": 5360,
+    "end": 5740,
+    "confidence": 0.986
+  },
+  {
+    "word": "in",
+    "start": 5740,
+    "end": 6220,
+    "confidence": 0.992
+  },
+  {
+    "word": "48",
+    "start": 6220,
+    "end": 6500,
+    "confidence": 0.995
+  },
+  {
+    "word": "hours.",
+    "start": 6500,
+    "end": 6980,
+    "confidence": 0.972
+  }
+]

@@ -10,6 +10,9 @@ import { NeuroproductivityComposition } from "./clips/neuroproductivity";
 import { LofiSongComposition } from "./clips/lofi_song";
 import { BoundariesComposition } from "./clips/boundaries";
 import boundariesTranscript from "./clips/boundaries/transcript.json";
+import { CutoutShowcase } from "./compositions/CutoutShowcase";
+import { DopamineResetComposition } from "./clips/dopamine_reset";
+import dopamine_resetTranscript from "./clips/dopamine_reset/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -20,6 +23,8 @@ import { EnvironmentComposition } from "./clips/environment";
 import environmentTranscript from "./clips/environment/transcript.json";
 import { LonelinessComposition } from "./clips/loneliness";
 import lonelinessTranscript from "./clips/loneliness/transcript.json";
+import { SayingNoComposition } from "./clips/saying_no";
+import sayingNoTranscript from "./clips/saying_no/transcript.json";
 import {
   NeuroproductivityThumbnail,
   ProcrastinationThumbnail,
@@ -35,11 +40,13 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  DopamineResetThumbnail,
   BoundariesThumbnail,
   PatternsThumbnail,
   TeenageThumbnail,
   EnvironmentThumbnail,
   LonelinessThumbnail,
+  SayingNoThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -89,14 +96,26 @@ export const RemotionRoot: React.FC = () => {
   const lofiSongDuration = Math.ceil(130.86 * fps); // 130.86s audio = 3926 frames
   
   const boundariesDuration = calculateDurationInFrames(boundariesTranscript as any[], fps);
+  
+  const dopamine_resetDuration = calculateDurationInFrames(dopamine_resetTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
   const environmentDuration = calculateDurationInFrames(environmentTranscript as any[], fps);
   const lonelinessDuration = calculateDurationInFrames(lonelinessTranscript as any[], fps);
+  const sayingNoDuration = calculateDurationInFrames(sayingNoTranscript as any[], fps);
 
   return (
     <>
+      <Composition
+        id="SayingNoVideo"
+        component={SayingNoComposition}
+        durationInFrames={sayingNoDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
       <Composition
         id="LonelinessVideo"
         component={LonelinessComposition}
@@ -137,6 +156,16 @@ export const RemotionRoot: React.FC = () => {
         id="BoundariesVideo"
         component={BoundariesComposition}
         durationInFrames={boundariesDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="DopamineResetVideo"
+        component={DopamineResetComposition}
+        durationInFrames={dopamine_resetDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -400,6 +429,36 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="LonelinessThumbnail"
         component={LonelinessThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="SayingNoThumbnail"
+        component={SayingNoThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      {/* Cutout Asset Engine Showcase */}
+      <Still
+        id="CutoutShowcase"
+        component={CutoutShowcase}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="CutoutShowcaseVideo"
+        component={CutoutShowcase}
+        durationInFrames={150}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+    
+      <Still
+        id="DopamineResetThumbnail"
+        component={DopamineResetThumbnail}
         width={1080}
         height={1920}
       />

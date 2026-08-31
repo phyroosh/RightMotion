@@ -141,8 +141,28 @@
     "shortsUrl": "https://youtube.com/shorts/xrPJNE5QVYY",
     "title": "Surrounded Online Yet Totally Alone (The Silent Paradox) 🧠 #Shorts",
     "privacyStatus": "private",
+    "publishAt": "2026-08-30T19:30:00.000Z",
+    "isScheduled": true,
+    "publishedAt": "2026-08-30T02:09:45Z",
+    "youtube": {
+      "uploaded": true,
+      "videoId": "d6OGbnfmXeo",
+      "youtubeUrl": "https://youtu.be/d6OGbnfmXeo",
+      "shortsUrl": "https://youtube.com/shorts/d6OGbnfmXeo",
+      "isScheduled": true,
+      "publishAt": "2026-08-30T19:30:00.000Z",
+      "publishedAt": "2026-08-30T15:55:38Z"
+    }
+  },
+  "saying_no_video.mp4": {
+    "uploaded": true,
+    "videoId": "8VLATZSBe2w",
+    "youtubeUrl": "https://youtu.be/8VLATZSBe2w",
+    "shortsUrl": "https://youtube.com/shorts/8VLATZSBe2w",
+    "title": "Stop Saying YES When You Want To Say NO 🛑 #Shorts",
+    "privacyStatus": "private",
     "publishAt": null,
     "isScheduled": false,
-    "publishedAt": "2026-08-30T02:09:45Z"
+    "publishedAt": "2026-08-31T04:01:45Z"
   }
 }

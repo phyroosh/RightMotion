@@ -23,9 +23,13 @@ const THUMBNAIL_MAP = {
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
   'promises_video.mp4': 'PromisesThumbnail',
+  'dopamine_reset_video.mp4': 'DopamineResetThumbnail',
   'boundaries_video.mp4': 'BoundariesThumbnail',
   'patterns_video.mp4': 'PatternsThumbnail',
   'teenage_video.mp4': 'TeenageThumbnail',
+  'environment_video.mp4': 'EnvironmentThumbnail',
+  'loneliness_video.mp4': 'LonelinessThumbnail',
+  'saying_no_video.mp4': 'SayingNoThumbnail',
 };
 
 // Target single video or all

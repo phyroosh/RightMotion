@@ -1,0 +1,893 @@
+{
+  "hyperrealistic_3d_glowing_brain": {
+    "id": "hyperrealistic_3d_glowing_brain",
+    "filename": "hyperrealistic_3d_glowing_brain.png",
+    "category": "psychology",
+    "path": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+    "title": "3D Glowing Neural Brain",
+    "description": "Hyper-realistic 3D glass brain with glowing synapses and electrical sparks",
+    "tone": "insightful",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "brain",
+      "neuroscience",
+      "rewire",
+      "neuroplasticity",
+      "mind",
+      "iq",
+      "genius",
+      "clarity"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "dopamine_head_circuit": {
+    "id": "dopamine_head_circuit",
+    "filename": "dopamine_head_circuit.png",
+    "category": "psychology",
+    "path": "assets/psychology/dopamine_head_circuit.png",
+    "title": "Dopamine Circuit Head",
+    "description": "Head profile outline with DOPAMINE text and neural circuit vesicles",
+    "tone": "analytical",
+    "recommendedSfx": "click",
+    "keywords": [
+      "dopamine",
+      "circuit",
+      "neurotransmitter",
+      "reward",
+      "habit",
+      "addiction"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "neurotransmitter_molecule_head": {
+    "id": "neurotransmitter_molecule_head",
+    "filename": "neurotransmitter_molecule_head.png",
+    "category": "psychology",
+    "path": "assets/psychology/neurotransmitter_molecule_head.png",
+    "title": "Neurotransmitter Molecule",
+    "description": "Chemical formula structure HO-C-HO inside profile silhouette",
+    "tone": "scientific",
+    "recommendedSfx": "click",
+    "keywords": [
+      "molecule",
+      "chemistry",
+      "biology",
+      "hormone",
+      "serotonin",
+      "dopamine"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "dopamine_sparks_brain": {
+    "id": "dopamine_sparks_brain",
+    "filename": "dopamine_sparks_brain.png",
+    "category": "psychology",
+    "path": "assets/psychology/dopamine_sparks_brain.png",
+    "title": "Dopamine Spark Mind",
+    "description": "Silhouette head with explosive dopamine spark particles in brain",
+    "tone": "energetic",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "spark",
+      "dopamine",
+      "motivation",
+      "energy",
+      "drive",
+      "focus"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "enlightened_mind_insight": {
+    "id": "enlightened_mind_insight",
+    "filename": "enlightened_mind_insight.png",
+    "category": "psychology",
+    "path": "assets/psychology/enlightened_mind_insight.png",
+    "title": "Enlightened Mind Insight",
+    "description": "Head outline with radiating light rays emanating from brain",
+    "tone": "epiphany",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "insight",
+      "breakthrough",
+      "epiphany",
+      "realization",
+      "clarity",
+      "wisdom"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "emotional_regulation_branches": {
+    "id": "emotional_regulation_branches",
+    "filename": "emotional_regulation_branches.png",
+    "category": "psychology",
+    "path": "assets/psychology/emotional_regulation_branches.png",
+    "title": "Emotional Regulation Node",
+    "description": "Brain branching into 3 emotional state nodes (happy, neutral, sad)",
+    "tone": "diagnostic",
+    "recommendedSfx": "click",
+    "keywords": [
+      "regulation",
+      "emotions",
+      "balance",
+      "mood",
+      "mental state",
+      "psychology"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "mindful_heart_gratitude": {
+    "id": "mindful_heart_gratitude",
+    "filename": "mindful_heart_gratitude.png",
+    "category": "psychology",
+    "path": "assets/psychology/mindful_heart_gratitude.png",
+    "title": "Mindful Gratitude Sparks",
+    "description": "Hands offering uplifted glowing heart and radiant energy sparks",
+    "tone": "uplifting",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "gratitude",
+      "mindfulness",
+      "peace",
+      "spiritual",
+      "calm",
+      "acceptance"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "heart_and_brain_harmony": {
+    "id": "heart_and_brain_harmony",
+    "filename": "heart_and_brain_harmony.png",
+    "category": "psychology",
+    "path": "assets/psychology/heart_and_brain_harmony.png",
+    "title": "Heart & Brain Harmony",
+    "description": "Cute mascot brain and heart holding hands walking in harmony",
+    "tone": "warm",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "harmony",
+      "balance",
+      "heart",
+      "logic",
+      "emotions",
+      "alignment"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "tangled_confusion_chaos": {
+    "id": "tangled_confusion_chaos",
+    "filename": "tangled_confusion_chaos.png",
+    "category": "psychology",
+    "path": "assets/psychology/tangled_confusion_chaos.png",
+    "title": "Tangled Confusion Knot",
+    "description": "Dense scribble ball with ?! marks showing chaotic racing thoughts",
+    "tone": "chaotic",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "confusion",
+      "overthinking",
+      "chaos",
+      "rumination",
+      "mess",
+      "stress"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "head_brain_cortex_outline": {
+    "id": "head_brain_cortex_outline",
+    "filename": "head_brain_cortex_outline.png",
+    "category": "psychology",
+    "path": "assets/psychology/head_brain_cortex_outline.png",
+    "title": "Anatomical Cortex Profile",
+    "description": "Clean anatomical brain cortex structure inside head outline",
+    "tone": "clinical",
+    "recommendedSfx": "click",
+    "keywords": [
+      "cortex",
+      "prefrontal",
+      "anatomy",
+      "neurobiology",
+      "structure"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "head_brain_clean_outline": {
+    "id": "head_brain_clean_outline",
+    "filename": "head_brain_clean_outline.png",
+    "category": "psychology",
+    "path": "assets/psychology/head_brain_clean_outline.png",
+    "title": "Minimalist Mind Outline",
+    "description": "Minimal line-art head profile with cerebral convolutions",
+    "tone": "minimal",
+    "recommendedSfx": "click",
+    "keywords": [
+      "thought",
+      "thinking",
+      "mental",
+      "mind",
+      "intellect"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "brain_battery_depleted": {
+    "id": "brain_battery_depleted",
+    "filename": "brain_battery_depleted.png",
+    "category": "burnout",
+    "path": "assets/burnout/brain_battery_depleted.png",
+    "title": "Brain Battery Depleted",
+    "description": "Brain with embedded battery bar at red empty level",
+    "tone": "drained",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "burnout",
+      "exhaustion",
+      "drain",
+      "tired",
+      "low energy",
+      "fatigue"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "head_battery_empty": {
+    "id": "head_battery_empty",
+    "filename": "head_battery_empty.png",
+    "category": "burnout",
+    "path": "assets/burnout/head_battery_empty.png",
+    "title": "Head Battery Critical",
+    "description": "Silhouette head profile with red flashing low battery warning",
+    "tone": "critical",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "depleted",
+      "energy",
+      "sleep",
+      "rest",
+      "limit",
+      "overload"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "battery_low_red": {
+    "id": "battery_low_red",
+    "filename": "battery_low_red.png",
+    "category": "burnout",
+    "path": "assets/burnout/battery_low_red.png",
+    "title": "Low Red Battery Bar",
+    "description": "Minimalist horizontal battery bar with single red segment",
+    "tone": "warning",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "battery",
+      "charge",
+      "power",
+      "empty",
+      "recharge"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "exhausted_dead_brain": {
+    "id": "exhausted_dead_brain",
+    "filename": "exhausted_dead_brain.png",
+    "category": "burnout",
+    "path": "assets/burnout/exhausted_dead_brain.png",
+    "title": "Exhausted Zombie Brain",
+    "description": "Cartoon brain drooling with crossed-out eyes and dead battery icon",
+    "tone": "fatigued",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "dead tired",
+      "burnt out",
+      "brain fry",
+      "zombie",
+      "overworked"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "overwhelmed_mind_ripples": {
+    "id": "overwhelmed_mind_ripples",
+    "filename": "overwhelmed_mind_ripples.png",
+    "category": "burnout",
+    "path": "assets/burnout/overwhelmed_mind_ripples.png",
+    "title": "Overwhelmed Ripple Waves",
+    "description": "Minimal figure with dizzy disorienting ripples around head",
+    "tone": "disoriented",
+    "recommendedSfx": "whoosh_fast",
+    "keywords": [
+      "overwhelm",
+      "dizziness",
+      "sensory overload",
+      "stimulation",
+      "noise"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "girl_headache_stress": {
+    "id": "girl_headache_stress",
+    "filename": "girl_headache_stress.png",
+    "category": "burnout",
+    "path": "assets/burnout/girl_headache_stress.png",
+    "title": "Girl Acute Stress",
+    "description": "Girl squatting holding head in severe migraine or stress panic",
+    "tone": "distressed",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "headache",
+      "migraine",
+      "stress",
+      "panic",
+      "pain",
+      "pressure"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "boy_crouching_despair": {
+    "id": "boy_crouching_despair",
+    "filename": "boy_crouching_despair.png",
+    "category": "burnout",
+    "path": "assets/burnout/boy_crouching_despair.png",
+    "title": "Boy Crouching Despair",
+    "description": "Hoodie-wearing boy crouching looking down in deep despair",
+    "tone": "somber",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "despair",
+      "hopeless",
+      "defeat",
+      "struggle",
+      "sadness",
+      "regret"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "student_study_burnout": {
+    "id": "student_study_burnout",
+    "filename": "student_study_burnout.png",
+    "category": "burnout",
+    "path": "assets/burnout/student_study_burnout.png",
+    "title": "Student Study Burnout",
+    "description": "Student slumped at desk clutching head over open book",
+    "tone": "overwhelmed",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "study",
+      "exams",
+      "homework",
+      "academic",
+      "burnout",
+      "reading"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "anxiety_racing_thoughts": {
+    "id": "anxiety_racing_thoughts",
+    "filename": "anxiety_racing_thoughts.png",
+    "category": "burnout",
+    "path": "assets/burnout/anxiety_racing_thoughts.png",
+    "title": "Anxiety Racing Heads",
+    "description": "Person clutching head with multiple blurred frantic ghost heads",
+    "tone": "frantic",
+    "recommendedSfx": "whoosh_fast",
+    "keywords": [
+      "anxiety",
+      "racing thoughts",
+      "panic attack",
+      "adhd",
+      "overthinking"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "slumped_anxiety_scribble": {
+    "id": "slumped_anxiety_scribble",
+    "filename": "slumped_anxiety_scribble.png",
+    "category": "burnout",
+    "path": "assets/burnout/slumped_anxiety_scribble.png",
+    "title": "Slumped Anxiety Shadow",
+    "description": "Person sitting slumped with chaotic dark scribble above head",
+    "tone": "heavy",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "depression",
+      "gloom",
+      "dark thoughts",
+      "heavy",
+      "burden"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "brain_trapped_in_cage": {
+    "id": "brain_trapped_in_cage",
+    "filename": "brain_trapped_in_cage.png",
+    "category": "burnout",
+    "path": "assets/burnout/brain_trapped_in_cage.png",
+    "title": "Brain In Prison Cage",
+    "description": "Sad cartoon brain trapped behind birdcage bars",
+    "tone": "constricted",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "trapped",
+      "cage",
+      "prison",
+      "limiting beliefs",
+      "stuck",
+      "blocked"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "dark_thought_cloud_crushing": {
+    "id": "dark_thought_cloud_crushing",
+    "filename": "dark_thought_cloud_crushing.png",
+    "category": "burnout",
+    "path": "assets/burnout/dark_thought_cloud_crushing.png",
+    "title": "Dark Cloud Crushing",
+    "description": "Figure crouching under a massive dark cloud of negative thoughts",
+    "tone": "oppressive",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "crushed",
+      "negative thoughts",
+      "weight",
+      "pressure",
+      "burden"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "insomnia_awake_in_bed": {
+    "id": "insomnia_awake_in_bed",
+    "filename": "insomnia_awake_in_bed.png",
+    "category": "burnout",
+    "path": "assets/burnout/insomnia_awake_in_bed.png",
+    "title": "Insomnia Awake In Bed",
+    "description": "Person lying awake in bed staring at clock late at night",
+    "tone": "restless",
+    "recommendedSfx": "click",
+    "keywords": [
+      "insomnia",
+      "sleep",
+      "bedtime",
+      "night",
+      "clock",
+      "screentime"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "exhausted_in_bed": {
+    "id": "exhausted_in_bed",
+    "filename": "exhausted_in_bed.png",
+    "category": "burnout",
+    "path": "assets/burnout/exhausted_in_bed.png",
+    "title": "Exhausted Bed Morning",
+    "description": "Tired weary person under blankets lacking energy to get up",
+    "tone": "lethargic",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "morning",
+      "waking up",
+      "lazy",
+      "lethargy",
+      "unmotivated",
+      "bed"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "furious_frustrated_pulling_hair": {
+    "id": "furious_frustrated_pulling_hair",
+    "filename": "furious_frustrated_pulling_hair.png",
+    "category": "burnout",
+    "path": "assets/burnout/furious_frustrated_pulling_hair.png",
+    "title": "Furious Hair Pulling",
+    "description": "Girl pulling hair screaming in acute frustration and anger",
+    "tone": "explosive",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "anger",
+      "frustration",
+      "rage",
+      "screaming",
+      "patience",
+      "temper"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "girl_crying_at_desk": {
+    "id": "girl_crying_at_desk",
+    "filename": "girl_crying_at_desk.png",
+    "category": "burnout",
+    "path": "assets/burnout/girl_crying_at_desk.png",
+    "title": "Girl Crying At Desk",
+    "description": "Girl slumped over desk resting head on arm with single tear",
+    "tone": "melancholic",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "crying",
+      "tears",
+      "heartbreak",
+      "failure",
+      "disappointment"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "trapped_in_glass_jar": {
+    "id": "trapped_in_glass_jar",
+    "filename": "trapped_in_glass_jar.png",
+    "category": "burnout",
+    "path": "assets/burnout/trapped_in_glass_jar.png",
+    "title": "Trapped In Glass Jar",
+    "description": "Sad woman sitting curled up inside a corked glass jar in the rain",
+    "tone": "isolated",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "suffocation",
+      "claustrophobia",
+      "trapped",
+      "helpless",
+      "bottle"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "trembling_nervous_mascot": {
+    "id": "trembling_nervous_mascot",
+    "filename": "trembling_nervous_mascot.png",
+    "category": "burnout",
+    "path": "assets/burnout/trembling_nervous_mascot.png",
+    "title": "Trembling Nervous Mascot",
+    "description": "Shivering mascot figure trembling with fear and cold sweat",
+    "tone": "anxious",
+    "recommendedSfx": "click",
+    "keywords": [
+      "nervous",
+      "scared",
+      "shivering",
+      "phobia",
+      "fear",
+      "trembling"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "phone_dopamine_overload": {
+    "id": "phone_dopamine_overload",
+    "filename": "phone_dopamine_overload.png",
+    "category": "devices",
+    "path": "assets/devices/phone_dopamine_overload.png",
+    "title": "Phone Dopamine Overload",
+    "description": "Shocked guy overwhelmed by colorful exploding feed dopamine streams",
+    "tone": "hypnotic",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "phone",
+      "social media",
+      "tiktok",
+      "reels",
+      "scroll",
+      "addiction",
+      "dopamine"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "phone_silent_notifications": {
+    "id": "phone_silent_notifications",
+    "filename": "phone_silent_notifications.png",
+    "category": "devices",
+    "path": "assets/devices/phone_silent_notifications.png",
+    "title": "Phone Silent Mode",
+    "description": "Hand holding phone with red silent bell badge for digital detox",
+    "tone": "intentional",
+    "recommendedSfx": "click",
+    "keywords": [
+      "detox",
+      "silent",
+      "notifications",
+      "focus",
+      "mute",
+      "monk mode"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "smartphone_lockscreen_notifications": {
+    "id": "smartphone_lockscreen_notifications",
+    "filename": "smartphone_lockscreen_notifications.png",
+    "category": "devices",
+    "path": "assets/devices/smartphone_lockscreen_notifications.png",
+    "title": "Lockscreen Notification Stack",
+    "description": "Morning 08:45 smartphone lockscreen stacked with alerts",
+    "tone": "distracting",
+    "recommendedSfx": "click",
+    "keywords": [
+      "lockscreen",
+      "morning",
+      "notifications",
+      "alerts",
+      "screen time",
+      "digital"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "isolated_curled_up": {
+    "id": "isolated_curled_up",
+    "filename": "isolated_curled_up.png",
+    "category": "relationships",
+    "path": "assets/relationships/isolated_curled_up.png",
+    "title": "Isolated Curled Up",
+    "description": "Figure sitting alone in dark corner curled up",
+    "tone": "lonely",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "loneliness",
+      "isolation",
+      "alone",
+      "alienated",
+      "rejection"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "fear_paranoia_voices": {
+    "id": "fear_paranoia_voices",
+    "filename": "fear_paranoia_voices.png",
+    "category": "relationships",
+    "path": "assets/relationships/fear_paranoia_voices.png",
+    "title": "Fear Whispering Voices",
+    "description": "Boy clutching ears surrounded by spectral whispering fear figures",
+    "tone": "paranoia",
+    "recommendedSfx": "whoosh_fast",
+    "keywords": [
+      "imposter syndrome",
+      "judgment",
+      "critics",
+      "paranoia",
+      "voices",
+      "fear"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "peer_pressure_criticism": {
+    "id": "peer_pressure_criticism",
+    "filename": "peer_pressure_criticism.png",
+    "category": "relationships",
+    "path": "assets/relationships/peer_pressure_criticism.png",
+    "title": "Peer Pressure Criticism",
+    "description": "One person whispering toxic gossip into sweating friend's ear",
+    "tone": "toxic",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "peer pressure",
+      "gossip",
+      "toxic",
+      "comparison",
+      "criticism",
+      "influence"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "sad_blue_figure_lonely": {
+    "id": "sad_blue_figure_lonely",
+    "filename": "sad_blue_figure_lonely.png",
+    "category": "relationships",
+    "path": "assets/relationships/sad_blue_figure_lonely.png",
+    "title": "Blue Watercolor Solitude",
+    "description": "Soft blue watercolor figure sitting curled in gentle sadness",
+    "tone": "vulnerable",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "solitude",
+      "sadness",
+      "melancholy",
+      "gentle",
+      "healing"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "friendship_comfort_support": {
+    "id": "friendship_comfort_support",
+    "filename": "friendship_comfort_support.png",
+    "category": "relationships",
+    "path": "assets/relationships/friendship_comfort_support.png",
+    "title": "Friendship Comfort Hug",
+    "description": "Two friendly blue figures with supportive arm around shoulder",
+    "tone": "empathetic",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "friendship",
+      "support",
+      "comfort",
+      "empathy",
+      "ally",
+      "kindness"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "angry_pouting_arms_crossed": {
+    "id": "angry_pouting_arms_crossed",
+    "filename": "angry_pouting_arms_crossed.png",
+    "category": "relationships",
+    "path": "assets/relationships/angry_pouting_arms_crossed.png",
+    "title": "Angry Arms Crossed Pout",
+    "description": "Girl standing with arms folded refusing to comply in defiance",
+    "tone": "defiant",
+    "recommendedSfx": "click",
+    "keywords": [
+      "boundary",
+      "stubborn",
+      "refusal",
+      "conflict",
+      "saying no",
+      "ego"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "cute_sad_mascot_knees": {
+    "id": "cute_sad_mascot_knees",
+    "filename": "cute_sad_mascot_knees.png",
+    "category": "relationships",
+    "path": "assets/relationships/cute_sad_mascot_knees.png",
+    "title": "Cute Mascot Hugging Knees",
+    "description": "Cute white cartoon figure sitting hugging knees in quiet reflection",
+    "tone": "pensive",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "reflection",
+      "sad",
+      "quiet",
+      "solitude",
+      "thinking",
+      "introvert"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "hugging_comfort_embrace": {
+    "id": "hugging_comfort_embrace",
+    "filename": "hugging_comfort_embrace.png",
+    "category": "relationships",
+    "path": "assets/relationships/hugging_comfort_embrace.png",
+    "title": "Embrace Hug Line Art",
+    "description": "Minimalist line art of two souls embracing in deep comfort",
+    "tone": "comforting",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "love",
+      "hug",
+      "embrace",
+      "intimacy",
+      "healing",
+      "connection"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "setting_boundary_stop_hand": {
+    "id": "setting_boundary_stop_hand",
+    "filename": "setting_boundary_stop_hand.png",
+    "category": "relationships",
+    "path": "assets/relationships/setting_boundary_stop_hand.png",
+    "title": "Stop Hand Boundary",
+    "description": "Figure holding palm forward in firm STOP gesture setting boundary",
+    "tone": "assertive",
+    "recommendedSfx": "impact_hit",
+    "keywords": [
+      "boundary",
+      "saying no",
+      "stop",
+      "limit",
+      "self respect",
+      "assertiveness"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "mood_rating_scale_emojis": {
+    "id": "mood_rating_scale_emojis",
+    "filename": "mood_rating_scale_emojis.png",
+    "category": "habits",
+    "path": "assets/habits/mood_rating_scale_emojis.png",
+    "title": "Mood Spectrum Scale",
+    "description": "6-level mood tracking scale from green smiling to red frowning",
+    "tone": "systematic",
+    "recommendedSfx": "click",
+    "keywords": [
+      "mood tracker",
+      "journaling",
+      "progress",
+      "rating",
+      "scale",
+      "emotion"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "happy_heart_mascot": {
+    "id": "happy_heart_mascot",
+    "filename": "happy_heart_mascot.png",
+    "category": "habits",
+    "path": "assets/habits/happy_heart_mascot.png",
+    "title": "Happy Heart Mascot",
+    "description": "Vibrant smiling pink heart with rosy cheeks radiating warmth",
+    "tone": "joyful",
+    "recommendedSfx": "whoosh_sparkle",
+    "keywords": [
+      "love",
+      "self love",
+      "joy",
+      "kindness",
+      "positivity",
+      "health"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "target_focus_crosshair": {
+    "id": "target_focus_crosshair",
+    "filename": "target_focus_crosshair.png",
+    "category": "habits",
+    "path": "assets/habits/target_focus_crosshair.png",
+    "title": "Precision Target Crosshair",
+    "description": "Minimalist laser focus crosshair target line art",
+    "tone": "focused",
+    "recommendedSfx": "click",
+    "keywords": [
+      "focus",
+      "target",
+      "goal",
+      "discipline",
+      "precision",
+      "aim"
+    ],
+    "width": 1080,
+    "height": 1080
+  },
+  "calendar_habit_check": {
+    "id": "calendar_habit_check",
+    "filename": "calendar_habit_check.png",
+    "category": "habits",
+    "path": "assets/habits/calendar_habit_check.png",
+    "title": "Habit Calendar Streak",
+    "description": "Calendar grid with confirmed checkmark indicating completed streak",
+    "tone": "disciplined",
+    "recommendedSfx": "click",
+    "keywords": [
+      "streak",
+      "calendar",
+      "consistency",
+      "habit loop",
+      "daily action",
+      "routine"
+    ],
+    "width": 1080,
+    "height": 1080
+  }
+}

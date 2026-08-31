@@ -371,3 +371,35 @@ export const LonelinessThumbnail: React.FC = () => (
     extraBadge="REAL CONNECTION"
   />
 );
+
+// 20. SAYING NO WITHOUT GUILT (9:16 Shorts)
+export const SayingNoThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="STOP SAYING YES WHEN YOU WANT TO SAY NO"
+    highlightWord="SAY NO"
+    highlightColor="rose"
+    subtitle="You Don't Owe An Explanation To Protect Your Boundaries"
+    categoryBadge="BOUNDARIES & SELF-RESPECT"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="STOP PEOPLE PLEASING"
+  />
+);
+
+
+export const DopamineResetThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="DOPAMINE RESET"
+    highlightWord="DOPAMINE"
+    highlightColor="rose"
+    subtitle="High-Retention Psychology Breakdown"
+    categoryBadge="PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="obsidian"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);

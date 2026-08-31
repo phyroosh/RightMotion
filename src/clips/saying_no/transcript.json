@@ -1,0 +1,512 @@
+[
+  {
+    "word": "Ever",
+    "start": 0,
+    "end": 400,
+    "confidence": 0.815
+  },
+  {
+    "word": "say",
+    "start": 400,
+    "end": 640,
+    "confidence": 0.998
+  },
+  {
+    "word": "yes",
+    "start": 640,
+    "end": 1060,
+    "confidence": 0.739
+  },
+  {
+    "word": "to",
+    "start": 1060,
+    "end": 1420,
+    "confidence": 0.96
+  },
+  {
+    "word": "something",
+    "start": 1420,
+    "end": 1680,
+    "confidence": 0.995
+  },
+  {
+    "word": "you",
+    "start": 1680,
+    "end": 1920,
+    "confidence": 0.993
+  },
+  {
+    "word": "really",
+    "start": 1920,
+    "end": 2120,
+    "confidence": 0.985
+  },
+  {
+    "word": "don't",
+    "start": 2120,
+    "end": 2460,
+    "confidence": 0.997
+  },
+  {
+    "word": "want",
+    "start": 2460,
+    "end": 2560,
+    "confidence": 0.832
+  },
+  {
+    "word": "to",
+    "start": 2560,
+    "end": 2640,
+    "confidence": 0.997
+  },
+  {
+    "word": "do,",
+    "start": 2640,
+    "end": 2800,
+    "confidence": 0.999
+  },
+  {
+    "word": "just",
+    "start": 3240,
+    "end": 3480,
+    "confidence": 0.991
+  },
+  {
+    "word": "because",
+    "start": 3480,
+    "end": 3760,
+    "confidence": 0.998
+  },
+  {
+    "word": "saying",
+    "start": 3760,
+    "end": 4140,
+    "confidence": 0.919
+  },
+  {
+    "word": "no",
+    "start": 4140,
+    "end": 4400,
+    "confidence": 0.686
+  },
+  {
+    "word": "feels",
+    "start": 4400,
+    "end": 4680,
+    "confidence": 0.999
+  },
+  {
+    "word": "awkward?",
+    "start": 4680,
+    "end": 4980,
+    "confidence": 0.998
+  },
+  {
+    "word": "You",
+    "start": 5680,
+    "end": 5800,
+    "confidence": 0.972
+  },
+  {
+    "word": "don't",
+    "start": 5800,
+    "end": 6000,
+    "confidence": 0.999
+  },
+  {
+    "word": "need",
+    "start": 6000,
+    "end": 6120,
+    "confidence": 1.0
+  },
+  {
+    "word": "some",
+    "start": 6120,
+    "end": 6320,
+    "confidence": 0.997
+  },
+  {
+    "word": "huge",
+    "start": 6320,
+    "end": 6560,
+    "confidence": 0.958
+  },
+  {
+    "word": "explanation.",
+    "start": 6560,
+    "end": 7080,
+    "confidence": 0.985
+  },
+  {
+    "word": "Try,",
+    "start": 8100,
+    "end": 8220,
+    "confidence": 0.957
+  },
+  {
+    "word": "\"Nah,",
+    "start": 8220,
+    "end": 8600,
+    "confidence": 0.941
+  },
+  {
+    "word": "I'm",
+    "start": 8820,
+    "end": 9080,
+    "confidence": 0.974
+  },
+  {
+    "word": "gonna",
+    "start": 9080,
+    "end": 9220,
+    "confidence": 0.909
+  },
+  {
+    "word": "pass,",
+    "start": 9220,
+    "end": 9480,
+    "confidence": 0.999
+  },
+  {
+    "word": "but",
+    "start": 9840,
+    "end": 9980,
+    "confidence": 0.996
+  },
+  {
+    "word": "thanks",
+    "start": 9980,
+    "end": 10200,
+    "confidence": 0.99
+  },
+  {
+    "word": "for",
+    "start": 10200,
+    "end": 10380,
+    "confidence": 0.999
+  },
+  {
+    "word": "asking.\"",
+    "start": 10380,
+    "end": 10740,
+    "confidence": 0.999
+  },
+  {
+    "word": "Or,",
+    "start": 11400,
+    "end": 11640,
+    "confidence": 0.901
+  },
+  {
+    "word": "\"I",
+    "start": 11860,
+    "end": 12020,
+    "confidence": 0.914
+  },
+  {
+    "word": "can't",
+    "start": 12020,
+    "end": 12340,
+    "confidence": 0.997
+  },
+  {
+    "word": "do",
+    "start": 12340,
+    "end": 12480,
+    "confidence": 0.999
+  },
+  {
+    "word": "that,",
+    "start": 12480,
+    "end": 12700,
+    "confidence": 0.999
+  },
+  {
+    "word": "hope",
+    "start": 12920,
+    "end": 13080,
+    "confidence": 0.988
+  },
+  {
+    "word": "you",
+    "start": 13080,
+    "end": 13260,
+    "confidence": 0.999
+  },
+  {
+    "word": "get",
+    "start": 13260,
+    "end": 13420,
+    "confidence": 0.975
+  },
+  {
+    "word": "it.\"",
+    "start": 13420,
+    "end": 13580,
+    "confidence": 1.0
+  },
+  {
+    "word": "And",
+    "start": 14140,
+    "end": 14240,
+    "confidence": 0.986
+  },
+  {
+    "word": "if",
+    "start": 14240,
+    "end": 14380,
+    "confidence": 0.957
+  },
+  {
+    "word": "they",
+    "start": 14380,
+    "end": 14520,
+    "confidence": 0.999
+  },
+  {
+    "word": "keep",
+    "start": 14520,
+    "end": 14640,
+    "confidence": 0.999
+  },
+  {
+    "word": "pushing,",
+    "start": 14640,
+    "end": 15000,
+    "confidence": 0.999
+  },
+  {
+    "word": "just",
+    "start": 15520,
+    "end": 15800,
+    "confidence": 0.995
+  },
+  {
+    "word": "calmly",
+    "start": 15800,
+    "end": 16060,
+    "confidence": 0.991
+  },
+  {
+    "word": "repeat",
+    "start": 16060,
+    "end": 16440,
+    "confidence": 0.997
+  },
+  {
+    "word": "yourself.",
+    "start": 16440,
+    "end": 16700,
+    "confidence": 0.996
+  },
+  {
+    "word": "You",
+    "start": 17520,
+    "end": 17660,
+    "confidence": 0.989
+  },
+  {
+    "word": "don't",
+    "start": 17660,
+    "end": 17800,
+    "confidence": 1.0
+  },
+  {
+    "word": "have",
+    "start": 17800,
+    "end": 17960,
+    "confidence": 0.999
+  },
+  {
+    "word": "to",
+    "start": 17960,
+    "end": 18100,
+    "confidence": 1.0
+  },
+  {
+    "word": "argue.",
+    "start": 18100,
+    "end": 18280,
+    "confidence": 1.0
+  },
+  {
+    "word": "The",
+    "start": 19060,
+    "end": 19140,
+    "confidence": 0.992
+  },
+  {
+    "word": "people",
+    "start": 19140,
+    "end": 19400,
+    "confidence": 0.994
+  },
+  {
+    "word": "worth",
+    "start": 19400,
+    "end": 19620,
+    "confidence": 0.982
+  },
+  {
+    "word": "keeping",
+    "start": 19620,
+    "end": 19880,
+    "confidence": 0.99
+  },
+  {
+    "word": "around",
+    "start": 19880,
+    "end": 20300,
+    "confidence": 0.996
+  },
+  {
+    "word": "won't",
+    "start": 20300,
+    "end": 20740,
+    "confidence": 0.992
+  },
+  {
+    "word": "need",
+    "start": 20740,
+    "end": 20880,
+    "confidence": 0.999
+  },
+  {
+    "word": "you",
+    "start": 20880,
+    "end": 21020,
+    "confidence": 0.994
+  },
+  {
+    "word": "to",
+    "start": 21020,
+    "end": 21120,
+    "confidence": 0.998
+  },
+  {
+    "word": "betray",
+    "start": 21120,
+    "end": 21300,
+    "confidence": 0.991
+  },
+  {
+    "word": "your",
+    "start": 21300,
+    "end": 21620,
+    "confidence": 0.996
+  },
+  {
+    "word": "own",
+    "start": 21620,
+    "end": 21840,
+    "confidence": 0.981
+  },
+  {
+    "word": "boundaries",
+    "start": 21840,
+    "end": 22080,
+    "confidence": 0.998
+  },
+  {
+    "word": "just",
+    "start": 22080,
+    "end": 22660,
+    "confidence": 0.751
+  },
+  {
+    "word": "to",
+    "start": 22660,
+    "end": 22900,
+    "confidence": 0.996
+  },
+  {
+    "word": "stay",
+    "start": 22900,
+    "end": 23060,
+    "confidence": 0.999
+  },
+  {
+    "word": "friends.",
+    "start": 23060,
+    "end": 23400,
+    "confidence": 0.994
+  },
+  {
+    "word": "And",
+    "start": 24160,
+    "end": 24340,
+    "confidence": 0.988
+  },
+  {
+    "word": "honestly,",
+    "start": 24500,
+    "end": 24860,
+    "confidence": 0.995
+  },
+  {
+    "word": "saying",
+    "start": 25280,
+    "end": 25540,
+    "confidence": 0.997
+  },
+  {
+    "word": "no",
+    "start": 25540,
+    "end": 25820,
+    "confidence": 0.95
+  },
+  {
+    "word": "gets",
+    "start": 25820,
+    "end": 26020,
+    "confidence": 0.998
+  },
+  {
+    "word": "much",
+    "start": 26020,
+    "end": 26240,
+    "confidence": 1.0
+  },
+  {
+    "word": "easier",
+    "start": 26240,
+    "end": 26580,
+    "confidence": 0.998
+  },
+  {
+    "word": "once",
+    "start": 26580,
+    "end": 26980,
+    "confidence": 0.987
+  },
+  {
+    "word": "you",
+    "start": 26980,
+    "end": 27220,
+    "confidence": 0.999
+  },
+  {
+    "word": "realize",
+    "start": 27220,
+    "end": 27440,
+    "confidence": 0.979
+  },
+  {
+    "word": "you're",
+    "start": 27440,
+    "end": 27840,
+    "confidence": 0.99
+  },
+  {
+    "word": "allowed",
+    "start": 27840,
+    "end": 28060,
+    "confidence": 0.996
+  },
+  {
+    "word": "to.",
+    "start": 28060,
+    "end": 28360,
+    "confidence": 0.997
+  }
+]
