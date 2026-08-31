@@ -44,13 +44,13 @@ export const ShrinkingCirclePresenter: React.FC<PresenterProps> = ({ currentMs }
           className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(99,102,241,0.18)] border-[5px] border-white z-40"
           style={{
             transform: `translateY(${(1 - badgeSpring) * -20}px) scale(${0.96 + badgeSpring * 0.04})`,
-            padding: "24px 54px",
+            padding: "26px 60px",
             borderRadius: 44,
             gap: 20,
           }}
         >
           <Users className="text-indigo-600" style={{ width: 52, height: 52 }} />
-          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 38 }}>
+          <span className="text-slate-950 font-black tracking-wider uppercase" style={{ fontSize: 42 }}>
             FRIENDSHIP CIRCLES
           </span>
         </div>

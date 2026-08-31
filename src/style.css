@@ -1,48 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  * {
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility !important;
+  }
+
   body {
-    background-color: #fbfbfd;
-    color: #1d1d1f;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", Arial, sans-serif;
+    background-color: #f8fafc;
+    color: #020617;
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    -webkit-font-smoothing: antialiased;
   }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   HIGH-END APPLE GLASSMORPHIC TRANSLUCENT SYSTEM
+───────────────────────────────────────────────────────────────────────────── */
+
+.glass-tile {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(45px) saturate(190%);
+  -webkit-backdrop-filter: blur(45px) saturate(190%);
+  border: 3.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 35px 85px -15px rgba(15, 23, 42, 0.12),
+              0 10px 30px -10px rgba(15, 23, 42, 0.06),
+              inset 0 2px 4px rgba(255, 255, 255, 0.95),
+              inset 0 -2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.glass-tile-dark {
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(35px) saturate(180%);
+  -webkit-backdrop-filter: blur(35px) saturate(180%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.45),
+              inset 0 1.5px 2px rgba(255, 255, 255, 0.3);
+}
+
+.glass-pill-emerald {
+  background: rgba(16, 185, 129, 0.12);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 2.5px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.9);
+}
+
+.glass-pill-sky {
+  background: rgba(14, 165, 233, 0.12);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 2.5px solid rgba(14, 165, 233, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.9);
+}
+
+.glass-pill-indigo {
+  background: rgba(99, 102, 241, 0.12);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 2.5px solid rgba(99, 102, 241, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.9);
+}
+
+.glass-pill-rose {
+  background: rgba(244, 63, 94, 0.12);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 2.5px solid rgba(244, 63, 94, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.9);
+}
+
+.glass-pill-amber {
+  background: rgba(245, 158, 11, 0.12);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 2.5px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.18), inset 0 1.5px 2px rgba(255, 255, 255, 0.9);
 }
 
 .apple-glass {
   background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(30px) saturate(190%);
-  -webkit-backdrop-filter: blur(30px) saturate(190%);
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04), inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
-}
-
-.apple-glass-pill {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), inset 0 1px 1px #ffffff;
-}
-
-.apple-glass-dark {
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.35);
-}
-
-.apple-sheen {
-  background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.6) 50%, transparent 80%);
-}
-
-.dot-pattern {
-  background-size: 32px 32px;
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1.5px, transparent 1.5px);
+  backdrop-filter: blur(35px) saturate(190%);
+  -webkit-backdrop-filter: blur(35px) saturate(190%);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 25px 55px -12px rgba(0, 0, 0, 0.1), inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
 }
