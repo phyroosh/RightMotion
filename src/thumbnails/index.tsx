@@ -449,3 +449,42 @@ export const PushingAwayThumbnail: React.FC = () => (
   />
 );
 
+// ========================================================
+// 💹 FINANCE CHANNEL — Apex Wealth (Dark Obsidian Gold)
+// ========================================================
+
+// 21. THE COMPOUNDING TRAP (9:16 Finance Short)
+export const TheCompoundingTrapThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="YOUR SAVINGS ACCOUNT IS MAKING YOU BROKE"
+    highlightWord="BROKE"
+    highlightColor="rose"
+    subtitle="Why Cash Savings Quietly Destroy Your Wealth Every Year"
+    categoryBadge="APEX WEALTH"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="obsidian_gold"
+    aspectRatio="9:16"
+    extraBadge="FINANCIAL TRUTH 💸"
+  />
+);
+
+// ========================================================
+// 🫀 HEALTH CHANNEL — BioMatrix (Biotech Cyan)
+// ========================================================
+
+// 22. THE 3AM CORTISOL SPIKE (9:16 Health Short)
+export const The3amCortisolSpikeThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY YOU WAKE UP AT 3 AM WITH PANIC"
+    highlightWord="3 AM"
+    highlightColor="sky"
+    subtitle="The Cortisol Spike — Not Anxiety, A Metabolic Emergency"
+    categoryBadge="BIOMATRIX SCIENCE"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="biotech_cyan"
+    aspectRatio="9:16"
+    extraBadge="SLEEP BIOLOGY 🫀"
+  />
+);

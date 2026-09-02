@@ -12,7 +12,7 @@ export interface ThumbnailCardProps {
   characterPosition?: 'left' | 'right' | 'center';
   characterScale?: number;
   characterOffsetY?: number;
-  theme?: 'obsidian' | 'crimson' | 'slate' | 'purple' | 'emerald' | 'amber' | 'blue' | 'white' | 'apple_studio';
+  theme?: 'obsidian' | 'crimson' | 'slate' | 'purple' | 'emerald' | 'amber' | 'blue' | 'white' | 'apple_studio' | 'obsidian_gold' | 'biotech_cyan';
   aspectRatio?: '16:9' | '9:16';
   extraBadge?: string;
   extraBadgeColor?: string;
@@ -181,6 +181,40 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       subColor: '#1e293b',
       scrimGrad: 'linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.88) 45%, rgba(248, 250, 252, 0) 100%)',
       dotGrid: 'radial-gradient(rgba(15, 23, 42, 0.18) 1.5px, transparent 1.5px)',
+    },
+    // 💹 Finance Channel – Apex Wealth: Rich Dark Carbon + Cyber-Gold + Liquid Emerald
+    obsidian_gold: {
+      bg: '#030712',
+      topGrad: 'linear-gradient(180deg, #030712 0%, #0b0f19 60%, #030712 100%)',
+      charGrad: 'linear-gradient(0deg, #0b0f19 0%, #030712 55%)',
+      glow: 'rgba(16, 185, 129, 0.55)',   // Liquid Emerald primary glow
+      glowWide: 'rgba(245, 158, 11, 0.38)', // Cyber Gold secondary glow
+      accent: '#10b981',
+      cardBg: 'rgba(5, 10, 22, 0.96)',
+      cardBorder: 'rgba(16, 185, 129, 0.35)',
+      rimLight: 'rgba(245, 158, 11, 0.40)',
+      footerColor: '#34d399',
+      textColor: '#ffffff',
+      subColor: '#e2e8f0',
+      scrimGrad: 'linear-gradient(180deg, #030712 0%, #030712f5 40%, #030712cc 70%, transparent 100%)',
+      dotGrid: 'radial-gradient(rgba(255,255,255,0.12) 1.5px, transparent 1.5px)',
+    },
+    // 🫀 Health Channel – BioMatrix: Deep Bio-Tech Navy + Cyber-Cyan + Bio-Mint
+    biotech_cyan: {
+      bg: '#060913',
+      topGrad: 'linear-gradient(180deg, #060913 0%, #0a1124 60%, #060913 100%)',
+      charGrad: 'linear-gradient(0deg, #0d1a3a 0%, #060913 55%)',
+      glow: 'rgba(6, 182, 212, 0.60)',    // Electric Cyan primary glow
+      glowWide: 'rgba(16, 185, 129, 0.38)', // Bio Mint secondary glow
+      accent: '#06b6d4',
+      cardBg: 'rgba(6, 10, 26, 0.96)',
+      cardBorder: 'rgba(6, 182, 212, 0.38)',
+      rimLight: 'rgba(16, 185, 129, 0.40)',
+      footerColor: '#22d3ee',
+      textColor: '#ffffff',
+      subColor: '#e2e8f0',
+      scrimGrad: 'linear-gradient(180deg, #060913 0%, #060913f5 40%, #060913cc 70%, transparent 100%)',
+      dotGrid: 'radial-gradient(rgba(255,255,255,0.12) 1.5px, transparent 1.5px)',
     },
   }[theme || 'apple_studio'] || {
     bg: '#ffffff',

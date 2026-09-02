@@ -1,0 +1,437 @@
+[
+  {
+    "word": "Ever",
+    "start": 0,
+    "end": 390
+  },
+  {
+    "word": "wonder",
+    "start": 410,
+    "end": 801
+  },
+  {
+    "word": "why",
+    "start": 821,
+    "end": 1212
+  },
+  {
+    "word": "you",
+    "start": 1232,
+    "end": 1623
+  },
+  {
+    "word": "can",
+    "start": 1643,
+    "end": 2034
+  },
+  {
+    "word": "work",
+    "start": 2054,
+    "end": 2445
+  },
+  {
+    "word": "60",
+    "start": 2465,
+    "end": 2855
+  },
+  {
+    "word": "hours",
+    "start": 2875,
+    "end": 3266
+  },
+  {
+    "word": "a",
+    "start": 3286,
+    "end": 3677
+  },
+  {
+    "word": "week,",
+    "start": 3697,
+    "end": 4088
+  },
+  {
+    "word": "save",
+    "start": 4108,
+    "end": 4499
+  },
+  {
+    "word": "every",
+    "start": 4519,
+    "end": 4910
+  },
+  {
+    "word": "dollar,",
+    "start": 4930,
+    "end": 5321
+  },
+  {
+    "word": "and",
+    "start": 5341,
+    "end": 5731
+  },
+  {
+    "word": "still",
+    "start": 5751,
+    "end": 6142
+  },
+  {
+    "word": "feel",
+    "start": 6162,
+    "end": 6553
+  },
+  {
+    "word": "broke?",
+    "start": 6573,
+    "end": 6964
+  },
+  {
+    "word": "It\u2019s",
+    "start": 6984,
+    "end": 7375
+  },
+  {
+    "word": "because",
+    "start": 7395,
+    "end": 7786
+  },
+  {
+    "word": "cash",
+    "start": 7806,
+    "end": 8197
+  },
+  {
+    "word": "in",
+    "start": 8217,
+    "end": 8607
+  },
+  {
+    "word": "a",
+    "start": 8627,
+    "end": 9018
+  },
+  {
+    "word": "bank",
+    "start": 9038,
+    "end": 9429
+  },
+  {
+    "word": "account",
+    "start": 9449,
+    "end": 9840
+  },
+  {
+    "word": "isn\u2019t",
+    "start": 9860,
+    "end": 10251
+  },
+  {
+    "word": "safe\u2026",
+    "start": 10271,
+    "end": 10662
+  },
+  {
+    "word": "it\u2019s",
+    "start": 10682,
+    "end": 11072
+  },
+  {
+    "word": "slowly",
+    "start": 11092,
+    "end": 11483
+  },
+  {
+    "word": "evaporating.",
+    "start": 11503,
+    "end": 11894
+  },
+  {
+    "word": "Inflation",
+    "start": 11914,
+    "end": 12305
+  },
+  {
+    "word": "quietly",
+    "start": 12325,
+    "end": 12716
+  },
+  {
+    "word": "steals",
+    "start": 12736,
+    "end": 13127
+  },
+  {
+    "word": "4",
+    "start": 13147,
+    "end": 13538
+  },
+  {
+    "word": "to",
+    "start": 13558,
+    "end": 13948
+  },
+  {
+    "word": "7",
+    "start": 13968,
+    "end": 14359
+  },
+  {
+    "word": "percent",
+    "start": 14379,
+    "end": 14770
+  },
+  {
+    "word": "of",
+    "start": 14790,
+    "end": 15181
+  },
+  {
+    "word": "your",
+    "start": 15201,
+    "end": 15592
+  },
+  {
+    "word": "purchasing",
+    "start": 15612,
+    "end": 16003
+  },
+  {
+    "word": "power",
+    "start": 16023,
+    "end": 16414
+  },
+  {
+    "word": "every",
+    "start": 16434,
+    "end": 16824
+  },
+  {
+    "word": "single",
+    "start": 16844,
+    "end": 17235
+  },
+  {
+    "word": "year.",
+    "start": 17255,
+    "end": 17646
+  },
+  {
+    "word": "While",
+    "start": 17666,
+    "end": 18057
+  },
+  {
+    "word": "the",
+    "start": 18077,
+    "end": 18468
+  },
+  {
+    "word": "average",
+    "start": 18488,
+    "end": 18879
+  },
+  {
+    "word": "person",
+    "start": 18899,
+    "end": 19289
+  },
+  {
+    "word": "is",
+    "start": 19309,
+    "end": 19700
+  },
+  {
+    "word": "proud",
+    "start": 19720,
+    "end": 20111
+  },
+  {
+    "word": "of",
+    "start": 20131,
+    "end": 20522
+  },
+  {
+    "word": "saving",
+    "start": 20542,
+    "end": 20933
+  },
+  {
+    "word": "ten",
+    "start": 20953,
+    "end": 21344
+  },
+  {
+    "word": "thousand",
+    "start": 21364,
+    "end": 21755
+  },
+  {
+    "word": "dollars,",
+    "start": 21775,
+    "end": 22165
+  },
+  {
+    "word": "that",
+    "start": 22185,
+    "end": 22576
+  },
+  {
+    "word": "money",
+    "start": 22596,
+    "end": 22987
+  },
+  {
+    "word": "loses",
+    "start": 23007,
+    "end": 23398
+  },
+  {
+    "word": "half",
+    "start": 23418,
+    "end": 23809
+  },
+  {
+    "word": "its",
+    "start": 23829,
+    "end": 24220
+  },
+  {
+    "word": "value",
+    "start": 24240,
+    "end": 24631
+  },
+  {
+    "word": "every",
+    "start": 24651,
+    "end": 25041
+  },
+  {
+    "word": "decade.",
+    "start": 25061,
+    "end": 25452
+  },
+  {
+    "word": "Wealthy",
+    "start": 25472,
+    "end": 25863
+  },
+  {
+    "word": "people",
+    "start": 25883,
+    "end": 26274
+  },
+  {
+    "word": "don\u2019t",
+    "start": 26294,
+    "end": 26685
+  },
+  {
+    "word": "hoard",
+    "start": 26705,
+    "end": 27096
+  },
+  {
+    "word": "cash.",
+    "start": 27116,
+    "end": 27506
+  },
+  {
+    "word": "They",
+    "start": 27526,
+    "end": 27917
+  },
+  {
+    "word": "convert",
+    "start": 27937,
+    "end": 28328
+  },
+  {
+    "word": "dying",
+    "start": 28348,
+    "end": 28739
+  },
+  {
+    "word": "fiat",
+    "start": 28759,
+    "end": 29150
+  },
+  {
+    "word": "currency",
+    "start": 29170,
+    "end": 29561
+  },
+  {
+    "word": "into",
+    "start": 29581,
+    "end": 29972
+  },
+  {
+    "word": "productive",
+    "start": 29992,
+    "end": 30382
+  },
+  {
+    "word": "assets",
+    "start": 30402,
+    "end": 30793
+  },
+  {
+    "word": "that",
+    "start": 30813,
+    "end": 31204
+  },
+  {
+    "word": "compound",
+    "start": 31224,
+    "end": 31615
+  },
+  {
+    "word": "while",
+    "start": 31635,
+    "end": 32026
+  },
+  {
+    "word": "they",
+    "start": 32046,
+    "end": 32437
+  },
+  {
+    "word": "sleep.",
+    "start": 32457,
+    "end": 32848
+  },
+  {
+    "word": "Stop",
+    "start": 32868,
+    "end": 33258
+  },
+  {
+    "word": "collecting",
+    "start": 33278,
+    "end": 33669
+  },
+  {
+    "word": "paper.",
+    "start": 33689,
+    "end": 34080
+  },
+  {
+    "word": "Start",
+    "start": 34100,
+    "end": 34491
+  },
+  {
+    "word": "owning",
+    "start": 34511,
+    "end": 34902
+  },
+  {
+    "word": "cash",
+    "start": 34922,
+    "end": 35313
+  },
+  {
+    "word": "flow.",
+    "start": 35333,
+    "end": 35723
+  }
+]

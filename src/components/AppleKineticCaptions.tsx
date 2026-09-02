@@ -5,15 +5,23 @@ import { WordChunk, WordTimestamp } from "../types";
 interface KineticCaptionsProps {
   transcript: WordTimestamp[];
   theme?: "light" | "dark";
+  activeColor?: string;   // Override the active word highlight color (e.g. "#10b981" for Finance, "#06b6d4" for Health)
+  currentMs?: number;     // Optional external currentMs override (falls back to internal frame-based calculation)
+  maxWordsPerGroup?: number; // Max words per caption group (default: 3 for 9:16, 4 for 16:9)
+  className?: string;     // Optional wrapper class override
 }
 
 export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
   transcript,
   theme = "light",
+  activeColor: activeColorProp,
+  currentMs: currentMsProp,
+  maxWordsPerGroup,
+  className,
 }) => {
   const frame = useCurrentFrame();
   const { fps, width } = useVideoConfig();
-  const currentMs = (frame / fps) * 1000;
+  const currentMs = currentMsProp ?? (frame / fps) * 1000;
 
   const isWidescreen = width > 1200; // 1920x1080 widescreen mode
   const isDark = theme === "dark";
@@ -31,7 +39,7 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
       const isNextLongPause =
         index < transcript.length - 1 &&
         transcript[index + 1].startMs - item.endMs > 250;
-      const isGroupFull = currentGroup.length >= (isWidescreen ? 4 : 3);
+      const isGroupFull = currentGroup.length >= (maxWordsPerGroup ?? (isWidescreen ? 4 : 3));
 
       if (hasPunctuation || isNextLongPause || isGroupFull || index === transcript.length - 1) {
         result.push({
@@ -76,13 +84,13 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
 
   const passedColor = isDark ? "#f8fafc" : "#09090b";
   const inactiveColor = isDark ? "rgba(248, 250, 252, 0.42)" : "rgba(15, 23, 42, 0.38)";
-  const activeColor = isDark ? "#38bdf8" : "#0071e3";
+  const activeColor = activeColorProp ?? (isDark ? "#38bdf8" : "#0071e3");
   const glowShadow = isDark
-    ? "0 0 35px rgba(56,189,248,0.75), 0 2px 10px rgba(0,0,0,0.6)"
-    : "0 0 35px rgba(0,113,227,0.55), 0 2px 10px rgba(255,255,255,0.9), 0 1px 3px rgba(0,0,0,0.12)";
+    ? `0 0 35px ${activeColor}cc, 0 2px 10px rgba(0,0,0,0.6)`
+    : `0 0 35px ${activeColor}99, 0 2px 10px rgba(255,255,255,0.9), 0 1px 3px rgba(0,0,0,0.12)`;
 
   return (
-    <div className={`absolute inset-x-0 ${bottomClass} flex items-end justify-center pointer-events-none z-40 px-10`}>
+    <div className={`absolute inset-x-0 ${bottomClass} flex items-end justify-center pointer-events-none z-40 px-10 ${className ?? ""}`}>
       <div
         className={`flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center ${maxWidthClass} px-6 py-2`}
         style={{

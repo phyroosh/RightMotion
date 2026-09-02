@@ -2,10 +2,41 @@
 
 This document is the **authoritative specification** for any AI Agent (Antigravity/AGY, Claude Code, Cursor, Copilot, ChatGPT) working in the **RightClips** repository.
 
-When a user provides a script and says:
-> *"Here is the script to generate the short video: <script text>"* or *"Generate a long-form video for: <script text>"*
+---
 
-Follow this exact automated pipeline to generate the voiceover, word timestamps, Remotion composition, 4K thumbnail, and final MP4 render without needing additional user explanation.
+## 🏷️ Universal Bracket-Tag Channel Routing (MANDATORY AGENT RULE)
+
+Every video script submitted to RightClips is tagged with one of three channel niche brackets:
+- **`{Self Improvement}`** (or `{Self Improvment}`) $\rightarrow$ Judy Insights Channel
+- **`{Finance}`** $\rightarrow$ Apex Wealth / Capital Markets Channel
+- **`{Health}`** $\rightarrow$ BioMatrix / Longevity & Cellular Biology Channel
+
+> [!CRITICAL]
+> **MANDATORY AGENT STOP-AND-ASK RULE**:
+> If the user submits a script prompt **WITHOUT** `{Finance}`, `{Self Improvement}`, or `{Health}`:
+> **The AI Agent MUST HALT immediately and ask the user which style they want before taking any action:**
+> *"Which channel editing style would you like me to use for this video?*
+> *1. `{Self Improvement}` (Judy Insights: Apple Studio Light mesh canvas, psychology, mindset, Judy presenter)*
+> *2. `{Finance}` (Apex Wealth: Rich Dark Obsidian & Cyber-Gold/Emerald, high-velocity financial graphics)*
+> *3. `{Health}` (BioMatrix: Deep Bio-Tech Navy & Cyber-Mint/Cyan clinical luxury, biometric telemetry)*"
+>
+> DO NOT guess or assume the style if the tag is missing!
+
+---
+
+### 🎨 Channel Design Systems Matrix
+
+| Feature | `{Self Improvement}` (Judy Insights) | `{Finance}` (Apex Wealth) | `{Health}` (BioMatrix) |
+| :--- | :--- | :--- | :--- |
+| **Canvas Background** | Pure Studio Off-White (`#f8fafc`) + warm amber & cognitive blue living orbs | Ultra-Rich Deep Obsidian Carbon (`#030712`, `#0b0f19`) + gold/emerald grid | Deep Bio-Tech Obsidian Navy (`#060913`, `#0a1124`) + cellular neon glow |
+| **Color Accents** | Electric Blue (`#0071e3`), Warm Amber (`#f59e0b`), Rose (`#e11d48`) | Liquid Emerald (`#10b981`), Cyber-Gold (`#f59e0b`), Platinum Ice White | Cyber Mint (`#10b981`), Electric Cyan (`#06b6d4`), Vital Coral (`#f43f5e`) |
+| **Pacing / Tempo** | `rate="+8%"` (Crisp articulate retention) | `rate="+11%"` (High-velocity, fast-paced Wall Street drive) | `rate="+8%"` (Authoritative, dense clinical retention) |
+| **Beat Transitions** | `snap_up` / `zoom_out` (2.5s - 3.5s beats) | `whip_left` / `snap_up` (1.8s - 2.5s rapid cuts) | `snap_up` / `zoom_in` (2.2s - 3.0s telemetry shifts) |
+| **3D Camera** | `dramatic_swoop` (Gentle documentary swoop with ReadabilityLock) | `isometric_shelf` + `impact_shake` (High-torque perspective sweeps) | `isometric_shelf` (Clinical telemetry HUD angle) |
+| **Foley & Sound** | Sharpie doodles, masking tape snaps, light clicks | Heavy cash thuds, stock ticker chimes, cinematic sub-bass drops | Heartbeat pulses, digital telemetry beeps, synaptic sparks |
+| **BGM Genre** | Acoustic piano & light ambient documentary | Dark, driving, minimalist synth pulse | Deep ambient biological drone & rhythmic bio-pulse |
+| **Hero Graphics** | Cutout props, masking tape, hand-drawn doodles | Compounding curves, wealth meters, cash flow trees, ROI tickers | Biometric rings, circadian clock, cortisol curve, metabolic gauge |
+| **Thumbnail Theme** | `theme="apple_studio"` | `theme="obsidian"` (or `obsidian_gold`) | `theme="obsidian"` (or `biotech_cyan`) |
 
 ---
 
@@ -127,16 +158,35 @@ python scripts/create_clip.py --name "<clip_name>" --topic "<topic_name>" --scri
 ### Option B: Step-by-Step Production Process
 
 #### Step 1: Synthesize Neural Voiceover Audio & Word-Level Timestamps
-Synthesize the voiceover with `edge-tts` (`en-US-AvaMultilingualNeural` at `rate="+8%"`, the smart retention-optimized tempo boost) and extract GPU/CPU millisecond timestamps using `faster-whisper`:
+Synthesize the voiceover with `edge-tts` and extract GPU/CPU millisecond timestamps using `faster-whisper`:
 - Audio output: `public/<name>/voiceover.mp3`
 - Transcript output: `src/clips/<name>/transcript.json`
+
+**Channel-specific voice settings:**
+| Channel | Voice | Rate | Pitch |
+| :--- | :--- | :--- | :--- |
+| `{Self Improvement}` | `en-US-AvaMultilingualNeural` | `+8%` | default |
+| `{Finance}` | `en-US-GuyNeural` | `+11%` | `-3Hz` |
+| `{Health}` | `en-US-AvaMultilingualNeural` | `+8%` | default |
 
 #### Step 2: Scaffold the Clip Component Directory (`src/clips/<name>/`)
 Create 4 modular files:
 1. `Background.tsx`: Clean Apple Studio mesh background (`bg-[#f8fafc]` with subtle ambient orbs and dot-grid).
-2. `Canvas.tsx`: High-retention motion graphics storyboard using `<ProCutout />` or `<PropComparison />`.
-3. `Presenter.tsx`: Judy multi-pose animations (`character_fullbody_pointing.png`, `character_pointing.png`, `character_crossed.png`, `character_open.png`, `character_fullbody_open.png`) using `CharacterKeyframeAnimator`.
-4. `index.tsx`: Main Composition uniting voiceover, BGM, synchronized SFX layer, `AppleProgressBar`, `AppleKineticCaptions`, and **FRAME 0 THUMBNAIL COVER**.
+**Channel-specific component libraries:**
+- `{Self Improvement}` → `Background.tsx` uses `<LivingStudioBackground />` (`#f8fafc`). `Canvas.tsx` uses `<ProCutout />`, `<PropComparison />`, `<HandDrawnDoodle />`, `<TapeStrip />`. `Presenter.tsx` uses `CharacterKeyframeAnimator` with Judy poses.
+- `{Finance}` → `Background.tsx` uses `<FinanceBackground />` (`#030712`). `Canvas.tsx` uses `<CompoundGrowthChart />`, `<WealthMultiplierMeter />`, `<CashFlowSankeyCard />`, `<FinanceTickerBadge />`, `<IsometricCard />`. **No presenter character.**
+- `{Health}` → `Background.tsx` uses `<HealthBackground />` (`#060913`). `Canvas.tsx` uses `<BiometricRing />`, `<CircadianClock />`, `<CortisolSpikeGraph />`, `<MetabolicStatusCard />`, `<IsometricCard />`. **No presenter character.**
+
+2. `Canvas.tsx`: High-retention motion graphics storyboard using channel-appropriate graphics.
+3. `Presenter.tsx`: Judy multi-pose animations for `{Self Improvement}` only. Finance and Health channels use `null` return (pure motion graphics).
+4. `index.tsx`: Main Composition uniting voiceover, BGM, synchronized SFX layer, `<AppleProgressBar accentColor={...} />`, `<AppleKineticCaptions activeColor={...} />`, and **FRAME 0 THUMBNAIL COVER**.
+
+**Channel-specific caption and progress bar accent colors:**
+| Channel | `activeColor` | `accentColor` | `theme` |
+| :--- | :--- | :--- | :--- |
+| `{Self Improvement}` | default (`#0071e3`) | default | `theme="apple_studio"` |
+| `{Finance}` | `#10b981` (Emerald) | `#10b981` | `theme="obsidian_gold"` |
+| `{Health}` | `#06b6d4` (Cyan) | `#06b6d4` | `theme="biotech_cyan"` |
 
 **🖼️ FRAME 0 THUMBNAIL COVER (PERMANENT RULE FOR 9:16 SHORTS):**
 ```tsx

@@ -19,6 +19,10 @@ import { HoldingGrudgesComposition } from "./clips/holding_grudges";
 import holding_grudgesTranscript from "./clips/holding_grudges/transcript.json";
 import { PushingAwayComposition } from "./clips/pushing_away";
 import pushingAwayTranscript from "./clips/pushing_away/transcript.json";
+import { TheCompoundingTrapComposition } from "./clips/the_compounding_trap";
+import theCompoundingTrapTranscript from "./clips/the_compounding_trap/transcript.json";
+import { The3amCortisolSpikeComposition } from "./clips/the_3am_cortisol_spike";
+import the3amCortisolSpikeTranscript from "./clips/the_3am_cortisol_spike/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -56,6 +60,8 @@ import {
   EnvironmentThumbnail,
   LonelinessThumbnail,
   SayingNoThumbnail,
+  TheCompoundingTrapThumbnail,
+  The3amCortisolSpikeThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -117,6 +123,8 @@ export const RemotionRoot: React.FC = () => {
   const environmentDuration = calculateDurationInFrames(environmentTranscript as any[], fps);
   const lonelinessDuration = calculateDurationInFrames(lonelinessTranscript as any[], fps);
   const sayingNoDuration = calculateDurationInFrames(sayingNoTranscript as any[], fps);
+  const theCompoundingTrapDuration = calculateDurationInFrames(theCompoundingTrapTranscript as any[], fps);
+  const the3amCortisolSpikeDuration = calculateDurationInFrames(the3amCortisolSpikeTranscript as any[], fps);
 
   return (
     <>
@@ -520,6 +528,38 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="PushingAwayThumbnail"
         component={PushingAwayThumbnail}
+        width={1080}
+        height={1920}
+      />
+
+      {/* ─── 💹 FINANCE CHANNEL — Apex Wealth ─── */}
+      <Composition
+        id="TheCompoundingTrapVideo"
+        component={TheCompoundingTrapComposition}
+        durationInFrames={theCompoundingTrapDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="TheCompoundingTrapThumbnail"
+        component={TheCompoundingTrapThumbnail}
+        width={1080}
+        height={1920}
+      />
+
+      {/* ─── 🫀 HEALTH CHANNEL — BioMatrix ─── */}
+      <Composition
+        id="The3amCortisolSpikeVideo"
+        component={The3amCortisolSpikeComposition}
+        durationInFrames={the3amCortisolSpikeDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="The3amCortisolSpikeThumbnail"
+        component={The3amCortisolSpikeThumbnail}
         width={1080}
         height={1920}
       />

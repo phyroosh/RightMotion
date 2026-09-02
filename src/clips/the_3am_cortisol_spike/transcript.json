@@ -1,0 +1,472 @@
+[
+  {
+    "word": "Ever",
+    "start": 0,
+    "end": 384
+  },
+  {
+    "word": "notice",
+    "start": 404,
+    "end": 789
+  },
+  {
+    "word": "how",
+    "start": 809,
+    "end": 1193
+  },
+  {
+    "word": "you",
+    "start": 1213,
+    "end": 1598
+  },
+  {
+    "word": "fall",
+    "start": 1618,
+    "end": 2002
+  },
+  {
+    "word": "asleep",
+    "start": 2022,
+    "end": 2407
+  },
+  {
+    "word": "exhausted,",
+    "start": 2427,
+    "end": 2811
+  },
+  {
+    "word": "only",
+    "start": 2831,
+    "end": 3216
+  },
+  {
+    "word": "to",
+    "start": 3236,
+    "end": 3620
+  },
+  {
+    "word": "violently",
+    "start": 3640,
+    "end": 4025
+  },
+  {
+    "word": "wake",
+    "start": 4045,
+    "end": 4429
+  },
+  {
+    "word": "up",
+    "start": 4449,
+    "end": 4834
+  },
+  {
+    "word": "at",
+    "start": 4854,
+    "end": 5238
+  },
+  {
+    "word": "3",
+    "start": 5258,
+    "end": 5643
+  },
+  {
+    "word": "AM",
+    "start": 5663,
+    "end": 6047
+  },
+  {
+    "word": "with",
+    "start": 6067,
+    "end": 6452
+  },
+  {
+    "word": "your",
+    "start": 6472,
+    "end": 6856
+  },
+  {
+    "word": "mind",
+    "start": 6876,
+    "end": 7261
+  },
+  {
+    "word": "racing?",
+    "start": 7281,
+    "end": 7665
+  },
+  {
+    "word": "That\u2019s",
+    "start": 7685,
+    "end": 8070
+  },
+  {
+    "word": "not",
+    "start": 8090,
+    "end": 8474
+  },
+  {
+    "word": "random",
+    "start": 8494,
+    "end": 8879
+  },
+  {
+    "word": "insomnia.",
+    "start": 8899,
+    "end": 9283
+  },
+  {
+    "word": "That\u2019s",
+    "start": 9303,
+    "end": 9688
+  },
+  {
+    "word": "an",
+    "start": 9708,
+    "end": 10092
+  },
+  {
+    "word": "emergency",
+    "start": 10112,
+    "end": 10497
+  },
+  {
+    "word": "metabolic",
+    "start": 10517,
+    "end": 10901
+  },
+  {
+    "word": "distress",
+    "start": 10921,
+    "end": 11306
+  },
+  {
+    "word": "signal.",
+    "start": 11326,
+    "end": 11710
+  },
+  {
+    "word": "Around",
+    "start": 11730,
+    "end": 12115
+  },
+  {
+    "word": "3",
+    "start": 12135,
+    "end": 12519
+  },
+  {
+    "word": "AM,",
+    "start": 12539,
+    "end": 12924
+  },
+  {
+    "word": "your",
+    "start": 12944,
+    "end": 13328
+  },
+  {
+    "word": "liver",
+    "start": 13348,
+    "end": 13733
+  },
+  {
+    "word": "runs",
+    "start": 13753,
+    "end": 14137
+  },
+  {
+    "word": "low",
+    "start": 14157,
+    "end": 14542
+  },
+  {
+    "word": "on",
+    "start": 14562,
+    "end": 14946
+  },
+  {
+    "word": "stored",
+    "start": 14966,
+    "end": 15351
+  },
+  {
+    "word": "glycogen",
+    "start": 15371,
+    "end": 15755
+  },
+  {
+    "word": "to",
+    "start": 15775,
+    "end": 16160
+  },
+  {
+    "word": "feed",
+    "start": 16180,
+    "end": 16564
+  },
+  {
+    "word": "your",
+    "start": 16584,
+    "end": 16969
+  },
+  {
+    "word": "brain.",
+    "start": 16989,
+    "end": 17373
+  },
+  {
+    "word": "To",
+    "start": 17393,
+    "end": 17778
+  },
+  {
+    "word": "keep",
+    "start": 17798,
+    "end": 18182
+  },
+  {
+    "word": "your",
+    "start": 18202,
+    "end": 18587
+  },
+  {
+    "word": "blood",
+    "start": 18607,
+    "end": 18992
+  },
+  {
+    "word": "sugar",
+    "start": 19012,
+    "end": 19396
+  },
+  {
+    "word": "from",
+    "start": 19416,
+    "end": 19801
+  },
+  {
+    "word": "crashing,",
+    "start": 19821,
+    "end": 20205
+  },
+  {
+    "word": "your",
+    "start": 20225,
+    "end": 20610
+  },
+  {
+    "word": "adrenal",
+    "start": 20630,
+    "end": 21014
+  },
+  {
+    "word": "glands",
+    "start": 21034,
+    "end": 21419
+  },
+  {
+    "word": "dump",
+    "start": 21439,
+    "end": 21823
+  },
+  {
+    "word": "a",
+    "start": 21843,
+    "end": 22228
+  },
+  {
+    "word": "spike",
+    "start": 22248,
+    "end": 22632
+  },
+  {
+    "word": "of",
+    "start": 22652,
+    "end": 23037
+  },
+  {
+    "word": "cortisol",
+    "start": 23057,
+    "end": 23441
+  },
+  {
+    "word": "and",
+    "start": 23461,
+    "end": 23846
+  },
+  {
+    "word": "adrenaline",
+    "start": 23866,
+    "end": 24250
+  },
+  {
+    "word": "straight",
+    "start": 24270,
+    "end": 24655
+  },
+  {
+    "word": "into",
+    "start": 24675,
+    "end": 25059
+  },
+  {
+    "word": "your",
+    "start": 25079,
+    "end": 25464
+  },
+  {
+    "word": "bloodstream.",
+    "start": 25484,
+    "end": 25868
+  },
+  {
+    "word": "Your",
+    "start": 25888,
+    "end": 26273
+  },
+  {
+    "word": "heart",
+    "start": 26293,
+    "end": 26677
+  },
+  {
+    "word": "beats",
+    "start": 26697,
+    "end": 27082
+  },
+  {
+    "word": "faster,",
+    "start": 27102,
+    "end": 27486
+  },
+  {
+    "word": "your",
+    "start": 27506,
+    "end": 27891
+  },
+  {
+    "word": "eyes",
+    "start": 27911,
+    "end": 28295
+  },
+  {
+    "word": "snap",
+    "start": 28315,
+    "end": 28700
+  },
+  {
+    "word": "open,",
+    "start": 28720,
+    "end": 29104
+  },
+  {
+    "word": "and",
+    "start": 29124,
+    "end": 29509
+  },
+  {
+    "word": "your",
+    "start": 29529,
+    "end": 29913
+  },
+  {
+    "word": "brain",
+    "start": 29933,
+    "end": 30318
+  },
+  {
+    "word": "searches",
+    "start": 30338,
+    "end": 30722
+  },
+  {
+    "word": "for",
+    "start": 30742,
+    "end": 31127
+  },
+  {
+    "word": "reasons",
+    "start": 31147,
+    "end": 31531
+  },
+  {
+    "word": "to",
+    "start": 31551,
+    "end": 31936
+  },
+  {
+    "word": "panic.",
+    "start": 31956,
+    "end": 32340
+  },
+  {
+    "word": "You",
+    "start": 32360,
+    "end": 32745
+  },
+  {
+    "word": "don\u2019t",
+    "start": 32765,
+    "end": 33149
+  },
+  {
+    "word": "have",
+    "start": 33169,
+    "end": 33554
+  },
+  {
+    "word": "an",
+    "start": 33574,
+    "end": 33958
+  },
+  {
+    "word": "anxiety",
+    "start": 33978,
+    "end": 34363
+  },
+  {
+    "word": "problem",
+    "start": 34383,
+    "end": 34767
+  },
+  {
+    "word": "at",
+    "start": 34787,
+    "end": 35172
+  },
+  {
+    "word": "night.",
+    "start": 35192,
+    "end": 35576
+  },
+  {
+    "word": "You",
+    "start": 35596,
+    "end": 35981
+  },
+  {
+    "word": "have",
+    "start": 36001,
+    "end": 36385
+  },
+  {
+    "word": "an",
+    "start": 36405,
+    "end": 36790
+  },
+  {
+    "word": "evening",
+    "start": 36810,
+    "end": 37194
+  },
+  {
+    "word": "glucose",
+    "start": 37214,
+    "end": 37599
+  },
+  {
+    "word": "crash.",
+    "start": 37619,
+    "end": 38004
+  }
+]

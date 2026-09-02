@@ -8,7 +8,31 @@
     "publishedAt": "2026-08-26T04:04:40Z",
     "privacyStatus": "public",
     "publishAt": null,
-    "isScheduled": false
+    "isScheduled": false,
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "FGYFQ07_97E",
+        "youtubeUrl": "https://youtu.be/FGYFQ07_97E",
+        "shortsUrl": "https://youtube.com/shorts/FGYFQ07_97E",
+        "title": "David Goggins' Secret Weapon Isn't Adrenaline 🍪 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-26T04:04:40Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "FGYFQ07_97E",
+        "youtubeUrl": "https://youtu.be/FGYFQ07_97E",
+        "shortsUrl": "https://youtube.com/shorts/FGYFQ07_97E",
+        "title": "David Goggins' Secret Weapon Isn't Adrenaline 🍪 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-26T04:04:40Z"
+      }
+    }
   },
   "motivation_video.mp4": {
     "uploaded": true,
@@ -19,7 +43,31 @@
     "publishedAt": "2026-08-25T14:25:04Z",
     "privacyStatus": "public",
     "publishAt": null,
-    "isScheduled": false
+    "isScheduled": false,
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "PRbv0aiJMKA",
+        "youtubeUrl": "https://youtu.be/PRbv0aiJMKA",
+        "shortsUrl": "https://youtube.com/shorts/PRbv0aiJMKA",
+        "title": "Why Motivation Is A Lie (Do This Instead) ⚡ #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-25T14:25:04Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "PRbv0aiJMKA",
+        "youtubeUrl": "https://youtu.be/PRbv0aiJMKA",
+        "shortsUrl": "https://youtube.com/shorts/PRbv0aiJMKA",
+        "title": "Why Motivation Is A Lie (Do This Instead) ⚡ #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-25T14:25:04Z"
+      }
+    }
   },
   "maturity_video.mp4": {
     "uploaded": true,
@@ -30,7 +78,31 @@
     "publishedAt": "2026-08-25T14:24:29Z",
     "privacyStatus": "public",
     "publishAt": null,
-    "isScheduled": false
+    "isScheduled": false,
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "5n8wJWXMkoI",
+        "youtubeUrl": "https://youtu.be/5n8wJWXMkoI",
+        "shortsUrl": "https://youtube.com/shorts/5n8wJWXMkoI",
+        "title": "Why Some People Mature Faster Than Others 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-25T14:24:29Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "5n8wJWXMkoI",
+        "youtubeUrl": "https://youtu.be/5n8wJWXMkoI",
+        "shortsUrl": "https://youtube.com/shorts/5n8wJWXMkoI",
+        "title": "Why Some People Mature Faster Than Others 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-25T14:24:29Z"
+      }
+    }
   },
   "adhd_video.mp4": {
     "uploaded": true,
@@ -41,7 +113,31 @@
     "publishedAt": "2026-08-25T14:23:55Z",
     "privacyStatus": "public",
     "publishAt": null,
-    "isScheduled": false
+    "isScheduled": false,
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "g-u-UA-CajM",
+        "youtubeUrl": "https://youtu.be/g-u-UA-CajM",
+        "shortsUrl": "https://youtube.com/shorts/g-u-UA-CajM",
+        "title": "ADHD Isn't Just Being Distracted (The Real Reason) 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-25T14:23:55Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "g-u-UA-CajM",
+        "youtubeUrl": "https://youtu.be/g-u-UA-CajM",
+        "shortsUrl": "https://youtube.com/shorts/g-u-UA-CajM",
+        "title": "ADHD Isn't Just Being Distracted (The Real Reason) 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-25T14:23:55Z"
+      }
+    }
   },
   "breaks_video.mp4": {
     "uploaded": true,
@@ -49,10 +145,34 @@
     "youtubeUrl": "https://youtu.be/SxQrCVpCcb0",
     "shortsUrl": "https://youtube.com/shorts/SxQrCVpCcb0",
     "title": "Why Taking A Long Break Isn't Quitting 🌿 #Shorts",
-    "privacyStatus": "scheduled",
+    "privacyStatus": "public",
     "publishAt": "2026-08-26T19:30:00.000Z",
     "isScheduled": true,
-    "publishedAt": "2026-08-26T19:30:05Z"
+    "publishedAt": "2026-08-26T19:30:05Z",
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "SxQrCVpCcb0",
+        "youtubeUrl": "https://youtu.be/SxQrCVpCcb0",
+        "shortsUrl": "https://youtube.com/shorts/SxQrCVpCcb0",
+        "title": "Why Taking A Long Break Isn't Quitting 🌿 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-26T19:30:05Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "SxQrCVpCcb0",
+        "youtubeUrl": "https://youtu.be/SxQrCVpCcb0",
+        "shortsUrl": "https://youtube.com/shorts/SxQrCVpCcb0",
+        "title": "Why Taking A Long Break Isn't Quitting 🌿 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-26T19:30:05Z"
+      }
+    }
   },
   "strength_video.mp4": {
     "uploaded": true,
@@ -63,7 +183,31 @@
     "privacyStatus": "public",
     "publishAt": null,
     "isScheduled": false,
-    "publishedAt": "2026-08-26T08:17:24Z"
+    "publishedAt": "2026-08-26T08:17:24Z",
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "SU7cdTjXd-A",
+        "youtubeUrl": "https://youtu.be/SU7cdTjXd-A",
+        "shortsUrl": "https://youtube.com/shorts/SU7cdTjXd-A",
+        "title": "What Real Strength Actually Looks Like 🛡️ #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-26T08:17:24Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "SU7cdTjXd-A",
+        "youtubeUrl": "https://youtu.be/SU7cdTjXd-A",
+        "shortsUrl": "https://youtube.com/shorts/SU7cdTjXd-A",
+        "title": "What Real Strength Actually Looks Like 🛡️ #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-26T08:17:24Z"
+      }
+    }
   },
   "emotions_video.mp4": {
     "uploaded": true,
@@ -74,7 +218,31 @@
     "privacyStatus": "public",
     "publishAt": null,
     "isScheduled": false,
-    "publishedAt": "2026-08-27T10:15:48Z"
+    "publishedAt": "2026-08-27T10:15:48Z",
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "iW8Ptx0N-cY",
+        "youtubeUrl": "https://youtu.be/iW8Ptx0N-cY",
+        "shortsUrl": "https://youtube.com/shorts/iW8Ptx0N-cY",
+        "title": "Why Men & Women Handle Emotions So Differently 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-27T10:15:48Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "iW8Ptx0N-cY",
+        "youtubeUrl": "https://youtu.be/iW8Ptx0N-cY",
+        "shortsUrl": "https://youtube.com/shorts/iW8Ptx0N-cY",
+        "title": "Why Men & Women Handle Emotions So Differently 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-27T10:15:48Z"
+      }
+    }
   },
   "chapters_video.mp4": {
     "uploaded": true,
@@ -82,10 +250,34 @@
     "youtubeUrl": "https://youtu.be/JR_jOvnPNPc",
     "shortsUrl": "https://youtube.com/shorts/JR_jOvnPNPc",
     "title": "When Life Feels Unfair (Remember This) ⏳ #Shorts",
-    "privacyStatus": "scheduled",
+    "privacyStatus": "public",
     "publishAt": "2026-08-27T19:30:00.000Z",
     "isScheduled": true,
-    "publishedAt": "2026-08-27T19:30:39Z"
+    "publishedAt": "2026-08-27T19:30:39Z",
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "JR_jOvnPNPc",
+        "youtubeUrl": "https://youtu.be/JR_jOvnPNPc",
+        "shortsUrl": "https://youtube.com/shorts/JR_jOvnPNPc",
+        "title": "When Life Feels Unfair (Remember This) ⏳ #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-27T19:30:39Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "JR_jOvnPNPc",
+        "youtubeUrl": "https://youtu.be/JR_jOvnPNPc",
+        "shortsUrl": "https://youtube.com/shorts/JR_jOvnPNPc",
+        "title": "When Life Feels Unfair (Remember This) ⏳ #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-27T19:30:39Z"
+      }
+    }
   },
   "teenage_video.mp4": {
     "uploaded": true,
@@ -97,7 +289,31 @@
     "publishAt": null,
     "isScheduled": false,
     "publishedAt": "2026-08-28T01:25:54Z",
-    "thumbnailAttached": true
+    "thumbnailAttached": true,
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "7tJMyDvj4OY",
+        "youtubeUrl": "https://youtu.be/7tJMyDvj4OY",
+        "shortsUrl": "https://youtube.com/shorts/7tJMyDvj4OY",
+        "title": "Why Teenage Years Feel Like Everything Is Happening At Once 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-28T01:25:54Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "7tJMyDvj4OY",
+        "youtubeUrl": "https://youtu.be/7tJMyDvj4OY",
+        "shortsUrl": "https://youtube.com/shorts/7tJMyDvj4OY",
+        "title": "Why Teenage Years Feel Like Everything Is Happening At Once 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-28T01:25:54Z"
+      }
+    }
   },
   "boundaries_video.mp4": {
     "uploaded": true,
@@ -109,7 +325,31 @@
     "publishAt": null,
     "isScheduled": false,
     "publishedAt": "2026-08-28T01:28:20Z",
-    "thumbnailAttached": true
+    "thumbnailAttached": true,
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "yI0GDJmyyhY",
+        "youtubeUrl": "https://youtu.be/yI0GDJmyyhY",
+        "shortsUrl": "https://youtube.com/shorts/yI0GDJmyyhY",
+        "title": "Why You Struggle to Set Boundaries 🛡️ #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-28T01:28:20Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "yI0GDJmyyhY",
+        "youtubeUrl": "https://youtu.be/yI0GDJmyyhY",
+        "shortsUrl": "https://youtube.com/shorts/yI0GDJmyyhY",
+        "title": "Why You Struggle to Set Boundaries 🛡️ #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-28T01:28:20Z"
+      }
+    }
   },
   "promises_video.mp4": {
     "uploaded": true,
@@ -120,7 +360,31 @@
     "privacyStatus": "public",
     "publishAt": null,
     "isScheduled": false,
-    "publishedAt": "2026-08-28T19:30:14Z"
+    "publishedAt": "2026-08-28T19:30:14Z",
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "O26QNkNYloQ",
+        "youtubeUrl": "https://youtu.be/O26QNkNYloQ",
+        "shortsUrl": "https://youtube.com/shorts/O26QNkNYloQ",
+        "title": "Why You Can't Keep Your Own Promises 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-28T19:30:14Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "O26QNkNYloQ",
+        "youtubeUrl": "https://youtu.be/O26QNkNYloQ",
+        "shortsUrl": "https://youtube.com/shorts/O26QNkNYloQ",
+        "title": "Why You Can't Keep Your Own Promises 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-28T19:30:14Z"
+      }
+    }
   },
   "environment_video.mp4": {
     "uploaded": true,
@@ -128,11 +392,35 @@
     "youtubeUrl": "https://youtu.be/jqaHeAL5qx4",
     "shortsUrl": "https://youtube.com/shorts/jqaHeAL5qx4",
     "title": "Why Smart People Keep Making Bad Choices (The Silent Trap) 🧠 #Shorts",
-    "privacyStatus": "scheduled",
+    "privacyStatus": "public",
     "publishAt": "2026-08-29T19:30:00.000Z",
     "isScheduled": true,
     "publishedAt": "2026-08-29T19:30:11Z",
-    "thumbnailAttached": true
+    "thumbnailAttached": true,
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "jqaHeAL5qx4",
+        "youtubeUrl": "https://youtu.be/jqaHeAL5qx4",
+        "shortsUrl": "https://youtube.com/shorts/jqaHeAL5qx4",
+        "title": "Why Smart People Keep Making Bad Choices (The Silent Trap) 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-29T19:30:11Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "jqaHeAL5qx4",
+        "youtubeUrl": "https://youtu.be/jqaHeAL5qx4",
+        "shortsUrl": "https://youtube.com/shorts/jqaHeAL5qx4",
+        "title": "Why Smart People Keep Making Bad Choices (The Silent Trap) 🧠 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-29T19:30:11Z"
+      }
+    }
   },
   "loneliness_video.mp4": {
     "uploaded": true,
@@ -152,6 +440,30 @@
       "isScheduled": true,
       "publishAt": "2026-08-30T19:30:00.000Z",
       "publishedAt": "2026-08-30T15:55:38Z"
+    },
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "xrPJNE5QVYY",
+        "youtubeUrl": "https://youtu.be/xrPJNE5QVYY",
+        "shortsUrl": "https://youtube.com/shorts/xrPJNE5QVYY",
+        "title": "Surrounded Online Yet Totally Alone (The Silent Paradox) 🧠 #Shorts",
+        "privacyStatus": "private",
+        "publishedAt": "2026-08-30T02:09:45Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "xrPJNE5QVYY",
+        "youtubeUrl": "https://youtu.be/xrPJNE5QVYY",
+        "shortsUrl": "https://youtube.com/shorts/xrPJNE5QVYY",
+        "title": "Surrounded Online Yet Totally Alone (The Silent Paradox) 🧠 #Shorts",
+        "privacyStatus": "private",
+        "publishedAt": "2026-08-30T02:09:45Z"
+      }
     }
   },
   "saying_no_video.mp4": {
@@ -160,9 +472,81 @@
     "youtubeUrl": "https://youtu.be/8VLATZSBe2w",
     "shortsUrl": "https://youtube.com/shorts/8VLATZSBe2w",
     "title": "Stop Saying YES When You Want To Say NO 🛑 #Shorts",
-    "privacyStatus": "private",
+    "privacyStatus": "public",
     "publishAt": null,
     "isScheduled": false,
-    "publishedAt": "2026-08-31T04:01:45Z"
+    "publishedAt": "2026-08-31T19:30:23Z",
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "8VLATZSBe2w",
+        "youtubeUrl": "https://youtu.be/8VLATZSBe2w",
+        "shortsUrl": "https://youtube.com/shorts/8VLATZSBe2w",
+        "title": "Stop Saying YES When You Want To Say NO 🛑 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-31T19:30:23Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "8VLATZSBe2w",
+        "youtubeUrl": "https://youtu.be/8VLATZSBe2w",
+        "shortsUrl": "https://youtube.com/shorts/8VLATZSBe2w",
+        "title": "Stop Saying YES When You Want To Say NO 🛑 #Shorts",
+        "privacyStatus": "public",
+        "publishedAt": "2026-08-31T19:30:23Z"
+      }
+    }
+  },
+  "holding_grudges_video.mp4": {
+    "channels": {
+      "UCsRmyC_93fGmQSk3rMJa9pA": {
+        "uploaded": true,
+        "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+        "channelTitle": "Judy Insights",
+        "videoId": "dV8pTuT5pdU",
+        "youtubeUrl": "https://youtu.be/dV8pTuT5pdU",
+        "shortsUrl": "https://youtube.com/shorts/dV8pTuT5pdU",
+        "title": "Why You Replay Past Hurt in Your Head For Months 🧠 #Shorts",
+        "privacyStatus": "private",
+        "publishedAt": "2026-09-02T10:52:10Z"
+      },
+      "legacy_channel": {
+        "uploaded": true,
+        "channelId": "legacy_channel",
+        "channelTitle": "Judy Insights",
+        "videoId": "dV8pTuT5pdU",
+        "youtubeUrl": "https://youtu.be/dV8pTuT5pdU",
+        "shortsUrl": "https://youtube.com/shorts/dV8pTuT5pdU",
+        "title": "Why You Replay Past Hurt in Your Head For Months 🧠 #Shorts",
+        "privacyStatus": "private",
+        "publishedAt": "2026-09-02T10:52:10Z"
+      }
+    },
+    "instagramAccounts": {},
+    "uploaded": true,
+    "videoId": "dV8pTuT5pdU",
+    "youtubeUrl": "https://youtu.be/dV8pTuT5pdU",
+    "shortsUrl": "https://youtube.com/shorts/dV8pTuT5pdU",
+    "isScheduled": true,
+    "publishAt": "2026-09-02T19:30:00.000Z",
+    "publishedAt": "2026-09-02T10:52:10Z",
+    "youtube": {
+      "uploaded": true,
+      "channelId": "UCsRmyC_93fGmQSk3rMJa9pA",
+      "channelTitle": "Judy Insights",
+      "videoId": "dV8pTuT5pdU",
+      "youtubeUrl": "https://youtu.be/dV8pTuT5pdU",
+      "shortsUrl": "https://youtube.com/shorts/dV8pTuT5pdU",
+      "isScheduled": true,
+      "publishAt": "2026-09-02T19:30:00.000Z",
+      "publishedAt": "2026-09-02T10:52:10Z",
+      "thumbnailAttached": true
+    },
+    "title": "Why You Replay Past Hurt in Your Head For Months 🧠 #Shorts",
+    "privacyStatus": "private"
   }
 }
