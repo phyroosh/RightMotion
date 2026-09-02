@@ -1,0 +1,644 @@
+[
+  {
+    "word": "Ever",
+    "start": 0,
+    "end": 260,
+    "confidence": 0.937
+  },
+  {
+    "word": "notice",
+    "start": 260,
+    "end": 480,
+    "confidence": 0.987
+  },
+  {
+    "word": "how",
+    "start": 480,
+    "end": 880,
+    "confidence": 0.99
+  },
+  {
+    "word": "sometimes",
+    "start": 880,
+    "end": 1340,
+    "confidence": 0.923
+  },
+  {
+    "word": "you",
+    "start": 1340,
+    "end": 1760,
+    "confidence": 0.994
+  },
+  {
+    "word": "push",
+    "start": 1760,
+    "end": 1940,
+    "confidence": 0.995
+  },
+  {
+    "word": "away",
+    "start": 1940,
+    "end": 2180,
+    "confidence": 0.989
+  },
+  {
+    "word": "the",
+    "start": 2180,
+    "end": 2320,
+    "confidence": 0.996
+  },
+  {
+    "word": "person",
+    "start": 2320,
+    "end": 2560,
+    "confidence": 0.999
+  },
+  {
+    "word": "you",
+    "start": 2560,
+    "end": 2820,
+    "confidence": 0.99
+  },
+  {
+    "word": "actually",
+    "start": 2820,
+    "end": 3240,
+    "confidence": 0.988
+  },
+  {
+    "word": "care",
+    "start": 3240,
+    "end": 3580,
+    "confidence": 0.999
+  },
+  {
+    "word": "about",
+    "start": 3580,
+    "end": 3840,
+    "confidence": 0.997
+  },
+  {
+    "word": "most?",
+    "start": 3840,
+    "end": 4060,
+    "confidence": 0.995
+  },
+  {
+    "word": "You",
+    "start": 4700,
+    "end": 4780,
+    "confidence": 0.982
+  },
+  {
+    "word": "might",
+    "start": 4780,
+    "end": 4920,
+    "confidence": 0.999
+  },
+  {
+    "word": "go",
+    "start": 4920,
+    "end": 5140,
+    "confidence": 0.995
+  },
+  {
+    "word": "quiet,",
+    "start": 5140,
+    "end": 5640,
+    "confidence": 0.97
+  },
+  {
+    "word": "act",
+    "start": 6020,
+    "end": 6240,
+    "confidence": 0.984
+  },
+  {
+    "word": "cold,",
+    "start": 6240,
+    "end": 6640,
+    "confidence": 0.999
+  },
+  {
+    "word": "or",
+    "start": 6980,
+    "end": 7180,
+    "confidence": 0.999
+  },
+  {
+    "word": "suddenly",
+    "start": 7180,
+    "end": 7580,
+    "confidence": 0.997
+  },
+  {
+    "word": "need",
+    "start": 7580,
+    "end": 7900,
+    "confidence": 0.972
+  },
+  {
+    "word": "distance.",
+    "start": 7900,
+    "end": 8240,
+    "confidence": 0.996
+  },
+  {
+    "word": "And",
+    "start": 8940,
+    "end": 9040,
+    "confidence": 0.963
+  },
+  {
+    "word": "weirdly,",
+    "start": 9040,
+    "end": 9420,
+    "confidence": 0.981
+  },
+  {
+    "word": "it",
+    "start": 9460,
+    "end": 9560,
+    "confidence": 0.998
+  },
+  {
+    "word": "can",
+    "start": 9560,
+    "end": 9640,
+    "confidence": 0.995
+  },
+  {
+    "word": "happen",
+    "start": 9640,
+    "end": 9920,
+    "confidence": 0.999
+  },
+  {
+    "word": "because",
+    "start": 9920,
+    "end": 10220,
+    "confidence": 0.955
+  },
+  {
+    "word": "you",
+    "start": 10220,
+    "end": 10420,
+    "confidence": 0.999
+  },
+  {
+    "word": "care,",
+    "start": 10420,
+    "end": 10680,
+    "confidence": 0.997
+  },
+  {
+    "word": "not",
+    "start": 10980,
+    "end": 11100,
+    "confidence": 0.998
+  },
+  {
+    "word": "because",
+    "start": 11100,
+    "end": 11360,
+    "confidence": 0.999
+  },
+  {
+    "word": "you",
+    "start": 11360,
+    "end": 11520,
+    "confidence": 0.999
+  },
+  {
+    "word": "don't.",
+    "start": 11520,
+    "end": 11820,
+    "confidence": 0.998
+  },
+  {
+    "word": "Sometimes",
+    "start": 12600,
+    "end": 12600,
+    "confidence": 0.989
+  },
+  {
+    "word": "closeness",
+    "start": 12600,
+    "end": 13180,
+    "confidence": 0.98
+  },
+  {
+    "word": "makes",
+    "start": 13180,
+    "end": 13500,
+    "confidence": 0.996
+  },
+  {
+    "word": "us",
+    "start": 13500,
+    "end": 13720,
+    "confidence": 0.999
+  },
+  {
+    "word": "feel",
+    "start": 13720,
+    "end": 14000,
+    "confidence": 0.997
+  },
+  {
+    "word": "vulnerable.",
+    "start": 14000,
+    "end": 14360,
+    "confidence": 0.999
+  },
+  {
+    "word": "So",
+    "start": 15180,
+    "end": 15240,
+    "confidence": 0.996
+  },
+  {
+    "word": "when",
+    "start": 15240,
+    "end": 15460,
+    "confidence": 0.618
+  },
+  {
+    "word": "someone",
+    "start": 15460,
+    "end": 15700,
+    "confidence": 0.999
+  },
+  {
+    "word": "gets",
+    "start": 15700,
+    "end": 15940,
+    "confidence": 0.997
+  },
+  {
+    "word": "important",
+    "start": 15940,
+    "end": 16260,
+    "confidence": 0.992
+  },
+  {
+    "word": "to",
+    "start": 16260,
+    "end": 16480,
+    "confidence": 0.999
+  },
+  {
+    "word": "us,",
+    "start": 16480,
+    "end": 16640,
+    "confidence": 1.0
+  },
+  {
+    "word": "our",
+    "start": 16640,
+    "end": 17340,
+    "confidence": 0.99
+  },
+  {
+    "word": "brain",
+    "start": 17340,
+    "end": 17640,
+    "confidence": 0.999
+  },
+  {
+    "word": "tries",
+    "start": 17640,
+    "end": 18000,
+    "confidence": 0.999
+  },
+  {
+    "word": "to",
+    "start": 18000,
+    "end": 18180,
+    "confidence": 1.0
+  },
+  {
+    "word": "protect",
+    "start": 18180,
+    "end": 18360,
+    "confidence": 0.999
+  },
+  {
+    "word": "us",
+    "start": 18360,
+    "end": 18620,
+    "confidence": 0.999
+  },
+  {
+    "word": "from",
+    "start": 18620,
+    "end": 18780,
+    "confidence": 0.998
+  },
+  {
+    "word": "rejection,",
+    "start": 18780,
+    "end": 19060,
+    "confidence": 0.997
+  },
+  {
+    "word": "disappointment,",
+    "start": 19720,
+    "end": 20180,
+    "confidence": 0.993
+  },
+  {
+    "word": "or",
+    "start": 20320,
+    "end": 20700,
+    "confidence": 0.998
+  },
+  {
+    "word": "getting",
+    "start": 20700,
+    "end": 20960,
+    "confidence": 0.997
+  },
+  {
+    "word": "hurt.",
+    "start": 20960,
+    "end": 21260,
+    "confidence": 1.0
+  },
+  {
+    "word": "It's",
+    "start": 21820,
+    "end": 21960,
+    "confidence": 0.995
+  },
+  {
+    "word": "basically,",
+    "start": 21960,
+    "end": 22300,
+    "confidence": 0.996
+  },
+  {
+    "word": "leave",
+    "start": 22720,
+    "end": 23240,
+    "confidence": 0.74
+  },
+  {
+    "word": "first",
+    "start": 23240,
+    "end": 23460,
+    "confidence": 0.997
+  },
+  {
+    "word": "before",
+    "start": 23460,
+    "end": 23740,
+    "confidence": 0.963
+  },
+  {
+    "word": "they",
+    "start": 23740,
+    "end": 23980,
+    "confidence": 0.999
+  },
+  {
+    "word": "can",
+    "start": 23980,
+    "end": 24100,
+    "confidence": 0.994
+  },
+  {
+    "word": "leave",
+    "start": 24100,
+    "end": 24280,
+    "confidence": 0.999
+  },
+  {
+    "word": "you.",
+    "start": 24280,
+    "end": 24500,
+    "confidence": 0.999
+  },
+  {
+    "word": "But",
+    "start": 24920,
+    "end": 25180,
+    "confidence": 0.996
+  },
+  {
+    "word": "pushing",
+    "start": 25180,
+    "end": 25420,
+    "confidence": 0.991
+  },
+  {
+    "word": "someone",
+    "start": 25420,
+    "end": 25700,
+    "confidence": 0.998
+  },
+  {
+    "word": "away",
+    "start": 25700,
+    "end": 25980,
+    "confidence": 0.998
+  },
+  {
+    "word": "doesn't",
+    "start": 25980,
+    "end": 26380,
+    "confidence": 0.997
+  },
+  {
+    "word": "always",
+    "start": 26380,
+    "end": 26640,
+    "confidence": 0.997
+  },
+  {
+    "word": "make",
+    "start": 26640,
+    "end": 26940,
+    "confidence": 0.999
+  },
+  {
+    "word": "the",
+    "start": 26940,
+    "end": 27080,
+    "confidence": 0.994
+  },
+  {
+    "word": "fear",
+    "start": 27080,
+    "end": 27240,
+    "confidence": 0.998
+  },
+  {
+    "word": "disappear.",
+    "start": 27240,
+    "end": 27660,
+    "confidence": 1.0
+  },
+  {
+    "word": "Sometimes,",
+    "start": 28300,
+    "end": 28700,
+    "confidence": 0.234
+  },
+  {
+    "word": "being",
+    "start": 28760,
+    "end": 29620,
+    "confidence": 0.995
+  },
+  {
+    "word": "honest",
+    "start": 29620,
+    "end": 29960,
+    "confidence": 0.992
+  },
+  {
+    "word": "about",
+    "start": 29960,
+    "end": 30260,
+    "confidence": 0.998
+  },
+  {
+    "word": "what",
+    "start": 30260,
+    "end": 30440,
+    "confidence": 0.995
+  },
+  {
+    "word": "you're",
+    "start": 30440,
+    "end": 30520,
+    "confidence": 0.967
+  },
+  {
+    "word": "feeling",
+    "start": 30520,
+    "end": 30820,
+    "confidence": 0.999
+  },
+  {
+    "word": "is",
+    "start": 30820,
+    "end": 31080,
+    "confidence": 0.997
+  },
+  {
+    "word": "safer",
+    "start": 31080,
+    "end": 31400,
+    "confidence": 0.976
+  },
+  {
+    "word": "than",
+    "start": 31400,
+    "end": 31920,
+    "confidence": 0.974
+  },
+  {
+    "word": "pretending",
+    "start": 31920,
+    "end": 32220,
+    "confidence": 0.994
+  },
+  {
+    "word": "you",
+    "start": 32220,
+    "end": 32480,
+    "confidence": 0.994
+  },
+  {
+    "word": "don't",
+    "start": 32480,
+    "end": 32700,
+    "confidence": 0.999
+  },
+  {
+    "word": "care.",
+    "start": 32700,
+    "end": 32820,
+    "confidence": 0.999
+  },
+  {
+    "word": "You",
+    "start": 33320,
+    "end": 33440,
+    "confidence": 0.994
+  },
+  {
+    "word": "don't",
+    "start": 33440,
+    "end": 33620,
+    "confidence": 0.999
+  },
+  {
+    "word": "have",
+    "start": 33620,
+    "end": 33740,
+    "confidence": 0.997
+  },
+  {
+    "word": "to",
+    "start": 33740,
+    "end": 33860,
+    "confidence": 0.998
+  },
+  {
+    "word": "shut",
+    "start": 33860,
+    "end": 34020,
+    "confidence": 0.996
+  },
+  {
+    "word": "people",
+    "start": 34020,
+    "end": 34340,
+    "confidence": 0.997
+  },
+  {
+    "word": "out",
+    "start": 34340,
+    "end": 34480,
+    "confidence": 0.971
+  },
+  {
+    "word": "just",
+    "start": 34480,
+    "end": 34720,
+    "confidence": 0.971
+  },
+  {
+    "word": "because",
+    "start": 34720,
+    "end": 35020,
+    "confidence": 0.996
+  },
+  {
+    "word": "they",
+    "start": 35020,
+    "end": 35320,
+    "confidence": 0.998
+  },
+  {
+    "word": "matter",
+    "start": 35320,
+    "end": 35500,
+    "confidence": 0.997
+  },
+  {
+    "word": "to",
+    "start": 35500,
+    "end": 35800,
+    "confidence": 0.999
+  },
+  {
+    "word": "you.",
+    "start": 35800,
+    "end": 35940,
+    "confidence": 0.999
+  }
+]

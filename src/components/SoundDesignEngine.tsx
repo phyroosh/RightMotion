@@ -7,7 +7,9 @@ export type SfxType =
   | "whoosh_deep"
   | "whoosh_sparkle"
   | "impact_hit"
-  | "whoosh_cinematic";
+  | "whoosh_cinematic"
+  | "marker_scribble"
+  | "tape_snap";
 
 export interface SfxCue {
   frame: number;
@@ -45,6 +47,16 @@ const SFX_CONFIG: Record<SfxType, { src: string; defaultVolume: number; duration
     src: "audio/sfx/whoosh_cinematic.wav",
     defaultVolume: 0.35,
     durationFrames: 60,
+  },
+  marker_scribble: {
+    src: "audio/sfx/marker_scribble.wav",
+    defaultVolume: 0.32,
+    durationFrames: 20,
+  },
+  tape_snap: {
+    src: "audio/sfx/tape_snap.wav",
+    defaultVolume: 0.30,
+    durationFrames: 15,
   },
 };
 

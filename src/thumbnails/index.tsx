@@ -433,3 +433,19 @@ export const HoldingGrudgesThumbnail: React.FC = () => (
     extraBadge="HEALING"
   />
 );
+
+export const PushingAwayThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY YOU PUSH THEM AWAY"
+    highlightWord="PUSH"
+    highlightColor="rose"
+    subtitle="The Avoidant Trap: Pushing Away Who You Love"
+    categoryBadge="RELATIONSHIP PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="ATTACHMENT"
+  />
+);
+

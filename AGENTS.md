@@ -153,6 +153,28 @@ Create 4 modular files:
 - `impact_hit`: Core problem statements, diagnostic warnings, cutout stamp impacts (`volume: 0.20 - 0.24`)
 - `click`: Tactile UI chips, badges, checklist micro-actions (`volume: 0.24 - 0.28`)
 - `whoosh_sparkle`: Key psychological revelations, solution cutouts, positive insights (`volume: 0.30 - 0.35`)
+- `marker_scribble`: Hand-drawn SVG doodle annotations, highlighter glides (`volume: 0.30 - 0.34`)
+- `tape_snap`: Masking tape pinning cards to canvas (`volume: 0.28 - 0.32`)
+
+---
+
+### 🚀 Pro Creative Editing Suite (3 Next-Gen Engines)
+
+1. **3D Virtual Camera & Isometric Depth (`src/components/camera3d/`)**:
+   - `<VirtualCamera3D preset="dramatic_swoop" | "isometric_shelf" | "subtle_breathing" | "impact_shake">`: Hardware-accelerated CSS 3D transforms with automatic `readabilityLock` (flattens angle during reading hold).
+   - `<IsometricCard tiltX={8} tiltY={-6} elevation={35}>`: Renders UI cards on an isometric plane with dynamic specular light glare.
+   - `<ParallaxLayer depthZ={-250 | 0 | 60 | 120}>`: True 3D spatial depth plane separation.
+
+2. **Documentary Tactile Collage (`src/components/collage/`)**:
+   - `<HandDrawnDoodle preset="circle" | "arrow" | "underline" | "scribble_cross" color="rose" | "sky" | "amber" | "emerald">`: Self-drawing SVG annotations animated with `strokeDashoffset`.
+   - `<HighlighterStroke color="yellow" | "rose" | "emerald" | "sky">`: Organic translucent text marker with soft edge bleed.
+   - `<TapeStrip position="top-right" | "top-left" | "center-top">`: Semi-transparent masking tape with 45-degree serrated ends pinning cards.
+   - `<DocumentaryTexture opacity={0.035}>`: Film & paper grain overlay for authentic print look.
+
+3. **Kinetic Typography 2.0 & Screen Trauma (`src/components/kinetic_text/`)**:
+   - `<SemanticWord physics="fracture" | "gravity_drop" | "elastic_expand" | "heartbeat">`: Words that physically act out their emotional meaning without overflowing into captions.
+   - `<CameraShake triggerFrames={[...]} intensity={8}>`: Event-driven trauma jitter on `impact_hit` cues.
+   - `<GlitchText>`: RGB chromatic aberration micro-flash on warning words.
 
 #### Step 3: Register in `src/Root.tsx`
 1. Add `<Composition id="<Name>Video" component={<Name>Composition} durationInFrames={duration} fps={30} width={1080} height={1920} />`

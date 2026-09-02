@@ -17,6 +17,8 @@ import { ShrinkingCircleComposition } from "./clips/shrinking_circle";
 import shrinkingCircleTranscript from "./clips/shrinking_circle/transcript.json";
 import { HoldingGrudgesComposition } from "./clips/holding_grudges";
 import holding_grudgesTranscript from "./clips/holding_grudges/transcript.json";
+import { PushingAwayComposition } from "./clips/pushing_away";
+import pushingAwayTranscript from "./clips/pushing_away/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -45,6 +47,7 @@ import {
   ChaptersThumbnail,
   PromisesThumbnail,
   HoldingGrudgesThumbnail,
+  PushingAwayThumbnail,
   ShrinkingCircleThumbnail,
   DopamineResetThumbnail,
   BoundariesThumbnail,
@@ -107,6 +110,7 @@ export const RemotionRoot: React.FC = () => {
   const shrinkingCircleDuration = calculateDurationInFrames(shrinkingCircleTranscript as any[], fps);
   
   const holding_grudgesDuration = calculateDurationInFrames(holding_grudgesTranscript as any[], fps);
+  const pushingAwayDuration = calculateDurationInFrames(pushingAwayTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -194,6 +198,16 @@ export const RemotionRoot: React.FC = () => {
         id="HoldingGrudgesVideo"
         component={HoldingGrudgesComposition}
         durationInFrames={holding_grudgesDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      {/* 0. Pushing Away & Avoidant Trap Video (9:16 Shorts) */}
+      <Composition
+        id="PushingAwayVideo"
+        component={PushingAwayComposition}
+        durationInFrames={pushingAwayDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -500,6 +514,12 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="HoldingGrudgesThumbnail"
         component={HoldingGrudgesThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="PushingAwayThumbnail"
+        component={PushingAwayThumbnail}
         width={1080}
         height={1920}
       />
