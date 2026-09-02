@@ -89,19 +89,29 @@ def transcribe_audio(audio_path: Path, output_json: Path):
     print("📝 [2/4] Extracting word timestamps with faster-whisper...")
     output_json.parent.mkdir(parents=True, exist_ok=True)
 
-    can_cuda = False
-    try:
-        if ctranslate2.get_cuda_device_count() > 0:
-            can_cuda = True
-    except Exception:
-        can_cuda = False
+    device = "cpu"
+    comp_type = "int8"
+    segments = None
+    if ctranslate2.get_cuda_device_count() > 0:
+        try:
+            model = WhisperModel("base.en", device="cuda", compute_type="float16")
+            seg_gen, info = model.transcribe(str(audio_path), word_timestamps=True, language="en", beam_size=5)
+            segments = list(seg_gen)
+            device = "cuda"
+            comp_type = "float16"
+        except Exception as e:
+            print(f"      CUDA runtime ({e}), using CPU int8...")
+            model = WhisperModel("base.en", device="cpu", compute_type="int8")
+            seg_gen, info = model.transcribe(str(audio_path), word_timestamps=True, language="en", beam_size=5)
+            segments = list(seg_gen)
+            device = "cpu"
+            comp_type = "int8"
+    else:
+        model = WhisperModel("base.en", device="cpu", compute_type="int8")
+        seg_gen, info = model.transcribe(str(audio_path), word_timestamps=True, language="en", beam_size=5)
+        segments = list(seg_gen)
 
-    device = "cuda" if can_cuda else "cpu"
-    comp_type = "float16" if device == "cuda" else "int8"
-    print(f"      Using compute device: {device} ({comp_type})")
-
-    model = WhisperModel("base.en", device=device, compute_type=comp_type)
-    segments, info = model.transcribe(str(audio_path), word_timestamps=True, language="en", beam_size=5)
+    print(f"      Transcribing on compute device: {device} ({comp_type})")
 
     words_list = []
     for s in segments:
@@ -592,20 +602,21 @@ def render_assets(name: str, pascal_name: str):
     (ROOT_DIR / "out").mkdir(parents=True, exist_ok=True)
 
     npx_bin = "npx.cmd" if sys.platform == "win32" else "npx"
+    gl_flag = "--gl=egl" if sys.platform != "win32" else "--gl=angle"
 
     # 1. Render Thumbnail
-    print(f"      Rendering Still: {pascal_name}Thumbnail -> {out_thumb}...")
+    print(f"      Rendering Still (GPU): {pascal_name}Thumbnail -> {out_thumb}...")
     subprocess.run(
-        f"{npx_bin} remotion still src/index.ts {pascal_name}Thumbnail {out_thumb} --overwrite",
+        f"{npx_bin} remotion still src/index.ts {pascal_name}Thumbnail {out_thumb} {gl_flag} --overwrite",
         shell=True,
         cwd=str(ROOT_DIR),
         check=True
     )
 
-    # 2. Render Video
-    print(f"      Rendering Video: {pascal_name}Video -> {out_video}...")
+    # 2. Render Video with GPU acceleration
+    print(f"      Rendering Video (GPU accelerated): {pascal_name}Video -> {out_video}...")
     subprocess.run(
-        f"{npx_bin} remotion render src/index.ts {pascal_name}Video {out_video} --concurrency=4 --overwrite",
+        f"{npx_bin} remotion render src/index.ts {pascal_name}Video {out_video} {gl_flag} --concurrency=4 --overwrite",
         shell=True,
         cwd=str(ROOT_DIR),
         check=True

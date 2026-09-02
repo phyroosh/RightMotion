@@ -418,3 +418,18 @@ export const ShrinkingCircleThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const HoldingGrudgesThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="STOP HOLDING GRUDGES"
+    highlightWord="STOP"
+    highlightColor="rose"
+    subtitle="They Hurt You Once. You Replay It For Months."
+    categoryBadge="EMOTIONAL CLOSURE"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="obsidian"
+    aspectRatio="9:16"
+    extraBadge="HEALING"
+  />
+);

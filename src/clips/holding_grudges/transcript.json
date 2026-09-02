@@ -1,0 +1,584 @@
+[
+  {
+    "word": "Ever",
+    "start": 0,
+    "end": 280,
+    "confidence": 0.873
+  },
+  {
+    "word": "notice",
+    "start": 280,
+    "end": 500,
+    "confidence": 0.978
+  },
+  {
+    "word": "how",
+    "start": 500,
+    "end": 880,
+    "confidence": 0.993
+  },
+  {
+    "word": "someone",
+    "start": 880,
+    "end": 1220,
+    "confidence": 0.996
+  },
+  {
+    "word": "can",
+    "start": 1220,
+    "end": 1500,
+    "confidence": 0.996
+  },
+  {
+    "word": "hurt",
+    "start": 1500,
+    "end": 1720,
+    "confidence": 0.999
+  },
+  {
+    "word": "you",
+    "start": 1720,
+    "end": 1880,
+    "confidence": 0.999
+  },
+  {
+    "word": "once,",
+    "start": 1880,
+    "end": 2120,
+    "confidence": 0.999
+  },
+  {
+    "word": "and",
+    "start": 2620,
+    "end": 2860,
+    "confidence": 0.994
+  },
+  {
+    "word": "somehow",
+    "start": 2860,
+    "end": 3320,
+    "confidence": 0.987
+  },
+  {
+    "word": "you",
+    "start": 3320,
+    "end": 3580,
+    "confidence": 0.961
+  },
+  {
+    "word": "keep",
+    "start": 3580,
+    "end": 3760,
+    "confidence": 0.997
+  },
+  {
+    "word": "replaying",
+    "start": 3760,
+    "end": 4180,
+    "confidence": 0.968
+  },
+  {
+    "word": "it",
+    "start": 4180,
+    "end": 4340,
+    "confidence": 0.986
+  },
+  {
+    "word": "in",
+    "start": 4340,
+    "end": 4420,
+    "confidence": 0.992
+  },
+  {
+    "word": "your",
+    "start": 4420,
+    "end": 4500,
+    "confidence": 0.996
+  },
+  {
+    "word": "head",
+    "start": 4500,
+    "end": 4680,
+    "confidence": 0.999
+  },
+  {
+    "word": "for",
+    "start": 4680,
+    "end": 4860,
+    "confidence": 0.997
+  },
+  {
+    "word": "months?",
+    "start": 4860,
+    "end": 5040,
+    "confidence": 0.999
+  },
+  {
+    "word": "That's",
+    "start": 5680,
+    "end": 5940,
+    "confidence": 0.991
+  },
+  {
+    "word": "partly",
+    "start": 5940,
+    "end": 6120,
+    "confidence": 0.997
+  },
+  {
+    "word": "because",
+    "start": 6120,
+    "end": 6580,
+    "confidence": 0.998
+  },
+  {
+    "word": "your",
+    "start": 6580,
+    "end": 6880,
+    "confidence": 0.987
+  },
+  {
+    "word": "brain",
+    "start": 6880,
+    "end": 7200,
+    "confidence": 0.999
+  },
+  {
+    "word": "hates",
+    "start": 7200,
+    "end": 7620,
+    "confidence": 0.996
+  },
+  {
+    "word": "unfinished",
+    "start": 7620,
+    "end": 8260,
+    "confidence": 0.981
+  },
+  {
+    "word": "emotional",
+    "start": 8260,
+    "end": 8680,
+    "confidence": 0.887
+  },
+  {
+    "word": "experiences.",
+    "start": 8680,
+    "end": 9460,
+    "confidence": 0.998
+  },
+  {
+    "word": "It",
+    "start": 10280,
+    "end": 10420,
+    "confidence": 0.993
+  },
+  {
+    "word": "keeps",
+    "start": 10420,
+    "end": 10620,
+    "confidence": 0.998
+  },
+  {
+    "word": "revisiting",
+    "start": 10620,
+    "end": 11340,
+    "confidence": 0.993
+  },
+  {
+    "word": "what",
+    "start": 11340,
+    "end": 11520,
+    "confidence": 0.999
+  },
+  {
+    "word": "happened,",
+    "start": 11520,
+    "end": 11840,
+    "confidence": 0.996
+  },
+  {
+    "word": "almost",
+    "start": 12180,
+    "end": 12720,
+    "confidence": 0.998
+  },
+  {
+    "word": "like",
+    "start": 12720,
+    "end": 12980,
+    "confidence": 0.999
+  },
+  {
+    "word": "it's",
+    "start": 12980,
+    "end": 13160,
+    "confidence": 0.991
+  },
+  {
+    "word": "trying",
+    "start": 13160,
+    "end": 13360,
+    "confidence": 0.998
+  },
+  {
+    "word": "to",
+    "start": 13360,
+    "end": 13500,
+    "confidence": 0.999
+  },
+  {
+    "word": "figure",
+    "start": 13500,
+    "end": 13700,
+    "confidence": 0.999
+  },
+  {
+    "word": "out,",
+    "start": 13700,
+    "end": 14020,
+    "confidence": 0.996
+  },
+  {
+    "word": "how",
+    "start": 14280,
+    "end": 14860,
+    "confidence": 0.46
+  },
+  {
+    "word": "could",
+    "start": 14860,
+    "end": 15020,
+    "confidence": 0.986
+  },
+  {
+    "word": "I",
+    "start": 15020,
+    "end": 15140,
+    "confidence": 0.989
+  },
+  {
+    "word": "have",
+    "start": 15140,
+    "end": 15220,
+    "confidence": 0.936
+  },
+  {
+    "word": "prevented",
+    "start": 15220,
+    "end": 15520,
+    "confidence": 1.0
+  },
+  {
+    "word": "this?",
+    "start": 15520,
+    "end": 15860,
+    "confidence": 0.998
+  },
+  {
+    "word": "So",
+    "start": 16560,
+    "end": 17020,
+    "confidence": 0.979
+  },
+  {
+    "word": "holding",
+    "start": 17020,
+    "end": 17360,
+    "confidence": 0.549
+  },
+  {
+    "word": "a",
+    "start": 17360,
+    "end": 17580,
+    "confidence": 0.997
+  },
+  {
+    "word": "grudge",
+    "start": 17580,
+    "end": 17940,
+    "confidence": 0.989
+  },
+  {
+    "word": "can",
+    "start": 17940,
+    "end": 18140,
+    "confidence": 0.995
+  },
+  {
+    "word": "feel",
+    "start": 18140,
+    "end": 18400,
+    "confidence": 0.999
+  },
+  {
+    "word": "like",
+    "start": 18400,
+    "end": 18640,
+    "confidence": 0.999
+  },
+  {
+    "word": "protecting",
+    "start": 18640,
+    "end": 19000,
+    "confidence": 0.994
+  },
+  {
+    "word": "yourself.",
+    "start": 19000,
+    "end": 19540,
+    "confidence": 0.999
+  },
+  {
+    "word": "But",
+    "start": 20120,
+    "end": 20360,
+    "confidence": 0.996
+  },
+  {
+    "word": "eventually,",
+    "start": 20360,
+    "end": 20760,
+    "confidence": 0.955
+  },
+  {
+    "word": "you're",
+    "start": 21140,
+    "end": 21320,
+    "confidence": 0.995
+  },
+  {
+    "word": "not",
+    "start": 21320,
+    "end": 21500,
+    "confidence": 0.995
+  },
+  {
+    "word": "protecting",
+    "start": 21500,
+    "end": 21860,
+    "confidence": 0.999
+  },
+  {
+    "word": "yourself",
+    "start": 21860,
+    "end": 22260,
+    "confidence": 0.997
+  },
+  {
+    "word": "from",
+    "start": 22260,
+    "end": 22480,
+    "confidence": 0.997
+  },
+  {
+    "word": "them",
+    "start": 22480,
+    "end": 22620,
+    "confidence": 0.998
+  },
+  {
+    "word": "anymore.",
+    "start": 22620,
+    "end": 22940,
+    "confidence": 0.936
+  },
+  {
+    "word": "You're",
+    "start": 23600,
+    "end": 23800,
+    "confidence": 0.996
+  },
+  {
+    "word": "carrying",
+    "start": 23800,
+    "end": 24180,
+    "confidence": 0.999
+  },
+  {
+    "word": "them",
+    "start": 24180,
+    "end": 24400,
+    "confidence": 0.999
+  },
+  {
+    "word": "around",
+    "start": 24400,
+    "end": 24640,
+    "confidence": 0.998
+  },
+  {
+    "word": "in",
+    "start": 24640,
+    "end": 24880,
+    "confidence": 0.995
+  },
+  {
+    "word": "your",
+    "start": 24880,
+    "end": 25000,
+    "confidence": 0.997
+  },
+  {
+    "word": "own",
+    "start": 25000,
+    "end": 25200,
+    "confidence": 0.998
+  },
+  {
+    "word": "head.",
+    "start": 25200,
+    "end": 25460,
+    "confidence": 1.0
+  },
+  {
+    "word": "You",
+    "start": 26020,
+    "end": 26180,
+    "confidence": 0.995
+  },
+  {
+    "word": "don't",
+    "start": 26180,
+    "end": 26360,
+    "confidence": 1.0
+  },
+  {
+    "word": "have",
+    "start": 26360,
+    "end": 26520,
+    "confidence": 0.999
+  },
+  {
+    "word": "to",
+    "start": 26520,
+    "end": 26680,
+    "confidence": 0.999
+  },
+  {
+    "word": "forgive",
+    "start": 26680,
+    "end": 26880,
+    "confidence": 1.0
+  },
+  {
+    "word": "someone",
+    "start": 26880,
+    "end": 27260,
+    "confidence": 0.999
+  },
+  {
+    "word": "just",
+    "start": 27260,
+    "end": 27620,
+    "confidence": 0.939
+  },
+  {
+    "word": "because",
+    "start": 27620,
+    "end": 27960,
+    "confidence": 0.999
+  },
+  {
+    "word": "they",
+    "start": 27960,
+    "end": 28200,
+    "confidence": 0.999
+  },
+  {
+    "word": "hurt",
+    "start": 28200,
+    "end": 28380,
+    "confidence": 0.999
+  },
+  {
+    "word": "you.",
+    "start": 28380,
+    "end": 28640,
+    "confidence": 1.0
+  },
+  {
+    "word": "Sometimes",
+    "start": 28640,
+    "end": 29540,
+    "confidence": 0.434
+  },
+  {
+    "word": "healing",
+    "start": 29540,
+    "end": 29960,
+    "confidence": 0.904
+  },
+  {
+    "word": "simply",
+    "start": 29960,
+    "end": 30460,
+    "confidence": 0.992
+  },
+  {
+    "word": "means",
+    "start": 30460,
+    "end": 30880,
+    "confidence": 0.999
+  },
+  {
+    "word": "deciding.",
+    "start": 30880,
+    "end": 31240,
+    "confidence": 0.984
+  },
+  {
+    "word": "I'm",
+    "start": 32220,
+    "end": 32300,
+    "confidence": 0.955
+  },
+  {
+    "word": "not",
+    "start": 32300,
+    "end": 32420,
+    "confidence": 0.998
+  },
+  {
+    "word": "giving",
+    "start": 32420,
+    "end": 32640,
+    "confidence": 0.998
+  },
+  {
+    "word": "this",
+    "start": 32640,
+    "end": 32940,
+    "confidence": 0.994
+  },
+  {
+    "word": "any",
+    "start": 32940,
+    "end": 33180,
+    "confidence": 0.831
+  },
+  {
+    "word": "more",
+    "start": 33180,
+    "end": 33500,
+    "confidence": 0.999
+  },
+  {
+    "word": "space",
+    "start": 33500,
+    "end": 33740,
+    "confidence": 0.998
+  },
+  {
+    "word": "in",
+    "start": 33740,
+    "end": 34040,
+    "confidence": 0.814
+  },
+  {
+    "word": "me.",
+    "start": 34040,
+    "end": 34200,
+    "confidence": 0.997
+  }
+]
