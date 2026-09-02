@@ -17,25 +17,25 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({
   endMs: t.endMs ?? t.end,
 }));
 
-// Event-driven multi-SFX suite synchronized across all 8 high-retention graphic scenes
+// Event-driven multi-SFX suite synchronized across all 8 high-retention graphic scenes (+8% tempo)
 const SFX_CUES: SfxCue[] = [
   { frame: 0,   type: "whoosh_deep",    volume: 0.32 }, // 0.0s: Intro Presenter entrance
-  { frame: 6,   type: "impact_hit",     volume: 0.22 }, // 0.2s: Single Incident card stamp
-  { frame: 72,  type: "whoosh_fast",    volume: 0.32 }, // 2.4s: Replay Counter whip-in
-  { frame: 85,  type: "click",          volume: 0.26 }, // 2.8s: Counter tick lock
-  { frame: 159, type: "whoosh_fast",    volume: 0.34 }, // 5.3s: Open Loops Scene entrance
-  { frame: 172, type: "impact_hit",     volume: 0.24 }, // 5.7s: Chaos cutout stamp
-  { frame: 294, type: "whoosh_fast",    volume: 0.32 }, // 9.8s: Mental DVR Scrubber entrance
-  { frame: 308, type: "click",          volume: 0.26 }, // 10.3s: Memory scrubber lock
-  { frame: 396, type: "whoosh_fast",    volume: 0.32 }, // 13.2s: Simulation Tree entrance
-  { frame: 412, type: "impact_hit",     volume: 0.24 }, // 13.7s: Reality warning tag
-  { frame: 498, type: "whoosh_fast",    volume: 0.34 }, // 16.6s: PropComparison entrance
-  { frame: 512, type: "click",          volume: 0.26 }, // 17.1s: Left illusion card lock
-  { frame: 615, type: "impact_hit",     volume: 0.25 }, // 20.5s: Right reality card reveal
-  { frame: 774, type: "whoosh_fast",    volume: 0.32 }, // 25.8s: Apple Toggle Switch entrance
-  { frame: 788, type: "click",          volume: 0.28 }, // 26.3s: Detachment toggle lock
-  { frame: 906, type: "whoosh_sparkle", volume: 0.35 }, // 30.2s: Closure card radiant reveal
-  { frame: 922, type: "click",          volume: 0.26 }, // 30.7s: Peace restored stamp
+  { frame: 3,   type: "impact_hit",     volume: 0.22 }, // 0.1s: Single Incident card stamp
+  { frame: 63,  type: "whoosh_fast",    volume: 0.32 }, // 2.1s: Replay Counter whip-in
+  { frame: 72,  type: "click",          volume: 0.26 }, // 2.4s: Counter tick lock
+  { frame: 144, type: "whoosh_fast",    volume: 0.34 }, // 4.8s: Open Loops Scene entrance
+  { frame: 153, type: "impact_hit",     volume: 0.24 }, // 5.1s: Chaos cutout stamp
+  { frame: 273, type: "whoosh_fast",    volume: 0.32 }, // 9.1s: Mental DVR Scrubber entrance
+  { frame: 282, type: "click",          volume: 0.26 }, // 9.4s: Memory scrubber lock
+  { frame: 366, type: "whoosh_fast",    volume: 0.32 }, // 12.2s: Simulation Tree entrance
+  { frame: 375, type: "impact_hit",     volume: 0.24 }, // 12.5s: Reality warning tag
+  { frame: 456, type: "whoosh_fast",    volume: 0.34 }, // 15.2s: PropComparison entrance
+  { frame: 465, type: "click",          volume: 0.26 }, // 15.5s: Left illusion card lock
+  { frame: 564, type: "impact_hit",     volume: 0.25 }, // 18.8s: Right reality card reveal
+  { frame: 714, type: "whoosh_fast",    volume: 0.32 }, // 23.8s: Apple Toggle Switch entrance
+  { frame: 723, type: "click",          volume: 0.28 }, // 24.1s: Detachment toggle lock
+  { frame: 810, type: "whoosh_sparkle", volume: 0.35 }, // 27.0s: Closure card radiant reveal
+  { frame: 819, type: "click",          volume: 0.26 }, // 27.3s: Peace restored stamp
 ];
 
 export const HoldingGrudgesComposition: React.FC = () => {

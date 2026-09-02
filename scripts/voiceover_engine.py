@@ -54,13 +54,13 @@ def normalize_text_for_tts(raw_text: str) -> str:
 
 async def generate_raw_tts(clean_text: str, raw_mp3_path: str, voice: str = "en-US-JennyNeural"):
     """
-    Synthesizes natural speech without artificial speedup (rate="+0%").
+    Synthesizes speech with smart tempo boost (rate="+8%") for high viewer retention.
     """
-    print(f"🎙️ Synthesizing natural voice with {voice} (Natural rate: +0%)...")
+    print(f"🎙️ Synthesizing voice with {voice} (Smart tempo boost: +8%)...")
     communicate = edge_tts.Communicate(
         text=clean_text,
         voice=voice,
-        rate="+0%",
+        rate="+8%",
         pitch="+0Hz"
     )
     await communicate.save(raw_mp3_path)

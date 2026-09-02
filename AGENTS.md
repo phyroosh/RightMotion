@@ -127,7 +127,7 @@ python scripts/create_clip.py --name "<clip_name>" --topic "<topic_name>" --scri
 ### Option B: Step-by-Step Production Process
 
 #### Step 1: Synthesize Neural Voiceover Audio & Word-Level Timestamps
-Synthesize the voiceover with `edge-tts` (`en-US-AvaMultilingualNeural` at `rate="+0%"`) and extract GPU/CPU millisecond timestamps using `faster-whisper`:
+Synthesize the voiceover with `edge-tts` (`en-US-AvaMultilingualNeural` at `rate="+8%"`, the smart retention-optimized tempo boost) and extract GPU/CPU millisecond timestamps using `faster-whisper`:
 - Audio output: `public/<name>/voiceover.mp3`
 - Transcript output: `src/clips/<name>/transcript.json`
 

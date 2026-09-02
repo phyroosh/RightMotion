@@ -3,582 +3,582 @@
     "word": "Ever",
     "start": 0,
     "end": 280,
-    "confidence": 0.873
+    "confidence": 0.895
   },
   {
     "word": "notice",
     "start": 280,
-    "end": 500,
-    "confidence": 0.978
+    "end": 460,
+    "confidence": 0.965
   },
   {
     "word": "how",
-    "start": 500,
-    "end": 880,
-    "confidence": 0.993
+    "start": 460,
+    "end": 820,
+    "confidence": 0.992
   },
   {
     "word": "someone",
-    "start": 880,
-    "end": 1220,
+    "start": 820,
+    "end": 1100,
     "confidence": 0.996
   },
   {
     "word": "can",
-    "start": 1220,
-    "end": 1500,
-    "confidence": 0.996
+    "start": 1100,
+    "end": 1360,
+    "confidence": 0.995
   },
   {
     "word": "hurt",
-    "start": 1500,
-    "end": 1720,
-    "confidence": 0.999
+    "start": 1360,
+    "end": 1560,
+    "confidence": 0.998
   },
   {
     "word": "you",
-    "start": 1720,
-    "end": 1880,
+    "start": 1560,
+    "end": 1700,
     "confidence": 0.999
   },
   {
     "word": "once,",
-    "start": 1880,
-    "end": 2120,
+    "start": 1700,
+    "end": 1920,
     "confidence": 0.999
   },
   {
     "word": "and",
-    "start": 2620,
-    "end": 2860,
-    "confidence": 0.994
+    "start": 2520,
+    "end": 2700,
+    "confidence": 0.993
   },
   {
     "word": "somehow",
-    "start": 2860,
-    "end": 3320,
-    "confidence": 0.987
+    "start": 2700,
+    "end": 3140,
+    "confidence": 0.989
   },
   {
     "word": "you",
-    "start": 3320,
-    "end": 3580,
-    "confidence": 0.961
+    "start": 3140,
+    "end": 3340,
+    "confidence": 0.962
   },
   {
     "word": "keep",
-    "start": 3580,
-    "end": 3760,
-    "confidence": 0.997
+    "start": 3340,
+    "end": 3500,
+    "confidence": 0.996
   },
   {
     "word": "replaying",
-    "start": 3760,
-    "end": 4180,
-    "confidence": 0.968
+    "start": 3500,
+    "end": 3900,
+    "confidence": 0.967
   },
   {
     "word": "it",
-    "start": 4180,
-    "end": 4340,
-    "confidence": 0.986
+    "start": 3900,
+    "end": 4040,
+    "confidence": 0.984
   },
   {
     "word": "in",
-    "start": 4340,
-    "end": 4420,
-    "confidence": 0.992
+    "start": 4040,
+    "end": 4100,
+    "confidence": 0.991
   },
   {
     "word": "your",
-    "start": 4420,
-    "end": 4500,
+    "start": 4100,
+    "end": 4180,
     "confidence": 0.996
   },
   {
     "word": "head",
-    "start": 4500,
-    "end": 4680,
-    "confidence": 0.999
+    "start": 4180,
+    "end": 4320,
+    "confidence": 0.998
   },
   {
     "word": "for",
-    "start": 4680,
-    "end": 4860,
+    "start": 4320,
+    "end": 4480,
     "confidence": 0.997
   },
   {
     "word": "months?",
-    "start": 4860,
-    "end": 5040,
+    "start": 4480,
+    "end": 4660,
     "confidence": 0.999
   },
   {
     "word": "That's",
-    "start": 5680,
-    "end": 5940,
+    "start": 5280,
+    "end": 5520,
     "confidence": 0.991
   },
   {
     "word": "partly",
-    "start": 5940,
-    "end": 6120,
+    "start": 5520,
+    "end": 5720,
     "confidence": 0.997
   },
   {
     "word": "because",
-    "start": 6120,
-    "end": 6580,
+    "start": 5720,
+    "end": 6100,
     "confidence": 0.998
   },
   {
     "word": "your",
-    "start": 6580,
-    "end": 6880,
-    "confidence": 0.987
+    "start": 6100,
+    "end": 6360,
+    "confidence": 0.985
   },
   {
     "word": "brain",
-    "start": 6880,
-    "end": 7200,
+    "start": 6360,
+    "end": 6660,
     "confidence": 0.999
   },
   {
     "word": "hates",
-    "start": 7200,
-    "end": 7620,
-    "confidence": 0.996
+    "start": 6660,
+    "end": 7060,
+    "confidence": 0.993
   },
   {
     "word": "unfinished",
-    "start": 7620,
-    "end": 8260,
-    "confidence": 0.981
+    "start": 7060,
+    "end": 7600,
+    "confidence": 0.955
   },
   {
     "word": "emotional",
-    "start": 8260,
-    "end": 8680,
-    "confidence": 0.887
+    "start": 7600,
+    "end": 8040,
+    "confidence": 0.914
   },
   {
     "word": "experiences.",
-    "start": 8680,
-    "end": 9460,
-    "confidence": 0.998
+    "start": 8040,
+    "end": 8720,
+    "confidence": 0.997
   },
   {
     "word": "It",
-    "start": 10280,
-    "end": 10420,
-    "confidence": 0.993
+    "start": 9480,
+    "end": 9620,
+    "confidence": 0.995
   },
   {
     "word": "keeps",
-    "start": 10420,
-    "end": 10620,
-    "confidence": 0.998
+    "start": 9620,
+    "end": 9800,
+    "confidence": 0.999
   },
   {
     "word": "revisiting",
-    "start": 10620,
-    "end": 11340,
-    "confidence": 0.993
+    "start": 9800,
+    "end": 10480,
+    "confidence": 0.994
   },
   {
     "word": "what",
-    "start": 11340,
-    "end": 11520,
+    "start": 10480,
+    "end": 10660,
     "confidence": 0.999
   },
   {
     "word": "happened,",
-    "start": 11520,
-    "end": 11840,
-    "confidence": 0.996
+    "start": 10660,
+    "end": 10960,
+    "confidence": 0.995
   },
   {
     "word": "almost",
-    "start": 12180,
-    "end": 12720,
+    "start": 11300,
+    "end": 11780,
     "confidence": 0.998
   },
   {
     "word": "like",
-    "start": 12720,
-    "end": 12980,
+    "start": 11780,
+    "end": 12020,
     "confidence": 0.999
   },
   {
     "word": "it's",
-    "start": 12980,
-    "end": 13160,
+    "start": 12020,
+    "end": 12180,
     "confidence": 0.991
   },
   {
     "word": "trying",
-    "start": 13160,
-    "end": 13360,
+    "start": 12180,
+    "end": 12380,
     "confidence": 0.998
   },
   {
     "word": "to",
-    "start": 13360,
-    "end": 13500,
+    "start": 12380,
+    "end": 12520,
     "confidence": 0.999
   },
   {
     "word": "figure",
-    "start": 13500,
-    "end": 13700,
-    "confidence": 0.999
+    "start": 12520,
+    "end": 12680,
+    "confidence": 1.0
   },
   {
     "word": "out,",
-    "start": 13700,
-    "end": 14020,
-    "confidence": 0.996
+    "start": 12680,
+    "end": 12960,
+    "confidence": 0.997
   },
   {
     "word": "how",
-    "start": 14280,
-    "end": 14860,
-    "confidence": 0.46
+    "start": 13240,
+    "end": 13780,
+    "confidence": 0.495
   },
   {
     "word": "could",
-    "start": 14860,
-    "end": 15020,
-    "confidence": 0.986
+    "start": 13780,
+    "end": 13920,
+    "confidence": 0.971
   },
   {
     "word": "I",
-    "start": 15020,
-    "end": 15140,
+    "start": 13920,
+    "end": 14060,
     "confidence": 0.989
   },
   {
     "word": "have",
-    "start": 15140,
-    "end": 15220,
-    "confidence": 0.936
+    "start": 14060,
+    "end": 14120,
+    "confidence": 0.918
   },
   {
     "word": "prevented",
-    "start": 15220,
-    "end": 15520,
+    "start": 14120,
+    "end": 14400,
     "confidence": 1.0
   },
   {
     "word": "this?",
-    "start": 15520,
-    "end": 15860,
-    "confidence": 0.998
+    "start": 14400,
+    "end": 14720,
+    "confidence": 0.999
   },
   {
     "word": "So",
-    "start": 16560,
-    "end": 17020,
-    "confidence": 0.979
+    "start": 15440,
+    "end": 15800,
+    "confidence": 0.984
   },
   {
     "word": "holding",
-    "start": 17020,
-    "end": 17360,
-    "confidence": 0.549
+    "start": 15800,
+    "end": 16120,
+    "confidence": 0.457
   },
   {
     "word": "a",
-    "start": 17360,
-    "end": 17580,
-    "confidence": 0.997
+    "start": 16120,
+    "end": 16320,
+    "confidence": 0.998
   },
   {
     "word": "grudge",
-    "start": 17580,
-    "end": 17940,
-    "confidence": 0.989
+    "start": 16320,
+    "end": 16660,
+    "confidence": 0.991
   },
   {
     "word": "can",
-    "start": 17940,
-    "end": 18140,
+    "start": 16660,
+    "end": 16840,
     "confidence": 0.995
   },
   {
     "word": "feel",
-    "start": 18140,
-    "end": 18400,
+    "start": 16840,
+    "end": 17040,
     "confidence": 0.999
   },
   {
     "word": "like",
-    "start": 18400,
-    "end": 18640,
+    "start": 17040,
+    "end": 17260,
     "confidence": 0.999
   },
   {
     "word": "protecting",
-    "start": 18640,
-    "end": 19000,
-    "confidence": 0.994
+    "start": 17260,
+    "end": 17580,
+    "confidence": 0.923
   },
   {
-    "word": "yourself.",
-    "start": 19000,
-    "end": 19540,
+    "word": "yourself,",
+    "start": 17580,
+    "end": 18080,
     "confidence": 0.999
   },
   {
-    "word": "But",
-    "start": 20120,
-    "end": 20360,
+    "word": "but",
+    "start": 18560,
+    "end": 18840,
     "confidence": 0.996
   },
   {
-    "word": "eventually,",
-    "start": 20360,
-    "end": 20760,
-    "confidence": 0.955
+    "word": "eventually",
+    "start": 18840,
+    "end": 19240,
+    "confidence": 0.984
   },
   {
     "word": "you're",
-    "start": 21140,
-    "end": 21320,
-    "confidence": 0.995
+    "start": 19240,
+    "end": 19560,
+    "confidence": 0.928
   },
   {
     "word": "not",
-    "start": 21320,
-    "end": 21500,
-    "confidence": 0.995
+    "start": 19560,
+    "end": 19720,
+    "confidence": 0.996
   },
   {
     "word": "protecting",
-    "start": 21500,
-    "end": 21860,
+    "start": 19720,
+    "end": 20040,
     "confidence": 0.999
   },
   {
     "word": "yourself",
-    "start": 21860,
-    "end": 22260,
+    "start": 20040,
+    "end": 20420,
     "confidence": 0.997
   },
   {
     "word": "from",
-    "start": 22260,
-    "end": 22480,
+    "start": 20420,
+    "end": 20620,
     "confidence": 0.997
   },
   {
     "word": "them",
-    "start": 22480,
-    "end": 22620,
+    "start": 20620,
+    "end": 20780,
     "confidence": 0.998
   },
   {
     "word": "anymore.",
-    "start": 22620,
-    "end": 22940,
-    "confidence": 0.936
+    "start": 20780,
+    "end": 21100,
+    "confidence": 0.956
   },
   {
     "word": "You're",
-    "start": 23600,
-    "end": 23800,
-    "confidence": 0.996
+    "start": 21880,
+    "end": 22080,
+    "confidence": 0.994
   },
   {
     "word": "carrying",
-    "start": 23800,
-    "end": 24180,
-    "confidence": 0.999
+    "start": 22080,
+    "end": 22360,
+    "confidence": 0.998
   },
   {
     "word": "them",
-    "start": 24180,
-    "end": 24400,
+    "start": 22360,
+    "end": 22580,
     "confidence": 0.999
   },
   {
     "word": "around",
-    "start": 24400,
-    "end": 24640,
+    "start": 22580,
+    "end": 22820,
     "confidence": 0.998
   },
   {
     "word": "in",
-    "start": 24640,
-    "end": 24880,
-    "confidence": 0.995
+    "start": 22820,
+    "end": 23040,
+    "confidence": 0.996
   },
   {
     "word": "your",
-    "start": 24880,
-    "end": 25000,
+    "start": 23040,
+    "end": 23140,
     "confidence": 0.997
   },
   {
     "word": "own",
-    "start": 25000,
-    "end": 25200,
-    "confidence": 0.998
+    "start": 23140,
+    "end": 23320,
+    "confidence": 0.999
   },
   {
     "word": "head.",
-    "start": 25200,
-    "end": 25460,
+    "start": 23320,
+    "end": 23540,
     "confidence": 1.0
   },
   {
     "word": "You",
-    "start": 26020,
-    "end": 26180,
-    "confidence": 0.995
+    "start": 24060,
+    "end": 24200,
+    "confidence": 0.998
   },
   {
     "word": "don't",
-    "start": 26180,
-    "end": 26360,
+    "start": 24200,
+    "end": 24340,
     "confidence": 1.0
   },
   {
     "word": "have",
-    "start": 26360,
-    "end": 26520,
+    "start": 24340,
+    "end": 24480,
     "confidence": 0.999
   },
   {
     "word": "to",
-    "start": 26520,
-    "end": 26680,
-    "confidence": 0.999
+    "start": 24480,
+    "end": 24620,
+    "confidence": 1.0
   },
   {
     "word": "forgive",
-    "start": 26680,
-    "end": 26880,
+    "start": 24620,
+    "end": 24820,
     "confidence": 1.0
   },
   {
     "word": "someone",
-    "start": 26880,
-    "end": 27260,
+    "start": 24820,
+    "end": 25140,
     "confidence": 0.999
   },
   {
     "word": "just",
-    "start": 27260,
-    "end": 27620,
-    "confidence": 0.939
+    "start": 25140,
+    "end": 25500,
+    "confidence": 0.978
   },
   {
     "word": "because",
-    "start": 27620,
-    "end": 27960,
+    "start": 25500,
+    "end": 25780,
     "confidence": 0.999
   },
   {
     "word": "they",
-    "start": 27960,
-    "end": 28200,
+    "start": 25780,
+    "end": 26040,
     "confidence": 0.999
   },
   {
     "word": "hurt",
-    "start": 28200,
-    "end": 28380,
+    "start": 26040,
+    "end": 26200,
     "confidence": 0.999
   },
   {
     "word": "you.",
-    "start": 28380,
-    "end": 28640,
+    "start": 26200,
+    "end": 26460,
     "confidence": 1.0
   },
   {
     "word": "Sometimes",
-    "start": 28640,
-    "end": 29540,
-    "confidence": 0.434
+    "start": 26860,
+    "end": 27320,
+    "confidence": 0.99
   },
   {
     "word": "healing",
-    "start": 29540,
-    "end": 29960,
-    "confidence": 0.904
+    "start": 27320,
+    "end": 27680,
+    "confidence": 0.972
   },
   {
     "word": "simply",
-    "start": 29960,
-    "end": 30460,
-    "confidence": 0.992
+    "start": 27680,
+    "end": 28240,
+    "confidence": 0.996
   },
   {
     "word": "means",
-    "start": 30460,
-    "end": 30880,
+    "start": 28240,
+    "end": 28540,
     "confidence": 0.999
   },
   {
     "word": "deciding.",
-    "start": 30880,
-    "end": 31240,
-    "confidence": 0.984
+    "start": 28540,
+    "end": 28800,
+    "confidence": 0.997
   },
   {
     "word": "I'm",
-    "start": 32220,
-    "end": 32300,
-    "confidence": 0.955
+    "start": 29360,
+    "end": 29840,
+    "confidence": 0.822
   },
   {
     "word": "not",
-    "start": 32300,
-    "end": 32420,
+    "start": 29840,
+    "end": 29960,
     "confidence": 0.998
   },
   {
     "word": "giving",
-    "start": 32420,
-    "end": 32640,
-    "confidence": 0.998
+    "start": 29960,
+    "end": 30120,
+    "confidence": 0.989
   },
   {
     "word": "this",
-    "start": 32640,
-    "end": 32940,
-    "confidence": 0.994
+    "start": 30120,
+    "end": 30380,
+    "confidence": 0.99
   },
   {
     "word": "any",
-    "start": 32940,
-    "end": 33180,
-    "confidence": 0.831
+    "start": 30380,
+    "end": 30600,
+    "confidence": 0.778
   },
   {
     "word": "more",
-    "start": 33180,
-    "end": 33500,
-    "confidence": 0.999
-  },
-  {
-    "word": "space",
-    "start": 33500,
-    "end": 33740,
+    "start": 30600,
+    "end": 30860,
     "confidence": 0.998
   },
   {
+    "word": "space",
+    "start": 30860,
+    "end": 31080,
+    "confidence": 0.999
+  },
+  {
     "word": "in",
-    "start": 33740,
-    "end": 34040,
-    "confidence": 0.814
+    "start": 31080,
+    "end": 31360,
+    "confidence": 0.838
   },
   {
     "word": "me.",
-    "start": 34040,
-    "end": 34200,
-    "confidence": 0.997
+    "start": 31360,
+    "end": 31480,
+    "confidence": 0.995
   }
 ]

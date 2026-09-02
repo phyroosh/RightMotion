@@ -77,8 +77,8 @@ def select_cutout_assets(topic: str, script: str):
 async def synthesize_speech(text: str, output_path: Path, voice: str = "en-US-AvaMultilingualNeural"):
     import edge_tts
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    print(f"🎙️ [1/4] Synthesizing neural speech with voice '{voice}'...")
-    communicate = edge_tts.Communicate(text=text, voice=voice, rate="+0%")
+    print(f"🎙️ [1/4] Synthesizing neural speech with voice '{voice}' (rate=+8% for retention)...")
+    communicate = edge_tts.Communicate(text=text, voice=voice, rate="+8%")
     await communicate.save(str(output_path))
     print(f"      Saved voiceover to: {output_path}")
 
