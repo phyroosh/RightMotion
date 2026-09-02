@@ -15,9 +15,9 @@ Every video generated in RightClips MUST use tactile, physical cutout props inst
 
 ### 👁️ AI Agent Visual Perception:
 Before generating a video or designing scenes, **view the visual catalog contact sheets directly**:
-1. **[Visual Catalog 1 (Psychology & Burnout)](file:///c:/Toptier%20Products/RightClips/public/assets/visual_catalog_1.png)**
-2. **[Visual Catalog 2 (Devices, Relationships & Habits)](file:///c:/Toptier%20Products/RightClips/public/assets/visual_catalog_2.png)**
-3. **[Asset Metadata Registry](file:///c:/Toptier%20Products/RightClips/public/assets/registry.json)**
+1. **[Visual Catalog 1 (Psychology & Burnout)](file:///home/phyroosh/TopProducts/RightClips/public/assets/visual_catalog_1.png)**
+2. **[Visual Catalog 2 (Devices, Relationships & Habits)](file:///home/phyroosh/TopProducts/RightClips/public/assets/visual_catalog_2.png)**
+3. **[Asset Metadata Registry](file:///home/phyroosh/TopProducts/RightClips/public/assets/registry.json)**
 
 ---
 
@@ -179,10 +179,10 @@ export const <Name>Thumbnail: React.FC = () => (
 #### Step 5: Render Video & 4K Thumbnail
 ```bash
 # Render 4K Still Thumbnail
-cmd /c "npx remotion still src/index.ts <Name>Thumbnail out/<name>_video_thumbnail.png --overwrite"
+npx remotion still src/index.ts <Name>Thumbnail out/<name>_video_thumbnail.png --overwrite
 
 # Render Full Video MP4
-cmd /c "npx remotion render src/index.ts <Name>Video out/<name>_video.mp4 --concurrency=4 --overwrite"
+npx remotion render src/index.ts <Name>Video out/<name>_video.mp4 --concurrency=4 --overwrite
 ```
 
 #### Step 6: Add Metadata to `studio/metadata.json`
@@ -213,5 +213,5 @@ Add the viral title (with `#Shorts`), high-CTR description, category (`27` Educa
 ---
 
 ## 🌐 Studio Dashboard & YouTube Automation
-- Run `start_studio.bat` or `npm run studio` to launch the local studio at `http://localhost:4000`.
+- Run `./start_studio.sh` (verifies & launches) or `./Direct_start_server.sh` (direct start) on Linux, `scripts/windows/start_studio.bat` on Windows, or `npm run studio` to launch the local studio at `http://localhost:4000`.
 - The studio automatically attaches 4K thumbnails, schedules native YouTube releases, and syncs upload states.

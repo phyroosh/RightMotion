@@ -63,12 +63,28 @@ RightClips/
 * **NVIDIA GPU with CUDA** (recommended for instant Whisper transcription and Remotion ANGLE rendering)
 
 ### 2. Install Dependencies
+
+**Linux / Fedora:**
+```bash
+./start_studio.sh       # All-in-one: verifies, installs dependencies & launches
+# Or standalone setup:
+./scripts/setup.sh
+```
+
+**Windows:**
+```bat
+scripts\windows\setup.bat
+```
+
+Or manually:
 ```bash
 # Install Node dependencies
 npm install
 
-# Install Python audio & AI dependencies
-pip install edge-tts faster-whisper
+# Setup Python virtual environment & dependencies
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ### 3. Start Remotion Preview Studio
@@ -78,8 +94,24 @@ npx remotion preview
 Open [http://localhost:3000](http://localhost:3000) to live preview and scrub any clip with hot reload.
 
 ### 4. Start RightClips Studio (YouTube Publishing Dashboard)
+
+**Linux / Fedora:**
 ```bash
-node studio/server.js
+# Complete verification, auto-setup & launch:
+./start_studio.sh
+
+# Or direct fast start (skips checks):
+./Direct_start_server.sh
+```
+
+**Windows:**
+```bat
+scripts\windows\start_studio.bat
+```
+
+Or via npm:
+```bash
+npm run studio
 ```
 Open [http://localhost:4000](http://localhost:4000) to view:
 * Video catalog with status badges (`✅ LIVE`, `📅 SCHED`, `⏳ READY`).

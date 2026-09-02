@@ -591,10 +591,12 @@ def render_assets(name: str, pascal_name: str):
     out_video = f"out/{name}_video.mp4"
     (ROOT_DIR / "out").mkdir(parents=True, exist_ok=True)
 
+    npx_bin = "npx.cmd" if sys.platform == "win32" else "npx"
+
     # 1. Render Thumbnail
     print(f"      Rendering Still: {pascal_name}Thumbnail -> {out_thumb}...")
     subprocess.run(
-        f"npx.cmd remotion still src/index.ts {pascal_name}Thumbnail {out_thumb} --overwrite",
+        f"{npx_bin} remotion still src/index.ts {pascal_name}Thumbnail {out_thumb} --overwrite",
         shell=True,
         cwd=str(ROOT_DIR),
         check=True
@@ -603,7 +605,7 @@ def render_assets(name: str, pascal_name: str):
     # 2. Render Video
     print(f"      Rendering Video: {pascal_name}Video -> {out_video}...")
     subprocess.run(
-        f"npx.cmd remotion render src/index.ts {pascal_name}Video {out_video} --concurrency=4 --overwrite",
+        f"{npx_bin} remotion render src/index.ts {pascal_name}Video {out_video} --concurrency=4 --overwrite",
         shell=True,
         cwd=str(ROOT_DIR),
         check=True
