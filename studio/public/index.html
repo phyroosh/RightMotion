@@ -697,39 +697,58 @@
         </button>
       </div>
 
-      <!-- 1. SELECT TARGET PLATFORMS -->
-      <div class="flex flex-col gap-2">
-        <label class="text-xs font-mono font-bold uppercase text-slate-300 tracking-wider">
-          1. Select Target Platforms
-        </label>
-        <div class="grid grid-cols-2 gap-3">
-          <!-- YouTube Checkbox Card -->
-          <label class="p-4 rounded-2xl glass-input border border-white/10 hover:border-sky-400/50 cursor-pointer flex items-center justify-between transition group">
-            <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-xl bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center font-bold">
-                <i data-lucide="play" class="w-4 h-4 fill-red-400"></i>
-              </div>
-              <div>
-                <div class="text-xs font-black text-white">YouTube Shorts</div>
-                <div class="text-[10px] text-sky-400 font-mono">Native Cloud Scheduling</div>
-              </div>
-            </div>
-            <input type="checkbox" id="modalTargetYt" onchange="onModalPlatformToggle()" checked class="w-5 h-5 rounded-lg accent-[#0071e3] cursor-pointer" />
+      <!-- 1. SELECT TARGET DESTINATIONS & CHANNELS -->
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-mono font-bold uppercase text-slate-300 tracking-wider flex items-center gap-1.5">
+            <i data-lucide="send" class="w-3.5 h-3.5 text-sky-400"></i>
+            1. Target Destinations & Channels
           </label>
+          <span class="text-[10px] text-slate-400 font-mono">Select channels to publish to</span>
+        </div>
 
-          <!-- Instagram Checkbox Card -->
-          <label class="p-4 rounded-2xl glass-input border border-white/10 hover:border-pink-400/50 cursor-pointer flex items-center justify-between transition group">
-            <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-xl bg-pink-600/20 text-pink-400 border border-pink-500/30 flex items-center justify-center font-bold">
-                <i data-lucide="camera" class="w-4 h-4"></i>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <!-- YouTube Channels Box -->
+          <div class="p-3.5 rounded-2xl glass-input border border-white/10 flex flex-col gap-2.5">
+            <div class="flex items-center justify-between border-b border-white/5 pb-2">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center">
+                  <i data-lucide="play" class="w-3 h-3 fill-red-400"></i>
+                </div>
+                <span class="text-xs font-black text-white">YouTube</span>
+                <span id="modalYtCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-sky-500/20 text-sky-300">0 selected</span>
               </div>
-              <div>
-                <div class="text-xs font-black text-white">Instagram Reels</div>
-                <div class="text-[10px] text-pink-400 font-mono">Instant Live Upload</div>
-              </div>
+              <label class="flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-slate-300 hover:text-white">
+                <span>Enable</span>
+                <input type="checkbox" id="modalTargetYt" onchange="onModalMasterToggle('yt')" checked class="w-4 h-4 rounded accent-[#0071e3] cursor-pointer" />
+              </label>
             </div>
-            <input type="checkbox" id="modalTargetIg" onchange="onModalPlatformToggle()" checked class="w-5 h-5 rounded-lg accent-[#e1306c] cursor-pointer" />
-          </label>
+            <!-- Dynamic list of YouTube channels with checkboxes -->
+            <div id="modalYtChannelsList" class="flex flex-col gap-1.5 max-h-36 overflow-y-auto custom-scrollbar pr-1">
+              <!-- Populated by renderModalDestinations() -->
+            </div>
+          </div>
+
+          <!-- Instagram Accounts Box -->
+          <div class="p-3.5 rounded-2xl glass-input border border-white/10 flex flex-col gap-2.5">
+            <div class="flex items-center justify-between border-b border-white/5 pb-2">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-pink-600/20 text-pink-400 border border-pink-500/30 flex items-center justify-center">
+                  <i data-lucide="camera" class="w-3 h-3"></i>
+                </div>
+                <span class="text-xs font-black text-white">Instagram</span>
+                <span id="modalIgCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-pink-500/20 text-pink-300">0 selected</span>
+              </div>
+              <label class="flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-slate-300 hover:text-white">
+                <span>Enable</span>
+                <input type="checkbox" id="modalTargetIg" onchange="onModalMasterToggle('ig')" checked class="w-4 h-4 rounded accent-[#e1306c] cursor-pointer" />
+              </label>
+            </div>
+            <!-- Dynamic list of Instagram accounts with checkboxes -->
+            <div id="modalIgAccountsList" class="flex flex-col gap-1.5 max-h-36 overflow-y-auto custom-scrollbar pr-1">
+              <!-- Populated by renderModalDestinations() -->
+            </div>
+          </div>
         </div>
       </div>
 
@@ -929,97 +948,136 @@
 
       <!-- 1. YOUTUBE SETTINGS TAB CONTENT -->
       <div id="settingsYtContent" class="flex flex-col gap-6">
-        <!-- STEP BY STEP GUIDE -->
-        <div class="flex flex-col gap-3">
-          <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
-            <i data-lucide="help-circle" class="w-4 h-4 text-sky-400"></i>
-            How to get your YouTube API Credentials (3 Simple Steps)
-          </div>
-          
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <!-- Step 1 -->
-            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">1</span>
-                <span class="text-xs font-bold text-white">Enable API</span>
-              </div>
-              <p class="text-[11px] text-slate-400 leading-relaxed">
-                Open <a href="https://console.cloud.google.com" target="_blank" class="text-sky-400 underline font-bold">Google Cloud</a>, create a project, and enable <strong>YouTube Data API v3</strong> in the Library.
-              </p>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">2</span>
-                <span class="text-xs font-bold text-white">OAuth Consent</span>
-              </div>
-              <p class="text-[11px] text-slate-400 leading-relaxed">
-                Set User Type to <strong>External</strong>, add YouTube upload scopes, and add your Google Email under <strong>Test Users</strong>.
-              </p>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
-              <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded-full bg-sky-500 text-black font-mono font-black text-xs flex items-center justify-center">3</span>
-                <span class="text-xs font-bold text-white">Download JSON</span>
-              </div>
-              <p class="text-[11px] text-slate-400 leading-relaxed">
-                Click <strong>Create Credentials</strong> &gt; <strong>OAuth Client ID</strong> &gt; <strong>Desktop App</strong> &gt; Download JSON file.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- JSON INPUT BOX & FILE SELECTOR -->
+        
+        <!-- SECTION 1: CONNECTED YOUTUBE CHANNELS -->
         <div class="flex flex-col gap-3">
           <div class="flex items-center justify-between">
-            <label class="text-xs font-bold text-slate-200 flex items-center gap-2">
-              <span>Paste client_secrets.json Content</span>
-              <span class="text-sky-400">*</span>
-            </label>
-            <label class="cursor-pointer text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1.5 transition">
-              <i data-lucide="folder-open" class="w-3.5 h-3.5"></i>
-              <span>Or browse file</span>
-              <input type="file" id="secretsFileInput" accept=".json" class="hidden" onchange="handleSecretsFile(event)" />
-            </label>
+            <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
+              <i data-lucide="youtube" class="w-4 h-4 text-red-500"></i>
+              <span>Connected YouTube Channels</span>
+              <span id="settingsChannelsCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-500/20 text-red-300 border border-red-500/30">0</span>
+            </div>
+            <button
+              type="button"
+              onclick="openConnectChannelModal()"
+              class="px-3.5 py-1.5 rounded-xl gradient-border-btn text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+            >
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+              <span>Connect Channel</span>
+            </button>
           </div>
 
-          <textarea
-            id="clientSecretsText"
-            rows="5"
-            placeholder='{"installed":{"client_id":"YOUR_CLIENT_ID.apps.googleusercontent.com","project_id":"...","client_secret":"YOUR_CLIENT_SECRET",...}}'
-            class="w-full px-4 py-3 rounded-2xl glass-input text-xs font-mono text-slate-200 placeholder:text-slate-600 focus:border-sky-400 custom-scrollbar leading-relaxed"
-          ></textarea>
-
-          <div class="flex items-center justify-between gap-3">
-            <button
-              type="button"
-              onclick="saveYoutubeSecrets()"
-              id="saveSecretsBtn"
-              class="px-6 py-3 rounded-2xl gradient-border-btn text-white text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
-            >
-              <i data-lucide="plus-circle" class="w-4 h-4"></i>
-              <span>Add this YT studio API</span>
-            </button>
-
-            <button
-              type="button"
-              onclick="resetYoutubeSecrets()"
-              class="px-4 py-2.5 rounded-2xl glass-input hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
-              title="Reset existing credentials"
-            >
-              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-              <span>Reset API</span>
-            </button>
+          <div id="settingsChannelsListContainer" class="flex flex-col gap-2.5">
+            <!-- Dynamically rendered by loadSettingsStatus() -->
           </div>
         </div>
 
-        <!-- ACTIVE CONNECTION & CONFIRMATION BOX -->
-        <div id="settingsConnectionCard" class="p-5 rounded-2xl border transition flex flex-col gap-3">
-          <!-- Dynamically rendered by updateSettingsUI() -->
+        <!-- SECTION 2: GOOGLE CLOUD CREDENTIALS PROJECTS -->
+        <div class="flex flex-col gap-3 pt-2 border-t border-white/10">
+          <div class="flex items-center justify-between">
+            <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
+              <i data-lucide="key" class="w-4 h-4 text-amber-400"></i>
+              <span>Google Cloud Console API Projects</span>
+              <span id="settingsProjectsCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">0</span>
+            </div>
+            <span class="text-[10px] text-slate-400 font-mono">Each project holds YouTube Data API quotas</span>
+          </div>
+
+          <div id="settingsProjectsListContainer" class="flex flex-col gap-2">
+            <!-- Dynamically rendered by loadSettingsStatus() -->
+          </div>
+
+          <!-- ADD NEW GOOGLE CLOUD CREDENTIALS BOX -->
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-3 mt-1">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-200 flex items-center gap-2">
+                <span>Add New Google Cloud API Project (client_secrets.json)</span>
+              </label>
+              <label class="cursor-pointer text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1.5 transition">
+                <i data-lucide="folder-open" class="w-3.5 h-3.5"></i>
+                <span>Browse JSON file</span>
+                <input type="file" id="secretsFileInput" accept=".json" class="hidden" onchange="handleSecretsFile(event)" />
+              </label>
+            </div>
+
+            <input
+              type="text"
+              id="clientSecretsProjectName"
+              placeholder="Friendly Project Name (e.g. Primary Studio Console, Second Channel Project)"
+              class="w-full px-3.5 py-2.5 rounded-xl glass-input text-xs font-medium text-white placeholder:text-slate-600 focus:border-sky-400"
+            />
+
+            <textarea
+              id="clientSecretsText"
+              rows="4"
+              placeholder='{"installed":{"client_id":"YOUR_CLIENT_ID.apps.googleusercontent.com","project_id":"...","client_secret":"YOUR_CLIENT_SECRET",...}}'
+              class="w-full px-4 py-2.5 rounded-xl glass-input text-xs font-mono text-slate-200 placeholder:text-slate-600 focus:border-sky-400 custom-scrollbar leading-relaxed"
+            ></textarea>
+
+            <div class="flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onclick="saveYoutubeSecrets()"
+                id="saveSecretsBtn"
+                class="px-5 py-2.5 rounded-xl gradient-border-btn text-white text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
+              >
+                <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                <span>Add Google Cloud Project</span>
+              </button>
+
+              <button
+                type="button"
+                onclick="resetYoutubeSecrets()"
+                class="px-4 py-2 rounded-xl glass-input hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                title="Reset existing credentials"
+              >
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                <span>Reset All Credentials</span>
+              </button>
+            </div>
+          </div>
         </div>
+
+        <!-- STEP BY STEP SETUP GUIDE -->
+        <div class="flex flex-col gap-2.5 pt-2 border-t border-white/10">
+          <div class="text-xs font-mono font-black uppercase text-slate-400 tracking-wider flex items-center gap-1.5">
+            <i data-lucide="help-circle" class="w-3.5 h-3.5 text-sky-400"></i>
+            How to get client_secrets.json from Google Cloud Console
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-sky-500 text-black font-mono font-black text-[11px] flex items-center justify-center">1</span>
+                <span class="text-xs font-bold text-white">Enable API</span>
+              </div>
+              <p class="text-[10px] text-slate-400">
+                In <a href="https://console.cloud.google.com" target="_blank" class="text-sky-400 underline font-bold">Google Cloud</a>, enable <strong>YouTube Data API v3</strong>.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-sky-500 text-black font-mono font-black text-[11px] flex items-center justify-center">2</span>
+                <span class="text-xs font-bold text-white">OAuth Consent</span>
+              </div>
+              <p class="text-[10px] text-slate-400">
+                External consent screen, add YouTube scopes, and add your Google account as <strong>Test User</strong>.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-sky-500 text-black font-mono font-black text-[11px] flex items-center justify-center">3</span>
+                <span class="text-xs font-bold text-white">Download JSON</span>
+              </div>
+              <p class="text-[10px] text-slate-400">
+                Create <strong>OAuth Client ID</strong> &gt; <strong>Desktop App</strong> &gt; Download JSON.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- 2. INSTAGRAM SETTINGS TAB CONTENT -->
@@ -1027,19 +1085,77 @@
         <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
           <div class="text-xs font-black text-pink-400 uppercase tracking-wide flex items-center gap-2">
             <i data-lucide="shield-check" class="w-4 h-4"></i>
-            Native Playwright Interactive Login (Safe & Persistent)
+            Native Playwright Interactive Login (Safe, Persistent & Multi-Account)
           </div>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Clicking <strong>Connect Instagram</strong> opens a native Chromium browser window. Log into your Instagram account normally (supporting 2-Factor Authentication). Your session is encrypted and securely saved locally for 1-click multi-platform publishing.
+            Connect one or multiple Instagram accounts safely. Clicking <strong>Connect Account</strong> opens a native Chromium window. Log in (supporting 2FA); your session is preserved for automated 1-click publishing.
           </p>
         </div>
 
-        <!-- Instagram Connection State Card -->
-        <div id="settingsIgConnectionCard" class="p-5 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400">
-          <!-- Rendered dynamically by checkInstagramStatus() -->
+        <!-- Instagram Connected Accounts Section -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
+              <i data-lucide="camera" class="w-4 h-4 text-pink-400"></i>
+              <span>Connected Instagram Accounts</span>
+              <span id="settingsIgAccountsCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">0</span>
+            </div>
+            <button
+              type="button"
+              onclick="loginInstagram()"
+              class="px-3.5 py-1.5 rounded-xl ig-gradient-btn text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+            >
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+              <span>Add IG Account</span>
+            </button>
+          </div>
+
+          <div id="settingsIgAccountsContainer" class="flex flex-col gap-2.5">
+            <!-- Rendered dynamically by checkInstagramStatus() -->
+          </div>
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- CONNECT YOUTUBE CHANNEL MODAL (SELECT GOOGLE PROJECT) -->
+  <div id="connectChannelModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-panel w-full max-w-md rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center">
+            <i data-lucide="youtube" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-white">Connect YouTube Channel</h3>
+        </div>
+        <button onclick="closeConnectChannelModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-3 text-xs">
+        <p class="text-slate-300">Select which Google Cloud project API credentials to use to authenticate your channel:</p>
+        
+        <div class="flex flex-col gap-1.5">
+          <label class="font-bold text-slate-200">Google Cloud API Project</label>
+          <select id="connectChannelProjectSelect" class="w-full px-3 py-2.5 rounded-xl glass-input text-xs font-bold text-white bg-slate-900 border border-white/10">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+
+        <div class="p-3 rounded-xl bg-sky-500/10 border border-sky-500/20 text-[11px] text-sky-200">
+          💡 You can authenticate multiple different YouTube channels using the <strong>same</strong> Google Cloud project or across <strong>multiple</strong> projects.
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2 border-t border-white/10">
+        <button onclick="closeConnectChannelModal()" class="px-4 py-2 rounded-xl glass-input text-slate-400 hover:text-white text-xs font-bold">Cancel</button>
+        <button onclick="proceedConnectChannel()" class="px-5 py-2.5 rounded-xl gradient-border-btn text-white text-xs font-black flex items-center gap-2">
+          <span>Continue to Google</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1107,53 +1223,147 @@
       return d.toISOString().slice(0, 16);
     }
 
+    // ═══════════════════════════════════════════════════
+    // MULTI-CHANNEL & MULTI-ACCOUNT STATE
+    // ═══════════════════════════════════════════════════
     let isIgConnected = false;
     let activeIgUser = null;
+    let allIgAccounts = [];
+    let activeIgUsername = null;
+
+    let isConnected = false;
+    let activeChannel = null;
+    let allChannels = [];
+    let activeChannelId = null;
+    let allCredentials = [];
+    let activeProjectId = null;
     let currentModalTiming = 'now';
 
+    // Global Dropdown Click-Outside Listener
+    document.addEventListener('click', (e) => {
+      const ytDropdown = document.getElementById('ytChannelsDropdown');
+      const igDropdown = document.getElementById('igAccountsDropdown');
+      if (ytDropdown && !e.target.closest('#authSection')) {
+        ytDropdown.classList.add('hidden');
+      }
+      if (igDropdown && !e.target.closest('#instagramAuthSection')) {
+        igDropdown.classList.add('hidden');
+      }
+    });
+
+    function toggleYtDropdown(e) {
+      e.stopPropagation();
+      const ytDropdown = document.getElementById('ytChannelsDropdown');
+      const igDropdown = document.getElementById('igAccountsDropdown');
+      if (igDropdown) igDropdown.classList.add('hidden');
+      if (ytDropdown) ytDropdown.classList.toggle('hidden');
+    }
+
+    function toggleIgDropdown(e) {
+      e.stopPropagation();
+      const igDropdown = document.getElementById('igAccountsDropdown');
+      const ytDropdown = document.getElementById('ytChannelsDropdown');
+      if (ytDropdown) ytDropdown.classList.add('hidden');
+      if (igDropdown) igDropdown.classList.toggle('hidden');
+    }
+
     // ═══════════════════════════════════════════════════
-    // INSTAGRAM PLAYWRIGHT HANDLERS
+    // INSTAGRAM PLAYWRIGHT MULTI-ACCOUNT HANDLERS
     // ═══════════════════════════════════════════════════
     async function checkInstagramStatus() {
       const igSection = document.getElementById('instagramAuthSection');
-      const card = document.getElementById('settingsIgConnectionCard');
+      const settingsContainer = document.getElementById('settingsIgAccountsContainer');
+      const countBadge = document.getElementById('settingsIgAccountsCountBadge');
 
       try {
-        const res = await fetch('/api/instagram/status?t=' + Date.now());
-        const data = await res.json();
+        const [statusRes, accountsRes] = await Promise.all([
+          fetch('/api/instagram/status?t=' + Date.now()),
+          fetch('/api/instagram/accounts?t=' + Date.now()).catch(() => null)
+        ]);
+
+        const data = await statusRes.json();
         isIgConnected = data.isConnected;
         activeIgUser = data;
 
-        if (isIgConnected) {
-          const uname = data.username || 'instagram_user';
-          const avatarUrl = data.profilePicUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(uname)}&background=e1306c&color=fff&bold=true`;
+        if (accountsRes && accountsRes.ok) {
+          const accData = await accountsRes.json();
+          allIgAccounts = accData.accounts || [];
+          activeIgUsername = accData.activeUsername || data.username || null;
+        } else {
+          allIgAccounts = isIgConnected && data.username ? [{ username: data.username, profilePicUrl: data.profilePicUrl }] : [];
+          activeIgUsername = data.username || null;
+        }
+
+        if (countBadge) countBadge.textContent = allIgAccounts.length;
+
+        if (isIgConnected && activeIgUsername) {
+          const uname = activeIgUsername;
+          const currentAcc = allIgAccounts.find(a => a.username?.toLowerCase() === uname.toLowerCase()) || activeIgUser;
+          const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(uname)}&background=e1306c&color=fff&bold=true`;
+          const avatarUrl = currentAcc.profilePicUrl || fallbackAvatar;
 
           igSection.innerHTML = `
-            <div class="flex items-center gap-2 px-3 py-1.5 rounded-2xl glass-input border-pink-500/30 bg-pink-500/10">
-              <img src="${avatarUrl}" class="w-5 h-5 rounded-full object-cover border border-pink-400" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(uname)}&background=e1306c&color=fff';" />
-              <span class="text-xs font-black text-pink-300">@${uname}</span>
-              <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]"></span>
+            <div class="relative">
+              <button
+                onclick="toggleIgDropdown(event)"
+                class="flex items-center gap-2 px-3 py-1.5 rounded-2xl glass-input border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 transition cursor-pointer"
+                title="Switch Instagram Account"
+              >
+                <img
+                  src="${avatarUrl}"
+                  class="w-5 h-5 rounded-full object-cover border border-pink-400 shrink-0"
+                  onerror="this.src='${fallbackAvatar}';"
+                />
+                <span class="text-xs font-black text-pink-300 max-w-[100px] truncate">@${uname}</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]"></span>
+                <i data-lucide="chevron-down" class="w-3 h-3 text-pink-300"></i>
+              </button>
+
+              <div id="igAccountsDropdown" class="hidden absolute right-0 top-full mt-2 w-64 rounded-2xl glass-panel border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
+                <div class="px-2 py-1 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+                  <span>Instagram Accounts</span>
+                  <span class="text-pink-300">${allIgAccounts.length} Connected</span>
+                </div>
+
+                <div class="flex flex-col gap-1 max-h-48 overflow-y-auto custom-scrollbar">
+                  ${allIgAccounts.map(a => {
+                    const isActive = a.username.toLowerCase() === uname.toLowerCase();
+                    const aAvatar = a.profilePicUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(a.username)}&background=e1306c&color=fff`;
+                    return `
+                      <button
+                        onclick="switchInstagramAccount('${a.username}')"
+                        class="w-full flex items-center justify-between p-2 rounded-xl hover:bg-white/5 transition text-left cursor-pointer ${isActive ? 'bg-pink-500/15 border border-pink-500/30' : ''}"
+                      >
+                        <div class="flex items-center gap-2 min-w-0">
+                          <img src="${aAvatar}" class="w-6 h-6 rounded-full object-cover border border-pink-400 shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.username)}&background=e1306c&color=fff';" />
+                          <span class="text-xs font-bold text-white truncate">@${a.username}</span>
+                        </div>
+                        ${isActive ? '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 shrink-0">ACTIVE</span>' : ''}
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+
+                <div class="border-t border-white/10 my-1"></div>
+
+                <button
+                  onclick="loginInstagram()"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-pink-300 hover:bg-pink-500/10 text-xs font-bold transition cursor-pointer"
+                >
+                  <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                  <span>Add Another Account</span>
+                </button>
+
+                <button
+                  onclick="disconnectInstagram('${uname}')"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-rose-400 hover:bg-rose-500/10 text-xs font-bold transition cursor-pointer"
+                >
+                  <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+                  <span>Disconnect @${uname}</span>
+                </button>
+              </div>
             </div>
           `;
-
-          if (card) {
-            card.className = "p-5 rounded-2xl border border-pink-500/40 bg-pink-500/10 flex items-center justify-between gap-4 shadow-lg";
-            card.innerHTML = `
-              <div class="flex items-center gap-3">
-                <img src="${avatarUrl}" class="w-12 h-12 rounded-full border-2 border-pink-400 object-cover shadow-lg" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(uname)}&background=e1306c&color=fff';" />
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-sm font-black text-white">@${uname}</span>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">CONNECTED</span>
-                  </div>
-                  <div class="text-xs text-slate-300 font-mono mt-0.5">Automated Reels Publisher Ready</div>
-                </div>
-              </div>
-              <button onclick="disconnectInstagram()" class="px-3.5 py-2 rounded-xl glass-input hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-bold transition">
-                Disconnect
-              </button>
-            `;
-          }
         } else {
           igSection.innerHTML = `
             <button onclick="loginInstagram()" class="px-3 py-1.5 rounded-2xl ig-gradient-btn text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer">
@@ -1161,28 +1371,85 @@
               <span>Connect IG</span>
             </button>
           `;
+        }
 
-          if (card) {
-            card.className = "p-5 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400";
-            card.innerHTML = `
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-slate-800 text-pink-400 border border-pink-500/20 flex items-center justify-center">
-                  <i data-lucide="camera" class="w-5 h-5"></i>
+        // Render Settings Modal Instagram Tab
+        if (settingsContainer) {
+          if (allIgAccounts.length > 0) {
+            settingsContainer.innerHTML = allIgAccounts.map(a => {
+              const isActive = activeIgUsername && a.username.toLowerCase() === activeIgUsername.toLowerCase();
+              const aAvatar = a.profilePicUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(a.username)}&background=e1306c&color=fff`;
+              return `
+                <div class="p-3.5 rounded-2xl border ${isActive ? 'border-pink-500/40 bg-pink-500/10' : 'border-white/10 bg-white/5'} flex items-center justify-between gap-3 shadow-md">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <img src="${aAvatar}" class="w-10 h-10 rounded-full border-2 border-pink-400 object-cover shadow-md shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.username)}&background=e1306c&color=fff';" />
+                    <div class="min-w-0">
+                      <div class="flex items-center gap-2">
+                        <span class="text-sm font-black text-white truncate">@${a.username}</span>
+                        ${isActive ? '<span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">ACTIVE</span>' : ''}
+                      </div>
+                      <div class="text-[11px] text-slate-400 font-mono mt-0.5">Automated Reels Ready</div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-2 shrink-0">
+                    ${!isActive ? `
+                      <button
+                        onclick="switchInstagramAccount('${a.username}')"
+                        class="px-3 py-1.5 rounded-xl glass-input hover:bg-pink-500/20 text-pink-300 text-xs font-bold border border-pink-500/30 transition cursor-pointer"
+                      >
+                        Set Active
+                      </button>
+                    ` : ''}
+                    <button
+                      onclick="disconnectInstagram('${a.username}')"
+                      class="px-3 py-1.5 rounded-xl glass-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/10 hover:border-rose-500/30 transition cursor-pointer"
+                    >
+                      Disconnect
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <div class="text-xs font-bold text-slate-200">Instagram Not Connected</div>
-                  <div class="text-[11px] text-slate-400">Log in once via Playwright to enable 1-click Instagram Reels uploads.</div>
+              `;
+            }).join('');
+          } else {
+            settingsContainer.innerHTML = `
+              <div class="p-5 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-2xl bg-slate-800 text-pink-400 border border-pink-500/20 flex items-center justify-center shrink-0">
+                    <i data-lucide="camera" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-bold text-slate-200">No Instagram Accounts Connected</div>
+                    <div class="text-[11px] text-slate-400">Log in once via Playwright to enable 1-click Instagram Reels uploads.</div>
+                  </div>
                 </div>
+                <button onclick="loginInstagram()" class="px-4 py-2.5 rounded-xl ig-gradient-btn text-white text-xs font-black flex items-center gap-1.5 shadow-lg">
+                  <i data-lucide="log-in" class="w-4 h-4"></i> Connect IG
+                </button>
               </div>
-              <button onclick="loginInstagram()" class="px-4 py-2.5 rounded-xl ig-gradient-btn text-white text-xs font-black flex items-center gap-1.5 shadow-lg">
-                <i data-lucide="log-in" class="w-4 h-4"></i> Connect IG
-              </button>
             `;
           }
         }
+
         safeCreateIcons();
       } catch (e) {
         igSection.innerHTML = `<span class="text-xs text-rose-400 font-mono">IG Offline</span>`;
+      }
+    }
+
+    async function switchInstagramAccount(username) {
+      try {
+        const res = await fetch('/api/instagram/switch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+        showToast(`✅ Switched active Instagram account to @${username}`);
+        await checkInstagramStatus();
+      } catch (err) {
+        showToast('Error switching account: ' + err.message);
       }
     }
 
@@ -1212,11 +1479,17 @@
       }
     }
 
-    async function disconnectInstagram() {
-      if (!confirm('Disconnect your Instagram session?')) return;
+    async function disconnectInstagram(username) {
+      const targetUser = username || activeIgUsername;
+      if (!targetUser) return;
+      if (!confirm(`Disconnect Instagram account @${targetUser}?`)) return;
       try {
-        await fetch('/api/instagram/disconnect', { method: 'POST' });
-        showToast('Instagram session disconnected.');
+        await fetch('/api/instagram/disconnect', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: targetUser })
+        });
+        showToast(`Instagram account @${targetUser} disconnected.`);
         await checkInstagramStatus();
       } catch (e) {
         showToast('Error: ' + e.message);
@@ -1232,13 +1505,13 @@
       if (!ytBtn || !igBtn) return;
 
       if (tab === 'youtube') {
-        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#0071e3] text-white shadow-md";
-        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white";
+        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#0071e3] text-white shadow-md cursor-pointer";
+        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white cursor-pointer";
         if (ytContent) ytContent.classList.remove('hidden');
         if (igContent) igContent.classList.add('hidden');
       } else {
-        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 ig-gradient-btn text-white shadow-md";
-        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white";
+        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 ig-gradient-btn text-white shadow-md cursor-pointer";
+        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white cursor-pointer";
         if (igContent) igContent.classList.remove('hidden');
         if (ytContent) ytContent.classList.add('hidden');
       }
@@ -1246,10 +1519,8 @@
     }
 
     // ═══════════════════════════════════════════════════
-    // SETTINGS & YOUTUBE API MODAL HANDLERS
+    // SETTINGS & YOUTUBE MULTI-CHANNEL HANDLERS
     // ═══════════════════════════════════════════════════
-    let settingsData = null;
-
     async function openSettingsModal() {
       const modal = document.getElementById('settingsModal');
       modal.classList.remove('opacity-0', 'pointer-events-none');
@@ -1263,109 +1534,176 @@
       modal.classList.add('opacity-0', 'pointer-events-none');
     }
 
-    // Load current YouTube API & Channel connection status
+    // Load YouTube Channels & Google Cloud Projects
     async function loadSettingsStatus() {
-      const card = document.getElementById('settingsConnectionCard');
       const statusDot = document.getElementById('settingsStatusDot');
+      const channelsContainer = document.getElementById('settingsChannelsListContainer');
+      const projectsContainer = document.getElementById('settingsProjectsListContainer');
+      const channelsBadge = document.getElementById('settingsChannelsCountBadge');
+      const projectsBadge = document.getElementById('settingsProjectsCountBadge');
+
       try {
         const res = await fetch('/api/settings/youtube?t=' + Date.now());
-        settingsData = await res.json();
+        const data = await res.json();
+        allChannels = data.channels || [];
+        allCredentials = data.credentials || [];
+        activeChannel = data.channel || null;
+        isConnected = data.isConnected || false;
+
+        if (channelsBadge) channelsBadge.textContent = allChannels.length;
+        if (projectsBadge) projectsBadge.textContent = allCredentials.length;
 
         if (statusDot) {
-          statusDot.className = settingsData.isConnected
+          statusDot.className = isConnected
             ? 'w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]'
-            : settingsData.hasSecrets
+            : allCredentials.length > 0
             ? 'w-2 h-2 rounded-full bg-amber-400'
             : 'w-2 h-2 rounded-full bg-rose-500';
         }
 
-        if (settingsData.isConnected && settingsData.channel) {
-          const ch = settingsData.channel;
-          const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff&bold=true`;
-          card.className = "p-5 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 flex flex-col gap-3 shadow-lg shadow-emerald-500/5";
-          card.innerHTML = `
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2 text-xs font-mono font-black text-emerald-400 uppercase tracking-wider">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse"></span>
-                <span>Active Connected Channel</span>
-              </div>
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                100% READY
-              </span>
-            </div>
+        // Render Connected Channels in Settings
+        if (channelsContainer) {
+          if (allChannels.length > 0) {
+            channelsContainer.innerHTML = allChannels.map(ch => {
+              const isActive = activeChannel && ch.channelId === activeChannel.channelId;
+              const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff&bold=true`;
+              const avatar = ch.avatar || fallbackAvatar;
+              return `
+                <div class="p-3.5 rounded-2xl border ${isActive ? 'border-emerald-500/40 bg-emerald-500/10' : 'border-white/10 bg-white/5'} flex items-center justify-between gap-3 shadow-md">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <img src="${avatar}" class="w-12 h-12 rounded-full border-2 border-emerald-400 object-cover shadow-lg shrink-0" onerror="this.src='${fallbackAvatar}';" />
+                    <div class="min-w-0">
+                      <div class="flex items-center gap-2">
+                        <span class="text-sm font-black text-white truncate">${ch.title}</span>
+                        ${isActive ? '<span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">ACTIVE</span>' : ''}
+                      </div>
+                      <div class="text-xs text-slate-300 font-mono mt-0.5">
+                        <span class="text-sky-300 font-bold">${ch.customUrl || ch.channelId}</span> • <span>${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</span>
+                      </div>
+                      <div class="text-[10px] text-slate-400 font-mono mt-0.5 truncate">
+                        Project: <span class="text-slate-300 font-bold">${ch.credentialName || ch.credentialId || 'Default'}</span>
+                      </div>
+                    </div>
+                  </div>
 
-            <div class="flex items-center gap-4 pt-1">
-              <img
-                src="${ch.thumbnail || fallbackAvatar}"
-                alt="${ch.title}"
-                class="w-14 h-14 rounded-full border-2 border-emerald-400 object-cover shadow-lg shadow-emerald-500/20"
-                onerror="this.src='${fallbackAvatar}';"
-              />
-              <div class="flex-1">
-                <div class="flex items-center gap-2">
-                  <span class="text-sm font-black text-white">${ch.title}</span>
-                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-400 fill-emerald-400/20"></i>
+                  <div class="flex items-center gap-2 shrink-0">
+                    ${!isActive ? `
+                      <button
+                        onclick="switchYouTubeChannel('${ch.channelId}')"
+                        class="px-3 py-1.5 rounded-xl glass-input hover:bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 transition cursor-pointer"
+                      >
+                        Set Active
+                      </button>
+                    ` : ''}
+                    <button
+                      onclick="disconnectChannel('${ch.channelId}')"
+                      class="px-3 py-1.5 rounded-xl glass-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/10 hover:border-rose-500/30 transition cursor-pointer"
+                    >
+                      Disconnect
+                    </button>
+                  </div>
                 </div>
-                <div class="text-xs text-slate-300 font-mono mt-0.5">
-                  <span class="text-sky-300 font-bold">${ch.customUrl || ch.id}</span> • <span>${parseInt(ch.subscriberCount || 0).toLocaleString()} subscribers</span>
-                </div>
-                <div class="text-[10px] text-slate-400 font-mono mt-1">
-                  ${parseInt(ch.videoCount || 0).toLocaleString()} videos published • API Quota Active
-                </div>
+              `;
+            }).join('');
+          } else {
+            channelsContainer.innerHTML = `
+              <div class="p-4 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400">
+                <div class="text-xs text-slate-300">No YouTube channels connected yet. Click <strong>Connect Channel</strong> above.</div>
+                <button onclick="openConnectChannelModal()" class="px-3 py-1.5 rounded-xl gradient-border-btn text-white text-xs font-bold">Connect</button>
               </div>
+            `;
+          }
+        }
 
-              <button
-                onclick="logout()"
-                class="px-3.5 py-2 rounded-xl glass-input hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
-              >
-                <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
-                <span>Switch</span>
-              </button>
-            </div>
-          `;
-        } else if (settingsData.hasSecrets && settingsData.authUrl) {
-          card.className = "p-5 rounded-2xl border border-amber-500/40 bg-amber-500/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg shadow-amber-500/5";
-          card.innerHTML = `
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0 font-black">
-                <i data-lucide="key" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="text-xs font-black text-amber-300 uppercase tracking-wide">
-                  Credentials Loaded • Ready To Connect
+        // Render Google Cloud Projects in Settings
+        if (projectsContainer) {
+          if (allCredentials.length > 0) {
+            projectsContainer.innerHTML = allCredentials.map(p => `
+              <div class="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center shrink-0">
+                    <i data-lucide="key" class="w-3.5 h-3.5"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <div class="font-bold text-white truncate">${p.name || 'Google Cloud Project'}</div>
+                    <div class="text-[10px] text-slate-400 font-mono truncate">ID: ${p.projectId || p.id} • Added ${formatDateTime(p.createdAt)}</div>
+                  </div>
                 </div>
-                <p class="text-xs text-slate-300 mt-0.5">
-                  Click confirm below to authorize with Google and select your YouTube channel.
-                </p>
+                <div class="flex items-center gap-2 shrink-0">
+                  <button
+                    onclick="deleteCredential('${p.id}')"
+                    class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition cursor-pointer"
+                    title="Remove this credential"
+                  >
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
               </div>
-            </div>
+            `).join('');
+          } else {
+            projectsContainer.innerHTML = `
+              <div class="p-3 rounded-xl border border-dashed border-white/15 text-center text-xs text-slate-400">
+                No Google Cloud API credentials saved. Add a client_secrets.json below.
+              </div>
+            `;
+          }
+        }
 
-            <a
-              href="${settingsData.authUrl}"
-              class="px-6 py-3 rounded-2xl gradient-border-btn text-white text-xs font-extrabold flex items-center gap-2 shadow-xl shrink-0 cursor-pointer"
-            >
-              <i data-lucide="log-in" class="w-4 h-4"></i>
-              <span>Confirm & Connect Channel</span>
-            </a>
-          `;
+        safeCreateIcons();
+      } catch (err) {
+        console.error('Settings error:', err);
+      }
+    }
+
+    // Connect Channel Modal Helpers
+    function openConnectChannelModal() {
+      const modal = document.getElementById('connectChannelModal');
+      const select = document.getElementById('connectChannelProjectSelect');
+      if (!modal || !select) return;
+
+      if (allCredentials.length === 0) {
+        showToast('⚠️ Please add Google Cloud client_secrets.json first in Settings.');
+        openSettingsModal();
+        return;
+      }
+
+      select.innerHTML = allCredentials.map(p => `
+        <option value="${p.id}">${p.name} (Project: ${p.projectId || p.id})</option>
+      `).join('') + `<option value="new">+ Add New Google Cloud Project...</option>`;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      safeCreateIcons();
+    }
+
+    function closeConnectChannelModal() {
+      const modal = document.getElementById('connectChannelModal');
+      if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    async function proceedConnectChannel() {
+      const select = document.getElementById('connectChannelProjectSelect');
+      const val = select ? select.value : null;
+
+      if (val === 'new') {
+        closeConnectChannelModal();
+        openSettingsModal();
+        return;
+      }
+
+      closeConnectChannelModal();
+      showToast('🚀 Redirecting to Google Cloud OAuth...');
+
+      try {
+        const res = await fetch('/api/auth-url?credentialId=' + encodeURIComponent(val || ''));
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
         } else {
-          card.className = "p-5 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400";
-          card.innerHTML = `
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-2xl bg-slate-800 text-slate-400 border border-white/10 flex items-center justify-center shrink-0">
-                <i data-lucide="alert-circle" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <div class="text-xs font-bold text-slate-200">No YouTube Credentials Configured</div>
-                <div class="text-[11px] text-slate-400 mt-0.5">Paste client_secrets.json above and click "Add this YT studio API" to enable 1-click uploads.</div>
-              </div>
-            </div>
-          `;
+          throw new Error('No OAuth URL returned');
         }
       } catch (err) {
-        card.innerHTML = `<div class="text-xs text-rose-400">Settings error: ${err.message}</div>`;
+        showToast('OAuth Error: ' + err.message);
       }
-      safeCreateIcons();
     }
 
     // Handle file picker selection for client_secrets.json
@@ -1375,7 +1713,7 @@
       const reader = new FileReader();
       reader.onload = function(e) {
         document.getElementById('clientSecretsText').value = e.target.result;
-        showToast('📄 client_secrets.json loaded into text box. Click "Add this YT studio API" to confirm.');
+        showToast('📄 client_secrets.json loaded. Click "Add Google Cloud Project" to confirm.');
       };
       reader.readAsText(file);
     }
@@ -1383,6 +1721,7 @@
     // Save client_secrets.json to server
     async function saveYoutubeSecrets() {
       const text = document.getElementById('clientSecretsText').value.trim();
+      const name = document.getElementById('clientSecretsProjectName')?.value.trim();
       if (!text) {
         showToast('⚠️ Please paste your client_secrets.json content first.');
         return;
@@ -1394,100 +1733,172 @@
       safeCreateIcons();
 
       try {
-        const res = await fetch('/api/settings/save-secrets', {
+        const res = await fetch('/api/credentials', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ jsonContent: text }),
+          body: JSON.stringify({ name: name || undefined, jsonContent: text }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to save API credentials');
 
-        showToast('✅ ' + data.message);
+        showToast('✅ ' + (data.message || 'Google Cloud Project saved!'));
         document.getElementById('clientSecretsText').value = '';
+        if (document.getElementById('clientSecretsProjectName')) {
+          document.getElementById('clientSecretsProjectName').value = '';
+        }
         await loadSettingsStatus();
         await checkAuthStatus();
 
         if (data.authUrl) {
-          window.location.href = data.authUrl;
+          if (confirm('Google Cloud credentials saved! Would you like to connect a YouTube channel to this project now?')) {
+            window.location.href = data.authUrl;
+          }
         }
       } catch (err) {
         showToast('❌ Error: ' + err.message);
       } finally {
         saveBtn.disabled = false;
-        saveBtn.innerHTML = `<i data-lucide="plus-circle" class="w-4 h-4"></i> <span>Add this YT studio API</span>`;
+        saveBtn.innerHTML = `<i data-lucide="plus-circle" class="w-4 h-4"></i> <span>Add Google Cloud Project</span>`;
         safeCreateIcons();
       }
     }
 
-    // Reset API credentials
+    async function deleteCredential(id) {
+      if (!confirm('Are you sure you want to remove this Google Cloud API project?')) return;
+      try {
+        const res = await fetch(`/api/credentials/${encodeURIComponent(id)}`, { method: 'DELETE' });
+        const data = await res.json();
+        showToast('🗑️ ' + data.message);
+        await loadSettingsStatus();
+        await checkAuthStatus();
+      } catch (err) {
+        showToast('Error removing project: ' + err.message);
+      }
+    }
+
     async function resetYoutubeSecrets() {
-      if (!confirm('Are you sure you want to remove your YouTube API credentials and disconnect?')) return;
+      if (!confirm('Are you sure you want to remove ALL credentials and disconnect all channels?')) return;
       try {
         const res = await fetch('/api/settings/reset-secrets', { method: 'POST' });
         const data = await res.json();
         showToast('🗑️ ' + data.message);
         await loadSettingsStatus();
         await checkAuthStatus();
+        await loadVideos();
       } catch (err) {
         showToast('Error resetting API: ' + err.message);
       }
     }
 
-    // 1. Check Auth Status on Load & Render Live Channel PFP
+    // 1. Check Auth Status on Load & Render Live Channel Switcher
     async function checkAuthStatus() {
       const authSection = document.getElementById('authSection');
       try {
         const res = await fetch('/api/auth-status?t=' + Date.now());
         const data = await res.json();
 
-        if (data.authenticated && data.channel) {
-          isConnected = true;
-          activeChannel = data.channel;
-          
-          const channelName = data.channel.title || 'Judy Insights';
-          const customUrl = data.channel.customUrl || '@thejudyinsights';
+        isConnected = data.authenticated || false;
+        activeChannel = data.channel || null;
+        allChannels = data.channels || [];
+        activeChannelId = data.activeChannelId || (activeChannel?.channelId) || null;
+        allCredentials = data.credentials || [];
+        activeProjectId = data.activeProjectId || null;
+
+        if (isConnected && activeChannel) {
+          const channelName = activeChannel.title || 'YouTube Channel';
+          const customUrl = activeChannel.customUrl || '@youtube';
           const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(channelName)}&background=0071e3&color=fff&bold=true`;
-          const avatarUrl = data.channel.avatar || data.channel.directAvatar || fallbackAvatar;
+          const avatarUrl = activeChannel.avatar || fallbackAvatar;
 
           authSection.innerHTML = `
-            <div class="flex items-center gap-3">
-              <div class="relative">
-                <img
-                  id="channelAvatarImg"
-                  src="${avatarUrl}"
-                  alt="${channelName}"
-                  referrerpolicy="no-referrer"
-                  crossorigin="anonymous"
-                  onerror="this.onerror=null; this.src='${fallbackAvatar}';"
-                  class="w-10 h-10 rounded-full border-2 border-emerald-400 object-cover shadow-lg shadow-emerald-500/10 bg-slate-800"
-                />
-                <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-[#090d16] flex items-center justify-center">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                </span>
-              </div>
-              <div class="text-left">
-                <div class="flex items-center gap-1.5">
-                  <span class="text-xs font-extrabold text-white">${channelName}</span>
-                  <i data-lucide="badge-check" class="w-4 h-4 text-emerald-400 fill-emerald-400/20"></i>
+            <div class="relative">
+              <button
+                onclick="toggleYtDropdown(event)"
+                class="flex items-center gap-2.5 px-3 py-1.5 rounded-2xl glass-input border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 transition cursor-pointer"
+                title="Switch YouTube Channel"
+              >
+                <div class="relative">
+                  <img
+                    id="channelAvatarImg"
+                    src="${avatarUrl}"
+                    alt="${channelName}"
+                    referrerpolicy="no-referrer"
+                    crossorigin="anonymous"
+                    onerror="this.onerror=null; this.src='${fallbackAvatar}';"
+                    class="w-7 h-7 rounded-full border-2 border-emerald-400 object-cover shadow-lg shadow-emerald-500/10 bg-slate-800"
+                  />
+                  <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-[#090d16]"></span>
                 </div>
-                <div class="flex items-center gap-1.5 text-[11px] text-slate-400 font-mono">
-                  <span class="text-sky-300 font-semibold">${customUrl}</span>
-                  <span>•</span>
-                  <span>${data.channel.subscriberCount ? parseInt(data.channel.subscriberCount).toLocaleString() + ' subs' : 'Active'}</span>
+                <div class="text-left leading-tight pr-1">
+                  <div class="flex items-center gap-1">
+                    <span class="text-xs font-extrabold text-white max-w-[120px] truncate">${channelName}</span>
+                    <i data-lucide="chevron-down" class="w-3 h-3 text-emerald-300"></i>
+                  </div>
+                  <div class="text-[10px] text-sky-300 font-mono">${customUrl}</div>
                 </div>
-              </div>
-              <button onclick="logout()" title="Switch / Disconnect Account" class="p-2 rounded-xl glass-input text-slate-400 hover:text-rose-400 transition ml-1">
-                <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
               </button>
+
+              <div id="ytChannelsDropdown" class="hidden absolute right-0 top-full mt-2 w-72 rounded-2xl glass-panel border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
+                <div class="px-2 py-1 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+                  <span>YouTube Channels</span>
+                  <span class="text-emerald-300">${allChannels.length} Connected</span>
+                </div>
+
+                <div class="flex flex-col gap-1 max-h-52 overflow-y-auto custom-scrollbar">
+                  ${allChannels.map(ch => {
+                    const isActive = ch.channelId === activeChannelId;
+                    const chAvatar = ch.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff`;
+                    return `
+                      <button
+                        onclick="switchYouTubeChannel('${ch.channelId}')"
+                        class="w-full flex items-center justify-between p-2 rounded-xl hover:bg-white/5 transition text-left cursor-pointer ${isActive ? 'bg-emerald-500/15 border border-emerald-500/30' : ''}"
+                      >
+                        <div class="flex items-center gap-2.5 min-w-0">
+                          <img src="${chAvatar}" class="w-7 h-7 rounded-full object-cover border border-emerald-400 shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff';" />
+                          <div class="min-w-0">
+                            <div class="text-xs font-bold text-white truncate max-w-[140px]">${ch.title}</div>
+                            <div class="text-[10px] text-slate-400 font-mono truncate">${ch.customUrl || ''} • ${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</div>
+                          </div>
+                        </div>
+                        ${isActive ? '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 shrink-0">ACTIVE</span>' : ''}
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+
+                <div class="border-t border-white/10 my-1"></div>
+
+                <button
+                  onclick="openConnectChannelModal()"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-sky-300 hover:bg-sky-500/10 text-xs font-bold transition cursor-pointer"
+                >
+                  <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                  <span>Connect Another Channel</span>
+                </button>
+
+                <button
+                  onclick="syncWithYouTube()"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-slate-300 hover:bg-white/5 text-xs font-bold transition cursor-pointer"
+                >
+                  <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                  <span>Sync Channel Uploads</span>
+                </button>
+
+                <button
+                  onclick="disconnectChannel('${activeChannel.channelId}')"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-rose-400 hover:bg-rose-500/10 text-xs font-bold transition cursor-pointer"
+                >
+                  <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+                  <span>Disconnect Channel</span>
+                </button>
+              </div>
             </div>
           `;
         } else {
-          isConnected = false;
-          activeChannel = null;
           authSection.innerHTML = `
-            <button onclick="connectYouTube()" class="px-4 py-2 rounded-xl gradient-border-btn text-white text-xs font-bold flex items-center gap-2 shadow-lg">
+            <button onclick="openConnectChannelModal()" class="px-4 py-2 rounded-xl gradient-border-btn text-white text-xs font-bold flex items-center gap-2 shadow-lg cursor-pointer">
               <i data-lucide="link" class="w-3.5 h-3.5"></i>
-              Connect YouTube Studio
+              <span>Connect YouTube Studio</span>
             </button>
           `;
         }
@@ -1497,42 +1908,70 @@
       }
     }
 
-    async function connectYouTube() {
+    async function switchYouTubeChannel(channelId) {
       try {
-        const res = await fetch('/api/auth-url');
+        const res = await fetch('/api/channels/switch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ channelId })
+        });
         const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        }
+        if (!res.ok) throw new Error(data.error);
+        showToast(`✅ Active channel switched to "${data.channel?.title || 'Selected Channel'}"`);
+        await checkAuthStatus();
+        await loadVideos();
       } catch (err) {
-        showToast('Failed to get auth URL: ' + err.message);
+        showToast('Error switching channel: ' + err.message);
       }
     }
 
-    async function logout() {
-      if (!confirm('Disconnect current YouTube account to reconnect with another channel?')) return;
-      await fetch('/api/logout', { method: 'POST' });
-      showToast('Logged out of YouTube. Reconnect to choose channel.');
-      checkAuthStatus();
+    async function disconnectChannel(channelId) {
+      if (!confirm('Disconnect this YouTube channel?')) return;
+      try {
+        const res = await fetch(`/api/channels/${encodeURIComponent(channelId)}`, { method: 'DELETE' });
+        const data = await res.json();
+        showToast('Channel disconnected: ' + data.message);
+        await checkAuthStatus();
+        await loadVideos();
+      } catch (err) {
+        showToast('Error disconnecting: ' + err.message);
+      }
     }
 
-    // Force Sync with YouTube
+    async function connectYouTube() {
+      openConnectChannelModal();
+    }
+
+    async function logout() {
+      if (activeChannelId) {
+        await disconnectChannel(activeChannelId);
+      } else {
+        await fetch('/api/logout', { method: 'POST' });
+        await checkAuthStatus();
+      }
+    }
+
+    // Force Sync with YouTube across all connected channels
     async function syncWithYouTube() {
       const syncBtn = document.getElementById('syncYtBtn');
-      syncBtn.disabled = true;
-      syncBtn.innerHTML = `<i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i> Syncing...`;
+      if (syncBtn) {
+        syncBtn.disabled = true;
+        syncBtn.innerHTML = `<i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i> Syncing...`;
+      }
       safeCreateIcons();
 
       try {
-        const res = await fetch('/api/sync-uploads', { method: 'POST' });
+        const res = await fetch('/api/channels/sync', { method: 'POST' });
         const data = await res.json();
         showToast(`✅ Synced with YouTube! ${data.count || 0} upload records updated.`);
         await loadVideos();
       } catch (err) {
         showToast('Sync error: ' + err.message);
       } finally {
-        syncBtn.disabled = false;
-        syncBtn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> Sync YT`;
+        if (syncBtn) {
+          syncBtn.disabled = false;
+          syncBtn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> Sync YT`;
+        }
         safeCreateIcons();
       }
     }
@@ -1785,34 +2224,66 @@
           <!-- DUAL STATUS BADGES (YT & IG) -->
           <div class="flex flex-col items-end gap-1 flex-shrink-0">
             <!-- YouTube Status Pill -->
-            ${yt.isScheduled ? `
-              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1">
-                <i data-lucide="play" class="w-2.5 h-2.5 fill-purple-400"></i> YT SCHED
-              </span>
-            ` : yt.isUploaded ? `
-              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-red-500/20 text-red-300 border border-red-500/40 flex items-center gap-1">
-                <i data-lucide="play" class="w-2.5 h-2.5 fill-red-400"></i> YT LIVE
-              </span>
-            ` : `
-              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-slate-400">
-                YT READY
-              </span>
-            `}
+            ${(() => {
+              const chCount = v.channels ? Object.keys(v.channels).length : 0;
+              if (chCount > 1) {
+                return `
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-red-500/20 text-red-300 border border-red-500/40 flex items-center gap-1">
+                    <i data-lucide="play" class="w-2.5 h-2.5 fill-red-400"></i> ${chCount} CHANNELS
+                  </span>
+                `;
+              }
+              if (yt.isScheduled) {
+                return `
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-purple-500/20 text-purple-300 border border-purple-500/40 flex items-center gap-1">
+                    <i data-lucide="play" class="w-2.5 h-2.5 fill-purple-400"></i> YT SCHED
+                  </span>
+                `;
+              }
+              if (yt.isUploaded) {
+                return `
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-red-500/20 text-red-300 border border-red-500/40 flex items-center gap-1">
+                    <i data-lucide="play" class="w-2.5 h-2.5 fill-red-400"></i> YT LIVE
+                  </span>
+                `;
+              }
+              return `
+                <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-slate-400">
+                  YT READY
+                </span>
+              `;
+            })()}
 
             <!-- Instagram Status Pill -->
-            ${ig.isScheduled ? `
-              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-pink-500/20 text-pink-300 border border-pink-500/40 flex items-center gap-1">
-                <i data-lucide="camera" class="w-2.5 h-2.5 text-pink-400"></i> IG SCHED
-              </span>
-            ` : ig.isUploaded ? `
-              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-pink-500/25 text-pink-300 border border-pink-500/50 flex items-center gap-1">
-                <i data-lucide="camera" class="w-2.5 h-2.5 text-pink-400"></i> IG REEL
-              </span>
-            ` : `
-              <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-slate-400">
-                IG READY
-              </span>
-            `}
+            ${(() => {
+              const igCount = v.instagramAccounts ? Object.keys(v.instagramAccounts).length : 0;
+              if (igCount > 1) {
+                return `
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-pink-500/25 text-pink-300 border border-pink-500/50 flex items-center gap-1">
+                    <i data-lucide="camera" class="w-2.5 h-2.5 text-pink-400"></i> ${igCount} IG ACCOUNTS
+                  </span>
+                `;
+              }
+              if (ig.isScheduled) {
+                return `
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-pink-500/20 text-pink-300 border border-pink-500/40 flex items-center gap-1">
+                    <i data-lucide="camera" class="w-2.5 h-2.5 text-pink-400"></i> IG SCHED
+                  </span>
+                `;
+              }
+              if (ig.isUploaded) {
+                return `
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-black bg-pink-500/25 text-pink-300 border border-pink-500/50 flex items-center gap-1">
+                    <i data-lucide="camera" class="w-2.5 h-2.5 text-pink-400"></i> IG REEL
+                  </span>
+                `;
+              }
+              return `
+                <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-slate-400">
+                  IG READY
+                </span>
+              `;
+            })()}
           </div>
         </div>
       `;
@@ -2165,6 +2636,9 @@
     // ═══════════════════════════════════════════════════
     // MULTI-PLATFORM PUBLISH & SCHEDULE ENGINE
     // ═══════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════
+    // MULTI-PLATFORM & MULTI-CHANNEL PUBLISH ENGINE
+    // ═══════════════════════════════════════════════════
     function openPublishModal(mode = 'both') {
       if (!selectedVideo) {
         showToast('Please select a video from the library first');
@@ -2175,18 +2649,93 @@
       const targetYt = document.getElementById('modalTargetYt');
       const targetIg = document.getElementById('modalTargetIg');
 
-      if (mode === 'youtube') {
-        targetYt.checked = true;
-        targetIg.checked = false;
-      } else if (mode === 'instagram') {
-        targetYt.checked = false;
-        targetIg.checked = true;
-      } else {
-        targetYt.checked = true;
-        targetIg.checked = true;
+      if (targetYt) targetYt.checked = mode !== 'instagram';
+      if (targetIg) targetIg.checked = mode !== 'youtube';
+
+      // Render YouTube Channels Checklist
+      const ytList = document.getElementById('modalYtChannelsList');
+      if (ytList) {
+        if (allChannels.length === 0) {
+          ytList.innerHTML = `
+            <div class="p-2.5 text-[11px] text-slate-400 bg-white/5 rounded-xl flex items-center justify-between">
+              <span>No YouTube channels connected.</span>
+              <button onclick="closePublishModal(); openConnectChannelModal();" class="text-sky-400 font-bold underline cursor-pointer">Connect Channel</button>
+            </div>
+          `;
+        } else {
+          ytList.innerHTML = allChannels.map(ch => {
+            const isLive = selectedVideo?.channels && selectedVideo.channels[ch.channelId];
+            const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff&bold=true`;
+            const chAvatar = ch.avatar || fallbackAvatar;
+            const isChecked = mode !== 'instagram' && (ch.channelId === activeChannelId || allChannels.length === 1);
+            return `
+              <label class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-between gap-2 cursor-pointer transition">
+                <div class="flex items-center gap-2 min-w-0">
+                  <input
+                    type="checkbox"
+                    value="${ch.channelId}"
+                    class="modal-yt-channel-cb w-4 h-4 rounded accent-[#0071e3] cursor-pointer shrink-0"
+                    ${isChecked ? 'checked' : ''}
+                    onchange="updateModalDestinationCounts()"
+                  />
+                  <img src="${chAvatar}" class="w-6 h-6 rounded-full object-cover border border-emerald-400 shrink-0" onerror="this.src='${fallbackAvatar}';" />
+                  <div class="min-w-0">
+                    <div class="text-xs font-bold text-white truncate max-w-[130px]">${ch.title}</div>
+                    <div class="text-[9px] text-slate-400 font-mono truncate">${ch.customUrl || ''} • ${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</div>
+                  </div>
+                </div>
+                ${isLive ? `
+                  <a href="${isLive.shortsUrl || isLive.youtubeUrl}" target="_blank" onclick="event.stopPropagation()" class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold bg-emerald-500/20 text-emerald-300 shrink-0 border border-emerald-500/30 hover:underline">
+                    LIVE
+                  </a>
+                ` : ''}
+              </label>
+            `;
+          }).join('');
+        }
       }
 
-      onModalPlatformToggle();
+      // Render Instagram Accounts Checklist
+      const igList = document.getElementById('modalIgAccountsList');
+      if (igList) {
+        if (allIgAccounts.length === 0) {
+          igList.innerHTML = `
+            <div class="p-2.5 text-[11px] text-slate-400 bg-white/5 rounded-xl flex items-center justify-between">
+              <span>No Instagram accounts connected.</span>
+              <button onclick="closePublishModal(); loginInstagram();" class="text-pink-400 font-bold underline cursor-pointer">Connect IG</button>
+            </div>
+          `;
+        } else {
+          igList.innerHTML = allIgAccounts.map(acc => {
+            const isLive = selectedVideo?.instagramAccounts && selectedVideo.instagramAccounts[acc.username];
+            const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(acc.username)}&background=e1306c&color=fff`;
+            const accAvatar = acc.profilePicUrl || fallbackAvatar;
+            const isChecked = mode !== 'youtube' && (acc.username.toLowerCase() === (activeIgUsername || '').toLowerCase() || allIgAccounts.length === 1);
+            return `
+              <label class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-between gap-2 cursor-pointer transition">
+                <div class="flex items-center gap-2 min-w-0">
+                  <input
+                    type="checkbox"
+                    value="${acc.username}"
+                    class="modal-ig-account-cb w-4 h-4 rounded accent-[#e1306c] cursor-pointer shrink-0"
+                    ${isChecked ? 'checked' : ''}
+                    onchange="updateModalDestinationCounts()"
+                  />
+                  <img src="${accAvatar}" class="w-6 h-6 rounded-full object-cover border border-pink-400 shrink-0" onerror="this.src='${fallbackAvatar}';" />
+                  <span class="text-xs font-bold text-white truncate max-w-[130px]">@${acc.username}</span>
+                </div>
+                ${isLive ? `
+                  <a href="${isLive.reelUrl || 'https://instagram.com'}" target="_blank" onclick="event.stopPropagation()" class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold bg-pink-500/20 text-pink-300 shrink-0 border border-pink-500/30 hover:underline">
+                    REEL LIVE
+                  </a>
+                ` : ''}
+              </label>
+            `;
+          }).join('');
+        }
+      }
+
+      updateModalDestinationCounts();
       setModalTiming('now');
 
       const defaultDate = new Date();
@@ -2202,34 +2751,71 @@
       document.getElementById('publishModal').classList.add('opacity-0', 'pointer-events-none');
     }
 
-    function onModalPlatformToggle() {
-      const targetYt = document.getElementById('modalTargetYt')?.checked;
-      const targetIg = document.getElementById('modalTargetIg')?.checked;
+    function onModalMasterToggle(type) {
+      if (type === 'yt') {
+        const checked = document.getElementById('modalTargetYt')?.checked;
+        document.querySelectorAll('.modal-yt-channel-cb').forEach(cb => cb.checked = checked);
+      } else if (type === 'ig') {
+        const checked = document.getElementById('modalTargetIg')?.checked;
+        document.querySelectorAll('.modal-ig-account-cb').forEach(cb => cb.checked = checked);
+      }
+      updateModalDestinationCounts();
+    }
+
+    function updateModalDestinationCounts() {
+      const ytChecked = document.querySelectorAll('.modal-yt-channel-cb:checked');
+      const igChecked = document.querySelectorAll('.modal-ig-account-cb:checked');
+      const ytCountBadge = document.getElementById('modalYtCountBadge');
+      const igCountBadge = document.getElementById('modalIgCountBadge');
+      const targetYt = document.getElementById('modalTargetYt');
+      const targetIg = document.getElementById('modalTargetIg');
+      const igOptionsBox = document.getElementById('modalIgOptionsBox');
       const btnSched = document.getElementById('timingBtnSchedule');
       const btnDraft = document.getElementById('timingBtnDraft');
-      const igOptionsBox = document.getElementById('modalIgOptionsBox');
+
+      if (ytCountBadge) ytCountBadge.textContent = `${ytChecked.length} selected`;
+      if (igCountBadge) igCountBadge.textContent = `${igChecked.length} selected`;
+
+      if (targetYt) targetYt.checked = ytChecked.length > 0;
+      if (targetIg) targetIg.checked = igChecked.length > 0;
 
       if (igOptionsBox) {
-        igOptionsBox.classList.toggle('hidden', !targetIg);
+        igOptionsBox.classList.toggle('hidden', igChecked.length === 0);
       }
 
-      // If ONLY Instagram is checked, disable Schedule and Draft (Instagram only supports instant Live upload)
-      if (!targetYt && targetIg) {
-        if (btnSched) {
-          btnSched.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
-        }
-        if (btnDraft) {
-          btnDraft.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
-        }
+      if (ytChecked.length === 0 && igChecked.length > 0) {
+        if (btnSched) btnSched.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        if (btnDraft) btnDraft.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
         setModalTiming('now');
       } else {
-        if (btnSched) {
-          btnSched.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
-        }
-        if (btnDraft) {
-          btnDraft.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
-        }
+        if (btnSched) btnSched.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        if (btnDraft) btnDraft.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
         setModalTiming(currentModalTiming);
+      }
+
+      updatePublishConfirmButtonText(ytChecked.length, igChecked.length);
+    }
+
+    function updatePublishConfirmButtonText(ytCount, igCount) {
+      const confirmBtnText = document.getElementById('confirmPublishBtnText');
+      if (!confirmBtnText) return;
+
+      if (ytCount === 0 && igCount === 0) {
+        confirmBtnText.textContent = "Select at least 1 destination";
+        return;
+      }
+
+      const totalDest = ytCount + igCount;
+      const parts = [];
+      if (ytCount > 0) parts.push(`${ytCount} YouTube Channel${ytCount > 1 ? 's' : ''}`);
+      if (igCount > 0) parts.push(`${igCount} Instagram Account${igCount > 1 ? 's' : ''}`);
+
+      if (currentModalTiming === 'now') {
+        confirmBtnText.textContent = `Publish Live to ${parts.join(' & ')}`;
+      } else if (currentModalTiming === 'schedule') {
+        confirmBtnText.textContent = `Schedule for ${parts.join(' & ')}`;
+      } else {
+        confirmBtnText.textContent = `Save Private Draft to ${parts.join(' & ')}`;
       }
     }
 
@@ -2239,9 +2825,6 @@
       const btnSched = document.getElementById('timingBtnSchedule');
       const btnDraft = document.getElementById('timingBtnDraft');
       const schedBox = document.getElementById('modalScheduleBox');
-      const confirmBtnText = document.getElementById('confirmPublishBtnText');
-      const targetYt = document.getElementById('modalTargetYt')?.checked ?? true;
-      const targetIg = document.getElementById('modalTargetIg')?.checked ?? true;
 
       [btnNow, btnSched, btnDraft].forEach(b => {
         if (b) b.className = "p-3.5 rounded-2xl glass-input border border-white/10 hover:border-sky-400/50 text-left flex flex-col gap-1 transition cursor-pointer";
@@ -2250,23 +2833,17 @@
       if (timing === 'now') {
         if (btnNow) btnNow.className = "p-3.5 rounded-2xl glass-input border border-[#0071e3] bg-[#0071e3]/15 text-left flex flex-col gap-1 transition cursor-pointer";
         if (schedBox) schedBox.classList.add('hidden');
-        if (confirmBtnText) {
-          if (targetYt && targetIg) confirmBtnText.textContent = "Publish Live to Both Platforms";
-          else if (targetIg) confirmBtnText.textContent = "Publish Instagram Reel Live Now";
-          else confirmBtnText.textContent = "Publish YouTube Shorts Live Now";
-        }
       } else if (timing === 'schedule') {
         if (btnSched) btnSched.className = "p-3.5 rounded-2xl glass-input border border-purple-500 bg-purple-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
         if (schedBox) schedBox.classList.remove('hidden');
-        if (confirmBtnText) {
-          if (targetYt && targetIg) confirmBtnText.textContent = "Schedule YouTube & Publish IG Live";
-          else confirmBtnText.textContent = "Schedule YouTube Shorts Release";
-        }
       } else {
         if (btnDraft) btnDraft.className = "p-3.5 rounded-2xl glass-input border border-amber-500 bg-amber-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
         if (schedBox) schedBox.classList.add('hidden');
-        if (confirmBtnText) confirmBtnText.textContent = "Save as Private Draft (YouTube)";
       }
+
+      const ytChecked = document.querySelectorAll('.modal-yt-channel-cb:checked').length;
+      const igChecked = document.querySelectorAll('.modal-ig-account-cb:checked').length;
+      updatePublishConfirmButtonText(ytChecked, igChecked);
       safeCreateIcons();
     }
 
@@ -2326,33 +2903,23 @@
     async function executeMultiPlatformPublish() {
       if (!selectedVideo) return;
 
-      const targetYt = document.getElementById('modalTargetYt').checked;
-      const targetIg = document.getElementById('modalTargetIg').checked;
+      const selectedYtChannelIds = Array.from(document.querySelectorAll('.modal-yt-channel-cb:checked')).map(cb => cb.value);
+      const selectedIgUsernames = Array.from(document.querySelectorAll('.modal-ig-account-cb:checked')).map(cb => cb.value);
 
-      if (!targetYt && !targetIg) {
-        showToast('⚠️ Please select at least one target platform (YouTube or Instagram)');
-        return;
-      }
-
-      if (targetYt && !isConnected) {
-        showToast('⚠️ YouTube is not connected! Connect YouTube first in Settings.');
-        return;
-      }
-
-      if (targetIg && !isIgConnected) {
-        showToast('⚠️ Instagram is not connected! Click "Connect IG" first.');
+      if (selectedYtChannelIds.length === 0 && selectedIgUsernames.length === 0) {
+        showToast('⚠️ Please select at least one target channel or Instagram account');
         return;
       }
 
       const platforms = [];
-      if (targetYt) platforms.push('youtube');
-      if (targetIg) platforms.push('instagram');
+      if (selectedYtChannelIds.length > 0) platforms.push('youtube');
+      if (selectedIgUsernames.length > 0) platforms.push('instagram');
 
       const title = document.getElementById('metaTitle').value.trim() || selectedVideo.filename;
       const description = document.getElementById('metaDescription').value.trim() || '';
       const tags = currentTags;
       const categoryId = document.getElementById('metaCategory')?.value || '27';
-      const shareToFeed = document.getElementById('modalIgShareToFeed').checked;
+      const shareToFeed = document.getElementById('modalIgShareToFeed')?.checked ?? true;
 
       let publishAt = null;
       if (currentModalTiming === 'schedule') {
@@ -2379,7 +2946,7 @@
 
       progressCard.classList.remove('hidden');
       resultLink.classList.add('hidden');
-      stageText.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Initializing multi-platform publisher...`;
+      stageText.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Initializing multi-destination release...`;
       percentText.textContent = `5%`;
       progressBar.style.width = `5%`;
       safeCreateIcons();
@@ -2391,6 +2958,8 @@
           body: JSON.stringify({
             filename: selectedVideo.filename,
             platforms,
+            youtubeChannelIds: selectedYtChannelIds,
+            instagramUsernames: selectedIgUsernames,
             timing: currentModalTiming,
             publishAt,
             youtube: {
@@ -2433,7 +3002,18 @@
               resultLink.classList.remove('hidden');
 
               let linksHtml = '';
-              if (statusData.result?.youtube) {
+
+              // Multi-Channel YouTube Links
+              if (statusData.result?.channels) {
+                Object.values(statusData.result.channels).forEach(ch => {
+                  const url = ch.shortsUrl || ch.youtubeUrl;
+                  linksHtml += `
+                    <a href="${url}" target="_blank" class="hover:underline flex items-center gap-1.5 text-sky-400 font-extrabold">
+                      <i data-lucide="play" class="w-3.5 h-3.5"></i> ${ch.channelTitle || 'YouTube'}: ${url} ${ch.isScheduled ? '(Scheduled)' : ''}
+                    </a>
+                  `;
+                });
+              } else if (statusData.result?.youtube) {
                 const yt = statusData.result.youtube;
                 const ytUrl = selectedVideo.isLongForm ? yt.youtubeUrl : (yt.shortsUrl || yt.youtubeUrl);
                 linksHtml += `
@@ -2443,7 +3023,16 @@
                 `;
               }
 
-              if (statusData.result?.instagram) {
+              // Multi-Account Instagram Links
+              if (statusData.result?.instagramAccounts) {
+                Object.values(statusData.result.instagramAccounts).forEach(acc => {
+                  linksHtml += `
+                    <a href="${acc.reelUrl || 'https://instagram.com'}" target="_blank" class="hover:underline flex items-center gap-1.5 text-pink-400 font-extrabold">
+                      <i data-lucide="camera" class="w-3.5 h-3.5"></i> @${acc.username}: ${acc.reelUrl || 'Reel Published'}
+                    </a>
+                  `;
+                });
+              } else if (statusData.result?.instagram) {
                 const ig = statusData.result.instagram;
                 linksHtml += `
                   <a href="${ig.reelUrl || 'https://instagram.com'}" target="_blank" class="hover:underline flex items-center gap-1.5 text-pink-400 font-extrabold">
@@ -2453,7 +3042,7 @@
               }
 
               resultLink.innerHTML = linksHtml;
-              showToast('🎉 Successfully processed multi-platform release!');
+              showToast('🎉 Successfully processed multi-destination release!');
               safeCreateIcons();
               await loadVideos();
             }

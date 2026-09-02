@@ -1,41 +1,212 @@
-const { chromium } = require('playwright');
+let chromium;
+try {
+  chromium = require('playwright').chromium;
+} catch (e) {
+  try {
+    chromium = require('playwright-core').chromium;
+  } catch (err) {
+    console.warn('Warning: Playwright / Playwright-core not found:', err.message);
+  }
+}
 const fs = require('fs');
 const path = require('path');
 
+const ACCOUNTS_FILE = path.join(__dirname, 'instagram_accounts.json');
+const SESSIONS_DIR = path.join(__dirname, 'instagram_sessions');
 const SESSION_FILE = path.join(__dirname, 'instagram_session.json');
 
-function getSavedSession() {
+function ensureSessionsDir() {
+  if (!fs.existsSync(SESSIONS_DIR)) {
+    try {
+      fs.mkdirSync(SESSIONS_DIR, { recursive: true });
+    } catch (e) {}
+  }
+}
+
+function getSavedAccounts() {
+  ensureSessionsDir();
+  if (fs.existsSync(ACCOUNTS_FILE)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(ACCOUNTS_FILE, 'utf-8'));
+      if (data && Array.isArray(data.accounts)) return data;
+    } catch (e) {
+      console.error('Failed to read instagram_accounts.json:', e);
+    }
+  }
+
+  // Auto-migrate legacy single session file if it exists
+  if (fs.existsSync(SESSION_FILE)) {
+    try {
+      const legacy = JSON.parse(fs.readFileSync(SESSION_FILE, 'utf-8'));
+      if (legacy && legacy.storageState) {
+        const uname = (legacy.username || 'instagram_user').trim().toLowerCase();
+        const sessPath = path.join(SESSIONS_DIR, `${uname}.json`);
+        fs.writeFileSync(sessPath, JSON.stringify(legacy, null, 2), 'utf-8');
+
+        const initialRegistry = {
+          accounts: [
+            {
+              username: legacy.username || uname,
+              name: legacy.name || legacy.username || uname,
+              profilePicUrl: legacy.profilePicUrl || null,
+              loggedInAt: legacy.loggedInAt || new Date().toISOString(),
+            }
+          ],
+          activeUsername: legacy.username || uname,
+        };
+        fs.writeFileSync(ACCOUNTS_FILE, JSON.stringify(initialRegistry, null, 2), 'utf-8');
+        return initialRegistry;
+      }
+    } catch (e) {
+      console.error('Error migrating legacy instagram session:', e);
+    }
+  }
+
+  return { accounts: [], activeUsername: null };
+}
+
+function saveAccounts(registry) {
+  try {
+    fs.writeFileSync(ACCOUNTS_FILE, JSON.stringify(registry, null, 2), 'utf-8');
+  } catch (e) {
+    console.error('Failed to write instagram_accounts.json:', e);
+  }
+}
+
+function getSavedSession(targetUsername = null) {
+  ensureSessionsDir();
+  const registry = getSavedAccounts();
+  const uname = (targetUsername || registry.activeUsername || '').trim();
+  if (!uname) return null;
+
+  const userFile = path.join(SESSIONS_DIR, `${uname.toLowerCase()}.json`);
+  if (fs.existsSync(userFile)) {
+    try {
+      return JSON.parse(fs.readFileSync(userFile, 'utf-8'));
+    } catch (e) {
+      console.error(`Failed to read session for @${uname}:`, e);
+    }
+  }
+
+  // Fallback to legacy single session file
   if (fs.existsSync(SESSION_FILE)) {
     try {
       return JSON.parse(fs.readFileSync(SESSION_FILE, 'utf-8'));
-    } catch (e) {
-      console.error('Failed to read instagram_session.json:', e);
-    }
+    } catch (e) {}
   }
   return null;
 }
 
 function saveSession(data) {
+  ensureSessionsDir();
+  const uname = (data.username || 'instagram_user').trim();
+  const userFile = path.join(SESSIONS_DIR, `${uname.toLowerCase()}.json`);
+  fs.writeFileSync(userFile, JSON.stringify(data, null, 2), 'utf-8');
+
+  // Keep legacy file updated with active account for backward compatibility
   try {
     fs.writeFileSync(SESSION_FILE, JSON.stringify(data, null, 2), 'utf-8');
-  } catch (e) {
-    console.error('Failed to write instagram_session.json:', e);
+  } catch (e) {}
+
+  const registry = getSavedAccounts();
+  const idx = registry.accounts.findIndex(a => a.username.toLowerCase() === uname.toLowerCase());
+  const accountInfo = {
+    username: uname,
+    name: data.name || uname,
+    profilePicUrl: data.profilePicUrl || null,
+    loggedInAt: data.loggedInAt || new Date().toISOString(),
+  };
+
+  if (idx >= 0) {
+    registry.accounts[idx] = accountInfo;
+  } else {
+    registry.accounts.push(accountInfo);
   }
+  registry.activeUsername = uname;
+  saveAccounts(registry);
 }
 
-async function checkSessionStatus() {
-  const session = getSavedSession();
+async function checkSessionStatus(targetUsername = null) {
+  const registry = getSavedAccounts();
+  const uname = targetUsername || registry.activeUsername;
+
+  if (!uname || registry.accounts.length === 0) {
+    return { isConnected: false, accounts: registry.accounts, activeUsername: null };
+  }
+
+  const session = getSavedSession(uname);
   if (!session || !session.storageState) {
-    return { isConnected: false };
+    return { isConnected: false, accounts: registry.accounts, activeUsername: null };
   }
 
   return {
     isConnected: true,
-    username: session.username || 'instagram_user',
-    name: session.name || session.username || 'Instagram Account',
+    username: session.username || uname,
+    name: session.name || session.username || uname,
     profilePicUrl: session.profilePicUrl || null,
     loggedInAt: session.loggedInAt || null,
+    accounts: registry.accounts,
+    activeUsername: registry.activeUsername,
   };
+}
+
+function listAccounts() {
+  const registry = getSavedAccounts();
+  return {
+    accounts: registry.accounts,
+    activeUsername: registry.activeUsername,
+  };
+}
+
+function switchActiveAccount(username) {
+  const registry = getSavedAccounts();
+  const found = registry.accounts.find(a => a.username.toLowerCase() === username.toLowerCase());
+  if (!found) {
+    return { success: false, error: `Account @${username} not found.` };
+  }
+  registry.activeUsername = found.username;
+  saveAccounts(registry);
+
+  const session = getSavedSession(found.username);
+  if (session) {
+    try {
+      fs.writeFileSync(SESSION_FILE, JSON.stringify(session, null, 2), 'utf-8');
+    } catch (e) {}
+  }
+  return { success: true, activeUsername: found.username };
+}
+
+function disconnectAccount(username = null) {
+  const registry = getSavedAccounts();
+  const target = username || registry.activeUsername;
+  if (!target) return { success: true };
+
+  registry.accounts = registry.accounts.filter(a => a.username.toLowerCase() !== target.toLowerCase());
+  const userFile = path.join(SESSIONS_DIR, `${target.toLowerCase()}.json`);
+  if (fs.existsSync(userFile)) {
+    try { fs.unlinkSync(userFile); } catch (e) {}
+  }
+
+  if (registry.activeUsername && registry.activeUsername.toLowerCase() === target.toLowerCase()) {
+    registry.activeUsername = registry.accounts.length > 0 ? registry.accounts[0].username : null;
+    if (registry.activeUsername) {
+      const activeSess = getSavedSession(registry.activeUsername);
+      if (activeSess) {
+        try { fs.writeFileSync(SESSION_FILE, JSON.stringify(activeSess, null, 2), 'utf-8'); } catch (e) {}
+      }
+    } else {
+      if (fs.existsSync(SESSION_FILE)) {
+        try { fs.unlinkSync(SESSION_FILE); } catch (e) {}
+      }
+    }
+  }
+
+  saveAccounts(registry);
+  return { success: true, message: `Disconnected @${target}` };
+}
+
+function disconnectSession() {
+  return disconnectAccount();
 }
 
 let activeLoginProcess = false;
@@ -191,16 +362,8 @@ async function startInteractiveLogin(onProgress) {
   }
 }
 
-function disconnectSession() {
-  if (fs.existsSync(SESSION_FILE)) {
-    try {
-      fs.unlinkSync(SESSION_FILE);
-    } catch (e) {}
-  }
-  return { success: true, message: 'Instagram session disconnected.' };
-}
-
 async function uploadReel({
+  username = null,
   videoPath,
   coverPath,
   caption,
@@ -208,9 +371,9 @@ async function uploadReel({
   onProgress,
   headless = false,
 }) {
-  const session = getSavedSession();
+  const session = getSavedSession(username);
   if (!session || !session.storageState) {
-    throw new Error('Instagram is not connected! Please click "Connect Instagram" in Studio first.');
+    throw new Error(username ? `Instagram account @${username} is not connected! Please connect it in Studio first.` : 'Instagram is not connected! Please click "Connect Instagram" in Studio first.');
   }
 
   if (!fs.existsSync(videoPath)) {
@@ -480,7 +643,10 @@ async function uploadReel({
 
 module.exports = {
   checkSessionStatus,
-  startInteractiveLogin,
+  listAccounts,
+  switchActiveAccount,
+  disconnectAccount,
   disconnectSession,
+  startInteractiveLogin,
   uploadReel,
 };

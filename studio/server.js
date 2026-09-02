@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
 const igPlaywright = require('./instagram_playwright');
+const multiChannel = require('./multi_channel_manager');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -50,107 +51,192 @@ function getSavedMetadata() {
   return {};
 }
 
-// Helper to get OAuth2 client
-function getOAuth2Client() {
-  if (!fs.existsSync(CLIENT_SECRETS_PATH)) {
-    throw new Error('client_secrets.json not found in studio directory');
+// Helper to get OAuth2 client (multi-channel enabled with fallback)
+function getOAuth2Client(channelId = null) {
+  const chObj = multiChannel.getOAuth2ClientForChannel(channelId, PORT);
+  if (chObj && chObj.oauth2Client) {
+    return chObj.oauth2Client;
   }
-  const fileContent = fs.readFileSync(CLIENT_SECRETS_PATH, 'utf-8');
-  const credentials = JSON.parse(fileContent);
-  const installed = credentials.installed || credentials.web;
-  
-  const redirectUri = `http://localhost:${PORT}/oauth2callback`;
-  const oauth2Client = new google.auth.OAuth2(
-    installed.client_id,
-    installed.client_secret,
-    redirectUri
-  );
 
-  if (fs.existsSync(TOKEN_PATH)) {
-    try {
-      const tokens = JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf-8'));
-      oauth2Client.setCredentials(tokens);
-    } catch (e) {
-      console.error('Failed to parse token.json:', e);
+  // Fallback to credential client (e.g. for generating auth URLs)
+  try {
+    const credObj = multiChannel.getOAuth2ClientForCredential(null, PORT);
+    if (credObj && credObj.oauth2Client) return credObj.oauth2Client;
+  } catch (e) {}
+
+  if (fs.existsSync(CLIENT_SECRETS_PATH)) {
+    const fileContent = fs.readFileSync(CLIENT_SECRETS_PATH, 'utf-8');
+    const credentials = JSON.parse(fileContent);
+    const installed = credentials.installed || credentials.web;
+    const redirectUri = `http://localhost:${PORT}/oauth2callback`;
+    const oauth2Client = new google.auth.OAuth2(
+      installed.client_id,
+      installed.client_secret,
+      redirectUri
+    );
+    if (fs.existsSync(TOKEN_PATH)) {
+      try {
+        const tokens = JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf-8'));
+        oauth2Client.setCredentials(tokens);
+      } catch (e) {}
     }
+    return oauth2Client;
   }
 
-  return oauth2Client;
+  throw new Error('No Google Cloud credentials found. Please add a client_secrets.json in Settings.');
 }
 
-// Sync uploads with live YouTube channel
-async function syncYouTubeUploads() {
-  if (!fs.existsSync(TOKEN_PATH)) return;
+// Sync uploads with live YouTube channel(s)
+async function syncYouTubeUploads(targetChannelId = null) {
+  const reg = multiChannel.getChannelsRegistry();
+  const channelsToSync = targetChannelId
+    ? reg.channels.filter((c) => c.channelId === targetChannelId)
+    : reg.channels;
 
-  try {
-    const oauth2Client = getOAuth2Client();
-    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+  if (channelsToSync.length === 0) {
+    if (!fs.existsSync(TOKEN_PATH)) return;
+    try {
+      const oauth2Client = getOAuth2Client();
+      const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+      const channelRes = await youtube.channels.list({
+        part: 'contentDetails,snippet',
+        mine: true,
+      });
+      const ch = channelRes.data.items?.[0];
+      const uploadsPlaylistId = ch?.contentDetails?.relatedPlaylists?.uploads;
+      if (!uploadsPlaylistId) return;
 
-    const channelRes = await youtube.channels.list({
-      part: 'contentDetails,snippet',
-      mine: true,
-    });
+      const playlistRes = await youtube.playlistItems.list({
+        part: 'snippet,status',
+        playlistId: uploadsPlaylistId,
+        maxResults: 50,
+      });
+      const ytVideos = playlistRes.data.items || [];
+      let uploads = getUploadsRecord();
+      let savedMetadata = getSavedMetadata();
 
-    const channel = channelRes.data.items?.[0];
-    const uploadsPlaylistId = channel?.contentDetails?.relatedPlaylists?.uploads;
-    if (!uploadsPlaylistId) return;
+      for (const yt of ytVideos) {
+        const ytTitle = yt.snippet.title.trim();
+        const ytVideoId = yt.snippet.resourceId.videoId;
+        const ytPublishedAt = yt.snippet.publishedAt;
+        const ytPrivacy = yt.status?.privacyStatus || 'public';
 
-    const playlistRes = await youtube.playlistItems.list({
-      part: 'snippet,status',
-      playlistId: uploadsPlaylistId,
-      maxResults: 50,
-    });
+        for (const [filename, meta] of Object.entries(savedMetadata)) {
+          const metaTitle = (meta.title || '').trim();
+          const metaTopic = (meta.topic || '').trim().toLowerCase();
+          const isExactTitle = metaTitle && ytTitle.toLowerCase() === metaTitle.toLowerCase();
+          const isTopicMatch = metaTopic && ytTitle.toLowerCase().includes(metaTopic);
 
-    const ytVideos = playlistRes.data.items || [];
-    let uploads = getUploadsRecord();
-    let savedMetadata = getSavedMetadata();
-
-    // Match YouTube videos with local files via metadata titles or keywords
-    for (const yt of ytVideos) {
-      const ytTitle = yt.snippet.title.trim();
-      const ytVideoId = yt.snippet.resourceId.videoId;
-      const ytPublishedAt = yt.snippet.publishedAt;
-      const ytPrivacy = yt.status?.privacyStatus || 'public';
-
-      // Find matching local file in metadata.json
-      for (const [filename, meta] of Object.entries(savedMetadata)) {
-        const metaTitle = (meta.title || '').trim();
-        const metaTopic = (meta.topic || '').trim().toLowerCase();
-
-        const isExactTitle = metaTitle && ytTitle.toLowerCase() === metaTitle.toLowerCase();
-        const isTopicMatch = metaTopic && ytTitle.toLowerCase().includes(metaTopic);
-        const isCleanMatch =
-          (metaTopic === 'goggins' && ytTitle.toLowerCase().includes('goggins')) ||
-          (metaTopic === 'motivation' && ytTitle.toLowerCase().includes('motivation')) ||
-          (metaTopic === 'maturity' && ytTitle.toLowerCase().includes('mature')) ||
-          (metaTopic === 'adhd' && ytTitle.toLowerCase().includes('adhd')) ||
-          (metaTopic === 'breaks' && (ytTitle.toLowerCase().includes('break') || ytTitle.toLowerCase().includes('quitting'))) ||
-          (metaTopic === 'comparison' && ytTitle.toLowerCase().includes('comparison')) ||
-          (metaTopic === 'habits' && ytTitle.toLowerCase().includes('habit')) ||
-          (metaTopic === 'procrastination' && ytTitle.toLowerCase().includes('procrastinat'));
-
-        if (isExactTitle || isTopicMatch || isCleanMatch) {
-          const existing = uploads[filename] || {};
-          uploads[filename] = {
-            ...existing,
-            uploaded: true,
-            videoId: ytVideoId,
-            youtubeUrl: `https://youtu.be/${ytVideoId}`,
-            shortsUrl: `https://youtube.com/shorts/${ytVideoId}`,
-            title: ytTitle,
-            privacyStatus: existing.privacyStatus || ytPrivacy,
-            publishAt: existing.publishAt || null,
-            isScheduled: existing.isScheduled || false,
-            publishedAt: ytPublishedAt,
-          };
-          break;
+          if (isExactTitle || isTopicMatch) {
+            const existing = uploads[filename] || {};
+            uploads[filename] = {
+              ...existing,
+              uploaded: true,
+              videoId: ytVideoId,
+              youtubeUrl: `https://youtu.be/${ytVideoId}`,
+              shortsUrl: `https://youtube.com/shorts/${ytVideoId}`,
+              title: ytTitle,
+              privacyStatus: existing.privacyStatus || ytPrivacy,
+              publishAt: existing.publishAt || null,
+              isScheduled: existing.isScheduled || false,
+              publishedAt: ytPublishedAt,
+            };
+            break;
+          }
         }
       }
+      saveUploadsRecord(uploads);
+    } catch (err) {
+      console.error('Legacy sync error:', err.message);
     }
+    return;
+  }
 
-    saveUploadsRecord(uploads);
-  } catch (err) {
-    console.error('Auto YouTube sync error:', err.message);
+  for (const channel of channelsToSync) {
+    try {
+      const clientObj = multiChannel.getOAuth2ClientForChannel(channel.channelId, PORT);
+      if (!clientObj) continue;
+
+      const youtube = google.youtube({ version: 'v3', auth: clientObj.oauth2Client });
+      const channelRes = await youtube.channels.list({
+        part: 'contentDetails,snippet,statistics',
+        mine: true,
+      });
+
+      const chData = channelRes.data.items?.[0];
+      if (!chData) continue;
+
+      // Update channel metadata
+      channel.title = chData.snippet.title;
+      channel.customUrl = chData.snippet.customUrl || channel.customUrl;
+      channel.avatar =
+        chData.snippet.thumbnails?.high?.url ||
+        chData.snippet.thumbnails?.medium?.url ||
+        chData.snippet.thumbnails?.default?.url ||
+        channel.avatar;
+      channel.subscriberCount = chData.statistics?.subscriberCount || '0';
+      channel.videoCount = chData.statistics?.videoCount || '0';
+      multiChannel.saveChannelsRegistry(reg);
+
+      const uploadsPlaylistId = chData.contentDetails?.relatedPlaylists?.uploads;
+      if (!uploadsPlaylistId) continue;
+
+      const playlistRes = await youtube.playlistItems.list({
+        part: 'snippet,status',
+        playlistId: uploadsPlaylistId,
+        maxResults: 50,
+      });
+
+      const ytVideos = playlistRes.data.items || [];
+      let uploads = getUploadsRecord();
+      let savedMetadata = getSavedMetadata();
+
+      for (const yt of ytVideos) {
+        const ytTitle = yt.snippet.title.trim();
+        const ytVideoId = yt.snippet.resourceId.videoId;
+        const ytPublishedAt = yt.snippet.publishedAt;
+        const ytPrivacy = yt.status?.privacyStatus || 'public';
+
+        for (const [filename, meta] of Object.entries(savedMetadata)) {
+          const metaTitle = (meta.title || '').trim();
+          const metaTopic = (meta.topic || '').trim().toLowerCase();
+          const isExactTitle = metaTitle && ytTitle.toLowerCase() === metaTitle.toLowerCase();
+          const isTopicMatch = metaTopic && ytTitle.toLowerCase().includes(metaTopic);
+
+          if (isExactTitle || isTopicMatch) {
+            const existing = uploads[filename] || {};
+            if (!existing.channels) existing.channels = {};
+            existing.channels[channel.channelId] = {
+              uploaded: true,
+              channelId: channel.channelId,
+              channelTitle: channel.title,
+              videoId: ytVideoId,
+              youtubeUrl: `https://youtu.be/${ytVideoId}`,
+              shortsUrl: `https://youtube.com/shorts/${ytVideoId}`,
+              title: ytTitle,
+              privacyStatus: ytPrivacy,
+              publishedAt: ytPublishedAt,
+            };
+
+            if (channel.channelId === reg.activeChannelId || !existing.uploaded) {
+              existing.uploaded = true;
+              existing.videoId = ytVideoId;
+              existing.youtubeUrl = `https://youtu.be/${ytVideoId}`;
+              existing.shortsUrl = `https://youtube.com/shorts/${ytVideoId}`;
+              existing.title = ytTitle;
+              existing.privacyStatus = ytPrivacy;
+              existing.publishedAt = ytPublishedAt;
+            }
+
+            uploads[filename] = existing;
+            break;
+          }
+        }
+      }
+      saveUploadsRecord(uploads);
+    } catch (err) {
+      console.error(`Sync error for channel ${channel.title}:`, err.message);
+    }
   }
 }
 
@@ -260,6 +346,8 @@ app.get('/api/videos', async (req, res) => {
           username: uploadInfo.instagram?.username || null,
           publishedAt: uploadInfo.instagram?.publishedAt || null,
         },
+        channels: uploadInfo.channels || {},
+        instagramAccounts: uploadInfo.instagramAccounts || {},
         uploadInfo: isUploaded ? uploadInfo : null,
         hasThumbnail,
         thumbnailFile: hasThumbnail ? thumbFile : null,
@@ -379,81 +467,92 @@ app.post('/api/render-thumbnail', (req, res) => {
   });
 });
 
-// 3. API: Auth status & Channel Profile
+// 3. API: Auth status & Channel Profile (Multi-Channel & Multi-Project Enabled)
 app.get('/api/auth-status', async (req, res) => {
   try {
-    if (!fs.existsSync(TOKEN_PATH)) {
-      return res.json({ authenticated: false });
-    }
+    const reg = multiChannel.getChannelsRegistry();
+    const credReg = multiChannel.getCredentialsRegistry();
+    const activeChannel =
+      reg.channels.find((c) => c.channelId === reg.activeChannelId) || reg.channels[0] || null;
 
-    const oauth2Client = getOAuth2Client();
-    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
-    
-    // Fetch channel profile info
-    const response = await youtube.channels.list({
-      part: 'snippet,statistics',
-      mine: true,
-    });
+    if (activeChannel) {
+      // Async refresh stats in background
+      multiChannel.refreshChannelDetails(activeChannel.channelId).catch(() => {});
 
-    if (response.data.items && response.data.items.length > 0) {
-      const channel = response.data.items[0];
-      const avatarUrl =
-        channel.snippet.thumbnails?.high?.url ||
-        channel.snippet.thumbnails?.medium?.url ||
-        channel.snippet.thumbnails?.default?.url;
-
+      const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeChannel.title)}&background=0071e3&color=fff`;
       return res.json({
         authenticated: true,
         channel: {
-          title: channel.snippet.title,
-          customUrl: channel.snippet.customUrl || `@${channel.snippet.title.replace(/\s+/g, '').toLowerCase()}`,
-          avatar: `/api/channel-avatar?t=${Date.now()}`,
-          directAvatar: avatarUrl,
-          channelId: channel.id,
-          subscriberCount: channel.statistics?.subscriberCount,
-          videoCount: channel.statistics?.videoCount,
+          title: activeChannel.title,
+          customUrl: activeChannel.customUrl,
+          avatar: `/api/channel-avatar?channelId=${activeChannel.channelId}&t=${Date.now()}`,
+          directAvatar: activeChannel.avatar || fallbackAvatar,
+          channelId: activeChannel.channelId,
+          subscriberCount: activeChannel.subscriberCount,
+          videoCount: activeChannel.videoCount,
         },
+        channels: reg.channels.map((c) => ({
+          channelId: c.channelId,
+          title: c.title,
+          customUrl: c.customUrl,
+          avatar: c.avatar,
+          subscriberCount: c.subscriberCount,
+          videoCount: c.videoCount,
+          isActive: c.channelId === reg.activeChannelId,
+        })),
+        activeChannelId: reg.activeChannelId,
+        credentials: credReg.projects,
+        activeProjectId: credReg.activeProjectId,
       });
     }
 
-    res.json({ authenticated: true, channel: null });
+    res.json({
+      authenticated: false,
+      channel: null,
+      channels: [],
+      credentials: credReg.projects,
+      activeProjectId: credReg.activeProjectId,
+    });
   } catch (err) {
     console.error('Auth verification error:', err.message);
-    res.json({ authenticated: false, error: err.message });
+    res.json({ authenticated: false, error: err.message, channels: [] });
   }
 });
 
 // Proxy channel avatar with NO CACHE to always serve current channel PFP
 app.get('/api/channel-avatar', async (req, res) => {
   try {
+    const { channelId } = req.query;
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
 
-    if (!fs.existsSync(TOKEN_PATH)) {
-      return res.redirect('https://ui-avatars.com/api/?name=YouTube&background=0071e3&color=fff');
+    const reg = multiChannel.getChannelsRegistry();
+    const target = channelId
+      ? reg.channels.find((c) => c.channelId === channelId)
+      : reg.channels.find((c) => c.channelId === reg.activeChannelId) || reg.channels[0];
+
+    let avatarUrl = target?.avatar;
+    if (!avatarUrl && target) {
+      const clientObj = multiChannel.getOAuth2ClientForChannel(target.channelId, PORT);
+      if (clientObj) {
+        const yt = google.youtube({ version: 'v3', auth: clientObj.oauth2Client });
+        const chRes = await yt.channels.list({ part: 'snippet', mine: true });
+        avatarUrl = chRes.data.items?.[0]?.snippet?.thumbnails?.high?.url;
+        if (avatarUrl) {
+          target.avatar = avatarUrl;
+          multiChannel.saveChannelsRegistry(reg);
+        }
+      }
     }
-    const oauth2Client = getOAuth2Client();
-    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
-    const response = await youtube.channels.list({
-      part: 'snippet',
-      mine: true,
-    });
-    const channel = response.data.items?.[0];
-    const avatarUrl =
-      channel?.snippet?.thumbnails?.high?.url ||
-      channel?.snippet?.thumbnails?.medium?.url ||
-      channel?.snippet?.thumbnails?.default?.url;
 
     if (!avatarUrl) {
-      const name = encodeURIComponent(channel?.snippet?.title || 'YouTube');
+      const name = encodeURIComponent(target?.title || 'YouTube');
       return res.redirect(`https://ui-avatars.com/api/?name=${name}&background=0071e3&color=fff`);
     }
 
     const imgRes = await fetch(avatarUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-      },
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
     });
     const arrayBuffer = await imgRes.arrayBuffer();
     res.setHeader('Content-Type', imgRes.headers.get('content-type') || 'image/jpeg');
@@ -464,10 +563,15 @@ app.get('/api/channel-avatar', async (req, res) => {
   }
 });
 
-// 4. API: Get Google OAuth URL
+// 4. API: Get Google OAuth URL (Supports specifying which Google Cloud Project to authenticate with)
 app.get('/api/auth-url', (req, res) => {
   try {
-    const oauth2Client = getOAuth2Client();
+    const { credentialId } = req.query;
+    const { oauth2Client, credentialId: resolvedCredId } = multiChannel.getOAuth2ClientForCredential(
+      credentialId,
+      PORT
+    );
+
     const scopes = [
       'https://www.googleapis.com/auth/youtube.upload',
       'https://www.googleapis.com/auth/youtube.readonly',
@@ -475,45 +579,64 @@ app.get('/api/auth-url', (req, res) => {
       'https://www.googleapis.com/auth/userinfo.profile',
     ];
 
+    const statePayload = Buffer.from(JSON.stringify({ credentialId: resolvedCredId })).toString('base64');
+
     const url = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       prompt: 'consent',
       scope: scopes,
+      state: statePayload,
     });
 
-    res.json({ url });
+    res.json({ url, credentialId: resolvedCredId });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// 5. OAuth Callback Handler
+// 5. OAuth Callback Handler (Multi-Channel Registration)
 app.get('/oauth2callback', async (req, res) => {
   const code = req.query.code;
   if (!code) {
     return res.status(400).send('Authorization code missing');
   }
 
+  let credentialId = null;
+  if (req.query.state) {
+    try {
+      const decoded = JSON.parse(Buffer.from(req.query.state, 'base64').toString('utf-8'));
+      credentialId = decoded.credentialId;
+    } catch (e) {}
+  }
+
   try {
-    const oauth2Client = getOAuth2Client();
-    const { tokens } = await oauth2Client.getToken(code);
-    oauth2Client.setCredentials(tokens);
-    fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokens, null, 2));
+    const channel = await multiChannel.registerChannelFromOAuth({
+      code,
+      credentialId,
+      port: PORT,
+    });
 
     // Automatically sync uploads with the new channel
-    await syncYouTubeUploads().catch(() => {});
+    await syncYouTubeUploads(channel.channelId).catch(() => {});
+
+    const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(channel.title)}&background=0071e3&color=fff`;
 
     res.send(`
       <html>
-        <head><title>YouTube Connected</title></head>
-        <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#0f172a; color:white;">
-          <div style="background:#1e293b; padding:40px 60px; border-radius:24px; text-align:center; box-shadow:0 20px 50px rgba(0,0,0,0.5); border:1px solid #334155;">
-            <h1 style="color:#10b981; margin-bottom:12px;">✅ YouTube Studio Connected!</h1>
-            <p style="color:#94a3b8; font-size:16px; margin-bottom:24px;">Your YouTube account has been updated and synced.</p>
-            <a href="/" style="background:#0071e3; color:white; padding:12px 30px; border-radius:12px; text-decoration:none; font-weight:bold; font-size:15px;">Return to Studio</a>
+        <head><title>YouTube Channel Connected</title></head>
+        <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#090d16; color:white;">
+          <div style="background:#121826; padding:40px 50px; border-radius:24px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.1); max-width:440px; width:90%;">
+            <div style="width:72px; height:72px; border-radius:50%; margin:0 auto 16px; overflow:hidden; border:3px solid #10b981; box-shadow:0 0 20px rgba(16,185,129,0.3);">
+              <img src="${channel.avatar || fallbackAvatar}" style="width:100%; height:100%; object-fit:cover;" />
+            </div>
+            <h1 style="color:#10b981; margin-bottom:8px; font-size:22px; font-weight:800;">✅ Channel Connected!</h1>
+            <p style="color:#f8fafc; font-size:18px; font-weight:bold; margin-bottom:4px;">${channel.title}</p>
+            <p style="color:#38bdf8; font-family:monospace; font-size:14px; margin-bottom:20px;">${channel.customUrl}</p>
+            <p style="color:#94a3b8; font-size:13px; margin-bottom:24px;">Syncing video uploads and activating channel...</p>
+            <a href="/" style="background:#0071e3; color:white; padding:12px 30px; border-radius:12px; text-decoration:none; font-weight:bold; font-size:14px; display:inline-block;">Return to Studio</a>
           </div>
           <script>
-            setTimeout(() => { window.location.href = '/'; }, 1500);
+            setTimeout(() => { window.location.href = '/'; }, 1800);
           </script>
         </body>
       </html>
@@ -522,6 +645,62 @@ app.get('/oauth2callback', async (req, res) => {
     console.error('Error exchanging token:', err);
     res.status(500).send(`Authentication Failed: ${err.message}`);
   }
+});
+
+// 5b. Multi-Channel YouTube API Endpoints
+app.get('/api/channels', (req, res) => {
+  const reg = multiChannel.getChannelsRegistry();
+  res.json(reg);
+});
+
+app.post('/api/channels/switch', (req, res) => {
+  const { channelId } = req.body;
+  if (!channelId) return res.status(400).json({ error: 'channelId is required' });
+  const result = multiChannel.switchActiveChannel(channelId);
+  if (!result.success) return res.status(404).json(result);
+  res.json(result);
+});
+
+app.delete('/api/channels/:channelId', (req, res) => {
+  const result = multiChannel.disconnectChannel(req.params.channelId);
+  res.json(result);
+});
+
+app.post('/api/channels/sync', async (req, res) => {
+  const { channelId } = req.body;
+  await syncYouTubeUploads(channelId).catch(() => {});
+  res.json({ success: true, message: 'Channels sync completed' });
+});
+
+// Logout / Disconnect Active Channel
+app.post('/api/logout', (req, res) => {
+  const reg = multiChannel.getChannelsRegistry();
+  if (reg.activeChannelId) {
+    multiChannel.disconnectChannel(reg.activeChannelId);
+  }
+  res.json({ success: true, message: 'Disconnected active YouTube channel' });
+});
+
+// 5c. Multi-Project Google Cloud Credentials API Endpoints
+app.get('/api/credentials', (req, res) => {
+  const reg = multiChannel.getCredentialsRegistry();
+  res.json(reg);
+});
+
+app.post('/api/credentials', (req, res) => {
+  const { name, jsonContent } = req.body;
+  if (!jsonContent) return res.status(400).json({ error: 'jsonContent is required' });
+  try {
+    const project = multiChannel.addCredential({ name, jsonContent });
+    res.json({ success: true, project });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.delete('/api/credentials/:id', (req, res) => {
+  const result = multiChannel.deleteCredential(req.params.id);
+  res.json(result);
 });
 
 // 6. API: Save Metadata
@@ -719,20 +898,35 @@ app.post('/api/upload', async (req, res) => {
 
 // Logout / Disconnect YouTube
 // ========================================================
-// 8b. API: Instagram Authentication & Reels Automation (Playwright)
+// 8b. API: Instagram Authentication & Multi-Account Reels Automation (Playwright)
 // ========================================================
 
-// GET Instagram Session Status
+// GET Instagram Session Status (active account or specific username)
 app.get('/api/instagram/status', async (req, res) => {
   try {
-    const status = await igPlaywright.checkSessionStatus();
+    const { username } = req.query;
+    const status = await igPlaywright.checkSessionStatus(username);
     res.json(status);
   } catch (err) {
     res.status(500).json({ isConnected: false, error: err.message });
   }
 });
 
-// POST Start Interactive Playwright Login
+// GET All Connected Instagram Accounts
+app.get('/api/instagram/accounts', (req, res) => {
+  res.json(igPlaywright.listAccounts());
+});
+
+// POST Switch Active Instagram Account
+app.post('/api/instagram/switch', (req, res) => {
+  const { username } = req.body;
+  if (!username) return res.status(400).json({ error: 'username is required' });
+  const result = igPlaywright.switchActiveAccount(username);
+  if (!result.success) return res.status(404).json(result);
+  res.json(result);
+});
+
+// POST Start Interactive Playwright Login (Connect New or Additional IG Account)
 app.post('/api/instagram/login', async (req, res) => {
   try {
     activeUpload = {
@@ -765,19 +959,20 @@ app.post('/api/instagram/login', async (req, res) => {
   }
 });
 
-// POST Disconnect Instagram Session
+// POST Disconnect Instagram Account
 app.post('/api/instagram/disconnect', (req, res) => {
   try {
-    const result = igPlaywright.disconnectSession();
+    const { username } = req.body;
+    const result = igPlaywright.disconnectAccount(username);
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// POST Upload Single Reel to Instagram
+// POST Upload Single Reel to Instagram (Supports targeting specific account)
 app.post('/api/instagram/upload', async (req, res) => {
-  const { filename, caption, shareToFeed = true, publishAt } = req.body;
+  const { filename, username, caption, shareToFeed = true, publishAt } = req.body;
 
   if (!filename) {
     return res.status(400).json({ error: 'filename is required' });
@@ -790,28 +985,31 @@ app.post('/api/instagram/upload', async (req, res) => {
 
   const baseName = filename.replace(/\.mp4$/i, '');
   const thumbPath = path.join(OUT_DIR, `${baseName}_thumbnail.png`);
-
   const isScheduling = !!publishAt && new Date(publishAt) > new Date();
 
   // If scheduled, save to persistent queue
   if (isScheduling) {
     let uploads = getUploadsRecord();
     const existing = uploads[filename] || {};
-    uploads[filename] = {
-      ...existing,
-      instagram: {
-        ...(existing.instagram || {}),
-        uploaded: false,
-        isScheduled: true,
-        publishAt: new Date(publishAt).toISOString(),
-        caption: caption || '',
-        shareToFeed,
-      },
+    const targetUser = username || igPlaywright.listAccounts().activeUsername || 'instagram';
+
+    if (!existing.instagramAccounts) existing.instagramAccounts = {};
+    existing.instagramAccounts[targetUser] = {
+      uploaded: false,
+      isScheduled: true,
+      publishAt: new Date(publishAt).toISOString(),
+      caption: caption || '',
+      shareToFeed,
+      username: targetUser,
     };
+
+    existing.instagram = existing.instagramAccounts[targetUser];
+    uploads[filename] = existing;
     saveUploadsRecord(uploads);
+
     return res.json({
       success: true,
-      message: `Reel scheduled for ${new Date(publishAt).toLocaleString()}`,
+      message: `Reel scheduled for ${new Date(publishAt).toLocaleString()} on @${targetUser}`,
       isScheduled: true,
       publishAt,
     });
@@ -834,6 +1032,7 @@ app.post('/api/instagram/upload', async (req, res) => {
 
   try {
     const uploadRes = await igPlaywright.uploadReel({
+      username: username || null,
       videoPath: filePath,
       coverPath: fs.existsSync(thumbPath) ? thumbPath : null,
       caption: caption || '',
@@ -847,21 +1046,23 @@ app.post('/api/instagram/upload', async (req, res) => {
 
     activeUpload.inProgress = false;
     activeUpload.progress = 100;
-    activeUpload.stage = '🎉 Reel published successfully to Instagram!';
+    activeUpload.stage = `🎉 Reel published successfully to Instagram (@${uploadRes.username})!`;
     activeUpload.result = uploadRes;
 
     let uploads = getUploadsRecord();
     const existing = uploads[filename] || {};
-    uploads[filename] = {
-      ...existing,
-      instagram: {
-        uploaded: true,
-        isScheduled: false,
-        reelUrl: uploadRes.reelUrl,
-        username: uploadRes.username,
-        publishedAt: uploadRes.publishedAt || new Date().toISOString(),
-      },
+    if (!existing.instagramAccounts) existing.instagramAccounts = {};
+
+    existing.instagramAccounts[uploadRes.username] = {
+      uploaded: true,
+      isScheduled: false,
+      reelUrl: uploadRes.reelUrl,
+      username: uploadRes.username,
+      publishedAt: uploadRes.publishedAt || new Date().toISOString(),
     };
+
+    existing.instagram = existing.instagramAccounts[uploadRes.username];
+    uploads[filename] = existing;
     saveUploadsRecord(uploads);
   } catch (err) {
     activeUpload.inProgress = false;
@@ -870,12 +1071,15 @@ app.post('/api/instagram/upload', async (req, res) => {
 });
 
 // ========================================================
-// 8c. API: Unified Multi-Platform Blast & Scheduling (YouTube + Instagram)
+// 8c. API: Unified Multi-Destination Publishing & Scheduling
+// Supports multiple YouTube Channels and multiple Instagram Accounts simultaneously!
 // ========================================================
 app.post('/api/publish-multi', async (req, res) => {
   const {
     filename,
     platforms = ['youtube'],
+    youtubeChannelIds: reqYtChannels,
+    instagramUsernames: reqIgUsers,
     timing = 'now', // 'now' | 'schedule' | 'draft'
     publishAt,
     youtube = {},
@@ -898,18 +1102,48 @@ app.post('/api/publish-multi', async (req, res) => {
     return res.status(400).json({ error: 'Scheduled time must be at least 2 minutes in the future.' });
   }
 
+  // Resolve target YouTube Channels
+  let targetYtChannelIds = [];
+  if (platforms.includes('youtube')) {
+    if (Array.isArray(reqYtChannels) && reqYtChannels.length > 0) {
+      targetYtChannelIds = reqYtChannels;
+    } else {
+      const chReg = multiChannel.getChannelsRegistry();
+      if (chReg.activeChannelId) targetYtChannelIds = [chReg.activeChannelId];
+      else if (chReg.channels.length > 0) targetYtChannelIds = [chReg.channels[0].channelId];
+    }
+  }
+
+  // Resolve target Instagram Accounts
+  let targetIgUsernames = [];
+  if (platforms.includes('instagram')) {
+    if (Array.isArray(reqIgUsers) && reqIgUsers.length > 0) {
+      targetIgUsernames = reqIgUsers;
+    } else {
+      const igReg = igPlaywright.listAccounts();
+      if (igReg.activeUsername) targetIgUsernames = [igReg.activeUsername];
+      else if (igReg.accounts.length > 0) targetIgUsernames = [igReg.accounts[0].username];
+    }
+  }
+
+  if (targetYtChannelIds.length === 0 && targetIgUsernames.length === 0) {
+    return res.status(400).json({ error: 'No active or selected destination channels found to publish to.' });
+  }
+
   if (activeUpload.inProgress) {
     return res.status(409).json({ error: 'Another upload is currently in progress. Please wait.' });
   }
+
+  const totalDestinations = targetYtChannelIds.length + targetIgUsernames.length;
 
   activeUpload = {
     inProgress: true,
     platform: platforms.join('+'),
     progress: 5,
     stage: isScheduling
-      ? `Scheduling release for ${new Date(isoPublishAt).toLocaleString()} on [${platforms.join(', ').toUpperCase()}]...`
-      : `Preparing multi-platform publishing for [${platforms.join(', ').toUpperCase()}]...`,
-    result: {},
+      ? `Scheduling release for ${new Date(isoPublishAt).toLocaleString()} across ${totalDestinations} destination(s)...`
+      : `Preparing publishing across ${totalDestinations} destination(s)...`,
+    result: { youtubeChannels: [], instagramAccounts: [] },
     error: null,
   };
 
@@ -917,6 +1151,8 @@ app.post('/api/publish-multi', async (req, res) => {
     message: 'Publishing process started',
     filename,
     platforms,
+    targetYtChannelIds,
+    targetIgUsernames,
     timing,
     publishAt: isoPublishAt,
   });
@@ -924,18 +1160,30 @@ app.post('/api/publish-multi', async (req, res) => {
   try {
     let uploads = getUploadsRecord();
     const existing = uploads[filename] || {};
+    if (!existing.channels) existing.channels = {};
+    if (!existing.instagramAccounts) existing.instagramAccounts = {};
+
     const baseName = filename.replace(/\.mp4$/i, '');
     const thumbPath = path.join(OUT_DIR, `${baseName}_thumbnail.png`);
+    const fileSize = fs.statSync(filePath).size;
 
-    // 1. YouTube Execution / Scheduling
-    if (platforms.includes('youtube')) {
-      activeUpload.stage = isScheduling
-        ? `Scheduling YouTube release on API...`
-        : `Uploading to YouTube Shorts...`;
+    let stepIndex = 0;
 
-      const oauth2Client = getOAuth2Client();
+    // 1. Upload/Schedule across all selected YouTube Channels
+    for (const channelId of targetYtChannelIds) {
+      stepIndex++;
+      const clientObj = multiChannel.getOAuth2ClientForChannel(channelId, PORT);
+      if (!clientObj) {
+        console.warn(`YouTube channel ${channelId} OAuth client not available, skipping.`);
+        continue;
+      }
+
+      const { oauth2Client, channel } = clientObj;
       const ytClient = google.youtube({ version: 'v3', auth: oauth2Client });
-      const fileSize = fs.statSync(filePath).size;
+
+      activeUpload.stage = isScheduling
+        ? `[${stepIndex}/${totalDestinations}] Scheduling on YouTube: "${channel.title}"...`
+        : `[${stepIndex}/${totalDestinations}] Uploading to YouTube: "${channel.title}"...`;
 
       const statusPayload = { selfDeclaredMadeForKids: false };
       if (isScheduling) {
@@ -964,77 +1212,106 @@ app.post('/api/publish-multi', async (req, res) => {
         {
           onUploadProgress: (evt) => {
             const pct = Math.min(99, Math.round((evt.bytesRead / fileSize) * 100));
-            activeUpload.progress = Math.round(pct * 0.5); // 0-50% for YouTube
-            activeUpload.stage = `YouTube Upload: ${pct}%...`;
+            const baseProgress = ((stepIndex - 1) / totalDestinations) * 100;
+            const stepSlice = (1 / totalDestinations) * 100;
+            activeUpload.progress = Math.round(baseProgress + (pct / 100) * stepSlice * 0.85);
+            activeUpload.stage = `[${stepIndex}/${totalDestinations}] YouTube ("${channel.title}"): ${pct}%...`;
           },
         }
       );
 
       const videoId = ytRes.data.id;
+      let thumbnailAttached = false;
 
-      // Attach Thumbnail
+      // Attach High-Converting 4K Thumbnail to this channel's upload
       if (fs.existsSync(thumbPath)) {
         try {
+          activeUpload.stage = `[${stepIndex}/${totalDestinations}] Attaching custom thumbnail on "${channel.title}"...`;
           await ytClient.thumbnails.set({
             videoId,
             media: { mimeType: 'image/png', body: fs.createReadStream(thumbPath) },
           });
-        } catch (e) {}
+          thumbnailAttached = true;
+        } catch (thumbErr) {
+          console.warn(`Could not attach thumbnail for ${channel.title}:`, thumbErr.message);
+        }
       }
 
-      existing.uploaded = true;
-      existing.videoId = videoId;
-      existing.youtubeUrl = `https://youtu.be/${videoId}`;
-      existing.shortsUrl = `https://youtube.com/shorts/${videoId}`;
-      existing.isScheduled = isScheduling;
-      existing.publishAt = isoPublishAt;
-      existing.youtube = {
+      const channelRecord = {
         uploaded: true,
+        channelId: channel.channelId,
+        channelTitle: channel.title,
         videoId,
         youtubeUrl: `https://youtu.be/${videoId}`,
         shortsUrl: `https://youtube.com/shorts/${videoId}`,
         isScheduled: isScheduling,
         publishAt: isoPublishAt,
         publishedAt: ytRes.data.snippet.publishedAt || new Date().toISOString(),
+        thumbnailAttached,
       };
 
-      activeUpload.result.youtube = existing.youtube;
+      existing.channels[channel.channelId] = channelRecord;
+
+      // Keep top-level legacy fields updated with active or last channel
+      existing.uploaded = true;
+      existing.videoId = videoId;
+      existing.youtubeUrl = `https://youtu.be/${videoId}`;
+      existing.shortsUrl = `https://youtube.com/shorts/${videoId}`;
+      existing.isScheduled = isScheduling;
+      existing.publishAt = isoPublishAt;
+      existing.publishedAt = channelRecord.publishedAt;
+      existing.youtube = channelRecord;
+
+      if (!activeUpload.result.youtubeChannels) activeUpload.result.youtubeChannels = [];
+      activeUpload.result.youtubeChannels.push(channelRecord);
+      activeUpload.result.youtube = channelRecord;
     }
 
-    // 2. Instagram Execution (Always Live Immediate Upload via Playwright)
-    if (platforms.includes('instagram')) {
-      activeUpload.stage = 'Publishing Instagram Reel via Playwright...';
-      activeUpload.progress = 60;
+    // 2. Upload/Schedule across all selected Instagram Accounts
+    for (const igUsername of targetIgUsernames) {
+      stepIndex++;
+      activeUpload.stage = `[${stepIndex}/${totalDestinations}] Publishing Reel to Instagram: @${igUsername}...`;
 
       const igRes = await igPlaywright.uploadReel({
+        username: igUsername,
         videoPath: filePath,
         coverPath: fs.existsSync(thumbPath) ? thumbPath : null,
         caption: instagram.caption || '',
         shareToFeed: instagram.shareToFeed !== false,
         onProgress: (p) => {
-          activeUpload.stage = `Instagram: ${p.stage}`;
-          activeUpload.progress = 50 + Math.round(p.progress * 0.5); // 50-100%
+          const baseProgress = ((stepIndex - 1) / totalDestinations) * 100;
+          const stepSlice = (1 / totalDestinations) * 100;
+          activeUpload.progress = Math.round(baseProgress + (p.progress / 100) * stepSlice);
+          activeUpload.stage = `[${stepIndex}/${totalDestinations}] Instagram (@${igUsername}): ${p.stage}`;
         },
         headless: false,
       });
 
-      existing.instagram = {
+      const igRecord = {
         uploaded: true,
+        username: igRes.username || igUsername,
         reelUrl: igRes.reelUrl,
-        username: igRes.username,
         publishedAt: igRes.publishedAt || new Date().toISOString(),
       };
-      activeUpload.result.instagram = existing.instagram;
+
+      existing.instagramAccounts[igRecord.username] = igRecord;
+      existing.instagram = igRecord;
+
+      if (!activeUpload.result.instagramAccounts) activeUpload.result.instagramAccounts = [];
+      activeUpload.result.instagramAccounts.push(igRecord);
+      activeUpload.result.instagram = igRecord;
     }
 
+    uploads[filename] = existing;
     saveUploadsRecord(uploads);
+
     activeUpload.inProgress = false;
     activeUpload.progress = 100;
     activeUpload.stage = isScheduling
-      ? `🎉 Successfully scheduled on YouTube & published to Instagram!`
-      : `🎉 Successfully published to [${platforms.join(' & ').toUpperCase()}]!`;
+      ? `🎉 Successfully scheduled release across ${totalDestinations} destination(s)!`
+      : `🎉 Successfully published across ${totalDestinations} destination(s)!`;
   } catch (err) {
-    console.error('Multi-platform publish error:', err);
+    console.error('Multi-destination publish error:', err);
     activeUpload.inProgress = false;
     activeUpload.error = err.message || 'Publishing failed';
   }
@@ -1044,18 +1321,21 @@ app.post('/api/publish-multi', async (req, res) => {
 // 9. API: Settings & YouTube API Credentials Configuration
 // ========================================================
 
-// GET Settings status & active channel info
+// GET Settings status & active channel info (Multi-Project & Multi-Channel)
 app.get('/api/settings/youtube', async (req, res) => {
-  const hasSecrets = fs.existsSync(CLIENT_SECRETS_PATH);
-  const hasToken = fs.existsSync(TOKEN_PATH);
+  const credReg = multiChannel.getCredentialsRegistry();
+  const chReg = multiChannel.getChannelsRegistry();
+  const activeChannel =
+    chReg.channels.find((c) => c.channelId === chReg.activeChannelId) || chReg.channels[0] || null;
+
+  const hasSecrets = credReg.projects.length > 0 || fs.existsSync(CLIENT_SECRETS_PATH);
+  const hasToken = chReg.channels.length > 0 || fs.existsSync(TOKEN_PATH);
 
   let authUrl = null;
-  let isConnected = false;
-  let channel = null;
-
   if (hasSecrets) {
     try {
-      const oauth2Client = getOAuth2Client();
+      const { oauth2Client, credentialId } = multiChannel.getOAuth2ClientForCredential(null, PORT);
+      const statePayload = Buffer.from(JSON.stringify({ credentialId })).toString('base64');
       authUrl = oauth2Client.generateAuthUrl({
         access_type: 'offline',
         prompt: 'consent',
@@ -1063,34 +1343,10 @@ app.get('/api/settings/youtube', async (req, res) => {
           'https://www.googleapis.com/auth/youtube.upload',
           'https://www.googleapis.com/auth/youtube',
           'https://www.googleapis.com/auth/youtube.readonly',
+          'https://www.googleapis.com/auth/userinfo.profile',
         ],
+        state: statePayload,
       });
-
-      if (hasToken) {
-        try {
-          const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
-          const channelRes = await youtube.channels.list({
-            part: 'snippet,statistics',
-            mine: true,
-          });
-          const item = channelRes.data.items?.[0];
-          if (item) {
-            isConnected = true;
-            channel = {
-              id: item.id,
-              title: item.snippet.title,
-              description: item.snippet.description,
-              customUrl: item.snippet.customUrl,
-              thumbnail: item.snippet.thumbnails?.default?.url || item.snippet.thumbnails?.medium?.url,
-              subscriberCount: item.statistics?.subscriberCount || '0',
-              videoCount: item.statistics?.videoCount || '0',
-              viewCount: item.statistics?.viewCount || '0',
-            };
-          }
-        } catch (e) {
-          console.warn('Could not fetch YouTube channel details:', e.message);
-        }
-      }
     } catch (e) {
       console.warn('OAuth2 client generation warning:', e.message);
     }
@@ -1099,46 +1355,28 @@ app.get('/api/settings/youtube', async (req, res) => {
   res.json({
     hasSecrets,
     hasToken,
-    isConnected,
-    channel,
+    isConnected: !!activeChannel,
+    channel: activeChannel,
+    channels: chReg.channels,
+    activeChannelId: chReg.activeChannelId,
+    credentials: credReg.projects,
+    activeProjectId: credReg.activeProjectId,
     authUrl,
   });
 });
 
-// POST Save YouTube client_secrets.json directly from UI paste/upload
+// POST Save YouTube client_secrets.json directly from UI paste/upload (Adds project to multi-credential registry)
 app.post('/api/settings/save-secrets', (req, res) => {
-  let { jsonContent } = req.body;
+  let { jsonContent, name } = req.body;
   if (!jsonContent) {
     return res.status(400).json({ error: 'Please paste your client_secrets.json content.' });
   }
 
   try {
-    let parsed;
-    if (typeof jsonContent === 'string') {
-      parsed = JSON.parse(jsonContent);
-    } else {
-      parsed = jsonContent;
-    }
+    const project = multiChannel.addCredential({ name, jsonContent });
+    const { oauth2Client, credentialId } = multiChannel.getOAuth2ClientForCredential(project.id, PORT);
+    const statePayload = Buffer.from(JSON.stringify({ credentialId })).toString('base64');
 
-    const installed = parsed.installed || parsed.web;
-    if (!installed || !installed.client_id || !installed.client_secret) {
-      return res.status(400).json({
-        error: 'Invalid format! The JSON must contain "installed" (Desktop App) or "web" with "client_id" and "client_secret".',
-      });
-    }
-
-    // Save secrets file
-    fs.writeFileSync(CLIENT_SECRETS_PATH, JSON.stringify(parsed, null, 2), 'utf-8');
-
-    // Remove old token so user can authenticate with the new project
-    if (fs.existsSync(TOKEN_PATH)) {
-      try {
-        fs.unlinkSync(TOKEN_PATH);
-      } catch (e) {}
-    }
-
-    // Generate new auth URL
-    const oauth2Client = getOAuth2Client();
     const authUrl = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       prompt: 'consent',
@@ -1146,17 +1384,20 @@ app.post('/api/settings/save-secrets', (req, res) => {
         'https://www.googleapis.com/auth/youtube.upload',
         'https://www.googleapis.com/auth/youtube',
         'https://www.googleapis.com/auth/youtube.readonly',
+        'https://www.googleapis.com/auth/userinfo.profile',
       ],
+      state: statePayload,
     });
 
-    console.log('✅ YouTube client_secrets.json successfully saved via Settings UI');
+    console.log(`✅ Google Cloud credentials "${project.name}" successfully saved via Settings UI`);
     res.json({
       success: true,
-      message: 'YouTube API credentials saved! Click "Confirm & Connect Channel" to authenticate.',
+      message: `Google Cloud credentials "${project.name}" saved! Click "Confirm & Connect Channel" to authenticate.`,
+      project,
       authUrl,
     });
   } catch (err) {
-    res.status(400).json({ error: 'Failed to parse JSON: ' + err.message });
+    res.status(400).json({ error: 'Failed to parse/save credentials: ' + err.message });
   }
 });
 
@@ -1165,6 +1406,8 @@ app.post('/api/settings/reset-secrets', (req, res) => {
   try {
     if (fs.existsSync(CLIENT_SECRETS_PATH)) fs.unlinkSync(CLIENT_SECRETS_PATH);
     if (fs.existsSync(TOKEN_PATH)) fs.unlinkSync(TOKEN_PATH);
+    if (fs.existsSync(multiChannel.CREDENTIALS_FILE)) fs.unlinkSync(multiChannel.CREDENTIALS_FILE);
+    if (fs.existsSync(multiChannel.CHANNELS_FILE)) fs.unlinkSync(multiChannel.CHANNELS_FILE);
     res.json({ success: true, message: 'YouTube API credentials and connection reset.' });
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -2,9 +2,15 @@
 node_modules/
 
 # Secrets & OAuth Credentials (DO NOT COMMIT SENSITIVE TOKENS)
-studio/token.json
-studio/client_secrets.json
-studio/instagram_session.json
+studio/token*.json
+studio/client_secrets*.json
+studio/instagram_session*.json
+studio/credentials/
+studio/tokens/
+studio/instagram_sessions/
+studio/credentials.json
+studio/channels.json
+studio/instagram_accounts.json
 .env
 .env.*
 *.pem
