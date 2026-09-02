@@ -89,14 +89,14 @@ export const HoldingGrudgesCanvas: React.FC<CanvasProps> = () => {
           </KineticCascadeItem>
 
           <KineticCascadeItem delayMs={5360} durationMs={380} direction="up" distance={25}>
-            <div className="px-10 py-3.5 rounded-full bg-slate-950 text-rose-400 font-mono text-[22px] font-black uppercase tracking-widest flex items-center gap-3.5 shadow-2xl border-2 border-rose-500/30">
+            <div className="px-10 py-3.5 rounded-full bg-slate-950 text-rose-400 font-mono text-[24px] font-black uppercase tracking-widest flex items-center gap-3.5 shadow-2xl border-2 border-rose-500/30">
               <AlertCircle className="w-7 h-7 text-rose-500" />
               STAGE 01 • UNFINISHED BUSINESS
             </div>
           </KineticCascadeItem>
 
           <KineticCascadeItem delayMs={5460} durationMs={450} direction="up" distance={45}>
-            <div className="w-full rounded-[52px] p-10 bg-white/95 backdrop-blur-2xl border-[4px] border-rose-200/80 shadow-2xl flex items-center gap-8">
+            <div className="w-full rounded-[52px] p-12 bg-white/95 backdrop-blur-2xl border-[4px] border-rose-200 shadow-2xl flex items-center gap-8">
               <div className="w-64 h-64 shrink-0">
                 <ProCutout
                   assetId="tangled_confusion_chaos"
@@ -110,12 +110,12 @@ export const HoldingGrudgesCanvas: React.FC<CanvasProps> = () => {
               </div>
 
               <div className="flex-1 flex flex-col gap-4">
-                <div className="text-4xl font-black text-slate-950 uppercase tracking-tight leading-tight">
+                <div className="text-5xl font-black text-slate-950 uppercase tracking-tight leading-tight">
                   Brain Hates Open Loops
                 </div>
-                <div className="p-5 rounded-2xl bg-rose-50 border-2 border-rose-200/80 text-rose-950 font-black text-2xl flex items-center gap-3">
-                  <span className="w-3.5 h-3.5 rounded-full bg-rose-500 shrink-0" />
-                  <span>The Zeigarnik effect traps unresolved conflicts in active memory</span>
+                <div className="p-5 rounded-2xl bg-rose-50 border-2 border-rose-200 text-rose-950 font-black text-2xl md:text-3xl flex items-center gap-3">
+                  <span className="w-4 h-4 rounded-full bg-rose-500 shrink-0" />
+                  <span>Unresolved conflicts loop endlessly in memory</span>
                 </div>
               </div>
             </div>

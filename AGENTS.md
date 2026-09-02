@@ -203,11 +203,13 @@ Add the viral title (with `#Shorts`), high-CTR description, category (`27` Educa
    - Never use empty text-only rounded rectangles.
    - Use `<ProCutout />` and `<PropComparison />` for tactile, documentary-grade visual rhythm.
 3. **Spacious Canvas Bounds**: `w-[980px] - w-[1020px]`, `px-6` margin. Vertical focal zone from `top: 15%` to `top: 76%`.
-4. **Strict Mobile Font Scale**:
-   - Card Titles & Headers: `48px - 58px` (`text-5xl`), `font-black`.
-   - Primary Labels: `32px - 40px` (`text-2xl` to `text-3xl`), `font-black`.
-   - Badges & Chips: **MINIMUM 24px - 30px** (`text-xl` / `text-2xl`, `font-black`), NEVER `text-xs` (12px) or `text-sm` (14px).
-   - Handwritten / Script Accents: `28px - 36px` (`text-3xl font-serif italic font-black`).
+4. **Strict Mobile Font Scale & Anti-Clutter Rule (iPhone 720p Mobile Standard)**:
+   - **THE GOLDEN RULE**: Videos are consumed on mobile devices (e.g. base iPhone 15 running on 720p). Tiny text causes instant viewer confusion and eye strain.
+   - **PERMANENT BAN**: **NEVER use text below 24px anywhere in 9:16 vertical videos**! No `text-sm` (14px), no `text-xs` (12px), no `text-base` (16px).
+   - **Card Titles & Headers**: `50px - 64px` (`text-5xl` to `text-6xl`), `font-black`.
+   - **Secondary Labels & Subtitles**: `28px - 36px` (`text-2xl` to `text-3xl`), `font-black`.
+   - **Badges & Chips**: **MINIMUM 24px - 30px** (`text-xl` / `text-2xl`, `font-black`).
+   - **Extreme Minimalism (Anti-Clutter)**: Max 1 bold headline + 1 punchy visual badge per card. Never cram multi-sentence paragraphs, 2-column small text matrices, or fine print onto the canvas. The viewer must grasp the visual concept in 0.5 seconds!
 5. **Pro Motion Graph Speed Curves & Kinetic Scenes (CapCut & After Effects Standard)**:
    - **Never use linear transitions or abrupt hard-cuts**: Wrap scenes in `<KineticScene startMs={...} endMs={...} inTransition="snap_up" outTransition="zoom_out" />`.
    - **In-Animation**: Uses `MotionCurves.snapSettle` (`cubic-bezier(0.16, 1.0, 0.3, 1.0)`) for explosive initial velocity and buttery deceleration.

@@ -108,18 +108,18 @@ export const PropComparison: React.FC<PropComparisonProps> = ({
     >
       {/* Left Problem Card */}
       <div
-        className="flex-1 min-w-[360px] rounded-[38px] p-6 bg-rose-50/80 border-[3px] border-rose-200/90 flex flex-col items-center text-center gap-4 relative overflow-hidden shadow-md"
+        className="flex-1 min-w-[360px] rounded-[44px] p-7 bg-rose-50/90 border-[3px] border-rose-200 flex flex-col items-center text-center gap-5 relative overflow-hidden shadow-md"
         style={{
           transform: `translateY(${(1 - spLeft) * 30}px) scale(${0.92 + spLeft * 0.08})`,
           opacity: Math.min(1, spLeft * 1.5),
         }}
       >
-        <div className="px-5 py-1.5 rounded-full bg-rose-600 text-white font-mono text-[16px] font-black uppercase tracking-wider flex items-center gap-2 shadow-sm">
-          <XCircle className="w-5 h-5 text-white" />
+        <div className="px-6 py-2.5 rounded-full bg-rose-600 text-white font-mono text-[22px] font-black uppercase tracking-wider flex items-center gap-2.5 shadow-sm">
+          <XCircle className="w-6 h-6 text-white shrink-0" />
           {leftBadge}
         </div>
 
-        <div className="w-48 h-48 my-2">
+        <div className="w-52 h-52 my-1">
           <ProCutout
             assetId={leftAssetId}
             glowColor={leftGlow}
@@ -129,11 +129,11 @@ export const PropComparison: React.FC<PropComparisonProps> = ({
           />
         </div>
 
-        <div className="text-3xl font-black text-rose-950 uppercase tracking-tight">
+        <div className="text-4xl font-black text-rose-950 uppercase tracking-tight">
           {leftTitle}
         </div>
         {leftSubtitle && (
-          <div className="text-lg font-bold text-rose-800/90 leading-snug">
+          <div className="text-2xl font-bold text-rose-900 leading-snug">
             {leftSubtitle}
           </div>
         )}
@@ -148,7 +148,7 @@ export const PropComparison: React.FC<PropComparisonProps> = ({
             opacity: Math.min(1, spDivider * 1.8),
           }}
         >
-          <div className="w-14 h-14 rounded-full bg-slate-950 text-amber-300 font-mono font-black text-xl flex items-center justify-center shadow-xl border-2 border-amber-400">
+          <div className="w-16 h-16 rounded-full bg-slate-950 text-amber-300 font-mono font-black text-2xl flex items-center justify-center shadow-xl border-2 border-amber-400">
             {centerDividerText}
           </div>
         </div>
@@ -157,18 +157,18 @@ export const PropComparison: React.FC<PropComparisonProps> = ({
       {/* Right Solution Card (Appears smoothly during expansion) */}
       {isRightActive && (
         <div
-          className="flex-1 min-w-[360px] rounded-[38px] p-6 bg-emerald-50/80 border-[3px] border-emerald-200/90 flex flex-col items-center text-center gap-4 relative overflow-hidden shadow-md"
+          className="flex-1 min-w-[360px] rounded-[44px] p-7 bg-emerald-50/90 border-[3px] border-emerald-200 flex flex-col items-center text-center gap-5 relative overflow-hidden shadow-md"
           style={{
             transform: `translateY(${(1 - spRight) * 35}px) scale(${0.88 + spRight * 0.12})`,
             opacity: Math.min(1, spRight * 1.5),
           }}
         >
-          <div className="px-5 py-1.5 rounded-full bg-emerald-600 text-white font-mono text-[16px] font-black uppercase tracking-wider flex items-center gap-2 shadow-sm">
-            <CheckCircle2 className="w-5 h-5 text-white" />
+          <div className="px-6 py-2.5 rounded-full bg-emerald-600 text-white font-mono text-[22px] font-black uppercase tracking-wider flex items-center gap-2.5 shadow-sm">
+            <CheckCircle2 className="w-6 h-6 text-white shrink-0" />
             {rightBadge}
           </div>
 
-          <div className="w-48 h-48 my-2">
+          <div className="w-52 h-52 my-1">
             <ProCutout
               assetId={rightAssetId}
               glowColor={rightGlow}
@@ -178,11 +178,11 @@ export const PropComparison: React.FC<PropComparisonProps> = ({
             />
           </div>
 
-          <div className="text-3xl font-black text-emerald-950 uppercase tracking-tight">
+          <div className="text-4xl font-black text-emerald-950 uppercase tracking-tight">
             {rightTitle}
           </div>
           {rightSubtitle && (
-            <div className="text-lg font-bold text-emerald-800/90 leading-snug">
+            <div className="text-2xl font-bold text-emerald-900 leading-snug">
               {rightSubtitle}
             </div>
           )}
