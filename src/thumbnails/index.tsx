@@ -488,3 +488,31 @@ export const The3amCortisolSpikeThumbnail: React.FC = () => (
     extraBadge="SLEEP BIOLOGY 🫀"
   />
 );
+
+export const TheIllusionOfOwnershipThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="THE ILLUSION OF OWNERSHIP"
+    highlightWord="OWNERSHIP"
+    highlightColor="emerald"
+    subtitle="Stop Financing Your Lifestyle"
+    categoryBadge="WEALTH"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="obsidian_gold"
+    aspectRatio="9:16"
+  />
+);
+
+export const TheDopamineSugarTrapThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="THE SUGAR TRAP"
+    highlightWord="TRAP"
+    highlightColor="cyan"
+    subtitle="The 2 PM Energy Crash"
+    categoryBadge="HEALTH"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="biotech_cyan"
+    aspectRatio="9:16"
+  />
+);

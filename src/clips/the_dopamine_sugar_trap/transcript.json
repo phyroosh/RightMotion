@@ -1,0 +1,377 @@
+[
+  {
+    "word": "When",
+    "start": 0,
+    "end": 322
+  },
+  {
+    "word": "you",
+    "start": 342,
+    "end": 665
+  },
+  {
+    "word": "crave",
+    "start": 685,
+    "end": 1008
+  },
+  {
+    "word": "a",
+    "start": 1028,
+    "end": 1351
+  },
+  {
+    "word": "sweet",
+    "start": 1371,
+    "end": 1694
+  },
+  {
+    "word": "treat",
+    "start": 1714,
+    "end": 2036
+  },
+  {
+    "word": "after",
+    "start": 2056,
+    "end": 2379
+  },
+  {
+    "word": "lunch,",
+    "start": 2399,
+    "end": 2722
+  },
+  {
+    "word": "it's",
+    "start": 2742,
+    "end": 3065
+  },
+  {
+    "word": "not",
+    "start": 3085,
+    "end": 3408
+  },
+  {
+    "word": "because",
+    "start": 3428,
+    "end": 3751
+  },
+  {
+    "word": "you're",
+    "start": 3771,
+    "end": 4093
+  },
+  {
+    "word": "hungry.",
+    "start": 4113,
+    "end": 4436
+  },
+  {
+    "word": "Your",
+    "start": 4456,
+    "end": 4779
+  },
+  {
+    "word": "brain",
+    "start": 4799,
+    "end": 5122
+  },
+  {
+    "word": "is",
+    "start": 5142,
+    "end": 5465
+  },
+  {
+    "word": "desperately",
+    "start": 5485,
+    "end": 5808
+  },
+  {
+    "word": "hunting",
+    "start": 5828,
+    "end": 6150
+  },
+  {
+    "word": "for",
+    "start": 6170,
+    "end": 6493
+  },
+  {
+    "word": "a",
+    "start": 6513,
+    "end": 6836
+  },
+  {
+    "word": "cheap",
+    "start": 6856,
+    "end": 7179
+  },
+  {
+    "word": "dopamine",
+    "start": 7199,
+    "end": 7522
+  },
+  {
+    "word": "hit",
+    "start": 7542,
+    "end": 7865
+  },
+  {
+    "word": "to",
+    "start": 7885,
+    "end": 8207
+  },
+  {
+    "word": "survive",
+    "start": 8227,
+    "end": 8550
+  },
+  {
+    "word": "the",
+    "start": 8570,
+    "end": 8893
+  },
+  {
+    "word": "afternoon",
+    "start": 8913,
+    "end": 9236
+  },
+  {
+    "word": "slump.",
+    "start": 9256,
+    "end": 9579
+  },
+  {
+    "word": "Sugar",
+    "start": 9599,
+    "end": 9921
+  },
+  {
+    "word": "hijacks",
+    "start": 9941,
+    "end": 10264
+  },
+  {
+    "word": "your",
+    "start": 10284,
+    "end": 10607
+  },
+  {
+    "word": "reward",
+    "start": 10627,
+    "end": 10950
+  },
+  {
+    "word": "circuitry",
+    "start": 10970,
+    "end": 11293
+  },
+  {
+    "word": "exactly",
+    "start": 11313,
+    "end": 11636
+  },
+  {
+    "word": "like",
+    "start": 11656,
+    "end": 11978
+  },
+  {
+    "word": "an",
+    "start": 11998,
+    "end": 12321
+  },
+  {
+    "word": "addictive",
+    "start": 12341,
+    "end": 12664
+  },
+  {
+    "word": "drug.",
+    "start": 12684,
+    "end": 13007
+  },
+  {
+    "word": "But",
+    "start": 13027,
+    "end": 13350
+  },
+  {
+    "word": "here's",
+    "start": 13370,
+    "end": 13693
+  },
+  {
+    "word": "the",
+    "start": 13713,
+    "end": 14035
+  },
+  {
+    "word": "scariest",
+    "start": 14055,
+    "end": 14378
+  },
+  {
+    "word": "part:",
+    "start": 14398,
+    "end": 14721
+  },
+  {
+    "word": "that",
+    "start": 14741,
+    "end": 15064
+  },
+  {
+    "word": "spike",
+    "start": 15084,
+    "end": 15407
+  },
+  {
+    "word": "causes",
+    "start": 15427,
+    "end": 15750
+  },
+  {
+    "word": "a",
+    "start": 15770,
+    "end": 16092
+  },
+  {
+    "word": "massive",
+    "start": 16112,
+    "end": 16435
+  },
+  {
+    "word": "insulin",
+    "start": 16455,
+    "end": 16778
+  },
+  {
+    "word": "surge,",
+    "start": 16798,
+    "end": 17121
+  },
+  {
+    "word": "leading",
+    "start": 17141,
+    "end": 17464
+  },
+  {
+    "word": "to",
+    "start": 17484,
+    "end": 17806
+  },
+  {
+    "word": "a",
+    "start": 17826,
+    "end": 18149
+  },
+  {
+    "word": "brutal",
+    "start": 18169,
+    "end": 18492
+  },
+  {
+    "word": "crash",
+    "start": 18512,
+    "end": 18835
+  },
+  {
+    "word": "two",
+    "start": 18855,
+    "end": 19178
+  },
+  {
+    "word": "hours",
+    "start": 19198,
+    "end": 19521
+  },
+  {
+    "word": "later.",
+    "start": 19541,
+    "end": 19863
+  },
+  {
+    "word": "Break",
+    "start": 19883,
+    "end": 20206
+  },
+  {
+    "word": "the",
+    "start": 20226,
+    "end": 20549
+  },
+  {
+    "word": "cycle",
+    "start": 20569,
+    "end": 20892
+  },
+  {
+    "word": "by",
+    "start": 20912,
+    "end": 21235
+  },
+  {
+    "word": "taking",
+    "start": 21255,
+    "end": 21578
+  },
+  {
+    "word": "a",
+    "start": 21598,
+    "end": 21920
+  },
+  {
+    "word": "ten-minute",
+    "start": 21940,
+    "end": 22263
+  },
+  {
+    "word": "walk",
+    "start": 22283,
+    "end": 22606
+  },
+  {
+    "word": "instead.",
+    "start": 22626,
+    "end": 22949
+  },
+  {
+    "word": "Your",
+    "start": 22969,
+    "end": 23292
+  },
+  {
+    "word": "brain",
+    "start": 23312,
+    "end": 23635
+  },
+  {
+    "word": "doesn't",
+    "start": 23655,
+    "end": 23977
+  },
+  {
+    "word": "need",
+    "start": 23997,
+    "end": 24320
+  },
+  {
+    "word": "sugar,",
+    "start": 24340,
+    "end": 24663
+  },
+  {
+    "word": "it",
+    "start": 24683,
+    "end": 25006
+  },
+  {
+    "word": "needs",
+    "start": 25026,
+    "end": 25349
+  },
+  {
+    "word": "circulation.",
+    "start": 25369,
+    "end": 25692
+  }
+]
