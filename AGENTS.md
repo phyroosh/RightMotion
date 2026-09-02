@@ -208,9 +208,13 @@ Add the viral title (with `#Shorts`), high-CTR description, category (`27` Educa
    - Primary Labels: `32px - 40px` (`text-2xl` to `text-3xl`), `font-black`.
    - Badges & Chips: **MINIMUM 24px - 30px** (`text-xl` / `text-2xl`, `font-black`), NEVER `text-xs` (12px) or `text-sm` (14px).
    - Handwritten / Script Accents: `28px - 36px` (`text-3xl font-serif italic font-black`).
-5. **Mass-Spring-Damper Physics & Rock-Solid Settled State**:
-   - `spring()` with `damping: 18 - 22, stiffness: 85 - 110, mass: 0.8 - 1.0`.
-   - **NO continuous `ambientFloat` / vertical bobbing / breathing on text or cards**. Once settled, they MUST remain 100% stationary and crisp.
+5. **Pro Motion Graph Speed Curves & Kinetic Scenes (CapCut & After Effects Standard)**:
+   - **Never use linear transitions or abrupt hard-cuts**: Wrap scenes in `<KineticScene startMs={...} endMs={...} inTransition="snap_up" outTransition="zoom_out" />`.
+   - **In-Animation**: Uses `MotionCurves.snapSettle` (`cubic-bezier(0.16, 1.0, 0.3, 1.0)`) for explosive initial velocity and buttery deceleration.
+   - **Living Hold Drift**: Scenes feature subtle sub-pixel scale drift (`1.0 -> 1.02`) during hold so content feels alive rather than frozen.
+   - **Out-Animation**: Seamlessly dismisses old scene elements 250-300ms before next scene enters with `zoom_out` or `snap_up` blur fade.
+   - **Staggered Cascade**: Use `<KineticCascadeItem delayMs={...} direction="up" />` to offset ghost text, badges, and hero cards by 60-80ms for captivating rhythm.
+   - **Living Canvas**: Use `<LivingStudioBackground />` for organic floating dual ambient orbs (amber + blue).
 6. **Captions**: Central `AppleKineticCaptions` with neon-blue active word pill glow.
 7. **Sound Design**: Multi-SFX suite via `SoundDesignEngine` strictly tied to visual cutout and card entrances.
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Easing, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { MotionCurves } from "./MotionGraph";
 
 export type CharacterPose =
   // Bust / waist-up cutouts (mid-video explanatory A-Roll)
@@ -56,33 +57,33 @@ export const CharacterKeyframeAnimator: React.FC<CharacterKeyframeAnimatorProps>
   const rotates = sorted.map((k) => k.rotate ?? 0);
   const opacities = sorted.map((k) => k.opacity ?? 1);
 
-  // Smooth bezier easing interpolation across keyframes
+  // Pro Speed Graph easing interpolation across keyframes (explosive initial speed + smooth settle)
   const targetScale = interpolate(currentMs, times, scales, {
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1.0),
+    easing: MotionCurves.snapSettle,
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   const targetX = interpolate(currentMs, times, xs, {
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1.0),
+    easing: MotionCurves.snapSettle,
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   const targetY = interpolate(currentMs, times, ys, {
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1.0),
+    easing: MotionCurves.snapSettle,
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   const targetRotate = interpolate(currentMs, times, rotates, {
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1.0),
+    easing: MotionCurves.snapSettle,
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   const targetOpacity = interpolate(currentMs, times, opacities, {
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1.0),
+    easing: MotionCurves.snapSettle,
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
