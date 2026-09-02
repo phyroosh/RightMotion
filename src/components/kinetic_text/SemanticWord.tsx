@@ -8,7 +8,8 @@ export type SemanticPhysics =
   | "heartbeat";      // Rhythmic double-beat pulse
 
 export interface SemanticWordProps {
-  word: string;
+  word?: string;
+  children?: React.ReactNode;
   physics: SemanticPhysics;
   startMs?: number;
   durationMs?: number;
@@ -22,13 +23,19 @@ export interface SemanticWordProps {
  * Strictly bounded to prevent caption collisions.
  */
 export const SemanticWord: React.FC<SemanticWordProps> = ({
-  word,
+  word: wordProp,
+  children,
   physics,
   startMs = 0,
   durationMs = 600,
   className = "",
   style = {},
 }) => {
+  const word =
+    wordProp ??
+    (typeof children === "string"
+      ? children
+      : React.Children.toArray(children).join(""));
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 

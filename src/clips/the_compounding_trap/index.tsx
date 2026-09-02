@@ -44,7 +44,7 @@ const SFX_CUES: SfxCue[] = [
   { frame: 930, type: "whoosh_deep",    volume: 0.34 }, // 31.0s: Scene 7 finale
   { frame: 945, type: "whoosh_sparkle", volume: 0.35 }, // 31.5s: GlitchText: PLAYING IT SAFE
   { frame: 990, type: "impact_hit",     volume: 0.26 }, // 33.0s: Final badge stamp
-};
+];
 
 // Screen trauma on fast-cut impact moments
 const SHAKE_FRAMES = [138, 426, 786];

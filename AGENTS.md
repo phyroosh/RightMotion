@@ -24,6 +24,22 @@ Every video script submitted to RightClips is tagged with one of three channel n
 
 ---
 
+## 🚫 Strict Repo Hygiene & Git Push Policy (MANDATORY AGENT RULE)
+
+> [!CRITICAL]
+> **DO NOT PUSH TO GITHUB ANYTHING THAT IS PRODUCED BY RIGHTCLIPS!**
+> Push **ONLY** the engine, core components, library assets, scripts, or anything that does the work.
+> 
+> **NEVER commit or push:**
+> 1. Rendered outputs: `out/`, `out/*.mp4`, `out/*.png`
+> 2. Produced video transcripts & speech: `public/*/voiceover.mp3`, `src/clips/*/transcript.json`
+> 3. Produced video metadata: `studio/metadata.json`, `studio/uploads.json`
+> 
+> The repository must stay 100% clean as a pure reusable software engine.
+
+
+---
+
 ### 🎨 Channel Design Systems Matrix
 
 | Feature | `{Self Improvement}` (Judy Insights) | `{Finance}` (Apex Wealth) | `{Health}` (BioMatrix) |

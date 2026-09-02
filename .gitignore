@@ -23,6 +23,14 @@ out/*.mp4
 out/*.png
 out/reference/
 
+# Generated Video Metadata & Upload Tracking (Engine only, no video outputs)
+studio/metadata.json
+studio/uploads.json
+
+# Generated Audio Voiceovers (Keep public/assets and public/audio)
+public/*/voiceover.mp3
+
+
 # Remotion & Build Artifacts
 .remotion/
 dist/

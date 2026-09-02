@@ -48,7 +48,7 @@ export const WealthMultiplierMeter: React.FC<WealthMultiplierMeterProps> = ({
           <div className="text-slate-400 font-bold text-2xl mt-1">Purchasing Power</div>
         </div>
 
-        <div className="px-4 py-2 rounded-xl bg-rose-950/50 border border-rose-800/60 text-rose-300 font-mono text-lg font-bold text-center">
+        <div className="px-5 py-3 rounded-2xl bg-rose-950/70 border-2 border-rose-800/80 text-rose-300 font-mono text-xl font-black text-center">
           SLOW EVAPORATION
         </div>
       </div>
@@ -69,7 +69,7 @@ export const WealthMultiplierMeter: React.FC<WealthMultiplierMeterProps> = ({
           <div className="text-slate-200 font-bold text-2xl mt-1">Compounding Return</div>
         </div>
 
-        <div className="px-4 py-2 rounded-xl bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 font-mono text-lg font-black text-center">
+        <div className="px-5 py-3 rounded-2xl bg-emerald-950/90 border-2 border-emerald-500/50 text-emerald-300 font-mono text-xl font-black text-center">
           EXPONENTIAL FREEDOM
         </div>
       </div>

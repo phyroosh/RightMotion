@@ -272,6 +272,12 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       shadow: isLight ? '0 10px 25px rgba(139, 92, 246, 0.42), 0 2px 6px rgba(0,0,0,0.06)' : '0 0 45px rgba(168,85,247,0.90), 0 4px 20px rgba(0,0,0,0.7)',
       border: 'none',
     },
+    cyan: {
+      bg: 'linear-gradient(135deg, #06b6d4, #0891b2)',
+      color: '#fff',
+      shadow: isLight ? '0 10px 25px rgba(6, 182, 212, 0.42), 0 2px 6px rgba(0,0,0,0.06)' : '0 0 45px rgba(6,182,212,0.90), 0 4px 20px rgba(0,0,0,0.7)',
+      border: 'none',
+    },
   }[highlightColor];
 
   const renderTitleWords = (fontSize: number, lineHeight: number) => {

@@ -59,7 +59,7 @@ export const CompoundGrowthChart: React.FC<CompoundGrowthChartProps> = ({
           <div className="text-emerald-400 font-mono font-black text-4xl">
             +{assetMultiplier}x
           </div>
-          <div className="text-slate-400 font-mono text-lg font-bold">10-YEAR RETURN</div>
+          <div className="text-slate-400 font-mono text-xl font-black">10-YEAR RETURN</div>
         </div>
       </div>
 

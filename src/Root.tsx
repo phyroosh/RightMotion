@@ -67,6 +67,8 @@ import {
   SayingNoThumbnail,
   TheCompoundingTrapThumbnail,
   The3amCortisolSpikeThumbnail,
+  TheIllusionOfOwnershipThumbnail,
+  TheDopamineSugarTrapThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -130,6 +132,8 @@ export const RemotionRoot: React.FC = () => {
   const sayingNoDuration = calculateDurationInFrames(sayingNoTranscript as any[], fps);
   const theCompoundingTrapDuration = calculateDurationInFrames(theCompoundingTrapTranscript as any[], fps);
   const the3amCortisolSpikeDuration = calculateDurationInFrames(the3amCortisolSpikeTranscript as any[], fps);
+  const theIllusionOfOwnershipDuration = calculateDurationInFrames(theIllusionOfOwnershipTranscript as any[], fps);
+  const theDopamineSugarTrapDuration = calculateDurationInFrames(theDopamineSugarTrapTranscript as any[], fps);
 
   return (
     <>
