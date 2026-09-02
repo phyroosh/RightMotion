@@ -558,8 +558,7 @@ export const {pascal_name}Thumbnail: React.FC = () => (
     subtitle="High-Retention Psychology Breakdown"
     categoryBadge="PSYCHOLOGY"
     characterPose="character_fullbody_pointing.png"
-    characterScale={{1.0}}
-    theme="obsidian"
+    theme="apple_studio"
     aspectRatio="{ "9:16" if format_type == "shorts" else "16:9" }"
     extraBadge="MINDSET"
   />

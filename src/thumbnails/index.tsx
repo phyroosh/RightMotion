@@ -393,14 +393,14 @@ export const DopamineResetThumbnail: React.FC = () => (
   <ThumbnailCard
     title="DOPAMINE RESET"
     highlightWord="DOPAMINE"
-    highlightColor="rose"
+    highlightColor="sky"
     subtitle="High-Retention Psychology Breakdown"
-    categoryBadge="PSYCHOLOGY"
+    categoryBadge="NEUROSCIENCE"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="obsidian"
+    theme="apple_studio"
     aspectRatio="9:16"
-    extraBadge="MINDSET"
+    extraBadge="FOCUS"
   />
 );
 
@@ -413,9 +413,9 @@ export const ShrinkingCircleThumbnail: React.FC = () => (
     categoryBadge="RELATIONSHIPS"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="obsidian"
+    theme="apple_studio"
     aspectRatio="9:16"
-    extraBadge="MINDSET"
+    extraBadge="INNER PEACE"
   />
 );
 
@@ -428,7 +428,7 @@ export const HoldingGrudgesThumbnail: React.FC = () => (
     categoryBadge="EMOTIONAL CLOSURE"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="obsidian"
+    theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="HEALING"
   />

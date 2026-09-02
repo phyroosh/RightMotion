@@ -39,20 +39,20 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
 
   const themes = {
     apple_studio: {
-      bg: '#f8fafc',
-      topGrad: 'radial-gradient(circle at 50% 15%, #ffffff 0%, #f1f5f9 45%, #e2e8f0 100%)',
-      charGrad: 'radial-gradient(ellipse at 50% 100%, rgba(241, 245, 249, 0.95) 0%, rgba(248, 250, 252, 0.3) 70%, transparent 100%)',
-      glow: 'rgba(245, 158, 11, 0.22)',
-      glowWide: 'rgba(14, 165, 233, 0.18)',
-      accent: '#0071e3',
-      cardBg: 'rgba(255, 255, 255, 0.92)',
+      bg: '#ffffff',
+      topGrad: 'radial-gradient(ellipse at 50% 0%, #ffffff 0%, #f8fafc 55%, #f1f5f9 100%)',
+      charGrad: 'radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.6) 60%, transparent 100%)',
+      glow: 'rgba(245, 158, 11, 0.28)', // Judy Warm Amber Sparkle
+      glowWide: 'rgba(37, 99, 235, 0.22)', // Judy Cognitive Blue
+      accent: '#0071e3', // Apple / Judy Electric Blue
+      cardBg: 'rgba(255, 255, 255, 0.94)',
       cardBorder: 'rgba(15, 23, 42, 0.08)',
-      rimLight: 'rgba(14, 165, 233, 0.25)',
+      rimLight: 'rgba(37, 99, 235, 0.22)',
       footerColor: '#64748b',
       textColor: '#090d16',
-      subColor: '#1e293b',
-      scrimGrad: 'linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.88) 45%, rgba(248, 250, 252, 0) 100%)',
-      dotGrid: 'radial-gradient(rgba(15, 23, 42, 0.18) 1.5px, transparent 1.5px)',
+      subColor: '#0f172a',
+      scrimGrad: 'linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.90) 45%, rgba(255, 255, 255, 0) 100%)',
+      dotGrid: 'radial-gradient(rgba(100, 116, 139, 0.22) 1.5px, transparent 1.5px)',
     },
     obsidian: {
       bg: '#080c14',
@@ -183,62 +183,62 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       dotGrid: 'radial-gradient(rgba(15, 23, 42, 0.18) 1.5px, transparent 1.5px)',
     },
   }[theme || 'apple_studio'] || {
-    bg: '#f8fafc',
-    topGrad: 'radial-gradient(circle at 50% 15%, #ffffff 0%, #f1f5f9 45%, #e2e8f0 100%)',
-    charGrad: 'radial-gradient(ellipse at 50% 100%, rgba(241, 245, 249, 0.95) 0%, rgba(248, 250, 252, 0.3) 70%, transparent 100%)',
-    glow: 'rgba(245, 158, 11, 0.22)',
-    glowWide: 'rgba(14, 165, 233, 0.18)',
+    bg: '#ffffff',
+    topGrad: 'radial-gradient(ellipse at 50% 0%, #ffffff 0%, #f8fafc 55%, #f1f5f9 100%)',
+    charGrad: 'radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.6) 60%, transparent 100%)',
+    glow: 'rgba(245, 158, 11, 0.28)',
+    glowWide: 'rgba(37, 99, 235, 0.22)',
     accent: '#0071e3',
-    cardBg: 'rgba(255, 255, 255, 0.92)',
+    cardBg: 'rgba(255, 255, 255, 0.94)',
     cardBorder: 'rgba(15, 23, 42, 0.08)',
-    rimLight: 'rgba(14, 165, 233, 0.25)',
+    rimLight: 'rgba(37, 99, 235, 0.22)',
     footerColor: '#64748b',
     textColor: '#090d16',
-    subColor: '#1e293b',
-    scrimGrad: 'linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.88) 45%, rgba(248, 250, 252, 0) 100%)',
-    dotGrid: 'radial-gradient(rgba(15, 23, 42, 0.18) 1.5px, transparent 1.5px)',
+    subColor: '#0f172a',
+    scrimGrad: 'linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.90) 45%, rgba(255, 255, 255, 0) 100%)',
+    dotGrid: 'radial-gradient(rgba(100, 116, 139, 0.22) 1.5px, transparent 1.5px)',
   };
+
+  const isLight = theme === 'apple_studio' || theme === 'white' || !theme;
 
   const highlightStyles = {
     amber: {
       bg: 'linear-gradient(135deg, #f59e0b, #f97316)',
-      color: '#000',
-      shadow: '0 0 40px rgba(245,158,11,0.85), 0 4px 20px rgba(0,0,0,0.6)',
+      color: '#fff',
+      shadow: isLight ? '0 10px 25px rgba(245, 158, 11, 0.42), 0 2px 6px rgba(0,0,0,0.06)' : '0 0 40px rgba(245,158,11,0.85), 0 4px 20px rgba(0,0,0,0.6)',
       border: 'none',
     },
     yellow: {
       bg: 'linear-gradient(135deg, #eab308, #fbbf24)',
       color: '#000',
-      shadow: '0 0 40px rgba(234,179,8,0.90), 0 4px 20px rgba(0,0,0,0.6)',
+      shadow: isLight ? '0 10px 25px rgba(234, 179, 8, 0.40), 0 2px 6px rgba(0,0,0,0.06)' : '0 0 40px rgba(234,179,8,0.90), 0 4px 20px rgba(0,0,0,0.6)',
       border: 'none',
     },
     rose: {
       bg: 'linear-gradient(135deg, #f43f5e, #be123c)',
       color: '#fff',
-      shadow: '0 0 45px rgba(244,63,94,0.90), 0 4px 20px rgba(0,0,0,0.7)',
+      shadow: isLight ? '0 10px 25px rgba(244, 63, 94, 0.42), 0 2px 6px rgba(0,0,0,0.06)' : '0 0 45px rgba(244,63,94,0.90), 0 4px 20px rgba(0,0,0,0.7)',
       border: 'none',
     },
     emerald: {
       bg: 'linear-gradient(135deg, #10b981, #0d9488)',
-      color: '#000',
-      shadow: '0 0 40px rgba(16,185,129,0.85), 0 4px 20px rgba(0,0,0,0.6)',
+      color: '#fff',
+      shadow: isLight ? '0 10px 25px rgba(16, 185, 129, 0.42), 0 2px 6px rgba(0,0,0,0.06)' : '0 0 40px rgba(16,185,129,0.85), 0 4px 20px rgba(0,0,0,0.6)',
       border: 'none',
     },
     sky: {
-      bg: 'linear-gradient(135deg, #0ea5e9, #2563eb)',
+      bg: 'linear-gradient(135deg, #0071e3, #2563eb)',
       color: '#fff',
-      shadow: '0 0 45px rgba(14,165,233,0.90), 0 4px 20px rgba(0,0,0,0.7)',
+      shadow: isLight ? '0 10px 25px rgba(0, 113, 227, 0.42), 0 2px 6px rgba(0,0,0,0.06)' : '0 0 45px rgba(14,165,233,0.90), 0 4px 20px rgba(0,0,0,0.7)',
       border: 'none',
     },
     purple: {
-      bg: 'linear-gradient(135deg, #a855f7, #7c3aed)',
+      bg: 'linear-gradient(135deg, #8b5cf6, #6d28d9)',
       color: '#fff',
-      shadow: '0 0 45px rgba(168,85,247,0.90), 0 4px 20px rgba(0,0,0,0.7)',
+      shadow: isLight ? '0 10px 25px rgba(139, 92, 246, 0.42), 0 2px 6px rgba(0,0,0,0.06)' : '0 0 45px rgba(168,85,247,0.90), 0 4px 20px rgba(0,0,0,0.7)',
       border: 'none',
     },
   }[highlightColor];
-
-  const isLight = theme === 'apple_studio' || theme === 'white';
 
   const renderTitleWords = (fontSize: number, lineHeight: number) => {
     if (!highlightWord) {
@@ -341,20 +341,39 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           zIndex: 2,
         }} />
 
-        {/* ─── LAYER 3: Radial glow behind character ─── */}
+        {/* ─── LAYER 3A: Left Warm Amber Glow (Judy Insights Signature) ─── */}
         <div style={{
           position: 'absolute',
-          bottom: '8%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '700px',
-          height: '700px',
+          top: isLight ? '14%' : '8%',
+          left: isLight ? '-14%' : '50%',
+          transform: isLight ? 'none' : 'translateX(-50%)',
+          width: isLight ? '760px' : '700px',
+          height: isLight ? '760px' : '700px',
           borderRadius: '50%',
-          background: themes.glow,
-          filter: 'blur(120px)',
+          background: isLight
+            ? 'radial-gradient(circle, rgba(245, 158, 11, 0.28) 0%, rgba(251, 191, 36, 0.12) 50%, transparent 75%)'
+            : themes.glow,
+          filter: isLight ? 'blur(100px)' : 'blur(120px)',
           zIndex: 3,
-          opacity: isLight ? 0.6 : 0.85,
+          opacity: isLight ? 0.85 : 0.85,
+          pointerEvents: 'none',
         }} />
+
+        {/* ─── LAYER 3B: Right Electric Cognitive Blue Glow (Judy Insights Signature) ─── */}
+        {isLight && (
+          <div style={{
+            position: 'absolute',
+            top: '26%',
+            right: '-14%',
+            width: '800px',
+            height: '800px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(37, 99, 235, 0.24) 0%, rgba(14, 165, 233, 0.10) 50%, transparent 75%)',
+            filter: 'blur(110px)',
+            zIndex: 3,
+            pointerEvents: 'none',
+          }} />
+        )}
 
         {/* ─── LAYER 4: Top accent glow ─── */}
         <div style={{
@@ -368,6 +387,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           background: themes.glowWide,
           filter: 'blur(90px)',
           zIndex: 3,
+          pointerEvents: 'none',
         }} />
 
         {/* ─── LAYER 5: Subtle dot grid overlay ─── */}
@@ -468,24 +488,26 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
             </span>
           </div>
 
-          {extraBadge && (
-            <div style={{
-              padding: '12px 24px',
-              borderRadius: '999px',
-              background: themes.cardBg,
-              border: `1.5px solid ${themes.cardBorder}`,
-              backdropFilter: 'blur(20px)',
-              fontFamily: 'monospace',
-              fontWeight: 800,
-              fontSize: '20px',
-              letterSpacing: '0.1em',
-              color: themes.accent,
-              textTransform: 'uppercase',
-              boxShadow: isLight ? '0 4px 20px rgba(15,23,42,0.06)' : '0 8px 32px rgba(0,0,0,0.5)',
-            }}>
-              {extraBadge}
-            </div>
-          )}
+          <div style={{
+            padding: '12px 24px',
+            borderRadius: '999px',
+            background: themes.cardBg,
+            border: `1.5px solid ${themes.cardBorder}`,
+            backdropFilter: 'blur(20px)',
+            fontFamily: 'monospace',
+            fontWeight: 800,
+            fontSize: '20px',
+            letterSpacing: '0.12em',
+            color: isLight ? '#0071e3' : themes.accent,
+            textTransform: 'uppercase',
+            boxShadow: isLight ? '0 4px 20px rgba(15,23,42,0.06)' : '0 8px 32px rgba(0,0,0,0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+          }}>
+            {isLight && <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#0071e3', display: 'inline-block' }} />}
+            {extraBadge || (isLight ? 'JUDY INSIGHTS' : '')}
+          </div>
         </div>
 
         {/* ─── LAYER 10: MAIN TITLE TEXT BLOCK ─── */}
@@ -510,17 +532,17 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
               alignItems: 'center',
               gap: '14px',
               padding: '18px 28px',
-              borderRadius: '18px',
-              background: themes.cardBg,
-              border: `1.5px solid ${themes.cardBorder}`,
-              backdropFilter: 'blur(20px)',
-              boxShadow: isLight ? '0 8px 30px rgba(15,23,42,0.08)' : '0 12px 40px rgba(0,0,0,0.6)',
-              maxWidth: '900px',
+              borderRadius: '20px',
+              background: isLight ? 'rgba(255, 255, 255, 0.95)' : themes.cardBg,
+              border: `1.5px solid ${isLight ? 'rgba(15, 23, 42, 0.08)' : themes.cardBorder}`,
+              backdropFilter: 'blur(24px)',
+              boxShadow: isLight ? '0 8px 30px rgba(15,23,42,0.06), 0 2px 8px rgba(0, 113, 227, 0.04)' : '0 12px 40px rgba(0,0,0,0.6)',
+              maxWidth: '920px',
             }}>
-              <Zap style={{ width: '24px', height: '24px', color: '#f59e0b', flexShrink: 0 }} />
+              <Sparkles style={{ width: '26px', height: '26px', color: '#f59e0b', flexShrink: 0 }} />
               <span style={{
-                fontSize: '26px',
-                fontWeight: 700,
+                fontSize: '28px',
+                fontWeight: 800,
                 color: themes.subColor,
                 letterSpacing: '-0.01em',
                 lineHeight: 1.35,

@@ -159,6 +159,10 @@ Create 4 modular files:
 2. Add `<Still id="<Name>Thumbnail" component={<Name>Thumbnail} width={1080} height={1920} />`
 
 #### Step 4: Register 4K Thumbnail in `src/thumbnails/index.tsx`
+> ⚠️ **PERMANENT BRAND SIGNATURE RULE (JUDY INSIGHTS)**:
+> All thumbnails MUST use `theme="apple_studio"` to match the clean Apple Studio light mesh aesthetic of the Judy Insights channel (@thejudyinsights).
+> Features: Pure studio canvas, dual amber-gold and cognitive blue ambient auras, 4-point gold sparkle, and deep obsidian title typography. NEVER use dark or obsidian themes.
+
 ```tsx
 export const <Name>Thumbnail: React.FC = () => (
   <ThumbnailCard
@@ -169,7 +173,7 @@ export const <Name>Thumbnail: React.FC = () => (
     categoryBadge="<CATEGORY>"
     characterPose="character_fullbody_pointing.png"
     characterScale={1.0}
-    theme="obsidian" // obsidian | crimson | slate | purple | emerald | amber | blue
+    theme="apple_studio" // ALWAYS apple_studio for Judy Insights Brand Signature
     aspectRatio="9:16" // 9:16 for Shorts, 16:9 for Long-Form
     extraBadge="<EXTRA TAG>"
   />
