@@ -45,16 +45,17 @@ export const TheCompoundingTrapCanvas: React.FC = () => {
               <div className="text-white font-black text-5xl leading-tight">
                 60 Hours A Week,<br />Every Dollar Saved.
               </div>
-              <div className="text-rose-400 font-black text-4xl">Still Feel Broke?</div>
+              <div className="relative inline-block mt-2 pb-2">
+                <span className="text-rose-400 font-black text-4xl">Still Feel Broke?</span>
+                <HandDrawnDoodle
+                  preset="underline"
+                  color="rose"
+                  startMs={1500}
+                  className="w-full absolute -bottom-5 left-0 h-7"
+                />
+              </div>
             </div>
           </IsometricCard>
-
-          <HandDrawnDoodle
-            preset="underline"
-            color="rose"
-            startMs={1500}
-            className="w-[500px]"
-          />
         </div>
       </KineticScene>
 
@@ -153,14 +154,6 @@ export const TheCompoundingTrapCanvas: React.FC = () => {
           </SemanticWord>
 
           <WealthMultiplierMeter startMs={14600} className="w-[960px]" />
-
-          <HandDrawnDoodle
-            preset="circle"
-            color="rose"
-            startMs={15500}
-            className="absolute"
-            style={{ left: "50px", top: "55%", width: "180px", height: "180px" }}
-          />
 
           <div className="px-6 py-3 rounded-2xl bg-amber-950/60 border border-amber-500/40 text-amber-300 font-mono text-2xl font-black text-center">
             PROUD OF $10K SAVINGS? IT LOSES HALF ITS VALUE IN A DECADE.

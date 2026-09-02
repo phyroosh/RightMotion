@@ -25,7 +25,7 @@ const SFX_CUES: SfxCue[] = [
   { frame: 0,   type: "whoosh_deep",    volume: 0.34 }, // 0.0s:  Scene 1 explosive entry
   { frame: 30,  type: "impact_hit",     volume: 0.24 }, // 1.0s:  Ticker badge stamp
   { frame: 60,  type: "click",          volume: 0.26 }, // 2.0s:  Isometric card lock
-  { frame: 135, type: "whoosh_fast",    volume: 0.32 }, // 4.5s:  Scene 2 whip-left cut
+  { frame: 135, type: "whoosh_fast",    volume: 0.18 }, // 4.5s:  Scene 2 whip-left cut
   { frame: 138, type: "impact_hit",     volume: 0.24 }, // 4.6s:  GlitchText: CASH IS NOT SAFE
   { frame: 210, type: "click",          volume: 0.26 }, // 7.0s:  Badge stamp
   { frame: 264, type: "whoosh_deep",    volume: 0.34 }, // 8.8s:  Scene 3 isometric shelf
@@ -33,12 +33,12 @@ const SFX_CUES: SfxCue[] = [
   { frame: 315, type: "impact_hit",     volume: 0.24 }, // 10.5s: Bar 1
   { frame: 345, type: "impact_hit",     volume: 0.24 }, // 11.5s: Bar 2
   { frame: 375, type: "impact_hit",     volume: 0.26 }, // 12.5s: Bar 3 critical
-  { frame: 420, type: "whoosh_fast",    volume: 0.32 }, // 14.0s: Scene 4 — gravity drop
+  { frame: 420, type: "whoosh_fast",    volume: 0.18 }, // 14.0s: Scene 4 — gravity drop
   { frame: 426, type: "impact_hit",     volume: 0.28 }, // 14.2s: SemanticWord gravity thud
   { frame: 500, type: "click",          volume: 0.26 }, // 16.7s: WealthMultiplierMeter lock
   { frame: 600, type: "whoosh_deep",    volume: 0.34 }, // 20.0s: Scene 5 VirtualCamera swoop
   { frame: 615, type: "whoosh_sparkle", volume: 0.32 }, // 20.5s: CompoundGrowthChart reveal
-  { frame: 780, type: "whoosh_fast",    volume: 0.32 }, // 26.0s: Scene 6 whip-left
+  { frame: 780, type: "whoosh_fast",    volume: 0.18 }, // 26.0s: Scene 6 whip-left
   { frame: 786, type: "impact_hit",     volume: 0.28 }, // 26.2s: SemanticWord fracture
   { frame: 840, type: "tape_snap",      volume: 0.30 }, // 28.0s: CashFlowSankeyCard tap
   { frame: 930, type: "whoosh_deep",    volume: 0.34 }, // 31.0s: Scene 7 finale
@@ -78,15 +78,13 @@ export const TheCompoundingTrapComposition: React.FC = () => {
         <TheCompoundingTrapPresenter currentMs={currentMs} />
 
         {/* 5. Central Kinetic Captions with Emerald active glow */}
-        <div className="absolute inset-x-0 bottom-24 z-40 flex justify-center pointer-events-none">
-          <AppleKineticCaptions
-            transcript={transcript}
-            currentMs={currentMs}
-            maxWordsPerGroup={2}
-            activeColor="#10b981"
-            className="w-[920px]"
-          />
-        </div>
+        <AppleKineticCaptions
+          transcript={transcript}
+          currentMs={currentMs}
+          maxWordsPerGroup={2}
+          theme="dark"
+          activeColor="#10b981"
+        />
       </CameraShake>
 
       {/* 6. Finance Green Progress Bar */}

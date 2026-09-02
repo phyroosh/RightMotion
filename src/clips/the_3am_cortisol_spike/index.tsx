@@ -31,14 +31,14 @@ const SFX_CUES: SfxCue[] = [
   { frame: 255, type: "whoosh_deep",    volume: 0.34 }, // 8.5s:  Scene 3 isometric shelf
   { frame: 264, type: "whoosh_sparkle", volume: 0.32 }, // 8.8s:  BiometricRing reveal
   { frame: 380, type: "impact_hit",     volume: 0.26 }, // 12.7s: Critical liver glycogen ring
-  { frame: 420, type: "whoosh_fast",    volume: 0.32 }, // 14.0s: Scene 4 — cortisol dump
+  { frame: 420, type: "whoosh_fast",    volume: 0.18 }, // 14.0s: Scene 4 — cortisol dump
   { frame: 433, type: "whoosh_sparkle", volume: 0.30 }, // 14.4s: CortisolSpikeGraph draw
   { frame: 510, type: "impact_hit",     volume: 0.26 }, // 17.0s: Adrenal gland bullet
-  { frame: 600, type: "whoosh_fast",    volume: 0.32 }, // 20.0s: Scene 5 physical symptoms
+  { frame: 600, type: "whoosh_fast",    volume: 0.18 }, // 20.0s: Scene 5 physical symptoms
   { frame: 615, type: "impact_hit",     volume: 0.24 }, // 20.5s: Heart rate spike card
   { frame: 645, type: "impact_hit",     volume: 0.22 }, // 21.5s: Eyes snap card
   { frame: 675, type: "impact_hit",     volume: 0.22 }, // 22.5s: Brain threat card
-  { frame: 780, type: "whoosh_fast",    volume: 0.32 }, // 26.0s: Scene 6 — reframe
+  { frame: 780, type: "whoosh_fast",    volume: 0.18 }, // 26.0s: Scene 6 — reframe
   { frame: 792, type: "marker_scribble",volume: 0.32 }, // 26.4s: Scribble cross over anxiety
   { frame: 870, type: "whoosh_sparkle", volume: 0.34 }, // 29.0s: Emerald reframe reveal
   { frame: 930, type: "whoosh_deep",    volume: 0.34 }, // 31.0s: Scene 7 solution
@@ -78,15 +78,13 @@ export const The3amCortisolSpikeComposition: React.FC = () => {
         <The3amCortisolSpikePresenter currentMs={currentMs} />
 
         {/* 5. Central Kinetic Captions with Electric Cyan active glow */}
-        <div className="absolute inset-x-0 bottom-24 z-40 flex justify-center pointer-events-none">
-          <AppleKineticCaptions
-            transcript={transcript}
-            currentMs={currentMs}
-            maxWordsPerGroup={2}
-            activeColor="#06b6d4"
-            className="w-[920px]"
-          />
-        </div>
+        <AppleKineticCaptions
+          transcript={transcript}
+          currentMs={currentMs}
+          maxWordsPerGroup={2}
+          theme="dark"
+          activeColor="#06b6d4"
+        />
       </CameraShake>
 
       {/* 6. Cyan Bio-Pulse Progress Bar */}

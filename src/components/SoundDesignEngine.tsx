@@ -25,7 +25,7 @@ const SFX_CONFIG: Record<SfxType, { src: string; defaultVolume: number; duration
   },
   whoosh_fast: {
     src: "audio/sfx/whoosh_fast.wav",
-    defaultVolume: 0.35,
+    defaultVolume: 0.18,
     durationFrames: 25,
   },
   whoosh_deep: {

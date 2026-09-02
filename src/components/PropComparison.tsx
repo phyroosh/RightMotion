@@ -114,7 +114,7 @@ export const PropComparison: React.FC<PropComparisonProps> = ({
           opacity: Math.min(1, spLeft * 1.5),
         }}
       >
-        <div className="px-6 py-2.5 rounded-full bg-rose-600 text-white font-mono text-[22px] font-black uppercase tracking-wider flex items-center gap-2.5 shadow-sm">
+        <div className="px-6 py-2.5 rounded-full bg-rose-600 text-white font-mono text-[24px] font-black uppercase tracking-wider flex items-center gap-2.5 shadow-sm">
           <XCircle className="w-6 h-6 text-white shrink-0" />
           {leftBadge}
         </div>
@@ -163,7 +163,7 @@ export const PropComparison: React.FC<PropComparisonProps> = ({
             opacity: Math.min(1, spRight * 1.5),
           }}
         >
-          <div className="px-6 py-2.5 rounded-full bg-emerald-600 text-white font-mono text-[22px] font-black uppercase tracking-wider flex items-center gap-2.5 shadow-sm">
+          <div className="px-6 py-2.5 rounded-full bg-emerald-600 text-white font-mono text-[24px] font-black uppercase tracking-wider flex items-center gap-2.5 shadow-sm">
             <CheckCircle2 className="w-6 h-6 text-white shrink-0" />
             {rightBadge}
           </div>

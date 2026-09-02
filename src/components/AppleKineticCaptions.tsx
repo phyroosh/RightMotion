@@ -78,21 +78,23 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
     config: { damping: 24, mass: 0.9, stiffness: 85 },
   });
 
-  const bottomClass = isWidescreen ? "bottom-[10%]" : "bottom-[16%]";
-  const maxWidthClass = isWidescreen ? "max-w-[1200px]" : "max-w-[800px]";
-  const fontSize = isWidescreen ? "clamp(34px, 3.0vw, 46px)" : "clamp(48px, 9.5vw, 68px)";
+  const bottomClass = isWidescreen ? "bottom-[10%]" : "bottom-[19%]";
+  const maxWidthClass = isWidescreen ? "max-w-[1200px]" : "max-w-[840px]";
+  const fontSize = isWidescreen ? "clamp(34px, 3.0vw, 46px)" : "clamp(46px, 9vw, 64px)";
 
-  const passedColor = isDark ? "#f8fafc" : "#09090b";
-  const inactiveColor = isDark ? "rgba(248, 250, 252, 0.42)" : "rgba(15, 23, 42, 0.38)";
+  const passedColor = isDark ? "#ffffff" : "#09090b";
+  const inactiveColor = isDark ? "rgba(255, 255, 255, 0.42)" : "rgba(15, 23, 42, 0.38)";
   const activeColor = activeColorProp ?? (isDark ? "#38bdf8" : "#0071e3");
   const glowShadow = isDark
-    ? `0 0 35px ${activeColor}cc, 0 2px 10px rgba(0,0,0,0.6)`
-    : `0 0 35px ${activeColor}99, 0 2px 10px rgba(255,255,255,0.9), 0 1px 3px rgba(0,0,0,0.12)`;
+    ? `0 0 30px ${activeColor}cc, 0 2px 12px rgba(0,0,0,0.8)`
+    : `0 0 30px ${activeColor}88, 0 2px 10px rgba(255,255,255,0.9)`;
 
   return (
-    <div className={`absolute inset-x-0 ${bottomClass} flex items-end justify-center pointer-events-none z-40 px-10 ${className ?? ""}`}>
+    <div className={`absolute inset-x-0 ${bottomClass} flex items-end justify-center pointer-events-none z-40 px-8 ${className ?? ""}`}>
       <div
-        className={`flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center ${maxWidthClass} px-6 py-2`}
+        className={`flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center ${maxWidthClass} px-6 py-2.5 rounded-3xl ${
+          isDark ? "bg-slate-950/70 border border-white/10 backdrop-blur-md shadow-2xl" : "bg-white/80 border border-slate-200/80 backdrop-blur-md shadow-xl"
+        }`}
         style={{
           transform: `translateY(${(1 - appear) * 12}px)`,
           opacity: Math.min(1, appear * 1.8),
@@ -105,27 +107,27 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
           return (
             <span
               key={`${item.word}-${idx}`}
-              className="relative inline-block font-black uppercase"
+              className="relative inline-block font-black uppercase tracking-tight"
               style={{
                 fontSize,
                 letterSpacing: "-0.025em",
-                lineHeight: 1.1,
-                color: isActive ? activeColor : isPassed ? passedColor : inactiveColor,
-                textShadow: isActive ? glowShadow : isDark ? "0 2px 8px rgba(0,0,0,0.6)" : "0 2px 6px rgba(0,0,0,0.04)",
-                transform: isActive ? "scale(1.04)" : "scale(1)",
-                transition: "transform 0.1s ease-out, color 0.08s ease-out",
+                lineHeight: 1.15,
+                backgroundColor: isActive
+                  ? isDark
+                    ? activeColor
+                    : `${activeColor}22`
+                  : "transparent",
+                color: isActive && isDark ? "#030712" : isActive ? activeColor : isPassed ? passedColor : inactiveColor,
+                padding: isActive ? "2px 14px" : "2px 4px",
+                borderRadius: "14px",
+                boxShadow: isActive
+                  ? `0 0 25px ${activeColor}aa, 0 4px 12px rgba(0,0,0,0.4)`
+                  : "none",
+                transform: isActive ? "scale(1.08)" : "scale(1)",
+                transition: "transform 0.08s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.08s ease-out, color 0.08s ease-out",
               }}
             >
               {item.word}
-              {isActive && (
-                <span
-                  className="absolute -bottom-1.5 left-0 right-0 h-[4px] rounded-full"
-                  style={{
-                    backgroundColor: activeColor,
-                    boxShadow: isDark ? "0 0 18px rgba(56,189,248,1)" : "0 0 16px rgba(0,113,227,0.9)",
-                  }}
-                />
-              )}
             </span>
           );
         })}

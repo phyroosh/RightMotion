@@ -41,18 +41,23 @@ export const The3amCortisolSpikeCanvas: React.FC = () => {
           <IsometricCard tiltX={6} tiltY={-5} elevation={22} className="w-[960px]">
             <div className="p-10 rounded-[40px] bg-slate-900/90 border-[3px] border-rose-500/40 shadow-2xl text-center flex flex-col gap-4">
               <div className="text-slate-300 font-black text-3xl">You Fall Asleep Exhausted…</div>
-              <div className="text-white font-black" style={{ fontSize: "62px", lineHeight: 1.15 }}>
+              <div className="text-white font-black" style={{ fontSize: "56px", lineHeight: 1.15 }}>
                 You Violently Wake Up At
               </div>
-              <div className="text-rose-400 font-mono font-black" style={{ fontSize: "80px" }}>
-                3 AM
+              <div className="relative inline-block mx-auto my-2">
+                <span className="text-rose-400 font-mono font-black" style={{ fontSize: "80px" }}>
+                  3 AM
+                </span>
+                <HandDrawnDoodle
+                  preset="circle"
+                  color="rose"
+                  startMs={1500}
+                  className="absolute inset-0 -m-3 w-[125%] h-[125%]"
+                />
               </div>
               <div className="text-slate-300 font-black text-3xl">Mind Racing. Heart Pounding.</div>
             </div>
           </IsometricCard>
-
-          <HandDrawnDoodle preset="circle" color="rose" startMs={1500}
-            className="absolute" style={{ right: "50px", top: "20%", width: "160px", height: "160px" }} />
         </div>
       </KineticScene>
 
@@ -91,9 +96,6 @@ export const The3amCortisolSpikeCanvas: React.FC = () => {
             </div>
 
             <BiometricRing startMs={8800} className="w-[960px]" />
-
-            <HandDrawnDoodle preset="arrow" color="sky" startMs={10000}
-              className="absolute" style={{ left: "60px", top: "50%", width: "200px" }} />
           </div>
         </VirtualCamera3D>
       </KineticScene>

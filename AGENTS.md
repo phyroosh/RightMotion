@@ -37,6 +37,92 @@ Every video script submitted to RightClips is tagged with one of three channel n
 > 
 > The repository must stay 100% clean as a pure reusable software engine.
 
+---
+
+## 🔍 Mandatory Frame-by-Frame Visual Quality Audit (MANDATORY AGENT RULE)
+
+> [!CRITICAL]
+> **EVERY AI AGENT MUST MANUALLY AUDIT STILL FRAMES BEFORE DECLARING COMPLETION!**
+> Never render a video blindly. Before presenting the finished video to the user, the AI Agent MUST render key still frames across scene milestones (e.g. Frame 45, Frame 200, Frame 480, Frame 850) using:
+> ```bash
+> ./node_modules/.bin/remotion still src/index.ts <CompositionId> out/audit_frame_<number>.png --frame=<number> --browser-executable=/usr/bin/google-chrome --overwrite
+> ```
+> The agent MUST view and audit the rendered still image:
+> 1. **Element Centering & Safe Zones**: Are cards, badges, and headers vertically centered in the safe zone? Ensure no element clips into the top 10% (phone status bar) or bottom 20% (caption and phone UI zone).
+> 2. **Doodle & Marker Alignment**: Is every hand-drawn doodle, circle, underline, or highlight anchored strictly to its intended keyword/metric? Ensure NO doodles float detached in empty space.
+> 3. **Caption Legibility & Contrast**: Are captions positioned at `bottom-[19%]` with high contrast? Ensure active word pills glow brightly (`#ffffff` on dark backgrounds, `#09090b` on light studio backgrounds).
+> 4. **Mobile Font Scale Compliance**: Is EVERY piece of text $\ge 24\text{px}$?
+
+---
+
+## ✏️ Strict Doodle & Highlight Anchoring Policy (NO FLOATING DOODLES)
+
+> [!CRITICAL]
+> **NEVER PLACE DOODLES IN RAW FLEX CONTAINERS OR WITH ARBITRARY SCREEN PERCENTAGES!**
+> Floating underlines (`className="w-[500px]"`) or disconnected absolute positions (`style={{ left: "50px", top: "55%" }}`) look like glitchy visual errors.
+>
+> **MANDATORY ANCHORING PATTERN**:
+> A doodle (`HandDrawnDoodle`, `HighlighterStroke`) MUST ALWAYS be wrapped inside a `relative inline-block` container directly around the exact keyword or metric it is highlighting:
+> ```tsx
+> {/* Correct: Perfectly anchored marker underline */}
+> <div className="relative inline-block mt-2 pb-2">
+>   <span className="text-rose-400 font-black text-4xl">Still Feel Broke?</span>
+>   <HandDrawnDoodle
+>     preset="underline"
+>     color="rose"
+>     startMs={1500}
+>     className="w-full absolute -bottom-5 left-0 h-7"
+>   />
+> </div>
+>
+> {/* Correct: Perfectly anchored diagnostic circle */}
+> <div className="relative inline-block mx-auto my-2">
+>   <span className="text-rose-400 font-mono font-black text-6xl">3 AM</span>
+>   <HandDrawnDoodle
+>     preset="circle"
+>     color="rose"
+>     startMs={1500}
+>     className="absolute inset-0 -m-3 w-[125%] h-[125%]"
+>   />
+> </div>
+> ```
+> If a doodle cannot be anchored directly to an exact word or metric, **DO NOT USE IT!**
+
+---
+
+## 📱 iPhone 15 Base Model Mobile Readability Standard (NO TINY FONTS)
+
+> [!CRITICAL]
+> **VIDEOS MUST BE FULLY READABLE ON A BASE IPHONE 15 RUNNING 720p MOBILE STREAMING!**
+> Small text causes instant viewer bounce and eye fatigue.
+> 1. **ABSOLUTE MINIMUM FONT SIZE**: `24px` (`text-xl` or `text-2xl font-black`, `text-[24px]`).
+> 2. **PERMANENT BAN**: NEVER use `text-xs` (12px), `text-sm` (14px), or `text-base` (16px) anywhere in 9:16 vertical videos.
+> 3. **Hero Titles & Headers**: `50px - 72px` (`text-5xl` to `text-6xl font-black`).
+> 4. **Secondary Labels & Subtitles**: `28px - 36px` (`text-2xl` to `text-3xl font-black`).
+> 5. **Badges, Tickers & Telemetry Pills**: `24px - 30px` (`font-mono font-black uppercase`).
+
+---
+
+## 🔊 Sound Design & Foley Polish Standard (NO HARSH / PIERCING SFX)
+
+> [!IMPORTANT]
+> Audio must be cinematic, crisp, and comfortable to listen to with earbuds at full volume.
+> 1. **Whip & Transition Cuts (`whoosh_fast`)**: Kept at `volume: 0.16 - 0.18` maximum with softened high frequencies (no piercing sword-like treble cuts).
+> 2. **Impact Hits (`impact_hit`)**: Kept at `volume: 0.22 - 0.26` for deep punch without clipping.
+> 3. **Tactile Clicks (`click`)**: `volume: 0.24 - 0.28`.
+> 4. **Sparkles & Revelations (`whoosh_sparkle`)**: `volume: 0.30 - 0.34`.
+> 5. **BGM Levels**: Kept at `0.10 - 0.14` so voiceover remains 100% articulate and dominant.
+
+---
+
+## 💯 Full Effort Creative Craftsmanship Policy (NO BAREBONES SHORTCUTS)
+
+> [!CRITICAL]
+> Every single video request must receive full creative effort:
+> - Dynamic 3D depth, isometric card glare, living backgrounds, tactile tape strips.
+> - High-impact visual metaphors from the Cutout Asset Engine (`ProCutout`, `PropComparison`).
+> - Perfectly synchronized multi-layered sound design on every scene entrance.
+> - Zero placeholder layouts or rushed shortcuts. Every video must look like a \$10,000 professional production.
 
 ---
 

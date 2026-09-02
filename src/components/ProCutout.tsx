@@ -180,12 +180,12 @@ export const ProCutout: React.FC<ProCutoutProps> = ({
       {pedestal && (
         <div className="absolute inset-0 rounded-[44px] bg-white/75 backdrop-blur-2xl border-[3px] border-white/90 shadow-[0_25px_60px_rgba(0,0,0,0.08),0_1px_3px_rgba(0,0,0,0.05)] z-0 flex flex-col justify-between p-6">
           {pedestalBadge && (
-            <div className="self-start px-5 py-1.5 rounded-full bg-slate-950 text-white font-mono text-[14px] font-black uppercase tracking-wider shadow-md">
+            <div className="self-start px-5 py-2 rounded-full bg-slate-950 text-white font-mono text-[24px] font-black uppercase tracking-wider shadow-md">
               {pedestalBadge}
             </div>
           )}
           {pedestalLabel && (
-            <div className="self-center text-center font-black text-slate-900 text-xl tracking-tight mt-auto">
+            <div className="self-center text-center font-black text-slate-900 text-2xl tracking-tight mt-auto">
               {pedestalLabel}
             </div>
           )}

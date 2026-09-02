@@ -24,18 +24,18 @@ const SFX_CUES: SfxCue[] = [
   { frame: 0,    type: "whoosh_deep",      volume: 0.32 }, // 0.0s: Judy intro entrance
   { frame: 3,    type: "tape_snap",        volume: 0.30 }, // 0.1s: Masking tape snap
   { frame: 45,   type: "marker_scribble",  volume: 0.34 }, // 1.5s: Hand-drawn doodle circle
-  { frame: 129,  type: "whoosh_fast",      volume: 0.32 }, // 4.3s: 3-step retreat entrance
+  { frame: 129,  type: "whoosh_fast",      volume: 0.18 }, // 4.3s: 3-step retreat entrance
   { frame: 141,  type: "click",            volume: 0.26 }, // 4.7s: Step 1 lock
   { frame: 192,  type: "impact_hit",       volume: 0.24 }, // 6.4s: Step 3 glitch impact
-  { frame: 258,  type: "whoosh_fast",      volume: 0.32 }, // 8.6s: Isometric 3D card
+  { frame: 258,  type: "whoosh_fast",      volume: 0.18 }, // 8.6s: Isometric 3D card
   { frame: 285,  type: "marker_scribble",  volume: 0.32 }, // 9.5s: Highlighter glide
   { frame: 366,  type: "whoosh_deep",      volume: 0.34 }, // 12.2s: 3D Virtual Camera swoop
   { frame: 384,  type: "impact_hit",       volume: 0.26 }, // 12.8s: Vulnerable fracture
-  { frame: 525,  type: "whoosh_fast",      volume: 0.32 }, // 17.5s: Leave First card
+  { frame: 525,  type: "whoosh_fast",      volume: 0.18 }, // 17.5s: Leave First card
   { frame: 672,  type: "marker_scribble",  volume: 0.34 }, // 22.4s: X scratch-out doodle
-  { frame: 738,  type: "whoosh_fast",      volume: 0.32 }, // 24.6s: Fear card entrance
+  { frame: 738,  type: "whoosh_fast",      volume: 0.18 }, // 24.6s: Fear card entrance
   { frame: 765,  type: "impact_hit",       volume: 0.26 }, // 25.5s: Gravity drop thud
-  { frame: 840,  type: "whoosh_fast",      volume: 0.34 }, // 28.0s: PropComparison entrance
+  { frame: 840,  type: "whoosh_fast",      volume: 0.18 }, // 28.0s: PropComparison entrance
   { frame: 906,  type: "click",            volume: 0.26 }, // 30.2s: Honesty card reveal
   { frame: 987,  type: "whoosh_sparkle",   volume: 0.35 }, // 32.9s: Finale closure radiant
   { frame: 1026, type: "marker_scribble",  volume: 0.32 }, // 34.2s: Underline doodle
@@ -73,14 +73,13 @@ export const PushingAwayComposition: React.FC = () => {
         <PushingAwayPresenter currentMs={currentMs} />
 
         {/* 5. Central Kinetic Captions */}
-        <div className="absolute inset-x-0 bottom-24 z-40 flex justify-center pointer-events-none">
-          <AppleKineticCaptions
-            transcript={transcript}
-            currentMs={currentMs}
-            maxWordsPerGroup={2}
-            className="w-[920px]"
-          />
-        </div>
+        <AppleKineticCaptions
+          transcript={transcript}
+          currentMs={currentMs}
+          maxWordsPerGroup={2}
+          theme="light"
+          activeColor="#0071e3"
+        />
       </CameraShake>
 
       {/* 6. Apple Studio Progress Bar */}
