@@ -6,6 +6,8 @@ import { CircadianClock } from "../../components/health/CircadianClock";
 import { CortisolSpikeGraph } from "../../components/health/CortisolSpikeGraph";
 import { MetabolicStatusCard } from "../../components/health/MetabolicStatusCard";
 import { IsometricCard } from "../../components/camera3d/IsometricCard";
+import { PhysicalCard } from "../../components/physics/PhysicalCard";
+import { SecondaryMotion } from "../../components/physics/SecondaryMotion";
 import { VirtualCamera3D } from "../../components/camera3d/VirtualCamera3D";
 import { SemanticWord } from "../../components/kinetic_text/SemanticWord";
 import { GlitchText } from "../../components/kinetic_text/GlitchText";
@@ -33,12 +35,14 @@ export const The3amCortisolSpikeCanvas: React.FC = () => {
       {/* ─── SCENE 1: THE HOOK ───────────────────────────────── */}
       <KineticScene startMs={0} endMs={4000} inTransition="snap_up" outTransition="zoom_out">
         <div className="absolute inset-0 flex flex-col items-center justify-center px-8 gap-6">
-          {/* Biometric Ring preview hint */}
-          <div className="px-8 py-2.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-mono text-xl font-black uppercase tracking-widest">
-            SLEEP TELEMETRY ALERT
-          </div>
+          {/* Biometric Ring preview hint with fluid secondary elasticity */}
+          <SecondaryMotion delayMs={140} momentumDirection="up" dragTiltDeg={2.5} springPreset="fluidTelemetry" enableDrift={true}>
+            <div className="px-8 py-2.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-mono text-xl font-black uppercase tracking-widest">
+              SLEEP TELEMETRY ALERT
+            </div>
+          </SecondaryMotion>
 
-          <IsometricCard tiltX={6} tiltY={-5} elevation={22} className="w-[960px]">
+          <PhysicalCard tiltX={6} tiltY={-5} elevation={24} className="w-[960px]">
             <div className="p-10 rounded-[40px] bg-slate-900/90 border-[3px] border-rose-500/40 shadow-2xl text-center flex flex-col gap-4">
               <div className="text-slate-300 font-black text-3xl">You Fall Asleep Exhausted…</div>
               <div className="text-white font-black" style={{ fontSize: "56px", lineHeight: 1.15 }}>
@@ -57,7 +61,7 @@ export const The3amCortisolSpikeCanvas: React.FC = () => {
               </div>
               <div className="text-slate-300 font-black text-3xl">Mind Racing. Heart Pounding.</div>
             </div>
-          </IsometricCard>
+          </PhysicalCard>
         </div>
       </KineticScene>
 

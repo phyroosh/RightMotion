@@ -6,6 +6,8 @@ import { KineticCascadeItem } from "../../components/KineticCascade";
 import { WordTimestamp } from "../../types";
 import { VirtualCamera3D } from "../../components/camera3d/VirtualCamera3D";
 import { IsometricCard } from "../../components/camera3d/IsometricCard";
+import { PhysicalCard } from "../../components/physics/PhysicalCard";
+import { SecondaryMotion } from "../../components/physics/SecondaryMotion";
 import { HandDrawnDoodle } from "../../components/collage/HandDrawnDoodle";
 import { HighlighterStroke } from "../../components/collage/HighlighterStroke";
 import { TapeStrip } from "../../components/collage/TapeStrip";
@@ -40,10 +42,12 @@ export const PushingAwayCanvas: React.FC<CanvasProps> = () => {
               {/* Documentary Masking Tape */}
               <TapeStrip position="top-right" rotation={11} />
 
-              <div className="px-8 py-3 rounded-full bg-rose-50 border-2 border-rose-300 text-rose-700 font-mono font-black text-2xl uppercase tracking-widest flex items-center gap-3">
-                <HeartCrack className="w-7 h-7 text-rose-600" />
-                THE ATTACHMENT PARADOX
-              </div>
+              <SecondaryMotion delayMs={140} momentumDirection="up" dragTiltDeg={3} springPreset="elasticSettle" enableWobble={true}>
+                <div className="px-8 py-3 rounded-full bg-rose-50 border-2 border-rose-300 text-rose-700 font-mono font-black text-2xl uppercase tracking-widest flex items-center gap-3">
+                  <HeartCrack className="w-7 h-7 text-rose-600" />
+                  THE ATTACHMENT PARADOX
+                </div>
+              </SecondaryMotion>
 
               <div className="text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-tight max-w-[850px] relative">
                 Pushing Away The Person You{" "}
@@ -138,14 +142,16 @@ export const PushingAwayCanvas: React.FC<CanvasProps> = () => {
       >
         <div className="w-full max-w-[1000px] px-6">
           <KineticCascadeItem delayMs={8650} durationMs={400} direction="up" distance={35}>
-            <IsometricCard tiltX={8} tiltY={-6} tiltZ={1.5} elevation={35}>
+            <PhysicalCard tiltX={8} tiltY={-6} tiltZ={1.5} elevation={35}>
               <div className="w-full rounded-[52px] p-12 bg-white/95 backdrop-blur-2xl border-[4px] border-amber-300 shadow-[0_30px_70px_rgba(245,158,11,0.18)] flex flex-col items-center gap-8 text-center">
                 <TapeStrip position="center-top" />
 
-                <div className="px-8 py-3 rounded-full bg-amber-50 border-2 border-amber-300 text-amber-800 font-mono font-black text-2xl uppercase tracking-widest flex items-center gap-3">
-                  <Flame className="w-7 h-7 text-amber-600" />
-                  THE REAL MOTIVE
-                </div>
+                <SecondaryMotion delayMs={160} momentumDirection="up" dragTiltDeg={3} springPreset="elasticSettle" enableWobble={true}>
+                  <div className="px-8 py-3 rounded-full bg-amber-50 border-2 border-amber-300 text-amber-800 font-mono font-black text-2xl uppercase tracking-widest flex items-center gap-3">
+                    <Flame className="w-7 h-7 text-amber-600" />
+                    THE REAL MOTIVE
+                  </div>
+                </SecondaryMotion>
 
                 <div className="text-5xl md:text-6xl font-black text-slate-950 tracking-tight leading-tight max-w-[880px]">
                   It Happens{" "}
@@ -158,7 +164,7 @@ export const PushingAwayCanvas: React.FC<CanvasProps> = () => {
                   NOT BECAUSE YOU DON'T
                 </div>
               </div>
-            </IsometricCard>
+            </PhysicalCard>
           </KineticCascadeItem>
         </div>
       </KineticScene>

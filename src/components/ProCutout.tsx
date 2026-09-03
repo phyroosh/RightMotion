@@ -1,6 +1,7 @@
 import React from "react";
 import { Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { CutoutAssetId, getCutoutMeta, getCutoutPath } from "./CutoutLibrary";
+import { calcDecayingWobble, calcSquashStretchFactors } from "./physics/PhysicsSprings";
 
 export type CutoutAnimationPreset =
   | "punch_in"
@@ -99,6 +100,8 @@ export const ProCutout: React.FC<ProCutoutProps> = ({
   // Calculate transform & opacity based on animation preset
   let animTranslateY = 0;
   let animScale = 1.0;
+  let animScaleX = 1.0;
+  let animScaleY = 1.0;
   let animOpacity = 1.0;
   let animRotate = tiltDeg;
 
@@ -118,7 +121,13 @@ export const ProCutout: React.FC<ProCutoutProps> = ({
     case "stamp_impact": {
       animScale = 1.28 - sp * 0.28;
       animOpacity = Math.min(1, sp * 2.0);
-      animRotate = tiltDeg + (1 - sp) * -6;
+      const wobble = calcDecayingWobble(calcFrame - 6, fps, 3.8, 5.0, 6.5);
+      animRotate = tiltDeg + (1 - sp) * -6 + wobble;
+      if (sp > 0.8) {
+        const factors = calcSquashStretchFactors(calcFrame - 6, fps, 0.12, 6.0);
+        animScaleX = factors.scaleX;
+        animScaleY = factors.scaleY;
+      }
       break;
     }
     case "slide_and_lock": {
@@ -155,7 +164,7 @@ export const ProCutout: React.FC<ProCutoutProps> = ({
         width,
         height,
         opacity: animOpacity,
-        transform: `translateY(${animTranslateY}px) scale(${scale * animScale}) rotate(${animRotate}deg)`,
+        transform: `translateY(${animTranslateY}px) scale(${scale * animScale * animScaleX}, ${scale * animScale * animScaleY}) rotate(${animRotate}deg)`,
         ...style,
       }}
     >

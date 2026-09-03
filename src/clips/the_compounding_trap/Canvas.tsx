@@ -6,6 +6,8 @@ import { WealthMultiplierMeter } from "../../components/finance/WealthMultiplier
 import { CashFlowSankeyCard } from "../../components/finance/CashFlowSankeyCard";
 import { FinanceTickerBadge } from "../../components/finance/FinanceTickerBadge";
 import { IsometricCard } from "../../components/camera3d/IsometricCard";
+import { PhysicalCard } from "../../components/physics/PhysicalCard";
+import { SecondaryMotion } from "../../components/physics/SecondaryMotion";
 import { VirtualCamera3D } from "../../components/camera3d/VirtualCamera3D";
 import { SemanticWord } from "../../components/kinetic_text/SemanticWord";
 import { GlitchText } from "../../components/kinetic_text/GlitchText";
@@ -31,13 +33,17 @@ export const TheCompoundingTrapCanvas: React.FC = () => {
       {/* ─── SCENE 1: THE BURNING QUESTION ──────────────────── */}
       <KineticScene startMs={0} endMs={4500} inTransition="snap_up" outTransition="zoom_out">
         <div className="absolute inset-0 flex flex-col items-center justify-center px-8 gap-6">
-          {/* Floating live ticker badges */}
+          {/* Floating live ticker badges with physical follow-through inertia */}
           <div className="flex gap-4 flex-wrap justify-center">
-            <FinanceTickerBadge label="INFLATION" value="+6.8% YOY" type="loss" />
-            <FinanceTickerBadge label="SAVINGS RATE" value="0.42% APY" type="loss" />
+            <SecondaryMotion delayMs={120} momentumDirection="up" dragTiltDeg={3.5} springPreset="heavyImpact" enableWobble={true}>
+              <FinanceTickerBadge label="INFLATION" value="+6.8% YOY" type="loss" />
+            </SecondaryMotion>
+            <SecondaryMotion delayMs={220} momentumDirection="up" dragTiltDeg={-3.5} springPreset="heavyImpact" enableWobble={true}>
+              <FinanceTickerBadge label="SAVINGS RATE" value="0.42% APY" type="loss" />
+            </SecondaryMotion>
           </div>
 
-          <IsometricCard tiltX={5} tiltY={-5} elevation={20} className="w-[960px]">
+          <PhysicalCard tiltX={5} tiltY={-5} elevation={22} className="w-[960px]">
             <div className="p-10 rounded-[40px] bg-slate-900/90 border-[3px] border-rose-500/40 shadow-2xl flex flex-col items-center gap-5 text-center">
               <div className="px-6 py-2 rounded-full bg-rose-500/20 border border-rose-400/40 text-rose-300 font-mono text-xl font-black uppercase tracking-widest">
                 THE PRODUCTIVITY TRAP
@@ -55,7 +61,7 @@ export const TheCompoundingTrapCanvas: React.FC = () => {
                 />
               </div>
             </div>
-          </IsometricCard>
+          </PhysicalCard>
         </div>
       </KineticScene>
 
@@ -155,9 +161,18 @@ export const TheCompoundingTrapCanvas: React.FC = () => {
 
           <WealthMultiplierMeter startMs={14600} className="w-[960px]" />
 
-          <div className="px-6 py-3 rounded-2xl bg-amber-950/60 border border-amber-500/40 text-amber-300 font-mono text-2xl font-black text-center">
-            PROUD OF $10K SAVINGS? IT LOSES HALF ITS VALUE IN A DECADE.
-          </div>
+          <SecondaryMotion
+            startMs={14600}
+            delayMs={200}
+            momentumDirection="up"
+            springPreset="heavyImpact"
+            enableWobble={true}
+            wobbleIntensityDeg={4}
+          >
+            <div className="px-6 py-3 rounded-2xl bg-amber-950/60 border border-amber-500/40 text-amber-300 font-mono text-2xl font-black text-center">
+              PROUD OF $10K SAVINGS? IT LOSES HALF ITS VALUE IN A DECADE.
+            </div>
+          </SecondaryMotion>
         </div>
       </KineticScene>
 

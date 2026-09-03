@@ -507,7 +507,7 @@ export const TheDopamineSugarTrapThumbnail: React.FC = () => (
   <ThumbnailCard
     title="THE SUGAR TRAP"
     highlightWord="TRAP"
-    highlightColor="cyan"
+    highlightColor="sky"
     subtitle="The 2 PM Energy Crash"
     categoryBadge="HEALTH"
     characterPose="character_fullbody_pointing.png"

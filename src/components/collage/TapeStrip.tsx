@@ -1,4 +1,6 @@
 import React from "react";
+import { useCurrentFrame, useVideoConfig } from "remotion";
+import { calcDecayingWobble } from "../physics/PhysicsSprings";
 
 export type TapePosition = "top-left" | "top-right" | "center-top" | "bottom-left" | "bottom-right";
 
@@ -8,6 +10,7 @@ export interface TapeStripProps {
   width?: number;
   height?: number;
   color?: "cream" | "semi_transparent" | "amber";
+  enableWobble?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -66,15 +69,22 @@ export const TapeStrip: React.FC<TapeStripProps> = ({
   width = 110,
   height = 34,
   color = "cream",
+  enableWobble = true,
   className = "",
   style = {},
 }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const wobble = enableWobble ? calcDecayingWobble(frame, fps, 3.2, 5.5, 6.5) : 0;
+
   const posStyle = POSITION_STYLES[position];
   const colorStyle = COLOR_STYLES[color];
 
-  const finalTransform = rotation !== undefined
-    ? `rotate(${rotation}deg)`
-    : posStyle.transform;
+  const baseRot = rotation !== undefined
+    ? rotation
+    : parseFloat(posStyle.transform?.toString().match(/rotate\(([-\d.]+)deg\)/)?.[1] || "0");
+
+  const finalTransform = `rotate(${baseRot + wobble}deg)`;
 
   return (
     <div
