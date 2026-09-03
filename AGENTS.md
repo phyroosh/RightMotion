@@ -24,6 +24,65 @@ Every video script submitted to RightClips is tagged with one of three channel n
 
 ---
 
+## 💡 Master Channel Topic Ideation & Viral Prompt Specification
+
+Every video produced or ideated in RightClips must target high-retention, deeply emotional, or mathematically irresistible topics across three specialized niche pillars:
+
+### 1. `{Self Improvement}` (Judy Insights) — Deeply Relatable Teenager Psychology & Mindset:
+*Goal: Speak directly to the private inner turmoil, emotional battles, and social world of teenagers with validation and actionable mindset shifts.*
+- **Core Themes & Viral Hooks**:
+  - **Side Character Syndrome**: Why you feel like a spectator in your own life and social circle.
+  - **The Fear of Being Caught Trying**: Why teens pretend not to care about school, art, or hobbies to protect against failure.
+  - **Social Overthinking at 2 AM**: The neurochemistry behind replaying awkward interactions and over-analyzing text delays.
+  - **High School Mask Exhaustion**: The emotional burnout of smiling all day when you feel hollow inside.
+  - **Friendship Drift & Heartbreak**: Why drifting apart from your childhood friend group hurts more than romantic breakups.
+  - **The Behind-the-Scenes vs Highlight Reel**: The psychological toll of comparing your private pain to classmates' Instagram feeds.
+  - **The Spotlight Illusion**: Empirical psychological proof that peers are way too worried about themselves to scrutinize you.
+  - **Why Parental Criticism Stings 10x Harder**: The adolescent neurological sensitivity to parental evaluation.
+  - **Rebuilding Self-Trust**: How to stop hating yourself after repeatedly breaking personal goals and promises.
+  - **Starting from Absolute Zero**: A compass for teenagers with no clear passion, direction, or plan.
+
+---
+
+### 2. `{Health}` (BioMatrix) — Essential Habits & Health Tips for Teens, Lost & Confused People:
+*Goal: Provide biological lifelines, clinical nervous system resets, and zero-friction micro-habits for individuals stuck in freeze mode, burnout, or directionless exhaustion.*
+- **Core Themes & Viral Hooks**:
+  - **The 10-Minute Morning Anchor**: Rebuilding agency and physiological stability when waking up feeling completely aimless.
+  - **Breaking the Nervous System Freeze Response**: Physical hacks to snap out of hours-long doomscrolling paralysis.
+  - **The 48-Hour Dopamine Baseline Reset**: Clearing sensory overstimulation to reignite baseline motivation and physical energy.
+  - **Low-Energy Survival Protocols**: Self-compassionate physical routines for days when getting out of bed feels nearly impossible.
+  - **The 2-Minute Micro-Action Rule**: Shrinking the initiation threshold so the brain cannot trigger autonomic resistance.
+  - **The 3-Minute Vagus Nerve Reset**: Instant parasympathetic down-regulation to eliminate acute panic and sensory overwhelm.
+  - **The 90-Minute Caffeine Delay Rule**: Allowing morning adenosine to fully clear to permanently eliminate the 2 PM energy crash.
+  - **Cortisol Awakening Response (C.A.R.)**: Why you wake up feeling like a zombie even after 8 hours of sleep.
+  - **Teen Circadian Phase Delay**: Why adolescent biology naturally stays awake until midnight and how to reset it without pills.
+  - **Glucose Spike Mitigation**: Why lunch crashes happen and how meal sequencing prevents brain fog and lethargy.
+
+---
+
+### 3. `{Finance}` (Apex Wealth) — Basic to Advanced Early Adult Finance & Wealth Hacks:
+*Goal: Demystify money for 18–25 year olds, eradicating predatory debt while equipping them with high-leverage compounding hacks.*
+
+#### 💳 Pillar A: Essential Early Adult Financial Foundations (Basic to Intermediate)
+- **Core Themes & Viral Hooks**:
+  - **The 30% Credit Utilization Rule**: The exact credit card mechanics to reach an 800+ credit score without paying a penny of interest.
+  - **The Big Bank Cash Trap**: Why keeping your savings in a 0.01% checking account loses you thousands to inflation every year.
+  - **The First $10,000 Emergency Fund**: A step-by-step roadmap to build your first financial shield on an entry-level salary.
+  - **The 20/4/10 Auto Loan Trap**: How a shiny car loan at age 22 silently destroys young professionals' 20s net worth.
+  - **Decoding Your First Real Paycheck**: Unpacking gross income, FICA taxes, health insurance, and 401(k) company match math.
+  - **Student Debt Elimination Mechanics**: Avalanche vs. Snowball methods to pay off loans 3x faster without misery.
+
+#### 📈 Pillar B: Wealth Compounding & High-Leverage Financial Hacks (Intermediate to Advanced)
+- **Core Themes & Viral Hooks**:
+  - **The $1.2 Million Roth IRA Gap**: The mathematical reality of investing $200/month starting at age 20 versus age 30.
+  - **The 50% Raise Rule**: How to immunize yourself against lifestyle inflation by automatically investing half of every promotion.
+  - **Index Funds vs Active Stock Picking**: Why 95% of professional Wall Street traders lose to automated S&P 500 compounding.
+  - **Plugging the Silent Leaks**: Identifying and killing stealth bank fees, forgotten subscriptions, and high-APR traps.
+  - **Asymmetric Career Leverage**: Acquiring rare, high-value skill stacks instead of selling linear hours for wages.
+  - **Side Hustle Tax Structuring**: Legal deductions and business write-offs for young creators, coders, and freelancers.
+
+---
+
 ## 🚫 Strict Repo Hygiene & Git Push Policy (MANDATORY AGENT RULE)
 
 > [!CRITICAL]
@@ -55,38 +114,24 @@ Every video script submitted to RightClips is tagged with one of three channel n
 
 ---
 
-## ✏️ Strict Doodle & Highlight Anchoring Policy (NO FLOATING DOODLES)
+## 🚫 Strict Minimalist Card Hygiene (NO REDUNDANT PILL HEADERS & NO HIGHLIGHTER LINES)
 
 > [!CRITICAL]
-> **NEVER PLACE DOODLES IN RAW FLEX CONTAINERS OR WITH ARBITRARY SCREEN PERCENTAGES!**
-> Floating underlines (`className="w-[500px]"`) or disconnected absolute positions (`style={{ left: "50px", top: "55%" }}`) look like glitchy visual errors.
+> **1. PERMANENT BAN ON BULKY TOP PILL HEADINGS (KEEP CARDS UNCROWDED)**:
+> NEVER place repetitive, elongated top pill banners across the upper edge of cards (e.g., `CIRCADIAN DIAGNOSTICS`, `3 MORNING BIOLOGICAL SWITCHES`, `NEURO-DIAGNOSTIC ALERT`).
+> - They waste critical safe-zone vertical space.
+> - They collide with top tape strips and make cards feel cramped and cluttered.
+> - **RULE**: Let the bold hero title and clean subtitle inside the card carry 100% of the topic context. Keep cards spacious, breathing, and minimal!
 >
-> **MANDATORY ANCHORING PATTERN**:
-> A doodle (`HandDrawnDoodle`, `HighlighterStroke`) MUST ALWAYS be wrapped inside a `relative inline-block` container directly around the exact keyword or metric it is highlighting:
-> ```tsx
-> {/* Correct: Perfectly anchored marker underline */}
-> <div className="relative inline-block mt-2 pb-2">
->   <span className="text-rose-400 font-black text-4xl">Still Feel Broke?</span>
->   <HandDrawnDoodle
->     preset="underline"
->     color="rose"
->     startMs={1500}
->     className="w-full absolute -bottom-5 left-0 h-7"
->   />
-> </div>
+> **2. PERMANENT BAN ON HIGHLIGHTER LINES & UNDERLINE DOODLES ON TEXT**:
+> NEVER place underline doodle strokes (`HandDrawnDoodle preset="underline"`) or marker lines (`HighlighterStroke`) under text headings.
+> - They invariably collide, cut through descenders/letters, and look visually messy.
+> - **RULE**: Use high-contrast colored typography (`text-rose-400`, `text-cyan-400`, `text-emerald-400`, `text-amber-400`) instead. Colored typography creates sharp, premium, zero-clutter visual hierarchy without messy lines.
+> - Diagnostic circles (`HandDrawnDoodle preset="circle"`) may only be used if cleanly encircling an isolated metric (e.g., a standalone `3 AM` badge).
 >
-> {/* Correct: Perfectly anchored diagnostic circle */}
-> <div className="relative inline-block mx-auto my-2">
->   <span className="text-rose-400 font-mono font-black text-6xl">3 AM</span>
->   <HandDrawnDoodle
->     preset="circle"
->     color="rose"
->     startMs={1500}
->     className="absolute inset-0 -m-3 w-[125%] h-[125%]"
->   />
-> </div>
-> ```
-> If a doodle cannot be anchored directly to an exact word or metric, **DO NOT USE IT!**
+> **3. UNCLUTTERED, BREATHING VISUAL COMPOSITION**:
+> - Cutout hero props (`ProCutout`) must be horizontally and vertically centered with `w-full flex justify-center items-center my-3`.
+> - Always maintain generous padding (`p-8` or `p-10`) so every scene feels premium, cinematic, and easy to scan on mobile.
 
 ---
 

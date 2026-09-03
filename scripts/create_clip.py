@@ -302,17 +302,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
               TRAP
             </div>
 
-            {{/* Topic Badge */}}
-            <div
-              className="px-10 py-3.5 rounded-full bg-slate-950 text-rose-400 font-mono text-[22px] font-black uppercase tracking-widest flex items-center gap-3.5 shadow-2xl border-2 border-rose-500/30"
-              style={{{{
-                transform: `translateY(${{(1 - sCard) * -20}}px)`,
-                opacity: Math.min(1, sCard * 1.5),
-              }}}}
-            >
-              <AlertCircle className="w-7 h-7 text-rose-500" />
-              STAGE 01 • THE HIDDEN TRAP
-            </div>
+
 
             {{/* Main Diagnostic Card */}}
             <div
@@ -361,17 +351,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
               REWIRE
             </div>
 
-            {{/* Topic Badge */}}
-            <div
-              className="px-10 py-3.5 rounded-full bg-slate-950 text-emerald-400 font-mono text-[22px] font-black uppercase tracking-widest flex items-center gap-3.5 shadow-2xl border-2 border-emerald-500/30"
-              style={{{{
-                transform: `translateY(${{(1 - sCard) * -20}}px)`,
-                opacity: Math.min(1, sCard * 1.5),
-              }}}}
-            >
-              <Target className="w-7 h-7 text-emerald-400" />
-              STAGE 02 • THE PROTOCOL
-            </div>
+
 
             {{/* Solution Hero Card */}}
             <div

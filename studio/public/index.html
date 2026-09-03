@@ -150,67 +150,145 @@
     </div>
   </header>
 
-  <!-- MAIN STUDIO WORKSPACE -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-    
-    <!-- LEFT COLUMN: DUAL-FORMAT WORKSPACE & LIVE PREVIEW (5 Cols) -->
-    <section class="lg:col-span-5 flex flex-col gap-6">
-      
-      <!-- DUAL FORMAT MASTER HUB TILES -->
-      <div class="grid grid-cols-2 gap-3.5">
-        <!-- 16:9 Long-Form Tile -->
-        <button
-          id="tile-longform"
-          onclick="filterByFormat('longform')"
-          class="format-tile p-4 rounded-3xl glass-panel border border-sky-500/30 hover:border-sky-400/60 bg-gradient-to-br from-sky-950/40 via-slate-900/70 to-black flex flex-col gap-2 text-left transition-all duration-300 shadow-xl group cursor-pointer relative overflow-hidden"
-        >
-          <div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-sky-500/15 blur-2xl group-hover:bg-sky-500/30 transition duration-300"></div>
-          <div class="flex items-center justify-between z-10">
-            <div class="w-9 h-9 rounded-2xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center shadow-lg shadow-sky-500/10">
-              <i data-lucide="tv" class="w-4 h-4"></i>
+  <!-- COMPACT SOVEREIGN CHANNEL SWITCHER BAR -->
+  <section class="max-w-7xl w-full mx-auto px-6 md:px-8 pt-4 pb-2">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <!-- 1. Judy Insights Switcher -->
+      <div
+        id="switch-self_improvement"
+        onclick="selectNicheChannel('self_improvement')"
+        class="channel-switch-chip px-3.5 py-2.5 rounded-xl border-2 border-sky-500/60 bg-sky-950/35 flex items-center justify-between transition-all cursor-pointer group shadow-lg shadow-sky-500/10"
+      >
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span class="text-lg">🧘</span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5 leading-tight">
+              <span class="text-xs font-bold text-white group-hover:text-sky-300 transition">Judy Insights</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-sky-500/20 text-sky-300 font-semibold">{Self Improvement}</span>
             </div>
-            <span id="tile-longform-count" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-black bg-sky-500/20 text-sky-300 border border-sky-500/30">0</span>
-          </div>
-          <div class="z-10 mt-1">
-            <div class="text-xs font-black text-white tracking-tight flex items-center gap-1.5 group-hover:text-sky-300 transition">
-              <span>16:9 Long-Form</span>
-              <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+            <div class="text-[10px] font-mono text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
+              <span class="text-red-400">● YT</span>
+              <span class="text-pink-400">● IG</span>
+              <span id="deck-yt-self_improvement" class="text-slate-300 font-semibold truncate">@thejudyinsights</span>
             </div>
-            <div class="text-[10px] text-slate-400 font-mono mt-0.5">Masterclass & Essays</div>
           </div>
-        </button>
-
-        <!-- 9:16 Shorts Tile -->
-        <button
-          id="tile-shorts"
-          onclick="filterByFormat('shorts')"
-          class="format-tile p-4 rounded-3xl glass-panel border border-emerald-500/30 hover:border-emerald-400/60 bg-gradient-to-br from-emerald-950/40 via-slate-900/70 to-black flex flex-col gap-2 text-left transition-all duration-300 shadow-xl group cursor-pointer relative overflow-hidden"
-        >
-          <div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-emerald-500/15 blur-2xl group-hover:bg-emerald-500/30 transition duration-300"></div>
-          <div class="flex items-center justify-between z-10">
-            <div class="w-9 h-9 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shadow-lg shadow-emerald-500/10">
-              <i data-lucide="smartphone" class="w-4 h-4"></i>
-            </div>
-            <span id="tile-shorts-count" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">0</span>
-          </div>
-          <div class="z-10 mt-1">
-            <div class="text-xs font-black text-white tracking-tight flex items-center gap-1.5 group-hover:text-emerald-300 transition">
-              <span>9:16 Shorts</span>
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            </div>
-            <div class="text-[10px] text-slate-400 font-mono mt-0.5">Viral Retention Loops</div>
-          </div>
+        </div>
+        <button onclick="event.stopPropagation(); openNicheAccountModal('self_improvement')" class="text-slate-500 hover:text-white p-1 rounded hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
+          <i data-lucide="settings-2" class="w-3.5 h-3.5 text-sky-400"></i>
         </button>
       </div>
 
-      <!-- Video Selector Card List with Separate Format Sections -->
-      <div class="glass-panel rounded-3xl p-5 flex flex-col gap-3.5 shadow-xl">
+      <!-- 2. Apex Wealth Switcher -->
+      <div
+        id="switch-finance"
+        onclick="selectNicheChannel('finance')"
+        class="channel-switch-chip px-3.5 py-2.5 rounded-xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm"
+      >
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span class="text-lg">💹</span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5 leading-tight">
+              <span class="text-xs font-bold text-slate-300 group-hover:text-emerald-300 transition">Apex Wealth</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 font-semibold">{Finance}</span>
+            </div>
+            <div class="text-[10px] font-mono text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
+              <span class="text-slate-500">○ YT</span>
+              <span class="text-slate-500">○ IG</span>
+              <span id="deck-yt-finance" class="text-slate-400 font-semibold truncate">+ Connect</span>
+            </div>
+          </div>
+        </div>
+        <button onclick="event.stopPropagation(); openNicheAccountModal('finance')" class="text-slate-500 hover:text-white p-1 rounded hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
+          <i data-lucide="settings-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+        </button>
+      </div>
+
+      <!-- 3. BioMatrix Switcher -->
+      <div
+        id="switch-health"
+        onclick="selectNicheChannel('health')"
+        class="channel-switch-chip px-3.5 py-2.5 rounded-xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm"
+      >
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span class="text-lg">🫀</span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5 leading-tight">
+              <span class="text-xs font-bold text-slate-300 group-hover:text-cyan-300 transition">BioMatrix</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-400 font-semibold">{Health}</span>
+            </div>
+            <div class="text-[10px] font-mono text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
+              <span class="text-slate-500">○ YT</span>
+              <span class="text-slate-500">○ IG</span>
+              <span id="deck-yt-health" class="text-slate-400 font-semibold truncate">+ Connect</span>
+            </div>
+          </div>
+        </div>
+        <button onclick="event.stopPropagation(); openNicheAccountModal('health')" class="text-slate-500 hover:text-white p-1 rounded hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
+          <i data-lucide="settings-2" class="w-3.5 h-3.5 text-cyan-400"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN STUDIO WORKSPACE -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    
+    <!-- LEFT COLUMN: CONTENT PIPELINE & PRODUCTION LIBRARY (5 Cols) -->
+    <section class="lg:col-span-5 flex flex-col gap-4">
+
+      <!-- 💡 AI VIDEO TOPIC PIPELINE STATION -->
+      <div class="glass-panel rounded-2xl p-4 flex flex-col gap-3 border border-white/10 bg-[#090d16]/90 shadow-xl">
+        <!-- Pipeline Header -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i data-lucide="git-commit" class="w-4 h-4 text-cyan-400"></i>
+            <span class="text-xs font-mono font-bold uppercase text-white tracking-wider">Content Pipeline</span>
+            <span id="pipelineActiveNichePill" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-semibold">{Self Improvement}</span>
+          </div>
+          <button
+            onclick="suggestNextTopics()"
+            id="suggestNextBtn"
+            class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1.5 transition cursor-pointer"
+            title="AI automatically generates the next 2 relevant topic ideas for this niche"
+          >
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span>⚡ Suggest Next 2</span>
+          </button>
+        </div>
+
+        <!-- Quick Add Manual Topic Bar -->
+        <div class="flex items-center gap-2">
+          <div class="relative flex-1">
+            <input
+              type="text"
+              id="newTopicInput"
+              placeholder="+ Add external or manual topic..."
+              class="w-full text-xs px-3 py-1.5 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50"
+              onkeydown="if (event.key === 'Enter') addManualTopic()"
+            />
+          </div>
+          <button
+            onclick="addManualTopic()"
+            class="text-xs px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold transition flex items-center gap-1 cursor-pointer shrink-0"
+          >
+            <span>Add</span>
+          </button>
+        </div>
+
+        <!-- Topic Pipeline Progression List -->
+        <div id="pipelineList" class="flex flex-col gap-1.5 max-h-[220px] overflow-y-auto custom-scrollbar pr-1">
+          <div class="p-3 text-center text-slate-500 text-xs">Loading topic pipeline...</div>
+        </div>
+      </div>
+
+      <!-- PRODUCTION LIBRARY (Clean Compact Format & Status Toggles) -->
+      <div class="glass-panel rounded-2xl p-4 flex flex-col gap-3 shadow-xl border border-white/10">
         
         <!-- Header & Sync Buttons -->
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2 text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
+          <div class="flex items-center gap-2 text-xs font-mono font-bold uppercase text-slate-300 tracking-wider">
             <i data-lucide="film" class="w-4 h-4 text-[#0071e3]"></i>
-            Production Library
+            <span>Production Library</span>
           </div>
           <div class="flex items-center gap-2">
             <button
@@ -227,56 +305,48 @@
           </div>
         </div>
 
-        <!-- Filter Segmented Tabs -->
-        <div class="grid grid-cols-5 gap-1 p-1 bg-black/40 rounded-2xl border border-white/5 text-[11px] font-bold">
+        <!-- Filter Segmented Tabs (NO "ALL" TABS — DIRECT TOGGLES) -->
+        <div class="grid grid-cols-4 gap-1 p-1 bg-black/50 rounded-xl border border-white/5 text-[11px] font-bold">
           <button
-            id="tab-all"
-            onclick="setTab('all')"
-            class="tab-btn active py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-300"
+            id="tab-shorts"
+            onclick="setTab('shorts')"
+            class="tab-btn active py-1.5 px-1 rounded-lg transition flex items-center justify-center gap-1 text-white bg-[#0071e3]"
+            title="9:16 Vertical Shorts"
           >
-            <span>All</span>
-            <span id="badge-count-all" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-white/20">0</span>
+            <span>📱 Shorts</span>
+            <span id="badge-count-shorts" class="text-[10px] font-mono px-1 rounded-full bg-white/20">0</span>
           </button>
           <button
             id="tab-longform"
             onclick="setTab('longform')"
-            class="tab-btn py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            class="tab-btn py-1.5 px-1 rounded-lg transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
             title="16:9 Long-Form Productions"
           >
-            <span class="text-sky-400">🎬 16:9</span>
-            <span id="badge-count-longform" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-sky-500/20 text-sky-300">0</span>
-          </button>
-          <button
-            id="tab-shorts"
-            onclick="setTab('shorts')"
-            class="tab-btn py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
-            title="9:16 Vertical Shorts"
-          >
-            <span class="text-emerald-400">📱 Shorts</span>
-            <span id="badge-count-shorts" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300">0</span>
+            <span>🎬 16:9</span>
+            <span id="badge-count-longform" class="text-[10px] font-mono px-1 rounded-full bg-sky-500/20 text-sky-300">0</span>
           </button>
           <button
             id="tab-unuploaded"
             onclick="setTab('unuploaded')"
-            class="tab-btn py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            class="tab-btn py-1.5 px-1 rounded-lg transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
             title="Videos ready to be posted"
           >
-            <span class="text-amber-400">⏳ Ready</span>
-            <span id="badge-count-unuploaded" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-amber-500/20 text-amber-300">0</span>
+            <span>⏳ Ready</span>
+            <span id="badge-count-unuploaded" class="text-[10px] font-mono px-1 rounded-full bg-amber-500/20 text-amber-300">0</span>
           </button>
           <button
             id="tab-uploaded"
             onclick="setTab('uploaded')"
-            class="tab-btn py-2 px-1 rounded-xl transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            class="tab-btn py-1.5 px-1 rounded-lg transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
             title="Videos already uploaded or scheduled"
           >
-            <span class="text-purple-400">✅ Live/Sched</span>
-            <span id="badge-count-uploaded" class="text-[10px] font-mono px-1 py-0.2 rounded-full bg-purple-500/20 text-purple-300">0</span>
+            <span>✅ Live</span>
+            <span id="badge-count-uploaded" class="text-[10px] font-mono px-1 rounded-full bg-purple-500/20 text-purple-300">0</span>
           </button>
         </div>
 
-        <!-- Categorized List Container (Separate Sections for Long-Form & Shorts) -->
-        <div id="videoList" class="flex flex-col gap-3.5 max-h-[380px] overflow-y-auto custom-scrollbar pr-1">
+        <!-- Categorized List Container -->
+        <div id="videoList" class="flex flex-col gap-2 max-h-[320px] overflow-y-auto custom-scrollbar pr-1">
           <div class="p-6 rounded-2xl glass-input text-center text-slate-400 text-xs">
             Loading production library...
           </div>
@@ -671,6 +741,168 @@
     </section>
 
   </main>
+
+  <!-- ======================================================== -->
+  <!-- 1-CLICK SOVEREIGN NICHE PUBLISH & SCHEDULE MODAL -->
+  <!-- ======================================================== -->
+  <div id="quickPublishModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-panel w-full max-w-lg rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div class="flex items-center gap-3">
+          <div id="quickModalIcon" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#0071e3] to-emerald-400 text-white flex items-center justify-center shadow-lg font-bold text-lg">
+            🚀
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 id="quickModalTitle" class="text-base font-black text-white tracking-tight">Upload Video</h2>
+              <span id="quickModalNicheBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-white font-bold">Niche</span>
+            </div>
+            <p id="quickModalSub" class="text-xs text-slate-400">Routes automatically to this niche's connected accounts</p>
+          </div>
+        </div>
+        <button onclick="closeQuickPublishModal()" class="p-2 rounded-xl glass-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Target Account Summary Card -->
+      <div class="p-3.5 rounded-2xl glass-input bg-black/40 border border-white/10 flex flex-col gap-2">
+        <div class="text-[10px] font-mono uppercase text-slate-400 font-bold">Bound Destination Accounts:</div>
+        <div class="flex items-center justify-between gap-2 text-xs font-mono">
+          <div id="quickModalYtSummary" class="flex items-center gap-1.5 text-red-300 font-bold">
+            <i data-lucide="play" class="w-3.5 h-3.5 fill-red-400"></i>
+            <span id="quickModalYtText">YouTube: Loading...</span>
+          </div>
+          <div id="quickModalIgSummary" class="flex items-center gap-1.5 text-pink-300 font-bold">
+            <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+            <span id="quickModalIgText">Instagram: Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timing Selector (Direct vs Schedule) -->
+      <div id="quickTimingSection" class="flex flex-col gap-3">
+        <label class="text-xs font-mono font-bold uppercase text-slate-300 tracking-wider">Release Timing</label>
+        <div class="grid grid-cols-2 gap-3">
+          <!-- Option A: Direct Publish -->
+          <button
+            type="button"
+            id="quickTimingDirectBtn"
+            onclick="setQuickModalMode('direct')"
+            class="p-3.5 rounded-2xl border-2 border-emerald-500/60 bg-emerald-500/10 text-left flex flex-col gap-1 transition cursor-pointer group"
+          >
+            <div class="flex items-center justify-between text-white font-black text-xs">
+              <span class="flex items-center gap-1.5">⚡ Publish Directly</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </div>
+            <span class="text-[10px] text-slate-400">Instant Public release</span>
+          </button>
+
+          <!-- Option B: Schedule -->
+          <button
+            type="button"
+            id="quickTimingScheduleBtn"
+            onclick="setQuickModalMode('schedule')"
+            class="p-3.5 rounded-2xl border-2 border-white/10 hover:border-purple-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group"
+          >
+            <div class="flex items-center justify-between text-slate-300 font-black text-xs group-hover:text-purple-300">
+              <span class="flex items-center gap-1.5">📅 Schedule Release</span>
+              <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+            </div>
+            <span class="text-[10px] text-slate-400">Auto-post at prime time</span>
+          </button>
+        </div>
+
+        <!-- Schedule Options Drawer -->
+        <div id="quickScheduleDrawer" class="hidden p-4 rounded-2xl border border-purple-500/30 bg-purple-500/10 flex flex-col gap-3">
+          <div class="text-[11px] font-mono text-purple-300 font-bold">Prime Time Presets (Local Time):</div>
+          <div class="grid grid-cols-4 gap-2 text-center text-xs font-mono">
+            <button type="button" onclick="setQuickPresetTime(8, 0)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-white font-bold transition cursor-pointer">
+              🌅 8:00 AM
+            </button>
+            <button type="button" onclick="setQuickPresetTime(12, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-white font-bold transition cursor-pointer">
+              🥪 12:30 PM
+            </button>
+            <button type="button" onclick="setQuickPresetTime(17, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-white font-bold transition cursor-pointer">
+              🌆 5:30 PM
+            </button>
+            <button type="button" onclick="setQuickPresetTime(20, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-white font-bold transition cursor-pointer">
+              🌙 8:30 PM
+            </button>
+          </div>
+          <div>
+            <label class="text-[10px] font-mono text-slate-400 block mb-1">Or Pick Custom Date & Time:</label>
+            <input
+              type="datetime-local"
+              id="quickScheduleDateTime"
+              class="w-full px-3 py-2 rounded-xl glass-input text-xs font-mono text-white border border-white/10"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button
+        id="quickLaunchBtn"
+        onclick="submitQuickPublish()"
+        class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#0071e3] to-emerald-400 hover:from-[#0071e3]/90 hover:to-emerald-400/90 text-white font-black text-sm tracking-wide shadow-xl flex items-center justify-center gap-2 cursor-pointer transition active:scale-[0.98]"
+      >
+        <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+        <span id="quickLaunchBtnText">Confirm & Publish Now</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- NICHE ACCOUNT BINDING MODAL -->
+  <!-- ======================================================== -->
+  <div id="nicheAccountModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-panel w-full max-w-md rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div>
+          <h2 id="nicheModalTitle" class="text-base font-black text-white tracking-tight">Configure Niche Accounts</h2>
+          <p class="text-xs text-slate-400">Bind dedicated YouTube & Instagram accounts</p>
+        </div>
+        <button onclick="closeNicheAccountModal()" class="p-2 rounded-xl glass-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- YouTube Channel Binding -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-mono font-bold uppercase text-slate-300 flex items-center gap-1.5">
+          <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> YouTube Channel
+        </label>
+        <select id="nicheYtSelect" class="w-full px-3 py-2.5 rounded-xl glass-input text-xs font-mono text-white border border-white/10">
+          <option value="">-- No Channel Assigned --</option>
+        </select>
+        <p class="text-[10px] text-slate-400">Need to add another channel? Use Settings & API to connect via Google OAuth.</p>
+      </div>
+
+      <!-- Instagram Account Binding -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-mono font-bold uppercase text-slate-300 flex items-center gap-1.5">
+          <i data-lucide="camera" class="w-3.5 h-3.5 text-pink-400"></i> Instagram Handle
+        </label>
+        <input
+          type="text"
+          id="nicheIgInput"
+          placeholder="e.g. thejudyinsights"
+          class="w-full px-3 py-2.5 rounded-xl glass-input text-xs font-mono text-white border border-white/10"
+        />
+        <p class="text-[10px] text-slate-400">Enter the Instagram username bound to this niche's Reels.</p>
+      </div>
+
+      <!-- Save Button -->
+      <button
+        onclick="saveNicheAccountBindings()"
+        class="w-full py-3 rounded-2xl bg-[#0071e3] hover:bg-[#0071e3]/90 text-white font-bold text-xs shadow-lg cursor-pointer transition"
+      >
+        Save Account Assignment
+      </button>
+    </div>
+  </div>
 
   <!-- ======================================================== -->
   <!-- SMART MULTI-PLATFORM PUBLISH & SCHEDULE MODAL -->
@@ -1975,34 +2207,274 @@
     }
 
     // Switch Format Filter from Master Tiles
-    function filterByFormat(format) {
-      setTab(format);
-    }
-
     // Switch Tab Filter
     function setTab(tab) {
       activeTab = tab;
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-white'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active', 'text-white', 'bg-[#0071e3]');
+        btn.classList.add('text-slate-400');
+      });
       const activeBtn = document.getElementById(`tab-${tab}`);
-      if (activeBtn) activeBtn.classList.add('active', 'text-white');
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'text-white', 'bg-[#0071e3]');
+        activeBtn.classList.remove('text-slate-400');
+      }
+      renderVideoList();
+    }
 
-      // Highlight active master tile
-      const longTile = document.getElementById('tile-longform');
-      const shortsTile = document.getElementById('tile-shorts');
-      if (longTile && shortsTile) {
-        if (tab === 'longform') {
-          longTile.classList.add('ring-2', 'ring-sky-400', 'shadow-sky-500/20');
-          shortsTile.classList.remove('ring-2', 'ring-emerald-400', 'shadow-emerald-500/20');
-        } else if (tab === 'shorts') {
-          shortsTile.classList.add('ring-2', 'ring-emerald-400', 'shadow-emerald-500/20');
-          longTile.classList.remove('ring-2', 'ring-sky-400', 'shadow-sky-500/20');
+    let nichesData = {};
+    let byNicheData = { self_improvement: [], finance: [], health: [] };
+    const urlNiche = new URLSearchParams(window.location.search).get('niche');
+    let activeNicheFilter = urlNiche || 'self_improvement';
+    let currentPipelineTopics = [];
+
+    function selectNicheChannel(nicheId) {
+      activeNicheFilter = nicheId;
+
+      // Update switcher highlights
+      ['self_improvement', 'finance', 'health'].forEach(id => {
+        const chip = document.getElementById(`switch-${id}`);
+        if (!chip) return;
+        if (id === nicheId) {
+          if (id === 'self_improvement') {
+            chip.className = 'channel-switch-chip px-3.5 py-2.5 rounded-xl border-2 border-sky-500/60 bg-sky-950/35 flex items-center justify-between transition-all cursor-pointer group shadow-lg shadow-sky-500/10';
+          } else if (id === 'finance') {
+            chip.className = 'channel-switch-chip px-3.5 py-2.5 rounded-xl border-2 border-emerald-500/60 bg-emerald-950/35 flex items-center justify-between transition-all cursor-pointer group shadow-lg shadow-emerald-500/10';
+          } else if (id === 'health') {
+            chip.className = 'channel-switch-chip px-3.5 py-2.5 rounded-xl border-2 border-cyan-500/60 bg-cyan-950/35 flex items-center justify-between transition-all cursor-pointer group shadow-lg shadow-cyan-500/10';
+          }
         } else {
-          longTile.classList.remove('ring-2', 'ring-sky-400', 'shadow-sky-500/20');
-          shortsTile.classList.remove('ring-2', 'ring-emerald-400', 'shadow-emerald-500/20');
+          chip.className = 'channel-switch-chip px-3.5 py-2.5 rounded-xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm';
         }
+      });
+
+      loadPipeline(nicheId);
+      renderVideoList();
+    }
+
+    // ==========================================
+    // 💡 CONTENT PIPELINE CLIENT LOGIC
+    // ==========================================
+    async function loadPipeline(nicheId = activeNicheFilter) {
+      const container = document.getElementById('pipelineList');
+      const nichePill = document.getElementById('pipelineActiveNichePill');
+      if (!container) return;
+
+      const nicheNames = {
+        self_improvement: '{Self Improvement}',
+        finance: '{Finance}',
+        health: '{Health}'
+      };
+      const nicheColors = {
+        self_improvement: 'bg-sky-500/20 text-sky-300 border-sky-500/30',
+        finance: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+        health: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30'
+      };
+
+      if (nichePill) {
+        nichePill.textContent = nicheNames[nicheId] || '{Pipeline}';
+        nichePill.className = `text-[10px] font-mono px-2 py-0.5 rounded-full border font-semibold ${nicheColors[nicheId] || 'bg-white/10 text-slate-300'}`;
       }
 
-      renderVideoList();
+      try {
+        const res = await fetch(`/api/pipeline?niche=${nicheId}`);
+        const data = await res.json();
+        currentPipelineTopics = data.topics || [];
+        renderPipelineHtml(currentPipelineTopics);
+      } catch (err) {
+        container.innerHTML = `<div class="text-[11px] text-rose-400 p-2 text-center">Failed to load pipeline: ${err.message}</div>`;
+      }
+    }
+
+    function renderPipelineHtml(topics) {
+      const container = document.getElementById('pipelineList');
+      if (!container) return;
+
+      if (!topics || topics.length === 0) {
+        container.innerHTML = `
+          <div class="p-4 text-center text-slate-500 text-xs flex flex-col items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-4 h-4 opacity-40"></i>
+            <span>No topics in pipeline. Click "⚡ Suggest Next 2" to populate!</span>
+          </div>
+        `;
+        safeCreateIcons();
+        return;
+      }
+
+      // Sort order: In Progress (0) -> Upcoming (1) -> Completed (2)
+      const sorted = [...topics].sort((a, b) => {
+        const order = { in_progress: 0, upcoming: 1, completed: 2 };
+        return (order[a.status] ?? 1) - (order[b.status] ?? 1);
+      });
+
+      container.innerHTML = sorted.map(t => {
+        const isCompleted = t.status === 'completed';
+        const isInProgress = t.status === 'in_progress';
+
+        const sourceMap = {
+          ai_suggested: 'AI Suggested',
+          ai_generated: 'AI Generated',
+          manual: 'Manually Added'
+        };
+        const sourceLabel = sourceMap[t.source] || 'Topic';
+
+        let statusLabel = 'Upcoming';
+        let statusClass = 'text-slate-400';
+        if (isCompleted) {
+          statusLabel = 'Completed';
+          statusClass = 'text-emerald-400';
+        } else if (isInProgress) {
+          statusLabel = 'In Progress';
+          statusClass = 'text-cyan-400 font-bold';
+        }
+
+        return `
+          <div class="group flex items-center justify-between gap-2.5 px-2.5 py-1.5 rounded-xl ${isInProgress ? 'bg-cyan-950/30 border border-cyan-500/40' : isCompleted ? 'bg-black/20 border border-white/5 opacity-70 hover:opacity-100' : 'bg-black/40 hover:bg-white/5 border border-white/5'} transition">
+            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+              <!-- Checkbox representing completion -->
+              <button
+                onclick="toggleTopicStatus('${t.id}')"
+                class="shrink-0 w-4 h-4 rounded border transition flex items-center justify-center cursor-pointer ${isCompleted ? 'bg-emerald-500 border-emerald-400 text-black shadow-sm' : isInProgress ? 'border-cyan-400 bg-cyan-500/20' : 'border-slate-600 hover:border-slate-400 bg-black/50'}"
+                title="${isCompleted ? 'Mark as Upcoming' : 'Mark as Completed'}"
+              >
+                ${isCompleted ? '<i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>' : isInProgress ? '<span class="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse"></span>' : ''}
+              </button>
+
+              <!-- Topic Info -->
+              <div class="min-w-0 flex-1">
+                <div class="text-xs ${isCompleted ? 'line-through text-slate-500 font-medium' : isInProgress ? 'text-white font-bold' : 'text-slate-200 font-medium'} truncate">
+                  ${t.title}
+                </div>
+                <div class="text-[10px] font-mono text-slate-500 flex items-center gap-1.5 mt-0.5 flex-wrap">
+                  ${t.categoryLabel ? `<span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-white/10 text-amber-300 border border-white/10 shrink-0">${t.categoryLabel}</span><span>·</span>` : ''}
+                  <span class="${statusClass}">${statusLabel}</span>
+                  <span>·</span>
+                  <span>${sourceLabel}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row Actions -->
+            <div class="flex items-center gap-1 shrink-0 opacity-0 group-hover:opacity-100 transition">
+              ${!isCompleted && !isInProgress ? `
+                <button
+                  onclick="setTopicCurrent('${t.id}')"
+                  class="px-2 py-0.5 rounded text-[10px] font-mono font-bold text-cyan-300 hover:bg-cyan-500/20 border border-cyan-500/30 transition cursor-pointer"
+                  title="Target as Current Video"
+                >
+                  Target
+                </button>
+              ` : ''}
+              <button
+                onclick="deleteTopic('${t.id}')"
+                class="p-1 rounded text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition cursor-pointer"
+                title="Delete Topic"
+              >
+                <i data-lucide="trash-2" class="w-3 h-3"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      safeCreateIcons();
+    }
+
+    async function toggleTopicStatus(topicId) {
+      const topic = currentPipelineTopics.find(t => t.id === topicId);
+      if (!topic) return;
+
+      const newStatus = topic.status === 'completed' ? 'upcoming' : 'completed';
+      try {
+        const res = await fetch(`/api/pipeline/topics/${topicId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        });
+        if (res.ok) {
+          loadPipeline(activeNicheFilter);
+        }
+      } catch (e) {
+        console.error('Failed to toggle status:', e);
+      }
+    }
+
+    async function setTopicCurrent(topicId) {
+      const topic = currentPipelineTopics.find(t => t.id === topicId);
+      if (!topic) return;
+
+      try {
+        await fetch(`/api/pipeline/topics/${topicId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'in_progress' })
+        });
+        // Populate topic title into editing inputs
+        const titleInput = document.getElementById('editTitle');
+        if (titleInput) titleInput.value = `${topic.title.toUpperCase()} #Shorts`;
+        loadPipeline(activeNicheFilter);
+      } catch (e) {
+        console.error('Failed to set current:', e);
+      }
+    }
+
+    async function addManualTopic() {
+      const input = document.getElementById('newTopicInput');
+      const title = input?.value?.trim();
+      if (!title) return;
+
+      try {
+        const res = await fetch('/api/pipeline/topics', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title,
+            niche: activeNicheFilter,
+            source: 'manual',
+            status: 'upcoming'
+          })
+        });
+        if (res.ok) {
+          input.value = '';
+          loadPipeline(activeNicheFilter);
+        }
+      } catch (e) {
+        console.error('Failed to add topic:', e);
+      }
+    }
+
+    async function suggestNextTopics() {
+      const btn = document.getElementById('suggestNextBtn');
+      if (btn) btn.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Suggesting...`;
+      try {
+        const res = await fetch('/api/pipeline/suggest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            niche: activeNicheFilter,
+            count: 2
+          })
+        });
+        if (res.ok) {
+          loadPipeline(activeNicheFilter);
+        }
+      } catch (e) {
+        console.error('Failed to suggest topics:', e);
+      } finally {
+        if (btn) btn.innerHTML = `<i data-lucide="sparkles" class="w-3.5 h-3.5 text-cyan-400"></i> <span>⚡ Suggest Next 2</span>`;
+        safeCreateIcons();
+      }
+    }
+
+    async function deleteTopic(topicId) {
+      try {
+        const res = await fetch(`/api/pipeline/topics/${topicId}`, { method: 'DELETE' });
+        if (res.ok) {
+          loadPipeline(activeNicheFilter);
+        }
+      } catch (e) {
+        console.error('Failed to delete topic:', e);
+      }
     }
 
     // 2. Fetch Videos with Live Upload & Schedule Status
@@ -2012,143 +2484,91 @@
         const res = await fetch('/api/videos');
         const data = await res.json();
         videosData = data.videos || [];
-        longFormsData = data.longForms || [];
-        shortsData = data.shorts || [];
-        uploadedData = data.uploadedVideos || [];
-        scheduledData = data.scheduledVideos || [];
-        unuploadedData = data.unuploadedVideos || [];
+        nichesData = data.niches || {};
+        byNicheData = data.byNiche || { self_improvement: [], finance: [], health: [] };
 
-        // Update counts
-        const allCount = document.getElementById('badge-count-all');
-        const unupCount = document.getElementById('badge-count-unuploaded');
-        const upCount = document.getElementById('badge-count-uploaded');
-        const longCount = document.getElementById('badge-count-longform');
-        const shortsCount = document.getElementById('badge-count-shorts');
-        const tileLongCount = document.getElementById('tile-longform-count');
-        const tileShortsCount = document.getElementById('tile-shorts-count');
+        // Sovereign Channel Handle Updates
+        ['self_improvement', 'finance', 'health'].forEach(id => {
+          const n = nichesData[id];
+          if (!n) return;
+          const ytEl = document.getElementById(`deck-yt-${id}`);
+          if (ytEl) ytEl.textContent = n.youtube?.connected ? (n.youtube.customUrl || n.youtube.title || 'Connected') : '+ Connect YT';
+        });
 
-        if (allCount) allCount.textContent = videosData.length;
-        if (unupCount) unupCount.textContent = unuploadedData.length;
-        if (upCount) upCount.textContent = (uploadedData.length + scheduledData.length);
-        if (longCount) longCount.textContent = longFormsData.length;
-        if (shortsCount) shortsCount.textContent = shortsData.length;
-        if (tileLongCount) tileLongCount.textContent = longFormsData.length;
-        if (tileShortsCount) tileShortsCount.textContent = shortsData.length;
-
+        // Update counts in current active tab
+        updateTabCounts();
         renderVideoList();
+        loadPipeline(activeNicheFilter);
 
-        // Select first available item if none selected, or keep current
-        if (videosData.length > 0) {
-          if (!selectedVideo) {
-            selectVideo(videosData[0].filename);
-          } else {
-            const stillExists = videosData.find(v => v.filename === selectedVideo.filename);
-            if (stillExists) selectVideo(stillExists.filename);
-            else selectVideo(videosData[0].filename);
-          }
+        // Select first item if none selected
+        const currentNicheList = byNicheData[activeNicheFilter] || [];
+        if (currentNicheList.length > 0 && !selectedVideo) {
+          selectVideo(currentNicheList[0].filename);
         }
       } catch (err) {
-        videoList.innerHTML = `<div class="p-4 text-center text-xs text-rose-400">Failed to load videos: ${err.message}</div>`;
+        if (videoList) videoList.innerHTML = `<div class="p-4 text-center text-xs text-rose-400">Failed to load videos: ${err.message}</div>`;
       }
     }
 
-    // Render Video List with Dedicated Visual Sections
+    function updateTabCounts() {
+      const nicheItems = byNicheData[activeNicheFilter] || [];
+      const shorts = nicheItems.filter(v => !v.isLongForm);
+      const longs = nicheItems.filter(v => v.isLongForm);
+      const unup = nicheItems.filter(v => !v.isUploaded && !v.isScheduled);
+      const up = nicheItems.filter(v => v.isUploaded || v.isScheduled);
+
+      const shortsCount = document.getElementById('badge-count-shorts');
+      const longCount = document.getElementById('badge-count-longform');
+      const unupCount = document.getElementById('badge-count-unuploaded');
+      const upCount = document.getElementById('badge-count-uploaded');
+
+      if (shortsCount) shortsCount.textContent = shorts.length;
+      if (longCount) longCount.textContent = longs.length;
+      if (unupCount) unupCount.textContent = unup.length;
+      if (upCount) upCount.textContent = up.length;
+    }
+
+    // Render Video List strictly filtered by activeNicheFilter & activeTab
     function renderVideoList() {
       const videoList = document.getElementById('videoList');
-      
-      if (activeTab === 'longform') {
-        if (longFormsData.length === 0) {
-          videoList.innerHTML = renderEmptyState('No 16:9 long-form videos rendered yet.');
-          safeCreateIcons();
-          return;
-        }
-        videoList.innerHTML = `
-          <div class="flex items-center justify-between px-1 pt-1 pb-0.5">
-            <div class="flex items-center gap-2 text-xs font-mono font-black uppercase text-sky-400 tracking-wider">
-              <i data-lucide="tv" class="w-3.5 h-3.5"></i> 16:9 Long-Form Productions
-            </div>
-            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/30">${longFormsData.length}</span>
-          </div>
-          <div class="flex flex-col gap-2.5">
-            ${longFormsData.map(v => renderCardHtml(v)).join('')}
-          </div>
-        `;
-      } else if (activeTab === 'shorts') {
-        if (shortsData.length === 0) {
-          videoList.innerHTML = renderEmptyState('No 9:16 vertical shorts rendered yet.');
-          safeCreateIcons();
-          return;
-        }
-        videoList.innerHTML = `
-          <div class="flex items-center justify-between px-1 pt-1 pb-0.5">
-            <div class="flex items-center gap-2 text-xs font-mono font-black uppercase text-emerald-400 tracking-wider">
-              <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> 9:16 YouTube Shorts
-            </div>
-            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">${shortsData.length}</span>
-          </div>
-          <div class="flex flex-col gap-2.5">
-            ${shortsData.map(v => renderCardHtml(v)).join('')}
-          </div>
-        `;
+      if (!videoList) return;
+
+      updateTabCounts();
+
+      const nicheItems = byNicheData[activeNicheFilter] || [];
+      let list = nicheItems;
+
+      if (activeTab === 'shorts') {
+        list = nicheItems.filter(v => !v.isLongForm);
+      } else if (activeTab === 'longform') {
+        list = nicheItems.filter(v => v.isLongForm);
       } else if (activeTab === 'unuploaded') {
-        renderFilteredSection(unuploadedData, '⏳ Ready To Publish', 'text-amber-400', 'bg-amber-500/15 text-amber-300 border-amber-500/30');
+        list = nicheItems.filter(v => !v.isUploaded && !v.isScheduled);
       } else if (activeTab === 'uploaded') {
-        const liveAndSched = [...scheduledData, ...uploadedData];
-        renderFilteredSection(liveAndSched, '✅ Live & Scheduled', 'text-purple-400', 'bg-purple-500/15 text-purple-300 border-purple-500/30');
-      } else {
-        // ALL VIEW — Display Separate Dedicated Sections for Long-Form and Shorts!
-        const longItems = videosData.filter(v => v.isLongForm);
-        const shortItems = videosData.filter(v => !v.isLongForm);
-
-        let html = '';
-
-        if (longItems.length > 0) {
-          html += `
-            <div class="flex flex-col gap-2">
-              <div class="flex items-center justify-between px-1 pt-1">
-                <div class="flex items-center gap-2 text-xs font-mono font-black uppercase text-sky-400 tracking-wider">
-                  <i data-lucide="tv" class="w-3.5 h-3.5"></i> 16:9 Long-Form Masterclasses
-                </div>
-                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/30">${longItems.length}</span>
-              </div>
-              <div class="flex flex-col gap-2">
-                ${longItems.map(v => renderCardHtml(v)).join('')}
-              </div>
-            </div>
-          `;
-        }
-
-        if (shortItems.length > 0) {
-          html += `
-            <div class="flex flex-col gap-2 pt-2 border-t border-white/5">
-              <div class="flex items-center justify-between px-1 pt-1">
-                <div class="flex items-center gap-2 text-xs font-mono font-black uppercase text-emerald-400 tracking-wider">
-                  <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> 9:16 YouTube Shorts & Reels
-                </div>
-                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">${shortItems.length}</span>
-              </div>
-              <div class="flex flex-col gap-2">
-                ${shortItems.map(v => renderCardHtml(v)).join('')}
-              </div>
-            </div>
-          `;
-        }
-
-        if (videosData.length === 0) {
-          html = renderEmptyState('No videos found in library.');
-        }
-
-        videoList.innerHTML = html;
+        list = nicheItems.filter(v => v.isUploaded || v.isScheduled);
       }
 
+      if (list.length === 0) {
+        const nicheTitle = activeNicheFilter === 'finance' ? 'Apex Wealth' : activeNicheFilter === 'health' ? 'BioMatrix' : 'Judy Insights';
+        videoList.innerHTML = renderEmptyState(`No videos under ${nicheTitle} (${activeTab}).`);
+        safeCreateIcons();
+        return;
+      }
+
+      videoList.innerHTML = `
+        <div class="flex flex-col gap-2">
+          ${list.map(v => renderCardHtml(v)).join('')}
+        </div>
+      `;
       safeCreateIcons();
 
-      // Highlight currently selected card
       if (selectedVideo) {
         const activeCard = document.getElementById(`video-card-${selectedVideo.filename}`);
         if (activeCard) {
           activeCard.classList.add('border-[#0071e3]', 'bg-[#0071e3]/15');
         }
+      } else if (list.length > 0) {
+        selectVideo(list[0].filename);
       }
     }
 
@@ -2187,6 +2607,12 @@
       const yt = v.youtube || {};
       const ig = v.instagram || {};
 
+      const nicheTag = v.niche === 'finance'
+        ? '<span class="text-emerald-400 font-mono font-bold text-[10px]">{Finance}</span>'
+        : v.niche === 'health'
+        ? '<span class="text-cyan-400 font-mono font-bold text-[10px]">{Health}</span>'
+        : '<span class="text-sky-400 font-mono font-bold text-[10px]">{Self Improvement}</span>';
+
       return `
         <div
           onclick="selectVideo('${v.filename}')"
@@ -2212,6 +2638,8 @@
                 <span class="text-xs font-black text-white tracking-tight truncate">${v.filename}</span>
               </div>
               <div class="text-[10px] text-slate-400 font-mono mt-1 flex items-center gap-1.5 flex-wrap">
+                ${nicheTag}
+                <span>•</span>
                 <span class="${isLong ? 'text-sky-300 font-bold' : 'text-emerald-300 font-bold'}">${isLong ? '16:9 Long-Form' : '9:16 Short'}</span>
                 <span>•</span>
                 <span>${v.sizeMb} MB</span>
@@ -2287,6 +2715,193 @@
       `;
     }
 
+    // --------------------------------------------------------
+    // Sovereign Niche Quick Publish & Account Binding Modal Handlers
+    // --------------------------------------------------------
+    let quickModalState = {
+      filename: null,
+      nicheId: null,
+      target: 'both',
+      mode: 'direct',
+      publishAt: null
+    };
+
+    function openQuickPublishModal(filename, nicheId, target) {
+      quickModalState.filename = filename;
+      quickModalState.nicheId = nicheId;
+      quickModalState.target = target;
+      quickModalState.mode = 'direct';
+      quickModalState.publishAt = null;
+
+      const niche = nichesData[nicheId] || {};
+      const modal = document.getElementById('quickPublishModal');
+      const title = document.getElementById('quickModalTitle');
+      const badge = document.getElementById('quickModalNicheBadge');
+      const ytText = document.getElementById('quickModalYtText');
+      const igText = document.getElementById('quickModalIgText');
+      const launchBtnText = document.getElementById('quickLaunchBtnText');
+
+      title.textContent = filename;
+      badge.textContent = niche.tag || niche.name || nicheId;
+
+      ytText.textContent = niche.youtube?.connected
+        ? `YouTube: ${niche.youtube.title || 'Connected'} (${niche.youtube.customUrl || ''})`
+        : 'YouTube: Not Connected';
+
+      igText.textContent = niche.instagram?.connected
+        ? `Instagram: @${niche.instagram.username}`
+        : 'Instagram: Not Connected';
+
+      const timingSection = document.getElementById('quickTimingSection');
+      if (target === 'instagram') {
+        timingSection.classList.add('hidden');
+        launchBtnText.textContent = `Upload to Instagram Reels Now`;
+      } else {
+        timingSection.classList.remove('hidden');
+        setQuickModalMode('direct');
+      }
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      safeCreateIcons();
+    }
+
+    function closeQuickPublishModal() {
+      const modal = document.getElementById('quickPublishModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    function setQuickModalMode(mode) {
+      quickModalState.mode = mode;
+      const directBtn = document.getElementById('quickTimingDirectBtn');
+      const schedBtn = document.getElementById('quickTimingScheduleBtn');
+      const drawer = document.getElementById('quickScheduleDrawer');
+      const launchBtnText = document.getElementById('quickLaunchBtnText');
+
+      if (mode === 'direct') {
+        directBtn.className = "p-3.5 rounded-2xl border-2 border-emerald-500/60 bg-emerald-500/10 text-left flex flex-col gap-1 transition cursor-pointer group";
+        schedBtn.className = "p-3.5 rounded-2xl border-2 border-white/10 hover:border-purple-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group";
+        drawer.classList.add('hidden');
+        launchBtnText.textContent = quickModalState.target === 'both' ? 'Publish to Both Platforms Now' : 'Publish to YouTube Now';
+      } else {
+        schedBtn.className = "p-3.5 rounded-2xl border-2 border-purple-500/60 bg-purple-500/10 text-left flex flex-col gap-1 transition cursor-pointer group";
+        directBtn.className = "p-3.5 rounded-2xl border-2 border-white/10 hover:border-emerald-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group";
+        drawer.classList.remove('hidden');
+
+        const dtInput = document.getElementById('quickScheduleDateTime');
+        if (!dtInput.value) {
+          const d = new Date(Date.now() + 3600 * 1000);
+          d.setMinutes(0, 0, 0);
+          dtInput.value = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+        }
+        launchBtnText.textContent = quickModalState.target === 'both' ? 'Schedule Release on Both' : 'Schedule YouTube Release';
+      }
+    }
+
+    function setQuickPresetTime(hour, minute) {
+      const dtInput = document.getElementById('quickScheduleDateTime');
+      const target = new Date();
+      target.setHours(hour, minute, 0, 0);
+      if (target.getTime() <= Date.now() + 10 * 60 * 1000) {
+        target.setDate(target.getDate() + 1);
+      }
+      dtInput.value = new Date(target.getTime() - target.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+      showToast(`📅 Scheduled for ${target.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`);
+    }
+
+    async function submitQuickPublish() {
+      const { filename, nicheId, target, mode } = quickModalState;
+      let publishAt = null;
+
+      if (mode === 'schedule') {
+        const dtVal = document.getElementById('quickScheduleDateTime').value;
+        if (!dtVal) {
+          alert('Please select a scheduled date and time.');
+          return;
+        }
+        publishAt = new Date(dtVal).toISOString();
+      }
+
+      closeQuickPublishModal();
+      showToast(`🚀 Initiating ${target.toUpperCase()} upload for ${filename}...`);
+
+      try {
+        const res = await fetch(`/api/niches/${nicheId}/publish`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ filename, target, mode, publishAt })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+
+        showToast(`🎉 Upload dispatched for ${data.niche}!`);
+        pollUploadProgress();
+        setTimeout(loadVideos, 4000);
+      } catch (err) {
+        showToast(`Upload failed: ${err.message}`);
+      }
+    }
+
+    let activeNicheBinding = null;
+
+    function openNicheAccountModal(nicheId) {
+      activeNicheBinding = nicheId;
+      const niche = nichesData[nicheId] || {};
+      const modal = document.getElementById('nicheAccountModal');
+      const title = document.getElementById('nicheModalTitle');
+      const ytSelect = document.getElementById('nicheYtSelect');
+      const igInput = document.getElementById('nicheIgInput');
+
+      title.textContent = `Configure ${niche.name || nicheId} Accounts`;
+
+      ytSelect.innerHTML = `<option value="">-- No Channel Assigned --</option>` +
+        (allChannels || []).map(ch => `
+          <option value="${ch.channelId}" ${niche.youtube?.channelId === ch.channelId ? 'selected' : ''}>
+            ${ch.title} (${ch.customUrl || ch.channelId})
+          </option>
+        `).join('');
+
+      igInput.value = niche.instagram?.username || '';
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      safeCreateIcons();
+    }
+
+    function closeNicheAccountModal() {
+      const modal = document.getElementById('nicheAccountModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    async function saveNicheAccountBindings() {
+      if (!activeNicheBinding) return;
+      const ytSelect = document.getElementById('nicheYtSelect');
+      const igInput = document.getElementById('nicheIgInput');
+
+      const channelId = ytSelect.value;
+      const username = igInput.value.trim();
+
+      try {
+        if (channelId) {
+          await fetch(`/api/niches/${activeNicheBinding}/bind-youtube`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ channelId })
+          });
+        }
+        if (username) {
+          await fetch(`/api/niches/${activeNicheBinding}/bind-instagram`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username })
+          });
+        }
+        showToast(`✅ Accounts successfully saved for ${activeNicheBinding}!`);
+        closeNicheAccountModal();
+        await loadVideos();
+      } catch (err) {
+        showToast(`Error saving bindings: ${err.message}`);
+      }
+    }
+
     // 3. Select Video & Populate Metadata & Show Live / Scheduled Status
     function selectVideo(filename) {
       selectedVideo = videosData.find((v) => v.filename === filename);
@@ -2329,17 +2944,7 @@
         activeBadge.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-400"></i> 9:16 Shorts`;
       }
 
-      const longTile = document.getElementById('tile-longform');
-      const shortsTile = document.getElementById('tile-shorts');
-      if (longTile && shortsTile && (activeTab === 'all' || activeTab === 'unuploaded' || activeTab === 'uploaded')) {
-        if (isWidescreen) {
-          longTile.classList.add('border-sky-400/70', 'shadow-sky-500/10');
-          shortsTile.classList.remove('border-emerald-400/70', 'shadow-emerald-500/10');
-        } else {
-          shortsTile.classList.add('border-emerald-400/70', 'shadow-emerald-500/10');
-          longTile.classList.remove('border-sky-400/70', 'shadow-sky-500/10');
-        }
-      }
+
 
       if (player) player.src = `/api/video-file/${filename}`;
       if (placeholder) placeholder.style.display = 'none';
@@ -2639,8 +3244,15 @@
     // ═══════════════════════════════════════════════════
     function openPublishModal(mode = 'both') {
       if (!selectedVideo) {
-        showToast('Please select a video from the library first');
-        return;
+        const nicheItems = byNicheData[activeNicheFilter] || [];
+        if (nicheItems.length > 0) {
+          selectVideo(nicheItems[0].filename);
+        } else if (videosData.length > 0) {
+          selectVideo(videosData[0].filename);
+        } else {
+          showToast('Please select a video from the library first');
+          return;
+        }
       }
 
       const modal = document.getElementById('publishModal');

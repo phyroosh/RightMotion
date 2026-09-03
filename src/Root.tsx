@@ -23,10 +23,14 @@ import { TheCompoundingTrapComposition } from "./clips/the_compounding_trap";
 import theCompoundingTrapTranscript from "./clips/the_compounding_trap/transcript.json";
 import { The3amCortisolSpikeComposition } from "./clips/the_3am_cortisol_spike";
 import the3amCortisolSpikeTranscript from "./clips/the_3am_cortisol_spike/transcript.json";
+import { TeenageMentalHealthComposition } from "./clips/teenage_mental_health";
+import teenageMentalHealthTranscript from "./clips/teenage_mental_health/transcript.json";
 import { TheIllusionOfOwnershipComposition } from "./clips/the_illusion_of_ownership";
 import theIllusionOfOwnershipTranscript from "./clips/the_illusion_of_ownership/transcript.json";
 import { TheDopamineSugarTrapComposition } from "./clips/the_dopamine_sugar_trap";
 import theDopamineSugarTrapTranscript from "./clips/the_dopamine_sugar_trap/transcript.json";
+import { CortisolAwakeningRoutineComposition } from "./clips/cortisol_awakening_routine";
+import cortisolAwakeningRoutineTranscript from "./clips/cortisol_awakening_routine/transcript.json";
 
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
@@ -67,8 +71,10 @@ import {
   SayingNoThumbnail,
   TheCompoundingTrapThumbnail,
   The3amCortisolSpikeThumbnail,
+  TeenageMentalHealthThumbnail,
   TheIllusionOfOwnershipThumbnail,
   TheDopamineSugarTrapThumbnail,
+  CortisolAwakeningRoutineThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -132,8 +138,10 @@ export const RemotionRoot: React.FC = () => {
   const sayingNoDuration = calculateDurationInFrames(sayingNoTranscript as any[], fps);
   const theCompoundingTrapDuration = calculateDurationInFrames(theCompoundingTrapTranscript as any[], fps);
   const the3amCortisolSpikeDuration = calculateDurationInFrames(the3amCortisolSpikeTranscript as any[], fps);
+  const teenageMentalHealthDuration = calculateDurationInFrames(teenageMentalHealthTranscript as any[], fps);
   const theIllusionOfOwnershipDuration = calculateDurationInFrames(theIllusionOfOwnershipTranscript as any[], fps);
   const theDopamineSugarTrapDuration = calculateDurationInFrames(theDopamineSugarTrapTranscript as any[], fps);
+  const cortisolAwakeningRoutineDuration = calculateDurationInFrames(cortisolAwakeningRoutineTranscript as any[], fps);
 
   return (
     <>
@@ -573,6 +581,20 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
       <Composition
+        id="TeenageMentalHealthVideo"
+        component={TeenageMentalHealthComposition}
+        durationInFrames={teenageMentalHealthDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="TeenageMentalHealthThumbnail"
+        component={TeenageMentalHealthThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Composition
         id="TheIllusionOfOwnershipVideo"
         component={TheIllusionOfOwnershipComposition}
         durationInFrames={theIllusionOfOwnershipDuration}
@@ -600,7 +622,22 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition
+        id="CortisolAwakeningRoutineVideo"
+        component={CortisolAwakeningRoutineComposition}
+        durationInFrames={cortisolAwakeningRoutineDuration}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="CortisolAwakeningRoutineThumbnail"
+        component={CortisolAwakeningRoutineThumbnail}
+        width={1080}
+        height={1920}
+      />
 
     </>
   );
 };
+

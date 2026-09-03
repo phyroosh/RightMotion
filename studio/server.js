@@ -249,12 +249,81 @@ let activeUpload = {
   error: null,
 };
 
+function classifyVideoNiche(filename, meta = {}) {
+  const metaStr = `${meta.topic || ''} ${meta.title || ''} ${meta.description || ''} ${(meta.tags || []).join(' ')}`.toLowerCase();
+  const fileStr = filename.toLowerCase();
+
+  // 1. Check explicit bracket tags first
+  if (metaStr.includes('{finance}')) return 'finance';
+  if (metaStr.includes('{health}')) return 'health';
+  if (metaStr.includes('{self improvement}') || metaStr.includes('{self improvment}')) return 'self_improvement';
+
+  // 2. Specific filename heuristics
+  if (
+    fileStr.includes('compounding') ||
+    fileStr.includes('ownership') ||
+    fileStr.includes('wealth') ||
+    fileStr.includes('finance') ||
+    fileStr.includes('money') ||
+    fileStr.includes('investing') ||
+    fileStr.includes('cash_flow')
+  ) {
+    return 'finance';
+  }
+
+  if (
+    fileStr.includes('cortisol') ||
+    fileStr.includes('sugar_trap') ||
+    fileStr.includes('biomatrix') ||
+    fileStr.includes('metabolic') ||
+    fileStr.includes('circadian') ||
+    fileStr.includes('glycogen') ||
+    fileStr.includes('hormone') ||
+    fileStr.includes('teenage_mental_health')
+  ) {
+    return 'health';
+  }
+
+  // 3. Keyword heuristics (excluding 'mental health' which belongs to Judy Insights psychology)
+  const cleanText = metaStr.replace(/mental health/g, 'psychology_wellbeing');
+
+  if (
+    cleanText.includes('investing') ||
+    cleanText.includes('compounding') ||
+    cleanText.includes('cash flow') ||
+    cleanText.includes('interest rate') ||
+    cleanText.includes('inflation') ||
+    cleanText.includes('stock market')
+  ) {
+    return 'finance';
+  }
+
+  if (
+    cleanText.includes('cortisol') ||
+    cleanText.includes('adrenal') ||
+    cleanText.includes('circadian') ||
+    cleanText.includes('glycogen') ||
+    cleanText.includes('cellular biology') ||
+    cleanText.includes('metabolism') ||
+    cleanText.includes('biometric') ||
+    cleanText.includes('blood sugar')
+  ) {
+    return 'health';
+  }
+
+  return 'self_improvement';
+}
+
 // 1. API: List all rendered videos sorted by date (newest first) & categorized with live upload and schedule status
 app.get('/api/videos', async (req, res) => {
   try {
+    const niches = multiChannel.getNichesRegistry();
+
     if (!fs.existsSync(OUT_DIR)) {
       return res.json({
         videos: [],
+        byNiche: { self_improvement: [], finance: [], health: [] },
+        niches,
         longForms: [],
         shorts: [],
         uploadedVideos: [],
@@ -321,8 +390,11 @@ app.get('/api/videos', async (req, res) => {
       const thumbPath = path.join(OUT_DIR, thumbFile);
       const hasThumbnail = fs.existsSync(thumbPath);
 
+      const niche = classifyVideoNiche(filename, meta);
+
       return {
         filename,
+        niche,
         sizeMb: (stats.size / (1024 * 1024)).toFixed(2),
         modifiedAt: stats.mtime,
         mtimeMs: stats.mtimeMs,
@@ -358,6 +430,12 @@ app.get('/api/videos', async (req, res) => {
     // Sort strictly by modification date (newest first)
     videos.sort((a, b) => b.mtimeMs - a.mtimeMs);
 
+    const byNiche = {
+      self_improvement: videos.filter((v) => v.niche === 'self_improvement'),
+      finance: videos.filter((v) => v.niche === 'finance'),
+      health: videos.filter((v) => v.niche === 'health'),
+    };
+
     const longForms = videos.filter((v) => v.isLongForm);
     const shorts = videos.filter((v) => !v.isLongForm);
     const uploadedVideos = videos.filter((v) => v.isUploaded && !v.isScheduled);
@@ -366,6 +444,8 @@ app.get('/api/videos', async (req, res) => {
 
     res.json({
       videos,
+      byNiche,
+      niches,
       longForms,
       shorts,
       uploadedVideos,
@@ -700,6 +780,32 @@ app.post('/api/credentials', (req, res) => {
 
 app.delete('/api/credentials/:id', (req, res) => {
   const result = multiChannel.deleteCredential(req.params.id);
+  res.json(result);
+});
+
+// -------------------------------------------------------------------
+// 5d. Sovereign Niches & Multi-Account Binding API Endpoints
+// -------------------------------------------------------------------
+app.get('/api/niches', (req, res) => {
+  try {
+    const niches = multiChannel.getNichesRegistry();
+    res.json(niches);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/niches/:nicheId/bind-youtube', (req, res) => {
+  const { channelId } = req.body;
+  if (!channelId) return res.status(400).json({ error: 'channelId is required' });
+  const result = multiChannel.bindYouTubeToNiche(req.params.nicheId, channelId);
+  res.json(result);
+});
+
+app.post('/api/niches/:nicheId/bind-instagram', (req, res) => {
+  const { username } = req.body;
+  if (!username) return res.status(400).json({ error: 'username is required' });
+  const result = multiChannel.bindInstagramToNiche(req.params.nicheId, username);
   res.json(result);
 });
 
@@ -1317,6 +1423,203 @@ app.post('/api/publish-multi', async (req, res) => {
   }
 });
 
+// 8d. API: Sovereign Niche 1-Click Publishing & Scheduling
+app.post('/api/niches/:nicheId/publish', async (req, res) => {
+  const { nicheId } = req.params;
+  const {
+    filename,
+    target = 'both', // 'youtube' | 'instagram' | 'both'
+    mode = 'direct', // 'direct' | 'schedule'
+    publishAt = null,
+  } = req.body;
+
+  if (!filename) return res.status(400).json({ error: 'filename is required' });
+
+  const niches = multiChannel.getNichesRegistry();
+  const niche = niches[nicheId];
+  if (!niche) return res.status(404).json({ error: `Niche ${nicheId} not found` });
+
+  const platforms = [];
+  const ytChannelIds = [];
+  const igUsernames = [];
+
+  if (target === 'youtube' || target === 'both') {
+    if (niche.youtube && niche.youtube.channelId) {
+      platforms.push('youtube');
+      ytChannelIds.push(niche.youtube.channelId);
+    }
+  }
+
+  if (target === 'instagram' || target === 'both') {
+    if (niche.instagram && niche.instagram.username) {
+      platforms.push('instagram');
+      igUsernames.push(niche.instagram.username);
+    }
+  }
+
+  if (platforms.length === 0) {
+    return res.status(400).json({
+      error: `No connected ${target} accounts configured for niche "${niche.name}". Please connect your account first.`
+    });
+  }
+
+  // Set normalized body for multi-destination publisher
+  req.body.platforms = platforms;
+  req.body.youtubeChannelIds = ytChannelIds;
+  req.body.instagramUsernames = igUsernames;
+  req.body.timing = mode === 'schedule' ? 'schedule' : 'now';
+  req.body.publishAt = publishAt;
+
+  // Delegate directly to publish-multi handler logic by triggering standard route
+  // In Express, we can re-route by calling the same handler or invoking axios/fetch or running the logic
+  // We will call the publish handler directly!
+  // To keep code perfectly DRY and robust, we can invoke the internal handler
+  try {
+    const filePath = path.join(OUT_DIR, filename);
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: `Video file ${filename} not found in out/` });
+    }
+
+    // Call /api/publish-multi logic
+    if (activeUpload.inProgress) {
+      return res.status(409).json({ error: 'Another upload is already in progress' });
+    }
+
+    const isScheduling = mode === 'schedule' && !!publishAt;
+    const isoPublishAt = isScheduling ? new Date(publishAt).toISOString() : null;
+
+    activeUpload = {
+      inProgress: true,
+      platform: platforms.length > 1 ? 'both' : platforms[0],
+      progress: 5,
+      stage: `Initializing ${target.toUpperCase()} release for ${niche.name}...`,
+      result: null,
+      error: null,
+    };
+
+    res.json({
+      message: `Publishing initiated for ${niche.name} (${target.toUpperCase()})`,
+      niche: niche.name,
+      target,
+      mode: isScheduling ? 'schedule' : 'direct',
+      publishAt: isoPublishAt,
+      platforms,
+      filename,
+    });
+
+    // Run async background publish
+    (async () => {
+      try {
+        const savedMetadata = getSavedMetadata();
+        const meta = savedMetadata[filename] || {};
+        const title = meta.title || filename.replace('.mp4', '').replace(/_/g, ' ');
+        const description = meta.description || '';
+        const tags = meta.tags || niche.defaultTags || [];
+        const thumbPath = path.join(OUT_DIR, `${filename.replace(/\.mp4$/i, '')}_thumbnail.png`);
+
+        const uploads = getUploadsRecord();
+        const existing = uploads[filename] || { filename, channels: {}, instagramAccounts: {} };
+
+        // 1. YouTube Upload
+        if (platforms.includes('youtube') && ytChannelIds.length > 0) {
+          for (const chId of ytChannelIds) {
+            activeUpload.stage = `Uploading to YouTube channel: ${niche.youtube.title}...`;
+            activeUpload.progress = 20;
+
+            const clientObj = multiChannel.getOAuth2ClientForChannel(chId);
+            if (!clientObj) throw new Error(`Authentication client missing for channel ${chId}`);
+
+            const youtube = google.youtube({ version: 'v3', auth: clientObj.oauth2Client });
+            const fileSize = fs.statSync(filePath).size;
+
+            const ytRes = await youtube.videos.insert({
+              part: 'snippet,status',
+              requestBody: {
+                snippet: { title, description, tags, categoryId: '27' },
+                status: {
+                  privacyStatus: isScheduling ? 'private' : 'public',
+                  publishAt: isoPublishAt,
+                  selfDeclaredMadeForKids: false,
+                },
+              },
+              media: { body: fs.createReadStream(filePath) },
+            });
+
+            const uploadedVideoId = ytRes.data.id;
+            activeUpload.progress = 60;
+
+            // Thumbnail
+            if (uploadedVideoId && fs.existsSync(thumbPath)) {
+              try {
+                await youtube.thumbnails.set({
+                  videoId: uploadedVideoId,
+                  media: { body: fs.createReadStream(thumbPath) },
+                });
+              } catch (thErr) {
+                console.warn('Thumbnail set warning:', thErr.message);
+              }
+            }
+
+            existing.channels[chId] = {
+              uploaded: true,
+              videoId: uploadedVideoId,
+              publishAt: isoPublishAt,
+              isScheduled,
+              channelTitle: niche.youtube.title,
+              publishedAt: new Date().toISOString(),
+            };
+            existing.youtube = existing.channels[chId];
+          }
+        }
+
+        // 2. Instagram Upload
+        if (platforms.includes('instagram') && igUsernames.length > 0) {
+          for (const igUser of igUsernames) {
+            activeUpload.stage = `Uploading Reel to Instagram: @${igUser}...`;
+            activeUpload.progress = 75;
+
+            const igRes = await igPlaywright.uploadReel({
+              username: igUser,
+              videoPath: filePath,
+              coverPath: fs.existsSync(thumbPath) ? thumbPath : null,
+              caption: `${title}\n\n${description}`,
+              shareToFeed: true,
+              onProgress: (p) => {
+                activeUpload.stage = p.stage;
+                activeUpload.progress = 75 + Math.floor(p.progress * 0.2);
+              },
+              headless: true,
+            });
+
+            existing.instagramAccounts[igUser] = {
+              uploaded: true,
+              username: igUser,
+              reelUrl: igRes.reelUrl,
+              publishedAt: new Date().toISOString(),
+            };
+            existing.instagram = existing.instagramAccounts[igUser];
+          }
+        }
+
+        uploads[filename] = existing;
+        saveUploadsRecord(uploads);
+
+        activeUpload.inProgress = false;
+        activeUpload.progress = 100;
+        activeUpload.stage = isScheduling
+          ? `🎉 Successfully scheduled release for ${niche.name}!`
+          : `🎉 Successfully published to ${niche.name}!`;
+      } catch (err) {
+        console.error(`Error in niche publish for ${nicheId}:`, err);
+        activeUpload.inProgress = false;
+        activeUpload.error = err.message || 'Niche publish failed';
+      }
+    })();
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // ========================================================
 // 9. API: Settings & YouTube API Credentials Configuration
 // ========================================================
@@ -1412,6 +1715,369 @@ app.post('/api/settings/reset-secrets', (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+
+// ==========================================
+// 💡 AI VIDEO TOPIC PIPELINE REST APIS
+// ==========================================
+const PIPELINE_FILE = path.join(__dirname, 'pipeline.json');
+
+function getPipelineData() {
+  if (!fs.existsSync(PIPELINE_FILE)) {
+    const initial = { self_improvement: [], finance: [], health: [] };
+    fs.writeFileSync(PIPELINE_FILE, JSON.stringify(initial, null, 2), 'utf-8');
+    return initial;
+  }
+  try {
+    return JSON.parse(fs.readFileSync(PIPELINE_FILE, 'utf-8'));
+  } catch (e) {
+    return { self_improvement: [], finance: [], health: [] };
+  }
+}
+
+function savePipelineData(data) {
+  fs.writeFileSync(PIPELINE_FILE, JSON.stringify(data, null, 2), 'utf-8');
+}
+
+// 1. GET /api/pipeline?niche=health
+app.get('/api/pipeline', (req, res) => {
+  const { niche } = req.query;
+  const data = getPipelineData();
+  if (niche && niche !== 'all' && data[niche]) {
+    return res.json({ niche, topics: data[niche] || [] });
+  }
+  return res.json({ niches: data });
+});
+
+// 2. POST /api/pipeline/topics - Add manual or suggested topic
+app.post('/api/pipeline/topics', (req, res) => {
+  const { title, niche = 'self_improvement', source = 'manual', status = 'upcoming' } = req.body;
+  if (!title || !title.trim()) {
+    return res.status(400).json({ error: 'Topic title is required' });
+  }
+  const data = getPipelineData();
+  if (!data[niche]) data[niche] = [];
+
+  const newTopic = {
+    id: `top_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+    title: title.trim(),
+    niche,
+    status: status, // 'upcoming' | 'in_progress' | 'completed'
+    source: source, // 'manual' | 'ai_suggested' | 'ai_generated'
+    createdAt: new Date().toISOString(),
+  };
+
+  data[niche].push(newTopic);
+  savePipelineData(data);
+  res.json({ success: true, topic: newTopic });
+});
+
+// 3. PATCH /api/pipeline/topics/:id - Toggle completed or in_progress
+app.patch('/api/pipeline/topics/:id', (req, res) => {
+  const { id } = req.params;
+  const { status, title, videoFilename } = req.body;
+  const data = getPipelineData();
+
+  let foundTopic = null;
+  for (const nicheKey of Object.keys(data)) {
+    const list = data[nicheKey];
+    const idx = list.findIndex(t => t.id === id);
+    if (idx !== -1) {
+      if (status) {
+        list[idx].status = status;
+        if (status === 'completed') {
+          list[idx].completedAt = new Date().toISOString();
+        } else {
+          delete list[idx].completedAt;
+        }
+      }
+      if (title) list[idx].title = title;
+      if (videoFilename !== undefined) list[idx].videoFilename = videoFilename;
+      foundTopic = list[idx];
+      break;
+    }
+  }
+
+  if (!foundTopic) {
+    return res.status(404).json({ error: 'Topic not found' });
+  }
+
+  savePipelineData(data);
+  res.json({ success: true, topic: foundTopic });
+});
+
+// 4. DELETE /api/pipeline/topics/:id
+app.delete('/api/pipeline/topics/:id', (req, res) => {
+  const { id } = req.params;
+  const data = getPipelineData();
+  let deleted = false;
+
+  for (const nicheKey of Object.keys(data)) {
+    const initialLen = data[nicheKey].length;
+    data[nicheKey] = data[nicheKey].filter(t => t.id !== id);
+    if (data[nicheKey].length < initialLen) {
+      deleted = true;
+      break;
+    }
+  }
+
+  if (!deleted) {
+    return res.status(404).json({ error: 'Topic not found' });
+  }
+
+  savePipelineData(data);
+  res.json({ success: true, id });
+});
+
+// 5. POST /api/pipeline/suggest - Enhanced Multi-Pillar AI Topic Ideation Engine
+app.post('/api/pipeline/suggest', (req, res) => {
+  const { niche = 'self_improvement', count = 2 } = req.body;
+  const data = getPipelineData();
+  if (!data[niche]) data[niche] = [];
+
+  const existingTitles = new Set((data[niche] || []).map(t => t.title.toLowerCase()));
+
+  // Curated High-Converting Niche Matrices mapped to specific pillars
+  const nicheMatrices = {
+    self_improvement: [
+      // Deeply Relatable Teenager Psychology & Mindset
+      {
+        title: "Why You Feel Like a Side Character in Your Own Life",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "The Fear of Being Seen Trying (Why Teens Pretend Not to Care)",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "Why You Overthink Every Text and Replay Conversations at 2 AM",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "The Exhaustion of Pretending You're Fine at School All Day",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "Why Losing Friends in High School Hurts Worse Than a Breakup",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "Comparing Your Behind-the-Scenes to Everyone's Highlight Reel",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "The Spotlight Illusion: Why Nobody Is Actually Judging You That Closely",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "Why Parental Criticism Stings 10x Harder During Teenage Years",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "The Anxiety of Group Projects and Speaking Up in Class",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "Why You Distance Yourself When People Get Too Close (Avoidant Instincts)",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "Starting From Scratch: What to Do When You Have No Direction or Passion",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      },
+      {
+        title: "How to Stop Comparing Your Looks and Personality to Others Online",
+        category: "teen_psychology",
+        categoryLabel: "Teen Psychology"
+      }
+    ],
+
+    health: [
+      // Essential Habits & Health Tips for Teens, Lost & Confused People + Bio Telemetry
+      {
+        title: "The 10-Minute Morning Anchor (For When You Wake Up Lost & Aimless)",
+        category: "habits_for_the_lost",
+        categoryLabel: "Habits for the Lost"
+      },
+      {
+        title: "How to Break the 'Freeze Response' When Doomscrolling Paralyzes You",
+        category: "habits_for_the_lost",
+        categoryLabel: "Habits for the Lost"
+      },
+      {
+        title: "The 48-Hour Dopamine Baseline Reset (Ending Teen Sensory Burnout)",
+        category: "habits_for_the_lost",
+        categoryLabel: "Habits for the Lost"
+      },
+      {
+        title: "Rebuilding Self-Trust (What to Do When You Keep Breaking Promises to Yourself)",
+        category: "habits_for_the_lost",
+        categoryLabel: "Habits for the Lost"
+      },
+      {
+        title: "The Low-Energy Survival Protocol (Getting Through Days When You Barely Function)",
+        category: "habits_for_the_lost",
+        categoryLabel: "Habits for the Lost"
+      },
+      {
+        title: "The 2-Minute Micro-Action Rule That Destroys Chronic Procrastination",
+        category: "habits_for_the_lost",
+        categoryLabel: "Habits for the Lost"
+      },
+      {
+        title: "Why Clean Spaces Rewire Chaotic Minds (The Environmental Anchor)",
+        category: "habits_for_the_lost",
+        categoryLabel: "Habits for the Lost"
+      },
+      {
+        title: "The 3-Minute Vagus Nerve Reset (Instant Parasympathetic Recovery)",
+        category: "clinical_telemetry",
+        categoryLabel: "Clinical Telemetry"
+      },
+      {
+        title: "The 90-Minute Caffeine Delay Rule (Resetting Your Adenosine Receptors)",
+        category: "clinical_telemetry",
+        categoryLabel: "Clinical Telemetry"
+      },
+      {
+        title: "Why You Wake Up Exhausted After 8 Hours (Cortisol Awakening Glitch)",
+        category: "clinical_telemetry",
+        categoryLabel: "Clinical Telemetry"
+      },
+      {
+        title: "Teen Circadian Phase Delay: Why Your Brain Stays Awake Past Midnight",
+        category: "clinical_telemetry",
+        categoryLabel: "Clinical Telemetry"
+      },
+      {
+        title: "The Glucose Spike-and-Crash Cycle (Why You Fall Asleep at 2 PM After Lunch)",
+        category: "clinical_telemetry",
+        categoryLabel: "Clinical Telemetry"
+      }
+    ],
+
+    finance: [
+      // Pillar A: Basic to Intermediate Finance for Early Adults
+      {
+        title: "The 30% Credit Card Utilization Rule Every 18-Year-Old Must Know",
+        category: "early_adult_foundations",
+        categoryLabel: "Early Adult Money"
+      },
+      {
+        title: "Why Leaving Cash in a Big Bank Savings Account Loses You 4% a Year",
+        category: "early_adult_foundations",
+        categoryLabel: "Early Adult Money"
+      },
+      {
+        title: "The First $10,000 Emergency Fund Roadmap (Step-by-Step for Your 20s)",
+        category: "early_adult_foundations",
+        categoryLabel: "Early Adult Money"
+      },
+      {
+        title: "The New Car Financing Trap That Destroys Early Adult Net Worth",
+        category: "early_adult_foundations",
+        categoryLabel: "Early Adult Money"
+      },
+      {
+        title: "How to Read Your First Paycheck (Taxes, FICA, and 401k Match Explained)",
+        category: "early_adult_foundations",
+        categoryLabel: "Early Adult Money"
+      },
+      {
+        title: "The Student Loan Avalanche vs Snowball Method (Paying Off Debt 3x Faster)",
+        category: "early_adult_foundations",
+        categoryLabel: "Early Adult Money"
+      },
+
+      // Pillar B: Advanced Wealth Compounding & Financial Hacks
+      {
+        title: "Roth IRA Math: Why Starting at Age 20 vs 30 Costs You $1.2 Million",
+        category: "wealth_hacks",
+        categoryLabel: "Wealth Hack"
+      },
+      {
+        title: "The 50% Pay Raise Rule (How to Completely Immunize Against Lifestyle Creep)",
+        category: "wealth_hacks",
+        categoryLabel: "Wealth Hack"
+      },
+      {
+        title: "Index Funds vs Stock Picking: The Mathematical Truth Wall Street Hides",
+        category: "wealth_hacks",
+        categoryLabel: "Wealth Hack"
+      },
+      {
+        title: "The 3 Silent Subscription and Bank Fee Leaks Draining $3,000/Year",
+        category: "wealth_hacks",
+        categoryLabel: "Wealth Hack"
+      },
+      {
+        title: "Asymmetric Leverage: Why the Rich Trade Systems Instead of Hours",
+        category: "wealth_hacks",
+        categoryLabel: "Wealth Hack"
+      },
+      {
+        title: "How to Legally Structure a Side Hustle for Maximum Tax Write-Offs",
+        category: "wealth_hacks",
+        categoryLabel: "Wealth Hack"
+      }
+    ]
+  };
+
+  const pool = nicheMatrices[niche] || nicheMatrices.self_improvement;
+  const available = pool.filter(item => !existingTitles.has(item.title.toLowerCase()));
+
+  // Balanced picking across sub-pillars if multiple available
+  let picks = [];
+  if (available.length >= count) {
+    // Group by category to pick diverse topics
+    const byCategory = {};
+    available.forEach(item => {
+      if (!byCategory[item.category]) byCategory[item.category] = [];
+      byCategory[item.category].push(item);
+    });
+    const categories = Object.keys(byCategory);
+    let catIdx = 0;
+    while (picks.length < count && available.length > 0) {
+      const currentCat = categories[catIdx % categories.length];
+      if (byCategory[currentCat] && byCategory[currentCat].length > 0) {
+        picks.push(byCategory[currentCat].shift());
+      } else {
+        const remaining = available.filter(x => !picks.includes(x));
+        if (remaining.length > 0) picks.push(remaining[0]);
+        else break;
+      }
+      catIdx++;
+    }
+  } else {
+    picks = (available.length > 0 ? available : pool).slice(0, count);
+  }
+
+  const newTopics = picks.map(item => ({
+    id: `top_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+    title: item.title,
+    category: item.category || 'general',
+    categoryLabel: item.categoryLabel || 'Topic',
+    niche,
+    status: 'upcoming',
+    source: 'ai_suggested',
+    createdAt: new Date().toISOString()
+  }));
+
+  data[niche].push(...newTopics);
+  savePipelineData(data);
+
+  res.json({ success: true, suggestions: newTopics });
 });
 
 app.listen(PORT, () => {

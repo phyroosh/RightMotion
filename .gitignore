@@ -26,9 +26,11 @@ out/reference/
 # Generated Video Metadata & Upload Tracking (Engine only, no video outputs)
 studio/metadata.json
 studio/uploads.json
+studio/pipeline.json
 
-# Generated Audio Voiceovers (Keep public/assets and public/audio)
+# Generated Audio Voiceovers & Transcripts (Keep public/assets and public/audio)
 public/*/voiceover.mp3
+src/clips/*/transcript.json
 
 
 # Remotion & Build Artifacts

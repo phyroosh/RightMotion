@@ -486,6 +486,108 @@ async function refreshChannelDetails(channelId = null) {
   return clientObj.channel;
 }
 
+// -------------------------------------------------------------------
+// 3. Sovereign Niches Registry & Niche Account Binding
+// -------------------------------------------------------------------
+
+function getNichesRegistry() {
+  const reg = getChannelsRegistry();
+  if (reg.niches) return reg.niches;
+
+  const defaultNiches = {
+    self_improvement: {
+      id: "self_improvement",
+      name: "Judy Insights",
+      tag: "{Self Improvement}",
+      theme: "apple_studio",
+      accentColor: "#0071e3",
+      badge: "Mindset & Psychology",
+      youtube: {
+        channelId: reg.activeChannelId || (reg.channels[0]?.channelId) || null,
+        title: "Judy Insights",
+        customUrl: "@thejudyinsights",
+        avatar: reg.channels[0]?.avatar || null,
+        connected: !!(reg.activeChannelId || reg.channels[0]?.channelId)
+      },
+      instagram: {
+        username: "thejudyinsights",
+        connected: true
+      },
+      defaultTags: ["SelfImprovement", "Psychology", "Mindset", "PersonalGrowth", "Shorts"]
+    },
+    finance: {
+      id: "finance",
+      name: "Apex Wealth",
+      tag: "{Finance}",
+      theme: "obsidian_gold",
+      accentColor: "#10b981",
+      badge: "Capital Markets & Growth",
+      youtube: { channelId: null, title: "Apex Wealth", connected: false },
+      instagram: { username: "apexwealth", connected: false },
+      defaultTags: ["Finance", "Investing", "Wealth", "Money", "Compounding", "Shorts"]
+    },
+    health: {
+      id: "health",
+      name: "BioMatrix",
+      tag: "{Health}",
+      theme: "biotech_cyan",
+      accentColor: "#06b6d4",
+      badge: "Cellular Biology & Longevity",
+      youtube: { channelId: null, title: "BioMatrix", connected: false },
+      instagram: { username: "biomatrixhealth", connected: false },
+      defaultTags: ["Health", "Neuroscience", "CircadianRhythm", "Biology", "Longevity", "Shorts"]
+    }
+  };
+
+  reg.niches = defaultNiches;
+  saveChannelsRegistry(reg);
+  return reg.niches;
+}
+
+function bindYouTubeToNiche(nicheId, channelId) {
+  const reg = getChannelsRegistry();
+  if (!reg.niches) reg.niches = getNichesRegistry();
+  if (!reg.niches[nicheId]) return { success: false, error: 'Unknown niche' };
+
+  const channel = reg.channels.find(c => c.channelId === channelId);
+  if (!channel) return { success: false, error: 'Channel not found in registry' };
+
+  reg.niches[nicheId].youtube = {
+    channelId: channel.channelId,
+    title: channel.title,
+    customUrl: channel.customUrl,
+    avatar: channel.avatar,
+    credentialId: channel.credentialId,
+    tokenFile: channel.tokenFile,
+    connected: true
+  };
+  saveChannelsRegistry(reg);
+  return { success: true, niche: reg.niches[nicheId] };
+}
+
+function bindInstagramToNiche(nicheId, username) {
+  const reg = getChannelsRegistry();
+  if (!reg.niches) reg.niches = getNichesRegistry();
+  if (!reg.niches[nicheId]) return { success: false, error: 'Unknown niche' };
+
+  reg.niches[nicheId].instagram = {
+    username,
+    connected: true,
+    sessionFile: `instagram_sessions/${username}.json`
+  };
+  saveChannelsRegistry(reg);
+  return { success: true, niche: reg.niches[nicheId] };
+}
+
+function getNicheAuthClient(nicheId, port = 4000) {
+  const niches = getNichesRegistry();
+  const niche = niches[nicheId];
+  if (!niche || !niche.youtube || !niche.youtube.channelId) {
+    return getOAuth2ClientForChannel(null, port);
+  }
+  return getOAuth2ClientForChannel(niche.youtube.channelId, port);
+}
+
 module.exports = {
   // Directories & Paths
   CREDENTIALS_DIR,
@@ -513,4 +615,10 @@ module.exports = {
   disconnectChannel,
   refreshChannelDetails,
   listChannels: () => getChannelsRegistry().channels,
+
+  // Sovereign Niches
+  getNichesRegistry,
+  bindYouTubeToNiche,
+  bindInstagramToNiche,
+  getNicheAuthClient,
 };

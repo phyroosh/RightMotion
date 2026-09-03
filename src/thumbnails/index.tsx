@@ -489,6 +489,22 @@ export const The3amCortisolSpikeThumbnail: React.FC = () => (
   />
 );
 
+// 23. TEENAGE MENTAL HEALTH (9:16 Health Short)
+export const TeenageMentalHealthThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY YOUR MOOD SUDDENLY CRASHES"
+    highlightWord="CRASHES"
+    highlightColor="sky"
+    subtitle="The Teenage Brain Storm — Remodeling, Not Drama"
+    categoryBadge="NEUROBIOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="biotech_cyan"
+    aspectRatio="9:16"
+    extraBadge="TEEN HEALTH 🫀"
+  />
+);
+
 export const TheIllusionOfOwnershipThumbnail: React.FC = () => (
   <ThumbnailCard
     title="THE ILLUSION OF OWNERSHIP"
@@ -516,3 +532,20 @@ export const TheDopamineSugarTrapThumbnail: React.FC = () => (
     aspectRatio="9:16"
   />
 );
+
+// 24. CORTISOL AWAKENING ROUTINE (9:16 Health Short)
+export const CortisolAwakeningRoutineThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY YOU WAKE UP EXHAUSTED AFTER 8 HOURS"
+    highlightWord="EXHAUSTED"
+    highlightColor="sky"
+    subtitle="The Cortisol Awakening Glitch Explained"
+    categoryBadge="CIRCADIAN BIOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    characterScale={1.0}
+    theme="biotech_cyan"
+    aspectRatio="9:16"
+    extraBadge="LONGEVITY 🫀"
+  />
+);
+
