@@ -1755,12 +1755,17 @@ app.post('/api/pipeline/topics', (req, res) => {
   if (!title || !title.trim()) {
     return res.status(400).json({ error: 'Topic title is required' });
   }
+  // Strip {no topics} modifier if present
+  const cleanTitle = title.replace(/\{\s*no\s+topics?\s*\}/gi, '').trim();
+  if (!cleanTitle) {
+    return res.status(400).json({ error: 'Valid topic title is required' });
+  }
   const data = getPipelineData();
   if (!data[niche]) data[niche] = [];
 
   const newTopic = {
     id: `top_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
-    title: title.trim(),
+    title: cleanTitle,
     niche,
     status: status, // 'upcoming' | 'in_progress' | 'completed'
     source: source, // 'manual' | 'ai_suggested' | 'ai_generated'

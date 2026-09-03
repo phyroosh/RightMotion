@@ -612,20 +612,27 @@ async def main():
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
 
     args = parser.parse_args()
-    name = re.sub(r"[^a-z0-9_]+", "_", args.name.lower()).strip("_")
-    topic = args.topic or name.replace("_", " ").title()
+    
+    # Strip {no topics} and {no topic} modifier tags cleanly
+    no_topics_pattern = re.compile(r"\{\s*no\s+topics?\s*\}", re.IGNORECASE)
+    clean_script = no_topics_pattern.sub("", args.script).strip()
+    clean_topic = no_topics_pattern.sub("", args.topic or "").strip() if args.topic else None
+
+    name = re.sub(r"\{\s*no\s+topics?\s*\}", "", args.name, flags=re.IGNORECASE)
+    name = re.sub(r"[^a-z0-9_]+", "_", name.lower()).strip("_")
+    topic = clean_topic or name.replace("_", " ").title()
 
     audio_path = ROOT_DIR / "public" / name / "voiceover.mp3"
     transcript_path = ROOT_DIR / "src" / "clips" / name / "transcript.json"
 
     # Step 1: Synthesize
-    await synthesize_speech(args.script, audio_path, args.voice)
+    await synthesize_speech(clean_script, audio_path, args.voice)
 
     # Step 2: Transcribe
     words, duration_sec = transcribe_audio(audio_path, transcript_path)
 
     # Step 3: Scaffold & Register
-    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, args.script)
+    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script)
     register_composition_and_thumbnail(name, pascal_name, topic, args.format)
 
     # Step 4: Render

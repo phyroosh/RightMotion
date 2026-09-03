@@ -2462,7 +2462,10 @@
 
     async function addManualTopic() {
       const input = document.getElementById('newTopicInput');
-      const title = input?.value?.trim();
+      const rawTitle = input?.value?.trim();
+      if (!rawTitle) return;
+
+      const title = rawTitle.replace(/\{\s*no\s+topics?\s*\}/gi, '').trim();
       if (!title) return;
 
       try {

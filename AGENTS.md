@@ -22,6 +22,13 @@ Every video script submitted to RightClips is tagged with one of three channel n
 >
 > DO NOT guess or assume the style if the tag is missing!
 
+### 🔇 Universal '{no topics}' Modifier Tag (MANDATORY AGENT RULE)
+
+If the user includes **`{no topics}`** (or **`{no topic}`**, case-insensitive) anywhere in their video generation request:
+1. **ZERO Topic Suggestions**: The AI Agent is strictly forbidden from suggesting, pitching, or appending follow-up video topics, future content ideas, or next-step topic lists. Do NOT suggest new topics this time!
+2. **Automatic Sanitization**: The agent and generation scripts MUST strip `{no topics}` or `{no topic}` from the prompt text, topic name, canvas cards, voiceover scripts, and metadata so the modifier never leaks into video assets.
+3. **Laser-Focused Execution**: Focus 100% of effort purely on generating, animating, sound-designing, auditing, and delivering the single requested video.
+
 ---
 
 ## 💡 Master Channel Topic Ideation & Viral Prompt Specification
