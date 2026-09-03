@@ -121,6 +121,39 @@ Every video produced or ideated in RightClips must target high-retention, deeply
 
 ---
 
+## ⚡ PERMANENT BAN ON MONOLITHIC ALL-AT-ONCE BLOCKS (MANDATORY SPEECH-SYNCHRONIZED PROGRESSIVE REVEAL)
+
+> [!CRITICAL]
+> **EVERY ELEMENT MUST APPEAR ONE-BY-ONE SYNCHRONIZED WITH THE HOST'S SPOKEN WORDS!**
+> Under NO circumstance may a video scene or card display multiple bullet points, switches, steps, or graphic items simultaneously at the start of the card.
+>
+> 1. **MANDATORY WORD SYNCHRONIZATION**:
+>    - Every visual element inside a card (Hero Cutout, Problem Subtitle, Point 1, Point 2, Point 3, Actionable Protocol) MUST have its own individual spoken word cue frame (`frame >= startFrame`).
+>    - Before that word cue frame is reached, the element MUST be 100% invisible:
+>      ```tsx
+>      const spItem1 = spring({ frame: frame - item1Frame, fps, config: { damping: 13, stiffness: 140 } });
+>
+>      <div
+>        style={{
+>          opacity: frame >= item1Frame ? Math.min(1, spItem1 * 1.2) : 0,
+>          transform: `scale(${frame >= item1Frame ? interpolate(spItem1, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= item1Frame ? interpolate(spItem1, [0, 1], [25, 0]) : 25}px)`,
+>          pointerEvents: frame >= item1Frame ? "auto" : "none",
+>        }}
+>      >
+>        {/* Item Content */}
+>      </div>
+>      ```
+> 2. **PERMANENT BAN ON STATIC BULLET LISTS & CONCEPT DUMPS**:
+>    - When presenting a 3-point rule, 3 biological switches, or financial steps, NEVER render all 3 points visible from frame 1 of the card.
+>    - Point 1 lands when the voiceover says "First...".
+>    - Point 2 lands when the voiceover says "Second...".
+>    - Point 3 lands when the voiceover says "Third...".
+>    - This progressive pacing commands viewer attention and skyrockets retention by 10x!
+> 3. **SFX SYNCHRONIZATION**:
+>    - Every progressive visual entrance must be paired with an audio Foley cue (`click` or `impact_hit` or `whoosh_sparkle`) in `SFX_CUES` on that exact entrance frame.
+
+---
+
 ## 🚫 Strict Minimalist Card Hygiene (NO REDUNDANT PILL HEADERS & NO HIGHLIGHTER LINES)
 
 > [!CRITICAL]

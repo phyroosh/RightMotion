@@ -31,6 +31,16 @@ for s in site.getsitepackages():
                 pass
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
+def sanitize_tags(text: str) -> str:
+    if not text:
+        return ""
+    # Strip {Health}, {Finance}, {Self Improvement}, {Self Improvment}, {no topics}, {no topic}
+    pattern = re.compile(r"\{\s*(health|finance|self\s*improv?ement|no\s*topics?)\s*\}", re.IGNORECASE)
+    cleaned = pattern.sub("", text)
+    # Also strip any residual curly braces that might break JSX evaluation
+    cleaned = re.sub(r"[{}\\]", "", cleaned)
+    return re.sub(r"\s+", " ", cleaned).strip()
+
 REGISTRY_PATH = ROOT_DIR / "public" / "assets" / "registry.json"
 
 def load_asset_registry():
@@ -132,68 +142,186 @@ def transcribe_audio(audio_path: Path, output_json: Path):
     print(f"      Transcribed {len(words_list)} words -> {output_json} ({duration_sec:.2f}s)")
     return words_list, duration_sec
 
-def scaffold_clip_files(name: str, topic: str, format_type: str, duration_sec: float, script_text: str):
-    print(f"🎨 [3/4] Scaffolding Remotion clip files with Pro Cutout Storyboard in src/clips/{name}/...")
+def parse_script_into_concepts(script_text: str):
+    lines = [l.strip() for l in script_text.splitlines() if l.strip()]
+    concepts = []
+    for line in lines:
+        parts = [p.strip() for p in re.split(r'(?<=[a-zA-Z][.?!])\s+(?=[A-Z"\'“‘])', line) if p.strip()]
+        for p in parts:
+            if p:
+                concepts.append(p)
+    return concepts
+
+def align_concepts(concepts, words_list, fps=30):
+    aligned = []
+    curr_idx = 0
+    total_words = len(words_list) if words_list else 0
+    
+    for c in concepts:
+        c_tokens = [re.sub(r"[^a-zA-Z0-9]", "", w.lower()) for w in c.split() if w.strip()]
+        if not c_tokens:
+            continue
+        
+        match_idx = None
+        if total_words > 0:
+            for i in range(curr_idx, total_words):
+                w_token = re.sub(r"[^a-zA-Z0-9]", "", words_list[i].get("word", "").lower())
+                if w_token == c_tokens[0]:
+                    match_idx = i
+                    break
+                elif len(c_tokens) > 1 and w_token == c_tokens[1]:
+                    match_idx = max(0, i - 1)
+                    break
+        
+        if match_idx is not None and total_words > 0:
+            start_ms = words_list[match_idx].get("startMs", words_list[match_idx].get("start", 0))
+            curr_idx = min(match_idx + max(1, len(c_tokens) - 1), total_words - 1)
+            end_ms = words_list[curr_idx].get("endMs", words_list[curr_idx].get("end", start_ms + 1500))
+        else:
+            prev_end = aligned[-1]["endMs"] if aligned else 0
+            start_ms = prev_end + 300
+            end_ms = start_ms + 2000
+        
+        aligned.append({
+            "text": c,
+            "startMs": start_ms,
+            "endMs": end_ms,
+            "startFrame": round((start_ms / 1000) * fps),
+            "endFrame": round((end_ms / 1000) * fps)
+        })
+    return aligned
+
+def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None):
+    topic = sanitize_tags(raw_topic)
+    script_text = sanitize_tags(raw_script)
+    print(f"🎨 [3/4] Scaffolding Remotion clip files with Speech-Synchronized Progressive Reveal in src/clips/{name}/...")
     clip_dir = ROOT_DIR / "src" / "clips" / name
     clip_dir.mkdir(parents=True, exist_ok=True)
 
+    fps = 30
+    total_frames = round(duration_sec * fps)
     pascal_name = "".join(w.capitalize() for w in re.split(r"[_\-\s]+", name))
     problem_cutout, solution_cutout = select_cutout_assets(topic, script_text)
-    print(f"      Selected Cutout Metaphors: Problem='{problem_cutout}', Solution='{solution_cutout}'")
 
-    # Dynamic proportional timing:
-    intro_ms = min(4000, round(duration_sec * 1000 * 0.22))
-    outro_ms = max(intro_ms + 2000, round(duration_sec * 1000 * 0.78))
-    mid_start = intro_ms
-    mid_end = outro_ms
-    pivot_ms = round(mid_start + (mid_end - mid_start) * 0.48)
+    # 1. Niche Detection & Design System Mapping
+    lower_text = f"{topic} {script_text}".lower()
+    if "{finance}" in lower_text or "apex wealth" in lower_text or "roth" in lower_text or "credit" in lower_text or "invest" in lower_text or "money" in lower_text or "wealth" in lower_text:
+        niche = "finance"
+    elif "{health}" in lower_text or "biomatrix" in lower_text or "cortisol" in lower_text or "circadian" in lower_text or "sleep" in lower_text or "dopamine" in lower_text or "adenosine" in lower_text or "body" in lower_text:
+        niche = "health"
+    else:
+        niche = "self_improvement"
 
-    # 1. Background
-    bg_code = f"""import React from "react";
+    if niche == "finance":
+        bg_code = f"""import React from "react";
+import {{ FinanceBackground }} from "../../components/finance/FinanceBackground";
 
 export const {pascal_name}Background: React.FC = () => {{
-  return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#f8fafc]">
-      <div
-        className="absolute inset-0 opacity-90"
-        style={{{{
-          background: "radial-gradient(circle at 50% 20%, #f1f5f9 0%, #e2e8f0 45%, #cbd5e1 100%)",
-        }}}}
-      />
-      <div
-        className="absolute w-[700px] h-[700px] rounded-full blur-[140px] opacity-25"
-        style={{{{
-          background: "radial-gradient(circle, #38bdf8 0%, #6366f1 100%)",
-          top: "12%",
-          left: "-10%",
-        }}}}
-      />
-      <div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-20"
-        style={{{{
-          background: "radial-gradient(circle, #f43f5e 0%, #fb923c 100%)",
-          bottom: "18%",
-          right: "-10%",
-        }}}}
-      />
-      <div
-        className="absolute inset-0 opacity-15"
-        style={{{{
-          backgroundImage: "radial-gradient(rgba(15, 23, 42, 0.3) 1.5px, transparent 1.5px)",
-          backgroundSize: "36px 36px",
-        }}}}
-      />
-    </div>
-  );
+  return <FinanceBackground />;
 }};
 """
+        card_class = "w-full p-8 rounded-3xl bg-[#0b0f19]/95 border-2 border-emerald-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
+        text_color = "text-white"
+        accent_color = "text-emerald-400"
+        sub_accent = "text-amber-400"
+        item_box = "p-4 rounded-2xl bg-[#111827]/90 border border-emerald-500/30 flex items-center justify-between text-left shadow-lg"
+        pill_box = "w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl font-black font-mono shrink-0"
+        sub_pill = "text-2xl font-mono text-emerald-300 font-bold"
+        status_box = "w-full p-4 rounded-2xl bg-black/70 border border-emerald-500/30 flex items-center justify-between text-2xl font-mono text-emerald-200"
+        status_alert = "text-amber-400 font-black tracking-wide"
+        glow_problem = "rose"
+        glow_solution = "emerald"
+    elif niche == "health":
+        bg_code = f"""import React from "react";
+import {{ HealthBackground }} from "../../components/health/HealthBackground";
+
+export const {pascal_name}Background: React.FC = () => {{
+  return <HealthBackground />;
+}};
+"""
+        card_class = "w-full p-8 rounded-3xl bg-[#0a1124]/95 border-2 border-cyan-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
+        text_color = "text-white"
+        accent_color = "text-cyan-400"
+        sub_accent = "text-rose-400"
+        item_box = "p-4 rounded-2xl bg-[#0e172f]/90 border border-cyan-500/40 flex items-center justify-between text-left shadow-lg"
+        pill_box = "w-12 h-12 rounded-xl bg-cyan-500/25 text-cyan-400 flex items-center justify-center text-3xl font-black font-mono shrink-0"
+        sub_pill = "text-2xl font-mono text-cyan-300 font-bold"
+        status_box = "w-full p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex items-center justify-between text-2xl font-mono text-cyan-200"
+        status_alert = "text-rose-400 font-black tracking-wide"
+        glow_problem = "rose"
+        glow_solution = "cyan"
+    else: # self_improvement
+        bg_code = f"""import React from "react";
+import {{ LivingStudioBackground }} from "../../components/LivingStudioBackground";
+
+export const {pascal_name}Background: React.FC = () => {{
+  return <LivingStudioBackground />;
+}};
+"""
+        card_class = "w-full p-8 rounded-3xl bg-white/95 border-2 border-sky-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
+        text_color = "text-slate-950"
+        accent_color = "text-[#0071e3]"
+        sub_accent = "text-rose-500"
+        item_box = "p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg"
+        pill_box = "w-12 h-12 rounded-xl bg-[#0071e3]/15 text-[#0071e3] flex items-center justify-center text-3xl font-black font-mono shrink-0"
+        sub_pill = "text-2xl font-mono text-sky-700 font-bold"
+        status_box = "w-full p-4 rounded-2xl bg-slate-100/90 border border-sky-200 flex items-center justify-between text-2xl font-mono text-slate-800"
+        status_alert = "text-rose-500 font-black tracking-wide"
+        glow_problem = "rose"
+        glow_solution = "amber"
+
     (clip_dir / "Background.tsx").write_text(bg_code, encoding="utf-8")
 
-    # 2. Presenter
+    # 2. Concept Segmentation & Word Timestamp Alignment
+    concepts = parse_script_into_concepts(script_text)
+    aligned = align_concepts(concepts, words_list, fps)
+
+    if len(aligned) < 3:
+        # Fallback if script is very short
+        aligned = [
+            {"text": topic, "startMs": 0, "endMs": round(duration_sec*350), "startFrame": 0, "endFrame": round(total_frames*0.35)},
+            {"text": script_text, "startMs": round(duration_sec*350), "endMs": round(duration_sec*700), "startFrame": round(total_frames*0.35), "endFrame": round(total_frames*0.70)},
+            {"text": "Master The Protocol", "startMs": round(duration_sec*700), "endMs": round(duration_sec*1000), "startFrame": round(total_frames*0.70), "endFrame": total_frames},
+        ]
+
+    # Partition concepts across 3 scenes:
+    # Scene 1: Hook & Diagnostic Problem
+    # Scene 2: The Core Breakdown / List Points (REVEALED ONE-BY-ONE!)
+    # Scene 3: The Actionable Protocol & Finale
+    n_concepts = len(aligned)
+    if n_concepts >= 6:
+        s1_items = aligned[:2]
+        s2_items = aligned[2:-2]
+        s3_items = aligned[-2:]
+    elif n_concepts >= 4:
+        s1_items = aligned[:2]
+        s2_items = aligned[2:-1]
+        s3_items = aligned[-1:]
+    else:
+        s1_items = [aligned[0]]
+        s2_items = [aligned[1]]
+        s3_items = [aligned[-1]]
+
+    s1_start = 0
+    s2_start = s2_items[0]["startFrame"]
+    s3_start = s3_items[0]["startFrame"]
+    s3_end = total_frames
+
+    # Timings for Scene 1 elements:
+    c1_hook_text = s1_items[0]["text"]
+    c1_problem_text = s1_items[1]["text"] if len(s1_items) > 1 else topic
+    f_c1_cutout = s1_items[1]["startFrame"] if len(s1_items) > 1 else max(12, round(s2_start * 0.4))
+    f_c1_metric = max(f_c1_cutout + 12, round(s2_start * 0.75))
+
+    # Presenter visibility: Enters intro, and re-enters ONLY for the closing 2.5s outro
+    intro_ms = min(3500, round((s1_items[-1]["startFrame"] / fps) * 1000))
+    outro_ms = max(intro_ms + 3000, round(((total_frames - 75) / fps) * 1000))
+
+    # 3. Presenter.tsx
     pres_code = f"""import React from "react";
 import {{ spring, useCurrentFrame, useVideoConfig }} from "remotion";
 import {{ CharacterKeyframeAnimator, KeyframePoint }} from "../../components/CharacterKeyframeAnimator";
-import {{ Sparkles, Zap }} from "lucide-react";
+import {{ Zap }} from "lucide-react";
 
 interface PresenterProps {{
   currentMs: number;
@@ -222,31 +350,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
 
   return (
     <div className="absolute inset-0 pointer-events-none z-30 flex flex-col items-center justify-end overflow-hidden">
-      <div className="absolute inset-0 backdrop-blur-2xl bg-white/35 pointer-events-none" />
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[850px] h-[850px] rounded-full pointer-events-none blur-[120px]"
-        style={{{{
-          background: isFinale
-            ? "radial-gradient(circle, rgba(16,185,129,0.35) 0%, rgba(14,165,233,0.2) 60%, transparent 80%)"
-            : "radial-gradient(circle, rgba(244,63,94,0.35) 0%, rgba(99,102,241,0.2) 60%, transparent 80%)",
-        }}}}
-      />
-      {{isIntro && (
-        <div
-          className="absolute top-[13%] apple-glass flex items-center shadow-[0_30px_70px_rgba(0,113,227,0.18)] border-[5px] border-white z-40"
-          style={{{{
-            transform: `translateY(${{(1 - badgeSpring) * -20}}px) scale(${{0.96 + badgeSpring * 0.04}})`,
-            padding: "24px 54px",
-            borderRadius: 44,
-            gap: 20,
-          }}}}
-        >
-          <Zap className="text-[#0071e3]" style={{{{ width: 52, height: 52 }}}} />
-          <span className="text-slate-950 font-black tracking-wider uppercase" style={{{{ fontSize: 38 }}}}>
-            {topic.upper()}
-          </span>
-        </div>
-      )}}
+      <div className="absolute inset-0 backdrop-blur-2xl bg-white/20 pointer-events-none" />
       <CharacterKeyframeAnimator keyframes={{keyframes}} currentMs={{currentMs}} baseHeight={{1550}} />
     </div>
   );
@@ -254,12 +358,69 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
 """
     (clip_dir / "Presenter.tsx").write_text(pres_code, encoding="utf-8")
 
-    # 3. Canvas (High-Retention Storyboard with ProCutout & PropComparison)
+    # 4. Canvas.tsx with Speech-Synchronized Sequential Reveals
+    # Build Scene 2 points JSX
+    s2_points_jsx = []
+    s2_spring_defs = []
+    sfx_cues = [
+        {"frame": 0, "type": "whoosh_deep", "volume": 0.32},
+        {"frame": f_c1_cutout, "type": "impact_hit", "volume": 0.24},
+        {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
+    ]
+
+    for idx, pt in enumerate(s2_items):
+        p_frame = pt["startFrame"]
+        p_text = pt["text"]
+        clean_text = re.sub(r"^(\d+[\.\)]\s*|[-*]\s*)", "", p_text).strip()
+        parts = clean_text.split(":", 1) if ":" in clean_text else [clean_text]
+        p_title = parts[0].strip()
+        p_desc = parts[1].strip() if len(parts) > 1 else ""
+
+        s2_spring_defs.append(f'const spP{idx+1} = spring({{ frame: frame - {p_frame}, fps, config: {{ damping: 13, stiffness: 140 }} }});')
+        sfx_cues.append({"frame": p_frame, "type": "click", "volume": 0.26})
+
+        s2_points_jsx.append(f"""
+                {{/* Progressive Item {idx+1} (Spoken Frame: {p_frame}) */}}
+                <div
+                  style={{{{
+                    opacity: frame >= {p_frame} ? Math.min(1, spP{idx+1} * 1.2) : 0,
+                    transform: `scale(${{frame >= {p_frame} ? interpolate(spP{idx+1}, [0, 1], [0.8, 1]) : 0.8}}) translateY(${{frame >= {p_frame} ? interpolate(spP{idx+1}, [0, 1], [25, 0]) : 25}}px)`,
+                    pointerEvents: frame >= {p_frame} ? "auto" : "none",
+                  }}}}
+                >
+                  <div className="{item_box}">
+                    <div className="flex items-center gap-4">
+                      <div className="{pill_box}">
+                        0{idx+1}
+                      </div>
+                      <div>
+                        <div className="text-3xl font-black {text_color}">
+                          {p_title}
+                        </div>
+                        {f'<div className="{sub_pill} mt-0.5">{p_desc}</div>' if p_desc else ''}
+                      </div>
+                    </div>
+                  </div>
+                </div>""")
+
+    # Scene 3 points:
+    s3_c1 = s3_items[0]
+    s3_c2 = s3_items[1] if len(s3_items) > 1 else s3_items[0]
+    f_s3_cutout = s3_c1["startFrame"]
+    f_s3_finale = s3_c2["startFrame"]
+    sfx_cues.append({"frame": f_s3_cutout, "type": "whoosh_sparkle", "volume": 0.32})
+    sfx_cues.append({"frame": f_s3_finale, "type": "impact_hit", "volume": 0.28})
+
+    s2_spring_str = "\n        ".join(s2_spring_defs)
+    s2_points_str = "".join(s2_points_jsx)
+
     canvas_code = f"""import React from "react";
-import {{ spring, useCurrentFrame, useVideoConfig }} from "remotion";
+import {{ useCurrentFrame, useVideoConfig, spring, interpolate }} from "remotion";
+import {{ PhysicalCard }} from "../../components/physics/PhysicalCard";
+import {{ TapeStrip }} from "../../components/collage/TapeStrip";
 import {{ ProCutout }} from "../../components/ProCutout";
+import {{ Sparkles, Zap, ArrowRight }} from "lucide-react";
 import {{ WordTimestamp }} from "../../types";
-import {{ Sparkles, AlertCircle, Target }} from "lucide-react";
 
 interface CanvasProps {{
   transcript: WordTimestamp[];
@@ -268,120 +429,179 @@ interface CanvasProps {{
 export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const frame = useCurrentFrame();
   const {{ fps }} = useVideoConfig();
-  const currentMs = (frame / fps) * 1000;
-
-  // Scene Timings:
-  // Scene 1 (Diagnostic Problem): {mid_start}ms - {pivot_ms}ms
-  // Scene 2 (Neural Shift / Solution): {pivot_ms}ms - {mid_end}ms
-  const isScene1 = currentMs >= {mid_start} && currentMs < {pivot_ms};
-  const isScene2 = currentMs >= {pivot_ms} && currentMs < {mid_end};
-
-  const sp = (delayMs: number, d = 20, s = 90, m = 0.85) => {{
-    const df = Math.floor((delayMs / 1000) * fps);
-    return spring({{
-      frame: Math.max(0, frame - df),
-      fps,
-      config: {{ damping: d, stiffness: s, mass: m }},
-    }});
-  }};
-
-  if (!isScene1 && !isScene2) return null;
 
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none z-20 select-none overflow-hidden flex flex-col items-center justify-center px-6">
-      {{/* ─────────────────────────────────────────────────────────────
-          SCENE 1: THE ROOT FRICTION & DIAGNOSTIC PROBLEM
-      ───────────────────────────────────────────────────────────── */}}
-      {{isScene1 && (() => {{
-        const sCard = sp({mid_start});
+    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none">
+      
+      {{/* ======================================================== */}}
+      {{/* SCENE 1: THE ROOT FRICTION & HOOK (Frames {s1_start} - {s2_start}) */}}
+      {{/* ======================================================== */}}
+      {{frame >= {s1_start} && frame < {s2_start} && (() => {{
+        const spCutout = spring({{ frame: frame - {f_c1_cutout}, fps, config: {{ damping: 13, stiffness: 140 }} }});
+        const spMetric = spring({{ frame: frame - {f_c1_metric}, fps, config: {{ damping: 13, stiffness: 140 }} }});
 
         return (
-          <div className="w-full max-w-[1000px] flex flex-col items-center gap-7">
-            {{/* Ghost Headline */}}
-            <div className="absolute -top-32 text-[260px] font-black text-slate-900/[0.04] leading-none tracking-tighter uppercase pointer-events-none select-none">
-              TRAP
-            </div>
-
-
-
-            {{/* Main Diagnostic Card */}}
-            <div
-              className="w-full rounded-[52px] p-10 bg-white/95 backdrop-blur-2xl border-[4px] border-rose-200/80 shadow-2xl flex items-center gap-8"
-              style={{{{
-                transform: `translateY(${{(1 - sCard) * 45}}px) scale(${{0.94 + sCard * 0.06}})`,
-                opacity: Math.min(1, sCard * 1.5),
-              }}}}
-            >
-              <div className="w-64 h-64 shrink-0">
-                <ProCutout
-                  assetId="{problem_cutout}"
-                  glowColor="rose"
-                  animation="punch_in"
-                  annotation="BURNOUT LOOP"
-                  annotationPosition="top-right"
-                  width="100%"
-                  height="100%"
-                />
+          <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
+            <div className="relative w-full max-w-[920px]">
+              <div className="absolute -top-7 right-8 z-30 pointer-events-none">
+                <TapeStrip position="top-right" width={{180}} height={{48}} enableWobble />
               </div>
 
-              <div className="flex-1 flex flex-col gap-4">
-                <div className="text-4xl font-black text-slate-950 uppercase tracking-tight leading-tight">
-                  Neural Circuit Overload
+              <PhysicalCard
+                tiltX={{4}}
+                tiltY={{-4}}
+                elevation={{45}}
+                impactMs={{{round((s1_start/fps)*1000)}}}
+                className="{card_class}"
+              >
+                {{/* Hero Hook Title */}}
+                <h1 className="text-5xl font-black {text_color} leading-tight tracking-tight max-w-[840px] mt-2">
+                  {c1_hook_text}
+                </h1>
+
+                {{/* Cutout Hero Prop — Revealed on Speech Frame {f_c1_cutout} */}}
+                <div
+                  className="w-full flex justify-center items-center my-3 transition-all"
+                  style={{{{
+                    opacity: frame >= {f_c1_cutout} ? Math.min(1, spCutout * 1.2) : 0,
+                    transform: `scale(${{frame >= {f_c1_cutout} ? interpolate(spCutout, [0, 1], [0.6, 1]) : 0.6}}) translateY(${{frame >= {f_c1_cutout} ? interpolate(spCutout, [0, 1], [30, 0]) : 30}}px)`,
+                    pointerEvents: frame >= {f_c1_cutout} ? "auto" : "none",
+                  }}}}
+                >
+                  <ProCutout
+                    assetId="{problem_cutout}"
+                    glowColor="{glow_problem}"
+                    animation="stamp_impact"
+                    width={{420}}
+                    height={{320}}
+                    ghostText="THE TRAP"
+                  />
                 </div>
-                <div className="p-5 rounded-2xl bg-rose-50 border-2 border-rose-200/80 text-rose-950 font-black text-2xl flex items-center gap-3">
-                  <span className="w-3.5 h-3.5 rounded-full bg-rose-500 shrink-0" />
-                  <span>Draining focus before you even begin</span>
+
+                {{/* Diagnostic Status Bar — Revealed on Speech Frame {f_c1_metric} */}}
+                <div
+                  className="w-full transition-all"
+                  style={{{{
+                    opacity: frame >= {f_c1_metric} ? Math.min(1, spMetric * 1.2) : 0,
+                    transform: `scale(${{frame >= {f_c1_metric} ? interpolate(spMetric, [0, 1], [0.8, 1]) : 0.8}})`,
+                    pointerEvents: frame >= {f_c1_metric} ? "auto" : "none",
+                  }}}}
+                >
+                  <div className="{status_box}">
+                    <span className="flex items-center gap-2.5">
+                      <Zap className="w-6 h-6 text-amber-400" />
+                      <span>{c1_problem_text[:35]}</span>
+                    </span>
+                    <span className="{status_alert}">CRITICAL DIAGNOSTIC</span>
+                  </div>
                 </div>
-              </div>
+              </PhysicalCard>
             </div>
           </div>
         );
       }})()}}
 
-      {{/* ─────────────────────────────────────────────────────────────
-          SCENE 2: THE NEURAL REWIRE & SOLUTION FRAMEWORK
-      ───────────────────────────────────────────────────────────── */}}
-      {{isScene2 && (() => {{
-        const sCard = sp({pivot_ms});
+      {{/* ======================================================== */}}
+      {{/* SCENE 2: THE BREAKDOWN (REVEALED ONE-BY-ONE AS SPOKEN!)  */}}
+      {{/* (Frames {s2_start} - {s3_start})                          */}}
+      {{/* ======================================================== */}}
+      {{frame >= {s2_start} && frame < {s3_start} && (() => {{
+        {s2_spring_str}
 
         return (
-          <div className="w-full max-w-[1000px] flex flex-col items-center gap-7">
-            {{/* Ghost Headline */}}
-            <div className="absolute -top-32 text-[260px] font-black text-slate-900/[0.04] leading-none tracking-tighter uppercase pointer-events-none select-none">
-              REWIRE
+          <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
+            <div className="relative w-full max-w-[920px]">
+              <div className="absolute -top-7 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+                <TapeStrip position="center-top" width={{180}} height={{48}} enableWobble />
+              </div>
+
+              <PhysicalCard
+                tiltX={{-5}}
+                tiltY={{4}}
+                elevation={{44}}
+                impactMs={{{round((s2_start/fps)*1000)}}}
+                className="{card_class}"
+              >
+                {{/* Clean Uncrowded Section Header */}}
+                <div className="text-center mt-1">
+                  <h2 className="text-5xl font-black {text_color} leading-tight">
+                    {topic}
+                  </h2>
+                  <div className="text-2xl font-mono {accent_color} font-bold mt-1 tracking-wider uppercase">
+                    Core Principles & Breakdown
+                  </div>
+                </div>
+
+                {{/* PROGRESSIVE SEQUENTIAL REVEALS: ONE BY ONE ON EXACT WORDS */}}
+                <div className="flex flex-col gap-4 w-full my-1">
+                  {s2_points_str}
+                </div>
+              </PhysicalCard>
             </div>
+          </div>
+        );
+      }})()}}
 
+      {{/* ======================================================== */}}
+      {{/* SCENE 3: THE ACTIONABLE SOLUTION & FINALE (Frames {s3_start} - {s3_end}) */}}
+      {{/* ======================================================== */}}
+      {{frame >= {s3_start} && frame < {s3_end} && (() => {{
+        const spSolCutout = spring({{ frame: frame - {f_s3_cutout}, fps, config: {{ damping: 13, stiffness: 140 }} }});
+        const spFinale = spring({{ frame: frame - {f_s3_finale}, fps, config: {{ damping: 13, stiffness: 140 }} }});
 
-
-            {{/* Solution Hero Card */}}
-            <div
-              className="w-full rounded-[52px] p-10 bg-white/95 backdrop-blur-2xl border-[4px] border-emerald-200/80 shadow-2xl flex items-center gap-8"
-              style={{{{
-                transform: `translateY(${{(1 - sCard) * 45}}px) scale(${{0.94 + sCard * 0.06}})`,
-                opacity: Math.min(1, sCard * 1.5),
-              }}}}
-            >
-              <div className="w-64 h-64 shrink-0">
-                <ProCutout
-                  assetId="{solution_cutout}"
-                  glowColor="emerald"
-                  animation="stamp_impact"
-                  annotation="REWIRED"
-                  annotationPosition="top-right"
-                  width="100%"
-                  height="100%"
-                />
+        return (
+          <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
+            <div className="relative w-full max-w-[920px]">
+              <div className="absolute -top-7 left-8 z-30 pointer-events-none">
+                <TapeStrip position="top-left" width={{180}} height={{48}} enableWobble />
               </div>
 
-              <div className="flex-1 flex flex-col gap-4">
-                <div className="text-4xl font-black text-slate-950 uppercase tracking-tight leading-tight">
-                  High-Retention Clarity
+              <PhysicalCard
+                tiltX={{3}}
+                tiltY={{-3}}
+                elevation={{45}}
+                impactMs={{{round((s3_start/fps)*1000)}}}
+                className="{card_class}"
+              >
+                {{/* Actionable Protocol Title */}}
+                <h3 className="text-5xl font-black {text_color} leading-tight mt-1">
+                  {s3_c1["text"]}
+                </h3>
+
+                {{/* Solution Cutout Hero — Revealed on Speech Frame {f_s3_cutout} */}}
+                <div
+                  className="w-full flex justify-center items-center my-2 transition-all"
+                  style={{{{
+                    opacity: frame >= {f_s3_cutout} ? Math.min(1, spSolCutout * 1.2) : 0,
+                    transform: `scale(${{frame >= {f_s3_cutout} ? interpolate(spSolCutout, [0, 1], [0.6, 1]) : 0.6}}) translateY(${{frame >= {f_s3_cutout} ? interpolate(spSolCutout, [0, 1], [30, 0]) : 30}}px)`,
+                    pointerEvents: frame >= {f_s3_cutout} ? "auto" : "none",
+                  }}}}
+                >
+                  <ProCutout
+                    assetId="{solution_cutout}"
+                    glowColor="{glow_solution}"
+                    animation="stamp_impact"
+                    width={{420}}
+                    height={{320}}
+                    ghostText="REWIRE"
+                  />
                 </div>
-                <div className="p-5 rounded-2xl bg-emerald-50 border-2 border-emerald-200/80 text-emerald-950 font-black text-2xl flex items-center gap-3">
-                  <Sparkles className="w-7 h-7 text-emerald-600 shrink-0" />
-                  <span>1 Micro-Shift Transforms The Output</span>
+
+                {{/* Finale Affirmation Statement — Revealed on Speech Frame {f_s3_finale} */}}
+                <div
+                  className="w-full transition-all"
+                  style={{{{
+                    opacity: frame >= {f_s3_finale} ? Math.min(1, spFinale * 1.2) : 0,
+                    transform: `scale(${{frame >= {f_s3_finale} ? interpolate(spFinale, [0, 1], [0.8, 1]) : 0.8}})`,
+                    pointerEvents: frame >= {f_s3_finale} ? "auto" : "none",
+                  }}}}
+                >
+                  <div className="w-full p-5 rounded-2xl bg-black/60 border border-emerald-500/30 flex items-center justify-center gap-3 text-3xl font-black {accent_color} shadow-xl">
+                    <Sparkles className="w-7 h-7 text-emerald-400 shrink-0" />
+                    <span>{s3_c2["text"]}</span>
+                  </div>
                 </div>
-              </div>
+              </PhysicalCard>
             </div>
           </div>
         );
@@ -392,12 +612,8 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
 """
     (clip_dir / "Canvas.tsx").write_text(canvas_code, encoding="utf-8")
 
-    # 4. index.tsx
-    fps = 30
-    mid_scene_frame = round((mid_start / 1000) * fps)
-    impact_frame = mid_scene_frame + 12
-    solution_frame = round((pivot_ms / 1000) * fps)
-    finale_frame = round((outro_ms / 1000) * fps)
+    # 5. index.tsx with Multi-Layered Sound Design
+    sfx_json = json.dumps(sfx_cues, indent=2)
 
     idx_code = f"""import React from "react";
 import {{ Audio, interpolate, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
@@ -418,15 +634,8 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({{
   endMs: t.endMs ?? t.end,
 }}));
 
-// Multi-SFX audio cues synchronized with visual card & cutout entrances
-const SFX_CUES: SfxCue[] = [
-  {{ frame: 0,                 type: "whoosh_deep",    volume: 0.32 }}, // 0.0s: Intro Presenter entrance
-  {{ frame: 12,                type: "click",          volume: 0.26 }}, // 0.4s: Topic badge pop
-  {{ frame: {mid_scene_frame}, type: "whoosh_fast",    volume: 0.34 }}, // Storyboard card entrance
-  {{ frame: {impact_frame},    type: "impact_hit",     volume: 0.22 }}, // Problem cutout diagnostic reveal
-  {{ frame: {solution_frame},  type: "whoosh_sparkle", volume: 0.32 }}, // Solution cutout insight reveal
-  {{ frame: {finale_frame},    type: "whoosh_sparkle", volume: 0.35 }}, // Finale Presenter Re-Entry
-];
+// Multi-SFX audio cues synchronized with progressive visual reveals
+const SFX_CUES: SfxCue[] = {sfx_json};
 
 export const {pascal_name}Composition: React.FC = () => {{
   const {{ width, height, fps, durationInFrames }} = useVideoConfig();
@@ -468,10 +677,10 @@ export const {pascal_name}Composition: React.FC = () => {{
       {{/* 4. Top Apple Progress Bar */}}
       <AppleProgressBar />
 
-      {{/* 5. Apple Studio Mesh Background */}}
+      {{/* 5. Niche Living Background */}}
       <{pascal_name}Background />
 
-      {{/* 6. Motion Graphics Storyboard Canvas with Pro Cutouts */}}
+      {{/* 6. Speech-Synchronized Progressive Reveal Canvas */}}
       <{pascal_name}Canvas transcript={{transcript}} />
 
       {{/* 7. Multi-Pose Character Presenter */}}
@@ -484,8 +693,9 @@ export const {pascal_name}Composition: React.FC = () => {{
 }};
 """
     (clip_dir / "index.tsx").write_text(idx_code, encoding="utf-8")
-    print(f"      Scaffolded 4 clip components in src/clips/{name}/")
+    print(f"      Scaffolded 4 speech-synchronized clip components in src/clips/{name}/")
     return pascal_name
+
 
 def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, format_type: str):
     root_file = ROOT_DIR / "src" / "Root.tsx"
@@ -613,12 +823,21 @@ async def main():
 
     args = parser.parse_args()
     
-    # Strip {no topics} and {no topic} modifier tags cleanly
-    no_topics_pattern = re.compile(r"\{\s*no\s+topics?\s*\}", re.IGNORECASE)
-    clean_script = no_topics_pattern.sub("", args.script).strip()
-    clean_topic = no_topics_pattern.sub("", args.topic or "").strip() if args.topic else None
+    # Detect channel niche from raw topic & script before sanitizing
+    raw_combined = f"{args.topic or ''} {args.script} {args.name}".lower()
+    if "{finance}" in raw_combined:
+        channel_voice = "en-US-AndrewMultilingualNeural"
+    elif "{health}" in raw_combined:
+        channel_voice = "en-US-BrianMultilingualNeural"
+    else:
+        channel_voice = "en-US-AvaMultilingualNeural"
 
-    name = re.sub(r"\{\s*no\s+topics?\s*\}", "", args.name, flags=re.IGNORECASE)
+    voice_to_use = args.voice if args.voice and args.voice != "en-US-AvaMultilingualNeural" else channel_voice
+
+    clean_script = sanitize_tags(args.script)
+    clean_topic = sanitize_tags(args.topic) if args.topic else None
+
+    name = sanitize_tags(args.name)
     name = re.sub(r"[^a-z0-9_]+", "_", name.lower()).strip("_")
     topic = clean_topic or name.replace("_", " ").title()
 
@@ -626,13 +845,13 @@ async def main():
     transcript_path = ROOT_DIR / "src" / "clips" / name / "transcript.json"
 
     # Step 1: Synthesize
-    await synthesize_speech(clean_script, audio_path, args.voice)
+    await synthesize_speech(clean_script, audio_path, voice_to_use)
 
     # Step 2: Transcribe
     words, duration_sec = transcribe_audio(audio_path, transcript_path)
 
     # Step 3: Scaffold & Register
-    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script)
+    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script, words)
     register_composition_and_thumbnail(name, pascal_name, topic, args.format)
 
     # Step 4: Render
