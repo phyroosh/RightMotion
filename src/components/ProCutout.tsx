@@ -11,7 +11,7 @@ export type CutoutAnimationPreset =
   | "float_ambient"
   | "none";
 
-export type GlowColor = "amber" | "rose" | "emerald" | "sky" | "indigo" | "purple" | "neutral";
+export type GlowColor = "amber" | "rose" | "emerald" | "sky" | "cyan" | "indigo" | "purple" | "neutral";
 
 export interface ProCutoutProps {
   assetId?: CutoutAssetId | string;
@@ -40,6 +40,7 @@ const GLOW_MAP: Record<GlowColor, string> = {
   rose: "radial-gradient(circle, rgba(244,63,94,0.38) 0%, rgba(225,29,72,0.15) 55%, transparent 75%)",
   emerald: "radial-gradient(circle, rgba(16,185,129,0.35) 0%, rgba(5,150,105,0.15) 55%, transparent 75%)",
   sky: "radial-gradient(circle, rgba(14,165,233,0.35) 0%, rgba(2,132,199,0.15) 55%, transparent 75%)",
+  cyan: "radial-gradient(circle, rgba(6,182,212,0.38) 0%, rgba(8,145,178,0.15) 55%, transparent 75%)",
   indigo: "radial-gradient(circle, rgba(99,102,241,0.38) 0%, rgba(79,70,229,0.15) 55%, transparent 75%)",
   purple: "radial-gradient(circle, rgba(168,85,247,0.38) 0%, rgba(147,51,234,0.15) 55%, transparent 75%)",
   neutral: "radial-gradient(circle, rgba(15,23,42,0.2) 0%, rgba(15,23,42,0.06) 55%, transparent 75%)",

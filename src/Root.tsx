@@ -32,6 +32,15 @@ import theDopamineSugarTrapTranscript from "./clips/the_dopamine_sugar_trap/tran
 import { CortisolAwakeningRoutineComposition } from "./clips/cortisol_awakening_routine";
 import cortisolAwakeningRoutineTranscript from "./clips/cortisol_awakening_routine/transcript.json";
 
+import { MapTheGapComposition } from "./clips/map_the_gap";
+import map_the_gapTranscript from "./clips/map_the_gap/transcript.json";
+import { DiagramYourLoopComposition } from "./clips/diagram_your_loop";
+import diagram_your_loopTranscript from "./clips/diagram_your_loop/transcript.json";
+
+import { YouAreNotAloneComposition } from "./clips/you_are_not_alone";
+import you_are_not_aloneTranscript from "./clips/you_are_not_alone/transcript.json";
+import { BuildToScaleTHFComposition } from "./clips/build_to_scale_thf";
+import buildToScaleTHFTranscript from "./clips/build_to_scale_thf/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -59,6 +68,8 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  YouAreNotAloneThumbnail,
+  MapTheGapThumbnail,
   HoldingGrudgesThumbnail,
   PushingAwayThumbnail,
   ShrinkingCircleThumbnail,
@@ -75,6 +86,8 @@ import {
   TheIllusionOfOwnershipThumbnail,
   TheDopamineSugarTrapThumbnail,
   CortisolAwakeningRoutineThumbnail,
+  DiagramYourLoopThumbnail,
+  BuildToScaleTHFThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -130,6 +143,14 @@ export const RemotionRoot: React.FC = () => {
   
   const holding_grudgesDuration = calculateDurationInFrames(holding_grudgesTranscript as any[], fps);
   const pushingAwayDuration = calculateDurationInFrames(pushingAwayTranscript as any[], fps);
+  
+  
+  
+  const map_the_gapDuration = calculateDurationInFrames(map_the_gapTranscript as any[], fps);
+  
+  const you_are_not_aloneDuration = calculateDurationInFrames(you_are_not_aloneTranscript as any[], fps);
+  
+  
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -142,6 +163,9 @@ export const RemotionRoot: React.FC = () => {
   const theIllusionOfOwnershipDuration = calculateDurationInFrames(theIllusionOfOwnershipTranscript as any[], fps);
   const theDopamineSugarTrapDuration = calculateDurationInFrames(theDopamineSugarTrapTranscript as any[], fps);
   const cortisolAwakeningRoutineDuration = calculateDurationInFrames(cortisolAwakeningRoutineTranscript as any[], fps);
+  const diagram_your_loopDuration = calculateDurationInFrames(diagram_your_loopTranscript as any[], fps);
+  const buildToScaleTHFDuration = 1322; // 44.06s video at 30 fps
+
 
   return (
     <>
@@ -238,6 +262,39 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
 
+
+
+      
+      <Composition
+        id="MapTheGapVideo"
+        component={MapTheGapComposition}
+        durationInFrames={map_the_gapDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      <Composition
+        id="DiagramYourLoopVideo"
+        component={DiagramYourLoopComposition}
+        durationInFrames={diagram_your_loopDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+
+      
+      <Composition
+        id="YouAreNotAloneVideo"
+        component={YouAreNotAloneComposition}
+        durationInFrames={you_are_not_aloneDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
       {/* 0. Broken Promises & Self-Trust Video (9:16 Shorts) */}
       <Composition
         id="PromisesVideo"
@@ -637,7 +694,45 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
 
-    </>
+
+    
+      <Still
+        id="MapTheGapThumbnail"
+        component={MapTheGapThumbnail}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="DiagramYourLoopThumbnail"
+        component={DiagramYourLoopThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="YouAreNotAloneThumbnail"
+        component={YouAreNotAloneThumbnail}
+        width={1080}
+        height={1920}
+      />
+
+      {/* {facecam} Style 4 Test: Build To Scale — The Hazelnut Factory */}
+      <Composition
+        id="BuildToScaleTHFVideo"
+        component={BuildToScaleTHFComposition}
+        durationInFrames={buildToScaleTHFDuration}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="BuildToScaleTHFThumbnail"
+        component={BuildToScaleTHFThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      </>
   );
 };
 

@@ -44,3 +44,40 @@
 - **Resolution**: 1080 x 1920 (Vertical 9:16 format for Shorts/Reels/TikTok).
 - **Frame Rate**: 30 frames per second (fps).
 - **Dynamic Timing**: Auto-calculated duration matching transcript length + smooth hold outro.
+
+## 6. Pro-Editor Facecam Editing Rules (`{facecam}`)
+- **Real Video Footage as A-Roll**: Real creator footage (`.mp4`) played via Remotion's `<Video />`.
+- **Dynamic Framing & Punch-Ins**:
+  - Never leave camera static. Cut between 1.0x wide framing and 1.15x - 1.22x punch-ins on punchlines, numbers, and emotional shifts.
+  - Smooth camera spring or snap transitions paired with `whoosh_fast` audio cues.
+- **Dynamic Host Slide-Down Motion**:
+  - When B-roll is displayed on screen, the host video automatically and smoothly slides down into the lower half (`translateY: ~340px - 360px`).
+  - This keeps the speaker's face, upper chest, and active hand gestures centered in the lower 50% of the screen without any awkward occlusion!
+  - When the B-roll ends, the host video springs back up to the normal center position (`translateY: 0`).
+- **Autonomous Entity B-Roll Protocol**:
+  - Whenever the creator mentions a specific entity (person, founder, brand, hotel, product, location, acquisition, valuation):
+    1. The AI Agent fetches or generates authentic visual proof media using `scripts/fetch_entity_media.py` (news clippings, search AI overviews, founder photos, B-roll stills/clips).
+    2. Uses `<FacecamBRoll />` in the top safe zone (`top-[6%] h-[45%]`) with subtle Ken Burns slow-zoom, rounded corners, drop shadows, and category badges.
+    3. Triggers `slideDownBeats` during those B-roll intervals.
+- **Safe Zones & Occlusion Control**:
+  - Keep the speaker's eyes and mouth 100% visible and un-occluded.
+  - Non-B-roll badges and stamps occupy the lower-third chest zone (`bottom-[28%]`).
+- **Speech-Synchronized Kinetic Captions**:
+  - Lower safe zone (`bottom-[18%]`), 2-3 words per chunk.
+  - Minimum 32px font size (`text-3xl font-black`), active word spring pop (`scale(1.1)`) with glowing cyan/gold highlight.
+## 7. Autonomous Scriptwriting & Direct Topic Protocol (`{no meta}`)
+- **Zero ChatGPT Middle Step**: Paste raw topics directly (e.g., `{Self Improvement} The Fear of Being Caught Trying` or `{Self Improvement} {no meta} The 2 AM Phone Loop`).
+- **Mode A: Standard (Product-Linked)**: Default when `{no meta}` is absent:
+  - Scans `Products/*.pdf` via `scripts/pdf_topic_matcher.py`.
+  - Generates `[METADATA]` block with exact page & exercise title.
+  - **MANDATORY SILENT PDF RULE**: Spoken voiceover must NEVER say "Photon" or the page number aloud (visual proof is rendered on screen).
+- **Mode B: Organic / Growth (`{no meta}`)**: Triggered when `{no meta}` is present:
+  - Completely skips PDF lookup; outputs ONLY `[VOICEOVER]`.
+  - Ends with an organic community / subscriber CTA.
+- **Judy Persona Rules**:
+  - Warm, intelligent older sister / caring friend voice.
+  - 75–90 words target (~30–35s, hard cap 100 words).
+  - Permanent ban on AI clichés (*"here's the thing"*, *"the truth is"*, *"you're not lazy"*) and sales hype (*"life-changing"*, *"must-read"*).
+
+
+

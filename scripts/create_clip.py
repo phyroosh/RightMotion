@@ -31,15 +31,108 @@ for s in site.getsitepackages():
                 pass
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(ROOT_DIR / "scripts"))
+
+from extract_product_page import extract_product_page
+from generate_script import generate_script_and_metadata, check_script_hygiene
+
 def sanitize_tags(text: str) -> str:
     if not text:
         return ""
-    # Strip {Health}, {Finance}, {Self Improvement}, {Self Improvment}, {no topics}, {no topic}
-    pattern = re.compile(r"\{\s*(health|finance|self\s*improv?ement|no\s*topics?)\s*\}", re.IGNORECASE)
+    # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, and product tags {product: Photon.pdf, page: 14}
+    pattern = re.compile(
+        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
+        re.IGNORECASE,
+    )
     cleaned = pattern.sub("", text)
-    # Also strip any residual curly braces that might break JSX evaluation
     cleaned = re.sub(r"[{}\\]", "", cleaned)
     return re.sub(r"\s+", " ", cleaned).strip()
+
+def parse_script_blocks(raw_text: str):
+    """
+    Parses [METADATA] and [VOICEOVER] blocks if present.
+    Returns: (product_file, page_number, exercise_title, voiceover_text)
+    """
+    if not raw_text:
+        return None, None, None, ""
+
+    product_file = None
+    page_number = None
+    exercise_title = None
+    voiceover_text = raw_text
+
+    # Check for [METADATA]
+    meta_match = re.search(r"\[METADATA\](.*?)(?:\[VOICEOVER\]|$)", raw_text, re.DOTALL | re.IGNORECASE)
+    if meta_match:
+        meta_content = meta_match.group(1)
+        f_match = re.search(r"product_file:\s*([^\n\r]+)", meta_content, re.IGNORECASE)
+        if f_match:
+            product_file = f_match.group(1).strip()
+        p_match = re.search(r"page_number:\s*(\d+)", meta_content, re.IGNORECASE)
+        if p_match:
+            try:
+                page_number = int(p_match.group(1).strip())
+            except ValueError:
+                pass
+        e_match = re.search(r"exercise_title:\s*([^\n\r]+)", meta_content, re.IGNORECASE)
+        if e_match:
+            exercise_title = e_match.group(1).strip()
+
+    # Check for [VOICEOVER]
+    vo_match = re.search(r"\[VOICEOVER\]\s*(.*)", raw_text, re.DOTALL | re.IGNORECASE)
+    if vo_match:
+        voiceover_text = vo_match.group(1).strip()
+    elif meta_match:
+        voiceover_text = raw_text[meta_match.end():].strip()
+
+    return product_file, page_number, exercise_title, voiceover_text
+
+
+def clean_thumbnail_title(raw_title: str) -> str:
+    """
+    Ensures thumbnail titles are 100% pure high-converting viral hooks,
+    strictly stripping any page numbers, PDF mentions, or parenthetical page tags.
+    Example: 'Diagram Your Loop (Page 7)' -> 'DIAGRAM YOUR LOOP'
+    """
+    if not raw_title:
+        return ""
+    text = sanitize_tags(raw_title)
+    # Strip parenthetical/bracketed page references: (Page 7), [Page 14], (p. 7), (pg. 7), (Page 7 of 15)
+    text = re.sub(
+        r"\s*[\(\[\{]\s*(?:page|pg\.?|p\.)\s*\d+(?:\s*(?:of|/)\s*\d+)?\s*[\)\]\}]",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+    # Strip standalone page mentions: "Page 7", "Pg. 14", "p. 7"
+    text = re.sub(r"\b(?:page|pg\.?|p\.)\s*\d+\b", "", text, flags=re.IGNORECASE)
+    # Strip file extensions / PDF mentions: "Photon.pdf", "something.pdf"
+    text = re.sub(r"\b\w+\.pdf\b", "", text, flags=re.IGNORECASE)
+    # Strip trailing/leading hyphens, colons, or punctuation
+    text = re.sub(r"[\s\-_:–—]+$", "", text).strip()
+    text = re.sub(r"^[\s\-_:–—]+", "", text).strip()
+    text = re.sub(r"\s+", " ", text).strip()
+    return text.upper()
+
+def sanitize_topic(raw_topic: str) -> str:
+    """
+    Cleans topic titles so they represent pure high-impact subject lines,
+    stripping niche brackets, product tags, and parenthetical page numbers.
+    """
+    if not raw_topic:
+        return ""
+    text = sanitize_tags(raw_topic)
+    text = re.sub(
+        r"\s*[\(\[\{]\s*(?:page|pg\.?|p\.)\s*\d+(?:\s*(?:of|/)\s*\d+)?\s*[\)\]\}]",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+    text = re.sub(r"\b(?:page|pg\.?|p\.)\s*\d+\b", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b\w+\.pdf\b", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"[\s\-_:–—]+$", "", text).strip()
+    text = re.sub(r"^[\s\-_:–—]+", "", text).strip()
+    return re.sub(r"\s+", " ", text).strip()
 
 REGISTRY_PATH = ROOT_DIR / "public" / "assets" / "registry.json"
 
@@ -87,10 +180,26 @@ def select_cutout_assets(topic: str, script: str):
 async def synthesize_speech(text: str, output_path: Path, voice: str = "en-US-AvaMultilingualNeural"):
     import edge_tts
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    raw_path = output_path.with_name("raw_" + output_path.name)
     print(f"🎙️ [1/4] Synthesizing neural speech with voice '{voice}' (rate=+8% for retention)...")
-    communicate = edge_tts.Communicate(text=text, voice=voice, rate="+8%")
-    await communicate.save(str(output_path))
-    print(f"      Saved voiceover to: {output_path}")
+    # Clean text to avoid pauses
+    norm_text = text.replace("…", ",").replace("...", ",").replace("\r\n", "\n").replace("\n\n", " ").replace("\n", " ").strip()
+    communicate = edge_tts.Communicate(text=norm_text, voice=voice, rate="+8%")
+    await communicate.save(str(raw_path))
+
+    # Compress pauses > 0.18s
+    try:
+        cmd = [
+            "ffmpeg", "-y", "-i", str(raw_path),
+            "-af", "silenceremove=stop_periods=-1:stop_duration=0.18:stop_threshold=-35dB:detection=peak",
+            "-b:a", "192k",
+            str(output_path)
+        ]
+        subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print(f"      Pause-compressed master audio saved to: {output_path}")
+    except Exception as e:
+        print(f"      Pause compression fallback: {e}")
+        shutil.copy2(str(raw_path), str(output_path))
 
 def transcribe_audio(audio_path: Path, output_json: Path):
     from faster_whisper import WhisperModel
@@ -191,7 +300,7 @@ def align_concepts(concepts, words_list, fps=30):
         })
     return aligned
 
-def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None):
+def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
     print(f"🎨 [3/4] Scaffolding Remotion clip files with Speech-Synchronized Progressive Reveal in src/clips/{name}/...")
@@ -205,7 +314,9 @@ def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_se
 
     # 1. Niche Detection & Design System Mapping
     lower_text = f"{topic} {script_text}".lower()
-    if "{finance}" in lower_text or "apex wealth" in lower_text or "roth" in lower_text or "credit" in lower_text or "invest" in lower_text or "money" in lower_text or "wealth" in lower_text:
+    if "{facecam}" in lower_text or "facecam" in lower_text:
+        niche = "facecam"
+    elif "{finance}" in lower_text or "apex wealth" in lower_text or "roth" in lower_text or "credit" in lower_text or "invest" in lower_text or "money" in lower_text or "wealth" in lower_text:
         niche = "finance"
     elif "{health}" in lower_text or "biomatrix" in lower_text or "cortisol" in lower_text or "circadian" in lower_text or "sleep" in lower_text or "dopamine" in lower_text or "adenosine" in lower_text or "body" in lower_text:
         niche = "health"
@@ -250,6 +361,24 @@ export const {pascal_name}Background: React.FC = () => {{
         status_alert = "text-rose-400 font-black tracking-wide"
         glow_problem = "rose"
         glow_solution = "cyan"
+    elif niche == "facecam":
+        bg_code = f"""import React from "react";
+
+export const {pascal_name}Background: React.FC = () => {{
+  return <div className="absolute inset-0 bg-[#070b14]" />;
+}};
+"""
+        card_class = "w-full p-8 rounded-3xl bg-[#0b1120]/95 border-2 border-amber-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
+        text_color = "text-white"
+        accent_color = "text-amber-400"
+        sub_accent = "text-cyan-400"
+        item_box = "p-4 rounded-2xl bg-[#0f172a]/90 border border-amber-500/40 flex items-center justify-between text-left shadow-lg"
+        pill_box = "w-12 h-12 rounded-xl bg-amber-500/25 text-amber-400 flex items-center justify-center text-3xl font-black font-mono shrink-0"
+        sub_pill = "text-2xl font-mono text-amber-300 font-bold"
+        status_box = "w-full p-4 rounded-2xl bg-black/70 border border-amber-500/30 flex items-center justify-between text-2xl font-mono text-amber-200"
+        status_alert = "text-cyan-400 font-black tracking-wide"
+        glow_problem = "rose"
+        glow_solution = "amber"
     else: # self_improvement
         bg_code = f"""import React from "react";
 import {{ LivingStudioBackground }} from "../../components/LivingStudioBackground";
@@ -411,6 +540,83 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     sfx_cues.append({"frame": f_s3_cutout, "type": "whoosh_sparkle", "volume": 0.32})
     sfx_cues.append({"frame": f_s3_finale, "type": "impact_hit", "volume": 0.28})
 
+    accent_choice = "cyan" if niche == "health" else ("emerald" if niche == "finance" else "blue")
+    s3_impact_ms = round((s3_start / fps) * 1000)
+    if product_meta:
+        prod_stem = Path(product_meta["pdf_name"]).stem.upper()
+        scene3_content_jsx = f"""{{frame >= {s3_start} && frame < {s3_end} && (
+        <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
+          <ProductPageShowcase
+            imageSrc="{product_meta['public_path']}"
+            pageNum={{{product_meta['page']}}}
+            productName="{prod_stem} BLUEPRINT"
+            accentColor="{accent_choice}"
+            entranceFrame={{{s3_start}}}
+            badgeLabel="OFFICIAL WORKSHEET PROTOCOL"
+            width={{880}}
+            height={{1080}}
+          />
+        </div>
+      )}}"""
+    else:
+        scene3_content_jsx = f"""{{frame >= {s3_start} && frame < {s3_end} && (() => {{
+        const spSolCutout = spring({{ frame: frame - {f_s3_cutout}, fps, config: {{ damping: 13, stiffness: 140 }} }});
+        const spFinale = spring({{ frame: frame - {f_s3_finale}, fps, config: {{ damping: 13, stiffness: 140 }} }});
+
+        return (
+          <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
+            <div className="relative w-full max-w-[920px]">
+              <div className="absolute -top-7 left-8 z-30 pointer-events-none">
+                <TapeStrip position="top-left" width={{180}} height={{48}} enableWobble />
+              </div>
+
+              <PhysicalCard
+                tiltX={{3}}
+                tiltY={{-3}}
+                elevation={{45}}
+                impactMs={{{s3_impact_ms}}}
+                className="{card_class}"
+              >
+                <h3 className="text-5xl font-black {text_color} leading-tight mt-1">
+                  {s3_c1["text"]}
+                </h3>
+
+                <div
+                  className="w-full flex justify-center items-center my-2 transition-all"
+                  style={{{{
+                    opacity: frame >= {f_s3_cutout} ? Math.min(1, spSolCutout * 1.2) : 0,
+                    transform: `scale(${{frame >= {f_s3_cutout} ? interpolate(spSolCutout, [0, 1], [0.6, 1]) : 0.6}}) translateY(${{frame >= {f_s3_cutout} ? interpolate(spSolCutout, [0, 1], [30, 0]) : 30}}px)`,
+                    pointerEvents: frame >= {f_s3_cutout} ? "auto" : "none",
+                  }}}}
+                >
+                  <ProCutout
+                    assetId="{solution_cutout}"
+                    glowColor="{glow_solution}"
+                    animation="stamp_impact"
+                    width={{420}}
+                    height={{320}}
+                    ghostText="REWIRE"
+                  />
+                </div>
+
+                <div
+                  className="w-full transition-all"
+                  style={{{{
+                    opacity: frame >= {f_s3_finale} ? Math.min(1, spFinale * 1.2) : 0,
+                    transform: `scale(${{frame >= {f_s3_finale} ? interpolate(spFinale, [0, 1], [0.8, 1]) : 0.8}})`,
+                    pointerEvents: frame >= {f_s3_finale} ? "auto" : "none",
+                  }}}}
+                >
+                  <div className="w-full p-5 rounded-2xl bg-black/60 border border-emerald-500/30 flex items-center justify-center gap-3 text-3xl font-black {accent_color} shadow-xl">
+                    <Sparkles className="w-7 h-7 text-emerald-400 shrink-0" />
+                    <span>{s3_c2["text"]}</span>
+                  </div>
+                </div>
+              </PhysicalCard>
+            </div>
+          </div>
+        );
+      }})()}}"""
     s2_spring_str = "\n        ".join(s2_spring_defs)
     s2_points_str = "".join(s2_points_jsx)
 
@@ -419,6 +625,7 @@ import {{ useCurrentFrame, useVideoConfig, spring, interpolate }} from "remotion
 import {{ PhysicalCard }} from "../../components/physics/PhysicalCard";
 import {{ TapeStrip }} from "../../components/collage/TapeStrip";
 import {{ ProCutout }} from "../../components/ProCutout";
+import {{ ProductPageShowcase }} from "../../components/ProductPageShowcase";
 import {{ Sparkles, Zap, ArrowRight }} from "lucide-react";
 import {{ WordTimestamp }} from "../../types";
 
@@ -543,69 +750,9 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
       }})()}}
 
       {{/* ======================================================== */}}
-      {{/* SCENE 3: THE ACTIONABLE SOLUTION & FINALE (Frames {s3_start} - {s3_end}) */}}
+      {{/* SCENE 3: SOLUTION PROTOCOL / PRODUCT SHOWCASE (Frames {s3_start} - {s3_end}) */}}
       {{/* ======================================================== */}}
-      {{frame >= {s3_start} && frame < {s3_end} && (() => {{
-        const spSolCutout = spring({{ frame: frame - {f_s3_cutout}, fps, config: {{ damping: 13, stiffness: 140 }} }});
-        const spFinale = spring({{ frame: frame - {f_s3_finale}, fps, config: {{ damping: 13, stiffness: 140 }} }});
-
-        return (
-          <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
-            <div className="relative w-full max-w-[920px]">
-              <div className="absolute -top-7 left-8 z-30 pointer-events-none">
-                <TapeStrip position="top-left" width={{180}} height={{48}} enableWobble />
-              </div>
-
-              <PhysicalCard
-                tiltX={{3}}
-                tiltY={{-3}}
-                elevation={{45}}
-                impactMs={{{round((s3_start/fps)*1000)}}}
-                className="{card_class}"
-              >
-                {{/* Actionable Protocol Title */}}
-                <h3 className="text-5xl font-black {text_color} leading-tight mt-1">
-                  {s3_c1["text"]}
-                </h3>
-
-                {{/* Solution Cutout Hero — Revealed on Speech Frame {f_s3_cutout} */}}
-                <div
-                  className="w-full flex justify-center items-center my-2 transition-all"
-                  style={{{{
-                    opacity: frame >= {f_s3_cutout} ? Math.min(1, spSolCutout * 1.2) : 0,
-                    transform: `scale(${{frame >= {f_s3_cutout} ? interpolate(spSolCutout, [0, 1], [0.6, 1]) : 0.6}}) translateY(${{frame >= {f_s3_cutout} ? interpolate(spSolCutout, [0, 1], [30, 0]) : 30}}px)`,
-                    pointerEvents: frame >= {f_s3_cutout} ? "auto" : "none",
-                  }}}}
-                >
-                  <ProCutout
-                    assetId="{solution_cutout}"
-                    glowColor="{glow_solution}"
-                    animation="stamp_impact"
-                    width={{420}}
-                    height={{320}}
-                    ghostText="REWIRE"
-                  />
-                </div>
-
-                {{/* Finale Affirmation Statement — Revealed on Speech Frame {f_s3_finale} */}}
-                <div
-                  className="w-full transition-all"
-                  style={{{{
-                    opacity: frame >= {f_s3_finale} ? Math.min(1, spFinale * 1.2) : 0,
-                    transform: `scale(${{frame >= {f_s3_finale} ? interpolate(spFinale, [0, 1], [0.8, 1]) : 0.8}})`,
-                    pointerEvents: frame >= {f_s3_finale} ? "auto" : "none",
-                  }}}}
-                >
-                  <div className="w-full p-5 rounded-2xl bg-black/60 border border-emerald-500/30 flex items-center justify-center gap-3 text-3xl font-black {accent_color} shadow-xl">
-                    <Sparkles className="w-7 h-7 text-emerald-400 shrink-0" />
-                    <span>{s3_c2["text"]}</span>
-                  </div>
-                </div>
-              </PhysicalCard>
-            </div>
-          </div>
-        );
-      }})()}}
+      {scene3_content_jsx}
     </div>
   );
 }};
@@ -697,7 +844,7 @@ export const {pascal_name}Composition: React.FC = () => {{
     return pascal_name
 
 
-def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, format_type: str):
+def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, format_type: str, niche: str = 'self_improvement'):
     root_file = ROOT_DIR / "src" / "Root.tsx"
     thumb_file = ROOT_DIR / "src" / "thumbnails" / "index.tsx"
     render_script = ROOT_DIR / "scripts" / "render_all_thumbnails.js"
@@ -739,18 +886,43 @@ def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, 
     # Register in thumbnails/index.tsx
     thumb_content = thumb_file.read_text(encoding="utf-8")
     if f"{pascal_name}Thumbnail" not in thumb_content:
+        clean_title = clean_thumbnail_title(topic)
+        highlight = clean_title.split()[0] if clean_title.split() else "TRUTH"
+
+        # Channel specific styling - strictly pure themes and badges, NEVER page numbers or PDF names!
+        if niche == "facecam":
+            cat_badge = "BUILD TO SCALE • FACECAM"
+            extra_badge = "STARTUP"
+            theme = "obsidian"
+            sub = "Creator Breakdown & Business Secrets"
+        elif niche == "finance":
+            cat_badge = "APEX WEALTH • FINANCE"
+            extra_badge = "WEALTH"
+            theme = "obsidian"
+            sub = "Wealth Compounding & Early Adult Strategy"
+        elif niche == "health":
+            cat_badge = "BIOMATRIX • HEALTH"
+            extra_badge = "BIOHACK"
+            theme = "biotech_cyan"
+            sub = "Biological Reset & Cellular Protocol"
+        else:
+            cat_badge = "JUDY INSIGHTS • PSYCHOLOGY"
+            extra_badge = "MINDSET"
+            theme = "apple_studio"
+            sub = "High-Retention Psychology Breakdown"
+
         thumb_decl = f"""
 export const {pascal_name}Thumbnail: React.FC = () => (
   <ThumbnailCard
-    title="{topic.upper()}"
-    highlightWord="{topic.split()[0].upper() if topic.split() else 'TRUTH'}"
+    title="{clean_title}"
+    highlightWord="{highlight}"
     highlightColor="rose"
-    subtitle="High-Retention Psychology Breakdown"
-    categoryBadge="PSYCHOLOGY"
+    subtitle="{sub}"
+    categoryBadge="{cat_badge}"
     characterPose="character_fullbody_pointing.png"
-    theme="apple_studio"
+    theme="{theme}"
     aspectRatio="{ "9:16" if format_type == "shorts" else "16:9" }"
-    extraBadge="MINDSET"
+    extraBadge="{extra_badge}"
   />
 );
 """
@@ -816,43 +988,133 @@ async def main():
     parser = argparse.ArgumentParser(description="RightClips Autonomous Video Engine")
     parser.add_argument("--name", required=True, help="Clip identifier (e.g. discipline)")
     parser.add_argument("--topic", default=None, help="Display title / topic")
-    parser.add_argument("--script", required=True, help="Voiceover script text")
+    parser.add_argument("--script", default=None, help="Voiceover script text (or topic can auto-generate it)")
     parser.add_argument("--format", choices=["shorts", "longform"], default="shorts")
     parser.add_argument("--voice", default="en-US-AvaMultilingualNeural")
+    parser.add_argument("--product", default=None, help="Product PDF filename (e.g. Photon.pdf)")
+    parser.add_argument("--product-page", type=int, default=None, help="Exact PDF page number to show (e.g. 14)")
+    parser.add_argument("--facecam", default=None, help="Path to creator facecam video file")
+    parser.add_argument("--video", default=None, help="Alias for --facecam")
+    parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
 
     args = parser.parse_args()
     
+    raw_script = args.script
+    raw_topic = args.topic or ""
+
+    # Check for {no meta} tag across inputs
+    has_no_meta = bool(re.search(r"\{\s*no\s*meta\s*\}", f"{raw_topic} {raw_script or ''} {args.name}", re.IGNORECASE))
+
+    # If no script provided, autonomously generate it from topic
+    if not raw_script and raw_topic:
+        print(f"✍️  [Scriptwriter] No script provided. Autonomously generating script for topic: '{raw_topic}'...")
+        gen_res = generate_script_and_metadata(raw_topic)
+        raw_script = gen_res["formatted_output"]
+        print(f"      Generated Mode {gen_res['mode']} script ({gen_res['word_count']} words)")
+    elif not raw_script:
+        raise ValueError("Must provide either --script or --topic to generate a video!")
+
+    # Parse [METADATA] and [VOICEOVER] blocks if present
+    meta_pdf, meta_page, meta_title, vo_text = parse_script_blocks(raw_script)
+
+    product_pdf = args.product or meta_pdf
+    product_page = args.product_page or meta_page
+
+    # If {no meta} was requested, strictly disable product linking
+    if has_no_meta:
+        product_pdf = None
+        product_page = None
+        product_meta = None
+    else:
+        # Also check inline {product: ...} tag
+        product_tag_pattern = re.compile(
+            r"\{\s*(?:product|pdf)\s*:\s*([^,}]+?)(?:\.pdf)?\s*,\s*page\s*:\s*(\d+)\s*\}",
+            re.IGNORECASE,
+        )
+        tag_match = product_tag_pattern.search(f"{raw_topic} {raw_script}")
+        if tag_match:
+            if not product_pdf:
+                product_pdf = tag_match.group(1).strip()
+            if not product_page:
+                product_page = int(tag_match.group(2).strip())
+
+        product_meta = None
+        if product_pdf and product_page:
+            try:
+                product_meta = extract_product_page(product_pdf, product_page)
+                print(f"📄 [Product] Extracted {product_meta['pdf_name']} Page {product_meta['page']} -> {product_meta['public_path']}")
+            except Exception as e:
+                print(f"⚠️  [Product] Warning: Failed to extract product page: {e}")
+
     # Detect channel niche from raw topic & script before sanitizing
-    raw_combined = f"{args.topic or ''} {args.script} {args.name}".lower()
-    if "{finance}" in raw_combined:
+    raw_combined = f"{raw_topic} {raw_script} {args.name}".lower()
+    video_source = args.facecam or args.video
+    is_facecam = bool(video_source) or "{facecam}" in raw_combined or args.style == "facecam"
+
+    if is_facecam:
+        channel_voice = "en-US-AvaMultilingualNeural"
+    elif "{finance}" in raw_combined or args.style == "finance":
         channel_voice = "en-US-AndrewMultilingualNeural"
-    elif "{health}" in raw_combined:
+    elif "{health}" in raw_combined or args.style == "health":
         channel_voice = "en-US-BrianMultilingualNeural"
     else:
         channel_voice = "en-US-AvaMultilingualNeural"
 
     voice_to_use = args.voice if args.voice and args.voice != "en-US-AvaMultilingualNeural" else channel_voice
 
-    clean_script = sanitize_tags(args.script)
-    clean_topic = sanitize_tags(args.topic) if args.topic else None
+    clean_script = sanitize_tags(vo_text)
+    clean_topic = sanitize_topic(args.topic) if args.topic else None
+
+    # Audit script hygiene
+    is_valid, issues = check_script_hygiene(clean_script, is_mode_a=bool(product_meta))
+    if not is_valid:
+        print("⚠️  [Script Hygiene Advisory]:")
+        for iss in issues:
+            print(f"      - {iss}")
 
     name = sanitize_tags(args.name)
     name = re.sub(r"[^a-z0-9_]+", "_", name.lower()).strip("_")
     topic = clean_topic or name.replace("_", " ").title()
+    
+    # Determine niche string
+    raw_niche_check = f"{raw_topic} {raw_script}".lower()
+    if is_facecam:
+        detected_niche = "facecam"
+    elif "{finance}" in raw_niche_check or args.style == "finance":
+        detected_niche = "finance"
+    elif "{health}" in raw_niche_check or args.style == "health":
+        detected_niche = "health"
+    else:
+        detected_niche = "self_improvement"
 
     audio_path = ROOT_DIR / "public" / name / "voiceover.mp3"
     transcript_path = ROOT_DIR / "src" / "clips" / name / "transcript.json"
 
-    # Step 1: Synthesize
-    await synthesize_speech(clean_script, audio_path, voice_to_use)
+    # Step 1: Audio setup (Extract from facecam or Synthesize TTS)
+    if is_facecam and video_source:
+        import shutil
+        print(f"🎬 [1/4] Extracting native voice audio from video: {video_source}...")
+        audio_path.parent.mkdir(parents=True, exist_ok=True)
+        dest_video = ROOT_DIR / "public" / name / "facecam.mp4"
+        shutil.copy2(str(video_source), str(dest_video))
+        cmd = [
+            "ffmpeg", "-y", "-i", str(video_source),
+            "-vn", "-ar", "44100", "-ac", "2", "-b:a", "192k",
+            str(audio_path)
+        ]
+        subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        print(f"      Native master audio saved to: {audio_path}")
+        print(f"      Facecam video saved to: {dest_video}")
+    else:
+        await synthesize_speech(clean_script, audio_path, voice_to_use)
 
     # Step 2: Transcribe
     words, duration_sec = transcribe_audio(audio_path, transcript_path)
 
     # Step 3: Scaffold & Register
-    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script, words)
-    register_composition_and_thumbnail(name, pascal_name, topic, args.format)
+    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script, words, product_meta)
+    register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche)
 
     # Step 4: Render
     if not args.no_render:

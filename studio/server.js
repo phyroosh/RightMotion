@@ -2085,6 +2085,90 @@ app.post('/api/pipeline/suggest', (req, res) => {
   res.json({ success: true, suggestions: newTopics });
 });
 
+// =========================================================
+// PRODUCTS ENGINE API
+// =========================================================
+const PRODUCTS_DIR = path.resolve(__dirname, '..', 'Products');
+const PUBLIC_PRODUCTS_DIR = path.resolve(__dirname, '..', 'public', 'products');
+
+app.use('/products', express.static(PUBLIC_PRODUCTS_DIR));
+
+// Helper to get PDF page count using pdfinfo
+function getPdfPageCount(pdfPath) {
+  try {
+    const { execSync } = require('child_process');
+    const out = execSync(`pdfinfo "${pdfPath}"`, { encoding: 'utf-8' });
+    const match = out.match(/Pages:\s+(\d+)/i);
+    if (match) return parseInt(match[1], 10);
+  } catch (e) {}
+  return null;
+}
+
+// 1. GET /api/products - List all product PDFs in Products/
+app.get('/api/products', (req, res) => {
+  if (!fs.existsSync(PRODUCTS_DIR)) {
+    return res.json({ products: [] });
+  }
+
+  try {
+    const files = fs.readdirSync(PRODUCTS_DIR).filter(f => f.toLowerCase().endsWith('.pdf'));
+    const products = files.map(file => {
+      const fullPath = path.join(PRODUCTS_DIR, file);
+      const stat = fs.statSync(fullPath);
+      const stem = path.basename(file, path.extname(file));
+      const pageCount = getPdfPageCount(fullPath);
+
+      // Check existing extracted pages in public/products/<stem>
+      const cachedPages = [];
+      const stemDir = path.join(PUBLIC_PRODUCTS_DIR, stem);
+      if (fs.existsSync(stemDir)) {
+        const pageFiles = fs.readdirSync(stemDir).filter(f => f.startsWith('page_') && f.endsWith('.png'));
+        pageFiles.forEach(pf => {
+          const m = pf.match(/page_(\d+)\.png/);
+          if (m) cachedPages.push(parseInt(m[1], 10));
+        });
+        cachedPages.sort((a, b) => a - b);
+      }
+
+      return {
+        name: file,
+        stem,
+        sizeBytes: stat.size,
+        pageCount,
+        cachedPages,
+        previewUrl: cachedPages.length > 0 ? `/products/${stem}/page_${cachedPages[0]}.png` : null
+      };
+    });
+
+    res.json({ products });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 2. POST /api/products/extract - Extract a specific page on demand
+app.post('/api/products/extract', (req, res) => {
+  const { pdf, page } = req.body;
+  if (!pdf || !page) {
+    return res.status(400).json({ error: 'Missing pdf or page number' });
+  }
+
+  const { execSync } = require('child_process');
+  try {
+    const scriptPath = path.resolve(__dirname, '..', 'scripts', 'extract_product_page.py');
+    const out = execSync(`python3 "${scriptPath}" --pdf "${pdf}" --page ${page}`, { encoding: 'utf-8' });
+    const stem = path.basename(pdf, path.extname(pdf));
+    res.json({
+      success: true,
+      message: out.trim(),
+      publicPath: `products/${stem}/page_${page}.png`,
+      url: `/products/${stem}/page_${page}.png`
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`\n========================================================`);
   console.log(`🚀 RightClips Studio is running at: http://localhost:${PORT}`);

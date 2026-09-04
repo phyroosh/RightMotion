@@ -29,7 +29,10 @@ studio/uploads.json
 studio/pipeline.json
 
 # Generated Audio Voiceovers & Transcripts (Keep public/assets and public/audio)
-public/*/voiceover.mp3
+public/*/*.mp3
+public/**/*.mp3
+public/*/facecam.mp4
+public/**/*.mp4
 src/clips/*/transcript.json
 
 

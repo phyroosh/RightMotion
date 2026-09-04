@@ -549,3 +549,78 @@ export const CortisolAwakeningRoutineThumbnail: React.FC = () => (
   />
 );
 
+
+export const The48HourDopamineProtocolThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="THE 48-HOUR DOPAMINE PROTOCOL"
+    highlightWord="THE"
+    highlightColor="rose"
+    subtitle="High-Retention Psychology Breakdown"
+    categoryBadge="PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
+
+export const TheMinimumViableDayThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="THE MINIMUM VIABLE DAY"
+    highlightWord="THE"
+    highlightColor="rose"
+    subtitle="High-Retention Psychology Breakdown"
+    categoryBadge="PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
+
+export const MapTheGapThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="STOP SAYING YES (MAP THE GAP)"
+    highlightWord="STOP SAYING YES"
+    highlightColor="rose"
+    subtitle="Why People-Pleasing Drains You • Page 6 Blueprint"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="PHOTON PROTOCOL"
+  />
+);
+
+export const DiagramYourLoopThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="DIAGRAM YOUR LOOP"
+    highlightWord="DIAGRAM"
+    highlightColor="rose"
+    subtitle="Break Autopilot Scrolling & Interrupt Cues"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_fullbody_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="HABITS"
+  />
+);
+
+
+export const YouAreNotAloneThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="YOU ARE NOT ALONE"
+    highlightWord="NOT ALONE"
+    highlightColor="rose"
+    subtitle="When Life Feels Completely Out Of Control"
+    categoryBadge="JUDY INSIGHTS • MINDSET"
+    characterPose="character_fullbody_open.png"
+    characterScale={1.05}
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="PERSPECTIVE"
+  />
+);
+
+export { BuildToScaleTHFThumbnail } from "./BuildToScaleTHFThumbnail";
+

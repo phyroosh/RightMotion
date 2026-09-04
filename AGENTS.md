@@ -6,19 +6,21 @@ This document is the **authoritative specification** for any AI Agent (Antigravi
 
 ## 🏷️ Universal Bracket-Tag Channel Routing (MANDATORY AGENT RULE)
 
-Every video script submitted to RightClips is tagged with one of three channel niche brackets:
+Every video script submitted to RightClips is tagged with one of four channel niche brackets:
 - **`{Self Improvement}`** (or `{Self Improvment}`) $\rightarrow$ Judy Insights Channel
 - **`{Finance}`** $\rightarrow$ Apex Wealth / Capital Markets Channel
 - **`{Health}`** $\rightarrow$ BioMatrix / Longevity & Cellular Biology Channel
+- **`{facecam}`** $\rightarrow$ Talking-Head / Creator Facecam Channel
 
 > [!CRITICAL]
 > **MANDATORY AGENT STOP-AND-ASK RULE**:
-> If the user submits a script prompt **WITHOUT** `{Finance}`, `{Self Improvement}`, or `{Health}`:
+> If the user submits a script prompt **WITHOUT** `{Finance}`, `{Self Improvement}`, `{Health}`, or `{facecam}`:
 > **The AI Agent MUST HALT immediately and ask the user which style they want before taking any action:**
 > *"Which channel editing style would you like me to use for this video?*
 > *1. `{Self Improvement}` (Judy Insights: Apple Studio Light mesh canvas, psychology, mindset, Judy presenter)*
 > *2. `{Finance}` (Apex Wealth: Rich Dark Obsidian & Cyber-Gold/Emerald, high-velocity financial graphics)*
-> *3. `{Health}` (BioMatrix: Deep Bio-Tech Navy & Cyber-Mint/Cyan clinical luxury, biometric telemetry)*"
+> *3. `{Health}` (BioMatrix: Deep Bio-Tech Navy & Cyber-Mint/Cyan clinical luxury, biometric telemetry)*
+> *4. `{facecam}` (Talking-Head / Creator Facecam: Dynamic zoom punch-ins, real speaker video/audio, B-roll overlays, kinetic captions)*"
 >
 > DO NOT guess or assume the style if the tag is missing!
 
@@ -28,6 +30,143 @@ If the user includes **`{no topics}`** (or **`{no topic}`**, case-insensitive) a
 1. **ZERO Topic Suggestions**: The AI Agent is strictly forbidden from suggesting, pitching, or appending follow-up video topics, future content ideas, or next-step topic lists. Do NOT suggest new topics this time!
 2. **Automatic Sanitization**: The agent and generation scripts MUST strip `{no topics}` or `{no topic}` from the prompt text, topic name, canvas cards, voiceover scripts, and metadata so the modifier never leaks into video assets.
 3. **Laser-Focused Execution**: Focus 100% of effort purely on generating, animating, sound-designing, auditing, and delivering the single requested video.
+
+---
+
+### 🧠 Universal '{no meta}' Modifier Tag & Direct Topic Protocol (ZERO CHATGPT ROUND-TRIPS)
+
+> [!CRITICAL]
+> **NEVER SEND THE USER TO CHATGPT OR ASK FOR A SCRIPT!**
+> Users can now directly submit raw topics into RightClips (e.g. `{Self Improvement} The Fear of Being Caught Trying` or `{Self Improvement} {no meta} Social Overthinking at 2 AM`).
+> The AI Agent acts directly as the expert short-form scriptwriter, PDF researcher, asset producer, and video editor all in one unified flow!
+
+#### 1. Mode A: Standard (Product-Linked Video) — Default when `{no meta}` is ABSENT:
+1. **Autonomously Scan Product PDFs**:
+   - Inspect `Products/*.pdf` (e.g. `Photon.pdf` or via `python3 scripts/pdf_topic_matcher.py --topic "<topic>"`).
+   - Identify the exact matching chapter and exercise:
+     - Page 4: *Trace the Wire* (conditioning, inherited beliefs)
+     - Page 6: *Map the Gap* (You vs. The Mask, social performance vs alone)
+     - Page 8: *Diagram Your Loop* (bad habits, phone loops, dopamine autopilot)
+     - Page 10: *Write the Identity, Then the Proof* (neuroplasticity, identity votes)
+     - Page 12: *The Four Layers* (values, environment, systems, feedback)
+     - Page 14: *The Minimum Viable Day* (low energy survival, consistency, emergency baseline)
+2. **Extract Visual Proof**:
+   - Run `python3 scripts/extract_product_page.py <pdf> <page_num>` to generate the retina screenshot in `public/products/<stem>/page_<num>.png`.
+3. **Generate `[METADATA]` Block**:
+   ```
+   [METADATA]
+   product_file: Photon.pdf
+   page_number: 8
+   exercise_title: Diagram Your Loop
+
+   [VOICEOVER]
+   <voiceover script>
+   ```
+4. **MANDATORY SILENT PDF RULE (CRITICAL)**:
+   - **NEVER speak the PDF filename** (never say "Photon" or "Photon.pdf" aloud).
+   - **NEVER speak the page number** (never say "on page 8" or "page 14" aloud).
+   - *Why*: RightClips handles the visual proof automatically by displaying the real designed page screenshot on screen via `<ProductPageShowcase />`. The voiceover only references it conversationally (e.g. *"I mapped out the full breakdown on the worksheet below so you can audit your own habits. Grab the guide below..."*).
+
+#### 2. Mode B: Organic / Growth Video — Triggered when `{no meta}` IS PRESENT:
+1. **STRICTLY SKIP ALL PDF SEARCH**:
+   - Do NOT inspect any PDF in `Products/`, do NOT search for product content, and do NOT output a `[METADATA]` block.
+2. **Output ONLY the `[VOICEOVER]` block**:
+   ```
+   [VOICEOVER]
+   <clean voiceover script>
+   ```
+3. **Organic Community CTA**:
+   - Replace the worksheet mention with a grounded channel/subscriber invitation (e.g. *"If you're trying to figure yourself out without all the noise, stick around. We unpack these patterns every day."* or *"Follow along if you want more breakdowns on how your brain actually works."*).
+4. **Sanitization**:
+   - Strip `{no meta}` from all prompt text, titles, canvas text, and audio synthesis so the tag never appears in video assets.
+
+#### 3. Judy Scriptwriting Persona & Quality Standards:
+- **Persona**: Female anime-style host (Judy) with a soft, warm, intelligent, emotionally grounded voice ("smart older sister" or "caring friend").
+- **Length & Pacing**: Strict **75–90 words** (~30–35s, hard cap 100 words).
+- **Structure**: Hook (0-3s pattern interrupt) $\rightarrow$ Psychological/Biological Mechanism (3-25s) $\rightarrow$ Actionable Shift & Ending (25-35s).
+- **PERMANENT BAN ON AI CLICHÉS**:
+  - ❌ *"Here's the thing..."*
+  - ❌ *"The truth is..."*
+  - ❌ *"You're not lazy, you're..."*
+  - ❌ *"What most people don't realize is..."*
+  - ❌ *"The tricky part is..."*
+  - ❌ *"That's because..."*
+- **PERMANENT BAN ON SALES HYPE**:
+  - ❌ *"masterpiece"*, *"life-changing"*, *"must-read"*, *"buy now"*, *"worth every cent"*, *"game-changer"*
+
+---
+
+### 📄 Universal '{product: <name>, page: <num>}' Showcase Tag (MANDATORY AGENT RULE)
+
+> [!IMPORTANT]
+> **PDF METADATA IS STRICTLY OPTIONAL — DEFAULT TO NORMAL RENDERING!**
+> There will **NOT** always be PDF metadata or page numbers present in the script. Most video requests will be standard, high-impact videos without any attached PDF.
+> - When PDF metadata (`{product: ...}`) is **ABSENT**:
+>   - Render 100% normally using the standard Cutout Asset Engine (`ProCutout` props, physical cards, stickers, meters, graphs).
+>   - **NEVER** search, hunt, or fail for missing PDFs or product screenshots! Default purely to standard video production.
+> - When PDF metadata is **EXPLICITLY PRESENT**:
+>   - ONLY then look at the PDF in `Products/` or `public/products/`, extract the target page or focused paragraph screenshot, and showcase it on screen.
+
+If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** (or CLI `--product Photon.pdf --product-page 14`):
+1. **The Strategic Purpose (The Goal)**:
+   - **Visual Proof**: Showing the real, designed page from the PDF makes the product feel tangible and real instead of abstract advice. Viewers instantly see that a structured, professional solution already exists.
+   - **Higher Conversions**: When viewers actually see the dark-mode layout and specific exercise on screen, trust goes up and click-through rates to buy the PDF increase significantly.
+   - **Seamless CTA**: It visually backs up Judy’s voiceover the exact second she references the worksheet, making the transition feel like a natural feature of the video rather than an ad.
+2. **Instant Single-Page Extraction**:
+   - The engine checks `Products/<name>.pdf` and extracts **only** the target page into `public/products/<name>/page_<num>.png` using `pdftoppm` at retina resolution (220 DPI).
+   - Automatically detects isolated paragraph/exercise blocks to produce a focused, readable screenshot (`page_<num>_paragraph.png`).
+   - NEVER parse or read the entire PDF.
+3. **Visual Presentation Requirements**:
+   - Use `ProductPageShowcase` component from `../../components/ProductPageShowcase`.
+   - Must render with physical 3D card tilt (`PhysicalCard`), anchored masking tape strip (`TapeStrip`), animated specular glass glare sweep, and floating telemetry badge (`PAGE 14 • WORKSHEET PROTOCOL`).
+   - Timed to reveal on the exact spoken frame where the host introduces the worksheet or protocol.
+4. **Automatic Sanitization**:
+   - Strip `{product: ..., page: ...}` from prompt text, card titles, and speech synthesis so the tag never leaks into spoken voiceover or UI text.
+
+---
+
+### 🖼️ ZERO Page Numbers or PDF Names on Thumbnails (MANDATORY AGENT RULE)
+
+> [!CRITICAL]
+> **THUMBNAILS MUST NEVER INCLUDE PAGE NUMBERS OR PDF NAMES!**
+> Having `(PAGE 7)`, `PAGE 14`, or `PHOTON PROTOCOL` on a YouTube Short / Instagram Reel thumbnail makes zero sense to prospective viewers and severely hurts CTR.
+> 1. **Pure Viral Hooks Only**: Thumbnail titles must be 100% focused on the emotional/psychological hook (e.g., `DIAGRAM YOUR LOOP`, `THE MINIMUM VIABLE DAY`, `THE DOPAMINE RESET`).
+> 2. **Strict Sanitization**: AI Agents and generators MUST strip all page mentions:
+>    - `(Page <num>)`, `[Page <num>]`, `Page <num>`, `Pg. <num>`, `p. <num>`
+>    - `.pdf` filenames (e.g. `Photon.pdf`)
+> 3. **Badge Hygiene**: Thumbnail category badges and extra badges must strictly reflect channel niches (`PSYCHOLOGY`, `MINDSET`, `WEALTH`, `BIOHACK`), NEVER a product name or page reference.
+
+---
+
+### 🎥 Autonomous Entity B-Roll & Dynamic Host Slide-Down Protocol (MANDATORY FACECAM RULE)
+
+> [!CRITICAL]
+> **EVERY FACECAM VIDEO MUST PAIR NAMED ENTITIES WITH REAL B-ROLL PROOF AND SMOOTH HOST SLIDE-DOWN MOTION!**
+> Viewers trust visual proof. When the host mentions a specific person, company, hotel, location, acquisition, or valuation, the AI Agent MUST autonomously fetch/generate the media and execute the split-screen slide.
+>
+> 1. **Entity Identification**:
+>    - Scan the spoken script for named entities (e.g., *Ankit Sahni*, *The Hazelnut Factory*, *Bikaji ₹131 Crore acquisition*, *Lucknow, UP*, *Specialty Coffee*, *Artisanal Bakery*).
+> 2. **Autonomous Fetching & Generation (`scripts/fetch_entity_media.py`)**:
+>    - Use `python3 scripts/fetch_entity_media.py`:
+>      - Real news clipping graphic with highlighted snippet (`--news-clipping --headline "..." --highlight "..."`)
+>      - Search Engine AI Overview proof card (`--search-overview --query "..." --highlight "..."`)
+>      - Direct URL download (`--url "<image_url>"`)
+>    - Save all assets in `public/<clip_name>/broll/<entity_name>.png`.
+> 3. **Dynamic Host Slide-Down Motion (`slideDownBeats`)**:
+>    - Whenever B-roll is visible, the host video MUST smoothly slide down into the lower half:
+>      ```tsx
+>      const slideDownBeats: SlideBeat[] = [
+>        { startFrame: 30, endFrame: 115, offsetY: 360 },
+>        { startFrame: 155, endFrame: 250, offsetY: 360 },
+>      ];
+>      ```
+>    - `translateY: 340px - 360px` centers the speaker's head, mic, and gesturing hands in the bottom 50% without awkward occlusion.
+>    - When the B-roll beat concludes, the host video smoothly springs back up to the centered A-roll position (`translateY: 0`).
+> 4. **Top B-Roll Component (`<FacecamBRoll />`)**:
+>    - Renders in the top region (`top-[6%] h-[45%] rounded-[32px] border-4 border-white/20 shadow-2xl`).
+>    - Includes subtle Ken Burns slow-zoom (`1.0x -> 1.08x`), status badges (`ANKIT SAHNI • FOUNDER`), and optional animated spotlight circles (`spotlightCircle={true}`).
+> 5. **Caption Safe Zone**:
+>    - Kinetic captions sit at `bottom-[18%]`, leaving the chest zone and B-roll safe zones completely clear and harmonious.
 
 ---
 
@@ -213,17 +352,17 @@ Every video produced or ideated in RightClips must target high-retention, deeply
 
 ### 🎨 Channel Design Systems Matrix
 
-| Feature | `{Self Improvement}` (Judy Insights) | `{Finance}` (Apex Wealth) | `{Health}` (BioMatrix) |
-| :--- | :--- | :--- | :--- |
-| **Canvas Background** | Pure Studio Off-White (`#f8fafc`) + warm amber & cognitive blue living orbs | Ultra-Rich Deep Obsidian Carbon (`#030712`, `#0b0f19`) + gold/emerald grid | Deep Bio-Tech Obsidian Navy (`#060913`, `#0a1124`) + cellular neon glow |
-| **Color Accents** | Electric Blue (`#0071e3`), Warm Amber (`#f59e0b`), Rose (`#e11d48`) | Liquid Emerald (`#10b981`), Cyber-Gold (`#f59e0b`), Platinum Ice White | Cyber Mint (`#10b981`), Electric Cyan (`#06b6d4`), Vital Coral (`#f43f5e`) |
-| **Pacing / Tempo** | `rate="+8%"` (Crisp articulate retention) | `rate="+11%"` (High-velocity, fast-paced Wall Street drive) | `rate="+8%"` (Authoritative, dense clinical retention) |
-| **Beat Transitions** | `snap_up` / `zoom_out` (2.5s - 3.5s beats) | `whip_left` / `snap_up` (1.8s - 2.5s rapid cuts) | `snap_up` / `zoom_in` (2.2s - 3.0s telemetry shifts) |
-| **3D Camera** | `dramatic_swoop` (Gentle documentary swoop with ReadabilityLock) | `isometric_shelf` + `impact_shake` (High-torque perspective sweeps) | `isometric_shelf` (Clinical telemetry HUD angle) |
-| **Foley & Sound** | Sharpie doodles, masking tape snaps, light clicks | Heavy cash thuds, stock ticker chimes, cinematic sub-bass drops | Heartbeat pulses, digital telemetry beeps, synaptic sparks |
-| **BGM Genre** | Acoustic piano & light ambient documentary | Dark, driving, minimalist synth pulse | Deep ambient biological drone & rhythmic bio-pulse |
-| **Hero Graphics** | Cutout props, masking tape, hand-drawn doodles | Compounding curves, wealth meters, cash flow trees, ROI tickers | Biometric rings, circadian clock, cortisol curve, metabolic gauge |
-| **Thumbnail Theme** | `theme="apple_studio"` | `theme="obsidian"` (or `obsidian_gold`) | `theme="obsidian"` (or `biotech_cyan`) |
+| Feature | `{Self Improvement}` (Judy Insights) | `{Finance}` (Apex Wealth) | `{Health}` (BioMatrix) | `{facecam}` (Talking-Head Creator) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Canvas Background** | Pure Studio Off-White (`#f8fafc`) + warm amber & cognitive blue living orbs | Ultra-Rich Deep Obsidian Carbon (`#030712`, `#0b0f19`) + gold/emerald grid | Deep Bio-Tech Obsidian Navy (`#060913`, `#0a1124`) + cellular neon glow | Real Creator Video Layer (`<OffthreadVideo />`) + cinematic vignette & studio framing |
+| **Color Accents** | Electric Blue (`#0071e3`), Warm Amber (`#f59e0b`), Rose (`#e11d48`) | Liquid Emerald (`#10b981`), Cyber-Gold (`#f59e0b`), Platinum Ice White | Cyber Mint (`#10b981`), Electric Cyan (`#06b6d4`), Vital Coral (`#f43f5e`) | Cyber-Gold (`#fbbf24`), Electric Cyan (`#22d3ee`), Emerald (`#10b981`), Pure White |
+| **Pacing / Tempo** | `rate="+8%"` (Crisp articulate retention) | `rate="+11%"` (High-velocity, fast-paced Wall Street drive) | `rate="+8%"` (Authoritative, dense clinical retention) | Natural Creator Voice Cadence + Rapid 1.0x to 1.18x Punch-in Jump Cuts |
+| **Beat Transitions** | `snap_up` / `zoom_out` (2.5s - 3.5s beats) | `whip_left` / `snap_up` (1.8s - 2.5s rapid cuts) | `snap_up` / `zoom_in` (2.2s - 3.0s telemetry shifts) | Digital Zoom Punch-ins (`whoosh_fast`), B-roll pop-ins (`impact_hit`) |
+| **3D Camera** | `dramatic_swoop` (Gentle documentary swoop with ReadabilityLock) | `isometric_shelf` + `impact_shake` (High-torque perspective sweeps) | `isometric_shelf` (Clinical telemetry HUD angle) | Dynamic 2D/3D Facecam Framing with spring-cushioned digital punch-ins |
+| **Foley & Sound** | Sharpie doodles, masking tape snaps, light clicks | Heavy cash thuds, stock ticker chimes, cinematic sub-bass drops | Heartbeat pulses, digital telemetry beeps, synaptic sparks | Camera shutter clicks, whoosh punch-ins, cash register hits, sparkle bells |
+| **BGM Genre** | Acoustic piano & light ambient documentary | Dark, driving, minimalist synth pulse | Deep ambient biological drone & rhythmic bio-pulse | Motivational upbeat lo-fi / modern electronic pulse ducked to `0.10 - 0.12` |
+| **Hero Graphics** | Cutout props, masking tape, hand-drawn doodles | Compounding curves, wealth meters, cash flow trees, ROI tickers | Biometric rings, circadian clock, cortisol curve, metabolic gauge | Floating metric badges, 3-in-1 comparison cards, tape strips, kinetic pills |
+| **Thumbnail Theme** | `theme="apple_studio"` | `theme="obsidian"` (or `obsidian_gold`) | `theme="obsidian"` (or `biotech_cyan`) | High-energy speaker freeze-frame + bold viral hook & cutout badge |
 
 ---
 
