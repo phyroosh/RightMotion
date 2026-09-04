@@ -300,7 +300,7 @@ def align_concepts(concepts, words_list, fps=30):
         })
     return aligned
 
-def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None):
+def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
     print(f"🎨 [3/4] Scaffolding Remotion clip files with Speech-Synchronized Progressive Reveal in src/clips/{name}/...")
@@ -434,17 +434,17 @@ export const {pascal_name}Background: React.FC = () => {{
     s1_start = 0
     s2_start = s2_items[0]["startFrame"]
     s3_start = s3_items[0]["startFrame"]
-    s3_end = total_frames
-
+    
     # Timings for Scene 1 elements:
     c1_hook_text = s1_items[0]["text"]
     c1_problem_text = s1_items[1]["text"] if len(s1_items) > 1 else topic
     f_c1_cutout = s1_items[1]["startFrame"] if len(s1_items) > 1 else max(12, round(s2_start * 0.4))
     f_c1_metric = max(f_c1_cutout + 12, round(s2_start * 0.75))
 
-    # Presenter visibility: Enters intro, and re-enters ONLY for the closing 2.5s outro
     intro_ms = min(3500, round((s1_items[-1]["startFrame"] / fps) * 1000))
     outro_ms = max(intro_ms + 3000, round(((total_frames - 75) / fps) * 1000))
+    outro_frame = round((outro_ms / 1000) * fps)
+    s3_end = outro_frame if outro_frame > s3_start + 30 else total_frames
 
     # 3. Presenter.tsx
     pres_code = f"""import React from "react";
@@ -470,7 +470,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     {{ timeMs: {round(duration_sec * 1000)}, pose: "fullbody_open", scale: 1.04, y: -6, rotate: 0, opacity: 1 }},
   ];
 
-  const isIntro = currentMs >= 0 && currentMs < {intro_ms};
+  const isIntro = {"false" if illustration_path else f"currentMs >= 0 && currentMs < {intro_ms}"};
   const isFinale = currentMs >= {outro_ms};
   const isPresenterActive = isIntro || isFinale;
 
@@ -479,7 +479,6 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
 
   return (
     <div className="absolute inset-0 pointer-events-none z-30 flex flex-col items-center justify-end overflow-hidden">
-      <div className="absolute inset-0 backdrop-blur-2xl bg-white/20 pointer-events-none" />
       <CharacterKeyframeAnimator keyframes={{keyframes}} currentMs={{currentMs}} baseHeight={{1550}} />
     </div>
   );
@@ -620,30 +619,27 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     s2_spring_str = "\n        ".join(s2_spring_defs)
     s2_points_str = "".join(s2_points_jsx)
 
-    canvas_code = f"""import React from "react";
-import {{ useCurrentFrame, useVideoConfig, spring, interpolate }} from "remotion";
-import {{ PhysicalCard }} from "../../components/physics/PhysicalCard";
-import {{ TapeStrip }} from "../../components/collage/TapeStrip";
-import {{ ProCutout }} from "../../components/ProCutout";
-import {{ ProductPageShowcase }} from "../../components/ProductPageShowcase";
-import {{ Sparkles, Zap, ArrowRight }} from "lucide-react";
-import {{ WordTimestamp }} from "../../types";
-
-interface CanvasProps {{
-  transcript: WordTimestamp[];
-}}
-
-export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
-  const frame = useCurrentFrame();
-  const {{ fps }} = useVideoConfig();
-
-  return (
-    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none">
-      
-      {{/* ======================================================== */}}
-      {{/* SCENE 1: THE ROOT FRICTION & HOOK (Frames {s1_start} - {s2_start}) */}}
-      {{/* ======================================================== */}}
-      {{frame >= {s1_start} && frame < {s2_start} && (() => {{
+    if illustration_path:
+        s1_impact_ms = round((s1_start / fps) * 1000)
+        scene1_content_jsx = f"""{{frame >= {s1_start} && frame < {s2_start} && (
+        <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
+          <CinematicIllustrationCard
+            imageSrc="{illustration_path}"
+            title="{c1_hook_text}"
+            subtitle="{c1_problem_text}"
+            badgeLabel="COGNITIVE DIAGNOSTIC // 01"
+            accentColor="{accent_choice}"
+            entranceFrame={{{s1_start}}}
+            highlightFrame={{{f_c1_cutout}}}
+            width={{920}}
+            height={{520}}
+            tiltX={{3}}
+            tiltY={{-3}}
+          />
+        </div>
+      )}}"""
+    else:
+        scene1_content_jsx = f"""{{frame >= {s1_start} && frame < {s2_start} && (() => {{
         const spCutout = spring({{ frame: frame - {f_c1_cutout}, fps, config: {{ damping: 13, stiffness: 140 }} }});
         const spMetric = spring({{ frame: frame - {f_c1_metric}, fps, config: {{ damping: 13, stiffness: 140 }} }});
 
@@ -706,7 +702,33 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
             </div>
           </div>
         );
-      }})()}}
+      }})()}}"""
+
+    canvas_code = f"""import React from "react";
+import {{ useCurrentFrame, useVideoConfig, spring, interpolate }} from "remotion";
+import {{ PhysicalCard }} from "../../components/physics/PhysicalCard";
+import {{ TapeStrip }} from "../../components/collage/TapeStrip";
+import {{ ProCutout }} from "../../components/ProCutout";
+import {{ ProductPageShowcase }} from "../../components/ProductPageShowcase";
+import {{ CinematicIllustrationCard }} from "../../components/CinematicIllustrationCard";
+import {{ Sparkles, Zap, ArrowRight }} from "lucide-react";
+import {{ WordTimestamp }} from "../../types";
+
+interface CanvasProps {{
+  transcript: WordTimestamp[];
+}}
+
+export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
+  const frame = useCurrentFrame();
+  const {{ fps }} = useVideoConfig();
+
+  return (
+    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none">
+      
+      {{/* ======================================================== */}}
+      {{/* SCENE 1: THE ROOT FRICTION & HOOK (Frames {s1_start} - {s2_start}) */}}
+      {{/* ======================================================== */}}
+      {scene1_content_jsx}
 
       {{/* ======================================================== */}}
       {{/* SCENE 2: THE BREAKDOWN (REVEALED ONE-BY-ONE AS SPOKEN!)  */}}
@@ -996,6 +1018,7 @@ async def main():
     parser.add_argument("--facecam", default=None, help="Path to creator facecam video file")
     parser.add_argument("--video", default=None, help="Alias for --facecam")
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
+    parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
 
     args = parser.parse_args()
@@ -1113,7 +1136,19 @@ async def main():
     words, duration_sec = transcribe_audio(audio_path, transcript_path)
 
     # Step 3: Scaffold & Register
-    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script, words, product_meta)
+    illustration_path = args.illustration
+    if not illustration_path:
+        possible_locs = [
+            ROOT_DIR / "public" / name / "assets" / "scene_illustration.png",
+            ROOT_DIR / "public" / name / "scene_illustration.png",
+        ]
+        for p in possible_locs:
+            if p.exists():
+                illustration_path = str(p.relative_to(ROOT_DIR / "public"))
+                print(f"🎨 [Illustration] Found bespoke scene illustration: {illustration_path}")
+                break
+
+    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script, words, product_meta, illustration_path=illustration_path)
     register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche)
 
     # Step 4: Render

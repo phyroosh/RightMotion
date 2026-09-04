@@ -60,3 +60,9 @@ Never squish the avatar in a corner or have graphics fighting for space on scree
 - `impact_hit`: Problem reveals and diagnostic cutouts (`vol: 0.22`).
 - `click`: Tactile badges and chips (`vol: 0.26`).
 - `whoosh_sparkle`: Solutions, rewiring breakthroughs, and finale re-entry (`vol: 0.32 - 0.35`).
+
+## 6. Bespoke Painterly Surreal Illustrations & Motion Graphics (`<CinematicIllustrationCard />`)
+- **Visual Style**: Expressive digital impasto oil brushwork, dark slate/obsidian shadows (`#080b12`), atmospheric chiaroscuro lighting, and vibrant glowing prismatic neon cognitive distortion trails (cyan, magenta, turquoise, amber).
+- **Motion Polish**: Never static! Wrap in `<CinematicIllustrationCard />` with subtle 2.5D Ken Burns zoom drift (`1.0x -> 1.07x`), diagonal glass glare sheen sweep, tactile card tilt with masking tape (`TapeStrip`), and monospace HUD telemetry (`COGNITIVE DIAGNOSTIC // 01`).
+- **Timing**: Enters at Frame 0 as the instant hero hook. Judy presents the outro (`isFinale`) cleanly without card clutter.
+- **Graceful Multi-Agent Fallback**: Agents with `generate_image` (Antigravity) generate the bespoke 16:9 art; agents without it (Claude Code) skip image generation and fall back to `ProCutout` seamlessly.

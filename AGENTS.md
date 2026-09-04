@@ -170,6 +170,47 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 
 ---
 
+### 🎨 Autonomous Painterly Illustration & Motion Graphics Protocol (MANDATORY AGENT RULE)
+
+> [!CRITICAL]
+> **RIGHTCLIPS SUPPORTS BESPOKE PAINTERLY SURREAL CONCEPT ILLUSTRATIONS WRAPPED IN MOTION GRAPHICS!**
+> Instead of only using cutouts or plain cards, AI Agents can generate bespoke, emotionally resonant concept art paired with high-end Remotion motion graphics.
+>
+> 1. **The Signature Painterly Aesthetic**:
+>    - **Fine-Art Style**: Stylized digital painterly concept illustration with thick, expressive impasto brushstrokes and a rich textured oil/gouache canvas finish.
+>    - **Atmosphere & Lighting**: Atmospheric chiaroscuro lighting, deep cinematic slate/obsidian shadows (`#080b12`), with vibrant glowing prismatic/neon cognitive distortion trails swirling from devices or around the character's head/eyes (electric cyan, vivid magenta, soft glowing turquoise, amber).
+>    - **Strict Style Bans**: NO anime faces, NO 3D CGI cartoon look, NO glossy flat photorealism, NO text, NO watermarks, NO borders.
+>
+> 2. **Prompt Generation Script (`scripts/generate_illustration_prompt.py`)**:
+>    - Run `python3 scripts/generate_illustration_prompt.py --topic "<topic>"` to generate the exact tuned prompt and metadata for any video topic.
+>
+> 3. **Motion Graphics Integration (`<CinematicIllustrationCard />`)**:
+>    - **NEVER display flat, static images!**
+>    - Wrap generated artwork in `<CinematicIllustrationCard />` (`src/components/CinematicIllustrationCard.tsx`).
+>    - **Key Motion Features**:
+>      - 2.5D Ken Burns slow drift (`zoomDrift: 1.0 -> 1.07`, subtle horizontal/vertical pan drift).
+>      - Diagonal specular holographic glass glare sheen sweep on entrance (`glareProgress`).
+>      - Physical 3D tactile card tilt (`PhysicalCard tiltX={3} tiltY={-3}`) with anchored masking tape strip (`TapeStrip`).
+>      - Monospace HUD telemetry header pill (`COGNITIVE DIAGNOSTIC // 01` with pulsing live indicator dot).
+>      - In-illustration diagnostic status badges (`ATMOSPHERIC CHANCE // HIGH`, `2.5D KINETIC`).
+>      - Speech-anchored spotlight pulse (`highlightFrame`).
+>
+> 4. **Multi-Agent Graceful Fallback Protocol**:
+>    - **Antigravity (or agents with `generate_image` tool)**:
+>      - Call `generate_image` with `AspectRatio="16:9"`, `ImagePaths=[".../media_1788524830036.png"]` (reference image), and the prompt from `generate_illustration_prompt.py`.
+>      - Save the output to `public/<clip_name>/assets/scene_illustration.png`.
+>      - Pass `--illustration <clip_name>/assets/scene_illustration.png` (or let `create_clip.py` auto-detect it).
+>    - **Agents without `generate_image` (Claude Code, Cursor, Copilot)**:
+>      - Cleanly skip image generation!
+>      - `create_clip.py` will automatically fall back to the standard Cutout Asset Engine (`ProCutout` props, physical cards, meters) without failing or erroring.
+>
+> 5. **Presenter & Scene Timing**:
+>    - When an illustration card is used in Scene 1 (Frames 0 to Scene 2 start), the card is the instant hero hook from Frame 0.
+>    - In `Presenter.tsx`, `isIntro` is disabled so Judy does NOT obscure the card with a full-screen blur during intro.
+>    - Judy enters smoothly during the outro (`isFinale`) to deliver the closing connection and CTA without card collision.
+
+---
+
 ## 💡 Master Channel Topic Ideation & Viral Prompt Specification
 
 Every video produced or ideated in RightClips must target high-retention, deeply emotional, or mathematically irresistible topics across three specialized niche pillars:

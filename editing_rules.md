@@ -79,5 +79,16 @@
   - 75–90 words target (~30–35s, hard cap 100 words).
   - Permanent ban on AI clichés (*"here's the thing"*, *"the truth is"*, *"you're not lazy"*) and sales hype (*"life-changing"*, *"must-read"*).
 
-
-
+## 8. Autonomous Painterly Illustrations & Motion Graphics Protocol
+- **Signature Fine-Art Aesthetic**:
+  - Stylized digital painterly concept illustration with thick expressive impasto brushstrokes, textured oil/gouache canvas finish, atmospheric chiaroscuro lighting, deep cinematic slate/obsidian shadows, and vibrant glowing prismatic neon trails (cyan, magenta, turquoise, amber).
+  - Strict bans: No anime faces, no 3D CGI cartoon look, no glossy flat photorealism, no text, no watermarks, no borders.
+  - Prompt formulation tool: `scripts/generate_illustration_prompt.py --topic "<topic>"`.
+- **Motion Graphics Card (`<CinematicIllustrationCard />`)**:
+  - Never display flat, static images!
+  - Wrap in `<CinematicIllustrationCard />`: 2.5D Ken Burns slow drift, diagonal specular glass sheen sweep, 3D tactile card tilt with top masking tape (`TapeStrip`), monospace HUD telemetry (`COGNITIVE DIAGNOSTIC // 01` with pulsing live dot), in-image status badges (`ATMOSPHERIC CHANCE // HIGH`, `2.5D KINETIC`), and speech-anchored spotlight pulse.
+- **Graceful Multi-Agent Fallback**:
+  - Antigravity / agents with `generate_image`: generate bespoke 16:9 art to `public/<clip_name>/assets/scene_illustration.png`.
+  - Claude Code / Cursor / Copilot (agents without `generate_image`): cleanly skip image generation; `create_clip.py` falls back smoothly to standard `ProCutout` props without error.
+- **Scene & Presenter Timing**:
+  - Illustration card enters Frame 0 as the instant hero hook. Judy does not blur/cover the card during intro; Judy enters smoothly during outro (`isFinale`) for the personal connection and CTA.
