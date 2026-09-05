@@ -25,12 +25,12 @@ const SFX_CONFIG: Record<SfxType, { src: string; defaultVolume: number; duration
   },
   whoosh_fast: {
     src: "audio/sfx/whoosh_fast.wav",
-    defaultVolume: 0.11,
+    defaultVolume: 0.18,
     durationFrames: 25,
   },
   whoosh_deep: {
     src: "audio/sfx/whoosh_deep.wav",
-    defaultVolume: 0.24,
+    defaultVolume: 0.30,
     durationFrames: 45,
   },
   whoosh_sparkle: {
@@ -40,7 +40,7 @@ const SFX_CONFIG: Record<SfxType, { src: string; defaultVolume: number; duration
   },
   impact_hit: {
     src: "audio/sfx/impact_hit.wav",
-    defaultVolume: 0.22,
+    defaultVolume: 0.18,
     durationFrames: 30,
   },
   whoosh_cinematic: {

@@ -677,9 +677,9 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     s2_points_jsx = []
     s2_spring_defs = []
     sfx_cues = [
-        {"frame": 0, "type": "whoosh_deep", "volume": 0.25},
+        {"frame": 0, "type": "whoosh_deep", "volume": 0.32},
         {"frame": f_c1_cutout, "type": "impact_hit", "volume": 0.24},
-        {"frame": s2_start, "type": "whoosh_fast", "volume": 0.27},
+        {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
     ]
 
     # 4b. Interactive Engagement Pill (Seconds 18–22 / ~70% timeline to boost likes and comments)
@@ -711,7 +711,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         )
         for b in illustration_beats:
             if b["type"] == "callout":
-                sfx_cues.append({"frame": b["frame"], "type": "whoosh_fast", "volume": 0.22})
+                sfx_cues.append({"frame": b["frame"], "type": "whoosh_fast", "volume": 0.28})
                 sfx_cues.append({"frame": b["frame"], "type": "click", "volume": 0.24})
             elif b["type"] == "stamp":
                 sfx_cues.append({"frame": b["frame"], "type": "impact_hit", "volume": 0.32})
