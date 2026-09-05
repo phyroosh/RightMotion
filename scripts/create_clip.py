@@ -1219,31 +1219,31 @@ def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, 
 
     # Register in thumbnails/index.tsx
     thumb_content = thumb_file.read_text(encoding="utf-8")
+    from metadata_engine import generate_full_metadata
+    meta_package = generate_full_metadata(topic, niche=niche, script=script_text or "", pinned_comment=pinned_comment or "")
+
     if f"{pascal_name}Thumbnail" not in thumb_content:
-        clean_title = clean_thumbnail_title(topic)
-        highlight = clean_title.split()[0] if clean_title.split() else "TRUTH"
+        clean_title = meta_package["thumbnail_title"]
+        highlight = meta_package["thumbnail_highlight"]
+        sub = meta_package["thumbnail_subtitle"]
 
         # Channel specific styling - strictly pure themes and badges, NEVER page numbers or PDF names!
         if niche == "facecam":
             cat_badge = "BUILD TO SCALE • FACECAM"
             extra_badge = "STARTUP"
             theme = "obsidian"
-            sub = "Creator Breakdown & Business Secrets"
         elif niche == "finance":
             cat_badge = "APEX WEALTH • FINANCE"
             extra_badge = "WEALTH"
             theme = "obsidian"
-            sub = "Wealth Compounding & Early Adult Strategy"
         elif niche == "health":
             cat_badge = "BIOMATRIX • HEALTH"
             extra_badge = "BIOHACK"
             theme = "biotech_cyan"
-            sub = "Biological Reset & Cellular Protocol"
         else:
             cat_badge = "JUDY INSIGHTS • PSYCHOLOGY"
             extra_badge = "MINDSET"
             theme = "apple_studio"
-            sub = "High-Retention Psychology Breakdown"
 
         thumb_decl = f"""
 export const {pascal_name}Thumbnail: React.FC = () => (
@@ -1277,18 +1277,19 @@ export const {pascal_name}Thumbnail: React.FC = () => (
     if meta_file.exists():
         try:
             meta = json.loads(meta_file.read_text(encoding="utf-8"))
-            final_pinned = pinned_comment or generate_pinned_comment(topic=topic, niche=niche, hook_text=topic, script_text=script_text or "")
+            final_pinned = pinned_comment or meta_package.get("pinnedComment") or generate_pinned_comment(topic=topic, niche=niche, hook_text=topic, script_text=script_text or "")
             meta[f"{name}_video.mp4"] = {
                 "topic": name,
-                "title": f"{topic} 🧠 #{'Shorts' if format_type == 'shorts' else 'Masterclass'}",
-                "description": f"{topic} — Psychological breakdown of mental models, habit loops, and identity shifts.\n\n#Shorts #Psychology #Mindset #SelfImprovement",
-                "tags": ["Shorts", "Psychology", "Mindset", topic, "Self Improvement"],
+                "title": meta_package["title"],
+                "description": meta_package["description"],
+                "tags": meta_package["tags"],
                 "categoryId": "27",
                 "privacyStatus": "public",
                 "pinnedComment": final_pinned
             }
             meta_file.write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
-            print("      Added metadata to studio/metadata.json")
+            print("      Added beautiful viral metadata to studio/metadata.json")
+            print(f"      Viral Hook Title: \"{meta_package['title']}\"")
             print(f"\n💬 [Suggested High-Retention Pinned Comment]:")
             print(f"   \"{final_pinned}\"\n")
         except Exception as e:

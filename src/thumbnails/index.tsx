@@ -627,10 +627,10 @@ export { BuildToScaleTHFThumbnail } from "./BuildToScaleTHFThumbnail";
 
 export const TeenageRelationshipsThumbnail: React.FC = () => (
   <ThumbnailCard
-    title="SHOULD YOU MAKE RELATIONSHIPS IN TEENAGE OR NOT"
-    highlightWord="SHOULD"
+    title="THE DATING TRAP"
+    highlightWord="DATING"
     highlightColor="rose"
-    subtitle="High-Retention Psychology Breakdown"
+    subtitle="Why Teenage Relationships Exhaust You"
     categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
     characterPose="character_pointing.png"
     theme="apple_studio"
