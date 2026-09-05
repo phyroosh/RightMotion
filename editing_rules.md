@@ -125,7 +125,7 @@
 ## 10. Universal Tactical Meme Integration Engine (Default-On, < 2.5s Rule)
 - **Default-On Policy (High-Retention by Default)**:
   - Tactical memes are **ENABLED BY DEFAULT** for all videos. The autonomous matcher (`scripts/meme_matcher.py`) automatically maps topics and emotional cues to the best-matching meme.
-  - Max 1 meme per standard video (usually in Scene 1 hook or Scene 2 friction). Never spam!
+  - Max 1 meme per standard video, strictly as the opening HOOK from Frame 0 (`startFrame={0}`). PERMANENT BAN on mid-video and outro memes!
 - **Opt-Out Modifier Tag (`{no meme}` / `{no memes}`)**:
   - Include `{no meme}` or `{no memes}` in prompt or CLI `--no-meme` to disable memes completely.
 - **Explicit Meme Override (`{meme: <id>}`)**:

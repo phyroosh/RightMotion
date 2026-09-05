@@ -309,11 +309,11 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 >      - `chrome_cyborg_overload`: Sensory overload, fried dopamine receptors.
 >      - `doctor_strange_multiverse`: Mind-blown, expanding consciousness, ego death.
 >
-> 8. **Dual Tactical Meme Presentation Modes**:
->    - **Mode A: Video Loop (`<TacticalMemeCard />`)**: Fast-forwarded (1.4x), muted video loop with diagonal specular glass glare sweep, monospace HUD badge, and synchronized SFX.
->    - **Mode B: Still-Frame Reaction Sticker (`<TacticalMemeFrame />`)**: Ultra-snappy (< 1.2s) freeze-frame reaction card with tactile tilt and drop shadow, popping right on a specific spoken word (e.g. at the 7-second friction pivot point).
->    - **First-Frame Hook (`startFrame={0}`)**: Memes in Scene 1 start at frame 0 to immediately hook scrollers within the first 500ms of feed playback!
->    - **Mid-Video Retention Spike**: Tactical meme frames can also be deployed in Scene 2 (~seconds 7–12) to puncture cognitive tension with humor and prevent mid-video swipe-away.
+> 8. **Tactical Meme Opening Hook Standard (PERMANENT RULE: ZERO MEMES IN MIDDLE/END)**:
+>    - **STRICTLY OPENING HOOK ONLY**: Memes are used EXCLUSIVELY at the very start of the video as the opening Hook (`startFrame={0}`).
+>    - **PERMANENT BAN ON MID-VIDEO MEMES**: AI Agents and generators are STRICTLY FORBIDDEN from placing memes in the middle (Scene 2) or end (Scene 3) of the video! Middle scenes must rely purely on clean editorial cards, tactile 3D physical breakdown cards (01, 02), and the host presenter.
+>    - **Instant Hook Timing**: Memes hit at Frame 0 (`startFrame={0}`) for 36–48 frames (~1.2s–1.6s, hard cap 2.2s), accelerated at 1.4x, with 100% muted audio (`volume={0}`). They snap out quickly to reveal the clean, bright hero editorial artwork underneath.
+>    - **Modes Supported**: Video loop (`<TacticalMemeCard />`) or still-frame reaction card (`<TacticalMemeFrame />`), strictly deployed at Frame 0.
 >
 > 9. **Automatic Tag Sanitization**:
 >    - AI Agents and generators MUST strip `{meme}`, `{meme: <id>}`, `{no meme}`, and `{no memes}` so modifiers never leak into spoken voiceover, card titles, or canvas text.
