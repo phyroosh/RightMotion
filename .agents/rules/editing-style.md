@@ -73,6 +73,7 @@ Never squish the avatar in a corner or have graphics fighting for space on scree
 - **The 7-Second Retention Pivot**: Deliver the counter-intuitive mechanism by second 5.5–7.0. Eliminate pauses and transition Scene 1 to Scene 2 by Frame 190–220.
 - **On-Screen Interactive Overlay (`<InteractiveEngagementPill />`)**: Renders at ~70% timeline (seconds 18–22) to convert viewers into comments and likes.
 - **Autonomous Pinned Comment**: Generate `[PINNED COMMENT]` with every script; auto-posted to YouTube via YouTube Data API (`commentThreads.insert`) on upload.
+- **Organic Growth Mode by Default (Zero PDF Hunt)**: All videos default to Mode B (pure organic psychological insights with community CTA). Only search product PDFs and extract worksheet proof when `{meta}`, `--meta`, or `{product: ...}` is explicitly requested.
 
 ## 8. Tactical Meme Integration Engine (Default-On, < 2.5s Retention Booster)
 - **Default-On Policy**: Memes are **ENABLED BY DEFAULT** for all videos! The semantic matcher automatically maps the video topic to the most relatable high-retention meme. Max 1 meme per standard video.

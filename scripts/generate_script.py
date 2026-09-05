@@ -45,7 +45,7 @@ def sanitize_tags(text: str) -> str:
     if not text:
         return ""
     pattern = re.compile(
-        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|no\s*memes?|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
+        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
         re.IGNORECASE,
     )
     cleaned = pattern.sub("", text)
@@ -188,23 +188,22 @@ def generate_dynamic_duo_script(clean_topic: str) -> str:
         "JUDY: Stop trying to debate your thoughts. Ground yourself in physical reality, and the anxiety loses its power instantly."
     )
 
-def generate_script_and_metadata(raw_topic: str, duo: bool = False) -> Dict[str, Any]:
+def generate_script_and_metadata(raw_topic: str, duo: bool = False, meta: bool = False) -> Dict[str, Any]:
     """
     Main orchestrator for Autonomous Scriptwriting:
-    - Analyzes raw topic for {no meta} and {duo}
+    - Default is Mode B (Organic / Growth CTA, ZERO PDF search)
+    - Mode A (Product-Linked, PDF search) ONLY runs when {meta}, --meta, or {product: ...} is explicitly present
     - If duo is requested: Generates conversational Judy & Andrew dialogue
-    - If {no meta} is present: Runs Mode B (Organic CTA, skips PDF)
-    - If {no meta} is absent: Runs Mode A (Product-Linked, silent PDF rules)
     - Returns structured metadata and voiceover text
     """
-    has_no_meta = bool(re.search(r"\{\s*no\s*meta\s*\}", raw_topic, re.IGNORECASE))
+    has_explicit_product = bool(re.search(r"\{\s*(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+\s*\}", raw_topic, re.IGNORECASE))
+    has_meta_tag = bool(re.search(r"\{\s*meta\s*\}", raw_topic, re.IGNORECASE))
+    has_no_meta_tag = bool(re.search(r"\{\s*no\s*meta\s*\}", raw_topic, re.IGNORECASE))
+
+    # Mode A is ONLY triggered if {meta}, {product: ...}, or meta=True is explicitly passed, and NOT overridden by {no meta}
+    is_mode_a = (meta or has_meta_tag or has_explicit_product) and not has_no_meta_tag
     is_duo = duo or bool(re.search(r"\{\s*duo\s*\}", raw_topic, re.IGNORECASE))
     clean_topic = sanitize_tags(raw_topic)
-
-    match = match_topic_to_product(clean_topic)
-    page_num = match["page_number"]
-    ex_title = match["exercise_title"]
-    product_file = match["product_file"]
 
     if is_duo:
         # CONVERSATIONAL DUO MODE (Judy & Andrew)
@@ -233,18 +232,23 @@ def generate_script_and_metadata(raw_topic: str, duo: bool = False) -> Dict[str,
             "is_duo": True
         }
 
-    if has_no_meta:
-        # MODE B: Organic / Growth
-        if page_num in CURATED_SCRIPTS:
-            voiceover = CURATED_SCRIPTS[page_num]["mode_b"]
-        else:
-            voiceover = (
-                f"Notice how often you find yourself overthinking {clean_topic.lower()}? "
-                "Your nervous system treats emotional uncertainty like a physical threat, so it keeps you replaying old interactions to keep you safe. "
-                "The secret isn't forcing positive thoughts. It's teaching your body that being imperfect won't end the world. "
-                "When you step back and observe the sensation without reacting, clarity returns naturally. "
-                "If you're trying to figure yourself out without all the noise, stick around. We unpack these patterns every day."
-            )
+    if not is_mode_a:
+        # MODE B: Organic / Growth (DEFAULT!) - ZERO PDF LOOKUP
+        # Check if topic matches any curated high-impact scripts
+        curated_mode_b = None
+        lower_top = clean_topic.lower()
+        for p_num, c_data in CURATED_SCRIPTS.items():
+            if c_data["topic"].lower() in lower_top or any(w in lower_top for w in c_data["topic"].lower().split() if len(w) > 3):
+                curated_mode_b = c_data["mode_b"]
+                break
+
+        voiceover = curated_mode_b or (
+            f"Notice how often you find yourself overthinking {clean_topic.lower()}? "
+            "Your nervous system treats emotional uncertainty like a physical threat, so it keeps you replaying old interactions to keep you safe. "
+            "The secret isn't forcing positive thoughts. It's teaching your body that being imperfect won't end the world. "
+            "When you step back and observe the sensation without reacting, clarity returns naturally. "
+            "If you're trying to figure yourself out without all the noise, stick around. We unpack these patterns every day."
+        )
         
         words = voiceover.split()
         is_valid, issues = check_script_hygiene(voiceover, is_mode_a=False)
@@ -264,7 +268,12 @@ def generate_script_and_metadata(raw_topic: str, duo: bool = False) -> Dict[str,
         }
 
     else:
-        # MODE A: Standard / Product-Linked
+        # MODE A: Standard / Product-Linked (ONLY when {meta} is explicitly passed)
+        match = match_topic_to_product(clean_topic)
+        page_num = match["page_number"]
+        ex_title = match["exercise_title"]
+        product_file = match["product_file"]
+
         if page_num in CURATED_SCRIPTS:
             voiceover = CURATED_SCRIPTS[page_num]["mode_a"]
         else:
@@ -311,15 +320,16 @@ def generate_script_and_metadata(raw_topic: str, duo: bool = False) -> Dict[str,
 
 def main():
     parser = argparse.ArgumentParser(description="RightClips Judy Scriptwriter")
-    parser.add_argument("--topic", required=True, help="Topic with channel and optional {no meta} tag")
+    parser.add_argument("--topic", required=True, help="Topic with channel and optional {meta} or {no meta} tag")
+    parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
     parser.add_argument("--duo", action="store_true", help="Generate conversational duo script with Judy and Andrew")
     parser.add_argument("--check-script", default=None, help="Validate an existing script text")
     parser.add_argument("--json", action="store_true", help="Output JSON format")
     args = parser.parse_args()
 
     if args.check_script:
-        has_no_meta = "{no meta}" in args.topic.lower()
-        is_valid, issues = check_script_hygiene(args.check_script, is_mode_a=not has_no_meta)
+        has_meta = "{meta}" in args.topic.lower() or args.meta
+        is_valid, issues = check_script_hygiene(args.check_script, is_mode_a=has_meta)
         words = len(re.sub(r"^\s*(?:judy|andrew)\s*:\s*", "", args.check_script, flags=re.IGNORECASE | re.MULTILINE).split())
         print(f"\nScript Hygiene Check ({words} words):")
         if is_valid:
@@ -330,7 +340,7 @@ def main():
                 print(f"     - {iss}")
         return
 
-    result = generate_script_and_metadata(args.topic, duo=args.duo)
+    result = generate_script_and_metadata(args.topic, duo=args.duo, meta=args.meta)
     if args.json:
         print(json.dumps(result, indent=2))
     else:

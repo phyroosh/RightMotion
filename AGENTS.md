@@ -33,15 +33,30 @@ If the user includes **`{no topics}`** (or **`{no topic}`**, case-insensitive) a
 
 ---
 
-### 🧠 Universal '{no meta}' Modifier Tag & Direct Topic Protocol (ZERO CHATGPT ROUND-TRIPS)
+### 🧠 Universal Direct Topic Protocol: Organic Mode is DEFAULT, PDF Search ONLY with '{meta}' (ZERO CHATGPT ROUND-TRIPS)
 
 > [!CRITICAL]
-> **NEVER SEND THE USER TO CHATGPT OR ASK FOR A SCRIPT!**
-> Users can now directly submit raw topics into RightClips (e.g. `{Self Improvement} The Fear of Being Caught Trying` or `{Self Improvement} {no meta} Social Overthinking at 2 AM`).
-> The AI Agent acts directly as the expert short-form scriptwriter, PDF researcher, asset producer, and video editor all in one unified flow!
+> **ORGANIC GROWTH MODE IS DEFAULT! NEVER HUNT FOR PDF UNLESS '{meta}' IS EXPLICITLY USED!**
+> Users can directly submit raw topics into RightClips (e.g. `{Self Improvement} The Fear of Being Caught Trying`).
+> - **DEFAULT (NO PDF SEARCH)**: Every video is treated as an **Organic / Growth Video (Mode B)** by default. Strictly skip all PDF hunting and product metadata!
+> - **OPT-IN PDF HUNT (`{meta}`)**: ONLY search `Products/*.pdf` and generate product metadata when **`{meta}`**, `--meta`, or **`{product: ...}`** is explicitly present in the prompt!
 
-#### 1. Mode A: Standard (Product-Linked Video) — Default when `{no meta}` is ABSENT:
+#### 1. Mode B: Organic / Growth Video — DEFAULT (Triggered when '{meta}' is ABSENT):
+1. **STRICTLY SKIP ALL PDF SEARCH**:
+   - Do NOT inspect any PDF in `Products/`, do NOT search for product content, and do NOT output a `[METADATA]` block.
+2. **Output ONLY the `[VOICEOVER]` block**:
+   ```
+   [VOICEOVER]
+   <clean voiceover script>
+   ```
+3. **Organic Community CTA**:
+   - End with a grounded channel/subscriber invitation (e.g. *"If you're trying to figure yourself out without all the noise, stick around. We unpack these patterns every day."* or *"Follow along if you want more breakdowns on how your brain actually works."*).
+4. **Sanitization**:
+   - Strip `{no meta}` and `{meta}` from all prompt text, titles, canvas text, and audio synthesis so the tags never appear in video assets.
+
+#### 2. Mode A: Standard (Product-Linked Video) — OPT-IN ONLY (Triggered when '{meta}' IS PRESENT):
 1. **Autonomously Scan Product PDFs**:
+   - Only runs when `{meta}` or `{product: ...}` is in the request.
    - Inspect `Products/*.pdf` (e.g. `Photon.pdf` or via `python3 scripts/pdf_topic_matcher.py --topic "<topic>"`).
    - Identify the exact matching chapter and exercise:
      - Page 4: *Trace the Wire* (conditioning, inherited beliefs)
@@ -66,19 +81,6 @@ If the user includes **`{no topics}`** (or **`{no topic}`**, case-insensitive) a
    - **NEVER speak the PDF filename** (never say "Photon" or "Photon.pdf" aloud).
    - **NEVER speak the page number** (never say "on page 8" or "page 14" aloud).
    - *Why*: RightClips handles the visual proof automatically by displaying the real designed page screenshot on screen via `<ProductPageShowcase />`. The voiceover only references it conversationally (e.g. *"I mapped out the full breakdown on the worksheet below so you can audit your own habits. Grab the guide below..."*).
-
-#### 2. Mode B: Organic / Growth Video — Triggered when `{no meta}` IS PRESENT:
-1. **STRICTLY SKIP ALL PDF SEARCH**:
-   - Do NOT inspect any PDF in `Products/`, do NOT search for product content, and do NOT output a `[METADATA]` block.
-2. **Output ONLY the `[VOICEOVER]` block**:
-   ```
-   [VOICEOVER]
-   <clean voiceover script>
-   ```
-3. **Organic Community CTA**:
-   - Replace the worksheet mention with a grounded channel/subscriber invitation (e.g. *"If you're trying to figure yourself out without all the noise, stick around. We unpack these patterns every day."* or *"Follow along if you want more breakdowns on how your brain actually works."*).
-4. **Sanitization**:
-   - Strip `{no meta}` from all prompt text, titles, canvas text, and audio synthesis so the tag never appears in video assets.
 
 #### 3. Judy Scriptwriting Persona & Quality Standards:
 - **Persona**: Female anime-style host (Judy) with a soft, warm, intelligent, emotionally grounded voice ("smart older sister" or "caring friend").

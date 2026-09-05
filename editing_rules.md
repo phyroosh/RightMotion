@@ -69,18 +69,20 @@
 - **Speech-Synchronized Kinetic Captions**:
   - Lower safe zone (`bottom-[18%]`), 2-3 words per chunk.
   - Minimum 32px font size (`text-3xl font-black`), active word spring pop (`scale(1.1)`) with glowing cyan/gold highlight.
-## 7. Autonomous Scriptwriting & Direct Topic Protocol (`{no meta}`)
-- **Zero ChatGPT Middle Step**: Paste raw topics directly (e.g., `{Self Improvement} The Fear of Being Caught Trying` or `{Self Improvement} {no meta} The 2 AM Phone Loop`).
-- **Mode A: Standard (Product-Linked)**: Default when `{no meta}` is absent:
-  - Scans `Products/*.pdf` via `scripts/pdf_topic_matcher.py`.
-  - Generates `[METADATA]` block with exact page & exercise title.
-  - **MANDATORY SILENT PDF RULE**: Spoken voiceover must NEVER say "Photon" or the page number aloud (visual proof is rendered on screen).
-- **Mode B: Organic / Growth (`{no meta}`)**: Triggered when `{no meta}` is present:
+## 7. Autonomous Scriptwriting & Direct Topic Protocol (Organic Default, '{meta}' Opt-In)
+- **Zero ChatGPT Middle Step**: Paste raw topics directly (e.g., `{Self Improvement} The Fear of Being Caught Trying`).
+- **Mode B: Organic / Growth — DEFAULT (When '{meta}' is ABSENT)**:
   - Completely skips PDF lookup; outputs ONLY `[VOICEOVER]`.
   - Ends with an organic community / subscriber CTA.
+  - Zero product hunting or PDF extraction.
+- **Mode A: Standard / Product-Linked — OPT-IN ONLY (When '{meta}' IS PRESENT)**:
+  - Triggered only when `{meta}`, `--meta`, or `{product: ...}` is in the request.
+  - Scans `Products/*.pdf` via `scripts/pdf_topic_matcher.py`.
+  - Generates `[METADATA]` block with exact page & exercise title and extracts retina screenshot.
+  - **MANDATORY SILENT PDF RULE**: Spoken voiceover must NEVER say "Photon" or the page number aloud (visual proof is rendered on screen).
 - **Judy Persona Rules**:
   - Warm, intelligent older sister / caring friend voice.
-  - 75–90 words target (~30–35s, hard cap 100 words).
+  - 65–85 words target (~24–30s, hard cap 90 words).
   - Permanent ban on AI clichés (*"here's the thing"*, *"the truth is"*, *"you're not lazy"*) and sales hype (*"life-changing"*, *"must-read"*).
 
 ## 8. Autonomous Painterly Illustrations & Motion Graphics Protocol

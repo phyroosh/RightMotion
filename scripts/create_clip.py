@@ -40,9 +40,9 @@ from dialogue_engine import process_dialogue
 def sanitize_tags(text: str) -> str:
     if not text:
         return ""
-    # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, {no meme}, {duo}, {meme: ...}, and product tags
+    # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, {meta}, {no meme}, {duo}, {meme: ...}, and product tags
     pattern = re.compile(
-        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|no\s*memes?|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
+        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
         re.IGNORECASE,
     )
     cleaned = pattern.sub("", text)
@@ -1321,6 +1321,7 @@ async def main():
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
     parser.add_argument("--meme", default=None, help="Meme ID override (e.g. side_eye_dog) or 'auto'")
     parser.add_argument("--no-meme", action="store_true", help="Disable Tactical Meme pop (memes are enabled by default)")
+    parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
 
@@ -1329,11 +1330,17 @@ async def main():
     raw_script = args.script
     raw_topic = args.topic or ""
 
-    # Check for {no meta} tag across inputs
-    has_no_meta = bool(re.search(r"\{\s*no\s*meta\s*\}", f"{raw_topic} {raw_script or ''} {args.name}", re.IGNORECASE))
+    raw_combined = f"{raw_topic} {raw_script or ''} {args.name}".lower()
+
+    # Check for {meta} tag (Mode A opt-in) vs {no meta} tag across inputs
+    has_meta_tag = bool(re.search(r"\{\s*meta\s*\}", raw_combined, re.IGNORECASE))
+    has_no_meta_tag = bool(re.search(r"\{\s*no\s*meta\s*\}", raw_combined, re.IGNORECASE))
+    has_explicit_product = bool(args.product) or bool(re.search(r"\{\s*(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+\s*\}", raw_combined, re.IGNORECASE))
+
+    # Mode B (organic growth) is DEFAULT unless {meta}, --meta, or {product: ...} is explicitly requested!
+    is_mode_a = (args.meta or has_meta_tag or has_explicit_product) and not has_no_meta_tag
 
     # Check for duo mode across inputs
-    raw_combined = f"{raw_topic} {raw_script or ''} {args.name}".lower()
     is_duo = args.duo or bool(re.search(r"\{\s*duo\s*\}", raw_combined, re.IGNORECASE)) or (
         bool(re.search(r"(?:^|\s+)judy\s*:", raw_combined, re.IGNORECASE)) and
         bool(re.search(r"(?:^|\s+)andrew\s*:", raw_combined, re.IGNORECASE))
@@ -1341,8 +1348,8 @@ async def main():
 
     # If no script provided, autonomously generate it from topic
     if not raw_script and raw_topic:
-        print(f"✍️  [Scriptwriter] No script provided. Autonomously generating script for topic: '{raw_topic}' (Duo: {is_duo})...")
-        gen_res = generate_script_and_metadata(raw_topic, duo=is_duo)
+        print(f"✍️  [Scriptwriter] No script provided. Autonomously generating script for topic: '{raw_topic}' (Duo: {is_duo}, Meta: {is_mode_a})...")
+        gen_res = generate_script_and_metadata(raw_topic, duo=is_duo, meta=is_mode_a)
         raw_script = gen_res["formatted_output"]
         if gen_res.get("is_duo"):
             is_duo = True
@@ -1359,15 +1366,14 @@ async def main():
         if bool(re.search(r"(?:^|\s+)judy\s*:", vo_lower)) and bool(re.search(r"(?:^|\s+)andrew\s*:", vo_lower)):
             is_duo = True
 
-    product_pdf = args.product or meta_pdf
-    product_page = args.product_page or meta_page
+    product_pdf = None
+    product_page = None
+    product_meta = None
 
-    # If {no meta} was requested, strictly disable product linking
-    if has_no_meta:
-        product_pdf = None
-        product_page = None
-        product_meta = None
-    else:
+    if is_mode_a:
+        product_pdf = args.product or meta_pdf
+        product_page = args.product_page or meta_page
+
         # Also check inline {product: ...} tag
         product_tag_pattern = re.compile(
             r"\{\s*(?:product|pdf)\s*:\s*([^,}]+?)(?:\.pdf)?\s*,\s*page\s*:\s*(\d+)\s*\}",
@@ -1380,13 +1386,14 @@ async def main():
             if not product_page:
                 product_page = int(tag_match.group(2).strip())
 
-        product_meta = None
         if product_pdf and product_page:
             try:
                 product_meta = extract_product_page(product_pdf, product_page)
                 print(f"📄 [Product] Extracted {product_meta['pdf_name']} Page {product_meta['page']} -> {product_meta['public_path']}")
             except Exception as e:
                 print(f"⚠️  [Product] Warning: Failed to extract product page: {e}")
+    else:
+        print(f"🌱 [Organic Engine] Running in Mode B (Organic Growth) — zero PDF hunt.")
 
     # Detect channel niche from raw topic & script before sanitizing
     video_source = args.facecam or args.video
