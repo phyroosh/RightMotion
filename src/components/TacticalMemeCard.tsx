@@ -200,3 +200,4 @@ export const TacticalMemeCard: React.FC<TacticalMemeCardProps> = ({
     </div>
   );
 };
+export { TacticalMemeFrame } from "./TacticalMemeFrame";

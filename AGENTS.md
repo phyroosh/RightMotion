@@ -187,19 +187,23 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 
 ---
 
-### 🎨 Autonomous Painterly Illustration & Motion Graphics Protocol (MANDATORY AGENT RULE)
+### 🎨 Autonomous Clean Editorial Hero Visual & Motion Graphics Protocol (MANDATORY AGENT RULE)
 
 > [!CRITICAL]
-> **RIGHTCLIPS SUPPORTS BESPOKE PAINTERLY SURREAL CONCEPT ILLUSTRATIONS WRAPPED IN MOTION GRAPHICS!**
-> Instead of only using cutouts or plain cards, AI Agents can generate bespoke, emotionally resonant concept art paired with high-end Remotion motion graphics.
+> **RIGHTCLIPS USES BESPOKE CLEAN MODERN EDITORIAL 2.5D CONCEPTUAL ART WRAPPED IN MOTION GRAPHICS!**
+> Slapping gloomy, dark, murky impasto oil paintings onto Judy Insights' bright Apple Studio Light mesh canvas is PERMANENTLY BANNED.
+> Hero visuals must be bright, clean, modern, and directly illustrate the concrete human narrative conflict in the hook.
 >
-> 1. **The Signature Painterly Aesthetic**:
->    - **Fine-Art Style**: Stylized digital painterly concept illustration with thick, expressive impasto brushstrokes and a rich textured oil/gouache canvas finish.
->    - **Atmosphere & Lighting**: Atmospheric chiaroscuro lighting, deep cinematic slate/obsidian shadows (`#080b12`), with vibrant glowing prismatic/neon cognitive distortion trails swirling from devices or around the character's head/eyes (electric cyan, vivid magenta, soft glowing turquoise, amber).
->    - **Strict Style Bans**: NO anime faces, NO 3D CGI cartoon look, NO glossy flat photorealism, NO text, NO watermarks, NO borders.
+> 1. **The Flagship Editorial Aesthetic (Vox / The New Yorker / Apple Editorial)**:
+>    - **Art Style**: Clean modern editorial conceptual illustration with crisp vector lines, elegant color blocking, and soft pastel gradients.
+>    - **Atmosphere & Lighting**: Warm natural sunlight, bright uncluttered architectural or everyday settings (sunlit school hallway, modern library, Scandinavian study, minimalist bedroom), generous negative space.
+>    - **Storytelling**: Clear visual contrast of human situations (e.g. peaceful independent protagonist vs. stressed phone-trapped couple). No random fantasy monsters, no gloomy dungeon shadows, no glowing squiggles around eyes.
+>    - **Strict Style Bans**: NO murky dark impasto oil paintings, NO repetitive gloomy chiaroscuro boilerplates, NO anime faces, NO 3D CGI cartoon look, NO text, NO watermarks, NO borders.
+>    - **PERMANENT BAN ON REFERENCE IMAGE LOCK-IN**: NEVER pass a fixed reference image (`ImagePaths`) to `generate_image`! Passing a reference image forces the image model to lock into the exact same face, dark moody lighting, and composition every time.
 >
 > 2. **Prompt Generation Script (`scripts/generate_illustration_prompt.py`)**:
->    - Run `python3 scripts/generate_illustration_prompt.py --topic "<topic>"` to generate the exact tuned prompt and metadata for any video topic.
+>    - Run `python3 scripts/generate_illustration_prompt.py --topic "<topic>" --script "<hook>"` to derive the exact prompt directly from the spoken narrative tension.
+>    - Supports styles: `--style editorial` (flagship default), `--style claymorphic_3d`, and `--style cinematic_studio`.
 >
 > 3. **Motion Graphics Integration (`<CinematicIllustrationCard />`)**:
 >    - **NEVER display flat, static images!**
@@ -214,7 +218,7 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 >
 > 4. **Multi-Agent Graceful Fallback Protocol**:
 >    - **Antigravity (or agents with `generate_image` tool)**:
->      - Call `generate_image` with `AspectRatio="16:9"`, `ImagePaths=[".../media_1788524830036.png"]` (reference image), and the prompt from `generate_illustration_prompt.py`.
+>      - Call `generate_image` with `AspectRatio="16:9"` and the prompt from `generate_illustration_prompt.py`. DO NOT pass fixed reference images!
 >      - Save the output to `public/<clip_name>/assets/scene_illustration.png`.
 >      - Pass `--illustration <clip_name>/assets/scene_illustration.png` (or let `create_clip.py` auto-detect it).
 >    - **Agents without `generate_image` (Claude Code, Cursor, Copilot)**:
@@ -222,17 +226,9 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 >      - `create_clip.py` will automatically fall back to the standard Cutout Asset Engine (`ProCutout` props, physical cards, meters) without failing or erroring.
 >
 > 5. **Presenter & Scene Timing**:
->    - When an illustration card is used in Scene 1 (Frames 0 to Scene 2 start), the card is the instant hero hook from Frame 0.
+>    - When an illustration card is used in Scene 1 (Frames 0 to Scene 2 start), the card is revealed behind the opening meme hook.
 >    - In `Presenter.tsx`, `isIntro` is disabled so Judy does NOT obscure the card with a full-screen blur during intro.
 >    - Judy enters smoothly during the outro (`isFinale`) to deliver the closing connection and CTA without card collision.
->
-> 6. **Multi-Beat Progressive Overlay Protocol (Anti-Retention Drop Standard)**:
->    - **NEVER hold static or slowly drifting artwork for $> 3.5$ seconds!** Viewers swipe away if the screen doesn't evolve.
->    - **Every 1.5–2.5 seconds, a new visual layer MUST hit the frame** synchronized with the host's spoken words:
->      - **Beat 1 (Frame 0)**: Entrance of the hero card, glass glare sweep, and main title hook.
->      - **Beat 2 (Spoken Pivot Word, ~2.5s)**: Camera punch zoom (`zoomLevel: 1.15`), target reticle focus, floating dark glass tactical callout pin (`<IllustrationCalloutPin />`), progressive subtitle reveal (`subtitleFrame`), paired with `whoosh_fast` + `click` SFX.
->      - **Beat 3 (Spoken Friction Word, ~5.5s)**: Diagnostic warning stamp (`<IllustrationStamp />`) slamming at an angle (`rotate-[-3deg]`) with `impact_hit` SFX for subconscious paralysis/anxiety/identity concepts.
->    - **Clause Splitting & Pacing Guardrails**: Scripts with long compound sentences ($\ge 16$ words) must be split on contrast conjunctions (`", but "`, `", yet "`, `", however "`) so Scene 1 transitions cleanly into Scene 2 by ~7–8s (Frame 210–240).
 
 ---
 
@@ -313,9 +309,11 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 >      - `chrome_cyborg_overload`: Sensory overload, fried dopamine receptors.
 >      - `doctor_strange_multiverse`: Mind-blown, expanding consciousness, ego death.
 >
-> 8. **Motion Graphics Card (`<TacticalMemeCard />`)**:
->    - Renders at `top-[7%]` (`w-[560px]`), floating gracefully in the upper region above the waist-up avatar without facial occlusion.
->    - Features diagonal specular glass glare sweep, monospace HUD badge (`[REACTION PROTOCOL // 01]`), and synchronized entrance/exit SFX (`whoosh_fast` on entry, `click` on exit).
+> 8. **Dual Tactical Meme Presentation Modes**:
+>    - **Mode A: Video Loop (`<TacticalMemeCard />`)**: Fast-forwarded (1.4x), muted video loop with diagonal specular glass glare sweep, monospace HUD badge, and synchronized SFX.
+>    - **Mode B: Still-Frame Reaction Sticker (`<TacticalMemeFrame />`)**: Ultra-snappy (< 1.2s) freeze-frame reaction card with tactile tilt and drop shadow, popping right on a specific spoken word (e.g. at the 7-second friction pivot point).
+>    - **First-Frame Hook (`startFrame={0}`)**: Memes in Scene 1 start at frame 0 to immediately hook scrollers within the first 500ms of feed playback!
+>    - **Mid-Video Retention Spike**: Tactical meme frames can also be deployed in Scene 2 (~seconds 7–12) to puncture cognitive tension with humor and prevent mid-video swipe-away.
 >
 > 9. **Automatic Tag Sanitization**:
 >    - AI Agents and generators MUST strip `{meme}`, `{meme: <id>}`, `{no meme}`, and `{no memes}` so modifiers never leak into spoken voiceover, card titles, or canvas text.

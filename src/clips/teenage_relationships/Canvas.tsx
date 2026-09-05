@@ -6,7 +6,7 @@ import { ProCutout } from "../../components/ProCutout";
 import { ProductPageShowcase } from "../../components/ProductPageShowcase";
 import { CinematicIllustrationCard } from "../../components/CinematicIllustrationCard";
 import { InteractiveEngagementPill } from "../../components/InteractiveEngagementPill";
-import { TacticalMemeCard } from "../../components/TacticalMemeCard";
+import { TacticalMemeCard, TacticalMemeFrame } from "../../components/TacticalMemeCard";
 import { Sparkles, Zap, ArrowRight } from "lucide-react";
 import { WordTimestamp } from "../../types";
 
@@ -275,10 +275,22 @@ export const TeenageRelationshipsCanvas: React.FC<CanvasProps> = () => {
       {/* ======================================================== */}
       <TacticalMemeCard
         memeId="lego_bruce_flabbergasted"
-        startFrame={28}
+        startFrame={0}
         durationFrames={45}
         playbackRate={1.4}
         hudLabel="INFATUATION // HYPNOSIS"
+        theme="apple_studio"
+        position="top"
+      />
+
+      {/* ======================================================== */}
+      {/* MID-VIDEO REACTION FRAME (< 1.2s Retention Savior)       */}
+      {/* ======================================================== */}
+      <TacticalMemeFrame
+        memeId="side_eye_dog"
+        startFrame={405}
+        durationFrames={35}
+        hudLabel="SKEPTICISM // REALITY CHECK"
         theme="apple_studio"
         position="top"
       />

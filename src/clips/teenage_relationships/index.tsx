@@ -36,14 +36,9 @@ const SFX_CUES: SfxCue[] = [
     "volume": 0.34
   },
   {
-    "frame": 28,
-    "type": "whoosh_fast",
-    "volume": 0.32
-  },
-  {
-    "frame": 73,
+    "frame": 45,
     "type": "click",
-    "volume": 0.22
+    "volume": 0.24
   },
   {
     "frame": 588,
@@ -74,6 +69,16 @@ const SFX_CUES: SfxCue[] = [
     "frame": 302,
     "type": "click",
     "volume": 0.26
+  },
+  {
+    "frame": 405,
+    "type": "whoosh_fast",
+    "volume": 0.30
+  },
+  {
+    "frame": 440,
+    "type": "click",
+    "volume": 0.22
   },
   {
     "frame": 463,

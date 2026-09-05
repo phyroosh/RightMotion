@@ -1,107 +1,168 @@
 #!/usr/bin/env python3
 """
-RightClips Illustration Prompt Generator
-Generates high-converting, stylistic prompts for bespoke painterly surreal illustrations.
-Matches the exact signature aesthetic: textured impasto oil brushstrokes, atmospheric chiaroscuro,
-and glowing prismatic/neon cognitive distortion trails.
+RightClips Hero Image Prompt Generator
+Generates high-converting, stylistic prompts for bespoke Hero visuals.
+Defaults to the flagship aesthetic: Clean Modern Editorial 2.5D Conceptual Art
+(Vox / The New Yorker / Apple Editorial aesthetic) with warm natural lighting,
+crisp lines, sophisticated color blocking, and clear human narrative conflict.
 """
 
 import argparse
 import json
 import re
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
-# Curated thematic scenes tailored to core psychology & habit patterns
-THEME_SCENE_MAPPING = [
-    {
-        "keywords": ["phone", "scroll", "2 am", "bed", "night", "doomscroll", "loop", "app"],
-        "subject": "A young person lying in bed or sitting at the edge of a bed in a dark bedroom late at night, holding a smartphone with an intense introspective expression",
-        "light_source": "Cool ambient blue glow from the smartphone screen illuminating their weary face and hands",
-        "metaphor": "vibrant glowing prismatic neon trails and colorful holographic light swirling from the screen and radiating around their eyes and temples (electric cyan, vivid magenta, soft glowing turquoise), visually representing an automated dopamine loop and subconscious wandering thoughts"
-    },
-    {
-        "keywords": ["desk", "laptop", "work", "burnout", "overthinking", "office", "tired", "freeze", "procrastination"],
-        "subject": "A professional or student sitting alone at a clean minimalist desk with a laptop in a dimly lit dark room, resting their head on one hand in deep contemplation",
-        "light_source": "Soft cool directional light from the laptop screen and an adjacent window with subtle ambient shadows",
-        "metaphor": "vivid glowing chromatic ribbons of neon light and prismatic energy gracefully leaking from their eyes and temples into the shadowy room (glowing cyan, hot pink, violet, and electric teal), visually capturing inner cognitive overload and mental fatigue"
-    },
-    {
-        "keywords": ["mask", "trying", "social", "crowd", "friends", "performance", "fitting in", "judgment"],
-        "subject": "A young person standing in a shadowy high school hallway or urban space, wearing a clean modern coat, holding a neutral stoic expression while looking slightly away",
-        "light_source": "Moody atmospheric dusk lighting with cool cinematic rim-light separating them from the dark backdrop",
-        "metaphor": "a delicate semi-translucent glowing neon geometric mask and chromatic light contours floating an inch off their face (electric turquoise, magenta, and amber luminescence), visually depicting the psychological social mask and the emotional weight of performing indifference"
-    },
-    {
-        "keywords": ["habit", "discipline", "consistent", "minimum", "start", "inertia", "small"],
-        "subject": "A person sitting beside an open notebook and a pen on a wooden table in a quiet, dark atmospheric room at dawn, contemplating taking a single small action",
-        "light_source": "A single soft warm desk lamp creating deep cinematic chiaroscuro contrast against deep slate and navy tones",
-        "metaphor": "a delicate pulsating neon thread of glowing turquoise and electric emerald light connecting their fingertips to the pen and paper, representing neuroplastic momentum and shrinking the initiation threshold"
-    }
-]
-
-DEFAULT_SCENE = {
-    "subject": "An introspective person in a dark, atmospheric room contemplating their thoughts and habits",
-    "light_source": "Subtle, cinematic cool rim-lighting creating dramatic chiaroscuro contrast with deep charcoal shadows",
-    "metaphor": "vibrant glowing prismatic neon light trails and ethereal chromatic distortions swirling around their eyes and temples (electric cyan, luminous magenta, and warm amber), visually representing psychological self-awareness and subconscious cognitive patterns"
-}
-
-def build_illustration_prompt(topic: str) -> Dict[str, Any]:
+def extract_core_narrative(topic: str, script: str = "") -> Dict[str, str]:
     """
-    Synthesizes a complete image generation prompt matching the user's signature reference style.
+    Deconstructs topic and hook text into concrete visual storytelling elements.
     """
     clean_topic = re.sub(r"\{\s*[^}]+\s*\}", "", topic).strip()
-    topic_lower = clean_topic.lower()
+    full_text = f"{clean_topic} {script}".lower()
 
-    # Find matching scenario
-    matched_scene = None
-    for item in THEME_SCENE_MAPPING:
-        if any(kw in topic_lower for kw in item["keywords"]):
-            matched_scene = item
-            break
+    # Relationship / Dating / Social tension
+    if any(k in full_text for k in ["relationship", "dating", "love", "teen", "high school", "single", "crush"]):
+        return {
+            "setting": "A bright, modern, sunlit minimalist high school hallway or contemporary library",
+            "protagonist": "A confident young person walking freely with headphones, a light backpack, and a peaceful, relaxed expression",
+            "conflict": "In the background, a couple sits on a wooden bench looking emotionally exhausted, overwhelmed, and silently glued to their phones in quiet tension",
+            "metaphor": "Clear visual contrast of independent emotional peace versus relational burnout and anxious attachment",
+            "palette": "Clean off-white, warm natural sunlight, sky blue, soft coral, and subtle sage green accents"
+        }
 
-    if not matched_scene:
-        matched_scene = DEFAULT_SCENE
+    # Phone / Doomscrolling / 3 AM sleep / Autopilot
+    elif any(k in full_text for k in ["phone", "scroll", "night", "bed", "sleep", "screen", "dopamine", "loop", "social media", "3 am", "2 am"]):
+        return {
+            "setting": "A minimalist, aesthetic modern bedroom split cleanly between dawn light and blue screen light",
+            "protagonist": "A young person sitting peacefully near an open window enjoying morning sunlight with a steaming cup of tea and a journal",
+            "conflict": "Reflected in a translucent glass pane or shadow, the weary nighttime version of themselves trapped in bed under harsh blue smartphone glow",
+            "metaphor": "The stark divide between intentional circadian presence and digital dopamine entrapment",
+            "palette": "Warm amber morning glow, crisp architectural white, contrasting with cool midnight slate and electric cyan"
+        }
 
-    # Full prompt formulation
-    prompt = (
-        f"A stylized digital painterly illustration with thick expressive impasto brushstrokes and rich textured oil canvas finish, moody concept art aesthetic. "
-        f"{matched_scene['subject']}. "
-        f"Atmospheric chiaroscuro lighting, deep cinematic shadows, dark slate, charcoal, and obsidian background tones. "
-        f"{matched_scene['light_source']}. "
-        f"Surreal conceptual element: {matched_scene['metaphor']}. "
-        f"Cinematic wide 16:9 composition, emotionally grounded, quiet, introspective atmosphere. Highly detailed painted textures, visible oil brushwork, mature fine-art finish. "
-        f"No anime faces, no 3D CGI cartoon look, no glossy flat photorealism, no text, no watermark, no border."
-    )
+    # Desk / Work / Procrastination / Burnout / Overthinking
+    elif any(k in full_text for k in ["procrastination", "work", "burnout", "study", "exam", "focus", "overthinking", "freeze", "lazy"]):
+        return {
+            "setting": "A serene, uncluttered Scandinavian-style study with expansive floor-to-ceiling glass windows overlooking nature",
+            "protagonist": "A focused student or creative sitting upright at a clean wooden desk, calmly writing with deep flow state clarity",
+            "conflict": "A giant translucent tangled sphere of chaotic scribbles, open browser tabs, and clock hands dissolving peacefully into clean geometric lines",
+            "metaphor": "Untangling cognitive friction into streamlined single-task momentum",
+            "palette": "Soft neutral cream, warm birch wood tones, calming mist blue, and crisp white"
+        }
+
+    # Identity / Performance / Mask / Fitting In / Boundaries
+    elif any(k in full_text for k in ["mask", "boundary", "boundaries", "people pleaser", "saying no", "fitting in", "judgment"]):
+        return {
+            "setting": "A sleek modern architectural courtyard with clean geometric archways and sunlit concrete",
+            "protagonist": "A person standing tall and authentic, wearing a vibrant, simple modern outfit, making grounded eye contact",
+            "conflict": "Around them, several blurred silhouette mannequins wearing identical rigid gray masks look on in rigid conformity",
+            "metaphor": "Stepping out of the exhausting performance mask into unapologetic, authentic self-definition",
+            "palette": "Luminous sky blue, architectural white, warm sand tones, and a striking coral or gold focal accent"
+        }
+
+    # Habit / Minimum Viable / Momentum / Small steps
+    elif any(k in full_text for k in ["habit", "small", "atomic", "routine", "discipline", "minimum", "start", "progress"]):
+        return {
+            "setting": "A clean, modern minimalist living space with soft morning sunlight streaming across a hardwood floor",
+            "protagonist": "A person placing a single perfect stone or minimalist wooden block onto a clean architectural foundation",
+            "conflict": "In the distance, an impossible mountain is broken down into clean, manageable floating steps bathed in gentle light",
+            "metaphor": "The micro-habit protocol: shrinking friction until daily action becomes effortless",
+            "palette": "Warm morning sunlight, pale eucalyptus green, warm oat tones, and crisp modern white"
+        }
+
+    # General default
+    return {
+        "setting": "A clean, bright, modern minimalist architectural space with generous natural daylight",
+        "protagonist": "An introspective young person exhibiting quiet self-awareness and confident intentionality",
+        "conflict": "Surrounding ambient elements visually represent the shift from chaotic inner overthinking to grounded psychological clarity",
+        "metaphor": "Mental clarity and emotional sovereignty overcoming modern cognitive clutter",
+        "palette": "Apple Studio off-white, warm sunlight, electric sky blue, and subtle coral/emerald highlights"
+    }
+
+def build_illustration_prompt(topic: str, script: str = "", style: str = "editorial", niche: str = "self_improvement") -> Dict[str, Any]:
+    """
+    Synthesizes a complete, high-converting image generation prompt.
+    """
+    clean_topic = re.sub(r"\{\s*[^}]+\s*\}", "", topic).strip()
+    narrative = extract_core_narrative(clean_topic, script)
+
+    if style == "claymorphic_3d":
+        prompt = (
+            f"A premium 3D claymorphic isometric conceptual illustration. "
+            f"Set on a floating minimalist pastel platform: {narrative['setting']}. "
+            f"Focal subject: {narrative['protagonist']}. "
+            f"Narrative tension: {narrative['conflict']}. "
+            f"Concept: {narrative['metaphor']}. "
+            f"Tactile smooth matte clay textures, soft rounded edges, warm studio lighting, subtle clean ambient occlusion. "
+            f"Color palette: {narrative['palette']}. "
+            f"Apple Keynote 3D diorama aesthetic, playful yet sophisticated, pristine minimalist composition. "
+            f"No text, no words, no logos, no watermarks."
+        )
+        aesthetic_tag = "claymorphic_3d_diorama"
+
+    elif style == "cinematic_studio":
+        prompt = (
+            f"A high-end cinematic editorial studio photograph. "
+            f"Setting: {narrative['setting']}. "
+            f"Subject: {narrative['protagonist']}. "
+            f"Emotional contrast: {narrative['conflict']}. "
+            f"Shot on 85mm f/1.8 prime lens, shallow depth of field, natural diffused daylight, authentic human emotion. "
+            f"Color palette: {narrative['palette']}. "
+            f"Contemporary Kinfolk and Monocle magazine aesthetic, elegant, uncluttered, emotionally resonant. "
+            f"No text, no words, no logos, no watermarks."
+        )
+        aesthetic_tag = "cinematic_studio_editorial"
+
+    else:
+        # Default Flagship: Clean Modern Editorial 2.5D Conceptual Art
+        prompt = (
+            f"A clean modern editorial conceptual illustration. "
+            f"Setting: {narrative['setting']}. "
+            f"Focal subject: {narrative['protagonist']}. "
+            f"Narrative contrast: {narrative['conflict']}. "
+            f"Visual concept: {narrative['metaphor']}. "
+            f"Crisp lines, sophisticated color blocking, soft pastel gradients, warm natural sunlight, generous negative space. "
+            f"Color palette: {narrative['palette']}. "
+            f"Apple Studio minimalist aesthetic, The New Yorker and Vox modern conceptual style, uncluttered, emotionally grounded. "
+            f"No text, no words, no letters, no logos, no watermarks, no borders."
+        )
+        aesthetic_tag = "clean_modern_editorial_2d"
 
     image_name = re.sub(r"[^a-z0-9]+", "_", clean_topic.lower()).strip("_")[:28]
     if not image_name:
-        image_name = "psychological_scene"
+        image_name = "editorial_hook"
 
     return {
         "topic": clean_topic,
         "image_name": f"{image_name}_scene",
         "prompt": prompt,
         "aspect_ratio": "16:9",
-        "reference_aesthetic": "painterly_surreal_chiaroscuro"
+        "style": style,
+        "reference_aesthetic": aesthetic_tag,
+        "narrative": narrative
     }
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate bespoke painterly illustration prompt")
+    parser = argparse.ArgumentParser(description="Generate bespoke hero visual prompt")
     parser.add_argument("--topic", required=True, help="Video topic or title")
+    parser.add_argument("--script", default="", help="Spoken hook or script")
+    parser.add_argument("--style", choices=["editorial", "claymorphic_3d", "cinematic_studio"], default="editorial", help="Visual art style")
+    parser.add_argument("--niche", default="self_improvement", help="Channel niche")
     parser.add_argument("--json", action="store_true", help="Output JSON format")
     args = parser.parse_args()
 
-    result = build_illustration_prompt(args.topic)
+    result = build_illustration_prompt(args.topic, script=args.script, style=args.style, niche=args.niche)
     if args.json:
         print(json.dumps(result, indent=2))
     else:
         print(f"\n{'='*60}")
-        print(f"🎨 Bespoke Painterly Illustration Prompt for: '{result['topic']}'")
+        print(f"🎨 Clean Hero Visual Prompt for: '{result['topic']}'")
         print(f"{'='*60}\n")
-        print(f"Image Name: {result['image_name']}")
+        print(f"Style:        {result['style']} ({result['reference_aesthetic']})")
+        print(f"Image Name:   {result['image_name']}")
         print(f"Aspect Ratio: {result['aspect_ratio']}\n")
         print(f"PROMPT:\n{result['prompt']}\n")
         print(f"{'='*60}\n")
 
 if __name__ == "__main__":
     main()
+

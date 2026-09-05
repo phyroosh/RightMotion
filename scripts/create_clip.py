@@ -713,16 +713,32 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     if meme_meta:
         m_id = meme_meta.get("id", "side_eye_dog")
         m_dur = min(meme_meta.get("default_duration_frames", 45), 66)
-        m_start = max(18, min(f_c1_cutout - 8, 28))
+        m_start = int(meme_meta.get("start_frame", 0))  # Default 0 for instant opening hook
         m_speed = meme_meta.get("playback_rate", 1.4)
         m_label = meme_meta.get("hud_label", "REACTION PROTOCOL // 01")
         m_sfx = meme_meta.get("recommended_sfx", "whoosh_fast")
+        m_mode = meme_meta.get("mode", "video")
         m_theme = "dark_obsidian" if niche in ("finance", "facecam") else ("cyber_cyan" if niche == "health" else "apple_studio")
 
         sfx_cues.append({"frame": m_start, "type": m_sfx, "volume": 0.32})
         sfx_cues.append({"frame": m_start + m_dur, "type": "click", "volume": 0.22})
 
-        meme_jsx = f"""
+        if m_mode == "frame":
+            meme_jsx = f"""
+      {{/* ======================================================== */}}
+      {{/* TACTICAL RETENTION MEME FRAME POP (< 2.5s Strict Cap)   */}}
+      {{/* ======================================================== */}}
+      <TacticalMemeFrame
+        memeId="{m_id}"
+        startFrame={{{m_start}}}
+        durationFrames={{{m_dur}}}
+        hudLabel="{m_label}"
+        theme="{m_theme}"
+        position="top"
+      />
+"""
+        else:
+            meme_jsx = f"""
       {{/* ======================================================== */}}
       {{/* TACTICAL RETENTION MEME POP (< 2.5s Strict Cap)          */}}
       {{/* ======================================================== */}}
@@ -993,7 +1009,7 @@ import {{ ProCutout }} from "../../components/ProCutout";
 import {{ ProductPageShowcase }} from "../../components/ProductPageShowcase";
 import {{ CinematicIllustrationCard }} from "../../components/CinematicIllustrationCard";
 import {{ InteractiveEngagementPill }} from "../../components/InteractiveEngagementPill";
-import {{ TacticalMemeCard }} from "../../components/TacticalMemeCard";
+import {{ TacticalMemeCard, TacticalMemeFrame }} from "../../components/TacticalMemeCard";
 import {{ Sparkles, Zap, ArrowRight }} from "lucide-react";
 import {{ WordTimestamp }} from "../../types";
 
@@ -1320,6 +1336,8 @@ async def main():
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
     parser.add_argument("--duo", action="store_true", help="Enable Conversational Duo mode (Judy & Andrew)")
     parser.add_argument("--meme", default=None, help="Meme ID override (e.g. side_eye_dog) or 'auto'")
+    parser.add_argument("--meme-start", type=int, default=0, help="Meme start frame (default: 0 for instant opening hook)")
+    parser.add_argument("--meme-mode", choices=["video", "frame"], default="video", help="Meme display mode (video card or still frame)")
     parser.add_argument("--no-meme", action="store_true", help="Disable Tactical Meme pop (memes are enabled by default)")
     parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
@@ -1486,9 +1504,12 @@ async def main():
             explicit_meme_id=target_meme_id
         )
         if meme_match:
+            meme_match = dict(meme_match)
+            meme_match["start_frame"] = args.meme_start
+            meme_match["mode"] = args.meme_mode
             override_str = f" (explicit override: {explicit_meme})" if target_meme_id else " (DEFAULT auto-matched)"
             print(f"🎭 [Meme Engine] Tactical retention meme enabled{override_str}: '{meme_match['name']}' ({meme_match['id']})")
-            print(f"      Duration: {meme_match['default_duration_frames']} frames (< 2.5s cap), Speed: {meme_match['playback_rate']}x, SFX: {meme_match['recommended_sfx']}")
+            print(f"      Start: Frame {meme_match['start_frame']} ({'Instant Hook' if meme_match['start_frame'] == 0 else f'{meme_match['start_frame']/30:.1f}s'}), Mode: {meme_match['mode']}, Duration: {meme_match['default_duration_frames']} frames (< 2.5s cap), Speed: {meme_match['playback_rate']}x, SFX: {meme_match['recommended_sfx']}")
     else:
         print(f"🔇 [Meme Engine] Tactical meme disabled via {{no meme}} / --no-meme.")
 
