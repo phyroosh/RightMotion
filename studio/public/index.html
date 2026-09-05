@@ -516,6 +516,46 @@
               class="bg-transparent text-xs text-white placeholder:text-slate-600 outline-none flex-1 min-w-[90px]"
             />
           </div>
+        <!-- High-Retention Suggested Pinned Comment -->
+        <div class="flex flex-col gap-2 p-4 rounded-2xl glass-input border border-sky-500/30 bg-sky-500/5 shadow-lg">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold text-sky-300 flex items-center gap-2">
+              <i data-lucide="message-square-quote" class="w-4 h-4 text-sky-400"></i>
+              <span>Suggested Pinned Discussion Comment</span>
+            </label>
+            <button
+              type="button"
+              id="copyPinnedCommentBtn"
+              onclick="copyPinnedComment()"
+              class="px-2.5 py-1 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 text-[11px] font-bold border border-sky-500/30 flex items-center gap-1.5 transition"
+              title="Copy comment to clipboard"
+            >
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span id="copyPinnedCommentBtnText">Copy</span>
+            </button>
+          </div>
+          <textarea
+            id="metaPinnedComment"
+            rows="3"
+            placeholder="AI-generated high-retention pinned comment prompt to spark audience replies..."
+            class="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-sky-500/20 text-xs text-slate-200 font-medium placeholder:text-slate-600 leading-relaxed custom-scrollbar focus:border-sky-400 outline-none"
+          ></textarea>
+          <div class="flex items-center justify-between pt-1 border-t border-sky-500/10 text-[11px]">
+            <label class="flex items-center gap-2 text-slate-300 cursor-pointer select-none">
+              <input type="checkbox" id="autoPostCommentCheck" checked class="rounded bg-slate-900 border-slate-700 text-sky-500 focus:ring-sky-500" />
+              <span>Auto-post comment on upload</span>
+            </label>
+            <button
+              type="button"
+              id="postCommentNowBtn"
+              onclick="postCommentNow()"
+              class="hidden px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold border border-emerald-500/30 transition flex items-center gap-1"
+              title="Post this comment to the live YouTube video right now"
+            >
+              <i data-lucide="send" class="w-3 h-3"></i>
+              <span>Post Now</span>
+            </button>
+          </div>
         </div>
 
         <!-- Settings Row: Visibility / Scheduling & Category -->
@@ -3046,6 +3086,19 @@
       if (privacyEl) privacyEl.value = meta.privacyStatus || 'public';
       if (catEl) catEl.value = meta.categoryId || '27';
       currentTags = Array.isArray(meta.tags) ? [...meta.tags] : ['Shorts'];
+
+      const pinnedCommentEl = document.getElementById('metaPinnedComment');
+      if (pinnedCommentEl) pinnedCommentEl.value = meta.pinnedComment || '';
+
+      const postCommentNowBtn = document.getElementById('postCommentNowBtn');
+      if (postCommentNowBtn) {
+        const hasYtVideoId = selectedVideo.isUploaded && (selectedVideo.youtube?.videoId || selectedVideo.uploadInfo?.videoId || selectedVideo.uploadInfo?.channels);
+        if (hasYtVideoId) {
+          postCommentNowBtn.classList.remove('hidden');
+        } else {
+          postCommentNowBtn.classList.add('hidden');
+        }
+      }
       
       // Initialize default schedule time to +2 hours from now
       if (schedDtEl) {
@@ -3263,6 +3316,7 @@
         tags: currentTags,
         categoryId: document.getElementById('metaCategory').value,
         privacyStatus: document.getElementById('metaPrivacy').value,
+        pinnedComment: document.getElementById('metaPinnedComment')?.value.trim() || '',
       };
 
       try {
@@ -3278,6 +3332,50 @@
         }
       } catch (err) {
         showToast('Error saving metadata: ' + err.message);
+      }
+    }
+
+    function copyPinnedComment() {
+      const commentEl = document.getElementById('metaPinnedComment');
+      if (!commentEl || !commentEl.value.trim()) {
+        showToast('⚠️ No pinned comment to copy.');
+        return;
+      }
+      navigator.clipboard.writeText(commentEl.value.trim());
+      const btnText = document.getElementById('copyPinnedCommentBtnText');
+      if (btnText) {
+        btnText.textContent = 'Copied!';
+        setTimeout(() => { btnText.textContent = 'Copy'; }, 2000);
+      }
+      showToast('📋 Discussion comment copied to clipboard!');
+    }
+
+    async function postCommentNow() {
+      if (!selectedVideo) return;
+      const commentEl = document.getElementById('metaPinnedComment');
+      const text = commentEl ? commentEl.value.trim() : '';
+      if (!text) {
+        showToast('⚠️ Please enter a comment before posting.');
+        return;
+      }
+      try {
+        showToast('💬 Posting discussion comment to YouTube...');
+        const res = await fetch(`/api/videos/${encodeURIComponent(selectedVideo.filename)}/comment`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ commentText: text }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('✅ Discussion comment posted successfully to YouTube video!');
+          if (selectedVideo.metadata) {
+            selectedVideo.metadata.pinnedComment = text;
+          }
+        } else {
+          showToast(`❌ Failed to post comment: ${data.error}`);
+        }
+      } catch (err) {
+        showToast(`❌ Comment error: ${err.message}`);
       }
     }
 
@@ -3623,6 +3721,8 @@
               tags,
               categoryId,
               privacyStatus: currentModalTiming === 'draft' ? 'private' : 'public',
+              pinnedComment: document.getElementById('metaPinnedComment')?.value.trim() || '',
+              autoPostComment: document.getElementById('autoPostCommentCheck')?.checked ?? true,
             },
             instagram: {
               caption: `${title}\n\n${description}\n\n#Shorts #Reels #JudyInsights #Viral`,

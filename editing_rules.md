@@ -99,3 +99,19 @@
     - Beat 2 (~2.5s): Camera punch zoom (`zoomLevel: 1.15`), target reticle, tactical HUD callout pin (`<IllustrationCalloutPin />`), and progressive subtitle reveal (`subtitleFrame`).
     - Beat 3 (~5.5s): Angled diagnostic warning stamp (`<IllustrationStamp />`) with `impact_hit` sound.
   - Split long sentences ($\ge 16$ words) on contrast conjunctions so Scene 1 transitions into Scene 2 by ~7–8s.
+
+## 9. High-Retention Blueprint, 7-Second Pivot & Pinned Comment Engine
+- **Runtime Hard-Cap**: Strict **24–32 seconds** (~65–85 words). Empirical channel data proves shorter videos achieve 65–75%+ retention and 10x higher view velocity.
+- **The Cognitive Paradox Standard (Anti-Flop)**:
+  - Ban vague emotional comfort (*"When life feels unfair"* $\rightarrow$ 20.8% retention).
+  - Target concrete behavioral contradictions & self-sabotage mechanisms (*"Why smart people keep making bad choices"* $\rightarrow$ 63.2% retention).
+- **The 7-Second Retention Pivot**:
+  - The 7-second mark is where 75% of viewers swipe away if there's a lull.
+  - Deliver the counter-intuitive psychological/neurological mechanism by second 5.5–7.0.
+  - Eliminate dead air pauses in audio and ensure Scene 1 transitions into Scene 2 by Frame 190–220.
+- **Interactive Engagement Overlay (`<InteractiveEngagementPill />`)**:
+  - Pops in at ~70% timeline (seconds 18–22) for 3.5s just above the caption safe zone to prompt comments and likes (*"Have you felt this? Drop a 🧠 below"*, *"Save this for later 📌"*).
+- **Autonomous Pinned Comment Engine**:
+  - Output `[PINNED COMMENT]` with every script generation.
+  - Stored in `studio/metadata.json` under `pinnedComment`.
+  - Automatically posted to YouTube via YouTube Data API (`commentThreads.insert`) on upload.

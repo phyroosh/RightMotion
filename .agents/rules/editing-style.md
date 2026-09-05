@@ -66,3 +66,10 @@ Never squish the avatar in a corner or have graphics fighting for space on scree
 - **Motion Polish**: Never static! Wrap in `<CinematicIllustrationCard />` with subtle 2.5D Ken Burns zoom drift (`1.0x -> 1.07x`), diagonal glass glare sheen sweep, tactile card tilt with masking tape (`TapeStrip`), and monospace HUD telemetry (`COGNITIVE DIAGNOSTIC // 01`).
 - **Timing & Multi-Beat Overlays**: Enters at Frame 0 as the instant hero hook. Judy presents the outro (`isFinale`) cleanly without card clutter. Never leave the illustration static for $>3.5$s: add camera punch zoom (`1.15x`), tactical callout pins (`<IllustrationCalloutPin />`), and angled diagnostic stamps (`<IllustrationStamp />`) every 1.5–2.5s.
 - **Graceful Multi-Agent Fallback**: Agents with `generate_image` (Antigravity) generate the bespoke 16:9 art; agents without it (Claude Code) skip image generation and fall back to `ProCutout` seamlessly.
+
+## 7. High-Retention Blueprint & Pinned Comment Engine
+- **Runtime Standard**: Strict **24–32 seconds** (~65–85 words). Shorter runtimes yield 65–75%+ retention and higher view velocity.
+- **Cognitive Paradox Standard**: Ban vague comfort cliches (*"When life feels unfair"* $\rightarrow$ 20.8% retention); lead with behavioral contradictions (*"Why smart people keep making bad choices"* $\rightarrow$ 63.2% retention).
+- **The 7-Second Retention Pivot**: Deliver the counter-intuitive mechanism by second 5.5–7.0. Eliminate pauses and transition Scene 1 to Scene 2 by Frame 190–220.
+- **On-Screen Interactive Overlay (`<InteractiveEngagementPill />`)**: Renders at ~70% timeline (seconds 18–22) to convert viewers into comments and likes.
+- **Autonomous Pinned Comment**: Generate `[PINNED COMMENT]` with every script; auto-posted to YouTube via YouTube Data API (`commentThreads.insert`) on upload.

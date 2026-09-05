@@ -833,7 +833,7 @@ app.get('/api/upload-status', (req, res) => {
 
 // 8. API: Upload or Schedule Video to YouTube
 app.post('/api/upload', async (req, res) => {
-  const { filename, title, description, tags, categoryId, privacyStatus, publishAt } = req.body;
+  const { filename, title, description, tags, categoryId, privacyStatus, publishAt, pinnedComment, autoPostComment = true } = req.body;
 
   if (!filename) {
     return res.status(400).json({ error: 'Filename is required' });
@@ -960,11 +960,45 @@ app.post('/api/upload', async (req, res) => {
       }
     }
 
+    // Automatically post high-converting Discussion Pinned Comment if provided & enabled
+    const savedMeta = getSavedMetadata();
+    const targetComment = (pinnedComment !== undefined && pinnedComment !== null)
+      ? pinnedComment
+      : (savedMeta[filename]?.pinnedComment || null);
+
+    let commentPosted = false;
+    let commentId = null;
+
+    if (autoPostComment && targetComment && targetComment.trim()) {
+      try {
+        activeUpload.stage = 'Posting creator discussion comment to YouTube...';
+        console.log(`💬 Posting creator discussion comment to video ${videoId}...`);
+        const commentRes = await youtube.commentThreads.insert({
+          part: 'snippet',
+          requestBody: {
+            snippet: {
+              videoId,
+              topLevelComment: {
+                snippet: {
+                  textOriginal: targetComment.trim(),
+                },
+              },
+            },
+          },
+        });
+        commentId = commentRes.data?.id || null;
+        commentPosted = true;
+        console.log('✅ Creator discussion comment posted successfully! ID:', commentId);
+      } catch (commentErr) {
+        console.warn('⚠️ Discussion comment could not be posted automatically:', commentErr.message);
+      }
+    }
+
     activeUpload.inProgress = false;
     activeUpload.progress = 100;
     activeUpload.stage = isScheduling
       ? `🎉 Upload Complete! Scheduled with custom thumbnail for ${new Date(isoPublishAt).toLocaleString()}`
-      : `🎉 Upload Complete! Video ${thumbnailAttached ? 'with custom thumbnail ' : ''}is live on YouTube.`;
+      : `🎉 Upload Complete! Video ${thumbnailAttached ? 'with custom thumbnail ' : ''}is live on YouTube.${commentPosted ? ' 💬 Discussion comment posted!' : ''}`;
       
     activeUpload.result = {
       videoId,
@@ -976,6 +1010,9 @@ app.post('/api/upload', async (req, res) => {
       isScheduled: isScheduling,
       publishedAt: response.data.snippet.publishedAt || new Date().toISOString(),
       thumbnailAttached,
+      commentPosted,
+      commentId,
+      pinnedComment: targetComment,
     };
 
     // Save record to persistent uploads.json
@@ -991,6 +1028,9 @@ app.post('/api/upload', async (req, res) => {
       isScheduled: isScheduling,
       publishedAt: activeUpload.result.publishedAt,
       thumbnailAttached,
+      commentPosted,
+      commentId,
+      pinnedComment: targetComment,
     };
     saveUploadsRecord(uploads);
 
@@ -999,6 +1039,56 @@ app.post('/api/upload', async (req, res) => {
     console.error('❌ Upload error:', err);
     activeUpload.inProgress = false;
     activeUpload.error = err.message || 'Upload failed';
+  }
+});
+
+// 8b. API: Post or Re-post Discussion Comment to YouTube Video
+app.post('/api/videos/:filename/comment', async (req, res) => {
+  const { filename } = req.params;
+  const { commentText } = req.body;
+  const uploads = getUploadsRecord();
+  const videoRecord = uploads[filename];
+
+  if (!videoRecord || !videoRecord.videoId) {
+    return res.status(404).json({ error: 'Video is not yet uploaded to YouTube or videoId is missing' });
+  }
+
+  const textToPost = commentText || videoRecord.pinnedComment || getSavedMetadata()[filename]?.pinnedComment;
+  if (!textToPost || !textToPost.trim()) {
+    return res.status(400).json({ error: 'No comment text provided or found in metadata' });
+  }
+
+  try {
+    const oauth2Client = getOAuth2Client();
+    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+    const response = await youtube.commentThreads.insert({
+      part: ['snippet'],
+      requestBody: {
+        snippet: {
+          videoId: videoRecord.videoId,
+          topLevelComment: {
+            snippet: {
+              textOriginal: textToPost.trim(),
+            },
+          },
+        },
+      },
+    });
+
+    videoRecord.commentPosted = true;
+    videoRecord.commentId = response.data?.id || null;
+    videoRecord.pinnedComment = textToPost.trim();
+    saveUploadsRecord(uploads);
+
+    res.json({
+      success: true,
+      commentId: response.data?.id,
+      videoId: videoRecord.videoId,
+      comment: textToPost.trim(),
+    });
+  } catch (err) {
+    console.error('Comment posting error:', err);
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -1343,6 +1433,32 @@ app.post('/api/publish-multi', async (req, res) => {
         }
       }
 
+      // Automatically post high-converting Discussion Pinned Comment if provided
+      const targetComment = youtube.pinnedComment || savedMetadata[filename]?.pinnedComment || null;
+      let commentPosted = false;
+      let commentId = null;
+      if (youtube.autoPostComment !== false && targetComment && targetComment.trim()) {
+        try {
+          activeUpload.stage = `[${stepIndex}/${totalDestinations}] Posting creator discussion comment on "${channel.title}"...`;
+          const cRes = await ytClient.commentThreads.insert({
+            part: ['snippet'],
+            requestBody: {
+              snippet: {
+                videoId,
+                topLevelComment: {
+                  snippet: { textOriginal: targetComment.trim() },
+                },
+              },
+            },
+          });
+          commentId = cRes.data?.id || null;
+          commentPosted = true;
+          console.log(`✅ Creator discussion comment posted for ${channel.title}! ID:`, commentId);
+        } catch (cErr) {
+          console.warn(`Could not post discussion comment for ${channel.title}:`, cErr.message);
+        }
+      }
+
       const channelRecord = {
         uploaded: true,
         channelId: channel.channelId,
@@ -1354,6 +1470,9 @@ app.post('/api/publish-multi', async (req, res) => {
         publishAt: isoPublishAt,
         publishedAt: ytRes.data.snippet.publishedAt || new Date().toISOString(),
         thumbnailAttached,
+        commentPosted,
+        commentId,
+        pinnedComment: targetComment,
       };
 
       existing.channels[channel.channelId] = channelRecord;
@@ -1367,6 +1486,9 @@ app.post('/api/publish-multi', async (req, res) => {
       existing.publishAt = isoPublishAt;
       existing.publishedAt = channelRecord.publishedAt;
       existing.youtube = channelRecord;
+      existing.commentPosted = commentPosted;
+      existing.commentId = commentId;
+      existing.pinnedComment = targetComment;
 
       if (!activeUpload.result.youtubeChannels) activeUpload.result.youtubeChannels = [];
       activeUpload.result.youtubeChannels.push(channelRecord);
@@ -1560,6 +1682,33 @@ app.post('/api/niches/:nicheId/publish', async (req, res) => {
               }
             }
 
+            // Discussion Comment
+            const targetComment = meta.pinnedComment || null;
+            let commentPosted = false;
+            let commentId = null;
+            if (uploadedVideoId && targetComment && targetComment.trim()) {
+              try {
+                const cRes = await youtube.commentThreads.insert({
+                  part: ['snippet'],
+                  requestBody: {
+                    snippet: {
+                      videoId: uploadedVideoId,
+                      topLevelComment: {
+                        snippet: {
+                          textOriginal: targetComment.trim(),
+                        },
+                      },
+                    },
+                  },
+                });
+                commentId = cRes.data?.id || null;
+                commentPosted = true;
+                console.log(`✅ Discussion comment posted for channel ${niche.youtube.title}!`);
+              } catch (cErr) {
+                console.warn('Comment post warning:', cErr.message);
+              }
+            }
+
             existing.channels[chId] = {
               uploaded: true,
               videoId: uploadedVideoId,
@@ -1567,6 +1716,9 @@ app.post('/api/niches/:nicheId/publish', async (req, res) => {
               isScheduled,
               channelTitle: niche.youtube.title,
               publishedAt: new Date().toISOString(),
+              commentPosted,
+              commentId,
+              pinnedComment: targetComment,
             };
             existing.youtube = existing.channels[chId];
           }

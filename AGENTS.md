@@ -82,8 +82,15 @@ If the user includes **`{no topics}`** (or **`{no topic}`**, case-insensitive) a
 
 #### 3. Judy Scriptwriting Persona & Quality Standards:
 - **Persona**: Female anime-style host (Judy) with a soft, warm, intelligent, emotionally grounded voice ("smart older sister" or "caring friend").
-- **Length & Pacing**: Strict **75–90 words** (~30–35s, hard cap 100 words).
-- **Structure**: Hook (0-3s pattern interrupt) $\rightarrow$ Psychological/Biological Mechanism (3-25s) $\rightarrow$ Actionable Shift & Ending (25-35s).
+- **Length & Pacing**: Strict **65–85 words** (~24–30s, hard cap 90 words). *Empirical channel data proves shorter runtimes (24–30s) deliver 65–75%+ retention and 10x higher view velocity.*
+- **Structure**:
+  - **Hook (0–3s)**: High-velocity pattern interrupt. Lead with a **cognitive paradox, hypocrisy, or concrete behavioral quirk** (*"Why smart people keep making bad choices"*, *"Notice how you pretend not to care about the things you want most"*).
+  - **The 7-Second Retention Pivot (3–8s)**: By second 5.5–7.0, deliver the counter-intuitive psychological/neurological mechanism (*"It's not laziness — your nervous system is in dorsal vagal freeze."* or *"Psychologists call this the Counter-Intentional Loop."*). Never allow a narrative or visual lull at the 7-second mark!
+  - **Actionable Shift & Ending (8–28s)**: Concrete, micro-habit rewiring $\rightarrow$ grounded CTA.
+- **PERMANENT BAN ON VAGUE COMFORT TOPICS (ANTI-FLOP RULE)**:
+  - ❌ *"When life feels unfair"* (scored 20.8% retention — 80% swipe-away rate!)
+  - ❌ *"You are not alone"*, *"Believe in yourself"*, *"It's okay to feel sad"* (scrollers swipe away from broad motivational comfort expecting an unhelpful lecture).
+  - ✅ **Concrete Behavioral Quirks Only**: Contradictions, inner friction, overthinking loops, self-sabotage mechanisms.
 - **PERMANENT BAN ON AI CLICHÉS**:
   - ❌ *"Here's the thing..."*
   - ❌ *"The truth is..."*
@@ -93,6 +100,14 @@ If the user includes **`{no topics}`** (or **`{no topic}`**, case-insensitive) a
   - ❌ *"That's because..."*
 - **PERMANENT BAN ON SALES HYPE**:
   - ❌ *"masterpiece"*, *"life-changing"*, *"must-read"*, *"buy now"*, *"worth every cent"*, *"game-changer"*
+
+#### 4. Mandatory `[PINNED COMMENT]` Output (ZERO-COMMENT KILLER):
+Every AI Agent generating a video script MUST generate an open-ended, highly relatable or polarizing creator comment to catalyst viewer engagement and comments from 0:
+```
+[PINNED COMMENT]
+<provocative, low-friction question or callout for viewers to reply to>
+```
+*Example: "Question for you: What's the one thing you secretly care deeply about, but pretend is no big deal around others? Be honest 👇"*
 
 ---
 

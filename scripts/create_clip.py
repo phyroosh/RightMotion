@@ -363,6 +363,68 @@ def generate_illustration_beats(s1_words, s1_start, s2_start, topic, hook_text, 
     subtitle_frame = b2_frame
     return beats, subtitle_frame
 
+def generate_pinned_comment(topic: str, niche: str, hook_text: str = "", script_text: str = "") -> str:
+    """
+    Autonomously generate a high-retention, discussion-catalyzing pinned comment.
+    Designed to trigger viewer responses, boost comments from 0, and drive algorithmic push.
+    """
+    clean_top = topic.replace("{Self Improvement}", "").replace("{Finance}", "").replace("{Health}", "").replace("{facecam}", "").replace("{no topics}", "").replace("{no meta}", "").strip()
+    lower_t = f"{clean_top} {hook_text} {script_text}".lower()
+
+    if niche == "finance":
+        if any(k in lower_t for k in ["credit", "score", "utilization"]):
+            return "Be honest: What's the biggest credit card myth you believed when you first started? Drop your score goals below 👇"
+        elif any(k in lower_t for k in ["invest", "roth", "compound", "401k"]):
+            return "At what age did you first hear about compounding? Let's see the average in the replies 👇"
+        elif any(k in lower_t for k in ["emergency", "savings", "debt"]):
+            return "What's the #1 unexpected expense that wiped out your savings before? How did you recover? 👇"
+        return "Be honest: what's the one financial rule you wish you were taught at 18 instead of learning the hard way? Drop your thoughts below 👇"
+
+    elif niche == "health":
+        if any(k in lower_t for k in ["caffeine", "coffee", "adenosine", "crash"]):
+            return "How many minutes after waking up do you usually drink your first coffee? Drop your exact morning time below 👇"
+        elif any(k in lower_t for k in ["sleep", "cortisol", "circadian", "wake"]):
+            return "What time do you usually fall asleep vs when you actually want to? Call yourself out below 👇"
+        elif any(k in lower_t for k in ["freeze", "doomscroll", "dopamine"]):
+            return "How many hours of screentime did your phone log yesterday? Be brutally honest 👇"
+        return "Quick pulse check: Which of these habits drains your physical energy the most right now? Drop a 🫀 below 👇"
+
+    elif niche == "facecam":
+        return "What's your take on this strategy? Would you have made this same move? Let's discuss in the comments 👇"
+
+    else:
+        # Self Improvement / Psychology
+        if any(k in lower_t for k in ["smart", "bad choices", "foolish", "decision"]):
+            return "Be honest: What's a bad choice you made recently even though you knew better? We've all been there 👇"
+        elif any(k in lower_t for k in ["pretend", "care", "trying", "caught"]):
+            return "Question for you: What's the one thing you secretly care deeply about, but pretend is no big deal around others? Be honest 👇"
+        elif any(k in lower_t for k in ["overthinking", "2 am", "spiral", "text"]):
+            return "What was the last interaction you caught your brain over-analyzing at 2 AM? Drop it below 👇"
+        elif any(k in lower_t for k in ["mask", "exhaustion", "burnout"]):
+            return "How much of your day is spent performing versus actually feeling like yourself? Drop your thoughts below 👇"
+        elif any(k in lower_t for k in ["alone", "loneliness", "isolated", "friend"]):
+            return "If you're in a season where it feels like nobody truly gets you, drop a 🤍 below. You're not as isolated as you think."
+        elif any(k in lower_t for k in ["promise", "trust", "habit"]):
+            return "What's one small promise to yourself that you're going to keep today? Lock it in below 👇"
+        return "Which part of this breakdown hit closest to home for you? Drop a 🧠 below 👇"
+
+def generate_engagement_pill_text(topic: str, niche: str) -> str:
+    lower_t = topic.lower()
+    if niche == "finance":
+        return "Save this framework for payday 📌"
+    elif niche == "health":
+        return "Drop a 🫀 if you need this reset"
+    else:
+        if "overthink" in lower_t or "2 am" in lower_t:
+            return "Save this for your next 2 AM spiral 📌"
+        elif "pretend" in lower_t or "trying" in lower_t:
+            return "Have you caught yourself doing this? 🧠"
+        elif "alone" in lower_t:
+            return "Drop a 🤍 if this resonated with you"
+        elif "promise" in lower_t:
+            return "Double tap to lock in your promise 🔒"
+        return "Have you felt this? Drop your thoughts 👇"
+
 def align_concepts(concepts, words_list, fps=30):
     aligned = []
     curr_idx = 0
@@ -605,6 +667,19 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
     ]
 
+    # 4b. Interactive Engagement Pill (Seconds 18–22 / ~70% timeline to boost likes and comments)
+    pill_entrance = round(total_frames * 0.70)
+    if pill_entrance < s2_start + 45:
+        pill_entrance = s2_start + 45
+    if pill_entrance > total_frames - 90:
+        pill_entrance = max(s2_start + 20, total_frames - 120)
+
+    pill_prompt = generate_engagement_pill_text(topic, niche)
+    pill_theme = "obsidian" if niche in ("finance", "facecam") else ("biotech_cyan" if niche == "health" else "apple_studio")
+    pill_icon = "pin" if niche == "finance" else ("heart" if niche == "health" else "brain")
+    pill_tag = "WEALTH CHECK" if niche == "finance" else ("BIO CHECK" if niche == "health" else "COMMUNITY")
+    sfx_cues.append({"frame": pill_entrance, "type": "click", "volume": 0.28})
+
     illustration_beats = []
     s1_subtitle_frame = f_c1_cutout
     if illustration_path:
@@ -841,6 +916,7 @@ import {{ TapeStrip }} from "../../components/collage/TapeStrip";
 import {{ ProCutout }} from "../../components/ProCutout";
 import {{ ProductPageShowcase }} from "../../components/ProductPageShowcase";
 import {{ CinematicIllustrationCard }} from "../../components/CinematicIllustrationCard";
+import {{ InteractiveEngagementPill }} from "../../components/InteractiveEngagementPill";
 import {{ Sparkles, Zap, ArrowRight }} from "lucide-react";
 import {{ WordTimestamp }} from "../../types";
 
@@ -905,6 +981,18 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
       {{/* SCENE 3: SOLUTION PROTOCOL / PRODUCT SHOWCASE (Frames {s3_start} - {s3_end}) */}}
       {{/* ======================================================== */}}
       {scene3_content_jsx}
+
+      {{/* ======================================================== */}}
+      {{/* ON-SCREEN INTERACTIVE ENGAGEMENT PILL (Seconds 18–22)    */}}
+      {{/* ======================================================== */}}
+      <InteractiveEngagementPill
+        entranceFrame={{{pill_entrance}}}
+        durationFrames={{105}}
+        prompt="{pill_prompt}"
+        tag="{pill_tag}"
+        icon="{pill_icon}"
+        theme="{pill_theme}"
+      />
     </div>
   );
 }};
@@ -1095,16 +1183,20 @@ export const {pascal_name}Thumbnail: React.FC = () => (
     if meta_file.exists():
         try:
             meta = json.loads(meta_file.read_text(encoding="utf-8"))
+            pinned_comment = generate_pinned_comment(topic=topic, niche=niche, hook_text=c1_hook_text, script_text=script_text)
             meta[f"{name}_video.mp4"] = {
                 "topic": name,
                 "title": f"{topic} 🧠 #{'Shorts' if format_type == 'shorts' else 'Masterclass'}",
                 "description": f"{topic} — Psychological breakdown of mental models, habit loops, and identity shifts.\n\n#Shorts #Psychology #Mindset #SelfImprovement",
                 "tags": ["Shorts", "Psychology", "Mindset", topic, "Self Improvement"],
                 "categoryId": "27",
-                "privacyStatus": "public"
+                "privacyStatus": "public",
+                "pinnedComment": pinned_comment
             }
             meta_file.write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
             print("      Added metadata to studio/metadata.json")
+            print(f"\n💬 [Suggested High-Retention Pinned Comment]:")
+            print(f"   \"{pinned_comment}\"\n")
         except Exception as e:
             print(f"      Metadata warning: {e}")
 
