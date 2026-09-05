@@ -1007,8 +1007,6 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
 
   return (
     <div className="{canvas_container_class}">
-      {meme_jsx}
-
       {{/* ======================================================== */}}
       {{/* SCENE 1: THE ROOT FRICTION & HOOK (Frames {s1_start} - {s2_start}) */}}
       {{/* ======================================================== */}}
@@ -1071,6 +1069,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
         icon="{pill_icon}"
         theme="{pill_theme}"
       />
+      {meme_jsx}
     </div>
   );
 }};
@@ -1319,6 +1318,7 @@ async def main():
     parser.add_argument("--facecam", default=None, help="Path to creator facecam video file")
     parser.add_argument("--video", default=None, help="Alias for --facecam")
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
+    parser.add_argument("--duo", action="store_true", help="Enable Conversational Duo mode (Judy & Andrew)")
     parser.add_argument("--meme", default=None, help="Meme ID override (e.g. side_eye_dog) or 'auto'")
     parser.add_argument("--no-meme", action="store_true", help="Disable Tactical Meme pop (memes are enabled by default)")
     parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
@@ -1493,7 +1493,13 @@ async def main():
         print(f"🔇 [Meme Engine] Tactical meme disabled via {{no meme}} / --no-meme.")
 
     illustration_path = args.illustration
-    if not illustration_path:
+    if illustration_path:
+        p_ill = Path(illustration_path)
+        if p_ill.is_absolute() and str(p_ill).startswith(str(ROOT_DIR / "public")):
+            illustration_path = str(p_ill.relative_to(ROOT_DIR / "public"))
+        elif illustration_path.startswith("public/"):
+            illustration_path = illustration_path.replace("public/", "", 1)
+    else:
         possible_locs = [
             ROOT_DIR / "public" / name / "assets" / "scene_illustration.png",
             ROOT_DIR / "public" / name / "scene_illustration.png",

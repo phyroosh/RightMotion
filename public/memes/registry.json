@@ -359,7 +359,12 @@
         "love",
         "stunned",
         "hypnotized",
-        "bewildered"
+        "bewildered",
+        "relationship",
+        "relationships",
+        "dating",
+        "romance",
+        "single"
       ],
       "best_hook_phrases": [
         "Why you get completely obsessed with someone new",

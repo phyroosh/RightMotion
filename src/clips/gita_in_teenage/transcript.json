@@ -1,0 +1,566 @@
+[
+  {
+    "word": "Notice",
+    "start": 0,
+    "end": 280,
+    "confidence": 0.966
+  },
+  {
+    "word": "how",
+    "start": 280,
+    "end": 600,
+    "confidence": 0.997
+  },
+  {
+    "word": "you",
+    "start": 600,
+    "end": 740,
+    "confidence": 0.998
+  },
+  {
+    "word": "pretend",
+    "start": 740,
+    "end": 960,
+    "confidence": 0.995
+  },
+  {
+    "word": "not",
+    "start": 960,
+    "end": 1680,
+    "confidence": 0.902
+  },
+  {
+    "word": "to",
+    "start": 1680,
+    "end": 1840,
+    "confidence": 0.998
+  },
+  {
+    "word": "care",
+    "start": 1840,
+    "end": 2000,
+    "confidence": 0.998
+  },
+  {
+    "word": "about",
+    "start": 2000,
+    "end": 2260,
+    "confidence": 0.998
+  },
+  {
+    "word": "the",
+    "start": 2260,
+    "end": 2380,
+    "confidence": 0.979
+  },
+  {
+    "word": "things",
+    "start": 2380,
+    "end": 2560,
+    "confidence": 0.998
+  },
+  {
+    "word": "you",
+    "start": 2560,
+    "end": 2720,
+    "confidence": 0.988
+  },
+  {
+    "word": "actually",
+    "start": 2720,
+    "end": 3020,
+    "confidence": 0.993
+  },
+  {
+    "word": "want",
+    "start": 3020,
+    "end": 3340,
+    "confidence": 1.0
+  },
+  {
+    "word": "most?",
+    "start": 3340,
+    "end": 3540,
+    "confidence": 0.995
+  },
+  {
+    "word": "We",
+    "start": 4120,
+    "end": 4160,
+    "confidence": 0.992
+  },
+  {
+    "word": "learn",
+    "start": 4160,
+    "end": 4340,
+    "confidence": 0.981
+  },
+  {
+    "word": "to",
+    "start": 4340,
+    "end": 4500,
+    "confidence": 0.999
+  },
+  {
+    "word": "act",
+    "start": 4500,
+    "end": 4700,
+    "confidence": 1.0
+  },
+  {
+    "word": "indifferent",
+    "start": 4700,
+    "end": 4900,
+    "confidence": 0.918
+  },
+  {
+    "word": "so",
+    "start": 4900,
+    "end": 5360,
+    "confidence": 0.96
+  },
+  {
+    "word": "nobody",
+    "start": 5360,
+    "end": 5620,
+    "confidence": 0.985
+  },
+  {
+    "word": "can",
+    "start": 5620,
+    "end": 5940,
+    "confidence": 0.997
+  },
+  {
+    "word": "laugh",
+    "start": 5940,
+    "end": 6160,
+    "confidence": 0.995
+  },
+  {
+    "word": "at",
+    "start": 6160,
+    "end": 6440,
+    "confidence": 0.994
+  },
+  {
+    "word": "us",
+    "start": 6440,
+    "end": 6660,
+    "confidence": 0.998
+  },
+  {
+    "word": "if",
+    "start": 6660,
+    "end": 6980,
+    "confidence": 0.827
+  },
+  {
+    "word": "we",
+    "start": 6980,
+    "end": 7120,
+    "confidence": 0.999
+  },
+  {
+    "word": "fall",
+    "start": 7120,
+    "end": 7280,
+    "confidence": 0.993
+  },
+  {
+    "word": "short.",
+    "start": 7280,
+    "end": 7680,
+    "confidence": 1.0
+  },
+  {
+    "word": "Psychologists",
+    "start": 8040,
+    "end": 8440,
+    "confidence": 0.991
+  },
+  {
+    "word": "call",
+    "start": 8440,
+    "end": 8840,
+    "confidence": 0.998
+  },
+  {
+    "word": "this",
+    "start": 8840,
+    "end": 9040,
+    "confidence": 0.997
+  },
+  {
+    "word": "the",
+    "start": 9040,
+    "end": 9200,
+    "confidence": 0.972
+  },
+  {
+    "word": "social",
+    "start": 9200,
+    "end": 9420,
+    "confidence": 0.898
+  },
+  {
+    "word": "mask.",
+    "start": 9420,
+    "end": 9740,
+    "confidence": 0.994
+  },
+  {
+    "word": "You",
+    "start": 10220,
+    "end": 10280,
+    "confidence": 0.996
+  },
+  {
+    "word": "spend",
+    "start": 10280,
+    "end": 10520,
+    "confidence": 0.971
+  },
+  {
+    "word": "so",
+    "start": 10520,
+    "end": 10920,
+    "confidence": 0.996
+  },
+  {
+    "word": "much",
+    "start": 10920,
+    "end": 11180,
+    "confidence": 0.999
+  },
+  {
+    "word": "energy",
+    "start": 11180,
+    "end": 11560,
+    "confidence": 0.999
+  },
+  {
+    "word": "performing",
+    "start": 11560,
+    "end": 11960,
+    "confidence": 0.983
+  },
+  {
+    "word": "casualness",
+    "start": 11960,
+    "end": 12760,
+    "confidence": 0.951
+  },
+  {
+    "word": "that",
+    "start": 12760,
+    "end": 13000,
+    "confidence": 0.974
+  },
+  {
+    "word": "you",
+    "start": 13000,
+    "end": 13120,
+    "confidence": 0.998
+  },
+  {
+    "word": "never",
+    "start": 13120,
+    "end": 13300,
+    "confidence": 0.997
+  },
+  {
+    "word": "give",
+    "start": 13300,
+    "end": 13540,
+    "confidence": 0.997
+  },
+  {
+    "word": "yourself",
+    "start": 13540,
+    "end": 13780,
+    "confidence": 0.957
+  },
+  {
+    "word": "permission",
+    "start": 13780,
+    "end": 14020,
+    "confidence": 0.999
+  },
+  {
+    "word": "to",
+    "start": 14020,
+    "end": 14440,
+    "confidence": 0.999
+  },
+  {
+    "word": "be",
+    "start": 14440,
+    "end": 14560,
+    "confidence": 0.999
+  },
+  {
+    "word": "a",
+    "start": 14560,
+    "end": 14620,
+    "confidence": 0.997
+  },
+  {
+    "word": "beginner.",
+    "start": 14620,
+    "end": 14840,
+    "confidence": 0.998
+  },
+  {
+    "word": "The",
+    "start": 15280,
+    "end": 15300,
+    "confidence": 0.996
+  },
+  {
+    "word": "real",
+    "start": 15300,
+    "end": 15460,
+    "confidence": 0.995
+  },
+  {
+    "word": "shift",
+    "start": 15460,
+    "end": 15780,
+    "confidence": 0.999
+  },
+  {
+    "word": "happens",
+    "start": 15780,
+    "end": 16180,
+    "confidence": 0.999
+  },
+  {
+    "word": "when",
+    "start": 16180,
+    "end": 16420,
+    "confidence": 0.998
+  },
+  {
+    "word": "you",
+    "start": 16420,
+    "end": 16520,
+    "confidence": 0.999
+  },
+  {
+    "word": "decide",
+    "start": 16520,
+    "end": 16740,
+    "confidence": 0.997
+  },
+  {
+    "word": "being",
+    "start": 16740,
+    "end": 17060,
+    "confidence": 0.996
+  },
+  {
+    "word": "caught",
+    "start": 17060,
+    "end": 17280,
+    "confidence": 0.998
+  },
+  {
+    "word": "trying",
+    "start": 17280,
+    "end": 17600,
+    "confidence": 0.989
+  },
+  {
+    "word": "is",
+    "start": 17600,
+    "end": 17840,
+    "confidence": 0.995
+  },
+  {
+    "word": "better",
+    "start": 17840,
+    "end": 18020,
+    "confidence": 0.999
+  },
+  {
+    "word": "than",
+    "start": 18020,
+    "end": 18280,
+    "confidence": 0.995
+  },
+  {
+    "word": "spending",
+    "start": 18280,
+    "end": 18580,
+    "confidence": 0.988
+  },
+  {
+    "word": "your",
+    "start": 18580,
+    "end": 18800,
+    "confidence": 0.994
+  },
+  {
+    "word": "youth",
+    "start": 18800,
+    "end": 18980,
+    "confidence": 0.998
+  },
+  {
+    "word": "performing",
+    "start": 18980,
+    "end": 19280,
+    "confidence": 0.995
+  },
+  {
+    "word": "a",
+    "start": 19280,
+    "end": 19580,
+    "confidence": 0.997
+  },
+  {
+    "word": "life",
+    "start": 19580,
+    "end": 19740,
+    "confidence": 0.999
+  },
+  {
+    "word": "you",
+    "start": 19740,
+    "end": 19980,
+    "confidence": 0.995
+  },
+  {
+    "word": "don't",
+    "start": 19980,
+    "end": 20280,
+    "confidence": 0.998
+  },
+  {
+    "word": "even",
+    "start": 20280,
+    "end": 20300,
+    "confidence": 0.986
+  },
+  {
+    "word": "want.",
+    "start": 20300,
+    "end": 20560,
+    "confidence": 1.0
+  },
+  {
+    "word": "If",
+    "start": 20920,
+    "end": 20980,
+    "confidence": 0.996
+  },
+  {
+    "word": "you're",
+    "start": 20980,
+    "end": 21060,
+    "confidence": 0.991
+  },
+  {
+    "word": "trying",
+    "start": 21060,
+    "end": 21280,
+    "confidence": 0.999
+  },
+  {
+    "word": "to",
+    "start": 21280,
+    "end": 21380,
+    "confidence": 0.999
+  },
+  {
+    "word": "figure",
+    "start": 21380,
+    "end": 21560,
+    "confidence": 0.999
+  },
+  {
+    "word": "yourself",
+    "start": 21560,
+    "end": 21900,
+    "confidence": 0.999
+  },
+  {
+    "word": "out",
+    "start": 21900,
+    "end": 22180,
+    "confidence": 0.993
+  },
+  {
+    "word": "without",
+    "start": 22180,
+    "end": 22340,
+    "confidence": 0.989
+  },
+  {
+    "word": "all",
+    "start": 22340,
+    "end": 22620,
+    "confidence": 0.998
+  },
+  {
+    "word": "the",
+    "start": 22620,
+    "end": 22740,
+    "confidence": 0.998
+  },
+  {
+    "word": "noise,",
+    "start": 22740,
+    "end": 22940,
+    "confidence": 0.996
+  },
+  {
+    "word": "stick",
+    "start": 22940,
+    "end": 23560,
+    "confidence": 0.996
+  },
+  {
+    "word": "around.",
+    "start": 23560,
+    "end": 23760,
+    "confidence": 1.0
+  },
+  {
+    "word": "We",
+    "start": 24280,
+    "end": 24320,
+    "confidence": 0.993
+  },
+  {
+    "word": "unpack",
+    "start": 24320,
+    "end": 24760,
+    "confidence": 0.975
+  },
+  {
+    "word": "these",
+    "start": 24760,
+    "end": 25100,
+    "confidence": 0.996
+  },
+  {
+    "word": "patterns",
+    "start": 25100,
+    "end": 25460,
+    "confidence": 0.999
+  },
+  {
+    "word": "every",
+    "start": 25460,
+    "end": 25960,
+    "confidence": 0.879
+  },
+  {
+    "word": "day.",
+    "start": 25960,
+    "end": 26320,
+    "confidence": 0.999
+  }
+]

@@ -41,6 +41,8 @@ import { YouAreNotAloneComposition } from "./clips/you_are_not_alone";
 import you_are_not_aloneTranscript from "./clips/you_are_not_alone/transcript.json";
 import { BuildToScaleTHFComposition } from "./clips/build_to_scale_thf";
 import buildToScaleTHFTranscript from "./clips/build_to_scale_thf/transcript.json";
+import { TeenageRelationshipsComposition } from "./clips/teenage_relationships";
+import teenage_relationshipsTranscript from "./clips/teenage_relationships/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -68,6 +70,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TeenageRelationshipsThumbnail,
   YouAreNotAloneThumbnail,
   MapTheGapThumbnail,
   HoldingGrudgesThumbnail,
@@ -151,6 +154,8 @@ export const RemotionRoot: React.FC = () => {
   const you_are_not_aloneDuration = calculateDurationInFrames(you_are_not_aloneTranscript as any[], fps);
   
   
+  
+  const teenage_relationshipsDuration = calculateDurationInFrames(teenage_relationshipsTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -295,6 +300,16 @@ export const RemotionRoot: React.FC = () => {
       />
 
       
+      
+      <Composition
+        id="TeenageRelationshipsVideo"
+        component={TeenageRelationshipsComposition}
+        durationInFrames={teenage_relationshipsDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
       {/* 0. Broken Promises & Self-Trust Video (9:16 Shorts) */}
       <Composition
         id="PromisesVideo"
@@ -732,7 +747,14 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
     
-      </>
+      
+      <Still
+        id="TeenageRelationshipsThumbnail"
+        component={TeenageRelationshipsThumbnail}
+        width={1080}
+        height={1920}
+      />
+    </>
   );
 };
 

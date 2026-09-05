@@ -1,0 +1,542 @@
+[
+  {
+    "word": "Notice",
+    "start": 0,
+    "end": 300,
+    "confidence": 0.967
+  },
+  {
+    "word": "how",
+    "start": 300,
+    "end": 560,
+    "confidence": 0.996
+  },
+  {
+    "word": "in",
+    "start": 560,
+    "end": 640,
+    "confidence": 0.973
+  },
+  {
+    "word": "high",
+    "start": 640,
+    "end": 800,
+    "confidence": 0.988
+  },
+  {
+    "word": "school,",
+    "start": 800,
+    "end": 1100,
+    "confidence": 0.989
+  },
+  {
+    "word": "everyone",
+    "start": 1540,
+    "end": 1860,
+    "confidence": 0.99
+  },
+  {
+    "word": "acts",
+    "start": 1860,
+    "end": 2100,
+    "confidence": 0.996
+  },
+  {
+    "word": "like",
+    "start": 2100,
+    "end": 2340,
+    "confidence": 0.996
+  },
+  {
+    "word": "being",
+    "start": 2340,
+    "end": 2580,
+    "confidence": 0.989
+  },
+  {
+    "word": "single",
+    "start": 2580,
+    "end": 2860,
+    "confidence": 0.995
+  },
+  {
+    "word": "means",
+    "start": 2860,
+    "end": 3180,
+    "confidence": 0.992
+  },
+  {
+    "word": "you're",
+    "start": 3180,
+    "end": 3440,
+    "confidence": 0.971
+  },
+  {
+    "word": "unwanted,",
+    "start": 3440,
+    "end": 3740,
+    "confidence": 0.989
+  },
+  {
+    "word": "but",
+    "start": 4280,
+    "end": 4360,
+    "confidence": 0.993
+  },
+  {
+    "word": "being",
+    "start": 4360,
+    "end": 4560,
+    "confidence": 0.998
+  },
+  {
+    "word": "in",
+    "start": 4560,
+    "end": 4680,
+    "confidence": 0.997
+  },
+  {
+    "word": "a",
+    "start": 4680,
+    "end": 4760,
+    "confidence": 0.998
+  },
+  {
+    "word": "relationship",
+    "start": 4760,
+    "end": 5100,
+    "confidence": 0.999
+  },
+  {
+    "word": "leaves",
+    "start": 5100,
+    "end": 5560,
+    "confidence": 0.996
+  },
+  {
+    "word": "you",
+    "start": 5560,
+    "end": 5740,
+    "confidence": 0.999
+  },
+  {
+    "word": "exhausted",
+    "start": 5740,
+    "end": 6060,
+    "confidence": 0.996
+  },
+  {
+    "word": "managing",
+    "start": 6060,
+    "end": 6440,
+    "confidence": 0.95
+  },
+  {
+    "word": "someone",
+    "start": 6440,
+    "end": 6860,
+    "confidence": 0.997
+  },
+  {
+    "word": "else's",
+    "start": 6860,
+    "end": 7200,
+    "confidence": 0.994
+  },
+  {
+    "word": "moods.",
+    "start": 7200,
+    "end": 7700,
+    "confidence": 0.975
+  },
+  {
+    "word": "Psychologists",
+    "start": 7860,
+    "end": 8340,
+    "confidence": 0.986
+  },
+  {
+    "word": "call",
+    "start": 8340,
+    "end": 8680,
+    "confidence": 0.997
+  },
+  {
+    "word": "this",
+    "start": 8680,
+    "end": 8860,
+    "confidence": 0.999
+  },
+  {
+    "word": "identity",
+    "start": 8860,
+    "end": 9160,
+    "confidence": 0.921
+  },
+  {
+    "word": "borrowing.",
+    "start": 9160,
+    "end": 9500,
+    "confidence": 0.851
+  },
+  {
+    "word": "When",
+    "start": 10060,
+    "end": 10080,
+    "confidence": 0.995
+  },
+  {
+    "word": "your",
+    "start": 10080,
+    "end": 10200,
+    "confidence": 0.987
+  },
+  {
+    "word": "own",
+    "start": 10200,
+    "end": 10400,
+    "confidence": 0.999
+  },
+  {
+    "word": "self",
+    "start": 10400,
+    "end": 10640,
+    "confidence": 0.996
+  },
+  {
+    "word": "is",
+    "start": 10640,
+    "end": 10860,
+    "confidence": 0.999
+  },
+  {
+    "word": "still",
+    "start": 10860,
+    "end": 11080,
+    "confidence": 0.999
+  },
+  {
+    "word": "forming,",
+    "start": 11080,
+    "end": 11400,
+    "confidence": 0.998
+  },
+  {
+    "word": "you",
+    "start": 11780,
+    "end": 11900,
+    "confidence": 0.999
+  },
+  {
+    "word": "confuse",
+    "start": 11900,
+    "end": 12100,
+    "confidence": 0.893
+  },
+  {
+    "word": "the",
+    "start": 12100,
+    "end": 12560,
+    "confidence": 0.999
+  },
+  {
+    "word": "rush",
+    "start": 12560,
+    "end": 12740,
+    "confidence": 0.961
+  },
+  {
+    "word": "of",
+    "start": 12740,
+    "end": 12980,
+    "confidence": 0.998
+  },
+  {
+    "word": "being",
+    "start": 12980,
+    "end": 13200,
+    "confidence": 0.993
+  },
+  {
+    "word": "chosen",
+    "start": 13200,
+    "end": 13520,
+    "confidence": 0.948
+  },
+  {
+    "word": "with",
+    "start": 13520,
+    "end": 13940,
+    "confidence": 0.991
+  },
+  {
+    "word": "actual",
+    "start": 13940,
+    "end": 14300,
+    "confidence": 0.997
+  },
+  {
+    "word": "compatibility.",
+    "start": 14300,
+    "end": 14740,
+    "confidence": 0.994
+  },
+  {
+    "word": "You",
+    "start": 15440,
+    "end": 15520,
+    "confidence": 0.994
+  },
+  {
+    "word": "end",
+    "start": 15520,
+    "end": 15700,
+    "confidence": 0.99
+  },
+  {
+    "word": "up",
+    "start": 15700,
+    "end": 15840,
+    "confidence": 0.999
+  },
+  {
+    "word": "shrinking",
+    "start": 15840,
+    "end": 16060,
+    "confidence": 0.982
+  },
+  {
+    "word": "your",
+    "start": 16060,
+    "end": 16320,
+    "confidence": 0.998
+  },
+  {
+    "word": "boundaries",
+    "start": 16320,
+    "end": 16540,
+    "confidence": 0.998
+  },
+  {
+    "word": "just",
+    "start": 16540,
+    "end": 17000,
+    "confidence": 0.957
+  },
+  {
+    "word": "to",
+    "start": 17000,
+    "end": 17160,
+    "confidence": 0.998
+  },
+  {
+    "word": "keep",
+    "start": 17160,
+    "end": 17320,
+    "confidence": 0.999
+  },
+  {
+    "word": "someone",
+    "start": 17320,
+    "end": 17560,
+    "confidence": 0.999
+  },
+  {
+    "word": "around.",
+    "start": 17560,
+    "end": 17820,
+    "confidence": 0.999
+  },
+  {
+    "word": "If",
+    "start": 18320,
+    "end": 18360,
+    "confidence": 0.995
+  },
+  {
+    "word": "you",
+    "start": 18360,
+    "end": 18460,
+    "confidence": 1.0
+  },
+  {
+    "word": "have",
+    "start": 18460,
+    "end": 18560,
+    "confidence": 0.998
+  },
+  {
+    "word": "to",
+    "start": 18560,
+    "end": 18700,
+    "confidence": 0.999
+  },
+  {
+    "word": "abandon",
+    "start": 18700,
+    "end": 18980,
+    "confidence": 1.0
+  },
+  {
+    "word": "yourself",
+    "start": 18980,
+    "end": 19400,
+    "confidence": 0.997
+  },
+  {
+    "word": "to",
+    "start": 19400,
+    "end": 19600,
+    "confidence": 0.99
+  },
+  {
+    "word": "keep",
+    "start": 19600,
+    "end": 19760,
+    "confidence": 0.999
+  },
+  {
+    "word": "them,",
+    "start": 19760,
+    "end": 20000,
+    "confidence": 0.999
+  },
+  {
+    "word": "that",
+    "start": 20280,
+    "end": 20420,
+    "confidence": 0.996
+  },
+  {
+    "word": "isn't",
+    "start": 20420,
+    "end": 20780,
+    "confidence": 0.996
+  },
+  {
+    "word": "love,",
+    "start": 20780,
+    "end": 20980,
+    "confidence": 0.997
+  },
+  {
+    "word": "it's",
+    "start": 21400,
+    "end": 21500,
+    "confidence": 0.964
+  },
+  {
+    "word": "anxiety.",
+    "start": 21500,
+    "end": 21800,
+    "confidence": 0.999
+  },
+  {
+    "word": "Build",
+    "start": 22440,
+    "end": 22440,
+    "confidence": 0.997
+  },
+  {
+    "word": "your",
+    "start": 22440,
+    "end": 22580,
+    "confidence": 0.997
+  },
+  {
+    "word": "foundation",
+    "start": 22580,
+    "end": 22820,
+    "confidence": 0.993
+  },
+  {
+    "word": "first.",
+    "start": 22820,
+    "end": 23400,
+    "confidence": 0.988
+  },
+  {
+    "word": "Follow",
+    "start": 24140,
+    "end": 24140,
+    "confidence": 0.989
+  },
+  {
+    "word": "along",
+    "start": 24140,
+    "end": 24500,
+    "confidence": 0.996
+  },
+  {
+    "word": "if",
+    "start": 24500,
+    "end": 24680,
+    "confidence": 0.959
+  },
+  {
+    "word": "you",
+    "start": 24680,
+    "end": 24780,
+    "confidence": 0.998
+  },
+  {
+    "word": "want",
+    "start": 24780,
+    "end": 24940,
+    "confidence": 0.999
+  },
+  {
+    "word": "more",
+    "start": 24940,
+    "end": 25100,
+    "confidence": 0.997
+  },
+  {
+    "word": "honest",
+    "start": 25100,
+    "end": 25420,
+    "confidence": 0.99
+  },
+  {
+    "word": "breakdowns",
+    "start": 25420,
+    "end": 26240,
+    "confidence": 0.99
+  },
+  {
+    "word": "on",
+    "start": 26240,
+    "end": 26460,
+    "confidence": 0.985
+  },
+  {
+    "word": "how",
+    "start": 26460,
+    "end": 26780,
+    "confidence": 0.988
+  },
+  {
+    "word": "your",
+    "start": 26780,
+    "end": 26900,
+    "confidence": 0.989
+  },
+  {
+    "word": "mind",
+    "start": 26900,
+    "end": 27200,
+    "confidence": 1.0
+  },
+  {
+    "word": "actually",
+    "start": 27200,
+    "end": 27720,
+    "confidence": 0.995
+  },
+  {
+    "word": "works.",
+    "start": 27720,
+    "end": 28000,
+    "confidence": 0.999
+  }
+]

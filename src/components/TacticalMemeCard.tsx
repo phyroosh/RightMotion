@@ -134,11 +134,11 @@ export const TacticalMemeCard: React.FC<TacticalMemeCardProps> = ({
     },
   }[theme];
 
-  const positionClass = position === "top" ? "top-[7%]" : "top-[26%]";
+  const positionClass = position === "top" ? "top-[5.5%]" : "top-[24%]";
 
   return (
     <div
-      className={`absolute inset-x-0 ${positionClass} flex flex-col items-center justify-center pointer-events-none z-35 ${className}`}
+      className={`absolute inset-x-0 ${positionClass} flex flex-col items-center justify-center pointer-events-none z-50 ${className}`}
       style={{
         perspective: "1000px",
         opacity: currentOpacity,

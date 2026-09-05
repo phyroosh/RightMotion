@@ -624,3 +624,45 @@ export const YouAreNotAloneThumbnail: React.FC = () => (
 
 export { BuildToScaleTHFThumbnail } from "./BuildToScaleTHFThumbnail";
 
+
+export const TeenageRelationshipsThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="SHOULD YOU MAKE RELATIONSHIPS IN TEENAGE OR NOT"
+    highlightWord="SHOULD"
+    highlightColor="rose"
+    subtitle="High-Retention Psychology Breakdown"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
+
+export const GitaInTeenageThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="GITA WISDOM FOR TEENAGERS"
+    highlightWord="WISDOM"
+    highlightColor="emerald"
+    subtitle="Ancient Mindset for Modern Chaos"
+    categoryBadge="JUDY INSIGHTS • PHILOSOPHY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
+
+export const RealityOfSocialMediaThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="THE REALITY OF SOCIAL MEDIA"
+    highlightWord="REALITY"
+    highlightColor="sky"
+    subtitle="Why It Destroys Teen Focus"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="FOCUS"
+  />
+);

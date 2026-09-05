@@ -254,10 +254,11 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
 
   const currentTheme = colorMap[accentColor] || colorMap.cyan;
 
-  // Resolve image source
-  const src = imageSrc.startsWith("http") || imageSrc.startsWith("/")
-    ? imageSrc
-    : staticFile(imageSrc);
+  // Resolve image source (strip public/ if present)
+  const cleanImageSrc = imageSrc.replace(/^public\//, "");
+  const src = cleanImageSrc.startsWith("http") || cleanImageSrc.startsWith("/")
+    ? cleanImageSrc
+    : staticFile(cleanImageSrc);
 
   // Subtitle Progressive Timing
   const effectiveSubFrame = subtitleFrame !== undefined ? subtitleFrame : entranceFrame;
