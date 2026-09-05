@@ -119,3 +119,19 @@
   - Output `[PINNED COMMENT]` with every script generation.
   - Stored in `studio/metadata.json` under `pinnedComment`.
   - Automatically posted to YouTube via YouTube Data API (`commentThreads.insert`) on upload.
+
+## 10. Universal Tactical Meme Integration Engine (< 2.5s Rule)
+- **Strict Retention Cap (< 2.5s)**:
+  - The brain recognizes familiar memes in $<0.5$s. Holding $>2.5$s causes steep retention drop-offs. Standardize on **1.2s–2.0s hold** (36–60 frames at 30 fps) with snappy spring entrance and collapse exit.
+- **100% Muted Audio (`volume={0}`)**:
+  - Native meme audio is completely muted to keep narration and background music uninterrupted.
+- **Fast-Forward Playback (`playbackRate={1.35 - 1.5}`)**:
+  - Default `1.4x` sped-up velocity to match rapid short-form attention spans.
+- **23-Meme Curated Catalog (`public/memes/`) & Autonomous Matcher (`scripts/meme_matcher.py`)**:
+  - Semantic matcher maps topic keywords and emotional intent to top meme (or use `{meme: <id>}` / `--meme <id>`).
+  - Max 1 meme per standard video (usually in Scene 1 hook or Scene 2 friction). Never spam!
+- **Tactical Glass Card (`<TacticalMemeCard />`)**:
+  - Elevated at `top-[7%]` (`w-[560px]`) floating safely in the upper third above the waist-up avatar without facial collision.
+  - Features diagonal specular glass glare sweep, monospace HUD badge (`[REACTION PROTOCOL // 01]`), and synchronized `whoosh_fast` (entry) / `click` (exit) SFX.
+- **Sanitization**:
+  - Strip `{meme}` and `{meme: <id>}` from speech synthesis and canvas text.

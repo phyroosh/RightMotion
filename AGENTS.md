@@ -254,6 +254,68 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 
 ---
 
+### 🎭 Universal Tactical Meme Integration Protocol (MANDATORY RETENTION BOOSTER RULE)
+
+> [!CRITICAL]
+> **TACTICAL MEME INTEGRATION & RETENTION ENGINE (< 2.5S RULE)!**
+> The human brain reads and registers a familiar meme in under 0.5 seconds. If a meme lingers on screen for $>2.5$ seconds, viewer retention plummets because the visual becomes dead weight. RightClips includes an autonomous tactical meme engine designed to spike dopamine and engagement without disrupting video flow.
+>
+> 1. **Strict Duration Cap (< 2.5s)**:
+>    - Standard duration: **1.2s to 2.0s** (36 to 60 frames at 30 fps).
+>    - NEVER exceed 2.2 seconds under any circumstances!
+>    - Enters with a high-velocity spring pop and snaps out cleanly with a rapid collapse spring.
+>
+> 2. **100% Muted Meme Audio (`volume={0}`)**:
+>    - Meme audio MUST be completely muted (`volume={0}`).
+>    - Narration voiceover and background music remain crystal-clear and uninterrupted.
+>
+> 3. **Fast-Forwarded Playback (`playbackRate={1.35 - 1.5}`)**:
+>    - Memes play back at accelerated speed (default `1.4x`), matching the fast-paced tempo of modern short-form feeds.
+>
+> 4. **Intentional Emotional Matching (Anti-Spam Standard)**:
+>    - Memes must feel deeply intentional, capturing a relatable subconscious friction or paradoxical reaction in a humorous way.
+>    - **Strict Cap**: Maximum **1 meme per standard video** (typically deployed in Scene 1 hook or Scene 2 psychological friction). Never spam or force memes!
+>
+> 5. **Built-in 23 Iconic Curated Memes Catalog (`public/memes/`)**:
+>    - All assets are pre-trimmed, audio-stripped, and compressed (7.4 MB total repository footprint):
+>      - `ishowspeed_stare`: Speechless shock, cognitive freeze, utter disbelief.
+>      - `doctor_strange_loop`: Endless repetition, phone doomscrolling loops, autopilot.
+>      - `side_eye_dog`: Caught red-handed, skepticism, suspicious sideways glance.
+>      - `angry_grandpa_rage`: Breaking point, explosive rage, internal frustration.
+>      - `awkward_smile_dog`: Masking pain, pretending everything is fine.
+>      - `confused_kid`: Cognitive dissonance, paradoxical confusion.
+>      - `walter_white_despair`: Rock bottom, complete ego collapse, devastation.
+>      - `office_rage_smash`: Burnout overload, throwing in the towel, quitting.
+>      - `michael_jackson_popcorn`: Spectator mode, watching school/online drama.
+>      - `rowley_innocent_wave`: Wholesome, oblivious innocence, naive smile.
+>      - `lego_bruce_flabbergasted`: Mesmerized, love-struck, stunned infatuation.
+>      - `courtroom_shout_me`: Called out in 4K, defensive excuse-making.
+>      - `al_pacino_depressed_bench`: Quiet isolation, existential void, feeling lonely.
+>      - `ishowspeed_nodding_headphones`: Agreeing with facts, head nodding, validation.
+>      - `bateman_iphone_inspection`: Perceived social scrutiny, over-analyzing texts.
+>      - `cat_laughing_pointing`: Savage reality check, mocking self-delusion.
+>      - `tony_stark_explosion`: Breakthrough moment, unstoppable power unlocked.
+>      - `rdj_shocked_closeup`: Sudden realization, paradigm shift, twist.
+>      - `wet_seal_cat`: Dorsal vagal freeze, numb paralysis, bed rotting.
+>      - `ronaldo_sipping_tea`: Unbothered, zero drama, supreme calm confidence.
+>      - `sweating_gamer`: Acute anxiety, high pressure, sweating bullets.
+>      - `chrome_cyborg_overload`: Sensory overload, fried dopamine receptors.
+>      - `doctor_strange_multiverse`: Mind-blown, expanding consciousness, ego death.
+>
+> 6. **Autonomous Semantic Matcher (`scripts/meme_matcher.py`)**:
+>    - Automatically maps topic text and emotional intent to the optimal meme:
+>      `python3 scripts/meme_matcher.py --topic "<topic>"`
+>    - Or specify explicitly via CLI `--meme <id>` or script tag `{meme: <id>}`.
+>
+> 7. **Motion Graphics Card (`<TacticalMemeCard />`)**:
+>    - Renders at `top-[7%]` (`w-[560px]`), floating gracefully in the upper region above the waist-up avatar without facial occlusion.
+>    - Features diagonal specular glass glare sweep, monospace HUD badge (`[REACTION PROTOCOL // 01]`), and synchronized entrance/exit SFX (`whoosh_fast` on entry, `click` on exit).
+>
+> 8. **Tag Sanitization**:
+>    - AI Agents and generators MUST strip `{meme}` and `{meme: <id>}` so the tag never leaks into spoken voiceover, card titles, or canvas text.
+
+---
+
 ## 💡 Master Channel Topic Ideation & Viral Prompt Specification
 
 Every video produced or ideated in RightClips must target high-retention, deeply emotional, or mathematically irresistible topics across three specialized niche pillars:

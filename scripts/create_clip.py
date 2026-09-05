@@ -40,9 +40,9 @@ from dialogue_engine import process_dialogue
 def sanitize_tags(text: str) -> str:
     if not text:
         return ""
-    # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, and product tags {product: Photon.pdf, page: 14}
+    # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, {duo}, {meme: ...}, and product tags
     pattern = re.compile(
-        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
+        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
         re.IGNORECASE,
     )
     cleaned = pattern.sub("", text)
@@ -482,7 +482,7 @@ def align_concepts(concepts, words_list, fps=30):
         })
     return aligned
 
-def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False):
+def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False, meme_meta: dict = None):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
     print(f"🎨 [3/4] Scaffolding Remotion clip files with Speech-Synchronized Progressive Reveal in src/clips/{name}/...")
@@ -707,6 +707,35 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         {"frame": f_c1_cutout, "type": "impact_hit", "volume": 0.24},
         {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
     ]
+
+    # 4a. Tactical Meme Integration (< 2.5s Strict Retention Cap, Muted, 1.4x Fast-Forward)
+    meme_jsx = ""
+    if meme_meta:
+        m_id = meme_meta.get("id", "side_eye_dog")
+        m_dur = min(meme_meta.get("default_duration_frames", 45), 66)
+        m_start = max(18, min(f_c1_cutout - 8, 28))
+        m_speed = meme_meta.get("playback_rate", 1.4)
+        m_label = meme_meta.get("hud_label", "REACTION PROTOCOL // 01")
+        m_sfx = meme_meta.get("recommended_sfx", "whoosh_fast")
+        m_theme = "dark_obsidian" if niche in ("finance", "facecam") else ("cyber_cyan" if niche == "health" else "apple_studio")
+
+        sfx_cues.append({"frame": m_start, "type": m_sfx, "volume": 0.32})
+        sfx_cues.append({"frame": m_start + m_dur, "type": "click", "volume": 0.22})
+
+        meme_jsx = f"""
+      {{/* ======================================================== */}}
+      {{/* TACTICAL RETENTION MEME POP (< 2.5s Strict Cap)          */}}
+      {{/* ======================================================== */}}
+      <TacticalMemeCard
+        memeId="{m_id}"
+        startFrame={{{m_start}}}
+        durationFrames={{{m_dur}}}
+        playbackRate={{{m_speed}}}
+        hudLabel="{m_label}"
+        theme="{m_theme}"
+        position="top"
+      />
+"""
 
     # 4b. Interactive Engagement Pill (Seconds 18–22 / ~70% timeline to boost likes and comments)
     pill_entrance = round(total_frames * 0.70)
@@ -964,6 +993,7 @@ import {{ ProCutout }} from "../../components/ProCutout";
 import {{ ProductPageShowcase }} from "../../components/ProductPageShowcase";
 import {{ CinematicIllustrationCard }} from "../../components/CinematicIllustrationCard";
 import {{ InteractiveEngagementPill }} from "../../components/InteractiveEngagementPill";
+import {{ TacticalMemeCard }} from "../../components/TacticalMemeCard";
 import {{ Sparkles, Zap, ArrowRight }} from "lucide-react";
 import {{ WordTimestamp }} from "../../types";
 
@@ -977,7 +1007,8 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
 
   return (
     <div className="{canvas_container_class}">
-      
+      {meme_jsx}
+
       {{/* ======================================================== */}}
       {{/* SCENE 1: THE ROOT FRICTION & HOOK (Frames {s1_start} - {s2_start}) */}}
       {{/* ======================================================== */}}
@@ -1289,6 +1320,7 @@ async def main():
     parser.add_argument("--video", default=None, help="Alias for --facecam")
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
     parser.add_argument("--duo", action="store_true", help="Enable Conversational Duo mode (Judy & Andrew)")
+    parser.add_argument("--meme", default=None, help="Meme ID or 'auto' to enable Tactical Meme pop (e.g. side_eye_dog)")
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
 
@@ -1423,6 +1455,28 @@ async def main():
         words, duration_sec = transcribe_audio(audio_path, transcript_path)
 
     # Step 3: Scaffold & Register
+    # Resolve tactical retention meme if requested or tagged
+    has_meme_tag = bool(re.search(r"\{\s*meme(?:\s*:\s*([a-zA-Z0-9_\-]+))?\s*\}", raw_combined, re.IGNORECASE))
+    explicit_meme = args.meme
+    if not explicit_meme and has_meme_tag:
+        tag_m = re.search(r"\{\s*meme\s*:\s*([a-zA-Z0-9_\-]+)\s*\}", raw_combined, re.IGNORECASE)
+        if tag_m:
+            explicit_meme = tag_m.group(1)
+        else:
+            explicit_meme = "auto"
+
+    meme_match = None
+    if explicit_meme or has_meme_tag:
+        from meme_matcher import find_best_meme
+        meme_match = find_best_meme(
+            raw_topic,
+            clean_script,
+            explicit_meme_id=explicit_meme if explicit_meme != "auto" else None
+        )
+        if meme_match:
+            print(f"🎭 [Meme Engine] Selected tactical retention meme: '{meme_match['name']}' ({meme_match['id']})")
+            print(f"      Duration: {meme_match['default_duration_frames']} frames (< 2.5s cap), Speed: {meme_match['playback_rate']}x, SFX: {meme_match['recommended_sfx']}")
+
     illustration_path = args.illustration
     if not illustration_path:
         possible_locs = [
@@ -1437,7 +1491,8 @@ async def main():
 
     pascal_name = scaffold_clip_files(
         name, topic, args.format, duration_sec, clean_script, words, product_meta,
-        illustration_path=illustration_path, pinned_comment=script_pinned_comment, is_duo=is_duo
+        illustration_path=illustration_path, pinned_comment=script_pinned_comment, is_duo=is_duo,
+        meme_meta=meme_match
     )
     register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche, pinned_comment=script_pinned_comment, script_text=clean_script)
 

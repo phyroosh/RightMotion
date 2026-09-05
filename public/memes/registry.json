@@ -1,0 +1,759 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RightClips Tactical Meme Registry",
+  "version": "1.0.0",
+  "pacing_rules": {
+    "max_duration_seconds": 2.2,
+    "min_duration_seconds": 1.2,
+    "default_duration_frames": 48,
+    "default_playback_rate": 1.4,
+    "audio_volume": 0.0,
+    "max_memes_per_video": 1
+  },
+  "memes": [
+    {
+      "id": "ishowspeed_stare",
+      "name": "IShowSpeed Dazed Stare",
+      "filename": "ishowspeed_stare.mp4",
+      "hud_label": "COGNITIVE FREEZE // SPEECHLESS",
+      "emotions": [
+        "shock",
+        "disbelief",
+        "stunned",
+        "brain_freeze",
+        "speechless",
+        "unbelievable"
+      ],
+      "keywords": [
+        "shocked",
+        "speechless",
+        "freeze",
+        "what",
+        "dumb",
+        "insane",
+        "unbelievable",
+        "staring",
+        "blank"
+      ],
+      "best_hook_phrases": [
+        "Notice how your brain completely shuts down",
+        "Why smart people do the dumbest things",
+        "You stare at the screen for three hours straight"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 45,
+      "playback_rate": 1.35
+    },
+    {
+      "id": "doctor_strange_loop",
+      "name": "Doctor Strange Time Loop",
+      "filename": "doctor_strange_loop.mp4",
+      "hud_label": "AUTOPILOT LOOP // RECURSION",
+      "emotions": [
+        "stuck",
+        "repetition",
+        "habit_loop",
+        "autopilot",
+        "trapped",
+        "deja_vu"
+      ],
+      "keywords": [
+        "loop",
+        "repeat",
+        "autopilot",
+        "cycle",
+        "again",
+        "stuck",
+        "pattern",
+        "habit",
+        "routine",
+        "trapped"
+      ],
+      "best_hook_phrases": [
+        "You promise yourself you won't do it again, but",
+        "Diagram your habit loop",
+        "Why you keep repeating the exact same mistake"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 48,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "side_eye_dog",
+      "name": "Dramatic Side-Eye Dog",
+      "filename": "side_eye_dog.mp4",
+      "hud_label": "SKEPTICISM // CAUGHT",
+      "emotions": [
+        "suspicion",
+        "skepticism",
+        "judging",
+        "caught",
+        "side_eye",
+        "distrust",
+        "fake"
+      ],
+      "keywords": [
+        "suspicious",
+        "fake",
+        "pretend",
+        "secretly",
+        "doubt",
+        "friends",
+        "caught",
+        "copying",
+        "jealous",
+        "judging"
+      ],
+      "best_hook_phrases": [
+        "Notice how you pretend not to care",
+        "Why your friends secretly copy you",
+        "When someone acts totally fake around you"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 42,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "angry_grandpa_rage",
+      "name": "Angry Grandpa Explosive Rage",
+      "filename": "angry_grandpa_rage.mp4",
+      "hud_label": "BREAKING POINT // EXPLOSION",
+      "emotions": [
+        "rage",
+        "anger",
+        "frustration",
+        "explosive",
+        "breaking_point",
+        "screaming"
+      ],
+      "keywords": [
+        "angry",
+        "rage",
+        "furious",
+        "scream",
+        "snapped",
+        "breaking point",
+        "unfair",
+        "yelling",
+        "criticism"
+      ],
+      "best_hook_phrases": [
+        "Why parental criticism makes you explode",
+        "When you finally hit your emotional breaking point",
+        "The rage you feel when life feels completely unfair"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 45,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "awkward_smile_dog",
+      "name": "Awkward Grinning Dog",
+      "filename": "awkward_smile_dog.mp4",
+      "hud_label": "SOCIAL MASK // THIS IS FINE",
+      "emotions": [
+        "awkward",
+        "forced_smile",
+        "masking",
+        "uncomfortable",
+        "hiding_pain",
+        "pretending"
+      ],
+      "keywords": [
+        "awkward",
+        "smile",
+        "mask",
+        "pretending",
+        "forced",
+        "fine",
+        "exhaustion",
+        "pleasing",
+        "faking"
+      ],
+      "best_hook_phrases": [
+        "The exhaustion of smiling when you're dying inside",
+        "High school mask exhaustion",
+        "Why you pretend to be fine when you're not"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 45,
+      "playback_rate": 1.35
+    },
+    {
+      "id": "confused_kid",
+      "name": "Confused Squinting Kid",
+      "filename": "confused_kid.mp4",
+      "hud_label": "PARADOX // COGNITIVE DISSONANCE",
+      "emotions": [
+        "confusion",
+        "baffled",
+        "contradiction",
+        "illogical",
+        "disbelief",
+        "wait_what"
+      ],
+      "keywords": [
+        "confused",
+        "makes no sense",
+        "paradox",
+        "contradiction",
+        "wait what",
+        "weird",
+        "hypocrisy"
+      ],
+      "best_hook_phrases": [
+        "Here is the weird contradiction about your brain",
+        "Why you want something but run away from it",
+        "Notice how you avoid the one task that actually matters"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 45,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "walter_white_despair",
+      "name": "Walter White Despair Fall",
+      "filename": "walter_white_despair.mp4",
+      "hud_label": "ROCK BOTTOM // SYSTEM FAILURE",
+      "emotions": [
+        "despair",
+        "devastation",
+        "rock_bottom",
+        "loss",
+        "hopelessness",
+        "defeat"
+      ],
+      "keywords": [
+        "failure",
+        "lost",
+        "ruined",
+        "despair",
+        "rock bottom",
+        "collapsed",
+        "wasted",
+        "over",
+        "broke"
+      ],
+      "best_hook_phrases": [
+        "The moment you realize you broke your own promise again",
+        "Starting from absolute zero",
+        "Why you feel completely hopeless after a relapse"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 50,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "office_rage_smash",
+      "name": "Office CRT Monitor Smash",
+      "filename": "office_rage_smash.mp4",
+      "hud_label": "BURNOUT OVERLOAD // CRASH",
+      "emotions": [
+        "burnout",
+        "frustration",
+        "rage_quit",
+        "system_overload",
+        "overwhelmed"
+      ],
+      "keywords": [
+        "burnout",
+        "exhausted",
+        "homework",
+        "quit",
+        "smash",
+        "overwhelmed",
+        "work",
+        "stress",
+        "crashing"
+      ],
+      "best_hook_phrases": [
+        "When your nervous system completely fries",
+        "Why you want to throw your laptop across the room",
+        "Academic burnout is not laziness"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 48,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "michael_jackson_popcorn",
+      "name": "Michael Jackson Eating Popcorn",
+      "filename": "michael_jackson_popcorn.mp4",
+      "hud_label": "SPECTATOR MODE // DRAMA",
+      "emotions": [
+        "spectating",
+        "drama",
+        "observing",
+        "entertainment",
+        "detached",
+        "side_character"
+      ],
+      "keywords": [
+        "drama",
+        "watching",
+        "spectator",
+        "side character",
+        "gossip",
+        "entertained",
+        "popcorn",
+        "chaos"
+      ],
+      "best_hook_phrases": [
+        "Side Character Syndrome",
+        "Why you feel like a spectator in your own friend group",
+        "Watching everyone else live their lives while you observe"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 45,
+      "playback_rate": 1.35
+    },
+    {
+      "id": "rowley_innocent_wave",
+      "name": "Rowley Innocent Friendly Wave",
+      "filename": "rowley_innocent_wave.mp4",
+      "hud_label": "WHOLESOME // OBLIVIOUS",
+      "emotions": [
+        "naive",
+        "wholesome",
+        "innocent",
+        "friendly",
+        "oblivious",
+        "kindness"
+      ],
+      "keywords": [
+        "innocent",
+        "naive",
+        "kind",
+        "friendly",
+        "oblivious",
+        "trying",
+        "sweet",
+        "wave"
+      ],
+      "best_hook_phrases": [
+        "You enter the room with pure intentions, but",
+        "Being the only genuine person in a fake group",
+        "Why nice people get taken for granted"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 40,
+      "playback_rate": 1.35
+    },
+    {
+      "id": "lego_bruce_flabbergasted",
+      "name": "Lego Bruce Wayne Bewildered",
+      "filename": "lego_bruce_flabbergasted.mp4",
+      "hud_label": "INFATUATION // HYPNOSIS",
+      "emotions": [
+        "bewildered",
+        "stunned",
+        "love_struck",
+        "awe",
+        "obsessed",
+        "mesmerized"
+      ],
+      "keywords": [
+        "crush",
+        "mesmerized",
+        "obsessed",
+        "love",
+        "stunned",
+        "hypnotized",
+        "bewildered"
+      ],
+      "best_hook_phrases": [
+        "Why you get completely obsessed with someone new",
+        "The neurochemistry of teenage infatuation",
+        "Notice how your whole brain locks onto them"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 45,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "courtroom_shout_me",
+      "name": "Courtroom Shouting 'ME?!'",
+      "filename": "courtroom_shout_me.mp4",
+      "hud_label": "CALLED OUT // DEFENSIVE",
+      "emotions": [
+        "called_out",
+        "defensive",
+        "shock",
+        "targeted",
+        "blamed",
+        "accused"
+      ],
+      "keywords": [
+        "called out",
+        "me",
+        "accused",
+        "blame",
+        "defensive",
+        "guilty",
+        "targeted",
+        "singled out"
+      ],
+      "best_hook_phrases": [
+        "Yes, I am talking directly to you",
+        "Why you get instantly defensive when called out",
+        "Notice how your first instinct is to blame everyone else"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 45,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "al_pacino_depressed_bench",
+      "name": "Al Pacino Solitary Bench",
+      "filename": "al_pacino_depressed_bench.mp4",
+      "hud_label": "ISOLATION // QUIET VOID",
+      "emotions": [
+        "loneliness",
+        "depression",
+        "isolation",
+        "solitude",
+        "invisible",
+        "emptiness"
+      ],
+      "keywords": [
+        "alone",
+        "lonely",
+        "isolated",
+        "empty",
+        "invisible",
+        "drift",
+        "bench",
+        "nobody",
+        "abandoned"
+      ],
+      "best_hook_phrases": [
+        "Friendship drift hurts worse than a breakup",
+        "Sitting in a crowded room feeling like a complete ghost",
+        "The quiet ache of having nobody to text at night"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 48,
+      "playback_rate": 1.35
+    },
+    {
+      "id": "ishowspeed_nodding_headphones",
+      "name": "IShowSpeed Knowing Nod & Smirk",
+      "filename": "ishowspeed_nodding_headphones.mp4",
+      "hud_label": "VALIDATION // FACTS",
+      "emotions": [
+        "validation",
+        "agreement",
+        "knowing",
+        "smirk",
+        "facts",
+        "satisfaction"
+      ],
+      "keywords": [
+        "facts",
+        "exactly",
+        "true",
+        "nodding",
+        "told you",
+        "realize",
+        "agreed",
+        "validated"
+      ],
+      "best_hook_phrases": [
+        "Once you see this pattern, you can never unsee it",
+        "And deep down, you know exactly what I'm talking about",
+        "Psychologists call this the Counter-Intentional Loop"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 42,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "bateman_iphone_inspection",
+      "name": "Patrick Bateman iPhone Scrutiny",
+      "filename": "bateman_iphone_inspection.mp4",
+      "hud_label": "SCRUTINY // SOCIAL ANXIETY",
+      "emotions": [
+        "comparison",
+        "scrutiny",
+        "envy",
+        "social_media",
+        "overthinking",
+        "texting"
+      ],
+      "keywords": [
+        "phone",
+        "instagram",
+        "text",
+        "compare",
+        "scrolling",
+        "delayed",
+        "screen",
+        "bateman",
+        "messages"
+      ],
+      "best_hook_phrases": [
+        "The behind-the-scenes vs highlight reel trap",
+        "Overthinking text response times at 2 AM",
+        "Why checking their profile makes you feel sick"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 45,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "cat_laughing_pointing",
+      "name": "Cat Pointing & Laughing Hysterically",
+      "filename": "cat_laughing_pointing.mp4",
+      "hud_label": "SAVAGE ROAST // REALITY CHECK",
+      "emotions": [
+        "roast",
+        "laughing",
+        "mocking",
+        "savage",
+        "calling_out_excuses",
+        "humor"
+      ],
+      "keywords": [
+        "excuse",
+        "tomorrow",
+        "starting monday",
+        "laughable",
+        "delusion",
+        "lazy",
+        "lies",
+        "joke"
+      ],
+      "best_hook_phrases": [
+        "Your brain telling you you'll start on Monday",
+        "The hilarious excuse you make to avoid sitting down",
+        "Let's be completely honest with ourselves"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 42,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "tony_stark_explosion",
+      "name": "Tony Stark Explosion Pose",
+      "filename": "tony_stark_explosion.mp4",
+      "hud_label": "BREAKTHROUGH // POWER UNLOCKED",
+      "emotions": [
+        "confidence",
+        "breakthrough",
+        "badass",
+        "power",
+        "winning",
+        "boundaries"
+      ],
+      "keywords": [
+        "confidence",
+        "boundaries",
+        "win",
+        "power",
+        "breakthrough",
+        "boss",
+        "unstoppable",
+        "shield"
+      ],
+      "best_hook_phrases": [
+        "The moment you stop seeking validation from people",
+        "When you finally set a real boundary and walk away",
+        "The compound interest curve after year five"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 50,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "rdj_shocked_closeup",
+      "name": "RDJ Sudden Bewilderment Closeup",
+      "filename": "rdj_shocked_closeup.mp4",
+      "hud_label": "PLOT TWIST // COGNITIVE SHIFT",
+      "emotions": [
+        "realization",
+        "plot_twist",
+        "epiphany",
+        "surprise",
+        "jaw_drop"
+      ],
+      "keywords": [
+        "realize",
+        "truth",
+        "actually",
+        "twist",
+        "surprise",
+        "epiphany",
+        "shift",
+        "secret"
+      ],
+      "best_hook_phrases": [
+        "It's not laziness \u2014 your nervous system is in freeze",
+        "What psychologists call the Spotlight Illusion",
+        "The real reason you can't stay consistent"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 45,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "wet_seal_cat",
+      "name": "Wet Cat Staring Blankly (Brain Empty)",
+      "filename": "wet_seal_cat.mp4",
+      "hud_label": "DORSAL VAGAL FREEZE // NUMB",
+      "emotions": [
+        "numb",
+        "dissociation",
+        "brain_dead",
+        "empty",
+        "freeze_mode",
+        "dopamine_crash"
+      ],
+      "keywords": [
+        "freeze",
+        "numb",
+        "doomscrolling",
+        "bed",
+        "dopamine",
+        "exhausted",
+        "empty",
+        "zombie",
+        "2 am"
+      ],
+      "best_hook_phrases": [
+        "Breaking the nervous system freeze response",
+        "Stuck in a 3-hour doomscrolling coma at 2 AM",
+        "When you wake up feeling like a complete zombie"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 45,
+      "playback_rate": 1.35
+    },
+    {
+      "id": "ronaldo_sipping_tea",
+      "name": "Cristiano Ronaldo Tea Sip & Wink",
+      "filename": "ronaldo_sipping_tea.mp4",
+      "hud_label": "UNBOTHERED // HIGH AGENCY",
+      "emotions": [
+        "unbothered",
+        "calm",
+        "thriving",
+        "peace",
+        "agency",
+        "untouchable"
+      ],
+      "keywords": [
+        "peace",
+        "unbothered",
+        "calm",
+        "drama free",
+        "thriving",
+        "protect",
+        "tea",
+        "chill"
+      ],
+      "best_hook_phrases": [
+        "Protecting your peace while everyone else spirals",
+        "How high-agency people react to social drama",
+        "When you stop caring about being understood"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 45,
+      "playback_rate": 1.35
+    },
+    {
+      "id": "sweating_gamer",
+      "name": "Sweating Nervous Gamer",
+      "filename": "sweating_gamer.mp4",
+      "hud_label": "ACUTE ANXIETY // OVERTHINKING",
+      "emotions": [
+        "anxiety",
+        "sweating",
+        "panic",
+        "overthinking",
+        "stress",
+        "pressure"
+      ],
+      "keywords": [
+        "anxiety",
+        "panic",
+        "stress",
+        "pressure",
+        "sweat",
+        "nervous",
+        "text",
+        "exam",
+        "overthinking"
+      ],
+      "best_hook_phrases": [
+        "Social overthinking at 2 AM",
+        "The panic of waiting for them to type back",
+        "Why small social interactions feel life-or-death"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 45,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "chrome_cyborg_overload",
+      "name": "Chrome Cybernetic Head Overload",
+      "filename": "chrome_cyborg_overload.mp4",
+      "hud_label": "SENSORY OVERLOAD // DOPAMINE FRIED",
+      "emotions": [
+        "sensory_overload",
+        "fried",
+        "hyper_stimulation",
+        "dopamine_burnout",
+        "neurochemistry"
+      ],
+      "keywords": [
+        "overload",
+        "dopamine",
+        "stimulation",
+        "fried",
+        "notifications",
+        "neurochemistry",
+        "screen",
+        "tiktok"
+      ],
+      "best_hook_phrases": [
+        "The 48-Hour Dopamine Baseline Reset",
+        "Your brain on 500 short-form videos a day",
+        "Why silence feels terrifying to a modern brain"
+      ],
+      "recommended_sfx": "impact_hit",
+      "default_duration_frames": 48,
+      "playback_rate": 1.4
+    },
+    {
+      "id": "doctor_strange_multiverse",
+      "name": "Doctor Strange Astral Awakening",
+      "filename": "doctor_strange_multiverse.mp4",
+      "hud_label": "PARADIGM SHIFT // EGO DEATH",
+      "emotions": [
+        "awakening",
+        "paradigm_shift",
+        "mind_blown",
+        "perspective",
+        "ego_death",
+        "clarity"
+      ],
+      "keywords": [
+        "mind blown",
+        "paradigm shift",
+        "awakening",
+        "perspective",
+        "reality",
+        "truth",
+        "expanded"
+      ],
+      "best_hook_phrases": [
+        "The cognitive shift that changes how you see people",
+        "The illusion of ownership",
+        "Stepping outside your own ego for the first time"
+      ],
+      "recommended_sfx": "whoosh_fast",
+      "default_duration_frames": 50,
+      "playback_rate": 1.4
+    }
+  ]
+}
