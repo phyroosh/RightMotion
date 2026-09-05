@@ -3,14 +3,17 @@ import { Easing, Img, interpolate, spring, staticFile, useCurrentFrame, useVideo
 import { MotionCurves } from "./MotionGraph";
 
 export type CharacterPose =
-  // Bust / waist-up cutouts (mid-video explanatory A-Roll)
+  // Judy Bust / waist-up cutouts (Screen-intimate A-Roll)
   | "pointing"
   | "crossed"
   | "open"
-  // Full body shots (intro hook & outro finale only)
-  | "fullbody_pointing"   // finger up — confident intro hook, calls to action
-  | "fullbody_open"       // open palms shrug — empathetic outros, question frames
-  | "fullbody_casual";    // touching hair — warm humanizing bookend moments
+  // Andrew Bust / waist-up cutouts (The inquisitive male counterpart)
+  | "andrew_crossed"
+  | "andrew_thinking"
+  // Legacy full-body aliases (automatically mapped to screen-intimate waist-up cutouts)
+  | "fullbody_pointing"
+  | "fullbody_open"
+  | "fullbody_casual";
 
 export interface KeyframePoint {
   timeMs: number; // millisecond in timeline
@@ -130,17 +133,17 @@ export const CharacterKeyframeAnimator: React.FC<CharacterKeyframeAnimatorProps>
   const getPoseSrc = (pose: CharacterPose) => {
     switch (pose) {
       case "crossed":
+      case "fullbody_casual":
         return staticFile("character_crossed.png");
       case "open":
-        return staticFile("character_open.png");
-      // Full body shots — intro hook & outro finale
-      case "fullbody_pointing":
-        return staticFile("character_fullbody_pointing.png");
       case "fullbody_open":
-        return staticFile("character_fullbody_open.png");
-      case "fullbody_casual":
-        return staticFile("character_fullbody_casual.png");
+        return staticFile("character_open.png");
+      case "andrew_crossed":
+        return staticFile("andrew_crossed.png");
+      case "andrew_thinking":
+        return staticFile("andrew_thinking.png");
       case "pointing":
+      case "fullbody_pointing":
       default:
         return staticFile("character_pointing.png");
     }

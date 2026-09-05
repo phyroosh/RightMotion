@@ -28,17 +28,21 @@
 - **Chunking**: Dynamic 2–4 words per chunk, holding cleanly across natural speech pauses.
 
 ## 3. Audio & Voiceovers
-- **Voice Profile**: Female Neural Voice (`en-US-JennyNeural` via Edge-TTS) at **natural conversational speed** (`rate="+0%"`). **DO NOT artificially speed up the voice.**
-- **Mandatory Silence / Pause Compression**: Automatically strip out unnatural dead-air pauses between sentences and paragraphs using the silence-compression filter (`silenceremove`, capping pauses to ~150ms–180ms).
-- **Word Timestamps**: Precise millisecond alignment generated via GPU `faster-whisper` on the pause-trimmed master audio.
+- **Voice Profiles**:
+  - Solo Judy: Female Neural Voice (`en-US-AvaMultilingualNeural` via Edge-TTS) at `rate="+8%"`.
+  - Judy & Andrew Conversational Duo: Judy (`en-US-AvaMultilingualNeural`, `+8%`) paired with Andrew (`en-US-SteffanNeural`, `+7%`).
+- **Mandatory Silence / Pause Compression**: Automatically strip out unnatural dead-air pauses between sentences and dialogue turns using snappy pause compression (~140ms–180ms).
+- **Word Timestamps**: Precise millisecond alignment generated via `faster-whisper` on the pause-trimmed master audio with deterministic speaker attribution.
 
 ## 4. Character Animation & Pro-Editor Integration
-- **Character Asset**: High-resolution transparent PNG cutout (`public/Character/...`).
-- **Placement & Motion**:
-  - Slide-in entrances with Remotion `spring()` physics from bottom-right / center.
-  - Continuous subtle breathing/floating parallax idle animation (`Math.sin(frame)`).
-  - Contextual appearances at key psychological beats (Hook reveal, Reality checks, Mindset shifts, CTA).
-  - Framed with frosted glass pedestals, halo rings, and status badges.
+- **Character Assets**: High-resolution transparent PNG cutouts in `public/` (`character_pointing.png`, `character_crossed.png`, `character_open.png` for Judy; `andrew_crossed.png`, `andrew_thinking.png` for Andrew).
+- **Screen-Intimate Framing Rule (PERMANENT ARCHIVE OF FAR FULL-BODY AVATARS)**:
+  - Far head-to-toe full-body avatars make characters appear distant and disconnected on vertical mobile screens.
+  - All avatars must be **screen-intimate, zoomed waist-up cutouts** (`baseHeight={1280 - 1550}`) so characters are close to the viewer. Legacy full-body avatars are archived in `public/archive_avatars/`.
+- **Judy & Andrew Duo Staging (`<DuoPresenter />`)**:
+  - Turn-based dynamic scaling (`1.08x` active speaker with full opacity, `0.92x` listening speaker with subtle dimming).
+  - Broadcast HUD badge anchored at `top-[5.5%]`.
+  - Dual-color kinetic captions: Amber/Gold (`#f59e0b`) for Andrew, Electric Sky Blue (`#38bdf8` / `#0071e3`) for Judy.
 
 ## 5. Composition Standards
 - **Resolution**: 1080 x 1920 (Vertical 9:16 format for Shorts/Reels/TikTok).

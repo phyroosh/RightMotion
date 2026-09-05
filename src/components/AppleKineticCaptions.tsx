@@ -84,10 +84,7 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
 
   const passedColor = isDark ? "#ffffff" : "#09090b";
   const inactiveColor = isDark ? "rgba(255, 255, 255, 0.42)" : "rgba(15, 23, 42, 0.38)";
-  const activeColor = activeColorProp ?? (isDark ? "#38bdf8" : "#0071e3");
-  const glowShadow = isDark
-    ? `0 0 30px ${activeColor}cc, 0 2px 12px rgba(0,0,0,0.8)`
-    : `0 0 30px ${activeColor}88, 0 2px 10px rgba(255,255,255,0.9)`;
+  const baseActiveColor = activeColorProp ?? (isDark ? "#38bdf8" : "#0071e3");
 
   return (
     <div className={`absolute inset-x-0 ${bottomClass} flex items-end justify-center pointer-events-none z-40 px-8 ${className ?? ""}`}>
@@ -103,6 +100,8 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
         {activeChunk.words.map((item, idx) => {
           const isActive = currentMs >= item.startMs && currentMs <= item.endMs;
           const isPassed = currentMs > item.endMs;
+          const isAndrew = item.speaker === "andrew";
+          const wordActiveColor = isAndrew ? "#f59e0b" : baseActiveColor;
 
           return (
             <span
@@ -114,14 +113,14 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
                 lineHeight: 1.15,
                 backgroundColor: isActive
                   ? isDark
-                    ? activeColor
-                    : `${activeColor}22`
+                    ? wordActiveColor
+                    : `${wordActiveColor}22`
                   : "transparent",
-                color: isActive && isDark ? "#030712" : isActive ? activeColor : isPassed ? passedColor : inactiveColor,
+                color: isActive && isDark ? "#030712" : isActive ? wordActiveColor : isPassed ? passedColor : inactiveColor,
                 padding: isActive ? "2px 14px" : "2px 4px",
                 borderRadius: "14px",
                 boxShadow: isActive
-                  ? `0 0 25px ${activeColor}aa, 0 4px 12px rgba(0,0,0,0.4)`
+                  ? `0 0 25px ${wordActiveColor}aa, 0 4px 12px rgba(0,0,0,0.4)`
                   : "none",
                 transform: isActive ? "scale(1.08)" : "scale(1)",
                 transition: "transform 0.08s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.08s ease-out, color 0.08s ease-out",

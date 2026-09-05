@@ -234,6 +234,26 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 
 ---
 
+### 👥 Judy & Andrew Conversational Duo & Waist-Up Framing Protocol (MANDATORY AGENT RULE)
+
+> [!CRITICAL]
+> **JUDY & ANDREW CONVERSATIONAL DUO PROTOCOL & SCREEN-INTIMATE FRAMING!**
+> 1. **Screen-Intimate Framing (PERMANENT BAN ON FAR FULL-BODY AVATARS)**:
+>    - Full-body head-to-toe avatars make characters appear distant and disconnected on vertical mobile screens.
+>    - Legacy full-body avatars are archived in `public/archive_avatars/`.
+>    - All videos MUST use **screen-intimate, waist-up cutouts** (`character_pointing.png`, `character_crossed.png`, `character_open.png` for Judy; `andrew_crossed.png`, `andrew_thinking.png` for Andrew) with close-up presence (`baseHeight={1280 - 1550}`).
+>    - Characters appear right in front of the viewer, maximizing intimacy, retention, and conversational warmth.
+>
+> 2. **Judy & Andrew Duo Dynamic**:
+>    - Triggered in `{Self Improvement}` (Judy Insights) when `--duo`, `{duo}`, or speaker turns (`JUDY:` / `ANDREW:`) are present in the script or prompt.
+>    - **Voice Profiles**: Judy (`en-US-AvaMultilingualNeural`, `rate="+8%"`) & Andrew (`en-US-SteffanNeural`, `rate="+7%"`).
+>    - **Vibe & Chemistry**: Andrew acts as the skeptical, inquisitive viewer who voices honest pushback questions (*"Wait, so you mean I shouldn't even have fun with my friends?"*). Judy responds with warm, grounded psychological insight. They have witty, lighthearted banter with subtle chemistry.
+>    - **Dialogue Engine (`scripts/dialogue_engine.py`)**: Turn-based audio synthesis with standardized 44.1kHz stereo normalization, 140ms inter-turn pause compression, and word-level faster-whisper alignment with deterministic speaker attribution.
+>    - **Turn-Based Staging (`<DuoPresenter />`)**: Active speaker scales up to `1.08x` with bright illumination; inactive speaker switches to reactive listening pose at `0.92x` scale with subtle dimming (`opacity-80`). Broadcast HUD badge sits at `top-[5.5%]`.
+>    - **Dual-Color Kinetic Captions**: Andrew's spoken words pop in vibrant Amber/Gold (`#f59e0b`), while Judy's pop in signature Electric Sky Blue (`#38bdf8` / `#0071e3`).
+
+---
+
 ## 💡 Master Channel Topic Ideation & Viral Prompt Specification
 
 Every video produced or ideated in RightClips must target high-retention, deeply emotional, or mathematically irresistible topics across three specialized niche pillars:

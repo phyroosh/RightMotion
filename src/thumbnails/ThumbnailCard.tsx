@@ -25,7 +25,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
   highlightColor = 'amber',
   subtitle,
   categoryBadge = 'PSYCHOLOGY ESSAY',
-  characterPose = 'character_fullbody_pointing.png',
+  characterPose = 'character_pointing.png',
   characterPosition = 'right',
   characterScale = 1.0,
   characterOffsetY = 0,
@@ -36,6 +36,16 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
   visualGraphic,
 }) => {
   const is16x9 = aspectRatio === '16:9';
+
+  // Map legacy fullbody references to high-impact zoomed waist-up cutouts
+  const resolvedPose = React.useMemo(() => {
+    if (!characterPose) return "character_pointing.png";
+    const clean = characterPose.replace("public/", "").replace(/^\//, "");
+    if (clean.includes("pointing")) return "character_pointing.png";
+    if (clean.includes("open")) return "character_open.png";
+    if (clean.includes("casual") || clean.includes("crossed")) return "character_crossed.png";
+    return clean;
+  }, [characterPose]);
 
   const themes = {
     apple_studio: {
@@ -468,7 +478,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           justifyContent: 'center',
         }}>
           <Img
-            src={staticFile(characterPose)}
+            src={staticFile(resolvedPose)}
             style={{
               width: '100%',
               height: '100%',
@@ -669,7 +679,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           zIndex: 1,
         }} />
         <Img
-          src={staticFile(characterPose)}
+          src={staticFile(resolvedPose)}
           style={{
             width: '100%',
             height: '100%',

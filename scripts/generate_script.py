@@ -55,13 +55,15 @@ def sanitize_tags(text: str) -> str:
 def check_script_hygiene(voiceover: str, is_mode_a: bool = True) -> Tuple[bool, list]:
     """
     Audits voiceover text for:
-    1. Word count (75-90 ideal, max 100).
+    1. Word count (65-90 ideal, max 100).
     2. Banned AI clichés.
     3. Banned sales hype words.
     4. Silent PDF rule (in Mode A: never speak 'Photon' or 'page X').
     """
     issues = []
-    words = voiceover.strip().split()
+    # Strip speaker tags for word count
+    cleaned_vo = re.sub(r"^\s*(?:judy|andrew)\s*:\s*", "", voiceover, flags=re.IGNORECASE | re.MULTILINE)
+    words = cleaned_vo.strip().split()
     word_count = len(words)
 
     if word_count < 65:
@@ -141,21 +143,95 @@ CURATED_SCRIPTS = {
     }
 }
 
-def generate_script_and_metadata(raw_topic: str) -> Dict[str, Any]:
+CURATED_DUO_SCRIPTS = {
+    "boundaries": {
+        "keywords": ["boundar", "friend", "say no", "people pleas"],
+        "topic": "Maintaining Boundaries with Friends",
+        "voiceover": (
+            "JUDY: Notice how you say yes to plans you secretly dread just to avoid feeling guilty? "
+            "ANDREW: Wait, so you're telling me I should just be cold and not even hang out with my friends? "
+            "JUDY: Setting boundaries isn't pushing people away. It's protecting your battery so you don't end up resenting them. "
+            "ANDREW: Okay, fair... but won't they think I'm being distant or weird? "
+            "JUDY: Real friends want you there when you're present, not performing. When you stop people-pleasing, the real connections survive."
+        )
+    },
+    "caught_trying": {
+        "keywords": ["trying", "caught", "pretend", "care", "failure", "mask"],
+        "topic": "The Fear of Being Caught Trying",
+        "voiceover": (
+            "JUDY: Notice how you pretend not to care about the things you actually want most? "
+            "ANDREW: Come on, if I try my hardest and still fail, everyone's going to laugh. Acting chill is just safer. "
+            "JUDY: Psychologists call that the social mask. You spend so much energy performing indifference that you never allow yourself to grow. "
+            "ANDREW: So what, I just start trying and let people judge me? "
+            "JUDY: Exactly. Being caught trying is always better than spending your youth performing a life you don't even want."
+        )
+    },
+    "phone_loop": {
+        "keywords": ["phone", "scroll", "screen", "loop", "2 am", "bed"],
+        "topic": "The 2 AM Phone Loop",
+        "voiceover": (
+            "JUDY: Ever close an app only to reopen it five seconds later without even realizing your thumb moved? "
+            "ANDREW: Literally every single night. I tell myself five minutes and suddenly it's 2 AM. "
+            "JUDY: That isn't a discipline failure. It's an automated dopamine loop. Your brain isn't hunting for posts—it's trying to numb boredom. "
+            "ANDREW: So how do I actually break it without throwing my phone out the window? "
+            "JUDY: Separate the physical cue from your craving. Put the charger across the room tonight, and watch the loop shatter."
+        )
+    }
+}
+
+def generate_dynamic_duo_script(clean_topic: str) -> str:
+    return (
+        f"JUDY: Notice how you get completely trapped in your head whenever it comes to {clean_topic.lower()}? "
+        f"ANDREW: Honestly, yeah. But isn't overthinking just trying to prepare for the worst case? "
+        "JUDY: That's the illusion. Your nervous system treats emotional uncertainty like a physical threat, so it keeps replaying worst-case scenarios to feel in control. "
+        "ANDREW: Okay, makes sense. But how do you actually stop that spiral in the moment? "
+        "JUDY: Stop trying to debate your thoughts. Ground yourself in physical reality, and the anxiety loses its power instantly."
+    )
+
+def generate_script_and_metadata(raw_topic: str, duo: bool = False) -> Dict[str, Any]:
     """
     Main orchestrator for Autonomous Scriptwriting:
-    - Analyzes raw topic for {no meta}
+    - Analyzes raw topic for {no meta} and {duo}
+    - If duo is requested: Generates conversational Judy & Andrew dialogue
     - If {no meta} is present: Runs Mode B (Organic CTA, skips PDF)
     - If {no meta} is absent: Runs Mode A (Product-Linked, silent PDF rules)
     - Returns structured metadata and voiceover text
     """
     has_no_meta = bool(re.search(r"\{\s*no\s*meta\s*\}", raw_topic, re.IGNORECASE))
+    is_duo = duo or bool(re.search(r"\{\s*duo\s*\}", raw_topic, re.IGNORECASE))
     clean_topic = sanitize_tags(raw_topic)
 
     match = match_topic_to_product(clean_topic)
     page_num = match["page_number"]
     ex_title = match["exercise_title"]
     product_file = match["product_file"]
+
+    if is_duo:
+        # CONVERSATIONAL DUO MODE (Judy & Andrew)
+        lower_top = clean_topic.lower()
+        matched_duo = None
+        for k, item in CURATED_DUO_SCRIPTS.items():
+            if any(kw in lower_top for kw in item["keywords"]):
+                matched_duo = item["voiceover"]
+                break
+        
+        voiceover = matched_duo or generate_dynamic_duo_script(clean_topic)
+        words = re.sub(r"^\s*(?:judy|andrew)\s*:\s*", "", voiceover, flags=re.IGNORECASE | re.MULTILINE).split()
+        is_valid, issues = check_script_hygiene(voiceover, is_mode_a=False)
+
+        formatted_output = f"[VOICEOVER]\n{voiceover}"
+        return {
+            "mode": "DUO",
+            "is_product_linked": False,
+            "topic": clean_topic,
+            "voiceover": voiceover,
+            "metadata": None,
+            "word_count": len(words),
+            "formatted_output": formatted_output,
+            "is_valid": is_valid,
+            "issues": issues,
+            "is_duo": True
+        }
 
     if has_no_meta:
         # MODE B: Organic / Growth
@@ -236,6 +312,7 @@ def generate_script_and_metadata(raw_topic: str) -> Dict[str, Any]:
 def main():
     parser = argparse.ArgumentParser(description="RightClips Judy Scriptwriter")
     parser.add_argument("--topic", required=True, help="Topic with channel and optional {no meta} tag")
+    parser.add_argument("--duo", action="store_true", help="Generate conversational duo script with Judy and Andrew")
     parser.add_argument("--check-script", default=None, help="Validate an existing script text")
     parser.add_argument("--json", action="store_true", help="Output JSON format")
     args = parser.parse_args()
@@ -243,17 +320,17 @@ def main():
     if args.check_script:
         has_no_meta = "{no meta}" in args.topic.lower()
         is_valid, issues = check_script_hygiene(args.check_script, is_mode_a=not has_no_meta)
-        words = len(args.check_script.split())
+        words = len(re.sub(r"^\s*(?:judy|andrew)\s*:\s*", "", args.check_script, flags=re.IGNORECASE | re.MULTILINE).split())
         print(f"\nScript Hygiene Check ({words} words):")
         if is_valid:
-            print("  ✅ 100% Compliant (75-90 words, no clichés, no spoken product/page mentions)")
+            print("  ✅ 100% Compliant (65-90 words, no clichés, no spoken product/page mentions)")
         else:
             print("  ❌ Issues found:")
             for iss in issues:
                 print(f"     - {iss}")
         return
 
-    result = generate_script_and_metadata(args.topic)
+    result = generate_script_and_metadata(args.topic, duo=args.duo)
     if args.json:
         print(json.dumps(result, indent=2))
     else:

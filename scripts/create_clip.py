@@ -35,6 +35,7 @@ sys.path.append(str(ROOT_DIR / "scripts"))
 
 from extract_product_page import extract_product_page
 from generate_script import generate_script_and_metadata, check_script_hygiene
+from dialogue_engine import process_dialogue
 
 def sanitize_tags(text: str) -> str:
     if not text:
@@ -267,7 +268,9 @@ def transcribe_audio(audio_path: Path, output_json: Path):
     return words_list, duration_sec
 
 def parse_script_into_concepts(script_text: str):
-    lines = [l.strip() for l in script_text.splitlines() if l.strip()]
+    # Strip speaker prefixes (e.g. JUDY:, ANDREW:) for visual cards
+    clean_text = re.sub(r"(?:^|\s+)(?:judy|andrew)\s*:\s*", " ", script_text, flags=re.IGNORECASE).strip()
+    lines = [l.strip() for l in clean_text.splitlines() if l.strip()]
     concepts = []
     for line in lines:
         parts = [p.strip() for p in re.split(r'(?<=[a-zA-Z][.?!])\s+(?=[A-Z"\'“‘])', line) if p.strip()]
@@ -479,7 +482,7 @@ def align_concepts(concepts, words_list, fps=30):
         })
     return aligned
 
-def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None):
+def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
     print(f"🎨 [3/4] Scaffolding Remotion clip files with Speech-Synchronized Progressive Reveal in src/clips/{name}/...")
@@ -631,7 +634,30 @@ export const {pascal_name}Background: React.FC = () => {{
     s3_end = outro_frame if outro_frame > s3_start + 30 else total_frames
 
     # 3. Presenter.tsx
-    pres_code = f"""import React from "react";
+    if is_duo:
+        pres_code = f"""import React from "react";
+import {{ DuoPresenter, DuoSpeakerSegment }} from "../../components/DuoPresenter";
+import speakerSegmentsRaw from "./speaker_segments.json";
+
+interface PresenterProps {{
+  currentMs: number;
+}}
+
+const speakerSegments: DuoSpeakerSegment[] = speakerSegmentsRaw as DuoSpeakerSegment[];
+
+export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}) => {{
+  return (
+    <DuoPresenter
+      currentMs={{currentMs}}
+      segments={{speakerSegments}}
+      baseHeight={{1280}}
+      showBadge={{true}}
+    />
+  );
+}};
+"""
+    else:
+        pres_code = f"""import React from "react";
 import {{ spring, useCurrentFrame, useVideoConfig }} from "remotion";
 import {{ CharacterKeyframeAnimator, KeyframePoint }} from "../../components/CharacterKeyframeAnimator";
 import {{ Zap }} from "lucide-react";
@@ -924,6 +950,12 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         );
       }})()}}"""
 
+    canvas_container_class = (
+        "absolute inset-0 w-full h-full flex flex-col items-center justify-start pt-[10%] p-8 select-none"
+        if is_duo
+        else "absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none"
+    )
+
     canvas_code = f"""import React from "react";
 import {{ useCurrentFrame, useVideoConfig, spring, interpolate }} from "remotion";
 import {{ PhysicalCard }} from "../../components/physics/PhysicalCard";
@@ -944,7 +976,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const {{ fps }} = useVideoConfig();
 
   return (
-    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none">
+    <div className="{canvas_container_class}">
       
       {{/* ======================================================== */}}
       {{/* SCENE 1: THE ROOT FRICTION & HOOK (Frames {s1_start} - {s2_start}) */}}
@@ -1034,6 +1066,7 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({{
   word: t.word,
   startMs: t.startMs ?? t.start,
   endMs: t.endMs ?? t.end,
+  speaker: t.speaker,
 }}));
 
 // Multi-SFX audio cues synchronized with progressive visual reveals
@@ -1174,7 +1207,7 @@ export const {pascal_name}Thumbnail: React.FC = () => (
     highlightColor="rose"
     subtitle="{sub}"
     categoryBadge="{cat_badge}"
-    characterPose="character_fullbody_pointing.png"
+    characterPose="character_pointing.png"
     theme="{theme}"
     aspectRatio="{ "9:16" if format_type == "shorts" else "16:9" }"
     extraBadge="{extra_badge}"
@@ -1255,6 +1288,7 @@ async def main():
     parser.add_argument("--facecam", default=None, help="Path to creator facecam video file")
     parser.add_argument("--video", default=None, help="Alias for --facecam")
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
+    parser.add_argument("--duo", action="store_true", help="Enable Conversational Duo mode (Judy & Andrew)")
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
 
@@ -1266,17 +1300,32 @@ async def main():
     # Check for {no meta} tag across inputs
     has_no_meta = bool(re.search(r"\{\s*no\s*meta\s*\}", f"{raw_topic} {raw_script or ''} {args.name}", re.IGNORECASE))
 
+    # Check for duo mode across inputs
+    raw_combined = f"{raw_topic} {raw_script or ''} {args.name}".lower()
+    is_duo = args.duo or bool(re.search(r"\{\s*duo\s*\}", raw_combined, re.IGNORECASE)) or (
+        bool(re.search(r"(?:^|\s+)judy\s*:", raw_combined, re.IGNORECASE)) and
+        bool(re.search(r"(?:^|\s+)andrew\s*:", raw_combined, re.IGNORECASE))
+    )
+
     # If no script provided, autonomously generate it from topic
     if not raw_script and raw_topic:
-        print(f"✍️  [Scriptwriter] No script provided. Autonomously generating script for topic: '{raw_topic}'...")
-        gen_res = generate_script_and_metadata(raw_topic)
+        print(f"✍️  [Scriptwriter] No script provided. Autonomously generating script for topic: '{raw_topic}' (Duo: {is_duo})...")
+        gen_res = generate_script_and_metadata(raw_topic, duo=is_duo)
         raw_script = gen_res["formatted_output"]
+        if gen_res.get("is_duo"):
+            is_duo = True
         print(f"      Generated Mode {gen_res['mode']} script ({gen_res['word_count']} words)")
     elif not raw_script:
         raise ValueError("Must provide either --script or --topic to generate a video!")
 
     # Parse [METADATA] and [VOICEOVER] blocks if present
     meta_pdf, meta_page, meta_title, vo_text, script_pinned_comment = parse_script_blocks(raw_script)
+
+    # Check again if parsed vo_text has dialogue turns
+    if not is_duo and vo_text:
+        vo_lower = vo_text.lower()
+        if bool(re.search(r"(?:^|\s+)judy\s*:", vo_lower)) and bool(re.search(r"(?:^|\s+)andrew\s*:", vo_lower)):
+            is_duo = True
 
     product_pdf = args.product or meta_pdf
     product_page = args.product_page or meta_page
@@ -1308,7 +1357,6 @@ async def main():
                 print(f"⚠️  [Product] Warning: Failed to extract product page: {e}")
 
     # Detect channel niche from raw topic & script before sanitizing
-    raw_combined = f"{raw_topic} {raw_script} {args.name}".lower()
     video_source = args.facecam or args.video
     is_facecam = bool(video_source) or "{facecam}" in raw_combined or args.style == "facecam"
 
@@ -1351,7 +1399,7 @@ async def main():
     audio_path = ROOT_DIR / "public" / name / "voiceover.mp3"
     transcript_path = ROOT_DIR / "src" / "clips" / name / "transcript.json"
 
-    # Step 1: Audio setup (Extract from facecam or Synthesize TTS)
+    # Step 1: Audio setup (Extract from facecam, Synthesize Conversational Duo, or Standard TTS)
     if is_facecam and video_source:
         import shutil
         print(f"🎬 [1/4] Extracting native voice audio from video: {video_source}...")
@@ -1366,11 +1414,13 @@ async def main():
         subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         print(f"      Native master audio saved to: {audio_path}")
         print(f"      Facecam video saved to: {dest_video}")
+        words, duration_sec = transcribe_audio(audio_path, transcript_path)
+    elif is_duo:
+        print(f"🎙️ [1/4] Synthesizing Conversational Duo speech (Judy & Andrew)...")
+        words, turn_timings, duration_sec = await process_dialogue(vo_text or clean_script, name, root_dir=ROOT_DIR)
     else:
         await synthesize_speech(clean_script, audio_path, voice_to_use)
-
-    # Step 2: Transcribe
-    words, duration_sec = transcribe_audio(audio_path, transcript_path)
+        words, duration_sec = transcribe_audio(audio_path, transcript_path)
 
     # Step 3: Scaffold & Register
     illustration_path = args.illustration
@@ -1385,7 +1435,10 @@ async def main():
                 print(f"🎨 [Illustration] Found bespoke scene illustration: {illustration_path}")
                 break
 
-    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script, words, product_meta, illustration_path=illustration_path, pinned_comment=script_pinned_comment)
+    pascal_name = scaffold_clip_files(
+        name, topic, args.format, duration_sec, clean_script, words, product_meta,
+        illustration_path=illustration_path, pinned_comment=script_pinned_comment, is_duo=is_duo
+    )
     register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche, pinned_comment=script_pinned_comment, script_text=clean_script)
 
     # Step 4: Render

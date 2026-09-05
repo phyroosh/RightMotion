@@ -21,22 +21,22 @@ Think like an After Effects and Premiere Pro motion graphics editor first! Every
 Never squish the avatar in a corner or have graphics fighting for space on screen with the avatar. We edit like a top-tier video essayist with distinct A-Roll and B-Roll rhythm:
 
 ### A-Roll Presenter Shots (The Human Connection)
-- **Voice Character:** Always use the female neural network voice (`en-US-AvaMultilingualNeural` with natural conversational speed `rate="+0%"`, DO NOT speed up the voice) matching Judy.
-- **Smart Multi-Pose Switching — 6-Pose System:**
-  **FULL BODY (intro hook & outro finale ONLY — the money shots):**
-  1. `character_fullbody_pointing.png` — Confident pointing up, strong for opening hooks and calls to action.
-  2. `character_fullbody_open.png` — Both palms open/shrug, empathetic outros, question-framing moments.
-  3. `character_fullbody_casual.png` — Touching hair, relaxed and warm — humanizing bookend moments.
-
-  **BUST CUTOUTS (mid-video explanatory A-Roll):**
-  4. `character_pointing.png` — Directing attention, hooks, action directives.
-  5. `character_crossed.png` — Arms crossed for analytical evaluation, skepticism, addressing excuses.
-  6. `character_open.png` — Open palms for explaining, questioning, empathetic reframes, compassionate wisdom.
-
-- **Character Layout Rule:**
-  - Use `CharacterKeyframeAnimator` inside `className="absolute inset-0 pointer-events-none z-30 flex flex-col items-center justify-end overflow-hidden"`.
-  - Full body intro/outro: `baseHeight={1550}`. Bust cutouts: `baseHeight={1200}`.
-  - Apple Glass scene badges only (`className="apple-glass"` with `border-[5px]` and Lucide icon).
+- **Voice Character:** Solo Judy uses `en-US-AvaMultilingualNeural` at `rate="+8%"`. Conversational Duo pairs Judy with Andrew (`en-US-SteffanNeural` at `rate="+7%"`).
+- **Screen-Intimate Framing Rule (PERMANENT ARCHIVE OF FAR FULL-BODY AVATARS):**
+  - Never use far head-to-toe full-body avatars. They make characters feel disconnected on mobile screens. Full-body files are archived in `public/archive_avatars/`.
+  - Standardize 100% on **screen-intimate, zoomed waist-up cutouts** (`baseHeight={1280 - 1550}`) so characters are close to the viewer.
+- **Smart Multi-Pose Cutouts:**
+  **Judy (Screen-Intimate Bust Cutouts):**
+  1. `character_pointing.png` — Confident opening hooks, directing attention, action directives.
+  2. `character_crossed.png` — Arms crossed for analytical evaluation, skepticism, addressing excuses.
+  3. `character_open.png` — Open palms for empathetic explanations, questioning, compassionate reframes.
+  **Andrew (Inquisitive Male Counterpart Cutouts):**
+  4. `andrew_crossed.png` — Arms crossed, skeptical pushback, challenging assumptions.
+  5. `andrew_thinking.png` — Thoughtful contemplation, inquisitive questioning, listening.
+- **Character Layout Rules:**
+  - Solo Judy: `CharacterKeyframeAnimator` inside `className="absolute inset-0 pointer-events-none z-30 flex flex-col items-center justify-end overflow-hidden"`.
+  - Conversational Duo (`<DuoPresenter />`): Turn-based speaker scaling (`1.08x` active, `0.92x` listening), top broadcast HUD badge (`top-[5.5%]`), top-anchored canvas (`pt-[10%]`), and dual-color kinetic captions (Amber for Andrew, Sky Blue for Judy).
+  - Apple Glass scene badges (`className="apple-glass"` with `border-[5px]` and Lucide icon).
 
 ### B-Roll Motion Graphics Shots (Single-Concept Visual Metaphors)
 - Spotlight **one** hero prop or visual comparison at a time using `ProCutout` or `PropComparison`.
