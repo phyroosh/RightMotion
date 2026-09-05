@@ -208,6 +208,14 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 >    - When an illustration card is used in Scene 1 (Frames 0 to Scene 2 start), the card is the instant hero hook from Frame 0.
 >    - In `Presenter.tsx`, `isIntro` is disabled so Judy does NOT obscure the card with a full-screen blur during intro.
 >    - Judy enters smoothly during the outro (`isFinale`) to deliver the closing connection and CTA without card collision.
+>
+> 6. **Multi-Beat Progressive Overlay Protocol (Anti-Retention Drop Standard)**:
+>    - **NEVER hold static or slowly drifting artwork for $> 3.5$ seconds!** Viewers swipe away if the screen doesn't evolve.
+>    - **Every 1.5–2.5 seconds, a new visual layer MUST hit the frame** synchronized with the host's spoken words:
+>      - **Beat 1 (Frame 0)**: Entrance of the hero card, glass glare sweep, and main title hook.
+>      - **Beat 2 (Spoken Pivot Word, ~2.5s)**: Camera punch zoom (`zoomLevel: 1.15`), target reticle focus, floating dark glass tactical callout pin (`<IllustrationCalloutPin />`), progressive subtitle reveal (`subtitleFrame`), paired with `whoosh_fast` + `click` SFX.
+>      - **Beat 3 (Spoken Friction Word, ~5.5s)**: Diagnostic warning stamp (`<IllustrationStamp />`) slamming at an angle (`rotate-[-3deg]`) with `impact_hit` SFX for subconscious paralysis/anxiety/identity concepts.
+>    - **Clause Splitting & Pacing Guardrails**: Scripts with long compound sentences ($\ge 16$ words) must be split on contrast conjunctions (`", but "`, `", yet "`, `", however "`) so Scene 1 transitions cleanly into Scene 2 by ~7–8s (Frame 210–240).
 
 ---
 

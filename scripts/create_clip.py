@@ -257,9 +257,111 @@ def parse_script_into_concepts(script_text: str):
     for line in lines:
         parts = [p.strip() for p in re.split(r'(?<=[a-zA-Z][.?!])\s+(?=[A-Z"\'“‘])', line) if p.strip()]
         for p in parts:
+            words = p.split()
+            # If a single sentence is very long (>= 16 words), split on contrast clauses or em-dashes
+            if len(words) >= 16:
+                sub_parts = re.split(r'(?<=,)\s+(?=but\b|yet\b|however\b|while\b|whereas\b)|(?<=\w)\s*—\s*|(?<=;)\s+', p, flags=re.IGNORECASE)
+                if len(sub_parts) > 1:
+                    for sp in sub_parts:
+                        if sp.strip():
+                            concepts.append(sp.strip())
+                    continue
             if p:
                 concepts.append(p)
     return concepts
+
+def generate_illustration_beats(s1_words, s1_start, s2_start, topic, hook_text, problem_text, accent_color="cyan", fps=30):
+    beats = []
+    s1_frames = s2_start - s1_start
+    if not s1_words or s1_frames < 45:
+        return beats, s1_start
+
+    contrast_keywords = {
+        "but", "yet", "however", "instead", "actually", "until", "when",
+        "where", "while", "because", "every", "nobody", "most", "stop", "never"
+    }
+
+    pivot_frames = []
+    for i, w in enumerate(s1_words):
+        wf = round((w.get("start", w.get("startMs", 0)) / 1000) * fps)
+        cleaned = re.sub(r"[^a-zA-Z]", "", w.get("word", "").lower())
+        if cleaned in contrast_keywords:
+            pivot_frames.append((wf, cleaned, w.get("word", "")))
+
+    # Choose beat 2 frame around 35% - 50% through s1
+    target_b2_frame = round(s1_start + s1_frames * 0.42)
+    b2_frame = target_b2_frame
+    for pf, kw, orig in pivot_frames:
+        if abs(pf - target_b2_frame) <= round(fps * 1.6) and pf >= s1_start + 25:
+            b2_frame = pf
+            break
+
+    # Extract a prominent word around b2_frame for callout tag
+    b2_word = ""
+    for w in s1_words:
+        wf = round((w.get("start", w.get("startMs", 0)) / 1000) * fps)
+        if wf >= b2_frame:
+            cleaned = re.sub(r"[^a-zA-Z]", "", w.get("word", "").upper())
+            if len(cleaned) >= 4 and cleaned.lower() not in contrast_keywords:
+                b2_word = cleaned
+                break
+
+    def clean_truncate(text, max_len=50):
+        if len(text) <= max_len:
+            return text
+        truncated = text[:max_len].rsplit(" ", 1)[0]
+        return truncated + "..."
+
+    callout_tag = f"{b2_word} REALITY" if b2_word else "CORE FRICTION"
+    callout_sub = clean_truncate(problem_text, 50)
+
+    # Beat 2: Tactical Callout Pin with Camera Punch
+    beats.append({
+        "frame": b2_frame,
+        "type": "callout",
+        "text": callout_tag,
+        "subtext": callout_sub,
+        "position": "top-right",
+        "icon": "target",
+        "color": accent_color,
+        "zoomLevel": 1.15,
+        "targetX": 50,
+        "targetY": 40
+    })
+
+    # Beat 3: Diagnostic Warning Stamp (if s1 is >= 4.5s / 135 frames)
+    if s1_frames >= 135 and s2_start - b2_frame >= 60:
+        target_b3_frame = round(b2_frame + (s2_start - b2_frame) * 0.58)
+        b3_frame = target_b3_frame
+
+        friction_keywords = {
+            "anxiety", "paralyzed", "fear", "crisis", "failure", "loop",
+            "burnout", "exhaustion", "trap", "panic", "stress", "mask",
+            "overthinking", "identity", "doubt", "freeze", "alone"
+        }
+        b3_word = ""
+        for w in s1_words:
+            wf = round((w.get("start", w.get("startMs", 0)) / 1000) * fps)
+            cleaned = re.sub(r"[^a-zA-Z]", "", w.get("word", "").lower())
+            if cleaned in friction_keywords and wf >= b2_frame + 20:
+                b3_frame = wf
+                b3_word = cleaned.upper()
+                break
+
+        stamp_title = f"{b3_word} // ACTIVE" if b3_word else "SUBCONSCIOUS PARALYSIS"
+
+        beats.append({
+            "frame": b3_frame,
+            "type": "stamp",
+            "text": stamp_title,
+            "subtext": "COGNITIVE OVERLOAD",
+            "position": "bottom-left",
+            "icon": "alert",
+            "color": "rose",
+        })
+
+    subtitle_frame = b2_frame
+    return beats, subtitle_frame
 
 def align_concepts(concepts, words_list, fps=30):
     aligned = []
@@ -418,7 +520,12 @@ export const {pascal_name}Background: React.FC = () => {{
     # Scene 2: The Core Breakdown / List Points (REVEALED ONE-BY-ONE!)
     # Scene 3: The Actionable Protocol & Finale
     n_concepts = len(aligned)
-    if n_concepts >= 6:
+    if illustration_path and aligned[0]["endFrame"] >= 140 and n_concepts >= 3:
+        # Pacing guardrail for illustration: if concept 0 alone is >= 4.6s, don't double up into an 11s scene!
+        s1_items = [aligned[0]]
+        s2_items = aligned[1:-1]
+        s3_items = [aligned[-1]]
+    elif n_concepts >= 6:
         s1_items = aligned[:2]
         s2_items = aligned[2:-2]
         s3_items = aligned[-2:]
@@ -486,6 +593,8 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
 """
     (clip_dir / "Presenter.tsx").write_text(pres_code, encoding="utf-8")
 
+    accent_choice = "cyan" if niche == "health" else ("emerald" if niche == "finance" else "blue")
+
     # 4. Canvas.tsx with Speech-Synchronized Sequential Reveals
     # Build Scene 2 points JSX
     s2_points_jsx = []
@@ -495,6 +604,27 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         {"frame": f_c1_cutout, "type": "impact_hit", "volume": 0.24},
         {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
     ]
+
+    illustration_beats = []
+    s1_subtitle_frame = f_c1_cutout
+    if illustration_path:
+        s1_words = [w for w in (words_list or []) if round((w.get("start", w.get("startMs", 0)) / 1000) * fps) < s2_start]
+        illustration_beats, s1_subtitle_frame = generate_illustration_beats(
+            s1_words=s1_words,
+            s1_start=s1_start,
+            s2_start=s2_start,
+            topic=topic,
+            hook_text=c1_hook_text,
+            problem_text=c1_problem_text,
+            accent_color=accent_choice,
+            fps=fps
+        )
+        for b in illustration_beats:
+            if b["type"] == "callout":
+                sfx_cues.append({"frame": b["frame"], "type": "whoosh_fast", "volume": 0.28})
+                sfx_cues.append({"frame": b["frame"], "type": "click", "volume": 0.24})
+            elif b["type"] == "stamp":
+                sfx_cues.append({"frame": b["frame"], "type": "impact_hit", "volume": 0.32})
 
     for idx, pt in enumerate(s2_items):
         p_frame = pt["startFrame"]
@@ -538,8 +668,6 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     f_s3_finale = s3_c2["startFrame"]
     sfx_cues.append({"frame": f_s3_cutout, "type": "whoosh_sparkle", "volume": 0.32})
     sfx_cues.append({"frame": f_s3_finale, "type": "impact_hit", "volume": 0.28})
-
-    accent_choice = "cyan" if niche == "health" else ("emerald" if niche == "finance" else "blue")
     s3_impact_ms = round((s3_start / fps) * 1000)
     if product_meta:
         prod_stem = Path(product_meta["pdf_name"]).stem.upper()
@@ -621,6 +749,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
 
     if illustration_path:
         s1_impact_ms = round((s1_start / fps) * 1000)
+        beats_json = json.dumps(illustration_beats, indent=12)
         scene1_content_jsx = f"""{{frame >= {s1_start} && frame < {s2_start} && (
         <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
           <CinematicIllustrationCard
@@ -630,7 +759,8 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
             badgeLabel="COGNITIVE DIAGNOSTIC // 01"
             accentColor="{accent_choice}"
             entranceFrame={{{s1_start}}}
-            highlightFrame={{{f_c1_cutout}}}
+            subtitleFrame={{{s1_subtitle_frame}}}
+            beats={{{beats_json}}}
             width={{920}}
             height={{520}}
             tiltX={{3}}

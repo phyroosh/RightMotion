@@ -64,5 +64,5 @@ Never squish the avatar in a corner or have graphics fighting for space on scree
 ## 6. Bespoke Painterly Surreal Illustrations & Motion Graphics (`<CinematicIllustrationCard />`)
 - **Visual Style**: Expressive digital impasto oil brushwork, dark slate/obsidian shadows (`#080b12`), atmospheric chiaroscuro lighting, and vibrant glowing prismatic neon cognitive distortion trails (cyan, magenta, turquoise, amber).
 - **Motion Polish**: Never static! Wrap in `<CinematicIllustrationCard />` with subtle 2.5D Ken Burns zoom drift (`1.0x -> 1.07x`), diagonal glass glare sheen sweep, tactile card tilt with masking tape (`TapeStrip`), and monospace HUD telemetry (`COGNITIVE DIAGNOSTIC // 01`).
-- **Timing**: Enters at Frame 0 as the instant hero hook. Judy presents the outro (`isFinale`) cleanly without card clutter.
+- **Timing & Multi-Beat Overlays**: Enters at Frame 0 as the instant hero hook. Judy presents the outro (`isFinale`) cleanly without card clutter. Never leave the illustration static for $>3.5$s: add camera punch zoom (`1.15x`), tactical callout pins (`<IllustrationCalloutPin />`), and angled diagnostic stamps (`<IllustrationStamp />`) every 1.5–2.5s.
 - **Graceful Multi-Agent Fallback**: Agents with `generate_image` (Antigravity) generate the bespoke 16:9 art; agents without it (Claude Code) skip image generation and fall back to `ProCutout` seamlessly.

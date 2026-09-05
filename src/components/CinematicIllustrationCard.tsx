@@ -9,7 +9,49 @@ import {
 } from "remotion";
 import { PhysicalCard } from "./physics/PhysicalCard";
 import { TapeStrip } from "./collage/TapeStrip";
-import { Eye, Activity, Sparkles, Compass } from "lucide-react";
+import {
+  Activity,
+  Sparkles,
+  Compass,
+  AlertTriangle,
+  Crosshair,
+  Zap,
+  Flame,
+  Shield,
+  Target,
+} from "lucide-react";
+
+export type IllustrationBeatType = "callout" | "stamp" | "badge" | "punch";
+export type IllustrationColor =
+  | "cyan"
+  | "magenta"
+  | "amber"
+  | "emerald"
+  | "violet"
+  | "blue"
+  | "rose";
+
+export interface IllustrationBeat {
+  /** Spoken cue frame when this overlay activates */
+  frame: number;
+  /** Type of graphical element: "callout" | "stamp" | "badge" | "punch" */
+  type: IllustrationBeatType;
+  /** Primary label or title */
+  text: string;
+  /** Secondary subtitle or description */
+  subtext?: string;
+  /** Position on the illustration: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center" */
+  position?: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center";
+  /** Icon name */
+  icon?: "alert" | "crosshair" | "zap" | "flame" | "shield" | "sparkles" | "target" | "compass";
+  /** Color theme override */
+  color?: IllustrationColor;
+  /** Camera zoom level on dynamic punch (e.g. 1.15 to zoom in) */
+  zoomLevel?: number;
+  /** Focal target position in percentages (x: 0-100, y: 0-100) */
+  targetX?: number;
+  targetY?: number;
+}
 
 export interface CinematicIllustrationCardProps {
   /** Relative image path inside public/ or URL */
@@ -20,12 +62,16 @@ export interface CinematicIllustrationCardProps {
   subtitle?: string;
   /** Telemetry badge text (e.g. "COGNITIVE STATE // 01") */
   badgeLabel?: string;
-  /** Color theme for neon accents & glow: "cyan" | "magenta" | "amber" | "emerald" | "violet" */
-  accentColor?: "cyan" | "magenta" | "amber" | "emerald" | "violet";
-  /** Frame when the card enters */
+  /** Color theme for neon accents & glow */
+  accentColor?: IllustrationColor;
+  /** Frame when the card enters (default: 0) */
   entranceFrame?: number;
-  /** Frame when diagnostic spotlight activates (optional) */
+  /** Frame when the subtitle reveals (default: entranceFrame) */
+  subtitleFrame?: number;
+  /** Frame when diagnostic spotlight activates (optional legacy) */
   highlightFrame?: number;
+  /** Speech-synchronized progressive overlay beats */
+  beats?: IllustrationBeat[];
   /** Width in pixels (default: 900) */
   width?: number;
   /** Height in pixels (default: 540) */
@@ -46,7 +92,9 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
   badgeLabel = "COGNITIVE DIAGNOSTIC // 01",
   accentColor = "cyan",
   entranceFrame = 0,
+  subtitleFrame,
   highlightFrame,
+  beats = [],
   width = 900,
   height = 540,
   tiltX = 3,
@@ -74,28 +122,52 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
 
   // 2.5D Ken Burns slow-pan and slow-zoom drift
   const zoomDrift = enableKenBurns
-    ? interpolate(relFrame, [0, 180], [1.0, 1.07], { extrapolateRight: "clamp" })
+    ? interpolate(relFrame, [0, 240], [1.0, 1.07], { extrapolateRight: "clamp" })
     : 1.0;
   const panDriftX = enableKenBurns
-    ? interpolate(relFrame, [0, 180], [0, -10], { extrapolateRight: "clamp" })
+    ? interpolate(relFrame, [0, 240], [0, -12], { extrapolateRight: "clamp" })
     : 0;
   const panDriftY = enableKenBurns
-    ? interpolate(relFrame, [0, 180], [0, -6], { extrapolateRight: "clamp" })
+    ? interpolate(relFrame, [0, 240], [0, -8], { extrapolateRight: "clamp" })
     : 0;
 
-  // Diagnostic highlight pulse spring (if specified)
-  const spHighlight = highlightFrame !== undefined && frame >= highlightFrame
-    ? spring({
-        frame: frame - highlightFrame,
+  // Dynamic Camera Punch Zoom Calculation from active beats
+  let cameraPunchZoom = 0;
+  let punchOriginX = 50;
+  let punchOriginY = 50;
+
+  for (const b of beats) {
+    if ((b.type === "punch" || b.zoomLevel !== undefined) && frame >= b.frame) {
+      const spPunch = spring({
+        frame: frame - b.frame,
         fps,
-        config: { damping: 12, stiffness: 150 },
-      })
-    : 0;
+        config: { damping: 12, stiffness: 160 },
+      });
+      const punchTarget = (b.zoomLevel ?? 1.15) - 1.0;
+      const punchVal = spPunch * punchTarget;
+      if (punchVal > cameraPunchZoom) {
+        cameraPunchZoom = punchVal;
+        if (b.targetX !== undefined) punchOriginX = b.targetX;
+        if (b.targetY !== undefined) punchOriginY = b.targetY;
+      }
+    }
+  }
 
   // Accent color mappings
-  const colorMap = {
+  const colorMap: Record<IllustrationColor, {
+    border: string;
+    glowBg: string;
+    badgeText: string;
+    badgeBg: string;
+    accentText: string;
+    pulseColor: string;
+    spotlightBorder: string;
+    spotlightGlow: string;
+    stampBg: string;
+    stampBorder: string;
+  }> = {
     cyan: {
-      border: "border-cyan-500/40",
+      border: "border-cyan-500/50",
       glowBg: "from-cyan-500/25 via-blue-600/15 to-transparent",
       badgeText: "text-cyan-400",
       badgeBg: "bg-cyan-500/15 border-cyan-500/40",
@@ -103,9 +175,11 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
       pulseColor: "bg-cyan-400",
       spotlightBorder: "border-cyan-400",
       spotlightGlow: "shadow-[0_0_35px_rgba(6,182,212,0.6)]",
+      stampBg: "bg-cyan-950/90",
+      stampBorder: "border-cyan-500/80",
     },
     magenta: {
-      border: "border-fuchsia-500/40",
+      border: "border-fuchsia-500/50",
       glowBg: "from-fuchsia-500/25 via-purple-600/15 to-transparent",
       badgeText: "text-fuchsia-400",
       badgeBg: "bg-fuchsia-500/15 border-fuchsia-500/40",
@@ -113,9 +187,11 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
       pulseColor: "bg-fuchsia-400",
       spotlightBorder: "border-fuchsia-400",
       spotlightGlow: "shadow-[0_0_35px_rgba(217,70,239,0.6)]",
+      stampBg: "bg-fuchsia-950/90",
+      stampBorder: "border-fuchsia-500/80",
     },
     amber: {
-      border: "border-amber-500/40",
+      border: "border-amber-500/50",
       glowBg: "from-amber-500/25 via-orange-600/15 to-transparent",
       badgeText: "text-amber-400",
       badgeBg: "bg-amber-500/15 border-amber-500/40",
@@ -123,9 +199,11 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
       pulseColor: "bg-amber-400",
       spotlightBorder: "border-amber-400",
       spotlightGlow: "shadow-[0_0_35px_rgba(245,158,11,0.6)]",
+      stampBg: "bg-amber-950/90",
+      stampBorder: "border-amber-500/80",
     },
     emerald: {
-      border: "border-emerald-500/40",
+      border: "border-emerald-500/50",
       glowBg: "from-emerald-500/25 via-teal-600/15 to-transparent",
       badgeText: "text-emerald-400",
       badgeBg: "bg-emerald-500/15 border-emerald-500/40",
@@ -133,9 +211,11 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
       pulseColor: "bg-emerald-400",
       spotlightBorder: "border-emerald-400",
       spotlightGlow: "shadow-[0_0_35px_rgba(16,185,129,0.6)]",
+      stampBg: "bg-emerald-950/90",
+      stampBorder: "border-emerald-500/80",
     },
     violet: {
-      border: "border-violet-500/40",
+      border: "border-violet-500/50",
       glowBg: "from-violet-500/25 via-indigo-600/15 to-transparent",
       badgeText: "text-violet-400",
       badgeBg: "bg-violet-500/15 border-violet-500/40",
@@ -143,6 +223,32 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
       pulseColor: "bg-violet-400",
       spotlightBorder: "border-violet-400",
       spotlightGlow: "shadow-[0_0_35px_rgba(139,92,246,0.6)]",
+      stampBg: "bg-violet-950/90",
+      stampBorder: "border-violet-500/80",
+    },
+    blue: {
+      border: "border-sky-500/50",
+      glowBg: "from-sky-500/25 via-blue-600/15 to-transparent",
+      badgeText: "text-sky-400",
+      badgeBg: "bg-sky-500/15 border-sky-500/40",
+      accentText: "text-sky-300",
+      pulseColor: "bg-sky-400",
+      spotlightBorder: "border-sky-400",
+      spotlightGlow: "shadow-[0_0_35px_rgba(14,165,233,0.6)]",
+      stampBg: "bg-sky-950/90",
+      stampBorder: "border-sky-500/80",
+    },
+    rose: {
+      border: "border-rose-500/50",
+      glowBg: "from-rose-500/25 via-red-600/15 to-transparent",
+      badgeText: "text-rose-400",
+      badgeBg: "bg-rose-500/15 border-rose-500/40",
+      accentText: "text-rose-300",
+      pulseColor: "bg-rose-400",
+      spotlightBorder: "border-rose-400",
+      spotlightGlow: "shadow-[0_0_35px_rgba(244,63,94,0.6)]",
+      stampBg: "bg-rose-950/90",
+      stampBorder: "border-rose-500/80",
     },
   };
 
@@ -152,6 +258,40 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
   const src = imageSrc.startsWith("http") || imageSrc.startsWith("/")
     ? imageSrc
     : staticFile(imageSrc);
+
+  // Subtitle Progressive Timing
+  const effectiveSubFrame = subtitleFrame !== undefined ? subtitleFrame : entranceFrame;
+  const isSubtitleActive = frame >= effectiveSubFrame;
+  const spSubtitle = isSubtitleActive
+    ? spring({
+        frame: frame - effectiveSubFrame,
+        fps,
+        config: { damping: 14, stiffness: 140 },
+      })
+    : 0;
+
+  // Helper for rendering beat icons
+  const renderBeatIcon = (iconName?: string, className: string = "w-5 h-5") => {
+    switch (iconName) {
+      case "alert":
+        return <AlertTriangle className={className} />;
+      case "crosshair":
+        return <Crosshair className={className} />;
+      case "zap":
+        return <Zap className={className} />;
+      case "flame":
+        return <Flame className={className} />;
+      case "shield":
+        return <Shield className={className} />;
+      case "target":
+        return <Target className={className} />;
+      case "compass":
+        return <Compass className={className} />;
+      case "sparkles":
+      default:
+        return <Sparkles className={className} />;
+    }
+  };
 
   return (
     <div
@@ -189,16 +329,16 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
           <div className="flex items-center justify-between px-2 pt-1">
             <div className="flex items-center gap-3">
               <div className="relative flex items-center justify-center">
-                <span className={`w-3 h-3 rounded-full ${currentTheme.pulseColor} animate-ping absolute opacity-75`} />
-                <span className={`w-2.5 h-2.5 rounded-full ${currentTheme.pulseColor}`} />
+                <span className={`w-3.5 h-3.5 rounded-full ${currentTheme.pulseColor} animate-ping absolute opacity-75`} />
+                <span className={`w-3 h-3 rounded-full ${currentTheme.pulseColor}`} />
               </div>
-              <span className={`text-xl font-mono font-black tracking-widest uppercase ${currentTheme.badgeText}`}>
+              <span className={`text-2xl font-mono font-black tracking-widest uppercase ${currentTheme.badgeText}`}>
                 {badgeLabel}
               </span>
             </div>
 
-            <div className={`px-4 py-1.5 rounded-full border ${currentTheme.badgeBg} flex items-center gap-2 text-lg font-mono font-bold ${currentTheme.badgeText}`}>
-              <Activity className="w-4 h-4" />
+            <div className={`px-4 py-2 rounded-full border ${currentTheme.badgeBg} flex items-center gap-2 text-xl font-mono font-black ${currentTheme.badgeText}`}>
+              <Activity className="w-5 h-5" />
               <span>LIVE SIGNAL</span>
             </div>
           </div>
@@ -208,12 +348,12 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
             className="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-black/80 shadow-inner"
             style={{ height: `${height}px` }}
           >
-            {/* The Illustration Image */}
+            {/* The Illustration Image with Dynamic Camera Punch */}
             <div
               className="w-full h-full"
               style={{
-                transform: `scale(${zoomDrift}) translate(${panDriftX}px, ${panDriftY}px)`,
-                transformOrigin: "center center",
+                transform: `scale(${zoomDrift + cameraPunchZoom}) translate(${panDriftX}px, ${panDriftY}px)`,
+                transformOrigin: `${punchOriginX}% ${punchOriginY}%`,
               }}
             >
               <Img
@@ -237,28 +377,142 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
               }}
             />
 
-            {/* Diagnostic Focus Spotlight on Surreal Neon Mental Trails (Revealed on cue frame) */}
-            {spHighlight > 0 && (
-              <div
-                className="absolute pointer-events-none transition-all"
-                style={{
-                  top: "22%",
-                  left: "44%",
-                  width: "140px",
-                  height: "140px",
-                  opacity: Math.min(1, spHighlight * 1.3),
-                  transform: `scale(${interpolate(spHighlight, [0, 1], [0.7, 1])})`,
-                }}
-              >
-                <div
-                  className={`w-full h-full rounded-full border-2 border-dashed ${currentTheme.spotlightBorder} ${currentTheme.spotlightGlow} animate-spin`}
-                  style={{ animationDuration: "14s" }}
-                />
-                <div className="absolute -top-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-md bg-black/80 border border-white/20 text-xs font-mono font-bold text-white tracking-widest uppercase">
-                  COGNITIVE CORE
-                </div>
-              </div>
-            )}
+            {/* PROGRESSIVE GRAPHICAL OVERLAYS (SPEECH-SYNCHRONIZED BEATS) */}
+            {beats.map((beat, bIdx) => {
+              if (frame < beat.frame) return null;
+
+              const beatRel = frame - beat.frame;
+              const spBeat = spring({
+                frame: beatRel,
+                fps,
+                config: { damping: 11, stiffness: 170, mass: 0.8 },
+              });
+              const beatTheme = colorMap[beat.color || accentColor] || currentTheme;
+
+              // Position styles
+              const posStyle: React.CSSProperties = {};
+              const pos = beat.position || "top-right";
+              if (pos === "top-left") {
+                posStyle.top = "18px";
+                posStyle.left = "18px";
+              } else if (pos === "top-right") {
+                posStyle.top = "18px";
+                posStyle.right = "18px";
+              } else if (pos === "bottom-left") {
+                posStyle.bottom = "58px";
+                posStyle.left = "18px";
+              } else if (pos === "bottom-right") {
+                posStyle.bottom = "58px";
+                posStyle.right = "18px";
+              } else if (pos === "center") {
+                posStyle.top = "50%";
+                posStyle.left = "50%";
+                posStyle.transform = "translate(-50%, -50%)";
+              }
+
+              // 1. CALLOUT PIN with Target Reticle
+              if (beat.type === "callout") {
+                const targetX = beat.targetX ?? 50;
+                const targetY = beat.targetY ?? 40;
+
+                return (
+                  <React.Fragment key={`beat-${bIdx}`}>
+                    {/* Pulsing Target Reticle over subject */}
+                    <div
+                      className="absolute pointer-events-none transition-all -translate-x-1/2 -translate-y-1/2"
+                      style={{
+                        top: `${targetY}%`,
+                        left: `${targetX}%`,
+                        opacity: Math.min(1, spBeat * 1.5),
+                        transform: `translate(-50%, -50%) scale(${interpolate(spBeat, [0, 1], [0.4, 1])})`,
+                      }}
+                    >
+                      <div
+                        className={`w-14 h-14 rounded-full border-2 border-dashed ${beatTheme.spotlightBorder} ${beatTheme.spotlightGlow} animate-spin`}
+                        style={{ animationDuration: "12s" }}
+                      />
+                      <div className={`absolute inset-0 m-auto w-3 h-3 rounded-full ${beatTheme.pulseColor} shadow-[0_0_12px_#ffffff]`} />
+                    </div>
+
+                    {/* Floating Tactical HUD Micro-Card */}
+                    <div
+                      className="absolute pointer-events-none z-30 transition-all max-w-[420px]"
+                      style={{
+                        ...posStyle,
+                        opacity: Math.min(1, spBeat * 1.3),
+                        transform: `${posStyle.transform || ""} scale(${interpolate(spBeat, [0, 1], [0.75, 1])}) translateY(${interpolate(spBeat, [0, 1], [-20, 0])}px)`,
+                      }}
+                    >
+                      <div className={`p-4 rounded-2xl bg-[#080b12]/92 backdrop-blur-2xl border-2 ${beatTheme.border} shadow-[0_15px_40px_rgba(0,0,0,0.85)] flex flex-col gap-1.5`}>
+                        <div className="flex items-center gap-2.5">
+                          <div className={`w-2.5 h-2.5 rounded-full ${beatTheme.pulseColor} animate-pulse shrink-0`} />
+                          {renderBeatIcon(beat.icon, `w-5 h-5 ${beatTheme.badgeText} shrink-0`)}
+                          <span className={`text-xl font-mono font-black tracking-wide uppercase ${beatTheme.badgeText}`}>
+                            {beat.text}
+                          </span>
+                        </div>
+                        {beat.subtext && (
+                          <div className="text-base font-bold text-white/90 pl-5 leading-snug">
+                            {beat.subtext}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </React.Fragment>
+                );
+              }
+
+              // 2. DIAGNOSTIC WARNING / REFRAME STAMP
+              if (beat.type === "stamp") {
+                return (
+                  <div
+                    key={`beat-${bIdx}`}
+                    className="absolute pointer-events-none z-30 transition-all max-w-[440px]"
+                    style={{
+                      ...posStyle,
+                      opacity: Math.min(1, spBeat * 1.5),
+                      transform: `${posStyle.transform || ""} rotate(${interpolate(spBeat, [0, 1], [-8, -3])}deg) scale(${interpolate(spBeat, [0, 1], [1.4, 1])})`,
+                    }}
+                  >
+                    <div className={`p-4 rounded-2xl ${beatTheme.stampBg} backdrop-blur-2xl border-2 ${beatTheme.stampBorder} shadow-[0_0_40px_rgba(0,0,0,0.85)] flex flex-col gap-1`}>
+                      <div className="flex items-center gap-2.5">
+                        {renderBeatIcon(beat.icon || "alert", `w-6 h-6 ${beatTheme.badgeText} shrink-0`)}
+                        <span className="text-2xl font-black text-white uppercase tracking-wider">
+                          {beat.text}
+                        </span>
+                      </div>
+                      {beat.subtext && (
+                        <div className={`text-sm font-mono font-bold ${beatTheme.accentText} uppercase tracking-wider pl-8`}>
+                          {beat.subtext}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              }
+
+              // 3. SLEEK TELEMETRY BADGE
+              if (beat.type === "badge") {
+                return (
+                  <div
+                    key={`beat-${bIdx}`}
+                    className="absolute pointer-events-none z-30 transition-all"
+                    style={{
+                      ...posStyle,
+                      opacity: Math.min(1, spBeat * 1.3),
+                      transform: `${posStyle.transform || ""} scale(${interpolate(spBeat, [0, 1], [0.8, 1])})`,
+                    }}
+                  >
+                    <div className={`px-4 py-2 rounded-xl bg-black/85 backdrop-blur-xl border ${beatTheme.badgeBg} flex items-center gap-2 text-lg font-mono font-black ${beatTheme.badgeText} shadow-xl`}>
+                      {renderBeatIcon(beat.icon, "w-4 h-4")}
+                      <span>{beat.text}</span>
+                    </div>
+                  </div>
+                );
+              }
+
+              return null;
+            })}
 
             {/* Subtle Vignette gradient along bottom edge of artwork */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
@@ -279,15 +533,22 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
             </div>
           </div>
 
-          {/* Card Bottom: Bold Hero Title & Diagnostic Subtitle */}
+          {/* Card Bottom: Bold Hero Title & Progressive Diagnostic Subtitle */}
           <div className="px-2 pb-1 text-center">
-            <h2 className="text-4xl font-black text-white tracking-tight leading-snug">
+            <h2 className="text-5xl font-black text-white tracking-tight leading-tight">
               {title}
             </h2>
-            {subtitle && (
-              <p className={`text-2xl font-bold ${currentTheme.accentText} mt-1 tracking-wide`}>
-                {subtitle}
-              </p>
+            {subtitle && isSubtitleActive && (
+              <div
+                style={{
+                  opacity: Math.min(1, spSubtitle * 1.3),
+                  transform: `scale(${interpolate(spSubtitle, [0, 1], [0.85, 1])}) translateY(${interpolate(spSubtitle, [0, 1], [15, 0])}px)`,
+                }}
+              >
+                <p className={`text-3xl font-bold ${currentTheme.accentText} mt-2 tracking-wide`}>
+                  {subtitle}
+                </p>
+              </div>
             )}
           </div>
         </PhysicalCard>

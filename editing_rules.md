@@ -92,3 +92,10 @@
   - Claude Code / Cursor / Copilot (agents without `generate_image`): cleanly skip image generation; `create_clip.py` falls back smoothly to standard `ProCutout` props without error.
 - **Scene & Presenter Timing**:
   - Illustration card enters Frame 0 as the instant hero hook. Judy does not blur/cover the card during intro; Judy enters smoothly during outro (`isFinale`) for the personal connection and CTA.
+- **Multi-Beat Progressive Overlays (Anti-Retention Drop Standard)**:
+  - Never let an illustration card sit static or slowly drift for $> 3.5$s.
+  - Layer speech-synchronized events every 1.5–2.5s:
+    - Beat 1 (0s): Hero entrance, glass sheen sweep, hook title.
+    - Beat 2 (~2.5s): Camera punch zoom (`zoomLevel: 1.15`), target reticle, tactical HUD callout pin (`<IllustrationCalloutPin />`), and progressive subtitle reveal (`subtitleFrame`).
+    - Beat 3 (~5.5s): Angled diagnostic warning stamp (`<IllustrationStamp />`) with `impact_hit` sound.
+  - Split long sentences ($\ge 16$ words) on contrast conjunctions so Scene 1 transitions into Scene 2 by ~7–8s.
