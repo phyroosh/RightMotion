@@ -74,12 +74,16 @@ Never squish the avatar in a corner or have graphics fighting for space on scree
 - **On-Screen Interactive Overlay (`<InteractiveEngagementPill />`)**: Renders at ~70% timeline (seconds 18–22) to convert viewers into comments and likes.
 - **Autonomous Pinned Comment**: Generate `[PINNED COMMENT]` with every script; auto-posted to YouTube via YouTube Data API (`commentThreads.insert`) on upload.
 
-## 8. Tactical Meme Integration Engine (< 2.5s Retention Booster)
+## 8. Tactical Meme Integration Engine (Default-On, < 2.5s Retention Booster)
+- **Default-On Policy**: Memes are **ENABLED BY DEFAULT** for all videos! The semantic matcher automatically maps the video topic to the most relatable high-retention meme. Max 1 meme per standard video.
+- **Opt-Out Modifier (`{no meme}` / `{no memes}`)**: Include `{no meme}` in prompt or CLI `--no-meme` to completely disable memes for that video.
+- **Explicit Override (`{meme: <id>}`)**: Override auto-selection with a specific meme tag (e.g. `{meme: side_eye_dog}`).
 - **Strict Duration Cap (< 2.5s)**: Brain registers memes in $<0.5$s. Holding $>2.5$s causes retention drop-off. Standardize on **1.2s–2.0s hold** (36–60 frames at 30 fps) with bouncy spring entrance and quick collapse snap-out.
 - **100% Muted Meme Audio (`volume={0}`)**: Mute meme native audio completely. Narration voiceover and background music remain crystal-clear and uninterrupted.
 - **Fast-Forward Velocity (`playbackRate={1.35 - 1.5}`)**: Sped-up tempo (1.4x default) matching short-form dopamine pacing.
 - **23 Curated Memes Catalog (`public/memes/`) & Semantic Matcher (`scripts/meme_matcher.py`)**:
-  - Automatically matches topic to relevant emotional reaction (or specify `--meme <id>` / `{meme: <id>}`). Max 1 meme per standard video. Never spam!
+  - Automatically matches topic to relevant emotional reaction.
 - **Elevated Tactical Card (`<TacticalMemeCard />`)**:
   - Positioned at `top-[7%]` (`w-[560px]`), floating above Judy and Andrew without facial occlusion.
   - Complete with diagonal glass glare sheen sweep, monospace HUD badge (`[REACTION PROTOCOL // 01]`), and synchronized `whoosh_fast` (entry) / `click` (exit) sound effects.
+- **Sanitization**: Strip `{meme}`, `{meme: <id>}`, `{no meme}`, and `{no memes}` from speech synthesis and canvas text.

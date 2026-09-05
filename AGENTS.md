@@ -257,26 +257,35 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 ### 🎭 Universal Tactical Meme Integration Protocol (MANDATORY RETENTION BOOSTER RULE)
 
 > [!CRITICAL]
-> **TACTICAL MEME INTEGRATION & RETENTION ENGINE (< 2.5S RULE)!**
+> **TACTICAL MEME INTEGRATION & RETENTION ENGINE (DEFAULT-ON, < 2.5S RULE)!**
 > The human brain reads and registers a familiar meme in under 0.5 seconds. If a meme lingers on screen for $>2.5$ seconds, viewer retention plummets because the visual becomes dead weight. RightClips includes an autonomous tactical meme engine designed to spike dopamine and engagement without disrupting video flow.
 >
-> 1. **Strict Duration Cap (< 2.5s)**:
+> 1. **Default-On Policy (High Retention by Default)**:
+>    - **Memes are ENABLED BY DEFAULT** for all videos!
+>    - The autonomous semantic matcher (`scripts/meme_matcher.py`) analyzes the prompt, topic, and script to automatically deploy the best-matching iconic meme during Scene 1 hook or Scene 2 friction.
+>    - Maximum **1 meme per standard video** to maintain intentionality and prevent spam.
+>
+> 2. **Universal '{no meme}' Modifier Tag (Opt-Out Rule)**:
+>    - If the user or script includes **`{no meme}`** (or **`{no memes}`**, case-insensitive) or CLI `--no-meme`:
+>      - **STRICTLY DISABLE MEMES**: Zero memes will be rendered in the video.
+>      - The engine cleanly falls back purely to the standard kinetic cutout/illustration engine.
+>
+> 3. **Explicit Meme Override (`{meme: <id>}`)**:
+>    - If the user wants a specific meme, they can pass `{meme: <id>}` (e.g. `{meme: side_eye_dog}`) or CLI `--meme <id>` to override the auto-selection.
+>
+> 4. **Strict Duration Cap (< 2.5s)**:
 >    - Standard duration: **1.2s to 2.0s** (36 to 60 frames at 30 fps).
 >    - NEVER exceed 2.2 seconds under any circumstances!
 >    - Enters with a high-velocity spring pop and snaps out cleanly with a rapid collapse spring.
 >
-> 2. **100% Muted Meme Audio (`volume={0}`)**:
+> 5. **100% Muted Meme Audio (`volume={0}`)**:
 >    - Meme audio MUST be completely muted (`volume={0}`).
 >    - Narration voiceover and background music remain crystal-clear and uninterrupted.
 >
-> 3. **Fast-Forwarded Playback (`playbackRate={1.35 - 1.5}`)**:
+> 6. **Fast-Forwarded Playback (`playbackRate={1.35 - 1.5}`)**:
 >    - Memes play back at accelerated speed (default `1.4x`), matching the fast-paced tempo of modern short-form feeds.
 >
-> 4. **Intentional Emotional Matching (Anti-Spam Standard)**:
->    - Memes must feel deeply intentional, capturing a relatable subconscious friction or paradoxical reaction in a humorous way.
->    - **Strict Cap**: Maximum **1 meme per standard video** (typically deployed in Scene 1 hook or Scene 2 psychological friction). Never spam or force memes!
->
-> 5. **Built-in 23 Iconic Curated Memes Catalog (`public/memes/`)**:
+> 7. **Built-in 23 Iconic Curated Memes Catalog (`public/memes/`)**:
 >    - All assets are pre-trimmed, audio-stripped, and compressed (7.4 MB total repository footprint):
 >      - `ishowspeed_stare`: Speechless shock, cognitive freeze, utter disbelief.
 >      - `doctor_strange_loop`: Endless repetition, phone doomscrolling loops, autopilot.
@@ -302,17 +311,12 @@ If the user or script explicitly includes **`{product: Photon.pdf, page: 14}`** 
 >      - `chrome_cyborg_overload`: Sensory overload, fried dopamine receptors.
 >      - `doctor_strange_multiverse`: Mind-blown, expanding consciousness, ego death.
 >
-> 6. **Autonomous Semantic Matcher (`scripts/meme_matcher.py`)**:
->    - Automatically maps topic text and emotional intent to the optimal meme:
->      `python3 scripts/meme_matcher.py --topic "<topic>"`
->    - Or specify explicitly via CLI `--meme <id>` or script tag `{meme: <id>}`.
->
-> 7. **Motion Graphics Card (`<TacticalMemeCard />`)**:
+> 8. **Motion Graphics Card (`<TacticalMemeCard />`)**:
 >    - Renders at `top-[7%]` (`w-[560px]`), floating gracefully in the upper region above the waist-up avatar without facial occlusion.
 >    - Features diagonal specular glass glare sweep, monospace HUD badge (`[REACTION PROTOCOL // 01]`), and synchronized entrance/exit SFX (`whoosh_fast` on entry, `click` on exit).
 >
-> 8. **Tag Sanitization**:
->    - AI Agents and generators MUST strip `{meme}` and `{meme: <id>}` so the tag never leaks into spoken voiceover, card titles, or canvas text.
+> 9. **Automatic Tag Sanitization**:
+>    - AI Agents and generators MUST strip `{meme}`, `{meme: <id>}`, `{no meme}`, and `{no memes}` so modifiers never leak into spoken voiceover, card titles, or canvas text.
 
 ---
 

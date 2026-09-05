@@ -120,7 +120,14 @@
   - Stored in `studio/metadata.json` under `pinnedComment`.
   - Automatically posted to YouTube via YouTube Data API (`commentThreads.insert`) on upload.
 
-## 10. Universal Tactical Meme Integration Engine (< 2.5s Rule)
+## 10. Universal Tactical Meme Integration Engine (Default-On, < 2.5s Rule)
+- **Default-On Policy (High-Retention by Default)**:
+  - Tactical memes are **ENABLED BY DEFAULT** for all videos. The autonomous matcher (`scripts/meme_matcher.py`) automatically maps topics and emotional cues to the best-matching meme.
+  - Max 1 meme per standard video (usually in Scene 1 hook or Scene 2 friction). Never spam!
+- **Opt-Out Modifier Tag (`{no meme}` / `{no memes}`)**:
+  - Include `{no meme}` or `{no memes}` in prompt or CLI `--no-meme` to disable memes completely.
+- **Explicit Meme Override (`{meme: <id>}`)**:
+  - Explicitly select a meme with `{meme: <id>}` or CLI `--meme <id>`.
 - **Strict Retention Cap (< 2.5s)**:
   - The brain recognizes familiar memes in $<0.5$s. Holding $>2.5$s causes steep retention drop-offs. Standardize on **1.2s–2.0s hold** (36–60 frames at 30 fps) with snappy spring entrance and collapse exit.
 - **100% Muted Audio (`volume={0}`)**:
@@ -128,10 +135,9 @@
 - **Fast-Forward Playback (`playbackRate={1.35 - 1.5}`)**:
   - Default `1.4x` sped-up velocity to match rapid short-form attention spans.
 - **23-Meme Curated Catalog (`public/memes/`) & Autonomous Matcher (`scripts/meme_matcher.py`)**:
-  - Semantic matcher maps topic keywords and emotional intent to top meme (or use `{meme: <id>}` / `--meme <id>`).
-  - Max 1 meme per standard video (usually in Scene 1 hook or Scene 2 friction). Never spam!
+  - 23 high-retention memes pre-trimmed, audio-stripped, and indexed in `public/memes/registry.json`.
 - **Tactical Glass Card (`<TacticalMemeCard />`)**:
   - Elevated at `top-[7%]` (`w-[560px]`) floating safely in the upper third above the waist-up avatar without facial collision.
   - Features diagonal specular glass glare sweep, monospace HUD badge (`[REACTION PROTOCOL // 01]`), and synchronized `whoosh_fast` (entry) / `click` (exit) SFX.
 - **Sanitization**:
-  - Strip `{meme}` and `{meme: <id>}` from speech synthesis and canvas text.
+  - Strip `{meme}`, `{meme: <id>}`, `{no meme}`, and `{no memes}` from speech synthesis and canvas text.

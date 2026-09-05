@@ -40,9 +40,9 @@ from dialogue_engine import process_dialogue
 def sanitize_tags(text: str) -> str:
     if not text:
         return ""
-    # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, {duo}, {meme: ...}, and product tags
+    # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, {no meme}, {duo}, {meme: ...}, and product tags
     pattern = re.compile(
-        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
+        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|no\s*memes?|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
         re.IGNORECASE,
     )
     cleaned = pattern.sub("", text)
@@ -1319,8 +1319,8 @@ async def main():
     parser.add_argument("--facecam", default=None, help="Path to creator facecam video file")
     parser.add_argument("--video", default=None, help="Alias for --facecam")
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
-    parser.add_argument("--duo", action="store_true", help="Enable Conversational Duo mode (Judy & Andrew)")
-    parser.add_argument("--meme", default=None, help="Meme ID or 'auto' to enable Tactical Meme pop (e.g. side_eye_dog)")
+    parser.add_argument("--meme", default=None, help="Meme ID override (e.g. side_eye_dog) or 'auto'")
+    parser.add_argument("--no-meme", action="store_true", help="Disable Tactical Meme pop (memes are enabled by default)")
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
 
@@ -1455,27 +1455,35 @@ async def main():
         words, duration_sec = transcribe_audio(audio_path, transcript_path)
 
     # Step 3: Scaffold & Register
-    # Resolve tactical retention meme if requested or tagged
-    has_meme_tag = bool(re.search(r"\{\s*meme(?:\s*:\s*([a-zA-Z0-9_\-]+))?\s*\}", raw_combined, re.IGNORECASE))
+    # Resolve tactical retention meme (DEFAULT ENABLED unless {no meme}, {no memes}, or --no-meme)
+    has_no_meme = (
+        args.no_meme
+        or bool(re.search(r"\{\s*no\s*memes?\s*\}", raw_combined, re.IGNORECASE))
+        or (args.meme and args.meme.lower() in ("none", "false", "no", "off", "disable", "disabled"))
+    )
+
     explicit_meme = args.meme
-    if not explicit_meme and has_meme_tag:
+    has_explicit_meme_tag = bool(re.search(r"\{\s*meme\s*:\s*([a-zA-Z0-9_\-]+)\s*\}", raw_combined, re.IGNORECASE))
+    if not explicit_meme and has_explicit_meme_tag:
         tag_m = re.search(r"\{\s*meme\s*:\s*([a-zA-Z0-9_\-]+)\s*\}", raw_combined, re.IGNORECASE)
         if tag_m:
             explicit_meme = tag_m.group(1)
-        else:
-            explicit_meme = "auto"
 
     meme_match = None
-    if explicit_meme or has_meme_tag:
+    if not has_no_meme:
         from meme_matcher import find_best_meme
+        target_meme_id = explicit_meme if (explicit_meme and explicit_meme != "auto") else None
         meme_match = find_best_meme(
             raw_topic,
             clean_script,
-            explicit_meme_id=explicit_meme if explicit_meme != "auto" else None
+            explicit_meme_id=target_meme_id
         )
         if meme_match:
-            print(f"🎭 [Meme Engine] Selected tactical retention meme: '{meme_match['name']}' ({meme_match['id']})")
+            override_str = f" (explicit override: {explicit_meme})" if target_meme_id else " (DEFAULT auto-matched)"
+            print(f"🎭 [Meme Engine] Tactical retention meme enabled{override_str}: '{meme_match['name']}' ({meme_match['id']})")
             print(f"      Duration: {meme_match['default_duration_frames']} frames (< 2.5s cap), Speed: {meme_match['playback_rate']}x, SFX: {meme_match['recommended_sfx']}")
+    else:
+        print(f"🔇 [Meme Engine] Tactical meme disabled via {{no meme}} / --no-meme.")
 
     illustration_path = args.illustration
     if not illustration_path:
