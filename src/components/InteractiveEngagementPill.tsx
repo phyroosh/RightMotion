@@ -49,121 +49,142 @@ export const InteractiveEngagementPill: React.FC<InteractiveEngagementPillProps>
   const opacity = Math.min(1, spIn * 1.5) * (1 - exitProgress);
   const translateY = interpolate(spIn, [0, 1], [30, 0]) + exitProgress * 25;
 
-  // Theme styles
+  // Theme styles with guaranteed inline contrast styles (immune to CSS purge)
   const themes: Record<
     EngagementTheme,
     {
-      bg: string;
-      border: string;
-      tagBg: string;
-      tagText: string;
+      bgStyle: React.CSSProperties;
+      tagStyle: React.CSSProperties;
       textColor: string;
       iconColor: string;
-      glow: string;
     }
   > = {
     apple_studio: {
-      bg: "bg-[#09090b]/92 backdrop-blur-2xl",
-      border: "border-cyan-400/40",
-      tagBg: "bg-cyan-500/20",
-      tagText: "text-cyan-300",
-      textColor: "text-white",
-      iconColor: "text-cyan-400",
-      glow: "shadow-[0_12px_35px_rgba(0,0,0,0.6)]",
+      bgStyle: {
+        backgroundColor: "rgba(9, 9, 11, 0.94)",
+        border: "2px solid rgba(56, 189, 248, 0.5)",
+        boxShadow: "0 12px 35px rgba(0, 0, 0, 0.65), 0 0 20px rgba(56, 189, 248, 0.2)",
+      },
+      tagStyle: {
+        backgroundColor: "rgba(6, 182, 212, 0.25)",
+        color: "#67e8f9",
+      },
+      textColor: "#ffffff",
+      iconColor: "#38bdf8",
     },
     obsidian: {
-      bg: "bg-[#080b12]/95 backdrop-blur-2xl",
-      border: "border-amber-400/40",
-      tagBg: "bg-amber-500/20",
-      tagText: "text-amber-300",
-      textColor: "text-white",
-      iconColor: "text-amber-400",
-      glow: "shadow-[0_12px_35px_rgba(0,0,0,0.7)]",
+      bgStyle: {
+        backgroundColor: "rgba(8, 11, 18, 0.95)",
+        border: "2px solid rgba(251, 191, 36, 0.5)",
+        boxShadow: "0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(251, 191, 36, 0.2)",
+      },
+      tagStyle: {
+        backgroundColor: "rgba(245, 158, 11, 0.25)",
+        color: "#fcd34d",
+      },
+      textColor: "#ffffff",
+      iconColor: "#fbbf24",
     },
     biotech_cyan: {
-      bg: "bg-[#07131e]/95 backdrop-blur-2xl",
-      border: "border-cyan-400/50",
-      tagBg: "bg-cyan-500/25",
-      tagText: "text-cyan-300",
-      textColor: "text-white",
-      iconColor: "text-cyan-400",
-      glow: "shadow-[0_12px_35px_rgba(6,182,212,0.25)]",
+      bgStyle: {
+        backgroundColor: "rgba(7, 19, 30, 0.95)",
+        border: "2px solid rgba(34, 211, 238, 0.55)",
+        boxShadow: "0 12px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(6, 182, 212, 0.3)",
+      },
+      tagStyle: {
+        backgroundColor: "rgba(6, 182, 212, 0.28)",
+        color: "#67e8f9",
+      },
+      textColor: "#ffffff",
+      iconColor: "#22d3ee",
     },
     gold: {
-      bg: "bg-[#0f0e08]/95 backdrop-blur-2xl",
-      border: "border-yellow-400/40",
-      tagBg: "bg-yellow-500/20",
-      tagText: "text-yellow-300",
-      textColor: "text-white",
-      iconColor: "text-yellow-400",
-      glow: "shadow-[0_12px_35px_rgba(234,179,8,0.25)]",
+      bgStyle: {
+        backgroundColor: "rgba(15, 14, 8, 0.95)",
+        border: "2px solid rgba(234, 179, 8, 0.5)",
+        boxShadow: "0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(234, 179, 8, 0.25)",
+      },
+      tagStyle: {
+        backgroundColor: "rgba(234, 179, 8, 0.25)",
+        color: "#fde047",
+      },
+      textColor: "#ffffff",
+      iconColor: "#eab308",
     },
     rose: {
-      bg: "bg-[#14080c]/95 backdrop-blur-2xl",
-      border: "border-rose-400/40",
-      tagBg: "bg-rose-500/20",
-      tagText: "text-rose-300",
-      textColor: "text-white",
-      iconColor: "text-rose-400",
-      glow: "shadow-[0_12px_35px_rgba(244,63,94,0.25)]",
+      bgStyle: {
+        backgroundColor: "rgba(20, 8, 12, 0.95)",
+        border: "2px solid rgba(244, 63, 94, 0.5)",
+        boxShadow: "0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(244, 63, 94, 0.25)",
+      },
+      tagStyle: {
+        backgroundColor: "rgba(244, 63, 94, 0.25)",
+        color: "#fda4af",
+      },
+      textColor: "#ffffff",
+      iconColor: "#f43f5e",
     },
   };
 
   const t = themes[theme] || themes.apple_studio;
 
   const renderIcon = () => {
-    const cls = `w-5 h-5 ${t.iconColor} shrink-0`;
+    const cls = "w-5 h-5 shrink-0";
+    const st = { color: t.iconColor };
     switch (icon) {
       case "pin":
-        return <Pin className={cls} />;
+        return <Pin style={st} className={cls} />;
       case "heart":
-        return <Heart className={cls} />;
+        return <Heart style={st} className={cls} />;
       case "chat":
-        return <MessageCircle className={cls} />;
+        return <MessageCircle style={st} className={cls} />;
       case "sparkles":
-        return <Sparkles className={cls} />;
+        return <Sparkles style={st} className={cls} />;
       case "share":
-        return <Share2 className={cls} />;
+        return <Share2 style={st} className={cls} />;
       case "brain":
       default:
-        return <Brain className={cls} />;
+        return <Brain style={st} className={cls} />;
     }
   };
 
   return (
     <div
-      className="absolute bottom-[28%] left-1/2 -translate-x-1/2 z-40 pointer-events-none select-none max-w-[860px] w-[90%]"
+      className="absolute bottom-[30.5%] left-1/2 -translate-x-1/2 z-40 pointer-events-none select-none max-w-[860px] w-[90%]"
       style={{
         opacity,
         transform: `translate(-50%, ${translateY}px) scale(${scale})`,
       }}
     >
       <div
-        className={`px-5 py-3 rounded-full ${t.bg} border-2 ${t.border} ${t.glow} flex items-center justify-between gap-4`}
+        style={t.bgStyle}
+        className="px-5 py-3 rounded-full flex items-center justify-between gap-4 backdrop-blur-2xl"
       >
         <div className="flex items-center gap-3 shrink-0">
           <div className="relative flex items-center justify-center">
             {renderIcon()}
             <div
-              className={`absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full ${t.iconColor.replace(
-                "text-",
-                "bg-"
-              )} animate-ping`}
+              style={{ backgroundColor: t.iconColor }}
+              className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full animate-ping"
             />
           </div>
           <span
-            className={`text-xs font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-full ${t.tagBg} ${t.tagText}`}
+            style={t.tagStyle}
+            className="text-xs font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-full"
           >
             {tag}
           </span>
         </div>
 
-        <div className={`text-xl font-bold tracking-tight ${t.textColor} truncate text-center flex-1`}>
+        <div
+          style={{ color: t.textColor }}
+          className="text-xl font-bold tracking-tight truncate text-center flex-1"
+        >
           {prompt}
         </div>
 
         <div className="flex items-center gap-1 shrink-0 opacity-70">
-          <CornerDownRight className={`w-4 h-4 ${t.iconColor}`} />
+          <CornerDownRight style={{ color: t.iconColor }} className="w-4 h-4" />
         </div>
       </div>
     </div>

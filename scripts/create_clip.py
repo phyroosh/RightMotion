@@ -60,9 +60,10 @@ def parse_script_blocks(raw_text: str):
     page_number = None
     exercise_title = None
     voiceover_text = raw_text
+    pinned_comment = None
 
     # Check for [METADATA]
-    meta_match = re.search(r"\[METADATA\](.*?)(?:\[VOICEOVER\]|$)", raw_text, re.DOTALL | re.IGNORECASE)
+    meta_match = re.search(r"\[METADATA\](.*?)(?:\[VOICEOVER\]|\[PINNED COMMENT\]|$)", raw_text, re.DOTALL | re.IGNORECASE)
     if meta_match:
         meta_content = meta_match.group(1)
         f_match = re.search(r"product_file:\s*([^\n\r]+)", meta_content, re.IGNORECASE)
@@ -78,14 +79,28 @@ def parse_script_blocks(raw_text: str):
         if e_match:
             exercise_title = e_match.group(1).strip()
 
+    # Check for [PINNED COMMENT]
+    pinned_match = re.search(r"\[PINNED COMMENT\]\s*(.*)", raw_text, re.DOTALL | re.IGNORECASE)
+    if pinned_match:
+        pinned_comment = pinned_match.group(1).strip()
+
     # Check for [VOICEOVER]
-    vo_match = re.search(r"\[VOICEOVER\]\s*(.*)", raw_text, re.DOTALL | re.IGNORECASE)
+    vo_match = re.search(r"\[VOICEOVER\]\s*(.*?)(?:\[PINNED COMMENT\]|$)", raw_text, re.DOTALL | re.IGNORECASE)
     if vo_match:
         voiceover_text = vo_match.group(1).strip()
     elif meta_match:
-        voiceover_text = raw_text[meta_match.end():].strip()
+        voiceover_text = raw_text[meta_match.end():]
+        if pinned_match:
+            c_idx = voiceover_text.lower().find("[pinned comment]")
+            if c_idx != -1:
+                voiceover_text = voiceover_text[:c_idx]
+        voiceover_text = voiceover_text.strip()
+    elif pinned_match:
+        c_idx = raw_text.lower().find("[pinned comment]")
+        if c_idx != -1:
+            voiceover_text = raw_text[:c_idx].strip()
 
-    return product_file, page_number, exercise_title, voiceover_text
+    return product_file, page_number, exercise_title, voiceover_text, pinned_comment
 
 
 def clean_thumbnail_title(raw_title: str) -> str:
@@ -464,7 +479,7 @@ def align_concepts(concepts, words_list, fps=30):
         })
     return aligned
 
-def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None):
+def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
     print(f"🎨 [3/4] Scaffolding Remotion clip files with Speech-Synchronized Progressive Reveal in src/clips/{name}/...")
@@ -662,9 +677,9 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     s2_points_jsx = []
     s2_spring_defs = []
     sfx_cues = [
-        {"frame": 0, "type": "whoosh_deep", "volume": 0.32},
+        {"frame": 0, "type": "whoosh_deep", "volume": 0.25},
         {"frame": f_c1_cutout, "type": "impact_hit", "volume": 0.24},
-        {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
+        {"frame": s2_start, "type": "whoosh_fast", "volume": 0.27},
     ]
 
     # 4b. Interactive Engagement Pill (Seconds 18–22 / ~70% timeline to boost likes and comments)
@@ -696,7 +711,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         )
         for b in illustration_beats:
             if b["type"] == "callout":
-                sfx_cues.append({"frame": b["frame"], "type": "whoosh_fast", "volume": 0.28})
+                sfx_cues.append({"frame": b["frame"], "type": "whoosh_fast", "volume": 0.22})
                 sfx_cues.append({"frame": b["frame"], "type": "click", "volume": 0.24})
             elif b["type"] == "stamp":
                 sfx_cues.append({"frame": b["frame"], "type": "impact_hit", "volume": 0.32})
@@ -1084,7 +1099,7 @@ export const {pascal_name}Composition: React.FC = () => {{
     return pascal_name
 
 
-def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, format_type: str, niche: str = 'self_improvement'):
+def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, format_type: str, niche: str = 'self_improvement', pinned_comment: str = None, script_text: str = None):
     root_file = ROOT_DIR / "src" / "Root.tsx"
     thumb_file = ROOT_DIR / "src" / "thumbnails" / "index.tsx"
     render_script = ROOT_DIR / "scripts" / "render_all_thumbnails.js"
@@ -1183,7 +1198,7 @@ export const {pascal_name}Thumbnail: React.FC = () => (
     if meta_file.exists():
         try:
             meta = json.loads(meta_file.read_text(encoding="utf-8"))
-            pinned_comment = generate_pinned_comment(topic=topic, niche=niche, hook_text=c1_hook_text, script_text=script_text)
+            final_pinned = pinned_comment or generate_pinned_comment(topic=topic, niche=niche, hook_text=topic, script_text=script_text or "")
             meta[f"{name}_video.mp4"] = {
                 "topic": name,
                 "title": f"{topic} 🧠 #{'Shorts' if format_type == 'shorts' else 'Masterclass'}",
@@ -1191,12 +1206,12 @@ export const {pascal_name}Thumbnail: React.FC = () => (
                 "tags": ["Shorts", "Psychology", "Mindset", topic, "Self Improvement"],
                 "categoryId": "27",
                 "privacyStatus": "public",
-                "pinnedComment": pinned_comment
+                "pinnedComment": final_pinned
             }
             meta_file.write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
             print("      Added metadata to studio/metadata.json")
             print(f"\n💬 [Suggested High-Retention Pinned Comment]:")
-            print(f"   \"{pinned_comment}\"\n")
+            print(f"   \"{final_pinned}\"\n")
         except Exception as e:
             print(f"      Metadata warning: {e}")
 
@@ -1261,7 +1276,7 @@ async def main():
         raise ValueError("Must provide either --script or --topic to generate a video!")
 
     # Parse [METADATA] and [VOICEOVER] blocks if present
-    meta_pdf, meta_page, meta_title, vo_text = parse_script_blocks(raw_script)
+    meta_pdf, meta_page, meta_title, vo_text, script_pinned_comment = parse_script_blocks(raw_script)
 
     product_pdf = args.product or meta_pdf
     product_page = args.product_page or meta_page
@@ -1370,8 +1385,8 @@ async def main():
                 print(f"🎨 [Illustration] Found bespoke scene illustration: {illustration_path}")
                 break
 
-    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script, words, product_meta, illustration_path=illustration_path)
-    register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche)
+    pascal_name = scaffold_clip_files(name, topic, args.format, duration_sec, clean_script, words, product_meta, illustration_path=illustration_path, pinned_comment=script_pinned_comment)
+    register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche, pinned_comment=script_pinned_comment, script_text=clean_script)
 
     # Step 4: Render
     if not args.no_render:
