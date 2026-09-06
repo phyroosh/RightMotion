@@ -1,0 +1,755 @@
+#!/usr/bin/env python3
+"""
+Generates the pristine RightClips Tactical Meme Registry (registry.json)
+and the human/agent-readable Internet Culture Meme Board (MEME_BOARD.md).
+"""
+
+import json
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+MEMES_DIR = ROOT_DIR / "public" / "memes"
+
+MEMES_DATA = [
+    {
+        "id": "ishowspeed_stare",
+        "name": "IShowSpeed Dazed Stare",
+        "filename": "ishowspeed_stare.mp4",
+        "category": "Disbelief & Brain Reboot",
+        "hud_label": "COGNITIVE FREEZE // SPEECHLESS",
+        "archetype": "Speechless Disbelief / Brain Reboot",
+        "culture_meaning": "When someone says or does something so completely wild, foolish, or unhinged that your brain literally freezes in place.",
+        "perfect_for": [
+            "Calling out irrational logic or shocking excuses",
+            "Staring at the screen in pure disbelief",
+            "Realizing the sheer absurdity of human behavior"
+        ],
+        "emotions": ["shock", "disbelief", "stunned", "speechless", "frozen", "baffled"],
+        "concept_clusters": [
+            ["brain", "freeze"],
+            ["make", "sense"],
+            ["speechless", "stare"],
+            ["unbelievable", "logic"]
+        ],
+        "keywords": ["shock", "shocked", "stare", "speechless", "freeze", "blank", "unbelievable", "insane", "dumb", "what"],
+        "best_hook_phrases": [
+            "Notice how your brain completely shuts down",
+            "Why smart people do the dumbest things",
+            "You stare at the screen for hours"
+        ],
+        "negative_keywords": ["peace", "calm", "relax", "meditation"],
+        "recommended_sfx": "impact_hit",
+        "default_duration_frames": 42,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "doctor_strange_loop",
+        "name": "Doctor Strange Time Loop",
+        "filename": "doctor_strange_loop.mp4",
+        "category": "Repeating Autopilot & Loops",
+        "hud_label": "AUTOPILOT LOOP // RECURSION",
+        "archetype": "Endless Time Loop / Groundhog Day",
+        "culture_meaning": "'Dormammu, I have come to bargain.' Trapped in a repeating automated cycle or bad habit you promised you would never do again.",
+        "perfect_for": [
+            "The 2 AM phone loop / doomscrolling",
+            "Repeating the same toxic relationship cycle",
+            "Relapsing into bad habits on autopilot"
+        ],
+        "emotions": ["stuck", "repetitive", "habitual", "autopilot", "trapped", "deja_vu", "cycle"],
+        "concept_clusters": [
+            ["phone", "loop"],
+            ["habit", "loop"],
+            ["open", "app"],
+            ["same", "mistake"],
+            ["do", "again"],
+            ["autopilot", "cycle"]
+        ],
+        "keywords": ["loop", "repeat", "repeating", "cycle", "autopilot", "again", "pattern", "habit", "scroll", "scrolling", "phone", "reopen"],
+        "best_hook_phrases": [
+            "Ever close an app only to reopen it five seconds later",
+            "Why you keep repeating the exact same cycle",
+            "The 2 AM phone loop",
+            "Trapped on autopilot"
+        ],
+        "negative_keywords": ["rage", "anger", "violence", "smash"],
+        "recommended_sfx": "whoosh_fast",
+        "default_duration_frames": 46,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "doctor_strange_multiverse",
+        "name": "Doctor Strange Multiverse Astral Projection",
+        "filename": "doctor_strange_multiverse.mp4",
+        "category": "Overthinking & Mental Overload",
+        "hud_label": "MULTIVERSE ANALYSIS // OVERTHINKING",
+        "archetype": "Astral Projection / 14 Million Realities",
+        "culture_meaning": "Doctor Strange frantically analyzing 14,000,605 future timelines. Mentally projecting into worst-case scenarios and catastrophic overthinking.",
+        "perfect_for": [
+            "Overthinking a single text or awkward conversation",
+            "Replaying worst-case scenarios at 3 AM",
+            "Catastrophic anxiety before social interaction"
+        ],
+        "emotions": ["overthinking", "anxious", "paranoid", "calculating", "catastrophic", "spiraling"],
+        "concept_clusters": [
+            ["overthinking", "conversation"],
+            ["worst", "case"],
+            ["replay", "head"],
+            ["replay", "conversation"],
+            ["catastrophic", "scenario"],
+            ["replay", "night"]
+        ],
+        "keywords": ["overthink", "overthinking", "replay", "replaying", "scenario", "multiverse", "calculate", "analyze", "analyzing", "spiral", "worst", "case", "possibility", "future"],
+        "best_hook_phrases": [
+            "Why you replay every awkward conversation at 2 AM",
+            "Your brain calculates 100 worst case scenarios",
+            "Overthinking every single possibility"
+        ],
+        "negative_keywords": ["smash", "punch", "rage"],
+        "recommended_sfx": "whoosh_deep",
+        "default_duration_frames": 48,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "al_pacino_depressed_bench",
+        "name": "Al Pacino Depressed Park Bench",
+        "filename": "al_pacino_depressed_bench.mp4",
+        "category": "Exhaustion & Defeat",
+        "hud_label": "CHRONIC EXHAUSTION // BURNOUT",
+        "archetype": "Soul-Crushing Burnout / 1000-Yard Stare",
+        "culture_meaning": "Sitting on a freezing bench wrapped in an oversized coat, staring into the abyss after adulting, work, or emotional fatigue drained your life force.",
+        "perfect_for": [
+            "Chronic burnout and low energy survival",
+            "Exhausting high school or teenage relationship drama",
+            "Waking up feeling completely empty and drained"
+        ],
+        "emotions": ["burnout", "exhausted", "drained", "depressed", "numb", "fatigued", "hopeless"],
+        "concept_clusters": [
+            ["completely", "drained"],
+            ["wake", "up", "tired"],
+            ["energy", "zero"],
+            ["exhausting", "relationship"],
+            ["burnout", "survival"]
+        ],
+        "keywords": ["drained", "exhausted", "exhausting", "burnout", "tired", "fatigue", "depressed", "weary", "energy", "zero", "numb", "empty", "lonely"],
+        "best_hook_phrases": [
+            "When you wake up feeling completely drained",
+            "Why teenage relationships feel so exhausting",
+            "Living on zero emotional energy",
+            "The exhaustion of pretending to be fine"
+        ],
+        "negative_keywords": ["hype", "celebrate", "party", "excited"],
+        "recommended_sfx": "whoosh_deep",
+        "default_duration_frames": 48,
+        "playback_rate": 1.35
+    },
+    {
+        "id": "walter_white_despair",
+        "name": "Walter White Desert Collapse",
+        "filename": "walter_white_despair.mp4",
+        "category": "Exhaustion & Defeat",
+        "hud_label": "CATASTROPHIC COLLAPSE // ROCK BOTTOM",
+        "archetype": "Total Defeat / Collapse in the Dirt",
+        "culture_meaning": "Walter White collapsing sideways in slow motion into the desert sand with open-mouthed despair. When your master plan falls completely apart.",
+        "perfect_for": [
+            "Realizing all your effort amounted to nothing",
+            "Checking your screen time or bank account at rock bottom",
+            "Total emotional or academic collapse"
+        ],
+        "emotions": ["devastation", "collapse", "defeat", "agony", "ruin", "regret", "rock_bottom"],
+        "concept_clusters": [
+            ["rock", "bottom"],
+            ["plans", "fail"],
+            ["everything", "falls", "apart"],
+            ["total", "defeat"]
+        ],
+        "keywords": ["collapse", "defeat", "ruin", "despair", "devastated", "agony", "fall", "apart", "regret", "lost", "failure", "failed", "broken"],
+        "best_hook_phrases": [
+            "When your entire plan collapses",
+            "Hitting absolute rock bottom",
+            "Watching everything fall apart in seconds"
+        ],
+        "negative_keywords": ["smile", "happy", "success", "win"],
+        "recommended_sfx": "impact_hit",
+        "default_duration_frames": 46,
+        "playback_rate": 1.35
+    },
+    {
+        "id": "sweating_gamer",
+        "name": "Sweating Speedrunner Gamer",
+        "filename": "sweating_gamer.mp4",
+        "category": "Overthinking & Mental Overload",
+        "hud_label": "PERFORMANCE PANIC // TRYHARD",
+        "archetype": "Extreme Tryhard Panic / Niagara Falls Sweat",
+        "culture_meaning": "Gamer pouring buckets of sweat trying to clutch a high-stakes moment under suffocating social or exam pressure.",
+        "perfect_for": [
+            "Fear of failure or being judged",
+            "Trying desperately to maintain a perfect social mask",
+            "High stakes social or exam performance anxiety"
+        ],
+        "emotions": ["panicked", "sweating", "stressed", "tryhard", "anxious", "nervous", "pressured"],
+        "concept_clusters": [
+            ["fear", "failure"],
+            ["trying", "hardest"],
+            ["social", "mask"],
+            ["under", "pressure"],
+            ["people", "pleasing"]
+        ],
+        "keywords": ["sweating", "tryhard", "panic", "panicking", "stress", "nervous", "pressure", "perform", "performing", "mask", "clutch", "fear", "failure", "trying"],
+        "best_hook_phrases": [
+            "Trying so hard to not look like you care",
+            "The fear of being caught trying",
+            "When the pressure gets so high you freeze"
+        ],
+        "negative_keywords": ["calm", "stoic", "chill", "relax"],
+        "recommended_sfx": "impact_hit",
+        "default_duration_frames": 44,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "chrome_cyborg_overload",
+        "name": "Chrome Cyborg Sensory Overload",
+        "filename": "chrome_cyborg_overload.mp4",
+        "category": "Overthinking & Mental Overload",
+        "hud_label": "NEURAL OVERLOAD // DOPAMINE FRY",
+        "archetype": "Sci-Fi Neural Meltdown / Digital Overdrive",
+        "culture_meaning": "Cybernetic head exploding with digital data streams and flashing neon sparks. The feeling of digital overstimulation and fried dopamine receptors.",
+        "perfect_for": [
+            "Dopamine detox & digital addiction",
+            "Sensory overload from endless scrolling and multi-tabbing",
+            "Brain fog and modern cognitive burnout"
+        ],
+        "emotions": ["overstimulated", "fried", "overload", "wired", "frenzied", "scattered"],
+        "concept_clusters": [
+            ["dopamine", "loop"],
+            ["dopamine", "reset"],
+            ["sensory", "overload"],
+            ["digital", "addiction"],
+            ["screen", "fry"]
+        ],
+        "keywords": ["dopamine", "overload", "fried", "screen", "digital", "addiction", "stimulate", "stimulation", "sensory", "scroll", "scrolling", "brain", "fog", "tabs"],
+        "best_hook_phrases": [
+            "How social media quietly destroys your focus",
+            "The 24-hour dopamine loop reset",
+            "When your brain is fried from endless screens"
+        ],
+        "negative_keywords": ["nature", "calm", "sleep", "slow"],
+        "recommended_sfx": "whoosh_fast",
+        "default_duration_frames": 46,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "courtroom_shout_me",
+        "name": "Courtroom Stand Up That is Me",
+        "filename": "courtroom_shout_me.mp4",
+        "category": "Accountability & Calling Out",
+        "hud_label": "SELF-CONFESSION // GUILTY AS CHARGED",
+        "archetype": "Standing Up in Court / Calling Yourself Out",
+        "culture_meaning": "Loudly leaping up in court to shout 'That is me!'. When you get called out so accurately that you have to plead completely guilty.",
+        "perfect_for": [
+            "Calling out relatable toxic habits or hypocrisy",
+            "When viewers feel personally targeted by the psychology breakdown",
+            "Admitting an embarrassing truth about yourself"
+        ],
+        "emotions": ["called_out", "guilty", "exposed", "targeted", "relatable", "confessing"],
+        "concept_clusters": [
+            ["called", "out"],
+            ["feel", "attacked"],
+            ["be", "honest"],
+            ["secretly", "faking"]
+        ],
+        "keywords": ["called", "out", "guilty", "confess", "exposed", "attacked", "me", "honest", "faking", "truth", "admit", "caught"],
+        "best_hook_phrases": [
+            "Be honest: you have done this exact thing",
+            "Why you secretly feel like you are faking it",
+            "When you get called out on your own excuses"
+        ],
+        "negative_keywords": ["innocent", "calm", "detached"],
+        "recommended_sfx": "impact_hit",
+        "default_duration_frames": 44,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "lego_bruce_flabbergasted",
+        "name": "Lego Bruce Wayne Gasp Epiphany",
+        "filename": "lego_bruce_flabbergasted.mp4",
+        "category": "Disbelief & Brain Reboot",
+        "hud_label": "MIND BLOWN // SUDDEN EPIPHANY",
+        "archetype": "Lego Bruce Wayne Dramatic Gasp / Plot Twist",
+        "culture_meaning": "Lego Batman choking on lobster / gasping with wide eyes in shock. The sudden mind-blown realization that re-contextualizes your whole life.",
+        "perfect_for": [
+            "Psychological plot twists and aha moments",
+            "Realizing why you secretly sabotage yourself",
+            "A hidden truth about human nature"
+        ],
+        "emotions": ["mind_blown", "epiphany", "astonished", "realization", "gasp", "enlightened"],
+        "concept_clusters": [
+            ["mind", "blown"],
+            ["sudden", "realization"],
+            ["psychological", "trap"],
+            ["secret", "reason"]
+        ],
+        "keywords": ["realize", "realization", "epiphany", "gasp", "mind", "blown", "twist", "secret", "truth", "aha", "shocking", "understand"],
+        "best_hook_phrases": [
+            "The real reason you self-sabotage",
+            "Psychologists call this Pluralistic Ignorance",
+            "The moment you realize you were wrong all along"
+        ],
+        "negative_keywords": ["boring", "normal", "predictable"],
+        "recommended_sfx": "impact_hit",
+        "default_duration_frames": 44,
+        "playback_rate": 1.35
+    },
+    {
+        "id": "ronaldo_sipping_tea",
+        "name": "Cristiano Ronaldo Unbothered Tea Sip",
+        "filename": "ronaldo_sipping_tea.mp4",
+        "category": "Swagger, Stoicism & Boundaries",
+        "hud_label": "UNBOTHERED CHAD // STOIC DETACHMENT",
+        "archetype": "Unbothered Smug Sip / Pure Chad Detachment",
+        "culture_meaning": "Ronaldo leaning back, smiling calmly, and taking a leisurely sip of tea while everyone else loses their minds. Zero guilt, zero drama.",
+        "perfect_for": [
+            "Setting boundaries and saying no without guilt",
+            "Emotional detachment from other people's opinions",
+            "Protecting your energy from toxic friends"
+        ],
+        "emotions": ["unbothered", "stoic", "detached", "peaceful", "confident", "smug", "boundary"],
+        "concept_clusters": [
+            ["setting", "boundaries"],
+            ["saying", "no"],
+            ["boundaries", "friends"],
+            ["protect", "energy"],
+            ["stop", "pleasing"]
+        ],
+        "keywords": ["boundary", "boundaries", "saying", "no", "unbothered", "peace", "detach", "detachment", "stoic", "chill", "sip", "tea", "guilt", "care", "independent"],
+        "best_hook_phrases": [
+            "The hard truth about boundaries with friends",
+            "How to stop caring what anyone thinks",
+            "Saying no without feeling a single ounce of guilt"
+        ],
+        "negative_keywords": ["panic", "despair", "cry", "rage", "smash"],
+        "recommended_sfx": "click",
+        "default_duration_frames": 44,
+        "playback_rate": 1.35
+    },
+    {
+        "id": "tony_stark_explosion",
+        "name": "Tony Stark Walking from Explosion",
+        "filename": "tony_stark_explosion.mp4",
+        "category": "Swagger, Stoicism & Boundaries",
+        "hud_label": "PEAK CONFIDENCE // MIC DROP",
+        "archetype": "Walking Away From Detonation / Pure Swagger",
+        "culture_meaning": "Tony Stark walking slowly forward with sunglasses while a massive missile battery obliterates the mountain behind him without looking back.",
+        "perfect_for": [
+            "Owning your authentic self unapologetically",
+            "Conquering fear of judgment and dropping the mask",
+            "Bold decisive mindset shifts"
+        ],
+        "emotions": ["confident", "swagger", "dominant", "unapologetic", "triumphant", "powerful"],
+        "concept_clusters": [
+            ["own", "identity"],
+            ["drop", "mask"],
+            ["zero", "shame"],
+            ["peak", "confidence"]
+        ],
+        "keywords": ["confidence", "confident", "swagger", "explosion", "boss", "bold", "unapologetic", "power", "triumph", "conquer", "strong", "win"],
+        "best_hook_phrases": [
+            "When you finally stop apologizing for existing",
+            "Dropping the social mask once and for all",
+            "Owning your true identity without fear"
+        ],
+        "negative_keywords": ["weak", "scared", "shy", "drained"],
+        "recommended_sfx": "whoosh_deep",
+        "default_duration_frames": 48,
+        "playback_rate": 1.35
+    },
+    {
+        "id": "bateman_iphone_inspection",
+        "name": "Patrick Bateman Phone Inspection",
+        "filename": "bateman_iphone_inspection.mp4",
+        "category": "Accountability & Calling Out",
+        "hud_label": "STATUS ANXIETY // PHONE OBSESSION",
+        "archetype": "Patrick Bateman Critical Stare / Ego Validation",
+        "culture_meaning": "Patrick Bateman in an immaculate suit staring with intense, calculating scrutiny at his modern smartphone screen. Social vanity, validation, and ego check.",
+        "perfect_for": [
+            "Leaving people on read or obsessing over replies",
+            "Checking your status, followers, or social approval",
+            "Comparing yourself to other people's highlight reels"
+        ],
+        "emotions": ["vanity", "critical", "calculating", "ego", "judgmental", "comparing"],
+        "concept_clusters": [
+            ["compare", "highlight"],
+            ["social", "media", "ego"],
+            ["check", "phone"],
+            ["validation", "seeking"]
+        ],
+        "keywords": ["bateman", "phone", "iphone", "text", "status", "ego", "validation", "compare", "comparing", "judge", "judging", "read", "notification", "vanity"],
+        "best_hook_phrases": [
+            "Why you stare at your phone waiting for validation",
+            "Comparing your private life to public performance",
+            "The toxic psychology of leaving people on read"
+        ],
+        "negative_keywords": ["humble", "modest", "nature"],
+        "recommended_sfx": "click",
+        "default_duration_frames": 44,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "confused_kid",
+        "name": "Confused Kid Wait What",
+        "filename": "confused_kid.mp4",
+        "category": "Disbelief & Brain Reboot",
+        "hud_label": "COGNITIVE DISSONANCE // BEWILDERED",
+        "archetype": "Total Confusion / 'Wait, What Just Happened?'",
+        "culture_meaning": "Young boy looking around in pure, innocent bewilderment. Total cognitive dissonance when something makes zero logical sense.",
+        "perfect_for": [
+            "Contradictory dating advice or social rules",
+            "Wondering why life feels so confusing and unfair",
+            "Absurd paradoxes in human behavior"
+        ],
+        "emotions": ["confused", "bewildered", "lost", "dissonance", "puzzled", "clueless"],
+        "concept_clusters": [
+            ["make", "no", "sense"],
+            ["confusing", "rules"],
+            ["wait", "what"],
+            ["cognitive", "dissonance"]
+        ],
+        "keywords": ["confused", "confusion", "puzzled", "lost", "clueless", "what", "paradox", "dissonance", "weird", "strange", "baffled", "contradiction"],
+        "best_hook_phrases": [
+            "Why dating rules make zero sense",
+            "When life feels completely confusing",
+            "The bizarre paradox of human behavior"
+        ],
+        "negative_keywords": ["certain", "clear", "confident"],
+        "recommended_sfx": "whoosh_fast",
+        "default_duration_frames": 44,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "wet_seal_cat",
+        "name": "Wet Seal Cat Head Empty",
+        "filename": "wet_seal_cat.mp4",
+        "category": "Disbelief & Brain Reboot",
+        "hud_label": "DISSOCIATION // ZERO THOUGHTS",
+        "archetype": "Head Empty No Thoughts / Complete Blanking",
+        "culture_meaning": "Round seal cat staring blankly with enormous pupils. Zero thoughts bouncing inside the skull. Pure dissociation and brain blanking.",
+        "perfect_for": [
+            "Freezing when asked a question unexpectedly",
+            "Brain dissociation when overwhelmed with tasks",
+            "The 5-minute morning blank stare"
+        ],
+        "emotions": ["dissociated", "blank", "numb", "empty", "spacey", "zoned_out"],
+        "concept_clusters": [
+            ["head", "empty"],
+            ["zero", "thoughts"],
+            ["zoned", "out"],
+            ["blank", "mind"]
+        ],
+        "keywords": ["seal", "cat", "blank", "empty", "dissociate", "dissociating", "zoned", "out", "space", "spacing", "clueless", "quiet", "fog"],
+        "best_hook_phrases": [
+            "When someone asks you a question and your brain is empty",
+            "The 5 minute morning stare into nothing",
+            "When you completely zone out in public"
+        ],
+        "negative_keywords": ["furious", "raging", "hyper"],
+        "recommended_sfx": "whoosh_sparkle",
+        "default_duration_frames": 44,
+        "playback_rate": 1.35
+    },
+    {
+        "id": "ishowspeed_nodding_headphones",
+        "name": "IShowSpeed Vibing in Headphones",
+        "filename": "ishowspeed_nodding_headphones.mp4",
+        "category": "Rage, Drama & Chaos",
+        "hud_label": "ESCAPISM // VIBING IN DENIAL",
+        "archetype": "Headphones Jamming / Blithe Denial",
+        "culture_meaning": "Speed nodding rhythmically in massive headphones, vibing in pure bliss while all life responsibilities burn in the background.",
+        "perfect_for": [
+            "Escaping stress by listening to music and avoiding reality",
+            "Procrastination by listening to your favorite playlist",
+            "Pretending everything is fine while deadlines approach"
+        ],
+        "emotions": ["escapism", "vibing", "denial", "carefree", "distracted", "oblivious"],
+        "concept_clusters": [
+            ["avoiding", "responsibilities"],
+            ["listening", "music"],
+            ["denial", "vibing"],
+            ["ignoring", "problems"]
+        ],
+        "keywords": ["headphones", "music", "nodding", "jamming", "vibe", "vibing", "escape", "escapism", "denial", "ignore", "ignoring", "chill", "distraction"],
+        "best_hook_phrases": [
+            "Putting on headphones to avoid all your problems",
+            "Vibing while your deadlines collapse in the background",
+            "The art of running away into music"
+        ],
+        "negative_keywords": ["serious", "work", "focus"],
+        "recommended_sfx": "click",
+        "default_duration_frames": 42,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "cat_laughing_pointing",
+        "name": "Cat Pointing and Laughing",
+        "filename": "cat_laughing_pointing.mp4",
+        "category": "Rage, Drama & Chaos",
+        "hud_label": "MOCKERY // REALITY CHECK",
+        "archetype": "Schadenfreude / Pointing and Laughing",
+        "culture_meaning": "Cartoon cat pointing right at the screen laughing uncontrollably. When life, reality, or karma ruthlessly humbles your ambitious plans.",
+        "perfect_for": [
+            "Getting humbled by reality after making big plans",
+            "Thinking you were going to wake up at 5 AM",
+            "The harsh irony of modern life"
+        ],
+        "emotions": ["mocked", "humbled", "ridiculed", "laughing", "ironic", "clowned"],
+        "concept_clusters": [
+            ["humbled", "reality"],
+            ["getting", "clowned"],
+            ["thinking", "easy"],
+            ["life", "laughs"]
+        ],
+        "keywords": ["cat", "laugh", "laughing", "point", "pointing", "mock", "mockery", "humbled", "clown", "joke", "ridiculous", "foolish", "irony"],
+        "best_hook_phrases": [
+            "When you tell yourself you will wake up at 5 AM",
+            "Life laughing at your five year plan",
+            "Thinking you had everything figured out"
+        ],
+        "negative_keywords": ["respect", "serious", "sad"],
+        "recommended_sfx": "impact_hit",
+        "default_duration_frames": 40,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "michael_jackson_popcorn",
+        "name": "Michael Jackson Eating Popcorn",
+        "filename": "michael_jackson_popcorn.mp4",
+        "category": "Rage, Drama & Chaos",
+        "hud_label": "DRAMA SPECTATOR // POPCORN READY",
+        "archetype": "Spectator Popcorn / Watching Drama Unfold",
+        "culture_meaning": "Michael Jackson munching on 3D glasses popcorn watching a spectacle. Sitting back enjoying the chaos without getting involved.",
+        "perfect_for": [
+            "High school or social circle drama",
+            "Watching two people argue online",
+            "Observing human madness from a safe distance"
+        ],
+        "emotions": ["entertained", "spectator", "amused", "detached", "gossip", "observing"],
+        "concept_clusters": [
+            ["watching", "drama"],
+            ["social", "drama"],
+            ["sitting", "back"],
+            ["eating", "popcorn"]
+        ],
+        "keywords": ["popcorn", "drama", "watch", "watching", "spectator", "gossip", "messy", "chaos", "fight", "fighting", "amused", "entertained"],
+        "best_hook_phrases": [
+            "Watching high school relationship drama unfold",
+            "Sitting back while everyone else fights online",
+            "When the tea is too good to look away"
+        ],
+        "negative_keywords": ["involved", "peace", "alone"],
+        "recommended_sfx": "click",
+        "default_duration_frames": 44,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "office_rage_smash",
+        "name": "Office Worker Monitor Smash",
+        "filename": "office_rage_smash.mp4",
+        "category": "Rage, Drama & Chaos",
+        "hud_label": "CUBICLE RAGE // BREAKING POINT",
+        "archetype": "Desk Meltdown / Obliterating Technology",
+        "culture_meaning": "Office worker completely snapping and smashing a computer monitor into pieces with savage fury. Reaching your absolute breaking point.",
+        "perfect_for": [
+            "Tech frustration and crashing systems",
+            "Workplace / corporate grind burnout",
+            "Losing all patience with repetitive nonsense"
+        ],
+        "emotions": ["furious", "rage", "snapped", "destructive", "explosive", "fed_up"],
+        "concept_clusters": [
+            ["breaking", "point"],
+            ["computer", "crash"],
+            ["lose", "mind"],
+            ["completely", "snapped"]
+        ],
+        "keywords": ["smash", "rage", "furious", "destroy", "snap", "snapped", "monitor", "office", "computer", "breaking", "point", "mad", "angry"],
+        "best_hook_phrases": [
+            "When you hit your absolute breaking point",
+            "Losing your mind after working all day",
+            "The rage of trying to deal with broken systems"
+        ],
+        "negative_keywords": ["zen", "calm", "relax", "breathe"],
+        "recommended_sfx": "impact_hit",
+        "default_duration_frames": 44,
+        "playback_rate": 1.45
+    },
+    {
+        "id": "angry_grandpa_rage",
+        "name": "Angry Grandpa Screaming Rage",
+        "filename": "angry_grandpa_rage.mp4",
+        "category": "Rage, Drama & Chaos",
+        "hud_label": "UNFILTERED FURY // RED FACED RAGE",
+        "archetype": "Red-Faced Screaming Fury / Betrayal",
+        "culture_meaning": "Angry Grandpa screaming at the top of his lungs in pure visceral betrayal and fury.",
+        "perfect_for": [
+            "Getting completely betrayed or cheated",
+            "Extreme indignation at unfair rules",
+            "Loud visceral frustration"
+        ],
+        "emotions": ["screaming", "betrayed", "indignant", "furious", "unfiltered", "outraged"],
+        "concept_clusters": [
+            ["screaming", "rage"],
+            ["feel", "betrayed"],
+            ["completely", "unfair"],
+            ["red", "faced"]
+        ],
+        "keywords": ["screaming", "scream", "fury", "grandpa", "angry", "rage", "betrayal", "unfair", "cheated", "outrage", "yell", "yelling"],
+        "best_hook_phrases": [
+            "When life feels completely unfair",
+            "The visceral fury of being lied to",
+            "Screaming at the top of your lungs"
+        ],
+        "negative_keywords": ["soft", "gentle", "quiet", "whisper"],
+        "recommended_sfx": "impact_hit",
+        "default_duration_frames": 42,
+        "playback_rate": 1.45
+    },
+    {
+        "id": "rdj_shocked_closeup",
+        "name": "Robert Downey Jr Sarcastic Gasp",
+        "filename": "rdj_shocked_closeup.mp4",
+        "category": "Rage, Drama & Chaos",
+        "hud_label": "THEATRICAL GASP // FEIGNED SHOCK",
+        "archetype": "Dramatic Gasp / Sarcastic Shock",
+        "culture_meaning": "RDJ with wide theatrical eyes and exaggerated gasp. The sarcastic reaction when something predictable happens that anyone could have seen coming.",
+        "perfect_for": [
+            "Sarcastic shock at predictable human failure",
+            "Pretending to be shocked by common excuses",
+            "Dramatic ironic realizations"
+        ],
+        "emotions": ["sarcastic", "ironic", "feigned_shock", "theatrical", "dramatic"],
+        "concept_clusters": [
+            ["who", "could", "have", "guessed"],
+            ["predictable", "failure"],
+            ["feigned", "shock"],
+            ["sarcastic", "gasp"]
+        ],
+        "keywords": ["gasp", "rdj", "shock", "shocked", "sarcastic", "sarcasm", "ironic", "drama", "theatrical", "predictable", "surprise", "unbelievable"],
+        "best_hook_phrases": [
+            "Who could have guessed that staying up late makes you tired",
+            "Pretending to be shocked by your own excuses",
+            "The sarcastic reality of human nature"
+        ],
+        "negative_keywords": ["genuine_grief", "heartbreak"],
+        "recommended_sfx": "whoosh_fast",
+        "default_duration_frames": 42,
+        "playback_rate": 1.4
+    },
+    {
+        "id": "rowley_innocent_wave",
+        "name": "Rowley Innocent Friendly Wave",
+        "filename": "rowley_innocent_wave.mp4",
+        "category": "Rage, Drama & Chaos",
+        "hud_label": "SWEET NAIVETY // OBLIVIOUS ENTRY",
+        "archetype": "Oblivious Innocent Wave / Sweet Naivety",
+        "culture_meaning": "Rowley cheerfully waving with big innocent eyes, completely oblivious that he is walking straight into social disaster or harsh reality.",
+        "perfect_for": [
+            "Naive beginners entering the adult world",
+            "Entering relationships or college with childlike optimism",
+            "Being completely unaware of social politics"
+        ],
+        "emotions": ["naive", "innocent", "sweet", "oblivious", "friendly", "clueless"],
+        "concept_clusters": [
+            ["naive", "optimism"],
+            ["childlike", "innocence"],
+            ["entering", "adulthood"],
+            ["oblivious", "danger"]
+        ],
+        "keywords": ["rowley", "wave", "innocent", "naive", "sweet", "optimism", "oblivious", "beginner", "friendly", "young", "kid", "child"],
+        "best_hook_phrases": [
+            "Walking into adulthood thinking it will be easy",
+            "Entering high school with sweet innocence",
+            "The naivety of thinking everyone has good intentions"
+        ],
+        "negative_keywords": ["cynical", "dark", "evil", "rage"],
+        "recommended_sfx": "whoosh_sparkle",
+        "default_duration_frames": 44,
+        "playback_rate": 1.35
+    }
+]
+
+
+def build_registry():
+    output = {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "title": "RightClips Tactical Meme Registry",
+        "version": "2.0.0",
+        "pacing_rules": {
+            "max_duration_seconds": 2.0,
+            "min_duration_seconds": 1.2,
+            "default_duration_frames": 44,
+            "default_playback_rate": 1.4,
+            "audio_volume": 0.0,
+            "max_memes_per_video": 1,
+            "positioning": {
+                "mode": "first_frame_hook",
+                "start_frame": 0,
+                "snap_out_transition": "rapid_spring_collapse"
+            }
+        },
+        "memes": MEMES_DATA
+    }
+    reg_path = MEMES_DIR / "registry.json"
+    with open(reg_path, "w", encoding="utf-8") as f:
+        json.dump(output, f, indent=2)
+    print(f"✅ Generated {reg_path} ({len(MEMES_DATA)} memes)")
+
+
+def build_meme_board():
+    categories = {}
+    for m in MEMES_DATA:
+        cat = m.get("category", "General")
+        categories.setdefault(cat, []).append(m)
+
+    lines = [
+        "# 🎭 RightClips Internet Culture Meme Board",
+        "",
+        "> **Authoritative Reference Board**: Defines all 21 tactical retention memes in RightClips,",
+        "> their precise meaning in internet meme culture, and their exact situational triggers.",
+        "",
+        "---",
+        "",
+        "## ⚡ Core Tactical Rules",
+        "1. **Start at Frame 0**: Memes slam on screen at the very first millisecond of the video (`startFrame=0`).",
+        "2. **Strict Retention Cap (< 2.0s)**: Maximum 40–48 frames (~1.3s–1.6s). Snaps out with a rapid spring collapse before viewer fatigue sets in.",
+        "3. **100% Muted Audio (`volume=0`)**: Voiceover narration and BGM remain uninterrupted.",
+        "4. **Fast-Forwarded (1.35x–1.45x)**: High-tempo modern short-form pacing.",
+        "5. **One Meme Per Video**: Maximum 1 meme reserved exclusively for the opening hook.",
+        "",
+        "---",
+        ""
+    ]
+
+    for cat, memes in categories.items():
+        lines.append(f"## 📌 Category: {cat}")
+        lines.append("")
+        for m in memes:
+            lines.append(f"### 🎬 `{m['id']}` — {m['name']}")
+            lines.append(f"- **HUD Telemetry Label**: `{m['hud_label']}`")
+            lines.append(f"- **Internet Culture Archetype**: {m['archetype']}")
+            lines.append(f"- **What It Means**: {m['culture_meaning']}")
+            lines.append("- **10/10 Perfect Triggers**:")
+            for p in m['perfect_for']:
+                lines.append(f"  - {p}")
+            lines.append(f"- **Best Hook Phrases**: *\"{m['best_hook_phrases'][0]}\"*")
+            lines.append(f"- **Acoustic SFX**: `{m['recommended_sfx']}` (40–48 frames @ {m['playback_rate']}x)")
+            lines.append(f"- **Avoid When**: Topic mentions {', '.join(m['negative_keywords'])}")
+            lines.append("")
+        lines.append("---")
+        lines.append("")
+
+    board_path = MEMES_DIR / "MEME_BOARD.md"
+    with open(board_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+    print(f"✅ Generated {board_path}")
+
+
+if __name__ == "__main__":
+    build_registry()
+    build_meme_board()
