@@ -147,12 +147,7 @@
         <img src="logo.svg" alt="RightClips" class="w-6 h-6" />
         <span class="text-[#fdf8e1] font-bold text-lg tracking-tight">RightClips</span>
       </div>
-      <nav class="hidden md:flex items-center gap-6 text-sm text-[#fdf8e1]/60 font-medium">
-        <button onclick="scrollToSection('heroSection')" class="hover:text-[#fdf8e1] transition">Studio</button>
-        <button onclick="scrollToSection('vaultSection')" class="hover:text-[#fdf8e1] transition">Vault</button>
-        <button onclick="scrollToSection('launchpadSection')" class="hover:text-[#fdf8e1] transition">Launchpad</button>
-        <button onclick="openMemeBoardModal()" class="hover:text-[#fdf8e1] transition">Memes</button>
-      </nav>
+      
     </div>
     <div class="flex items-center gap-4">
       <div id="systemHealthBadge" onclick="fetchSystemHealth()" class="hidden sm:flex items-center gap-2 text-[#fdf8e1]/80 text-xs font-mono font-bold cursor-pointer">
@@ -225,9 +220,14 @@
               <span class="flex items-center gap-1.5"><i data-lucide="image" class="w-3.5 h-3.5 text-amber-400"></i> Cover</span>
               <span id="thumbnailBadge" class="text-[10px] flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3 h-3"></i> Ready</span>
             </div>
-            <a id="viewThumbFullBtn" target="_blank" class="w-full py-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-center text-xs font-bold text-[#fdf8e1] transition cursor-pointer">
-              Download 4K
-            </a>
+            <div class="flex items-center gap-2 w-full">
+              <a id="previewThumbBtn" target="_blank" class="flex-1 py-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-center text-xs font-bold text-[#fdf8e1] transition cursor-pointer">
+                Preview
+              </a>
+              <a id="viewThumbFullBtn" download="thumbnail.png" class="flex-1 py-2 rounded-xl border border-[#fdf8e1]/40 bg-[#fdf8e1]/10 hover:bg-[#fdf8e1]/20 text-center text-xs font-bold text-[#fdf8e1] transition cursor-pointer">
+                Download 4K
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -2120,6 +2120,8 @@
         if (thumbPlaceholder) thumbPlaceholder.style.display = 'none';
         if (thumbBadge) thumbBadge.innerHTML = `<span class="text-[#fdf8e1]/80 font-bold flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> ${isLong ? '16:9 Cover Ready' : '9:16 Shorts Cover Ready'}</span>`;
         if (viewFullBtn) viewFullBtn.href = url;
+        const previewBtn = document.getElementById('previewThumbBtn');
+        if (previewBtn) previewBtn.href = url;
       } else {
         if (thumbImg) thumbImg.style.display = 'none';
         if (thumbPlaceholder) thumbPlaceholder.style.display = 'flex';
