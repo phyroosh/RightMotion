@@ -45,17 +45,19 @@ def sanitize_tags(text: str) -> str:
     if not text:
         return ""
     pattern = re.compile(
-        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
+        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|andrew|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
         re.IGNORECASE,
     )
     cleaned = pattern.sub("", text)
     cleaned = re.sub(r"[{}\\]", "", cleaned)
     return re.sub(r"\s+", " ", cleaned).strip()
 
-def check_script_hygiene(voiceover: str, is_mode_a: bool = True) -> Tuple[bool, list]:
+def check_script_hygiene(voiceover: str, is_mode_a: bool = True, is_duo: bool = False) -> Tuple[bool, list]:
     """
     Audits voiceover text for:
-    1. Word count (65-90 ideal, max 100).
+    1. Word count:
+       - Solo Judy (default): 55-70 words ideal (max 75 words, ~20-24s).
+       - Judy & Andrew ({andrew}): 75-115 words (max 120 words, up to 40s).
     2. Banned AI clichés.
     3. Banned sales hype words.
     4. Silent PDF rule (in Mode A: never speak 'Photon' or 'page X').
@@ -66,10 +68,16 @@ def check_script_hygiene(voiceover: str, is_mode_a: bool = True) -> Tuple[bool, 
     words = cleaned_vo.strip().split()
     word_count = len(words)
 
-    if word_count < 65:
-        issues.append(f"Script too short ({word_count} words). Aim for 75-90 words (~30-35 seconds).")
-    elif word_count > 100:
-        issues.append(f"Script too long ({word_count} words). Hard cap is 100 words (75-90 ideal).")
+    if is_duo:
+        if word_count < 60:
+            issues.append(f"Duo script too short ({word_count} words). Aim for 75-115 words (up to 40 seconds).")
+        elif word_count > 120:
+            issues.append(f"Duo script too long ({word_count} words). Hard cap is 120 words (up to 40 seconds).")
+    else:
+        if word_count < 50:
+            issues.append(f"Script too short ({word_count} words). Aim for 55-70 words (~20-24 seconds).")
+        elif word_count > 75:
+            issues.append(f"Script too long ({word_count} words). Solo Judy hard cap is 75 words (55-70 ideal, 20-24 seconds).")
 
     lower_text = voiceover.lower()
     for pattern in BANNED_CLICHES:
@@ -94,51 +102,53 @@ CURATED_SCRIPTS = {
     6: { # Map the Gap (Page 6)
         "topic": "The Fear of Being Caught Trying",
         "exercise_title": "Map The Gap",
+        "keywords": ["caught trying", "social mask", "pretend not to care", "trying hardest"],
         "mode_a": (
             "Notice how you pretend not to care about the things you actually want most? "
-            "In high school or college, we learn to act indifferent so nobody can laugh at us if we fall short. "
-            "Psychologists call this the social mask. You spend so much energy performing casualness that you never give yourself permission to be a beginner. "
-            "Start by mapping the gap between who you are alone and who you perform in public. "
-            "I mapped out the exact worksheet below so you can audit where you hide. Grab it and start being honest with yourself."
+            "We act indifferent so nobody laughs if we fall short. "
+            "Psychologists call this the social mask. Performing casualness stops you from ever being a beginner. "
+            "I mapped out the exact worksheet below so you can audit where you hide. Grab the guide below and start showing up as yourself."
         ),
         "mode_b": (
             "Notice how you pretend not to care about the things you actually want most? "
-            "We learn to act indifferent so nobody can laugh at us if we fall short. "
-            "Psychologists call this the social mask. You spend so much energy performing casualness that you never give yourself permission to be a beginner. "
-            "The real shift happens when you decide being caught trying is better than spending your youth performing a life you don't even want. "
-            "If you're trying to figure yourself out without all the noise, stick around. We unpack these patterns every day."
+            "We act indifferent so nobody can laugh if we fall short. "
+            "Psychologists call this the social mask. Performing casualness burns more energy than actually trying. "
+            "Being caught trying is always better than performing a life you don't want. "
+            "What's one thing you secretly care about, but pretend is no big deal? Tell me below."
         )
     },
     8: { # Diagram Your Loop (Page 8)
         "topic": "The 2 AM Phone Loop",
         "exercise_title": "Diagram Your Loop",
+        "keywords": ["phone loop", "2 am phone", "scroll loop", "doomscroll"],
         "mode_a": (
-            "Ever close an app only to reopen it five seconds later without even realizing your thumb moved? "
-            "That isn't a discipline failure. It's an automated neural loop. Your brain isn't hunting for new posts—it's anticipating a dopamine reward to numb boredom. "
-            "When you blame yourself, you reinforce the spiral. But once you separate the trigger from your actual craving, the loop breaks instantly. "
-            "I diagrammed the complete habit loop breakdown on the worksheet below. Grab it, audit your trigger, and disrupt the cycle tonight."
+            "Ever close an app only to reopen it five seconds later without thinking? "
+            "That isn't a discipline failure. It's an automated dopamine loop numbing boredom. "
+            "When you blame yourself, the spiral worsens. Once you separate the trigger from the craving, the loop shatters. "
+            "I diagrammed the habit framework on the worksheet below. Grab the guide and disrupt your loop tonight."
         ),
         "mode_b": (
-            "Ever close an app only to reopen it five seconds later without even realizing your thumb moved? "
-            "That isn't a discipline failure. It's an automated neural loop. Your brain isn't hunting for new posts—it's anticipating a dopamine reward to numb boredom. "
-            "When you blame yourself, you reinforce the spiral. But once you separate the trigger from your craving, the loop breaks. "
-            "Follow along if you want more breakdowns on how your brain actually works."
+            "Ever close an app only to reopen it five seconds later without thinking? "
+            "That isn't a discipline failure. It's an automated dopamine loop numbing boredom. "
+            "When you blame yourself, the spiral worsens. Separate the trigger from your craving, and the cycle breaks. "
+            "Be honest: how many hours did you lose to your phone today? Tell me below."
         )
     },
     14: { # The Minimum Viable Day (Page 14)
         "topic": "The Minimum Viable Day",
         "exercise_title": "The Minimum Viable Day",
+        "keywords": ["minimum viable day", "emergency baseline", "low energy routine"],
         "mode_a": (
-            "When you wake up feeling completely drained, trying to execute an intense two-hour routine usually ends in freeze mode on your phone. "
-            "Consistency isn't about hitting your peak every single day. It's about shrinking the initiation threshold so your brain cannot generate resistance. "
+            "When you wake up feeling drained, an intense two-hour routine usually ends in phone freeze. "
+            "Consistency isn't about peak output every single day. It's about shrinking the initiation threshold until your brain cannot generate resistance. "
             "Define your minimum viable day: one paragraph written, two minutes of stretching, or one honest breath. "
-            "I laid out the exact protocol on the worksheet below. Grab it and set your emergency baseline so you never break your momentum again."
+            "I laid out the protocol below. Grab the guide and protect your momentum."
         ),
         "mode_b": (
-            "When you wake up feeling completely drained, trying to execute an intense two-hour routine usually ends in freeze mode on your phone. "
-            "Consistency isn't about hitting your peak every single day. It's about shrinking the initiation threshold so your brain cannot generate resistance. "
-            "Define your minimum viable day: one paragraph written, two minutes of stretching, or one honest breath. "
-            "Subscribe if this helped. We share practical psychological resets every single day."
+            "When you wake up feeling drained, an intense two-hour routine usually ends in phone freeze. "
+            "Consistency isn't about peak output every single day. It's about shrinking the initiation threshold until your brain cannot generate resistance. "
+            "Define your minimum viable day: one paragraph written, or two minutes of stretching. "
+            "What's your emergency baseline when your energy hits zero? Tell me below."
         )
     }
 }
@@ -202,11 +212,13 @@ def generate_script_and_metadata(raw_topic: str, duo: bool = False, meta: bool =
 
     # Mode A is ONLY triggered if {meta}, {product: ...}, or meta=True is explicitly passed, and NOT overridden by {no meta}
     is_mode_a = (meta or has_meta_tag or has_explicit_product) and not has_no_meta_tag
-    is_duo = duo or bool(re.search(r"\{\s*duo\s*\}", raw_topic, re.IGNORECASE))
+    has_andrew_tag = bool(re.search(r"\{\s*andrew\s*\}", raw_topic, re.IGNORECASE))
+    has_duo_tag = bool(re.search(r"\{\s*duo\s*\}", raw_topic, re.IGNORECASE))
+    is_duo = duo or has_andrew_tag or has_duo_tag
     clean_topic = sanitize_tags(raw_topic)
 
     if is_duo:
-        # CONVERSATIONAL DUO MODE (Judy & Andrew)
+        # CONVERSATIONAL DUO MODE (Judy & Andrew) - Up to 40s
         lower_top = clean_topic.lower()
         matched_duo = None
         for k, item in CURATED_DUO_SCRIPTS.items():
@@ -216,7 +228,7 @@ def generate_script_and_metadata(raw_topic: str, duo: bool = False, meta: bool =
         
         voiceover = matched_duo or generate_dynamic_duo_script(clean_topic)
         words = re.sub(r"^\s*(?:judy|andrew)\s*:\s*", "", voiceover, flags=re.IGNORECASE | re.MULTILINE).split()
-        is_valid, issues = check_script_hygiene(voiceover, is_mode_a=False)
+        is_valid, issues = check_script_hygiene(voiceover, is_mode_a=False, is_duo=True)
 
         formatted_output = f"[VOICEOVER]\n{voiceover}"
         return {
@@ -238,20 +250,19 @@ def generate_script_and_metadata(raw_topic: str, duo: bool = False, meta: bool =
         curated_mode_b = None
         lower_top = clean_topic.lower()
         for p_num, c_data in CURATED_SCRIPTS.items():
-            if c_data["topic"].lower() in lower_top or any(w in lower_top for w in c_data["topic"].lower().split() if len(w) > 3):
+            if c_data["topic"].lower() in lower_top or any(kw in lower_top for kw in c_data.get("keywords", [])):
                 curated_mode_b = c_data["mode_b"]
                 break
 
         voiceover = curated_mode_b or (
             f"Notice how often you find yourself overthinking {clean_topic.lower()}? "
-            "Your nervous system treats emotional uncertainty like a physical threat, so it keeps you replaying old interactions to keep you safe. "
-            "The secret isn't forcing positive thoughts. It's teaching your body that being imperfect won't end the world. "
-            "When you step back and observe the sensation without reacting, clarity returns naturally. "
-            "If you're trying to figure yourself out without all the noise, stick around. We unpack these patterns every day."
+            "Your nervous system treats emotional uncertainty like a physical threat, so it keeps you replaying old interactions to feel safe. "
+            "The shift happens when you stop debating your thoughts and simply observe the physical sensation. "
+            "Be honest: what's the one thought that keeps you awake at night? Tell me below."
         )
         
         words = voiceover.split()
-        is_valid, issues = check_script_hygiene(voiceover, is_mode_a=False)
+        is_valid, issues = check_script_hygiene(voiceover, is_mode_a=False, is_duo=False)
 
         formatted_output = f"[VOICEOVER]\n{voiceover}"
 
@@ -323,24 +334,31 @@ def main():
     parser.add_argument("--topic", required=True, help="Topic with channel and optional {meta} or {no meta} tag")
     parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
     parser.add_argument("--duo", action="store_true", help="Generate conversational duo script with Judy and Andrew")
+    parser.add_argument("--andrew", action="store_true", help="Include Andrew character (Conversational Duo mode with Judy, runtime up to 40s)")
     parser.add_argument("--check-script", default=None, help="Validate an existing script text")
     parser.add_argument("--json", action="store_true", help="Output JSON format")
     args = parser.parse_args()
 
+    is_duo_opt = args.andrew or args.duo or bool(re.search(r"\{\s*(?:andrew|duo)\s*\}", args.topic, re.IGNORECASE))
+
     if args.check_script:
         has_meta = "{meta}" in args.topic.lower() or args.meta
-        is_valid, issues = check_script_hygiene(args.check_script, is_mode_a=has_meta)
+        check_is_duo = is_duo_opt or (
+            bool(re.search(r"^\s*judy\s*:", args.check_script, re.IGNORECASE | re.MULTILINE)) and
+            bool(re.search(r"^\s*andrew\s*:", args.check_script, re.IGNORECASE | re.MULTILINE))
+        )
+        is_valid, issues = check_script_hygiene(args.check_script, is_mode_a=has_meta, is_duo=check_is_duo)
         words = len(re.sub(r"^\s*(?:judy|andrew)\s*:\s*", "", args.check_script, flags=re.IGNORECASE | re.MULTILINE).split())
-        print(f"\nScript Hygiene Check ({words} words):")
+        print(f"\nScript Hygiene Check ({words} words, Duo: {check_is_duo}):")
         if is_valid:
-            print("  ✅ 100% Compliant (65-90 words, no clichés, no spoken product/page mentions)")
+            print("  ✅ 100% Compliant (Pacing, no clichés, no spoken product/page mentions)")
         else:
             print("  ❌ Issues found:")
             for iss in issues:
                 print(f"     - {iss}")
         return
 
-    result = generate_script_and_metadata(args.topic, duo=args.duo, meta=args.meta)
+    result = generate_script_and_metadata(args.topic, duo=is_duo_opt, meta=args.meta)
     if args.json:
         print(json.dumps(result, indent=2))
     else:

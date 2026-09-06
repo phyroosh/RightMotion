@@ -28,9 +28,9 @@
 - **Chunking**: Dynamic 2–4 words per chunk, holding cleanly across natural speech pauses.
 
 ## 3. Audio & Voiceovers
-- **Voice Profiles**:
-  - Solo Judy: Female Neural Voice (`en-US-AvaMultilingualNeural` via Edge-TTS) at `rate="+8%"`.
-  - Judy & Andrew Conversational Duo: Judy (`en-US-AvaMultilingualNeural`, `+8%`) paired with Andrew (`en-US-SteffanNeural`, `+7%`).
+- **Voice Profiles & Duration Policy**:
+  - Solo Judy (Default): Female Neural Voice (`en-US-AvaMultilingualNeural` via Edge-TTS) at `rate="+8%"`. Strict **20–24s runtime** (55–70 words, hard cap 75 words).
+  - Judy & Andrew Conversational Duo: Triggered **ONLY** when `{andrew}` or `--andrew` is explicitly passed! Judy (`en-US-AvaMultilingualNeural`, `+8%`) paired with Andrew (`en-US-SteffanNeural`, `+7%`). Allowed **up to 40s runtime** (~80–115 words).
 - **Mandatory Silence / Pause Compression**: Automatically strip out unnatural dead-air pauses between sentences and dialogue turns using snappy pause compression (~140ms–180ms).
 - **Word Timestamps**: Precise millisecond alignment generated via `faster-whisper` on the pause-trimmed master audio with deterministic speaker attribution.
 

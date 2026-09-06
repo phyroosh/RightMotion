@@ -21,7 +21,7 @@ Think like an After Effects and Premiere Pro motion graphics editor first! Every
 Never squish the avatar in a corner or have graphics fighting for space on screen with the avatar. We edit like a top-tier video essayist with distinct A-Roll and B-Roll rhythm:
 
 ### A-Roll Presenter Shots (The Human Connection)
-- **Voice Character:** Solo Judy uses `en-US-AvaMultilingualNeural` at `rate="+8%"`. Conversational Duo pairs Judy with Andrew (`en-US-SteffanNeural` at `rate="+7%"`).
+- **Voice Character & Runtime:** Solo Judy (default) uses `en-US-AvaMultilingualNeural` at `rate="+8%"` with strict **20–24s runtime** (55–70 words). Conversational Duo is triggered **ONLY** when `{andrew}` or `--andrew` is explicitly passed, pairing Judy with Andrew (`en-US-SteffanNeural` at `rate="+7%"`) and allowing **up to 40s runtime** (~80–115 words).
 - **Screen-Intimate Framing Rule (PERMANENT ARCHIVE OF FAR FULL-BODY AVATARS):**
   - Never use far head-to-toe full-body avatars. They make characters feel disconnected on mobile screens. Full-body files are archived in `public/archive_avatars/`.
   - Standardize 100% on **screen-intimate, zoomed waist-up cutouts** (`baseHeight={1280 - 1550}`) so characters are close to the viewer.

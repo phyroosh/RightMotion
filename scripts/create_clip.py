@@ -40,9 +40,9 @@ from dialogue_engine import process_dialogue
 def sanitize_tags(text: str) -> str:
     if not text:
         return ""
-    # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, {meta}, {no meme}, {duo}, {meme: ...}, and product tags
+    # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, {meta}, {no meme}, {andrew}, {duo}, {meme: ...}, and product tags
     pattern = re.compile(
-        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
+        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|andrew|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
         re.IGNORECASE,
     )
     cleaned = pattern.sub("", text)
@@ -1493,6 +1493,7 @@ async def main():
     parser.add_argument("--video", default=None, help="Alias for --facecam")
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
     parser.add_argument("--duo", action="store_true", help="Enable Conversational Duo mode (Judy & Andrew)")
+    parser.add_argument("--andrew", action="store_true", help="Include Andrew character (Conversational Duo mode with Judy, runtime up to 40s)")
     parser.add_argument("--meme", default=None, help="Meme ID override (e.g. side_eye_dog) or 'auto'")
     parser.add_argument("--meme-start", type=int, default=0, help="Meme start frame (default: 0 for instant opening hook)")
     parser.add_argument("--meme-mode", choices=["video", "frame"], default="video", help="Meme display mode (video card or still frame)")
@@ -1516,15 +1517,17 @@ async def main():
     # Mode B (organic growth) is DEFAULT unless {meta}, --meta, or {product: ...} is explicitly requested!
     is_mode_a = (args.meta or has_meta_tag or has_explicit_product) and not has_no_meta_tag
 
-    # Check for duo mode across inputs
-    is_duo = args.duo or bool(re.search(r"\{\s*duo\s*\}", raw_combined, re.IGNORECASE)) or (
-        bool(re.search(r"(?:^|\s+)judy\s*:", raw_combined, re.IGNORECASE)) and
-        bool(re.search(r"(?:^|\s+)andrew\s*:", raw_combined, re.IGNORECASE))
-    )
+    # Check for Andrew / Duo mode: ONLY include Andrew when {andrew}, --andrew, {duo}, or --duo is explicitly used!
+    has_andrew_tag = bool(re.search(r"\{\s*andrew\s*\}", raw_combined, re.IGNORECASE))
+    has_duo_tag = bool(re.search(r"\{\s*duo\s*\}", raw_combined, re.IGNORECASE))
+    is_duo = getattr(args, "andrew", False) or args.duo or has_andrew_tag or has_duo_tag
+
+    if is_duo:
+        print("👥 [Andrew Protocol] '{andrew}' detected: Including Andrew alongside Judy (runtime allowed up to 40s).")
 
     # If no script provided, autonomously generate it from topic
     if not raw_script and raw_topic:
-        print(f"✍️  [Scriptwriter] No script provided. Autonomously generating script for topic: '{raw_topic}' (Duo: {is_duo}, Meta: {is_mode_a})...")
+        print(f"✍️  [Scriptwriter] No script provided. Autonomously generating script for topic: '{raw_topic}' (Andrew/Duo: {is_duo}, Meta: {is_mode_a})...")
         gen_res = generate_script_and_metadata(raw_topic, duo=is_duo, meta=is_mode_a)
         raw_script = gen_res["formatted_output"]
         if gen_res.get("is_duo"):
@@ -1535,12 +1538,6 @@ async def main():
 
     # Parse [METADATA] and [VOICEOVER] blocks if present
     meta_pdf, meta_page, meta_title, vo_text, script_pinned_comment = parse_script_blocks(raw_script)
-
-    # Check again if parsed vo_text has dialogue turns
-    if not is_duo and vo_text:
-        vo_lower = vo_text.lower()
-        if bool(re.search(r"(?:^|\s+)judy\s*:", vo_lower)) and bool(re.search(r"(?:^|\s+)andrew\s*:", vo_lower)):
-            is_duo = True
 
     product_pdf = None
     product_page = None
@@ -1590,7 +1587,7 @@ async def main():
     clean_topic = sanitize_topic(args.topic) if args.topic else None
 
     # Audit script hygiene
-    is_valid, issues = check_script_hygiene(clean_script, is_mode_a=bool(product_meta))
+    is_valid, issues = check_script_hygiene(clean_script, is_mode_a=bool(product_meta), is_duo=is_duo)
     if not is_valid:
         print("⚠️  [Script Hygiene Advisory]:")
         for iss in issues:

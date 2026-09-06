@@ -12,7 +12,7 @@ from typing import Dict, Any, List, Tuple
 def sanitize_raw_topic(topic: str) -> str:
     """Strips niche brackets, product tags, modifier tags, and quotes."""
     clean = re.sub(
-        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
+        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|andrew|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
         "",
         topic,
         flags=re.IGNORECASE,
@@ -274,6 +274,15 @@ def generate_full_metadata(topic: str, niche: str = "self_improvement", script: 
     }
 
 if __name__ == "__main__":
+    import argparse
     import json
-    sample = generate_full_metadata("Should you make relationships in teenage or not", "self_improvement", "Notice how in high school, everyone acts like being single means you're unwanted, but being in a relationship leaves you exhausted managing someone else's moods.")
+
+    parser = argparse.ArgumentParser(description="RightClips Viral Metadata Engine")
+    parser.add_argument("--topic", default="Should you make relationships in teenage or not", help="Raw topic prompt")
+    parser.add_argument("--niche", default="self_improvement", help="Channel niche")
+    parser.add_argument("--script", default="", help="Voiceover script text")
+    parser.add_argument("--json", action="store_true", help="Output JSON format")
+    args = parser.parse_args()
+
+    sample = generate_full_metadata(args.topic, args.niche, args.script)
     print(json.dumps(sample, indent=2))
