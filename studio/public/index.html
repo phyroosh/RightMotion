@@ -224,9 +224,9 @@
               <span id="thumbnailBadge" class="text-[10px] flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3 h-3"></i> Ready</span>
             </div>
             <div class="flex items-center gap-2 w-full">
-              <a id="previewThumbBtn" target="_blank" class="flex-1 py-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-center text-xs font-bold text-[#fdf8e1] transition cursor-pointer">
+              <button id="previewThumbBtn" type="button" onclick="openThumbnailModal()" class="flex-1 py-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-center text-xs font-bold text-[#fdf8e1] transition cursor-pointer">
                 Preview
-              </a>
+              </button>
               <a id="viewThumbFullBtn" download="thumbnail.png" class="flex-1 py-2 rounded-xl border border-[#fdf8e1]/40 bg-[#fdf8e1]/10 hover:bg-[#fdf8e1]/20 text-center text-xs font-bold text-[#fdf8e1] transition cursor-pointer">
                 Download 4K
               </a>
@@ -565,6 +565,774 @@
   <div id="switch-finance" class="hidden"></div>
   <div id="switch-health" class="hidden"></div>
 
+    <div id="memeBoardModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card w-full max-w-6xl max-h-[90vh] rounded-3xl p-6 md:p-8 flex flex-col gap-4 shadow-2xl border border-white/15 relative overflow-hidden bg-black/95">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-white/20 pb-4 shrink-0">
+        <div class="flex items-center gap-3.5">
+          <div class="w-11 h-11 rounded-2xl bg-white/10 text-[#fdf8e1] flex items-center justify-center shadow-lg shadow-purple-500/20 text-xl font-bold">
+            🎭
+          </div>
+          <div>
+            <div class="flex items-center gap-2.5">
+              <h2 class="text-lg font-black text-[#fdf8e1] tracking-tight">Tactical Meme Culture Board</h2>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-purple-500/20 text-[#fdf8e1] border border-purple-500/30">21 Curated Hooks</span>
+            </div>
+            <p class="text-xs text-[#fdf8e1]/60">First-frame psychological retention hooks (< 2.0s, frame 0, muted). Click to copy tag or inject into topic.</p>
+          </div>
+        </div>
+        <button onclick="closeMemeBoardModal()" class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 text-[#fdf8e1]/60 hover:text-[#fdf8e1] flex items-center justify-center transition cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Controls: Category Chips & Search -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
+        <!-- Category Filter Chips -->
+        <div class="flex flex-wrap items-center gap-1.5" id="memeCategoryTabs">
+          <button onclick="filterMemeCategory('all')" class="meme-filter-btn active px-3 py-1 rounded-xl text-xs font-bold bg-purple-600 text-[#fdf8e1] transition">All (21)</button>
+          <button onclick="filterMemeCategory('Disbelief & Brain Reboot')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Disbelief (4)</button>
+          <button onclick="filterMemeCategory('Repeating Autopilot & Loops')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Autopilot (1)</button>
+          <button onclick="filterMemeCategory('Overthinking & Mental Overload')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Overload (3)</button>
+          <button onclick="filterMemeCategory('Exhaustion & Defeat')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Defeat (2)</button>
+          <button onclick="filterMemeCategory('Accountability & Calling Out')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Callout (2)</button>
+          <button onclick="filterMemeCategory('Swagger, Stoicism & Boundaries')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Stoicism (2)</button>
+          <button onclick="filterMemeCategory('Rage, Drama & Chaos')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Chaos (7)</button>
+        </div>
+
+        <!-- Search Memes -->
+        <div class="relative min-w-[220px]">
+          <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[#fdf8e1]/60"></i>
+          <input
+            type="text"
+            id="memeSearchInput"
+            placeholder="Search memes, emotions, hooks..."
+            oninput="searchMemes()"
+            class="w-full text-xs pl-8 pr-3 py-1.5 rounded-xl bg-black/50 border border-white/20 text-[#fdf8e1] placeholder-[#fdf8e1]/50 focus:outline-none focus:border-purple-500/50"
+          />
+        </div>
+      </div>
+
+      <!-- Memes Interactive Grid -->
+      <div id="memeBoardGrid" class="flex-1 overflow-y-auto custom-scrollbar pr-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 min-h-[350px]">
+        <div class="col-span-full flex flex-col items-center justify-center p-12 text-[#fdf8e1]/60 gap-3">
+          <i data-lucide="loader-2" class="w-8 h-8 animate-spin text-[#fdf8e1]/60"></i>
+          <span class="text-xs font-mono">Loading meme culture board...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 1-CLICK SOVEREIGN NICHE PUBLISH & SCHEDULE MODAL -->
+  <!-- ======================================================== -->
+  <div id="quickPublishModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card w-full max-w-lg rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b border-white/20 pb-4">
+        <div class="flex items-center gap-3">
+          <div id="quickModalIcon" class="w-10 h-10 rounded-2xl bg-[#fdf8e1] text-black flex items-center justify-center shadow-lg font-bold text-lg">
+            🚀
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 id="quickModalTitle" class="text-base font-black text-[#fdf8e1] tracking-tight">Upload Video</h2>
+              <span id="quickModalNicheBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-[#fdf8e1] font-bold">Niche</span>
+            </div>
+            <p id="quickModalSub" class="text-xs text-[#fdf8e1]/60">Routes automatically to this niche's connected accounts</p>
+          </div>
+        </div>
+        <button onclick="closeQuickPublishModal()" class="p-2 rounded-xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Target Account Summary Card -->
+      <div class="p-3.5 rounded-2xl sleek-input bg-black/40 border border-white/20 flex flex-col gap-2">
+        <div class="text-[10px] font-mono uppercase text-[#fdf8e1]/60 font-bold">Bound Destination Accounts:</div>
+        <div class="flex items-center justify-between gap-2 text-xs font-mono">
+          <div id="quickModalYtSummary" class="flex items-center gap-1.5 text-[#fdf8e1] font-bold">
+            <i data-lucide="play" class="w-3.5 h-3.5 fill-red-400"></i>
+            <span id="quickModalYtText">YouTube: Loading...</span>
+          </div>
+          <div id="quickModalIgSummary" class="flex items-center gap-1.5 text-pink-300 font-bold">
+            <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+            <span id="quickModalIgText">Instagram: Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timing Selector (Direct vs Schedule) -->
+      <div id="quickTimingSection" class="flex flex-col gap-3">
+        <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider">Release Timing</label>
+        <div class="grid grid-cols-2 gap-3">
+          <!-- Option A: Direct Publish -->
+          <button
+            type="button"
+            id="quickTimingDirectBtn"
+            onclick="setQuickModalMode('direct')"
+            class="p-3.5 rounded-2xl border-2 border-white/20 bg-[#fdf8e1]/10 text-left flex flex-col gap-1 transition cursor-pointer group"
+          >
+            <div class="flex items-center justify-between text-[#fdf8e1] font-black text-xs">
+              <span class="flex items-center gap-1.5">⚡ Publish Directly</span>
+              <span class="w-2 h-2 rounded-full bg-[#fdf8e1]"></span>
+            </div>
+            <span class="text-[10px] text-[#fdf8e1]/60">Instant Public release</span>
+          </button>
+
+          <!-- Option B: Schedule -->
+          <button
+            type="button"
+            id="quickTimingScheduleBtn"
+            onclick="setQuickModalMode('schedule')"
+            class="p-3.5 rounded-2xl border-2 border-white/20 hover:border-purple-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group"
+          >
+            <div class="flex items-center justify-between text-[#fdf8e1]/80 font-black text-xs group-hover:text-[#fdf8e1]">
+              <span class="flex items-center gap-1.5">📅 Schedule Release</span>
+              <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+            </div>
+            <span class="text-[10px] text-[#fdf8e1]/60">Auto-post at prime time</span>
+          </button>
+        </div>
+
+        <!-- Schedule Options Drawer -->
+        <div id="quickScheduleDrawer" class="hidden p-4 rounded-2xl border border-purple-500/30 bg-purple-500/10 flex flex-col gap-3">
+          <div class="text-[11px] font-mono text-[#fdf8e1] font-bold">Prime Time Presets (Local Time):</div>
+          <div class="grid grid-cols-4 gap-2 text-center text-xs font-mono">
+            <button type="button" onclick="setQuickPresetTime(8, 0)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-[#fdf8e1] font-bold transition cursor-pointer">
+              🌅 8:00 AM
+            </button>
+            <button type="button" onclick="setQuickPresetTime(12, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-[#fdf8e1] font-bold transition cursor-pointer">
+              🥪 12:30 PM
+            </button>
+            <button type="button" onclick="setQuickPresetTime(17, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-[#fdf8e1] font-bold transition cursor-pointer">
+              🌆 5:30 PM
+            </button>
+            <button type="button" onclick="setQuickPresetTime(20, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-[#fdf8e1] font-bold transition cursor-pointer">
+              🌙 8:30 PM
+            </button>
+          </div>
+          <div>
+            <label class="text-[10px] font-mono text-[#fdf8e1]/60 block mb-1">Or Pick Custom Date & Time:</label>
+            <input
+              type="datetime-local"
+              id="quickScheduleDateTime"
+              class="w-full px-3 py-2 rounded-xl sleek-input text-xs font-mono text-[#fdf8e1] border border-white/20"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button
+        id="quickLaunchBtn"
+        onclick="submitQuickPublish()"
+        class="w-full py-3.5 rounded-2xl bg-[#fdf8e1] hover:from-[#0071e3]/90 hover:opacity-90 text-[#fdf8e1] font-black text-sm tracking-wide shadow-xl flex items-center justify-center gap-2 cursor-pointer transition active:scale-[0.98]"
+      >
+        <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+        <span id="quickLaunchBtnText">Confirm & Publish Now</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- NICHE ACCOUNT BINDING MODAL -->
+  <!-- ======================================================== -->
+  <div id="nicheAccountModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card w-full max-w-md rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
+      <div class="flex items-center justify-between border-b border-white/20 pb-4">
+        <div>
+          <h2 id="nicheModalTitle" class="text-base font-black text-[#fdf8e1] tracking-tight">Configure Niche Accounts</h2>
+          <p class="text-xs text-[#fdf8e1]/60">Bind dedicated YouTube & Instagram accounts</p>
+        </div>
+        <button onclick="closeNicheAccountModal()" class="p-2 rounded-xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- YouTube Channel Binding -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 flex items-center gap-1.5">
+          <i data-lucide="play" class="w-3.5 h-3.5 text-[#fdf8e1]/80"></i> YouTube Channel
+        </label>
+        <select id="nicheYtSelect" class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-mono text-[#fdf8e1] border border-white/20">
+          <option value="">-- No Channel Assigned --</option>
+        </select>
+        <p class="text-[10px] text-[#fdf8e1]/60">Need to add another channel? Use Settings & API to connect via Google OAuth.</p>
+      </div>
+
+      <!-- Instagram Account Binding -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 flex items-center gap-1.5">
+          <i data-lucide="camera" class="w-3.5 h-3.5 text-[#fdf8e1]/80"></i> Instagram Handle
+        </label>
+        <input
+          type="text"
+          id="nicheIgInput"
+          placeholder="e.g. thejudyinsights"
+          class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-mono text-[#fdf8e1] border border-white/20"
+        />
+        <p class="text-[10px] text-[#fdf8e1]/60">Enter the Instagram username bound to this niche's Reels.</p>
+      </div>
+
+      <!-- Save Button -->
+      <button
+        onclick="saveNicheAccountBindings()"
+        class="w-full py-3 rounded-2xl bg-[#fdf8e1] hover:bg-[#fdf8e1]/90 text-[#fdf8e1] font-bold text-xs shadow-lg cursor-pointer transition"
+      >
+        Save Account Assignment
+      </button>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SMART MULTI-PLATFORM PUBLISH & SCHEDULE MODAL -->
+  <!-- ======================================================== -->
+  <div id="publishModal" class="fixed inset-0 z-50 bg-black/20 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card w-full max-w-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-white/20 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-white/10 border border-white/20 text-[#fdf8e1] flex items-center justify-center shadow-lg">
+            <i data-lucide="share-2" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-lg font-black text-[#fdf8e1] tracking-tight">Multi-Platform Publishing Hub</h2>
+            <p class="text-xs text-[#fdf8e1]/60">Choose target platforms, instant publishing, or scheduled release times</p>
+          </div>
+        </div>
+        <button
+          onclick="closePublishModal()"
+          class="p-2 rounded-xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- 1. SELECT TARGET DESTINATIONS & CHANNELS -->
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-1.5">
+            <i data-lucide="send" class="w-3.5 h-3.5 text-[#fdf8e1]/80"></i>
+            1. Target Destinations & Channels
+          </label>
+          <span class="text-[10px] text-[#fdf8e1]/60 font-mono">Select channels to publish to</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <!-- YouTube Channels Box -->
+          <div class="p-3.5 rounded-2xl sleek-input border border-white/20 flex flex-col gap-2.5">
+            <div class="flex items-center justify-between border-b border-white/5 pb-2">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-white/10 text-[#fdf8e1]/80 border border-red-500/30 flex items-center justify-center">
+                  <i data-lucide="play" class="w-3 h-3 fill-red-400"></i>
+                </div>
+                <span class="text-xs font-black text-[#fdf8e1]">YouTube</span>
+                <span id="modalYtCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white/10 text-[#fdf8e1]/80">0 selected</span>
+              </div>
+              <label class="flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1]">
+                <span>Enable</span>
+                <input type="checkbox" id="modalTargetYt" onchange="onModalMasterToggle('yt')" checked class="w-4 h-4 rounded accent-[#fdf8e1] cursor-pointer" />
+              </label>
+            </div>
+            <!-- Dynamic list of YouTube channels with checkboxes -->
+            <div id="modalYtChannelsList" class="flex flex-col gap-1.5 max-h-36 overflow-y-auto custom-scrollbar pr-1">
+              <!-- Populated by renderModalDestinations() -->
+            </div>
+          </div>
+
+          <!-- Instagram Accounts Box -->
+          <div class="p-3.5 rounded-2xl sleek-input border border-white/20 flex flex-col gap-2.5">
+            <div class="flex items-center justify-between border-b border-white/5 pb-2">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-pink-600/20 text-[#fdf8e1]/80 border border-pink-500/30 flex items-center justify-center">
+                  <i data-lucide="camera" class="w-3 h-3"></i>
+                </div>
+                <span class="text-xs font-black text-[#fdf8e1]">Instagram</span>
+                <span id="modalIgCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-pink-500/20 text-pink-300">0 selected</span>
+              </div>
+              <label class="flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1]">
+                <span>Enable</span>
+                <input type="checkbox" id="modalTargetIg" onchange="onModalMasterToggle('ig')" checked class="w-4 h-4 rounded accent-[#e1306c] cursor-pointer" />
+              </label>
+            </div>
+            <!-- Dynamic list of Instagram accounts with checkboxes -->
+            <div id="modalIgAccountsList" class="flex flex-col gap-1.5 max-h-36 overflow-y-auto custom-scrollbar pr-1">
+              <!-- Populated by renderModalDestinations() -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. SELECT PUBLISH TIMING -->
+      <div class="flex flex-col gap-2.5">
+        <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider">
+          2. Release Timing
+        </label>
+        
+        <div class="grid grid-cols-3 gap-2.5">
+          <!-- Instant Now -->
+          <button
+            type="button"
+            id="timingBtnNow"
+            onclick="setModalTiming('now')"
+            class="p-3.5 rounded-2xl sleek-input border border-[#fdf8e1]/40 bg-white/10 text-left flex flex-col gap-1 transition cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <i data-lucide="zap" class="w-4 h-4 text-[#fdf8e1]/80"></i>
+              <span class="w-2 h-2 rounded-full bg-white/50"></span>
+            </div>
+            <div class="text-xs font-black text-[#fdf8e1] mt-1">Publish Now</div>
+            <div class="text-[10px] text-[#fdf8e1]/60">Go live immediately</div>
+          </button>
+
+          <!-- Schedule Later (YouTube Native) -->
+          <button
+            type="button"
+            id="timingBtnSchedule"
+            onclick="setModalTiming('schedule')"
+            class="p-3.5 rounded-2xl sleek-input border border-white/20 hover:border-purple-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <i data-lucide="calendar-clock" class="w-4 h-4 text-[#fdf8e1]/60"></i>
+              <span class="w-2 h-2 rounded-full bg-purple-400 opacity-40"></span>
+            </div>
+            <div class="text-xs font-black text-[#fdf8e1] mt-1">Schedule (YouTube)</div>
+            <div class="text-[10px] text-[#fdf8e1]/60">Native Google Cloud queue</div>
+          </button>
+
+          <!-- Private Draft -->
+          <button
+            type="button"
+            id="timingBtnDraft"
+            onclick="setModalTiming('draft')"
+            class="p-3.5 rounded-2xl sleek-input border border-white/20 hover:border-amber-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
+          >
+            <div class="flex items-center justify-between">
+              <i data-lucide="lock" class="w-4 h-4 text-amber-400"></i>
+              <span class="w-2 h-2 rounded-full bg-amber-400 opacity-40"></span>
+            </div>
+            <div class="text-xs font-black text-[#fdf8e1] mt-1">Private Draft</div>
+            <div class="text-[10px] text-[#fdf8e1]/60">Save unlisted on YouTube</div>
+          </button>
+        </div>
+
+        <!-- Schedule Options Picker (Shown when Schedule is selected) -->
+        <div id="modalScheduleBox" class="hidden p-4 rounded-2xl border border-purple-500/40 bg-purple-500/10 flex flex-col gap-3.5 mt-1">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-200 flex items-center gap-1.5">
+              <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#fdf8e1]/60"></i> Select YouTube Release Time
+            </span>
+            <span class="text-[10px] font-mono text-[#fdf8e1]">Google Cloud Release</span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-2.5">
+            <input
+              type="datetime-local"
+              id="modalScheduleDateTime"
+              onchange="updateModalSchedulePreview()"
+              class="w-full sm:flex-1 px-4 py-2.5 rounded-xl sleek-input text-xs text-[#fdf8e1] font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
+            />
+            <div class="flex items-center gap-1.5 w-full sm:w-auto">
+              <button
+                type="button"
+                onclick="setModalQuickHours(2)"
+                class="px-3 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs font-bold transition"
+              >
+                +2 Hrs
+              </button>
+              <button
+                type="button"
+                onclick="setModalQuickHours(4)"
+                class="px-3 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs font-bold transition"
+              >
+                +4 Hrs
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Peak Time Slots -->
+          <div class="grid grid-cols-5 gap-1.5">
+            <button type="button" onclick="setModalTargetTime(1, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-[#fdf8e1]">1:00 AM</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Night</div>
+            </button>
+            <button type="button" onclick="setModalTargetTime(2, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-[#fdf8e1]">2:00 AM</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Late</div>
+            </button>
+            <button type="button" onclick="setModalTargetTime(7, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-amber-300">7:00 AM</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Morning</div>
+            </button>
+            <button type="button" onclick="setModalTargetTime(14, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-[#fdf8e1]/80">2:00 PM</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Afternoon</div>
+            </button>
+            <button type="button" onclick="setModalTargetTime(21, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+              <div class="text-[11px] font-black text-rose-300">9:00 PM</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Prime</div>
+            </button>
+          </div>
+
+          <div id="modalSchedulePreviewText" class="text-[11px] text-purple-200 font-medium pt-1"></div>
+        </div>
+      </div>
+
+      <!-- Instagram Specific Settings (Share to Feed) -->
+      <div id="modalIgOptionsBox" class="p-4 rounded-2xl bg-white/5 border border-white/20 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <i data-lucide="share" class="w-4 h-4 text-[#fdf8e1]/80"></i>
+          <div>
+            <div class="text-xs font-bold text-[#fdf8e1]">Share Reel to Instagram Main Profile Feed</div>
+            <div class="text-[10px] text-[#fdf8e1]/60">Displays on your Instagram main grid as well as the Reels tab</div>
+          </div>
+        </div>
+        <input type="checkbox" id="modalIgShareToFeed" checked class="w-5 h-5 rounded-lg accent-[#e1306c] cursor-pointer" />
+      </div>
+
+      <!-- Modal Footer Action -->
+      <div class="pt-4 border-t border-white/20 flex items-center justify-between gap-4">
+        <button
+          onclick="closePublishModal()"
+          class="px-5 py-3 rounded-2xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] text-xs font-bold transition"
+        >
+          Cancel
+        </button>
+
+        <button
+          id="confirmPublishBtn"
+          onclick="executeMultiPlatformPublish()"
+          class="px-8 py-3.5 rounded-2xl solid-white-btn text-[#fdf8e1] text-sm font-black flex items-center gap-2 shadow-2xl cursor-pointer"
+        >
+          <i data-lucide="rocket" class="w-4 h-4"></i>
+          <span id="confirmPublishBtnText">Publish to Selected Platforms</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SETTINGS & YOUTUBE API MODAL -->
+  <div id="settingsModal" class="fixed inset-0 z-50 bg-black/20 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card w-full max-w-3xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-white/20 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-white/10 text-[#fdf8e1]/80 border border-white/10 flex items-center justify-center">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-lg font-black text-[#fdf8e1] tracking-tight">Studio Settings & YouTube API</h2>
+            <p class="text-xs text-[#fdf8e1]/60">Configure your Google Cloud client_secrets.json to connect your YouTube Channel</p>
+          </div>
+        </div>
+        <button
+          onclick="closeSettingsModal()"
+          class="p-2 rounded-xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Tabs (YouTube API vs Instagram Playwright) -->
+      <div class="grid grid-cols-2 p-1.5 rounded-2xl bg-black/50 border border-white/20 text-xs font-black">
+        <button
+          type="button"
+          id="settingsTabYt"
+          onclick="switchSettingsTab('youtube')"
+          class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#fdf8e1] text-black shadow-md cursor-pointer"
+        >
+          <i data-lucide="play" class="w-4 h-4 fill-white"></i>
+          <span>YouTube Channel API</span>
+        </button>
+        <button
+          type="button"
+          id="settingsTabIg"
+          onclick="switchSettingsTab('instagram')"
+          class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer"
+        >
+          <i data-lucide="camera" class="w-4 h-4 text-[#fdf8e1]/80"></i>
+          <span>Instagram Playwright Session</span>
+        </button>
+      </div>
+
+      <!-- 1. YOUTUBE SETTINGS TAB CONTENT -->
+      <div id="settingsYtContent" class="flex flex-col gap-6">
+        
+        <!-- SECTION 1: CONNECTED YOUTUBE CHANNELS -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-2">
+              <i data-lucide="youtube" class="w-4 h-4 text-red-500"></i>
+              <span>Connected YouTube Channels</span>
+              <span id="settingsChannelsCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/10 text-[#fdf8e1] border border-red-500/30">0</span>
+            </div>
+            <button
+              type="button"
+              onclick="openConnectChannelModal()"
+              class="px-3.5 py-1.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+            >
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+              <span>Connect Channel</span>
+            </button>
+          </div>
+
+          <div id="settingsChannelsListContainer" class="flex flex-col gap-2.5">
+            <!-- Dynamically rendered by loadSettingsStatus() -->
+          </div>
+        </div>
+
+        <!-- SECTION 2: GOOGLE CLOUD CREDENTIALS PROJECTS -->
+        <div class="flex flex-col gap-3 pt-2 border-t border-white/20">
+          <div class="flex items-center justify-between">
+            <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-2">
+              <i data-lucide="key" class="w-4 h-4 text-amber-400"></i>
+              <span>Google Cloud Console API Projects</span>
+              <span id="settingsProjectsCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">0</span>
+            </div>
+            <span class="text-[10px] text-[#fdf8e1]/60 font-mono">Each project holds YouTube Data API quotas</span>
+          </div>
+
+          <div id="settingsProjectsListContainer" class="flex flex-col gap-2">
+            <!-- Dynamically rendered by loadSettingsStatus() -->
+          </div>
+
+          <!-- ADD NEW GOOGLE CLOUD CREDENTIALS BOX -->
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/20 flex flex-col gap-3 mt-1">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-[#fdf8e1]/90 flex items-center gap-2">
+                <span>Add New Google Cloud API Project (client_secrets.json)</span>
+              </label>
+              <label class="cursor-pointer text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1]/80 flex items-center gap-1.5 transition">
+                <i data-lucide="folder-open" class="w-3.5 h-3.5"></i>
+                <span>Browse JSON file</span>
+                <input type="file" id="secretsFileInput" accept=".json" class="hidden" onchange="handleSecretsFile(event)" />
+              </label>
+            </div>
+
+            <input
+              type="text"
+              id="clientSecretsProjectName"
+              placeholder="Friendly Project Name (e.g. Primary Studio Console, Second Channel Project)"
+              class="w-full px-3.5 py-2.5 rounded-xl sleek-input text-xs font-medium text-[#fdf8e1] placeholder:text-[#fdf8e1]/50 focus:border-white/50"
+            />
+
+            <textarea
+              id="clientSecretsText"
+              rows="4"
+              placeholder='{"installed":{"client_id":"YOUR_CLIENT_ID.apps.googleusercontent.com","project_id":"...","client_secret":"YOUR_CLIENT_SECRET",...}}'
+              class="w-full px-4 py-2.5 rounded-xl sleek-input text-xs font-mono text-[#fdf8e1]/90 placeholder:text-[#fdf8e1]/50 focus:border-white/50 custom-scrollbar leading-relaxed"
+            ></textarea>
+
+            <div class="flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onclick="saveYoutubeSecrets()"
+                id="saveSecretsBtn"
+                class="px-5 py-2.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
+              >
+                <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                <span>Add Google Cloud Project</span>
+              </button>
+
+              <button
+                type="button"
+                onclick="resetYoutubeSecrets()"
+                class="px-4 py-2 rounded-xl sleek-input hover:bg-rose-500/10 text-[#fdf8e1]/60 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                title="Reset existing credentials"
+              >
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                <span>Reset All Credentials</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP BY STEP SETUP GUIDE -->
+        <div class="flex flex-col gap-2.5 pt-2 border-t border-white/20">
+          <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/60 tracking-wider flex items-center gap-1.5">
+            <i data-lucide="help-circle" class="w-3.5 h-3.5 text-[#fdf8e1]/80"></i>
+            How to get client_secrets.json from Google Cloud Console
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div class="p-3 rounded-xl bg-white/5 border border-white/20 flex flex-col gap-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-[#fdf8e1] text-black font-mono font-black text-[11px] flex items-center justify-center">1</span>
+                <span class="text-xs font-bold text-[#fdf8e1]">Enable API</span>
+              </div>
+              <p class="text-[10px] text-[#fdf8e1]/60">
+                In <a href="https://console.cloud.google.com" target="_blank" class="text-[#fdf8e1]/80 underline font-bold">Google Cloud</a>, enable <strong>YouTube Data API v3</strong>.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-white/5 border border-white/20 flex flex-col gap-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-[#fdf8e1] text-black font-mono font-black text-[11px] flex items-center justify-center">2</span>
+                <span class="text-xs font-bold text-[#fdf8e1]">OAuth Consent</span>
+              </div>
+              <p class="text-[10px] text-[#fdf8e1]/60">
+                External consent screen, add YouTube scopes, and add your Google account as <strong>Test User</strong>.
+              </p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-white/5 border border-white/20 flex flex-col gap-1">
+              <div class="flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-[#fdf8e1] text-black font-mono font-black text-[11px] flex items-center justify-center">3</span>
+                <span class="text-xs font-bold text-[#fdf8e1]">Download JSON</span>
+              </div>
+              <p class="text-[10px] text-[#fdf8e1]/60">
+                Create <strong>OAuth Client ID</strong> &gt; <strong>Desktop App</strong> &gt; Download JSON.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 2. INSTAGRAM SETTINGS TAB CONTENT -->
+      <div id="settingsIgContent" class="hidden flex flex-col gap-6">
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/20 flex flex-col gap-2">
+          <div class="text-xs font-black text-[#fdf8e1]/80 uppercase tracking-wide flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            Native Playwright Interactive Login (Safe, Persistent & Multi-Account)
+          </div>
+          <p class="text-xs text-[#fdf8e1]/80 leading-relaxed">
+            Connect one or multiple Instagram accounts safely. Clicking <strong>Connect Account</strong> opens a native Chromium window. Log in (supporting 2FA); your session is preserved for automated 1-click publishing.
+          </p>
+        </div>
+
+        <!-- Instagram Connected Accounts Section -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-2">
+              <i data-lucide="camera" class="w-4 h-4 text-[#fdf8e1]/80"></i>
+              <span>Connected Instagram Accounts</span>
+              <span id="settingsIgAccountsCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">0</span>
+            </div>
+            <button
+              type="button"
+              onclick="loginInstagram()"
+              class="px-3.5 py-1.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+            >
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+              <span>Add IG Account</span>
+            </button>
+          </div>
+
+          <div id="settingsIgAccountsContainer" class="flex flex-col gap-2.5">
+            <!-- Rendered dynamically by checkInstagramStatus() -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONNECT YOUTUBE CHANNEL MODAL (SELECT GOOGLE PROJECT) -->
+  <div id="connectChannelModal" class="fixed inset-0 z-50 bg-black/20 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card w-full max-w-md rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15">
+      <div class="flex items-center justify-between border-b border-white/20 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-white/10 text-[#fdf8e1]/80 border border-red-500/30 flex items-center justify-center">
+            <i data-lucide="youtube" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-[#fdf8e1]">Connect YouTube Channel</h3>
+        </div>
+        <button onclick="closeConnectChannelModal()" class="p-1.5 rounded-lg text-[#fdf8e1]/60 hover:text-[#fdf8e1]">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-3 text-xs">
+        <p class="text-[#fdf8e1]/80">Select which Google Cloud project API credentials to use to authenticate your channel:</p>
+        
+        <div class="flex flex-col gap-1.5">
+          <label class="font-bold text-[#fdf8e1]/90">Google Cloud API Project</label>
+          <select id="connectChannelProjectSelect" class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-bold text-[#fdf8e1] bg-[#111] border border-white/20">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+
+        <div class="p-3 rounded-xl bg-white/5 border border-white/10 text-[11px] text-[#fdf8e1]">
+          💡 You can authenticate multiple different YouTube channels using the <strong>same</strong> Google Cloud project or across <strong>multiple</strong> projects.
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2 border-t border-white/20">
+        <button onclick="closeConnectChannelModal()" class="px-4 py-2 rounded-xl sleek-input text-[#fdf8e1]/60 hover:text-[#fdf8e1] text-xs font-bold">Cancel</button>
+        <button onclick="proceedConnectChannel()" class="px-5 py-2.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-black flex items-center gap-2">
+          <span>Continue to Google</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFICATION TOAST -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 frosted-glass-card px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-[#fdf8e1] flex items-center gap-3">
+    <i data-lucide="info" class="w-4 h-4 text-[#38bdf8]"></i>
+    <span id="toastMessage">Notification</span>
+  </div>
+
+  <script>
+    let videosData = [];
+    let longFormsData = [];
+    let shortsData = [];
+    let uploadedData = [];
+    let scheduledData = [];
+    let unuploadedData = [];
+    let selectedVideo = null;
+    let currentTags = [];
+    let activeTab = 'all'; // 'all', 'unuploaded', 'scheduled', 'uploaded', 'longform'
+
+    // Safe Lucide Icon Renderer (never throws if Lucide is slow or absent)
+    function safeCreateIcons() {
+      if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+        try {
+          lucide.createIcons();
+        } catch (e) {
+          console.warn('Lucide icon warning:', e);
+        }
+      }
+    }
+
+    
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+
+
+  <!-- 🖼️ 4K THUMBNAIL PREVIEW LIGHTBOX MODAL -->
+  <div id="thumbnailModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card max-w-lg w-full rounded-3xl p-5 flex flex-col gap-4 shadow-2xl border border-white/15 relative">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="image" class="w-4 h-4 text-amber-400"></i>
+          <h3 id="thumbnailModalTitle" class="text-sm font-black text-[#fdf8e1]">4K Cover Preview</h3>
+        </div>
+        <button onclick="closeThumbnailModal()" class="p-1.5 rounded-xl hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="relative w-full max-h-[70vh] flex items-center justify-center rounded-2xl overflow-hidden bg-black/50 border border-white/10">
+        <img id="thumbnailModalImg" src="" alt="4K Cover" class="max-h-[65vh] w-auto object-contain rounded-xl" />
+      </div>
+      <div class="flex items-center justify-between gap-3 pt-1">
+        <span id="thumbnailModalDims" class="text-xs font-mono text-[#fdf8e1]/60">1080 × 1920 (9:16 Shorts)</span>
+        <div class="flex items-center gap-2">
+          <button onclick="closeThumbnailModal()" class="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 text-xs font-bold text-[#fdf8e1]/70 cursor-pointer">Close</button>
+          <a id="thumbnailModalDownloadBtn" download="thumbnail.png" class="px-4 py-2 rounded-xl solid-white-btn text-xs font-black flex items-center gap-1.5 cursor-pointer">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> Download 4K
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 frosted-glass-card px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-[#fdf8e1] flex items-center gap-3">
     <i data-lucide="info" class="w-4 h-4 text-[#38bdf8]"></i>
     <span id="toastMessage">Notification</span>
@@ -693,6 +1461,7 @@
     // ═══════════════════════════════════════════════════
     async function checkInstagramStatus() {
       const igSection = document.getElementById('instagramAuthSection');
+      if (igSection) igSection.classList.remove('hidden');
       const settingsContainer = document.getElementById('settingsIgAccountsContainer');
       const countBadge = document.getElementById('settingsIgAccountsCountBadge');
 
@@ -1214,6 +1983,7 @@
     // 1. Check Auth Status on Load & Render Live Channel Switcher
     async function checkAuthStatus() {
       const authSection = document.getElementById('authSection');
+      if (authSection) authSection.classList.remove('hidden');
       try {
         const res = await fetch('/api/auth-status?t=' + Date.now());
         const data = await res.json();
@@ -2158,6 +2928,38 @@
       safeCreateIcons();
     }
 
+    
+    function openThumbnailModal() {
+      if (!selectedVideo || !selectedVideo.hasThumbnail) {
+        showToast("⚠️ No thumbnail available yet for this video.");
+        return;
+      }
+      const modal = document.getElementById("thumbnailModal");
+      const img = document.getElementById("thumbnailModalImg");
+      const dims = document.getElementById("thumbnailModalDims");
+      const dlBtn = document.getElementById("thumbnailModalDownloadBtn");
+      const title = document.getElementById("thumbnailModalTitle");
+
+      const url = `${selectedVideo.thumbnailUrl}?t=${Date.now()}`;
+      if (img) img.src = url;
+      if (dlBtn) {
+        dlBtn.href = selectedVideo.thumbnailUrl;
+        dlBtn.download = selectedVideo.thumbnailFile || `${selectedVideo.filename.replace(".mp4","")}_thumbnail.png`;
+      }
+      if (title) title.textContent = `${selectedVideo.meta?.title || selectedVideo.filename} (4K Cover)`;
+      if (dims) dims.textContent = selectedVideo.isLongForm ? "3840 × 2160 (16:9 4K Master)" : "2160 × 3840 (9:16 Shorts 4K Master)";
+
+      if (modal) {
+        modal.classList.remove("opacity-0", "pointer-events-none");
+      }
+      safeCreateIcons();
+    }
+
+    function closeThumbnailModal() {
+      const modal = document.getElementById("thumbnailModal");
+      if (modal) modal.classList.add("opacity-0", "pointer-events-none");
+    }
+
     function downloadThumbnail() {
       if (!selectedVideo || !selectedVideo.hasThumbnail) {
         showToast('⚠️ No thumbnail rendered yet. Click Re-Render first!');
@@ -2347,6 +3149,7 @@
       showToast('📋 Discussion comment copied to clipboard!');
     }
 
+    function postPinnedCommentNow() { return postCommentNow(); }
     async function postCommentNow() {
       if (!selectedVideo) return;
       const commentEl = document.getElementById('metaPinnedComment');
@@ -2486,14 +3289,34 @@
       }
 
       updateModalDestinationCounts();
-      setModalTiming('now');
 
-      const defaultDate = new Date();
-      defaultDate.setHours(defaultDate.getHours() + 2);
-      document.getElementById('modalScheduleDateTime').value = toLocalISOString(defaultDate);
+      // Sync with dashboard privacy & schedule controls
+      const dashboardPrivacy = document.getElementById('metaPrivacy')?.value || 'public';
+      const dashboardSchedule = document.getElementById('scheduleDateTime')?.value || '';
+
+      if (dashboardPrivacy === 'scheduled') {
+        setModalTiming('schedule');
+        if (dashboardSchedule) {
+          const mSched = document.getElementById('modalScheduleDateTime');
+          if (mSched) mSched.value = dashboardSchedule;
+        }
+      } else if (dashboardPrivacy === 'private' || dashboardPrivacy === 'unlisted') {
+        setModalTiming('draft');
+      } else {
+        setModalTiming('now');
+      }
+
+      if (!document.getElementById('modalScheduleDateTime')?.value) {
+        const defaultDate = new Date();
+        defaultDate.setHours(defaultDate.getHours() + 2);
+        const mSched = document.getElementById('modalScheduleDateTime');
+        if (mSched) mSched.value = toLocalISOString(defaultDate);
+      }
       updateModalSchedulePreview();
 
-      modal.classList.remove('opacity-0', 'pointer-events-none');
+      if (modal) {
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+      }
       safeCreateIcons();
     }
 
