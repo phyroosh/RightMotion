@@ -20,104 +20,128 @@
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #000000;
-      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      /* Warm, earthy, abstract mesh background simulating a blurred portrait */
+      background-color: #1a100c;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(205, 115, 75, 0.25), transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(135, 65, 45, 0.3), transparent 50%),
+        radial-gradient(circle at 50% 100%, rgba(85, 35, 25, 0.4), transparent 50%);
+      background-attachment: fixed;
+      color: #fdf8e1;
       min-height: 100vh;
     }
 
-    .sleek-card {
-      background-color: #050505;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .frosted-glass-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 32px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
       position: relative;
       overflow: hidden;
     }
-
-    .sleek-grid-bg {
-      background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), 
-                        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(circle at center, black, transparent 80%);
-      -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
-    }
-
-    .sleek-panel {
-      background-color: #0a0a0c;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      transition: all 0.2s;
-    }
     
-    .sleek-panel:hover {
+    /* Optional edge highlight for glass */
+    .frosted-glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 32px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 40%, rgba(255,255,255,0.05));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .thick-glass-pill {
+      background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 9999px;
+      box-shadow: 
+        0 12px 32px 0 rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+      color: #fdf8e1;
+    }
+
+    .translucent-btn {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      color: #fdf8e1;
+      transition: all 0.3s ease;
+    }
+    .translucent-btn:hover {
+      background: rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .translucent-btn.active {
+      background: rgba(15, 15, 15, 0.85);
       border-color: rgba(255, 255, 255, 0.15);
     }
 
-    .sleek-input {
-      background-color: #0f0f12;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      color: #ffffff;
-      transition: all 0.2s;
+    .solid-white-btn {
+      background: #ffffff;
+      color: #000000;
+      border-radius: 9999px;
+      font-weight: 600;
+      border: none;
+      transition: transform 0.2s, opacity 0.2s;
     }
-    .sleek-input:focus {
-      border-color: rgba(139, 92, 246, 0.5);
-      outline: none;
-    }
-
-    .text-gradient {
-      background: linear-gradient(to right, #e8b0ff, #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .pill-btn-primary {
-      background: linear-gradient(to right, #4f46e5, #7c3aed);
-      color: white;
-      transition: opacity 0.2s;
-    }
-    .pill-btn-primary:hover {
+    .solid-white-btn:hover {
       opacity: 0.9;
+      transform: scale(1.02);
     }
 
-    .pill-btn-outline {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
-      transition: background 0.2s;
+    .glass-input-wrapper {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
     }
-    .pill-btn-outline:hover {
-      background: rgba(255, 255, 255, 0.05);
+    .glass-input-wrapper:focus-within {
+      background: rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
-    .tab-btn.active {
-      background: rgba(139, 92, 246, 0.15);
-      color: #e8b0ff;
-      border-color: rgba(139, 92, 246, 0.3);
+    /* Override sleek inputs for vault */
+    .sleek-input {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      color: #fdf8e1;
     }
 
     .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased custom-scrollbar">
 
   <!-- TOP COMMAND APP BAR -->
-  <header class="sticky top-0 z-50 bg-[#000000]/90 backdrop-blur-md border-b border-white/5 px-6 md:px-8 py-4 flex items-center justify-between">
+  <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/5 px-6 md:px-8 py-4 flex items-center justify-between">
     <div class="flex items-center gap-8">
       <div class="flex items-center gap-2">
         <img src="logo.svg" alt="RightClips" class="w-6 h-6" />
-        <span class="text-white font-bold text-lg tracking-tight">RightClips</span>
+        <span class="text-[#fdf8e1] font-bold text-lg tracking-tight">RightClips</span>
       </div>
-      <nav class="hidden md:flex items-center gap-6 text-sm text-gray-400 font-medium">
-        <button onclick="scrollToSection('heroSection')" class="hover:text-white transition">Studio</button>
-        <button onclick="scrollToSection('vaultSection')" class="hover:text-white transition">Vault</button>
-        <button onclick="scrollToSection('launchpadSection')" class="hover:text-white transition">Launchpad</button>
-        <button onclick="openMemeBoardModal()" class="hover:text-white transition">Memes</button>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-[#fdf8e1]/60 font-medium">
+        <button onclick="scrollToSection('heroSection')" class="hover:text-[#fdf8e1] transition">Studio</button>
+        <button onclick="scrollToSection('vaultSection')" class="hover:text-[#fdf8e1] transition">Vault</button>
+        <button onclick="scrollToSection('launchpadSection')" class="hover:text-[#fdf8e1] transition">Launchpad</button>
+        <button onclick="openMemeBoardModal()" class="hover:text-[#fdf8e1] transition">Memes</button>
       </nav>
     </div>
     <div class="flex items-center gap-4">
@@ -127,40 +151,62 @@
       <div id="instagramAuthSection" class="hidden text-xs text-gray-500">IG</div>
       <div id="authSection" class="hidden text-xs text-gray-500">YT</div>
       
-      <button onclick="focusTopicInput()" class="pill-btn-primary px-5 py-1.5 rounded-full text-xs font-bold shadow-[0_0_15px_rgba(139,92,246,0.3)]">Create Clip</button>
+      <button onclick="focusTopicInput()" class="solid-white-btn px-5 py-1.5 rounded-full text-xs font-bold shadow-[0_0_15px_rgba(139,92,246,0.3)]">Create Clip</button>
     </div>
   </header>
 
   <!-- ======================================================== -->
   <!-- 🌟 HERO SECTION -->
   <section id="heroSection" class="relative max-w-6xl w-full mx-auto px-4 md:px-8 pt-8 pb-16">
-    <div class="sleek-card w-full rounded-[32px] p-8 md:p-14 flex flex-col items-center text-center">
+    <div class="frosted-glass-card w-full rounded-[32px] p-8 md:p-14 flex flex-col items-center text-center">
       
       <!-- Background Grid & Radial Glow -->
-      <div class="absolute inset-0 sleek-grid-bg pointer-events-none opacity-30"></div>
-      <div class="absolute bottom-[-15%] left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-600/15 blur-[100px] rounded-full pointer-events-none"></div>
+      
+      
 
       <div class="relative z-10 w-full flex flex-col items-center">
         <!-- Title & Subtitle -->
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-4 leading-tight">
-          All-In-One <span class="text-gradient">Video Studio</span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#fdf8e1] tracking-tight mb-4 leading-[1.3] max-w-3xl">
+          All-In-One <span class="thick-glass-pill inline-flex items-center justify-center px-6 py-1 -translate-y-2 mx-2 font-bold text-[#fdf8e1] shadow-2xl">Video Studio</span>
         </h1>
-        <p class="text-gray-400 text-sm md:text-base max-w-2xl mb-12 leading-relaxed">
+        <p class="text-[#fdf8e1]/70 font-medium text-sm md:text-base max-w-2xl mb-12 leading-relaxed">
           Discover how our voice AI transforms your content by generating high-retention psychological hooks, neural voiceovers, kinetic captions, and 4K thumbnails in seconds.
         </p>
 
-        <!-- Centered Video Player -->
-        <div id="videoContainer" class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black mb-12 group mx-auto transition-all duration-300">
+        <!-- Quick Tag Chips -->
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
+          <button onclick="insertTag('{Self Improvement}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{Self Improvement}</button>
+          <button onclick="insertTag('{Finance}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{Finance}</button>
+          <button onclick="insertTag('{Health}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{Health}</button>
+          <button onclick="insertTag('{facecam}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{facecam}</button>
+          <button onclick="insertTag('{andrew}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{andrew}</button>
+          <button onclick="insertTag('{no meme}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{no meme}</button>
+        </div>
+
+        <!-- Bottom Pill Input -->
+        <div class="w-full max-w-2xl glass-input-wrapper p-1.5 flex items-center">
+          <div class="pl-4 pr-2">
+            <i data-lucide="video" class="w-4 h-4 text-purple-400"></i>
+          </div>
+          <input type="text" id="newTopicInput" class="flex-1 bg-transparent border-none outline-none text-[#fdf8e1] text-sm px-2 placeholder-gray-500" placeholder="Enter a video topic (e.g. 'Why perfectionism is ruining your life')..." />
+          <button onclick="startTopicGeneration()" class="ml-2 solid-white-btn text-black px-6 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 hover:opacity-90 transition">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i> Generate
+          </button>
+        </div>
+      
+
+<!-- Centered Video Player -->
+        <div id="videoContainer" class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-transparent mb-12 group mx-auto transition-all duration-300">
           <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-500 text-xs"><i data-lucide="play-circle" class="w-10 h-10 mb-2 opacity-20"></i>No video generated yet</div>
           <video id="videoPlayer" class="w-full h-full object-cover" controls playsinline></video>
           
           <div class="absolute inset-0 pointer-events-none border border-white/5 rounded-2xl"></div>
           
           <!-- Floating Status / Pipeline (Styled like the white floating element in reference) -->
-          <div id="topicPipeline" class="hidden absolute bottom-4 left-1/2 -translate-x-1/2 w-[85%] bg-white rounded-xl p-3 shadow-2xl flex-col items-center gap-2 z-20 transition-all">
+          <div id="topicPipeline" class="hidden absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%] thick-glass-pill p-4 flex-col items-center gap-3 z-20 transition-all">
              <div class="flex items-center justify-between w-full">
                <div class="flex items-center gap-2">
-                 <img src="logo.svg" class="w-5 h-5 rounded-full bg-black p-0.5" />
+                 <img src="logo.svg" class="w-5 h-5 rounded-full bg-transparent p-0.5" />
                  <span id="pipelineStageText" class="text-xs font-bold text-gray-800">Synthesizing...</span>
                </div>
                <i data-lucide="loader-2" class="w-3.5 h-3.5 text-blue-600 animate-spin"></i>
@@ -171,27 +217,7 @@
           </div>
         </div>
 
-        <!-- Quick Tag Chips -->
-        <div class="flex flex-wrap justify-center gap-2 mb-6">
-          <button onclick="insertTag('{Self Improvement}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{Self Improvement}</button>
-          <button onclick="insertTag('{Finance}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{Finance}</button>
-          <button onclick="insertTag('{Health}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{Health}</button>
-          <button onclick="insertTag('{facecam}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{facecam}</button>
-          <button onclick="insertTag('{andrew}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{andrew}</button>
-          <button onclick="insertTag('{no meme}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{no meme}</button>
         </div>
-
-        <!-- Bottom Pill Input -->
-        <div class="w-full max-w-2xl bg-[#0f0f11] border border-white/10 rounded-full p-1.5 flex items-center shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all focus-within:border-purple-500/50 focus-within:shadow-[0_8px_32px_rgba(139,92,246,0.15)]">
-          <div class="pl-4 pr-2">
-            <i data-lucide="video" class="w-4 h-4 text-purple-400"></i>
-          </div>
-          <input type="text" id="newTopicInput" class="flex-1 bg-transparent border-none outline-none text-white text-sm px-2 placeholder-gray-500" placeholder="Enter a video topic (e.g. 'Why perfectionism is ruining your life')..." />
-          <button onclick="startTopicGeneration()" class="ml-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 hover:opacity-90 transition">
-            <i data-lucide="send" class="w-3.5 h-3.5"></i> Generate
-          </button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -207,17 +233,17 @@
   <!-- 🎬 SECTION: PRODUCTION VAULT (VIDEO LIBRARY) -->
   <!-- ======================================================== -->
   <section id="vaultSection" class="max-w-7xl w-full mx-auto px-6 md:px-8 py-8">
-    <div class="sleek-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-2xl border border-white/10">
+    <div class="frosted-glass-card rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-2xl border border-white/20">
       
       <!-- Vault Header Strip -->
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-white/10">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-white/20">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#0071e3] to-indigo-600 flex items-center justify-center text-white shadow-lg">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#0071e3] to-indigo-600 flex items-center justify-center text-[#fdf8e1] shadow-lg">
             <i data-lucide="film" class="w-5 h-5"></i>
           </div>
           <div>
-            <h2 class="text-base font-black text-white tracking-tight">Production Vault</h2>
-            <p class="text-xs text-slate-400">Manage, preview, and release rendered short-form videos</p>
+            <h2 class="text-base font-black text-[#fdf8e1] tracking-tight">Production Vault</h2>
+            <p class="text-xs text-[#fdf8e1]/60">Manage, preview, and release rendered short-form videos</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
@@ -230,7 +256,7 @@
             <i data-lucide="refresh-cw" class="w-3 h-3"></i>
             <span>Sync YouTube</span>
           </button>
-          <button id="refreshVideosBtn" onclick="loadVideos()" class="text-xs px-3 py-1.5 rounded-full sleek-input text-slate-300 hover:text-white flex items-center gap-1 transition cursor-pointer">
+          <button id="refreshVideosBtn" onclick="loadVideos()" class="text-xs px-3 py-1.5 rounded-full sleek-input text-[#fdf8e1]/80 hover:text-[#fdf8e1] flex items-center gap-1 transition cursor-pointer">
             <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
             <span>Reload</span>
           </button>
@@ -241,22 +267,22 @@
       <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         <!-- Live Keystroke Search Input -->
         <div class="relative flex-1 max-w-md">
-          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#fdf8e1]/60"></i>
           <input
             type="text"
             id="librarySearchInput"
             placeholder="Search vault by title, topic, or niche..."
             oninput="filterVideosBySearch()"
-            class="w-full text-xs pl-9 pr-3 py-2 rounded-full bg-black/60 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500/50"
+            class="w-full text-xs pl-9 pr-3 py-2 rounded-full bg-black/60 border border-white/20 text-[#fdf8e1] placeholder-slate-500 focus:outline-none focus:border-sky-500/50"
           />
         </div>
 
         <!-- Filter Segmented Tabs -->
-        <div class="flex flex-wrap items-center gap-1 p-1 bg-black/50 rounded-full border border-white/10 text-[11px] font-bold">
+        <div class="flex flex-wrap items-center gap-1 p-1 bg-black/50 rounded-full border border-white/20 text-[11px] font-bold">
           <button
             id="tab-shorts"
             onclick="setTab('shorts')"
-            class="tab-btn active py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-white bg-[#0071e3] cursor-pointer"
+            class="tab-btn active py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-[#fdf8e1] bg-[#0071e3] cursor-pointer"
             title="9:16 Vertical Shorts"
           >
             <span>📱 Shorts</span>
@@ -265,7 +291,7 @@
           <button
             id="tab-longform"
             onclick="setTab('longform')"
-            class="tab-btn py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200 cursor-pointer"
+            class="tab-btn py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-[#fdf8e1]/60 hover:text-slate-200 cursor-pointer"
             title="16:9 Long-Form Productions"
           >
             <span>🎬 16:9</span>
@@ -274,7 +300,7 @@
           <button
             id="tab-unuploaded"
             onclick="setTab('unuploaded')"
-            class="tab-btn py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200 cursor-pointer"
+            class="tab-btn py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-[#fdf8e1]/60 hover:text-slate-200 cursor-pointer"
             title="Videos ready to be posted"
           >
             <span>⏳ Ready</span>
@@ -283,7 +309,7 @@
           <button
             id="tab-uploaded"
             onclick="setTab('uploaded')"
-            class="tab-btn py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200 cursor-pointer"
+            class="tab-btn py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-[#fdf8e1]/60 hover:text-slate-200 cursor-pointer"
             title="Videos already uploaded or scheduled"
           >
             <span>✅ Live</span>
@@ -294,7 +320,7 @@
 
       <!-- Video Grid Container -->
       <div id="videoList" class="min-h-[220px]">
-        <div class="p-8 rounded-2xl sleek-input text-center text-slate-400 text-xs">
+        <div class="p-8 rounded-2xl sleek-input text-center text-[#fdf8e1]/60 text-xs">
           Loading production library...
         </div>
       </div>
@@ -310,8 +336,8 @@
       
       <!-- LEFT LAUNCHPAD: THUMBNAIL STUDIO & COVER CARD (5 Cols) -->
       <div class="lg:col-span-5 flex flex-col gap-4">
-        <div class="sleek-panel rounded-3xl p-6 flex flex-col gap-4 shadow-xl border border-white/10">
-          <div class="w-full flex items-center justify-between text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
+        <div class="frosted-glass-card rounded-3xl p-6 flex flex-col gap-4 shadow-xl border border-white/20">
+          <div class="w-full flex items-center justify-between text-xs font-mono font-bold uppercase text-[#fdf8e1]/60 tracking-wider">
             <span class="flex items-center gap-2">
               <i data-lucide="image" class="w-4 h-4 text-amber-400"></i>
               Thumbnail & Visual Cover
@@ -322,7 +348,7 @@
           </div>
 
           <!-- Thumbnail Display Container (Adaptive Ratio) -->
-          <div id="thumbnailContainer" class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300">
+          <div id="thumbnailContainer" class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/20 border border-white/20 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300">
             <img
               id="thumbnailImg"
               src=""
@@ -337,7 +363,7 @@
               <button
                 id="viewThumbFullBtn"
                 onclick="openThumbnailFull()"
-                class="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-bold backdrop-blur-md transition flex items-center gap-1.5 cursor-pointer"
+                class="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-[#fdf8e1] text-xs font-bold backdrop-blur-md transition flex items-center gap-1.5 cursor-pointer"
               >
                 <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> View 4K
               </button>
@@ -345,8 +371,8 @@
           </div>
 
           <!-- Ratio & Category Badges -->
-          <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
-            <span id="thumbnailRatioBadge" class="text-slate-400 font-bold">9:16 Shorts Cover</span>
+          <div class="flex items-center justify-between pt-2 border-t border-white/20 text-xs font-mono">
+            <span id="thumbnailRatioBadge" class="text-[#fdf8e1]/60 font-bold">9:16 Shorts Cover</span>
             <span class="text-amber-400 font-bold">Frame 0 High-CTR</span>
           </div>
         </div>
@@ -354,20 +380,20 @@
 
       <!-- RIGHT LAUNCHPAD: METADATA & MULTI-PLATFORM PUBLISHER (7 Cols) -->
       <div class="lg:col-span-7 flex flex-col gap-4">
-        <div class="sleek-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-xl border border-white/10">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="frosted-glass-card rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-xl border border-white/20">
+          <div class="flex items-center justify-between border-b border-white/20 pb-3">
             <div class="flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-[#0071e3] to-sky-400 flex items-center justify-center text-white font-bold text-xs">
+              <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-[#0071e3] to-sky-400 flex items-center justify-center text-[#fdf8e1] font-bold text-xs">
                 ⚡
               </div>
-              <h3 class="text-sm font-black text-white uppercase tracking-wider">Metadata & Release Station</h3>
+              <h3 class="text-sm font-black text-[#fdf8e1] uppercase tracking-wider">Metadata & Release Station</h3>
             </div>
             <span id="schedModeBadge" class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">Direct Mode</span>
           </div>
 
           <!-- Video Title with Char Counter -->
           <div class="flex flex-col gap-1.5">
-            <div class="flex items-center justify-between text-xs font-mono text-slate-300">
+            <div class="flex items-center justify-between text-xs font-mono text-[#fdf8e1]/80">
               <label for="editTitle" class="font-bold flex items-center gap-1.5">
                 <i data-lucide="type" class="w-3.5 h-3.5 text-sky-400"></i>
                 <span>Viral Video Title</span>
@@ -378,7 +404,7 @@
               type="text"
               id="editTitle"
               placeholder="e.g. Why You Pretend Not to Care (The Fear of Trying) #Shorts"
-              class="w-full text-xs px-3.5 py-2.5 rounded-xl sleek-input text-white focus:border-sky-400"
+              class="w-full text-xs px-3.5 py-2.5 rounded-xl sleek-input text-[#fdf8e1] focus:border-sky-400"
               oninput="updateTitleCharCount()"
             />
             <input type="hidden" id="metaTitle" />
@@ -386,7 +412,7 @@
 
           <!-- Description Box -->
           <div class="flex flex-col gap-1.5">
-            <label for="metaDescription" class="text-xs font-mono font-bold text-slate-300 flex items-center gap-1.5">
+            <label for="metaDescription" class="text-xs font-mono font-bold text-[#fdf8e1]/80 flex items-center gap-1.5">
               <i data-lucide="align-left" class="w-3.5 h-3.5 text-indigo-400"></i>
               <span>Description</span>
             </label>
@@ -394,13 +420,13 @@
               id="metaDescription"
               rows="3"
               placeholder="Detailed description with scientific context..."
-              class="w-full text-xs p-3 rounded-xl sleek-input text-white focus:border-sky-400 custom-scrollbar"
+              class="w-full text-xs p-3 rounded-xl sleek-input text-[#fdf8e1] focus:border-sky-400 custom-scrollbar"
             ></textarea>
           </div>
 
           <!-- Hashtags Manager -->
           <div class="flex flex-col gap-1.5">
-            <label class="text-xs font-mono font-bold text-slate-300 flex items-center gap-1.5">
+            <label class="text-xs font-mono font-bold text-[#fdf8e1]/80 flex items-center gap-1.5">
               <i data-lucide="hash" class="w-3.5 h-3.5 text-pink-400"></i>
               <span>Hashtags & Tags</span>
             </label>
@@ -409,7 +435,7 @@
                 type="text"
                 id="tagInput"
                 placeholder="+ Add tag..."
-                class="text-xs bg-transparent border-none text-white focus:outline-none min-w-[80px]"
+                class="text-xs bg-transparent border-none text-[#fdf8e1] focus:outline-none min-w-[80px]"
                 onkeydown="if(event.key==='Enter'||event.key===','){event.preventDefault();addTagFromInput();}"
               />
             </div>
@@ -435,17 +461,17 @@
               id="metaPinnedComment"
               rows="2"
               placeholder="Question for you: What's the one thing you secretly care about? 👇"
-              class="w-full text-xs p-2.5 rounded-xl sleek-input text-white focus:border-sky-400 custom-scrollbar"
+              class="w-full text-xs p-2.5 rounded-xl sleek-input text-[#fdf8e1] focus:border-sky-400 custom-scrollbar"
             ></textarea>
             <div class="flex items-center justify-between pt-1">
-              <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+              <label class="flex items-center gap-2 cursor-pointer text-xs text-[#fdf8e1]/80">
                 <input type="checkbox" id="autoPostCommentCheck" checked class="rounded border-white/20 text-sky-500 focus:ring-sky-500" />
                 <span>Auto-pin on upload</span>
               </label>
               <button
                 id="postCommentNowBtn"
                 onclick="postPinnedCommentNow()"
-                class="text-[11px] font-bold text-slate-400 hover:text-white transition flex items-center gap-1 cursor-pointer"
+                class="text-[11px] font-bold text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition flex items-center gap-1 cursor-pointer"
               >
                 <i data-lucide="send" class="w-3 h-3"></i>
                 <span>Post Comment Now</span>
@@ -458,14 +484,14 @@
           
           <!-- Visibility Status with Scheduled Option -->
           <div class="flex flex-col gap-1.5">
-            <label class="text-xs font-bold text-slate-300 flex items-center justify-between">
+            <label class="text-xs font-bold text-[#fdf8e1]/80 flex items-center justify-between">
               <span>Visibility & Schedule</span>
               <span id="schedModeBadge" class="hidden text-[10px] font-mono font-bold text-purple-400">📅 AUTO-TIMER</span>
             </label>
             <select
               id="metaPrivacy"
               onchange="onPrivacyChange()"
-              class="px-4 py-3 rounded-2xl sleek-input text-xs text-white font-semibold cursor-pointer"
+              class="px-4 py-3 rounded-2xl sleek-input text-xs text-[#fdf8e1] font-semibold cursor-pointer"
             >
               <option value="public" class="bg-slate-900 text-emerald-400">🌐 Public (Immediate Live)</option>
               <option value="scheduled" class="bg-slate-900 text-purple-400">📅 Scheduled Release (Upload now, publish later)</option>
@@ -476,10 +502,10 @@
 
           <!-- YouTube Category -->
           <div class="flex flex-col gap-1.5">
-            <label class="text-xs font-bold text-slate-300">Category</label>
+            <label class="text-xs font-bold text-[#fdf8e1]/80">Category</label>
             <select
               id="metaCategory"
-              class="px-4 py-3 rounded-2xl sleek-input text-xs text-white font-semibold cursor-pointer"
+              class="px-4 py-3 rounded-2xl sleek-input text-xs text-[#fdf8e1] font-semibold cursor-pointer"
             >
               <option value="27" class="bg-slate-900">🎓 Education & Self Improvement</option>
               <option value="22" class="bg-slate-900">👤 People & Blogs</option>
@@ -508,7 +534,7 @@
               type="datetime-local"
               id="scheduleDateTime"
               onchange="updateSchedulePreview()"
-              class="w-full sm:flex-1 px-4 py-3 rounded-2xl sleek-input text-sm text-white font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
+              class="w-full sm:flex-1 px-4 py-3 rounded-2xl sleek-input text-sm text-[#fdf8e1] font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
             />
             <div class="flex items-center gap-2 w-full sm:w-auto">
               <button
@@ -537,7 +563,7 @@
                 <i data-lucide="zap" class="w-3 h-3 text-yellow-400"></i>
                 Select Peak Time Slot:
               </span>
-              <span class="text-[10px] text-slate-400 font-mono">Auto-picks upcoming slot</span>
+              <span class="text-[10px] text-[#fdf8e1]/60 font-mono">Auto-picks upcoming slot</span>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
@@ -545,65 +571,65 @@
               <button
                 type="button"
                 onclick="setQuickTargetTime(1, 0)"
-                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
               >
                 <div class="flex items-center gap-1 text-purple-300 font-black">
                   <span>🌙</span>
-                  <span class="text-sm font-black tracking-tight text-white group-hover:text-purple-200">1:00 AM</span>
+                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-purple-200">1:00 AM</span>
                 </div>
-                <span class="text-[9px] text-slate-400 font-mono">Night Slot</span>
+                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Night Slot</span>
               </button>
 
               <!-- 2. 2:00 AM -->
               <button
                 type="button"
                 onclick="setQuickTargetTime(2, 0)"
-                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
               >
                 <div class="flex items-center gap-1 text-purple-300 font-black">
                   <span>🌙</span>
-                  <span class="text-sm font-black tracking-tight text-white group-hover:text-purple-200">2:00 AM</span>
+                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-purple-200">2:00 AM</span>
                 </div>
-                <span class="text-[9px] text-slate-400 font-mono">Late Night</span>
+                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Late Night</span>
               </button>
 
               <!-- 3. 7:00 AM -->
               <button
                 type="button"
                 onclick="setQuickTargetTime(7, 0)"
-                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
               >
                 <div class="flex items-center gap-1 text-amber-300 font-black">
                   <span>🌅</span>
-                  <span class="text-sm font-black tracking-tight text-white group-hover:text-amber-200">7:00 AM</span>
+                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-amber-200">7:00 AM</span>
                 </div>
-                <span class="text-[9px] text-slate-400 font-mono">Morning Rush</span>
+                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Morning Rush</span>
               </button>
 
               <!-- 4. 2:00 PM -->
               <button
                 type="button"
                 onclick="setQuickTargetTime(14, 0)"
-                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
               >
                 <div class="flex items-center gap-1 text-sky-300 font-black">
                   <span>☀️</span>
-                  <span class="text-sm font-black tracking-tight text-white group-hover:text-sky-200">2:00 PM</span>
+                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-sky-200">2:00 PM</span>
                 </div>
-                <span class="text-[9px] text-slate-400 font-mono">Afternoon</span>
+                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Afternoon</span>
               </button>
 
               <!-- 5. 9:00 PM -->
               <button
                 type="button"
                 onclick="setQuickTargetTime(21, 0)"
-                class="col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-white border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
               >
                 <div class="flex items-center gap-1 text-rose-300 font-black">
                   <span>🌆</span>
-                  <span class="text-sm font-black tracking-tight text-white group-hover:text-rose-200">9:00 PM</span>
+                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-rose-200">9:00 PM</span>
                 </div>
-                <span class="text-[9px] text-slate-400 font-mono">Prime Evening</span>
+                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Prime Evening</span>
               </button>
             </div>
           </div>
@@ -616,10 +642,10 @@
         </div>
 
         <!-- 3 DEDICATED MULTI-PLATFORM PUBLISH BUTTONS -->
-        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="pt-4 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-3">
           <button
             onclick="saveMetadataOnly()"
-            class="w-full sm:w-auto px-4 py-3 rounded-2xl sleek-input hover:bg-white/5 text-slate-300 text-xs font-bold transition flex items-center justify-center gap-1.5"
+            class="w-full sm:w-auto px-4 py-3 rounded-2xl sleek-input hover:bg-white/5 text-[#fdf8e1]/80 text-xs font-bold transition flex items-center justify-center gap-1.5"
           >
             <i data-lucide="save" class="w-4 h-4"></i>
             Save Draft
@@ -629,7 +655,7 @@
             <!-- 1. Single YouTube Button -->
             <button
               onclick="openPublishModal('youtube')"
-              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
             >
               <i data-lucide="play" class="w-4 h-4"></i>
               <span>YouTube</span>
@@ -638,7 +664,7 @@
             <!-- 2. Single Instagram Button -->
             <button
               onclick="openPublishModal('instagram')"
-              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
             >
               <i data-lucide="camera" class="w-4 h-4"></i>
               <span>Instagram</span>
@@ -647,7 +673,7 @@
             <!-- 3. BLAST BOTH PLATFORMS BUTTON -->
             <button
               onclick="openPublishModal('both')"
-              class="flex-1 sm:flex-initial px-5 py-3 rounded-2xl pill-btn-primary text-white text-xs font-black flex items-center justify-center gap-2 shadow-xl cursor-pointer"
+              class="flex-1 sm:flex-initial px-5 py-3 rounded-2xl solid-white-btn text-[#fdf8e1] text-xs font-black flex items-center justify-center gap-2 shadow-xl cursor-pointer"
               title="Publish or Schedule to BOTH YouTube & Instagram at once"
             >
               <i data-lucide="rocket" class="w-4 h-4"></i>
@@ -657,13 +683,13 @@
         </div>
 
         <!-- Live Upload Progress Card -->
-        <div id="uploadProgressCard" class="hidden p-4 rounded-2xl bg-[#111] border border-white/10 flex flex-col gap-3">
+        <div id="uploadProgressCard" class="hidden p-4 rounded-2xl bg-[#111] border border-white/20 flex flex-col gap-3">
           <div class="flex items-center justify-between text-xs font-bold">
             <span id="uploadStageText" class="text-sky-300 flex items-center gap-2">
               <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
               Uploading to YouTube...
             </span>
-            <span id="uploadPercentText" class="font-mono text-white">0%</span>
+            <span id="uploadPercentText" class="font-mono text-[#fdf8e1]">0%</span>
           </div>
           <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
             <div id="uploadProgressBar" class="h-full bg-gradient-to-r from-[#0071e3] to-emerald-400 transition-all duration-300" style="width: 0%"></div>
@@ -681,22 +707,22 @@
   <!-- 🎭 TACTICAL MEME CULTURE BOARD MODAL (21 CURATED MEMES) -->
   <!-- ======================================================== -->
   <div id="memeBoardModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="sleek-panel w-full max-w-6xl max-h-[90vh] rounded-3xl p-6 md:p-8 flex flex-col gap-4 shadow-2xl border border-white/15 relative overflow-hidden bg-[#050505]/95">
+    <div class="frosted-glass-card w-full max-w-6xl max-h-[90vh] rounded-3xl p-6 md:p-8 flex flex-col gap-4 shadow-2xl border border-white/15 relative overflow-hidden bg-black/95">
       <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-white/10 pb-4 shrink-0">
+      <div class="flex items-center justify-between border-b border-white/20 pb-4 shrink-0">
         <div class="flex items-center gap-3.5">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-purple-600 via-indigo-600 to-sky-500 text-white flex items-center justify-center shadow-lg shadow-purple-500/20 text-xl font-bold">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-purple-600 via-indigo-600 to-sky-500 text-[#fdf8e1] flex items-center justify-center shadow-lg shadow-purple-500/20 text-xl font-bold">
             🎭
           </div>
           <div>
             <div class="flex items-center gap-2.5">
-              <h2 class="text-lg font-black text-white tracking-tight">Tactical Meme Culture Board</h2>
+              <h2 class="text-lg font-black text-[#fdf8e1] tracking-tight">Tactical Meme Culture Board</h2>
               <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">21 Curated Hooks</span>
             </div>
-            <p class="text-xs text-slate-400">First-frame psychological retention hooks (< 2.0s, frame 0, muted). Click to copy tag or inject into topic.</p>
+            <p class="text-xs text-[#fdf8e1]/60">First-frame psychological retention hooks (< 2.0s, frame 0, muted). Click to copy tag or inject into topic.</p>
           </div>
         </div>
-        <button onclick="closeMemeBoardModal()" class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer">
+        <button onclick="closeMemeBoardModal()" class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 text-[#fdf8e1]/60 hover:text-[#fdf8e1] flex items-center justify-center transition cursor-pointer">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -705,25 +731,25 @@
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
         <!-- Category Filter Chips -->
         <div class="flex flex-wrap items-center gap-1.5" id="memeCategoryTabs">
-          <button onclick="filterMemeCategory('all')" class="meme-filter-btn active px-3 py-1 rounded-xl text-xs font-bold bg-purple-600 text-white transition">All (21)</button>
-          <button onclick="filterMemeCategory('Disbelief & Brain Reboot')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 transition">Disbelief (4)</button>
-          <button onclick="filterMemeCategory('Repeating Autopilot & Loops')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 transition">Autopilot (1)</button>
-          <button onclick="filterMemeCategory('Overthinking & Mental Overload')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 transition">Overload (3)</button>
-          <button onclick="filterMemeCategory('Exhaustion & Defeat')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 transition">Defeat (2)</button>
-          <button onclick="filterMemeCategory('Accountability & Calling Out')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 transition">Callout (2)</button>
-          <button onclick="filterMemeCategory('Swagger, Stoicism & Boundaries')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 transition">Stoicism (2)</button>
-          <button onclick="filterMemeCategory('Rage, Drama & Chaos')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 transition">Chaos (7)</button>
+          <button onclick="filterMemeCategory('all')" class="meme-filter-btn active px-3 py-1 rounded-xl text-xs font-bold bg-purple-600 text-[#fdf8e1] transition">All (21)</button>
+          <button onclick="filterMemeCategory('Disbelief & Brain Reboot')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Disbelief (4)</button>
+          <button onclick="filterMemeCategory('Repeating Autopilot & Loops')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Autopilot (1)</button>
+          <button onclick="filterMemeCategory('Overthinking & Mental Overload')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Overload (3)</button>
+          <button onclick="filterMemeCategory('Exhaustion & Defeat')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Defeat (2)</button>
+          <button onclick="filterMemeCategory('Accountability & Calling Out')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Callout (2)</button>
+          <button onclick="filterMemeCategory('Swagger, Stoicism & Boundaries')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Stoicism (2)</button>
+          <button onclick="filterMemeCategory('Rage, Drama & Chaos')" class="meme-filter-btn px-3 py-1 rounded-xl text-xs font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1] bg-white/5 hover:bg-white/10 transition">Chaos (7)</button>
         </div>
 
         <!-- Search Memes -->
         <div class="relative min-w-[220px]">
-          <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[#fdf8e1]/60"></i>
           <input
             type="text"
             id="memeSearchInput"
             placeholder="Search memes, emotions, hooks..."
             oninput="searchMemes()"
-            class="w-full text-xs pl-8 pr-3 py-1.5 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-purple-500/50"
+            class="w-full text-xs pl-8 pr-3 py-1.5 rounded-xl bg-black/50 border border-white/20 text-[#fdf8e1] placeholder-slate-500 focus:outline-none focus:border-purple-500/50"
           />
         </div>
       </div>
@@ -742,29 +768,29 @@
   <!-- 1-CLICK SOVEREIGN NICHE PUBLISH & SCHEDULE MODAL -->
   <!-- ======================================================== -->
   <div id="quickPublishModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="sleek-panel w-full max-w-lg rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
+    <div class="frosted-glass-card w-full max-w-lg rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
       <!-- Header -->
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+      <div class="flex items-center justify-between border-b border-white/20 pb-4">
         <div class="flex items-center gap-3">
-          <div id="quickModalIcon" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#0071e3] to-emerald-400 text-white flex items-center justify-center shadow-lg font-bold text-lg">
+          <div id="quickModalIcon" class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#0071e3] to-emerald-400 text-[#fdf8e1] flex items-center justify-center shadow-lg font-bold text-lg">
             🚀
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h2 id="quickModalTitle" class="text-base font-black text-white tracking-tight">Upload Video</h2>
-              <span id="quickModalNicheBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-white font-bold">Niche</span>
+              <h2 id="quickModalTitle" class="text-base font-black text-[#fdf8e1] tracking-tight">Upload Video</h2>
+              <span id="quickModalNicheBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-[#fdf8e1] font-bold">Niche</span>
             </div>
-            <p id="quickModalSub" class="text-xs text-slate-400">Routes automatically to this niche's connected accounts</p>
+            <p id="quickModalSub" class="text-xs text-[#fdf8e1]/60">Routes automatically to this niche's connected accounts</p>
           </div>
         </div>
-        <button onclick="closeQuickPublishModal()" class="p-2 rounded-xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
+        <button onclick="closeQuickPublishModal()" class="p-2 rounded-xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <!-- Target Account Summary Card -->
-      <div class="p-3.5 rounded-2xl sleek-input bg-black/40 border border-white/10 flex flex-col gap-2">
-        <div class="text-[10px] font-mono uppercase text-slate-400 font-bold">Bound Destination Accounts:</div>
+      <div class="p-3.5 rounded-2xl sleek-input bg-black/40 border border-white/20 flex flex-col gap-2">
+        <div class="text-[10px] font-mono uppercase text-[#fdf8e1]/60 font-bold">Bound Destination Accounts:</div>
         <div class="flex items-center justify-between gap-2 text-xs font-mono">
           <div id="quickModalYtSummary" class="flex items-center gap-1.5 text-red-300 font-bold">
             <i data-lucide="play" class="w-3.5 h-3.5 fill-red-400"></i>
@@ -779,7 +805,7 @@
 
       <!-- Timing Selector (Direct vs Schedule) -->
       <div id="quickTimingSection" class="flex flex-col gap-3">
-        <label class="text-xs font-mono font-bold uppercase text-slate-300 tracking-wider">Release Timing</label>
+        <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider">Release Timing</label>
         <div class="grid grid-cols-2 gap-3">
           <!-- Option A: Direct Publish -->
           <button
@@ -788,11 +814,11 @@
             onclick="setQuickModalMode('direct')"
             class="p-3.5 rounded-2xl border-2 border-emerald-500/60 bg-emerald-500/10 text-left flex flex-col gap-1 transition cursor-pointer group"
           >
-            <div class="flex items-center justify-between text-white font-black text-xs">
+            <div class="flex items-center justify-between text-[#fdf8e1] font-black text-xs">
               <span class="flex items-center gap-1.5">⚡ Publish Directly</span>
               <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
             </div>
-            <span class="text-[10px] text-slate-400">Instant Public release</span>
+            <span class="text-[10px] text-[#fdf8e1]/60">Instant Public release</span>
           </button>
 
           <!-- Option B: Schedule -->
@@ -800,13 +826,13 @@
             type="button"
             id="quickTimingScheduleBtn"
             onclick="setQuickModalMode('schedule')"
-            class="p-3.5 rounded-2xl border-2 border-white/10 hover:border-purple-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group"
+            class="p-3.5 rounded-2xl border-2 border-white/20 hover:border-purple-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group"
           >
-            <div class="flex items-center justify-between text-slate-300 font-black text-xs group-hover:text-purple-300">
+            <div class="flex items-center justify-between text-[#fdf8e1]/80 font-black text-xs group-hover:text-purple-300">
               <span class="flex items-center gap-1.5">📅 Schedule Release</span>
               <span class="w-2 h-2 rounded-full bg-slate-500"></span>
             </div>
-            <span class="text-[10px] text-slate-400">Auto-post at prime time</span>
+            <span class="text-[10px] text-[#fdf8e1]/60">Auto-post at prime time</span>
           </button>
         </div>
 
@@ -814,25 +840,25 @@
         <div id="quickScheduleDrawer" class="hidden p-4 rounded-2xl border border-purple-500/30 bg-purple-500/10 flex flex-col gap-3">
           <div class="text-[11px] font-mono text-purple-300 font-bold">Prime Time Presets (Local Time):</div>
           <div class="grid grid-cols-4 gap-2 text-center text-xs font-mono">
-            <button type="button" onclick="setQuickPresetTime(8, 0)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-white font-bold transition cursor-pointer">
+            <button type="button" onclick="setQuickPresetTime(8, 0)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-[#fdf8e1] font-bold transition cursor-pointer">
               🌅 8:00 AM
             </button>
-            <button type="button" onclick="setQuickPresetTime(12, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-white font-bold transition cursor-pointer">
+            <button type="button" onclick="setQuickPresetTime(12, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-[#fdf8e1] font-bold transition cursor-pointer">
               🥪 12:30 PM
             </button>
-            <button type="button" onclick="setQuickPresetTime(17, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-white font-bold transition cursor-pointer">
+            <button type="button" onclick="setQuickPresetTime(17, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-[#fdf8e1] font-bold transition cursor-pointer">
               🌆 5:30 PM
             </button>
-            <button type="button" onclick="setQuickPresetTime(20, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-white font-bold transition cursor-pointer">
+            <button type="button" onclick="setQuickPresetTime(20, 30)" class="p-2 rounded-xl bg-black/60 hover:bg-purple-500/20 border border-purple-500/30 text-[#fdf8e1] font-bold transition cursor-pointer">
               🌙 8:30 PM
             </button>
           </div>
           <div>
-            <label class="text-[10px] font-mono text-slate-400 block mb-1">Or Pick Custom Date & Time:</label>
+            <label class="text-[10px] font-mono text-[#fdf8e1]/60 block mb-1">Or Pick Custom Date & Time:</label>
             <input
               type="datetime-local"
               id="quickScheduleDateTime"
-              class="w-full px-3 py-2 rounded-xl sleek-input text-xs font-mono text-white border border-white/10"
+              class="w-full px-3 py-2 rounded-xl sleek-input text-xs font-mono text-[#fdf8e1] border border-white/20"
             />
           </div>
         </div>
@@ -842,7 +868,7 @@
       <button
         id="quickLaunchBtn"
         onclick="submitQuickPublish()"
-        class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#0071e3] to-emerald-400 hover:from-[#0071e3]/90 hover:to-emerald-400/90 text-white font-black text-sm tracking-wide shadow-xl flex items-center justify-center gap-2 cursor-pointer transition active:scale-[0.98]"
+        class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#0071e3] to-emerald-400 hover:from-[#0071e3]/90 hover:to-emerald-400/90 text-[#fdf8e1] font-black text-sm tracking-wide shadow-xl flex items-center justify-center gap-2 cursor-pointer transition active:scale-[0.98]"
       >
         <i data-lucide="upload-cloud" class="w-4 h-4"></i>
         <span id="quickLaunchBtnText">Confirm & Publish Now</span>
@@ -854,46 +880,46 @@
   <!-- NICHE ACCOUNT BINDING MODAL -->
   <!-- ======================================================== -->
   <div id="nicheAccountModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="sleek-panel w-full max-w-md rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+    <div class="frosted-glass-card w-full max-w-md rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
+      <div class="flex items-center justify-between border-b border-white/20 pb-4">
         <div>
-          <h2 id="nicheModalTitle" class="text-base font-black text-white tracking-tight">Configure Niche Accounts</h2>
-          <p class="text-xs text-slate-400">Bind dedicated YouTube & Instagram accounts</p>
+          <h2 id="nicheModalTitle" class="text-base font-black text-[#fdf8e1] tracking-tight">Configure Niche Accounts</h2>
+          <p class="text-xs text-[#fdf8e1]/60">Bind dedicated YouTube & Instagram accounts</p>
         </div>
-        <button onclick="closeNicheAccountModal()" class="p-2 rounded-xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
+        <button onclick="closeNicheAccountModal()" class="p-2 rounded-xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <!-- YouTube Channel Binding -->
       <div class="flex flex-col gap-2">
-        <label class="text-xs font-mono font-bold uppercase text-slate-300 flex items-center gap-1.5">
+        <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 flex items-center gap-1.5">
           <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> YouTube Channel
         </label>
-        <select id="nicheYtSelect" class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-mono text-white border border-white/10">
+        <select id="nicheYtSelect" class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-mono text-[#fdf8e1] border border-white/20">
           <option value="">-- No Channel Assigned --</option>
         </select>
-        <p class="text-[10px] text-slate-400">Need to add another channel? Use Settings & API to connect via Google OAuth.</p>
+        <p class="text-[10px] text-[#fdf8e1]/60">Need to add another channel? Use Settings & API to connect via Google OAuth.</p>
       </div>
 
       <!-- Instagram Account Binding -->
       <div class="flex flex-col gap-2">
-        <label class="text-xs font-mono font-bold uppercase text-slate-300 flex items-center gap-1.5">
+        <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 flex items-center gap-1.5">
           <i data-lucide="camera" class="w-3.5 h-3.5 text-pink-400"></i> Instagram Handle
         </label>
         <input
           type="text"
           id="nicheIgInput"
           placeholder="e.g. thejudyinsights"
-          class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-mono text-white border border-white/10"
+          class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-mono text-[#fdf8e1] border border-white/20"
         />
-        <p class="text-[10px] text-slate-400">Enter the Instagram username bound to this niche's Reels.</p>
+        <p class="text-[10px] text-[#fdf8e1]/60">Enter the Instagram username bound to this niche's Reels.</p>
       </div>
 
       <!-- Save Button -->
       <button
         onclick="saveNicheAccountBindings()"
-        class="w-full py-3 rounded-2xl bg-[#0071e3] hover:bg-[#0071e3]/90 text-white font-bold text-xs shadow-lg cursor-pointer transition"
+        class="w-full py-3 rounded-2xl bg-[#0071e3] hover:bg-[#0071e3]/90 text-[#fdf8e1] font-bold text-xs shadow-lg cursor-pointer transition"
       >
         Save Account Assignment
       </button>
@@ -903,23 +929,23 @@
   <!-- ======================================================== -->
   <!-- SMART MULTI-PLATFORM PUBLISH & SCHEDULE MODAL -->
   <!-- ======================================================== -->
-  <div id="publishModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="sleek-panel w-full max-w-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+  <div id="publishModal" class="fixed inset-0 z-50 bg-black/20 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card w-full max-w-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
       
       <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+      <div class="flex items-center justify-between border-b border-white/20 pb-4">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-pink-500 to-[#0071e3] text-white flex items-center justify-center shadow-lg">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-pink-500 to-[#0071e3] text-[#fdf8e1] flex items-center justify-center shadow-lg">
             <i data-lucide="share-2" class="w-5 h-5"></i>
           </div>
           <div>
-            <h2 class="text-lg font-black text-white tracking-tight">Multi-Platform Publishing Hub</h2>
-            <p class="text-xs text-slate-400">Choose target platforms, instant publishing, or scheduled release times</p>
+            <h2 class="text-lg font-black text-[#fdf8e1] tracking-tight">Multi-Platform Publishing Hub</h2>
+            <p class="text-xs text-[#fdf8e1]/60">Choose target platforms, instant publishing, or scheduled release times</p>
           </div>
         </div>
         <button
           onclick="closePublishModal()"
-          class="p-2 rounded-xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
+          class="p-2 rounded-xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer"
         >
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
@@ -928,25 +954,25 @@
       <!-- 1. SELECT TARGET DESTINATIONS & CHANNELS -->
       <div class="flex flex-col gap-3">
         <div class="flex items-center justify-between">
-          <label class="text-xs font-mono font-bold uppercase text-slate-300 tracking-wider flex items-center gap-1.5">
+          <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-1.5">
             <i data-lucide="send" class="w-3.5 h-3.5 text-sky-400"></i>
             1. Target Destinations & Channels
           </label>
-          <span class="text-[10px] text-slate-400 font-mono">Select channels to publish to</span>
+          <span class="text-[10px] text-[#fdf8e1]/60 font-mono">Select channels to publish to</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           <!-- YouTube Channels Box -->
-          <div class="p-3.5 rounded-2xl sleek-input border border-white/10 flex flex-col gap-2.5">
+          <div class="p-3.5 rounded-2xl sleek-input border border-white/20 flex flex-col gap-2.5">
             <div class="flex items-center justify-between border-b border-white/5 pb-2">
               <div class="flex items-center gap-2">
                 <div class="w-6 h-6 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center">
                   <i data-lucide="play" class="w-3 h-3 fill-red-400"></i>
                 </div>
-                <span class="text-xs font-black text-white">YouTube</span>
+                <span class="text-xs font-black text-[#fdf8e1]">YouTube</span>
                 <span id="modalYtCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-sky-500/20 text-sky-300">0 selected</span>
               </div>
-              <label class="flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-slate-300 hover:text-white">
+              <label class="flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1]">
                 <span>Enable</span>
                 <input type="checkbox" id="modalTargetYt" onchange="onModalMasterToggle('yt')" checked class="w-4 h-4 rounded accent-[#0071e3] cursor-pointer" />
               </label>
@@ -958,16 +984,16 @@
           </div>
 
           <!-- Instagram Accounts Box -->
-          <div class="p-3.5 rounded-2xl sleek-input border border-white/10 flex flex-col gap-2.5">
+          <div class="p-3.5 rounded-2xl sleek-input border border-white/20 flex flex-col gap-2.5">
             <div class="flex items-center justify-between border-b border-white/5 pb-2">
               <div class="flex items-center gap-2">
                 <div class="w-6 h-6 rounded-lg bg-pink-600/20 text-pink-400 border border-pink-500/30 flex items-center justify-center">
                   <i data-lucide="camera" class="w-3 h-3"></i>
                 </div>
-                <span class="text-xs font-black text-white">Instagram</span>
+                <span class="text-xs font-black text-[#fdf8e1]">Instagram</span>
                 <span id="modalIgCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-pink-500/20 text-pink-300">0 selected</span>
               </div>
-              <label class="flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-slate-300 hover:text-white">
+              <label class="flex items-center gap-1.5 cursor-pointer text-[11px] font-bold text-[#fdf8e1]/80 hover:text-[#fdf8e1]">
                 <span>Enable</span>
                 <input type="checkbox" id="modalTargetIg" onchange="onModalMasterToggle('ig')" checked class="w-4 h-4 rounded accent-[#e1306c] cursor-pointer" />
               </label>
@@ -982,7 +1008,7 @@
 
       <!-- 2. SELECT PUBLISH TIMING -->
       <div class="flex flex-col gap-2.5">
-        <label class="text-xs font-mono font-bold uppercase text-slate-300 tracking-wider">
+        <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider">
           2. Release Timing
         </label>
         
@@ -998,8 +1024,8 @@
               <i data-lucide="zap" class="w-4 h-4 text-sky-400"></i>
               <span class="w-2 h-2 rounded-full bg-sky-400"></span>
             </div>
-            <div class="text-xs font-black text-white mt-1">Publish Now</div>
-            <div class="text-[10px] text-slate-400">Go live immediately</div>
+            <div class="text-xs font-black text-[#fdf8e1] mt-1">Publish Now</div>
+            <div class="text-[10px] text-[#fdf8e1]/60">Go live immediately</div>
           </button>
 
           <!-- Schedule Later (YouTube Native) -->
@@ -1007,14 +1033,14 @@
             type="button"
             id="timingBtnSchedule"
             onclick="setModalTiming('schedule')"
-            class="p-3.5 rounded-2xl sleek-input border border-white/10 hover:border-purple-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
+            class="p-3.5 rounded-2xl sleek-input border border-white/20 hover:border-purple-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
           >
             <div class="flex items-center justify-between">
               <i data-lucide="calendar-clock" class="w-4 h-4 text-purple-400"></i>
               <span class="w-2 h-2 rounded-full bg-purple-400 opacity-40"></span>
             </div>
-            <div class="text-xs font-black text-white mt-1">Schedule (YouTube)</div>
-            <div class="text-[10px] text-slate-400">Native Google Cloud queue</div>
+            <div class="text-xs font-black text-[#fdf8e1] mt-1">Schedule (YouTube)</div>
+            <div class="text-[10px] text-[#fdf8e1]/60">Native Google Cloud queue</div>
           </button>
 
           <!-- Private Draft -->
@@ -1022,14 +1048,14 @@
             type="button"
             id="timingBtnDraft"
             onclick="setModalTiming('draft')"
-            class="p-3.5 rounded-2xl sleek-input border border-white/10 hover:border-amber-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
+            class="p-3.5 rounded-2xl sleek-input border border-white/20 hover:border-amber-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
           >
             <div class="flex items-center justify-between">
               <i data-lucide="lock" class="w-4 h-4 text-amber-400"></i>
               <span class="w-2 h-2 rounded-full bg-amber-400 opacity-40"></span>
             </div>
-            <div class="text-xs font-black text-white mt-1">Private Draft</div>
-            <div class="text-[10px] text-slate-400">Save unlisted on YouTube</div>
+            <div class="text-xs font-black text-[#fdf8e1] mt-1">Private Draft</div>
+            <div class="text-[10px] text-[#fdf8e1]/60">Save unlisted on YouTube</div>
           </button>
         </div>
 
@@ -1047,7 +1073,7 @@
               type="datetime-local"
               id="modalScheduleDateTime"
               onchange="updateModalSchedulePreview()"
-              class="w-full sm:flex-1 px-4 py-2.5 rounded-xl sleek-input text-xs text-white font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
+              class="w-full sm:flex-1 px-4 py-2.5 rounded-xl sleek-input text-xs text-[#fdf8e1] font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
             />
             <div class="flex items-center gap-1.5 w-full sm:w-auto">
               <button
@@ -1071,23 +1097,23 @@
           <div class="grid grid-cols-5 gap-1.5">
             <button type="button" onclick="setModalTargetTime(1, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
               <div class="text-[11px] font-black text-purple-300">1:00 AM</div>
-              <div class="text-[8px] text-slate-400">Night</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Night</div>
             </button>
             <button type="button" onclick="setModalTargetTime(2, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
               <div class="text-[11px] font-black text-purple-300">2:00 AM</div>
-              <div class="text-[8px] text-slate-400">Late</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Late</div>
             </button>
             <button type="button" onclick="setModalTargetTime(7, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
               <div class="text-[11px] font-black text-amber-300">7:00 AM</div>
-              <div class="text-[8px] text-slate-400">Morning</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Morning</div>
             </button>
             <button type="button" onclick="setModalTargetTime(14, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
               <div class="text-[11px] font-black text-sky-300">2:00 PM</div>
-              <div class="text-[8px] text-slate-400">Afternoon</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Afternoon</div>
             </button>
             <button type="button" onclick="setModalTargetTime(21, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
               <div class="text-[11px] font-black text-rose-300">9:00 PM</div>
-              <div class="text-[8px] text-slate-400">Prime</div>
+              <div class="text-[8px] text-[#fdf8e1]/60">Prime</div>
             </button>
           </div>
 
@@ -1096,22 +1122,22 @@
       </div>
 
       <!-- Instagram Specific Settings (Share to Feed) -->
-      <div id="modalIgOptionsBox" class="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+      <div id="modalIgOptionsBox" class="p-4 rounded-2xl bg-white/5 border border-white/20 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <i data-lucide="share" class="w-4 h-4 text-pink-400"></i>
           <div>
-            <div class="text-xs font-bold text-white">Share Reel to Instagram Main Profile Feed</div>
-            <div class="text-[10px] text-slate-400">Displays on your Instagram main grid as well as the Reels tab</div>
+            <div class="text-xs font-bold text-[#fdf8e1]">Share Reel to Instagram Main Profile Feed</div>
+            <div class="text-[10px] text-[#fdf8e1]/60">Displays on your Instagram main grid as well as the Reels tab</div>
           </div>
         </div>
         <input type="checkbox" id="modalIgShareToFeed" checked class="w-5 h-5 rounded-lg accent-[#e1306c] cursor-pointer" />
       </div>
 
       <!-- Modal Footer Action -->
-      <div class="pt-4 border-t border-white/10 flex items-center justify-between gap-4">
+      <div class="pt-4 border-t border-white/20 flex items-center justify-between gap-4">
         <button
           onclick="closePublishModal()"
-          class="px-5 py-3 rounded-2xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white text-xs font-bold transition"
+          class="px-5 py-3 rounded-2xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] text-xs font-bold transition"
         >
           Cancel
         </button>
@@ -1119,7 +1145,7 @@
         <button
           id="confirmPublishBtn"
           onclick="executeMultiPlatformPublish()"
-          class="px-8 py-3.5 rounded-2xl pill-btn-primary text-white text-sm font-black flex items-center gap-2 shadow-2xl cursor-pointer"
+          class="px-8 py-3.5 rounded-2xl solid-white-btn text-[#fdf8e1] text-sm font-black flex items-center gap-2 shadow-2xl cursor-pointer"
         >
           <i data-lucide="rocket" class="w-4 h-4"></i>
           <span id="confirmPublishBtnText">Publish to Selected Platforms</span>
@@ -1130,35 +1156,35 @@
   </div>
 
   <!-- SETTINGS & YOUTUBE API MODAL -->
-  <div id="settingsModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="sleek-panel w-full max-w-3xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+  <div id="settingsModal" class="fixed inset-0 z-50 bg-black/20 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card w-full max-w-3xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
       
       <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+      <div class="flex items-center justify-between border-b border-white/20 pb-4">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-2xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center">
             <i data-lucide="settings" class="w-5 h-5"></i>
           </div>
           <div>
-            <h2 class="text-lg font-black text-white tracking-tight">Studio Settings & YouTube API</h2>
-            <p class="text-xs text-slate-400">Configure your Google Cloud client_secrets.json to connect your YouTube Channel</p>
+            <h2 class="text-lg font-black text-[#fdf8e1] tracking-tight">Studio Settings & YouTube API</h2>
+            <p class="text-xs text-[#fdf8e1]/60">Configure your Google Cloud client_secrets.json to connect your YouTube Channel</p>
           </div>
         </div>
         <button
           onclick="closeSettingsModal()"
-          class="p-2 rounded-xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
+          class="p-2 rounded-xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer"
         >
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <!-- Modal Tabs (YouTube API vs Instagram Playwright) -->
-      <div class="grid grid-cols-2 p-1.5 rounded-2xl bg-black/50 border border-white/10 text-xs font-black">
+      <div class="grid grid-cols-2 p-1.5 rounded-2xl bg-black/50 border border-white/20 text-xs font-black">
         <button
           type="button"
           id="settingsTabYt"
           onclick="switchSettingsTab('youtube')"
-          class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#0071e3] text-white shadow-md cursor-pointer"
+          class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#0071e3] text-[#fdf8e1] shadow-md cursor-pointer"
         >
           <i data-lucide="play" class="w-4 h-4 fill-white"></i>
           <span>YouTube Channel API</span>
@@ -1167,7 +1193,7 @@
           type="button"
           id="settingsTabIg"
           onclick="switchSettingsTab('instagram')"
-          class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white cursor-pointer"
+          class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer"
         >
           <i data-lucide="camera" class="w-4 h-4 text-pink-400"></i>
           <span>Instagram Playwright Session</span>
@@ -1180,7 +1206,7 @@
         <!-- SECTION 1: CONNECTED YOUTUBE CHANNELS -->
         <div class="flex flex-col gap-3">
           <div class="flex items-center justify-between">
-            <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
+            <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-2">
               <i data-lucide="youtube" class="w-4 h-4 text-red-500"></i>
               <span>Connected YouTube Channels</span>
               <span id="settingsChannelsCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-500/20 text-red-300 border border-red-500/30">0</span>
@@ -1188,7 +1214,7 @@
             <button
               type="button"
               onclick="openConnectChannelModal()"
-              class="px-3.5 py-1.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+              class="px-3.5 py-1.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
             >
               <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
               <span>Connect Channel</span>
@@ -1201,14 +1227,14 @@
         </div>
 
         <!-- SECTION 2: GOOGLE CLOUD CREDENTIALS PROJECTS -->
-        <div class="flex flex-col gap-3 pt-2 border-t border-white/10">
+        <div class="flex flex-col gap-3 pt-2 border-t border-white/20">
           <div class="flex items-center justify-between">
-            <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
+            <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-2">
               <i data-lucide="key" class="w-4 h-4 text-amber-400"></i>
               <span>Google Cloud Console API Projects</span>
               <span id="settingsProjectsCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">0</span>
             </div>
-            <span class="text-[10px] text-slate-400 font-mono">Each project holds YouTube Data API quotas</span>
+            <span class="text-[10px] text-[#fdf8e1]/60 font-mono">Each project holds YouTube Data API quotas</span>
           </div>
 
           <div id="settingsProjectsListContainer" class="flex flex-col gap-2">
@@ -1216,7 +1242,7 @@
           </div>
 
           <!-- ADD NEW GOOGLE CLOUD CREDENTIALS BOX -->
-          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-3 mt-1">
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/20 flex flex-col gap-3 mt-1">
             <div class="flex items-center justify-between">
               <label class="text-xs font-bold text-slate-200 flex items-center gap-2">
                 <span>Add New Google Cloud API Project (client_secrets.json)</span>
@@ -1232,7 +1258,7 @@
               type="text"
               id="clientSecretsProjectName"
               placeholder="Friendly Project Name (e.g. Primary Studio Console, Second Channel Project)"
-              class="w-full px-3.5 py-2.5 rounded-xl sleek-input text-xs font-medium text-white placeholder:text-slate-600 focus:border-sky-400"
+              class="w-full px-3.5 py-2.5 rounded-xl sleek-input text-xs font-medium text-[#fdf8e1] placeholder:text-slate-600 focus:border-sky-400"
             />
 
             <textarea
@@ -1247,7 +1273,7 @@
                 type="button"
                 onclick="saveYoutubeSecrets()"
                 id="saveSecretsBtn"
-                class="px-5 py-2.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
+                class="px-5 py-2.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
               >
                 <i data-lucide="plus-circle" class="w-4 h-4"></i>
                 <span>Add Google Cloud Project</span>
@@ -1256,7 +1282,7 @@
               <button
                 type="button"
                 onclick="resetYoutubeSecrets()"
-                class="px-4 py-2 rounded-xl sleek-input hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                class="px-4 py-2 rounded-xl sleek-input hover:bg-rose-500/10 text-[#fdf8e1]/60 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
                 title="Reset existing credentials"
               >
                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
@@ -1267,39 +1293,39 @@
         </div>
 
         <!-- STEP BY STEP SETUP GUIDE -->
-        <div class="flex flex-col gap-2.5 pt-2 border-t border-white/10">
-          <div class="text-xs font-mono font-black uppercase text-slate-400 tracking-wider flex items-center gap-1.5">
+        <div class="flex flex-col gap-2.5 pt-2 border-t border-white/20">
+          <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/60 tracking-wider flex items-center gap-1.5">
             <i data-lucide="help-circle" class="w-3.5 h-3.5 text-sky-400"></i>
             How to get client_secrets.json from Google Cloud Console
           </div>
           
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-            <div class="p-3 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-1">
+            <div class="p-3 rounded-xl bg-white/5 border border-white/20 flex flex-col gap-1">
               <div class="flex items-center gap-1.5">
                 <span class="w-5 h-5 rounded-full bg-sky-500 text-black font-mono font-black text-[11px] flex items-center justify-center">1</span>
-                <span class="text-xs font-bold text-white">Enable API</span>
+                <span class="text-xs font-bold text-[#fdf8e1]">Enable API</span>
               </div>
-              <p class="text-[10px] text-slate-400">
+              <p class="text-[10px] text-[#fdf8e1]/60">
                 In <a href="https://console.cloud.google.com" target="_blank" class="text-sky-400 underline font-bold">Google Cloud</a>, enable <strong>YouTube Data API v3</strong>.
               </p>
             </div>
 
-            <div class="p-3 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-1">
+            <div class="p-3 rounded-xl bg-white/5 border border-white/20 flex flex-col gap-1">
               <div class="flex items-center gap-1.5">
                 <span class="w-5 h-5 rounded-full bg-sky-500 text-black font-mono font-black text-[11px] flex items-center justify-center">2</span>
-                <span class="text-xs font-bold text-white">OAuth Consent</span>
+                <span class="text-xs font-bold text-[#fdf8e1]">OAuth Consent</span>
               </div>
-              <p class="text-[10px] text-slate-400">
+              <p class="text-[10px] text-[#fdf8e1]/60">
                 External consent screen, add YouTube scopes, and add your Google account as <strong>Test User</strong>.
               </p>
             </div>
 
-            <div class="p-3 rounded-xl bg-white/5 border border-white/10 flex flex-col gap-1">
+            <div class="p-3 rounded-xl bg-white/5 border border-white/20 flex flex-col gap-1">
               <div class="flex items-center gap-1.5">
                 <span class="w-5 h-5 rounded-full bg-sky-500 text-black font-mono font-black text-[11px] flex items-center justify-center">3</span>
-                <span class="text-xs font-bold text-white">Download JSON</span>
+                <span class="text-xs font-bold text-[#fdf8e1]">Download JSON</span>
               </div>
-              <p class="text-[10px] text-slate-400">
+              <p class="text-[10px] text-[#fdf8e1]/60">
                 Create <strong>OAuth Client ID</strong> &gt; <strong>Desktop App</strong> &gt; Download JSON.
               </p>
             </div>
@@ -1310,12 +1336,12 @@
 
       <!-- 2. INSTAGRAM SETTINGS TAB CONTENT -->
       <div id="settingsIgContent" class="hidden flex flex-col gap-6">
-        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-2">
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/20 flex flex-col gap-2">
           <div class="text-xs font-black text-pink-400 uppercase tracking-wide flex items-center gap-2">
             <i data-lucide="shield-check" class="w-4 h-4"></i>
             Native Playwright Interactive Login (Safe, Persistent & Multi-Account)
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
+          <p class="text-xs text-[#fdf8e1]/80 leading-relaxed">
             Connect one or multiple Instagram accounts safely. Clicking <strong>Connect Account</strong> opens a native Chromium window. Log in (supporting 2FA); your session is preserved for automated 1-click publishing.
           </p>
         </div>
@@ -1323,7 +1349,7 @@
         <!-- Instagram Connected Accounts Section -->
         <div class="flex flex-col gap-3">
           <div class="flex items-center justify-between">
-            <div class="text-xs font-mono font-black uppercase text-slate-300 tracking-wider flex items-center gap-2">
+            <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-2">
               <i data-lucide="camera" class="w-4 h-4 text-pink-400"></i>
               <span>Connected Instagram Accounts</span>
               <span id="settingsIgAccountsCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">0</span>
@@ -1331,7 +1357,7 @@
             <button
               type="button"
               onclick="loginInstagram()"
-              class="px-3.5 py-1.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+              class="px-3.5 py-1.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
             >
               <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
               <span>Add IG Account</span>
@@ -1348,26 +1374,26 @@
   </div>
 
   <!-- CONNECT YOUTUBE CHANNEL MODAL (SELECT GOOGLE PROJECT) -->
-  <div id="connectChannelModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="sleek-panel w-full max-w-md rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15">
-      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+  <div id="connectChannelModal" class="fixed inset-0 z-50 bg-black/20 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="frosted-glass-card w-full max-w-md rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15">
+      <div class="flex items-center justify-between border-b border-white/20 pb-3">
         <div class="flex items-center gap-2.5">
           <div class="w-9 h-9 rounded-xl bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center">
             <i data-lucide="youtube" class="w-5 h-5"></i>
           </div>
-          <h3 class="text-base font-extrabold text-white">Connect YouTube Channel</h3>
+          <h3 class="text-base font-extrabold text-[#fdf8e1]">Connect YouTube Channel</h3>
         </div>
-        <button onclick="closeConnectChannelModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-white">
+        <button onclick="closeConnectChannelModal()" class="p-1.5 rounded-lg text-[#fdf8e1]/60 hover:text-[#fdf8e1]">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <div class="flex flex-col gap-3 text-xs">
-        <p class="text-slate-300">Select which Google Cloud project API credentials to use to authenticate your channel:</p>
+        <p class="text-[#fdf8e1]/80">Select which Google Cloud project API credentials to use to authenticate your channel:</p>
         
         <div class="flex flex-col gap-1.5">
           <label class="font-bold text-slate-200">Google Cloud API Project</label>
-          <select id="connectChannelProjectSelect" class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-bold text-white bg-slate-900 border border-white/10">
+          <select id="connectChannelProjectSelect" class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-bold text-[#fdf8e1] bg-slate-900 border border-white/20">
             <!-- Dynamically populated -->
           </select>
         </div>
@@ -1377,9 +1403,9 @@
         </div>
       </div>
 
-      <div class="flex items-center justify-end gap-2 pt-2 border-t border-white/10">
-        <button onclick="closeConnectChannelModal()" class="px-4 py-2 rounded-xl sleek-input text-slate-400 hover:text-white text-xs font-bold">Cancel</button>
-        <button onclick="proceedConnectChannel()" class="px-5 py-2.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-black flex items-center gap-2">
+      <div class="flex items-center justify-end gap-2 pt-2 border-t border-white/20">
+        <button onclick="closeConnectChannelModal()" class="px-4 py-2 rounded-xl sleek-input text-[#fdf8e1]/60 hover:text-[#fdf8e1] text-xs font-bold">Cancel</button>
+        <button onclick="proceedConnectChannel()" class="px-5 py-2.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-black flex items-center gap-2">
           <span>Continue to Google</span>
           <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </button>
@@ -1388,7 +1414,7 @@
   </div>
 
   <!-- NOTIFICATION TOAST -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 sleek-panel px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-white flex items-center gap-3">
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 frosted-glass-card px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-[#fdf8e1] flex items-center gap-3">
     <i data-lucide="info" class="w-4 h-4 text-[#38bdf8]"></i>
     <span id="toastMessage">Notification</span>
   </div>
@@ -1561,8 +1587,8 @@
                 <i data-lucide="chevron-down" class="w-3 h-3 text-pink-300"></i>
               </button>
 
-              <div id="igAccountsDropdown" class="hidden absolute right-0 top-full mt-2 w-64 rounded-2xl sleek-panel border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
-                <div class="px-2 py-1 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+              <div id="igAccountsDropdown" class="hidden absolute right-0 top-full mt-2 w-64 rounded-2xl frosted-glass-card border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
+                <div class="px-2 py-1 text-[10px] font-mono font-bold text-[#fdf8e1]/60 uppercase tracking-wider flex items-center justify-between">
                   <span>Instagram Accounts</span>
                   <span class="text-pink-300">${allIgAccounts.length} Connected</span>
                 </div>
@@ -1578,7 +1604,7 @@
                       >
                         <div class="flex items-center gap-2 min-w-0">
                           <img src="${aAvatar}" class="w-6 h-6 rounded-full object-cover border border-pink-400 shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.username)}&background=e1306c&color=fff';" />
-                          <span class="text-xs font-bold text-white truncate">@${a.username}</span>
+                          <span class="text-xs font-bold text-[#fdf8e1] truncate">@${a.username}</span>
                         </div>
                         ${isActive ? '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 shrink-0">ACTIVE</span>' : ''}
                       </button>
@@ -1586,7 +1612,7 @@
                   }).join('')}
                 </div>
 
-                <div class="border-t border-white/10 my-1"></div>
+                <div class="border-t border-white/20 my-1"></div>
 
                 <button
                   onclick="loginInstagram()"
@@ -1608,7 +1634,7 @@
           `;
         } else {
           igSection.innerHTML = `
-            <button onclick="loginInstagram()" class="px-3 py-1.5 rounded-2xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer">
+            <button onclick="loginInstagram()" class="px-3 py-1.5 rounded-2xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer">
               <i data-lucide="camera" class="w-3.5 h-3.5"></i>
               <span>Connect IG</span>
             </button>
@@ -1622,15 +1648,15 @@
               const isActive = activeIgUsername && a.username.toLowerCase() === activeIgUsername.toLowerCase();
               const aAvatar = a.profilePicUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(a.username)}&background=e1306c&color=fff`;
               return `
-                <div class="p-3.5 rounded-2xl border ${isActive ? 'border-pink-500/40 bg-pink-500/10' : 'border-white/10 bg-white/5'} flex items-center justify-between gap-3 shadow-md">
+                <div class="p-3.5 rounded-2xl border ${isActive ? 'border-pink-500/40 bg-pink-500/10' : 'border-white/20 bg-white/5'} flex items-center justify-between gap-3 shadow-md">
                   <div class="flex items-center gap-3 min-w-0">
                     <img src="${aAvatar}" class="w-10 h-10 rounded-full border-2 border-pink-400 object-cover shadow-md shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.username)}&background=e1306c&color=fff';" />
                     <div class="min-w-0">
                       <div class="flex items-center gap-2">
-                        <span class="text-sm font-black text-white truncate">@${a.username}</span>
+                        <span class="text-sm font-black text-[#fdf8e1] truncate">@${a.username}</span>
                         ${isActive ? '<span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">ACTIVE</span>' : ''}
                       </div>
-                      <div class="text-[11px] text-slate-400 font-mono mt-0.5">Automated Reels Ready</div>
+                      <div class="text-[11px] text-[#fdf8e1]/60 font-mono mt-0.5">Automated Reels Ready</div>
                     </div>
                   </div>
 
@@ -1645,7 +1671,7 @@
                     ` : ''}
                     <button
                       onclick="disconnectInstagram('${a.username}')"
-                      class="px-3 py-1.5 rounded-xl sleek-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/10 hover:border-rose-500/30 transition cursor-pointer"
+                      class="px-3 py-1.5 rounded-xl sleek-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/20 hover:border-rose-500/30 transition cursor-pointer"
                     >
                       Disconnect
                     </button>
@@ -1655,17 +1681,17 @@
             }).join('');
           } else {
             settingsContainer.innerHTML = `
-              <div class="p-5 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400">
+              <div class="p-5 rounded-2xl border border-white/20 bg-white/5 flex items-center justify-between gap-3 text-[#fdf8e1]/60">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 rounded-2xl bg-slate-800 text-pink-400 border border-pink-500/20 flex items-center justify-center shrink-0">
                     <i data-lucide="camera" class="w-5 h-5"></i>
                   </div>
                   <div>
                     <div class="text-xs font-bold text-slate-200">No Instagram Accounts Connected</div>
-                    <div class="text-[11px] text-slate-400">Log in once via Playwright to enable 1-click Instagram Reels uploads.</div>
+                    <div class="text-[11px] text-[#fdf8e1]/60">Log in once via Playwright to enable 1-click Instagram Reels uploads.</div>
                   </div>
                 </div>
-                <button onclick="loginInstagram()" class="px-4 py-2.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-black flex items-center gap-1.5 shadow-lg">
+                <button onclick="loginInstagram()" class="px-4 py-2.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-black flex items-center gap-1.5 shadow-lg">
                   <i data-lucide="log-in" class="w-4 h-4"></i> Connect IG
                 </button>
               </div>
@@ -1747,13 +1773,13 @@
       if (!ytBtn || !igBtn) return;
 
       if (tab === 'youtube') {
-        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#0071e3] text-white shadow-md cursor-pointer";
-        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white cursor-pointer";
+        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#0071e3] text-[#fdf8e1] shadow-md cursor-pointer";
+        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer";
         if (ytContent) ytContent.classList.remove('hidden');
         if (igContent) igContent.classList.add('hidden');
       } else {
-        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#111] border border-white/10 hover:bg-white/5 text-white shadow-md cursor-pointer";
-        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white cursor-pointer";
+        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] shadow-md cursor-pointer";
+        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer";
         if (igContent) igContent.classList.remove('hidden');
         if (ytContent) ytContent.classList.add('hidden');
       }
@@ -1811,19 +1837,19 @@
               const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff&bold=true`;
               const avatar = ch.avatar || fallbackAvatar;
               return `
-                <div class="p-3.5 rounded-2xl border ${isActive ? 'border-emerald-500/40 bg-emerald-500/10' : 'border-white/10 bg-white/5'} flex items-center justify-between gap-3 shadow-md">
+                <div class="p-3.5 rounded-2xl border ${isActive ? 'border-emerald-500/40 bg-emerald-500/10' : 'border-white/20 bg-white/5'} flex items-center justify-between gap-3 shadow-md">
                   <div class="flex items-center gap-3 min-w-0">
                     <img src="${avatar}" class="w-12 h-12 rounded-full border-2 border-emerald-400 object-cover shadow-lg shrink-0" onerror="this.src='${fallbackAvatar}';" />
                     <div class="min-w-0">
                       <div class="flex items-center gap-2">
-                        <span class="text-sm font-black text-white truncate">${ch.title}</span>
+                        <span class="text-sm font-black text-[#fdf8e1] truncate">${ch.title}</span>
                         ${isActive ? '<span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">ACTIVE</span>' : ''}
                       </div>
-                      <div class="text-xs text-slate-300 font-mono mt-0.5">
+                      <div class="text-xs text-[#fdf8e1]/80 font-mono mt-0.5">
                         <span class="text-sky-300 font-bold">${ch.customUrl || ch.channelId}</span> • <span>${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</span>
                       </div>
-                      <div class="text-[10px] text-slate-400 font-mono mt-0.5 truncate">
-                        Project: <span class="text-slate-300 font-bold">${ch.credentialName || ch.credentialId || 'Default'}</span>
+                      <div class="text-[10px] text-[#fdf8e1]/60 font-mono mt-0.5 truncate">
+                        Project: <span class="text-[#fdf8e1]/80 font-bold">${ch.credentialName || ch.credentialId || 'Default'}</span>
                       </div>
                     </div>
                   </div>
@@ -1839,7 +1865,7 @@
                     ` : ''}
                     <button
                       onclick="disconnectChannel('${ch.channelId}')"
-                      class="px-3 py-1.5 rounded-xl sleek-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/10 hover:border-rose-500/30 transition cursor-pointer"
+                      class="px-3 py-1.5 rounded-xl sleek-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/20 hover:border-rose-500/30 transition cursor-pointer"
                     >
                       Disconnect
                     </button>
@@ -1849,9 +1875,9 @@
             }).join('');
           } else {
             channelsContainer.innerHTML = `
-              <div class="p-4 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400">
-                <div class="text-xs text-slate-300">No YouTube channels connected yet. Click <strong>Connect Channel</strong> above.</div>
-                <button onclick="openConnectChannelModal()" class="px-3 py-1.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold">Connect</button>
+              <div class="p-4 rounded-2xl border border-white/20 bg-white/5 flex items-center justify-between gap-3 text-[#fdf8e1]/60">
+                <div class="text-xs text-[#fdf8e1]/80">No YouTube channels connected yet. Click <strong>Connect Channel</strong> above.</div>
+                <button onclick="openConnectChannelModal()" class="px-3 py-1.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold">Connect</button>
               </div>
             `;
           }
@@ -1861,20 +1887,20 @@
         if (projectsContainer) {
           if (allCredentials.length > 0) {
             projectsContainer.innerHTML = allCredentials.map(p => `
-              <div class="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between gap-3 text-xs">
+              <div class="p-3 rounded-xl bg-white/5 border border-white/20 flex items-center justify-between gap-3 text-xs">
                 <div class="flex items-center gap-2.5 min-w-0">
                   <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center shrink-0">
                     <i data-lucide="key" class="w-3.5 h-3.5"></i>
                   </div>
                   <div class="min-w-0">
-                    <div class="font-bold text-white truncate">${p.name || 'Google Cloud Project'}</div>
-                    <div class="text-[10px] text-slate-400 font-mono truncate">ID: ${p.projectId || p.id} • Added ${formatDateTime(p.createdAt)}</div>
+                    <div class="font-bold text-[#fdf8e1] truncate">${p.name || 'Google Cloud Project'}</div>
+                    <div class="text-[10px] text-[#fdf8e1]/60 font-mono truncate">ID: ${p.projectId || p.id} • Added ${formatDateTime(p.createdAt)}</div>
                   </div>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
                   <button
                     onclick="deleteCredential('${p.id}')"
-                    class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition cursor-pointer"
+                    class="p-1.5 rounded-lg text-[#fdf8e1]/60 hover:text-rose-400 hover:bg-rose-500/10 transition cursor-pointer"
                     title="Remove this credential"
                   >
                     <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
@@ -1884,7 +1910,7 @@
             `).join('');
           } else {
             projectsContainer.innerHTML = `
-              <div class="p-3 rounded-xl border border-dashed border-white/15 text-center text-xs text-slate-400">
+              <div class="p-3 rounded-xl border border-dashed border-white/15 text-center text-xs text-[#fdf8e1]/60">
                 No Google Cloud API credentials saved. Add a client_secrets.json below.
               </div>
             `;
@@ -2073,15 +2099,15 @@
                 </div>
                 <div class="text-left leading-tight pr-1">
                   <div class="flex items-center gap-1">
-                    <span class="text-xs font-extrabold text-white max-w-[120px] truncate">${channelName}</span>
+                    <span class="text-xs font-extrabold text-[#fdf8e1] max-w-[120px] truncate">${channelName}</span>
                     <i data-lucide="chevron-down" class="w-3 h-3 text-emerald-300"></i>
                   </div>
                   <div class="text-[10px] text-sky-300 font-mono">${customUrl}</div>
                 </div>
               </button>
 
-              <div id="ytChannelsDropdown" class="hidden absolute right-0 top-full mt-2 w-72 rounded-2xl sleek-panel border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
-                <div class="px-2 py-1 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+              <div id="ytChannelsDropdown" class="hidden absolute right-0 top-full mt-2 w-72 rounded-2xl frosted-glass-card border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
+                <div class="px-2 py-1 text-[10px] font-mono font-bold text-[#fdf8e1]/60 uppercase tracking-wider flex items-center justify-between">
                   <span>YouTube Channels</span>
                   <span class="text-emerald-300">${allChannels.length} Connected</span>
                 </div>
@@ -2098,8 +2124,8 @@
                         <div class="flex items-center gap-2.5 min-w-0">
                           <img src="${chAvatar}" class="w-7 h-7 rounded-full object-cover border border-emerald-400 shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff';" />
                           <div class="min-w-0">
-                            <div class="text-xs font-bold text-white truncate max-w-[140px]">${ch.title}</div>
-                            <div class="text-[10px] text-slate-400 font-mono truncate">${ch.customUrl || ''} • ${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</div>
+                            <div class="text-xs font-bold text-[#fdf8e1] truncate max-w-[140px]">${ch.title}</div>
+                            <div class="text-[10px] text-[#fdf8e1]/60 font-mono truncate">${ch.customUrl || ''} • ${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</div>
                           </div>
                         </div>
                         ${isActive ? '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 shrink-0">ACTIVE</span>' : ''}
@@ -2108,7 +2134,7 @@
                   }).join('')}
                 </div>
 
-                <div class="border-t border-white/10 my-1"></div>
+                <div class="border-t border-white/20 my-1"></div>
 
                 <button
                   onclick="openConnectChannelModal()"
@@ -2120,7 +2146,7 @@
 
                 <button
                   onclick="syncWithYouTube()"
-                  class="w-full flex items-center gap-2 p-2 rounded-xl text-slate-300 hover:bg-white/5 text-xs font-bold transition cursor-pointer"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-[#fdf8e1]/80 hover:bg-white/5 text-xs font-bold transition cursor-pointer"
                 >
                   <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
                   <span>Sync Channel Uploads</span>
@@ -2138,7 +2164,7 @@
           `;
         } else {
           authSection.innerHTML = `
-            <button onclick="openConnectChannelModal()" class="px-4 py-2 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold flex items-center gap-2 shadow-lg cursor-pointer">
+            <button onclick="openConnectChannelModal()" class="px-4 py-2 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold flex items-center gap-2 shadow-lg cursor-pointer">
               <i data-lucide="link" class="w-3.5 h-3.5"></i>
               <span>Connect YouTube Studio</span>
             </button>
@@ -2223,13 +2249,13 @@
     function setTab(tab) {
       activeTab = tab;
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active', 'text-white', 'bg-[#0071e3]');
-        btn.classList.add('text-slate-400');
+        btn.classList.remove('active', 'text-[#fdf8e1]', 'bg-[#0071e3]');
+        btn.classList.add('text-[#fdf8e1]/60');
       });
       const activeBtn = document.getElementById(`tab-${tab}`);
       if (activeBtn) {
-        activeBtn.classList.add('active', 'text-white', 'bg-[#0071e3]');
-        activeBtn.classList.remove('text-slate-400');
+        activeBtn.classList.add('active', 'text-[#fdf8e1]', 'bg-[#0071e3]');
+        activeBtn.classList.remove('text-[#fdf8e1]/60');
       }
       renderVideoList();
     }
@@ -2256,7 +2282,7 @@
             chip.className = 'channel-switch-chip px-3.5 py-2.5 rounded-xl border-2 border-cyan-500/60 bg-cyan-950/35 flex items-center justify-between transition-all cursor-pointer group shadow-lg shadow-cyan-500/10';
           }
         } else {
-          chip.className = 'channel-switch-chip px-3.5 py-2.5 rounded-xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm';
+          chip.className = 'channel-switch-chip px-3.5 py-2.5 rounded-xl border border-white/20 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm';
         }
       });
 
@@ -2285,7 +2311,7 @@
 
       if (nichePill) {
         nichePill.textContent = nicheNames[nicheId] || '{Pipeline}';
-        nichePill.className = `text-[10px] font-mono px-2 py-0.5 rounded-full border font-semibold ${nicheColors[nicheId] || 'bg-white/10 text-slate-300'}`;
+        nichePill.className = `text-[10px] font-mono px-2 py-0.5 rounded-full border font-semibold ${nicheColors[nicheId] || 'bg-white/10 text-[#fdf8e1]/80'}`;
       }
 
       try {
@@ -2331,7 +2357,7 @@
         const sourceLabel = sourceMap[t.source] || 'Topic';
 
         let statusLabel = 'Upcoming';
-        let statusClass = 'text-slate-400';
+        let statusClass = 'text-[#fdf8e1]/60';
         if (isCompleted) {
           statusLabel = 'Completed';
           statusClass = 'text-emerald-400';
@@ -2354,11 +2380,11 @@
 
               <!-- Topic Info -->
               <div class="min-w-0 flex-1">
-                <div class="text-xs ${isCompleted ? 'line-through text-slate-500 font-medium' : isInProgress ? 'text-white font-bold' : 'text-slate-200 font-medium'} truncate">
+                <div class="text-xs ${isCompleted ? 'line-through text-slate-500 font-medium' : isInProgress ? 'text-[#fdf8e1] font-bold' : 'text-slate-200 font-medium'} truncate">
                   ${t.title}
                 </div>
                 <div class="text-[10px] font-mono text-slate-500 flex items-center gap-1.5 mt-0.5 flex-wrap">
-                  ${t.categoryLabel ? `<span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-white/10 text-amber-300 border border-white/10 shrink-0">${t.categoryLabel}</span><span>·</span>` : ''}
+                  ${t.categoryLabel ? `<span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-white/10 text-amber-300 border border-white/20 shrink-0">${t.categoryLabel}</span><span>·</span>` : ''}
                   <span class="${statusClass}">${statusLabel}</span>
                   <span>·</span>
                   <span>${sourceLabel}</span>
@@ -2667,23 +2693,23 @@
         >
           <div class="flex items-center gap-3 min-w-0 flex-1">
             <!-- Thumbnail Visual Preview Tile -->
-            <div class="relative ${isLong ? 'w-16 h-10' : 'w-9 h-14'} rounded-xl overflow-hidden bg-black/90 border border-white/10 shrink-0 flex items-center justify-center shadow-md">
+            <div class="relative ${isLong ? 'w-16 h-10' : 'w-9 h-14'} rounded-xl overflow-hidden bg-black/20 border border-white/20 shrink-0 flex items-center justify-center shadow-md">
               ${v.hasThumbnail ? `
                 <img src="${v.thumbnailUrl}" class="w-full h-full object-cover" alt="Thumbnail" />
               ` : `
                 <i data-lucide="${isLong ? 'tv' : 'smartphone'}" class="w-4 h-4 ${isLong ? 'text-sky-400' : 'text-emerald-400'}"></i>
               `}
               ${v.hasThumbnail ? `
-                <span class="absolute bottom-0.5 right-0.5 px-1 py-0.2 rounded text-[8px] font-mono font-black bg-black/80 text-amber-300">4K</span>
+                <span class="absolute bottom-0.5 right-0.5 px-1 py-0.2 rounded text-[8px] font-mono font-black bg-black/20 text-amber-300">4K</span>
               ` : ''}
             </div>
 
             <!-- Filename & Details -->
             <div class="text-left min-w-0 flex-1">
               <div class="flex items-center gap-2">
-                <span class="text-xs font-black text-white tracking-tight truncate">${v.filename}</span>
+                <span class="text-xs font-black text-[#fdf8e1] tracking-tight truncate">${v.filename}</span>
               </div>
-              <div class="text-[10px] text-slate-400 font-mono mt-1 flex items-center gap-1.5 flex-wrap">
+              <div class="text-[10px] text-[#fdf8e1]/60 font-mono mt-1 flex items-center gap-1.5 flex-wrap">
                 ${nicheTag}
                 <span>•</span>
                 <span class="${isLong ? 'text-sky-300 font-bold' : 'text-emerald-300 font-bold'}">${isLong ? '16:9 Long-Form' : '9:16 Short'}</span>
@@ -2720,7 +2746,7 @@
                 `;
               }
               return `
-                <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-slate-400">
+                <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-[#fdf8e1]/60">
                   YT READY
                 </span>
               `;
@@ -2751,7 +2777,7 @@
                 `;
               }
               return `
-                <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-slate-400">
+                <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/5 text-[#fdf8e1]/60">
                   IG READY
                 </span>
               `;
@@ -2825,12 +2851,12 @@
 
       if (mode === 'direct') {
         directBtn.className = "p-3.5 rounded-2xl border-2 border-emerald-500/60 bg-emerald-500/10 text-left flex flex-col gap-1 transition cursor-pointer group";
-        schedBtn.className = "p-3.5 rounded-2xl border-2 border-white/10 hover:border-purple-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group";
+        schedBtn.className = "p-3.5 rounded-2xl border-2 border-white/20 hover:border-purple-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group";
         drawer.classList.add('hidden');
         launchBtnText.textContent = quickModalState.target === 'both' ? 'Publish to Both Platforms Now' : 'Publish to YouTube Now';
       } else {
         schedBtn.className = "p-3.5 rounded-2xl border-2 border-purple-500/60 bg-purple-500/10 text-left flex flex-col gap-1 transition cursor-pointer group";
-        directBtn.className = "p-3.5 rounded-2xl border-2 border-white/10 hover:border-emerald-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group";
+        directBtn.className = "p-3.5 rounded-2xl border-2 border-white/20 hover:border-emerald-500/40 bg-black/40 text-left flex flex-col gap-1 transition cursor-pointer group";
         drawer.classList.remove('hidden');
 
         const dtInput = document.getElementById('quickScheduleDateTime');
@@ -2974,9 +3000,9 @@
 
       if (container) {
         if (isWidescreen) {
-          container.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black mb-12 group mx-auto transition-all duration-300";
+          container.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-transparent mb-12 group mx-auto transition-all duration-300";
         } else {
-          container.className = "relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black mb-12 group mx-auto transition-all duration-300";
+          container.className = "relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-transparent mb-12 group mx-auto transition-all duration-300";
         }
       }
       
@@ -3012,17 +3038,17 @@
       if (statusBanner) {
         let bannerHtml = `
           <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-[#0071e3] text-white flex items-center justify-center flex-shrink-0 font-bold">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-[#0071e3] text-[#fdf8e1] flex items-center justify-center flex-shrink-0 font-bold">
               <i data-lucide="activity" class="w-5 h-5"></i>
             </div>
             <div>
-              <div class="text-xs font-black text-white uppercase tracking-wide flex items-center gap-2">
+              <div class="text-xs font-black text-[#fdf8e1] uppercase tracking-wide flex items-center gap-2">
                 <span>Platform Release Status</span>
               </div>
-              <div class="text-[11px] text-slate-300 font-mono mt-0.5 flex items-center gap-3">
-                <span>YT: <strong class="${yt.isUploaded ? 'text-red-400' : yt.isScheduled ? 'text-purple-400' : 'text-slate-400'}">${yt.isScheduled ? 'Scheduled' : yt.isUploaded ? 'Live' : 'Ready'}</strong></span>
+              <div class="text-[11px] text-[#fdf8e1]/80 font-mono mt-0.5 flex items-center gap-3">
+                <span>YT: <strong class="${yt.isUploaded ? 'text-red-400' : yt.isScheduled ? 'text-purple-400' : 'text-[#fdf8e1]/60'}">${yt.isScheduled ? 'Scheduled' : yt.isUploaded ? 'Live' : 'Ready'}</strong></span>
                 <span>•</span>
-                <span>IG: <strong class="${ig.isUploaded ? 'text-pink-400' : ig.isScheduled ? 'text-purple-400' : 'text-slate-400'}">${ig.isScheduled ? 'Scheduled' : ig.isUploaded ? 'Reel Live' : 'Ready'}</strong></span>
+                <span>IG: <strong class="${ig.isUploaded ? 'text-pink-400' : ig.isScheduled ? 'text-purple-400' : 'text-[#fdf8e1]/60'}">${ig.isScheduled ? 'Scheduled' : ig.isUploaded ? 'Reel Live' : 'Ready'}</strong></span>
               </div>
             </div>
           </div>
@@ -3098,13 +3124,13 @@
 
       if (thumbContainer) {
         if (isLong) {
-          thumbContainer.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
+          thumbContainer.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden bg-black/20 border border-white/20 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
           if (ratioBadge) {
             ratioBadge.textContent = "16:9 Long-Form";
             ratioBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/20 font-bold";
           }
         } else {
-          thumbContainer.className = "relative w-full max-w-[260px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
+          thumbContainer.className = "relative w-full max-w-[260px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/20 border border-white/20 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300";
           if (ratioBadge) {
             ratioBadge.textContent = "9:16 Shorts";
             ratioBadge.className = "text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-bold";
@@ -3124,7 +3150,7 @@
       } else {
         if (thumbImg) thumbImg.style.display = 'none';
         if (thumbPlaceholder) thumbPlaceholder.style.display = 'flex';
-        if (thumbBadge) thumbBadge.innerHTML = `<span class="text-slate-400 font-mono">Auto Generating...</span>`;
+        if (thumbBadge) thumbBadge.innerHTML = `<span class="text-[#fdf8e1]/60 font-mono">Auto Generating...</span>`;
         if (viewFullBtn) viewFullBtn.href = '#';
       }
       safeCreateIcons();
@@ -3379,7 +3405,7 @@
       if (ytList) {
         if (allChannels.length === 0) {
           ytList.innerHTML = `
-            <div class="p-2.5 text-[11px] text-slate-400 bg-white/5 rounded-xl flex items-center justify-between">
+            <div class="p-2.5 text-[11px] text-[#fdf8e1]/60 bg-white/5 rounded-xl flex items-center justify-between">
               <span>No YouTube channels connected.</span>
               <button onclick="closePublishModal(); openConnectChannelModal();" class="text-sky-400 font-bold underline cursor-pointer">Connect Channel</button>
             </div>
@@ -3402,8 +3428,8 @@
                   />
                   <img src="${chAvatar}" class="w-6 h-6 rounded-full object-cover border border-emerald-400 shrink-0" onerror="this.src='${fallbackAvatar}';" />
                   <div class="min-w-0">
-                    <div class="text-xs font-bold text-white truncate max-w-[130px]">${ch.title}</div>
-                    <div class="text-[9px] text-slate-400 font-mono truncate">${ch.customUrl || ''} • ${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</div>
+                    <div class="text-xs font-bold text-[#fdf8e1] truncate max-w-[130px]">${ch.title}</div>
+                    <div class="text-[9px] text-[#fdf8e1]/60 font-mono truncate">${ch.customUrl || ''} • ${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</div>
                   </div>
                 </div>
                 ${isLive ? `
@@ -3422,7 +3448,7 @@
       if (igList) {
         if (allIgAccounts.length === 0) {
           igList.innerHTML = `
-            <div class="p-2.5 text-[11px] text-slate-400 bg-white/5 rounded-xl flex items-center justify-between">
+            <div class="p-2.5 text-[11px] text-[#fdf8e1]/60 bg-white/5 rounded-xl flex items-center justify-between">
               <span>No Instagram accounts connected.</span>
               <button onclick="closePublishModal(); loginInstagram();" class="text-pink-400 font-bold underline cursor-pointer">Connect IG</button>
             </div>
@@ -3444,7 +3470,7 @@
                     onchange="updateModalDestinationCounts()"
                   />
                   <img src="${accAvatar}" class="w-6 h-6 rounded-full object-cover border border-pink-400 shrink-0" onerror="this.src='${fallbackAvatar}';" />
-                  <span class="text-xs font-bold text-white truncate max-w-[130px]">@${acc.username}</span>
+                  <span class="text-xs font-bold text-[#fdf8e1] truncate max-w-[130px]">@${acc.username}</span>
                 </div>
                 ${isLive ? `
                   <a href="${isLive.reelUrl || 'https://instagram.com'}" target="_blank" onclick="event.stopPropagation()" class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold bg-pink-500/20 text-pink-300 shrink-0 border border-pink-500/30 hover:underline">
@@ -3549,7 +3575,7 @@
       const schedBox = document.getElementById('modalScheduleBox');
 
       [btnNow, btnSched, btnDraft].forEach(b => {
-        if (b) b.className = "p-3.5 rounded-2xl sleek-input border border-white/10 hover:border-sky-400/50 text-left flex flex-col gap-1 transition cursor-pointer";
+        if (b) b.className = "p-3.5 rounded-2xl sleek-input border border-white/20 hover:border-sky-400/50 text-left flex flex-col gap-1 transition cursor-pointer";
       });
 
       if (timing === 'now') {
@@ -3852,8 +3878,8 @@
       currentMemeFilter = category;
       const tabs = document.querySelectorAll('#memeCategoryTabs .meme-filter-btn');
       tabs.forEach(t => {
-        t.classList.remove('active', 'bg-purple-600', 'text-white');
-        t.classList.add('text-slate-300', 'bg-white/5');
+        t.classList.remove('active', 'bg-purple-600', 'text-[#fdf8e1]');
+        t.classList.add('text-[#fdf8e1]/80', 'bg-white/5');
       });
       const activeBtn = Array.from(tabs).find(t => {
         if (category === 'all' && t.textContent.includes('All')) return true;
@@ -3861,8 +3887,8 @@
         return false;
       });
       if (activeBtn) {
-        activeBtn.classList.add('active', 'bg-purple-600', 'text-white');
-        activeBtn.classList.remove('text-slate-300', 'bg-white/5');
+        activeBtn.classList.add('active', 'bg-purple-600', 'text-[#fdf8e1]');
+        activeBtn.classList.remove('text-[#fdf8e1]/80', 'bg-white/5');
       }
       renderMemeBoard(currentMemeFilter);
     }
@@ -3877,7 +3903,7 @@
 
       if (!memeBoardCache || memeBoardCache.length === 0) {
         grid.innerHTML = `
-          <div class="col-span-full p-8 text-center text-slate-400 text-xs">
+          <div class="col-span-full p-8 text-center text-[#fdf8e1]/60 text-xs">
             No tactical memes found in registry.
           </div>
         `;
@@ -3905,7 +3931,7 @@
 
       if (list.length === 0) {
         grid.innerHTML = `
-          <div class="col-span-full p-12 text-center text-slate-400 text-xs">
+          <div class="col-span-full p-12 text-center text-[#fdf8e1]/60 text-xs">
             No memes match your search. Try another term.
           </div>
         `;
@@ -3915,9 +3941,9 @@
       grid.innerHTML = list.map(m => {
         const perfBullets = (m.perfect_for || []).slice(0, 2).map(p => `• ${p}`).join('<br>');
         return `
-          <div class="sleek-panel rounded-2xl p-3 flex flex-col gap-2.5 border border-white/10 hover:border-purple-500/40 transition group">
+          <div class="frosted-glass-card rounded-2xl p-3 flex flex-col gap-2.5 border border-white/20 hover:border-purple-500/40 transition group">
             <!-- Video Preview (Hover to Play) -->
-            <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black/80 border border-white/10 flex items-center justify-center">
+            <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black/20 border border-white/20 flex items-center justify-center">
               <video
                 src="/memes/${m.filename}"
                 class="w-full h-full object-cover"
@@ -3931,7 +3957,7 @@
               <div class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md text-[9px] font-mono font-bold bg-black/70 text-purple-300 border border-purple-500/30 backdrop-blur-sm">
                 ${m.hud_label || 'TACTICAL HOOK'}
               </div>
-              <div class="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded text-[8px] font-mono bg-black/80 text-slate-400">
+              <div class="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded text-[8px] font-mono bg-black/20 text-[#fdf8e1]/60">
                 Hover to play
               </div>
             </div>
@@ -3939,16 +3965,16 @@
             <!-- Title & Archetype -->
             <div class="flex flex-col gap-0.5">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-black text-white group-hover:text-purple-300 transition truncate">${m.name}</span>
+                <span class="text-xs font-black text-[#fdf8e1] group-hover:text-purple-300 transition truncate">${m.name}</span>
               </div>
               <span class="text-[10px] font-mono text-purple-400 font-semibold truncate">${m.archetype}</span>
             </div>
 
             <!-- Cultural Meaning -->
-            <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">${m.culture_meaning}</p>
+            <p class="text-[11px] text-[#fdf8e1]/80 line-clamp-2 leading-relaxed">${m.culture_meaning}</p>
 
             <!-- Key Use Cases -->
-            <div class="text-[10px] text-slate-400 font-mono line-clamp-2 bg-black/30 p-1.5 rounded-lg border border-white/5">
+            <div class="text-[10px] text-[#fdf8e1]/60 font-mono line-clamp-2 bg-black/30 p-1.5 rounded-lg border border-white/5">
               ${perfBullets}
             </div>
 
