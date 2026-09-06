@@ -1414,10 +1414,7 @@
       }
     }
 
-    // Smooth Navigation & Quick Focus Helpers
-        setTimeout(() => el.focus(), 300);
-      }
-    }
+    
 
     function scrollToSection(id) {
       const el = document.getElementById(id);
@@ -3992,16 +3989,14 @@
     }
 
     function insertMemeToTopic(memeId) {
-      const input = document.getElementById('newTopicInput');
-      if (!input) return;
       const tag = `{meme: ${memeId}}`;
-      const current = input.value.trim();
-      if (!current.includes(tag)) {
-        input.value = current ? `${tag} ${current}` : `${tag} `;
-      }
-      closeMemeBoardModal();
-      input.focus();
-      showToast(`Injected ${tag} into topic pipeline!`);
+      navigator.clipboard.writeText(tag).then(() => {
+        closeMemeBoardModal();
+        showToast(`Copied ${tag} to clipboard!`);
+      }).catch(() => {
+        closeMemeBoardModal();
+        showToast(`Tag: ${tag}`);
+      });
     }
 
     // ========================================================

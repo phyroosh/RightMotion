@@ -792,7 +792,7 @@ app.get('/api/channels', (req, res) => {
 });
 
 app.post('/api/channels/switch', (req, res) => {
-  const { channelId } = req.body;
+  const channelId = (req.body || {}).channelId || null;
   if (!channelId) return res.status(400).json({ error: 'channelId is required' });
   const result = multiChannel.switchActiveChannel(channelId);
   if (!result.success) return res.status(404).json(result);
@@ -805,7 +805,7 @@ app.delete('/api/channels/:channelId', (req, res) => {
 });
 
 app.post('/api/channels/sync', async (req, res) => {
-  const { channelId } = req.body;
+  const channelId = (req.body || {}).channelId || null;
   await syncYouTubeUploads(channelId).catch(() => {});
   res.json({ success: true, message: 'Channels sync completed' });
 });
@@ -854,7 +854,7 @@ app.get('/api/niches', (req, res) => {
 });
 
 app.post('/api/niches/:nicheId/bind-youtube', (req, res) => {
-  const { channelId } = req.body;
+  const channelId = (req.body || {}).channelId || null;
   if (!channelId) return res.status(400).json({ error: 'channelId is required' });
   const result = multiChannel.bindYouTubeToNiche(req.params.nicheId, channelId);
   res.json(result);
