@@ -824,7 +824,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     s2_spring_defs = []
     sfx_cues = [
         {"frame": 0, "type": "whoosh_deep", "volume": 0.32},
-        {"frame": f_c1_cutout, "type": "impact_hit", "volume": 0.24},
+        {"frame": f_c1_cutout, "type": "whoosh_fast", "volume": 0.32},
         {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
     ]
 
@@ -896,8 +896,6 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     slam_theme = "obsidian" if niche in ("finance", "facecam") else ("biotech_cyan" if niche == "health" else "apple_studio")
     slam_icon = "target" if niche == "finance" else ("activity" if niche == "health" else "brain")
 
-    sfx_cues.append({"frame": concept_entrance, "type": "impact_hit", "volume": 0.32})
-    sfx_cues.append({"frame": concept_entrance, "type": "whoosh_fast", "volume": 0.28})
     sfx_cues.append({"frame": concept_exit, "type": "whoosh_sparkle", "volume": 0.24})
 
     s2_clean_header = meta_package.get("thumbnail_title", clean_thumbnail_title(topic))
@@ -922,7 +920,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
                 sfx_cues.append({"frame": b["frame"], "type": "whoosh_fast", "volume": 0.28})
                 sfx_cues.append({"frame": b["frame"], "type": "click", "volume": 0.24})
             elif b["type"] == "stamp":
-                sfx_cues.append({"frame": b["frame"], "type": "impact_hit", "volume": 0.32})
+                sfx_cues.append({"frame": b["frame"], "type": "impact_hit", "volume": 0.28})
 
     for idx, pt in enumerate(s2_items):
         p_frame = max(pt["startFrame"], concept_exit)
@@ -965,7 +963,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     f_s3_cutout = s3_c1["startFrame"]
     f_s3_finale = s3_c2["startFrame"]
     sfx_cues.append({"frame": f_s3_cutout, "type": "whoosh_sparkle", "volume": 0.32})
-    sfx_cues.append({"frame": f_s3_finale, "type": "impact_hit", "volume": 0.28})
+    sfx_cues.append({"frame": f_s3_finale, "type": "click", "volume": 0.32})
     s3_impact_ms = round((s3_start / fps) * 1000)
     if product_meta:
         prod_stem = Path(product_meta["pdf_name"]).stem.upper()

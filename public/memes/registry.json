@@ -78,7 +78,7 @@
         "relax",
         "meditation"
       ],
-      "recommended_sfx": "impact_hit",
+      "recommended_sfx": "whoosh_deep",
       "default_duration_frames": 42,
       "playback_rate": 1.4
     },
@@ -380,7 +380,7 @@
         "success",
         "win"
       ],
-      "recommended_sfx": "impact_hit",
+      "recommended_sfx": "whoosh_deep",
       "default_duration_frames": 46,
       "playback_rate": 1.35
     },
@@ -455,7 +455,7 @@
         "chill",
         "relax"
       ],
-      "recommended_sfx": "impact_hit",
+      "recommended_sfx": "whoosh_deep",
       "default_duration_frames": 44,
       "playback_rate": 1.4
     },
@@ -596,7 +596,7 @@
         "calm",
         "detached"
       ],
-      "recommended_sfx": "impact_hit",
+      "recommended_sfx": "whoosh_deep",
       "default_duration_frames": 44,
       "playback_rate": 1.4
     },
@@ -663,7 +663,7 @@
         "normal",
         "predictable"
       ],
-      "recommended_sfx": "impact_hit",
+      "recommended_sfx": "whoosh_deep",
       "default_duration_frames": 44,
       "playback_rate": 1.35
     },
@@ -1150,7 +1150,7 @@
         "serious",
         "sad"
       ],
-      "recommended_sfx": "impact_hit",
+      "recommended_sfx": "whoosh_deep",
       "default_duration_frames": 40,
       "playback_rate": 1.4
     },
@@ -1286,7 +1286,7 @@
         "relax",
         "breathe"
       ],
-      "recommended_sfx": "impact_hit",
+      "recommended_sfx": "whoosh_deep",
       "default_duration_frames": 44,
       "playback_rate": 1.45
     },
@@ -1354,7 +1354,7 @@
         "quiet",
         "whisper"
       ],
-      "recommended_sfx": "impact_hit",
+      "recommended_sfx": "whoosh_deep",
       "default_duration_frames": 42,
       "playback_rate": 1.45
     },

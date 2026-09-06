@@ -38,7 +38,7 @@ MEMES_DATA = [
             "You stare at the screen for hours"
         ],
         "negative_keywords": ["peace", "calm", "relax", "meditation"],
-        "recommended_sfx": "impact_hit",
+        "recommended_sfx": "whoosh_deep",
         "default_duration_frames": 42,
         "playback_rate": 1.4
     },
@@ -169,7 +169,7 @@ MEMES_DATA = [
             "Watching everything fall apart in seconds"
         ],
         "negative_keywords": ["smile", "happy", "success", "win"],
-        "recommended_sfx": "impact_hit",
+        "recommended_sfx": "whoosh_deep",
         "default_duration_frames": 46,
         "playback_rate": 1.35
     },
@@ -201,7 +201,7 @@ MEMES_DATA = [
             "When the pressure gets so high you freeze"
         ],
         "negative_keywords": ["calm", "stoic", "chill", "relax"],
-        "recommended_sfx": "impact_hit",
+        "recommended_sfx": "whoosh_deep",
         "default_duration_frames": 44,
         "playback_rate": 1.4
     },
@@ -264,7 +264,7 @@ MEMES_DATA = [
             "When you get called out on your own excuses"
         ],
         "negative_keywords": ["innocent", "calm", "detached"],
-        "recommended_sfx": "impact_hit",
+        "recommended_sfx": "whoosh_deep",
         "default_duration_frames": 44,
         "playback_rate": 1.4
     },
@@ -295,7 +295,7 @@ MEMES_DATA = [
             "The moment you realize you were wrong all along"
         ],
         "negative_keywords": ["boring", "normal", "predictable"],
-        "recommended_sfx": "impact_hit",
+        "recommended_sfx": "whoosh_deep",
         "default_duration_frames": 44,
         "playback_rate": 1.35
     },
@@ -513,7 +513,7 @@ MEMES_DATA = [
             "Thinking you had everything figured out"
         ],
         "negative_keywords": ["respect", "serious", "sad"],
-        "recommended_sfx": "impact_hit",
+        "recommended_sfx": "whoosh_deep",
         "default_duration_frames": 40,
         "playback_rate": 1.4
     },
@@ -575,7 +575,7 @@ MEMES_DATA = [
             "The rage of trying to deal with broken systems"
         ],
         "negative_keywords": ["zen", "calm", "relax", "breathe"],
-        "recommended_sfx": "impact_hit",
+        "recommended_sfx": "whoosh_deep",
         "default_duration_frames": 44,
         "playback_rate": 1.45
     },
@@ -606,7 +606,7 @@ MEMES_DATA = [
             "Screaming at the top of your lungs"
         ],
         "negative_keywords": ["soft", "gentle", "quiet", "whisper"],
-        "recommended_sfx": "impact_hit",
+        "recommended_sfx": "whoosh_deep",
         "default_duration_frames": 42,
         "playback_rate": 1.45
     },

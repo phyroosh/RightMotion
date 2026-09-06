@@ -26,7 +26,7 @@ const SFX_CUES: SfxCue[] = [
   },
   {
     "frame": 126,
-    "type": "impact_hit",
+    "type": "whoosh_deep",
     "volume": 0.24
   },
   {
@@ -51,7 +51,7 @@ const SFX_CUES: SfxCue[] = [
   },
   {
     "frame": 152,
-    "type": "impact_hit",
+    "type": "whoosh_deep",
     "volume": 0.32
   },
   {
@@ -76,7 +76,7 @@ const SFX_CUES: SfxCue[] = [
   },
   {
     "frame": 760,
-    "type": "impact_hit",
+    "type": "whoosh_deep",
     "volume": 0.28
   }
 ];
