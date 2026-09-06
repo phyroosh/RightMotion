@@ -126,7 +126,7 @@
       </div>
       <div id="instagramAuthSection" class="hidden text-xs text-gray-500">IG</div>
       <div id="authSection" class="hidden text-xs text-gray-500">YT</div>
-      <button onclick="openSettingsModal()" class="pill-btn-outline px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5"><i data-lucide="settings" class="w-3.5 h-3.5"></i> Settings<span id="settingsStatusDot" class="w-1.5 h-1.5 rounded-full bg-amber-400"></span></button>
+      
       <button onclick="focusTopicInput()" class="pill-btn-primary px-5 py-1.5 rounded-full text-xs font-bold shadow-[0_0_15px_rgba(139,92,246,0.3)]">Create Clip</button>
     </div>
   </header>
@@ -150,7 +150,8 @@
         </p>
 
         <!-- Centered Video Player -->
-        <div class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black mb-12 group">
+        <div id="videoContainer" class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black mb-12 group mx-auto transition-all duration-300">
+          <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-500 text-xs"><i data-lucide="play-circle" class="w-10 h-10 mb-2 opacity-20"></i>No video generated yet</div>
           <video id="videoPlayer" class="w-full h-full object-cover" controls playsinline></video>
           
           <div class="absolute inset-0 pointer-events-none border border-white/5 rounded-2xl"></div>
@@ -183,9 +184,9 @@
         <!-- Bottom Pill Input -->
         <div class="w-full max-w-2xl bg-[#0f0f11] border border-white/10 rounded-full p-1.5 flex items-center shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all focus-within:border-purple-500/50 focus-within:shadow-[0_8px_32px_rgba(139,92,246,0.15)]">
           <div class="pl-4 pr-2">
-            <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
+            <i data-lucide="video" class="w-4 h-4 text-purple-400"></i>
           </div>
-          <input type="text" id="newTopicInput" class="flex-1 bg-transparent border-none outline-none text-white text-sm px-2 placeholder-gray-500" placeholder="Ask me anything. Press '/' for prompt." />
+          <input type="text" id="newTopicInput" class="flex-1 bg-transparent border-none outline-none text-white text-sm px-2 placeholder-gray-500" placeholder="Enter a video topic (e.g. 'Why perfectionism is ruining your life')..." />
           <button onclick="startTopicGeneration()" class="ml-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 hover:opacity-90 transition">
             <i data-lucide="send" class="w-3.5 h-3.5"></i> Generate
           </button>
@@ -2971,22 +2972,30 @@
 
       const isWidescreen = selectedVideo.isLongForm;
 
-      if (isWidescreen) {
-        container.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-2xl flex items-center justify-center group transition-all duration-300";
-        formatLabel.innerHTML = `
-          <i data-lucide="tv" class="w-4 h-4 text-sky-400"></i>
-          16:9 Long-Form Video Essay (1080p)
-        `;
-        activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-sky-500/15 text-sky-300 border border-sky-500/30 flex items-center gap-1.5 shadow-sm";
-        activeBadge.innerHTML = `<i data-lucide="tv" class="w-3.5 h-3.5 text-sky-400"></i> 16:9 Long-Form Essay`;
-      } else {
-        container.className = "relative w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-2xl flex items-center justify-center group transition-all duration-300";
-        formatLabel.innerHTML = `
-          <i data-lucide="smartphone" class="w-4 h-4 text-emerald-400"></i>
-          9:16 YouTube Shorts
-        `;
-        activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 shadow-sm";
-        activeBadge.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-400"></i> 9:16 Shorts`;
+      if (container) {
+        if (isWidescreen) {
+          container.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black mb-12 group mx-auto transition-all duration-300";
+        } else {
+          container.className = "relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black mb-12 group mx-auto transition-all duration-300";
+        }
+      }
+      
+      if (formatLabel) {
+        if (isWidescreen) {
+          formatLabel.innerHTML = `<i data-lucide="tv" class="w-4 h-4 text-sky-400"></i> 16:9 Long-Form Video Essay (1080p)`;
+        } else {
+          formatLabel.innerHTML = `<i data-lucide="smartphone" class="w-4 h-4 text-emerald-400"></i> 9:16 YouTube Shorts`;
+        }
+      }
+      
+      if (activeBadge) {
+        if (isWidescreen) {
+          activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-sky-500/15 text-sky-300 border border-sky-500/30 flex items-center gap-1.5 shadow-sm";
+          activeBadge.innerHTML = `<i data-lucide="tv" class="w-3.5 h-3.5 text-sky-400"></i> 16:9 Long-Form Essay`;
+        } else {
+          activeBadge.className = "px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 shadow-sm";
+          activeBadge.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-400"></i> 9:16 Shorts`;
+        }
       }
 
 
