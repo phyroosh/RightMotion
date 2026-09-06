@@ -124,12 +124,56 @@
       box-shadow: 0 4px 16px rgba(0, 113, 227, 0.4);
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     @keyframes cosmicPulse {
       0%, 100% { opacity: 0.7; transform: scale(1); }
       50% { opacity: 1; transform: scale(1.03); }
     }
     .animate-cosmic-pulse {
       animation: cosmicPulse 6s ease-in-out infinite;
+    }
+
+    @keyframes starPulse {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.85; }
+      50% { transform: scale(1.18) rotate(12deg); opacity: 1; filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.7)); }
+    }
+    .animate-star-pulse {
+      animation: starPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes eqBounce {
+      0%, 100% { height: 4px; }
+      50% { height: 16px; }
+    }
+
+    .hero-showcase-card {
+      transform: perspective(1000px) rotateY(-5deg) rotateX(3deg);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 30px 70px -15px rgba(0, 113, 227, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.12);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(8, 12, 26, 0.88);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+    }
+    .hero-showcase-card:hover {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(-4px);
+      box-shadow: 0 35px 85px -15px rgba(0, 113, 227, 0.55), 0 0 0 1px rgba(56, 189, 248, 0.45);
+    }
+
+    .btn-pill-primary {
+      background: #0071e3;
+      box-shadow: 0 10px 25px -4px rgba(0, 113, 227, 0.5);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-pill-primary:hover {
+      background: #0077ed;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px -4px rgba(0, 113, 227, 0.65);
+    }
+    .btn-pill-primary:active {
+      transform: scale(0.97);
     }
   </style>
 </head>
@@ -138,7 +182,7 @@
   <!-- TOP COMMAND APP BAR -->
   <header class="sticky top-0 z-50 glass-panel border-b border-white/10 px-6 md:px-8 py-3.5 flex items-center justify-between">
     <!-- Left: Brandmark & Studio Version -->
-    <div class="flex items-center gap-3.5 group cursor-pointer" onclick="window.location.reload()">
+    <div class="flex items-center gap-3.5 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
       <div class="relative w-10 h-10 flex items-center justify-center">
         <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-500/30 via-indigo-500/20 to-purple-500/30 blur-md group-hover:blur-lg transition-all duration-300"></div>
         <img src="/logo.svg" alt="RightClips Logo" class="relative w-9 h-9 drop-shadow-[0_0_12px_rgba(56,189,248,0.5)] group-hover:scale-105 transition-transform duration-300" />
@@ -152,27 +196,31 @@
       </div>
     </div>
 
-    <!-- Center: Global Navigation Tabs -->
-    <div class="hidden lg:flex items-center gap-1.5 p-1 rounded-2xl glass-input border border-white/10">
-      <button id="navTabStudio" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-sky-600/40 border border-sky-400/40 flex items-center gap-2 shadow-sm transition">
-        <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-sky-400"></i>
-        <span>Studio Command</span>
+    <!-- Center: Global Modern Nav Links -->
+    <div class="hidden lg:flex items-center gap-1 p-1 rounded-full glass-input border border-white/10 shadow-inner">
+      <button onclick="scrollToSection('heroSection')" id="navTabStudio" class="px-4 py-1.5 rounded-full text-xs font-bold text-white bg-sky-600/40 border border-sky-400/40 flex items-center gap-2 shadow-sm transition cursor-pointer">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-sky-400"></i>
+        <span>Studio</span>
       </button>
-      <button id="navTabMemes" onclick="openMemeBoardModal()" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-2 transition cursor-pointer">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-400"></i>
-        <span>Meme Culture Board</span>
+      <button onclick="scrollToSection('vaultSection')" id="navTabVault" class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-2 transition cursor-pointer">
+        <i data-lucide="film" class="w-3.5 h-3.5 text-slate-400"></i>
+        <span>Production Vault</span>
+      </button>
+      <button onclick="scrollToSection('launchpadSection')" id="navTabLaunchpad" class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-2 transition cursor-pointer">
+        <i data-lucide="send" class="w-3.5 h-3.5 text-slate-400"></i>
+        <span>Launchpad</span>
+      </button>
+      <button id="navTabMemes" onclick="openMemeBoardModal()" class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-2 transition cursor-pointer">
+        <i data-lucide="smile" class="w-3.5 h-3.5 text-purple-400"></i>
+        <span>Memes</span>
         <span class="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">21</span>
-      </button>
-      <button onclick="openSettingsModal()" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-2 transition cursor-pointer">
-        <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5 text-slate-400"></i>
-        <span>Settings & API</span>
       </button>
     </div>
 
-    <!-- Right Header Actions: Telemetry, Accounts & Settings -->
+    <!-- Right Header Actions: Telemetry, Accounts, Settings & Pill CTA -->
     <div class="flex items-center gap-3">
       <!-- Live Engine Telemetry Badge -->
-      <div id="systemHealthBadge" onclick="fetchSystemHealth()" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl glass-input text-emerald-400 text-xs font-mono font-bold border border-emerald-500/30 hover:bg-emerald-500/10 transition cursor-pointer" title="Engine Status • Click to Refresh">
+      <div id="systemHealthBadge" onclick="fetchSystemHealth()" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full glass-input text-emerald-400 text-xs font-mono font-bold border border-emerald-500/30 hover:bg-emerald-500/10 transition cursor-pointer" title="Engine Status • Click to Refresh">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -182,7 +230,7 @@
       
       <!-- Instagram Account Pill -->
       <div id="instagramAuthSection" class="flex items-center gap-2">
-        <div class="flex items-center gap-2 text-slate-400 text-xs px-3 py-1.5 rounded-xl glass-input">
+        <div class="flex items-center gap-2 text-slate-400 text-xs px-3 py-1.5 rounded-full glass-input">
           <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
           Checking IG...
         </div>
@@ -199,41 +247,217 @@
       <!-- Settings & API Button -->
       <button
         onclick="openSettingsModal()"
-        class="px-3.5 py-2 rounded-2xl glass-input hover:bg-white/10 text-xs font-bold text-slate-200 border border-white/10 hover:border-sky-400/50 transition flex items-center gap-2 shadow-md cursor-pointer"
+        class="w-9 h-9 rounded-full glass-input hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 hover:border-sky-400/50 transition flex items-center justify-center shadow-md cursor-pointer relative"
         title="Configure YouTube API & Studio Settings"
       >
         <i data-lucide="settings" class="w-4 h-4 text-sky-400"></i>
-        <span class="hidden sm:inline">Settings</span>
-        <span id="settingsStatusDot" class="w-2 h-2 rounded-full bg-amber-400"></span>
+        <span id="settingsStatusDot" class="w-2 h-2 rounded-full bg-amber-400 absolute top-1 right-1"></span>
+      </button>
+
+      <!-- Primary Pill CTA Button (Matching Reference Screenshot) -->
+      <button
+        onclick="focusTopicInput()"
+        class="btn-pill-primary px-4 sm:px-5 py-2 rounded-full text-white text-xs font-black flex items-center gap-2 cursor-pointer shrink-0"
+      >
+        <span>Create Clip</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
       </button>
     </div>
   </header>
 
-  <!-- COMPACT SOVEREIGN CHANNEL SWITCHER BAR -->
-  <section class="max-w-7xl w-full mx-auto px-6 md:px-8 pt-4 pb-2">
+  <!-- ======================================================== -->
+  <!-- 🌟 HERO SECTION (MODERN SAAS SHOWCASE WITH 3D GLASS CARD) -->
+  <!-- ======================================================== -->
+  <section id="heroSection" class="relative max-w-7xl w-full mx-auto px-6 md:px-8 pt-10 pb-16 lg:py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      
+      <!-- LEFT HERO COLUMN: HEADLINE, HIGHLIGHT DOODLE & COMMAND BAR -->
+      <div class="lg:col-span-7 flex flex-col gap-6 relative">
+        <!-- Golden Star Sparkle #1 (Top-Left) -->
+        <svg class="w-6 h-6 text-amber-400 absolute -top-5 -left-3 animate-star-pulse pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/>
+        </svg>
+
+        <!-- Enterprise Studio Pill -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/25 text-sky-300 text-xs font-mono font-bold w-fit shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+          <span>Next-Gen Autonomous Video Engine</span>
+        </div>
+
+        <!-- Giant Bold Hero Headline with Hand-Drawn Yellow Circle Doodle -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.12]">
+          Autonomous AI Studio<br />
+          <span class="relative inline-block mt-1">
+            <span>Viral In </span>
+            <span class="relative inline-block px-2 text-amber-300">
+              Seconds
+              <!-- Hand-drawn yellow scribble / circular doodle -->
+              <svg class="absolute -inset-x-3 -inset-y-2 w-[calc(100%+24px)] h-[calc(100%+16px)] pointer-events-none" viewBox="0 0 160 52" fill="none" preserveAspectRatio="none">
+                <path d="M12,28 C20,10 130,6 150,22 C158,28 152,44 110,48 C60,53 18,48 10,36 C5,28 20,16 55,12 C95,8 142,12 152,26" stroke="#facc15" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </span>
+        </h1>
+
+        <!-- Subtitle Paragraph -->
+        <p class="text-base sm:text-lg text-slate-300 max-w-xl font-medium leading-relaxed">
+          Formulate 2-beat curiosity gap scripts, high-retention tactical memes, clean Vox-style editorial visuals, and 4K thumbnail covers in a single automated click.
+        </p>
+
+        <!-- Sleek Pill Creation Bar -->
+        <div class="glass-panel p-2 sm:p-2.5 rounded-2xl sm:rounded-full flex flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-xl border border-white/15 shadow-2xl bg-black/60 mt-1">
+          <div class="relative flex-1 flex items-center pl-3.5">
+            <i data-lucide="sparkles" class="w-4 h-4 text-sky-400 mr-2 shrink-0"></i>
+            <input
+              type="text"
+              id="newTopicInput"
+              placeholder="Enter topic prompt or add niche below..."
+              class="w-full text-xs sm:text-sm bg-transparent border-0 text-white placeholder-slate-400 focus:outline-none"
+              onkeydown="if (event.key === 'Enter') addManualTopic()"
+            />
+          </div>
+          <button
+            onclick="addManualTopic()"
+            class="btn-pill-primary px-6 py-2.5 sm:py-3 rounded-full text-white text-xs sm:text-sm font-black flex items-center justify-center gap-2 cursor-pointer shrink-0"
+          >
+            <span>Create Clip</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Prompt Quick-Tags -->
+        <div class="flex flex-wrap items-center gap-1.5 max-w-xl">
+          <span class="text-[10px] font-mono text-slate-400 font-bold uppercase mr-1">Niches:</span>
+          <button type="button" onclick="insertPromptTag('{Self Improvement}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-500/30 transition cursor-pointer">+ {Self Improvement}</button>
+          <button type="button" onclick="insertPromptTag('{Finance}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition cursor-pointer">+ {Finance}</button>
+          <button type="button" onclick="insertPromptTag('{Health}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 transition cursor-pointer">+ {Health}</button>
+          <button type="button" onclick="insertPromptTag('{facecam}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-500/30 transition cursor-pointer">+ {facecam}</button>
+          <span class="text-[10px] font-mono text-slate-400 font-bold uppercase ml-2 mr-1">Modifiers:</span>
+          <button type="button" onclick="insertPromptTag('{andrew}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition cursor-pointer">+ {andrew}</button>
+          <button type="button" onclick="insertPromptTag('{no meme}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition cursor-pointer">+ {no meme}</button>
+        </div>
+
+        <!-- Topic Pipeline Progression Drawer -->
+        <div class="glass-card rounded-2xl p-3.5 border border-white/10 max-w-xl shadow-xl">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-300 mb-2">
+            <div class="flex items-center gap-2">
+              <i data-lucide="git-commit" class="w-3.5 h-3.5 text-cyan-400"></i>
+              <span class="font-bold">Content Progression Pipeline</span>
+            </div>
+            <span id="pipelineActiveNichePill" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-semibold">{Self Improvement}</span>
+          </div>
+          <div id="pipelineList" class="flex flex-col gap-1.5 max-h-[140px] overflow-y-auto custom-scrollbar pr-1">
+            <div class="p-2 text-center text-slate-500 text-xs">Loading topic pipeline...</div>
+          </div>
+        </div>
+
+        <!-- Golden Star Sparkle #2 (Bottom-Right of Left Col) -->
+        <svg class="w-5 h-5 text-amber-400 absolute -bottom-3 right-12 animate-star-pulse pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/>
+        </svg>
+      </div>
+
+      <!-- RIGHT HERO COLUMN: 3D FLOATING SHOWCASE CARD & GLOWING BACKDROP -->
+      <div class="lg:col-span-5 flex items-center justify-center relative">
+        <!-- Glowing Circular Backdrop Disc -->
+        <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-sky-500/30 via-blue-600/40 to-indigo-600/25 blur-3xl -z-10 animate-pulse"></div>
+
+        <!-- Golden Star Sparkle #3 (Top Right of Card) -->
+        <svg class="w-7 h-7 text-amber-300 absolute -top-6 -right-4 animate-star-pulse pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/>
+        </svg>
+
+        <!-- 3D Tilted Showcase Glass Card -->
+        <div class="hero-showcase-card w-full max-w-[360px] rounded-3xl p-4 sm:p-5 flex flex-col gap-3.5 border border-white/15 relative overflow-hidden backdrop-blur-2xl">
+          <!-- Card Header Strip with Soundwave Equalizer -->
+          <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+            <div class="flex items-center gap-2">
+              <div class="flex items-end gap-0.5 h-4">
+                <span class="w-0.5 h-2 bg-sky-400 rounded-full animate-[eqBounce_0.8s_ease-in-out_infinite]"></span>
+                <span class="w-0.5 h-3.5 bg-blue-400 rounded-full animate-[eqBounce_0.8s_ease-in-out_0.2s_infinite]"></span>
+                <span class="w-0.5 h-1.5 bg-indigo-400 rounded-full animate-[eqBounce_0.8s_ease-in-out_0.4s_infinite]"></span>
+                <span class="w-0.5 h-3 bg-cyan-400 rounded-full animate-[eqBounce_0.8s_ease-in-out_0.1s_infinite]"></span>
+              </div>
+              <span id="playerFormatLabel" class="text-xs font-mono font-bold text-slate-200">Video Preview</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span id="activeFormatBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Shorts</span>
+              <span id="videoStatsBadge" class="text-[10px] font-mono text-slate-400">Ready</span>
+            </div>
+          </div>
+
+          <!-- Video Player Container (Adaptive Ratio) -->
+          <div id="videoContainer" class="relative w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300">
+            <video
+              id="videoPlayer"
+              class="w-full h-full object-contain bg-black"
+              controls
+              playsinline
+              preload="metadata"
+            ></video>
+            <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-slate-500 pointer-events-none">
+              <i data-lucide="video-off" class="w-10 h-10 mb-2 stroke-[1.5]"></i>
+              <span class="text-xs">Select a clip below to preview</span>
+            </div>
+          </div>
+
+          <!-- Multi-Platform Status Banner -->
+          <div id="uploadStatusBanner" class="hidden rounded-xl bg-black/40 border border-white/10 p-2 text-xs"></div>
+
+          <!-- Quick Action Buttons -->
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button
+              onclick="openQuickPublishModal()"
+              class="btn-pill-primary px-3 py-2 rounded-xl text-white text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <span>🚀 1-Click Post</span>
+            </button>
+            <button
+              onclick="scrollToSection('launchpadSection')"
+              class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer border border-white/10"
+            >
+              <i data-lucide="settings-2" class="w-3.5 h-3.5 text-sky-400"></i>
+              <span>Launchpad</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Golden Star Sparkle #4 (Bottom Left of Card) -->
+        <svg class="w-5 h-5 text-amber-400 absolute -bottom-4 -left-3 animate-star-pulse pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 📺 SOVEREIGN CHANNEL NICHE SELECTOR DECK -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl w-full mx-auto px-6 md:px-8 pb-6">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
       <!-- 1. Judy Insights Switcher -->
       <div
         id="switch-self_improvement"
         onclick="selectNicheChannel('self_improvement')"
-        class="channel-switch-chip px-3.5 py-2.5 rounded-xl border-2 border-sky-500/60 bg-sky-950/35 flex items-center justify-between transition-all cursor-pointer group shadow-lg shadow-sky-500/10"
+        class="channel-switch-chip px-4 py-3 rounded-2xl border-2 border-sky-500/60 bg-sky-950/35 flex items-center justify-between transition-all cursor-pointer group shadow-lg shadow-sky-500/10 hover:border-sky-400"
       >
-        <div class="flex items-center gap-2.5 min-w-0">
-          <span class="text-lg">🧘</span>
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="text-2xl">🧘</span>
           <div class="min-w-0">
-            <div class="flex items-center gap-1.5 leading-tight">
+            <div class="flex items-center gap-2 leading-tight">
               <span class="text-xs font-bold text-white group-hover:text-sky-300 transition">Judy Insights</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-sky-500/20 text-sky-300 font-semibold">{Self Improvement}</span>
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-semibold">{Self Improvement}</span>
             </div>
-            <div class="text-[10px] font-mono text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
-              <span class="text-red-400">● YT</span>
-              <span class="text-pink-400">● IG</span>
+            <div class="text-[11px] font-mono text-slate-400 truncate flex items-center gap-2 mt-1">
+              <span class="text-red-400 font-bold">● YT</span>
+              <span class="text-pink-400 font-bold">● IG</span>
               <span id="deck-yt-self_improvement" class="text-slate-300 font-semibold truncate">@thejudyinsights</span>
             </div>
           </div>
         </div>
-        <button onclick="event.stopPropagation(); openNicheAccountModal('self_improvement')" class="text-slate-500 hover:text-white p-1 rounded hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
-          <i data-lucide="settings-2" class="w-3.5 h-3.5 text-sky-400"></i>
+        <button onclick="event.stopPropagation(); openNicheAccountModal('self_improvement')" class="text-slate-500 hover:text-white p-1.5 rounded-xl hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
+          <i data-lucide="settings-2" class="w-4 h-4 text-sky-400"></i>
         </button>
       </div>
 
@@ -241,24 +465,24 @@
       <div
         id="switch-finance"
         onclick="selectNicheChannel('finance')"
-        class="channel-switch-chip px-3.5 py-2.5 rounded-xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm"
+        class="channel-switch-chip px-4 py-3 rounded-2xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm"
       >
-        <div class="flex items-center gap-2.5 min-w-0">
-          <span class="text-lg">💹</span>
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="text-2xl">💹</span>
           <div class="min-w-0">
-            <div class="flex items-center gap-1.5 leading-tight">
+            <div class="flex items-center gap-2 leading-tight">
               <span class="text-xs font-bold text-slate-300 group-hover:text-emerald-300 transition">Apex Wealth</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 font-semibold">{Finance}</span>
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-semibold">{Finance}</span>
             </div>
-            <div class="text-[10px] font-mono text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
+            <div class="text-[11px] font-mono text-slate-400 truncate flex items-center gap-2 mt-1">
               <span class="text-slate-500">○ YT</span>
               <span class="text-slate-500">○ IG</span>
               <span id="deck-yt-finance" class="text-slate-400 font-semibold truncate">+ Connect</span>
             </div>
           </div>
         </div>
-        <button onclick="event.stopPropagation(); openNicheAccountModal('finance')" class="text-slate-500 hover:text-white p-1 rounded hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
-          <i data-lucide="settings-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+        <button onclick="event.stopPropagation(); openNicheAccountModal('finance')" class="text-slate-500 hover:text-white p-1.5 rounded-xl hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
+          <i data-lucide="settings-2" class="w-4 h-4 text-emerald-400"></i>
         </button>
       </div>
 
@@ -266,371 +490,278 @@
       <div
         id="switch-health"
         onclick="selectNicheChannel('health')"
-        class="channel-switch-chip px-3.5 py-2.5 rounded-xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm"
+        class="channel-switch-chip px-4 py-3 rounded-2xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm"
       >
-        <div class="flex items-center gap-2.5 min-w-0">
-          <span class="text-lg">🫀</span>
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="text-2xl">🫀</span>
           <div class="min-w-0">
-            <div class="flex items-center gap-1.5 leading-tight">
+            <div class="flex items-center gap-2 leading-tight">
               <span class="text-xs font-bold text-slate-300 group-hover:text-cyan-300 transition">BioMatrix</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-400 font-semibold">{Health}</span>
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 font-semibold">{Health}</span>
             </div>
-            <div class="text-[10px] font-mono text-slate-400 truncate flex items-center gap-1.5 mt-0.5">
+            <div class="text-[11px] font-mono text-slate-400 truncate flex items-center gap-2 mt-1">
               <span class="text-slate-500">○ YT</span>
               <span class="text-slate-500">○ IG</span>
               <span id="deck-yt-health" class="text-slate-400 font-semibold truncate">+ Connect</span>
             </div>
           </div>
         </div>
-        <button onclick="event.stopPropagation(); openNicheAccountModal('health')" class="text-slate-500 hover:text-white p-1 rounded hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
-          <i data-lucide="settings-2" class="w-3.5 h-3.5 text-cyan-400"></i>
+        <button onclick="event.stopPropagation(); openNicheAccountModal('health')" class="text-slate-500 hover:text-white p-1.5 rounded-xl hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
+          <i data-lucide="settings-2" class="w-4 h-4 text-cyan-400"></i>
         </button>
       </div>
     </div>
   </section>
 
-  <!-- MAIN STUDIO WORKSPACE -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-    
-    <!-- LEFT COLUMN: CONTENT PIPELINE & PRODUCTION LIBRARY (5 Cols) -->
-    <section class="lg:col-span-5 flex flex-col gap-4">
-
-      <!-- 💡 AI VIDEO TOPIC PIPELINE STATION -->
-      <div class="glass-panel rounded-2xl p-4 flex flex-col gap-3 border border-white/10 bg-[#090d16]/90 shadow-xl">
-        <!-- Pipeline Header -->
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <i data-lucide="git-commit" class="w-4 h-4 text-cyan-400"></i>
-            <span class="text-xs font-mono font-bold uppercase text-white tracking-wider">Content Pipeline</span>
-            <span id="pipelineActiveNichePill" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-semibold">{Self Improvement}</span>
+  <!-- ======================================================== -->
+  <!-- 🎬 SECTION: PRODUCTION VAULT (VIDEO LIBRARY) -->
+  <!-- ======================================================== -->
+  <section id="vaultSection" class="max-w-7xl w-full mx-auto px-6 md:px-8 py-8">
+    <div class="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-2xl border border-white/10">
+      
+      <!-- Vault Header Strip -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-white/10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#0071e3] to-indigo-600 flex items-center justify-center text-white shadow-lg">
+            <i data-lucide="film" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-black text-white tracking-tight">Production Vault</h2>
+            <p class="text-xs text-slate-400">Manage, preview, and release rendered short-form videos</p>
           </div>
         </div>
-
-        <!-- Quick Add Manual Topic Bar -->
         <div class="flex items-center gap-2">
-          <div class="relative flex-1">
-            <input
-              type="text"
-              id="newTopicInput"
-              placeholder="+ Add external or manual topic..."
-              class="w-full text-xs px-3 py-1.5 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50"
-              onkeydown="if (event.key === 'Enter') addManualTopic()"
-            />
-          </div>
           <button
-            onclick="addManualTopic()"
-            class="text-xs px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold transition flex items-center gap-1 cursor-pointer shrink-0"
+            id="syncYtBtn"
+            onclick="syncWithYouTube()"
+            class="text-xs px-3 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5 transition font-bold cursor-pointer"
+            title="Sync upload & schedule status directly with YouTube channel"
           >
-            <span>Add</span>
+            <i data-lucide="refresh-cw" class="w-3 h-3"></i>
+            <span>Sync YouTube</span>
           </button>
-        </div>
-
-        <!-- Quick Prompt Tags (Channel Niches & Engine Modifiers) -->
-        <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
-          <span class="text-[10px] font-mono text-slate-500 font-bold uppercase mr-0.5">Niche:</span>
-          <button type="button" onclick="insertPromptTag('{Self Improvement}')" class="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-500/30 transition cursor-pointer">+ {Self Improvement}</button>
-          <button type="button" onclick="insertPromptTag('{Finance}')" class="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition cursor-pointer">+ {Finance}</button>
-          <button type="button" onclick="insertPromptTag('{Health}')" class="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 transition cursor-pointer">+ {Health}</button>
-          <button type="button" onclick="insertPromptTag('{facecam}')" class="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-500/30 transition cursor-pointer">+ {facecam}</button>
-          <span class="text-[10px] font-mono text-slate-500 font-bold uppercase ml-1 mr-0.5">Opt:</span>
-          <button type="button" onclick="insertPromptTag('{andrew}')" class="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition cursor-pointer">+ {andrew}</button>
-          <button type="button" onclick="insertPromptTag('{no meme}')" class="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition cursor-pointer">+ {no meme}</button>
-        </div>
-
-        <!-- Topic Pipeline Progression List -->
-        <div id="pipelineList" class="flex flex-col gap-1.5 max-h-[220px] overflow-y-auto custom-scrollbar pr-1">
-          <div class="p-3 text-center text-slate-500 text-xs">Loading topic pipeline...</div>
+          <button id="refreshVideosBtn" onclick="loadVideos()" class="text-xs px-3 py-1.5 rounded-full glass-input text-slate-300 hover:text-white flex items-center gap-1 transition cursor-pointer">
+            <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+            <span>Reload</span>
+          </button>
         </div>
       </div>
 
-      <!-- PRODUCTION LIBRARY (Clean Compact Format & Status Toggles) -->
-      <div class="glass-panel rounded-2xl p-4 flex flex-col gap-3 shadow-xl border border-white/10">
-        
-        <!-- Header & Sync Buttons -->
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2 text-xs font-mono font-bold uppercase text-slate-300 tracking-wider">
-            <i data-lucide="film" class="w-4 h-4 text-[#0071e3]"></i>
-            <span>Production Library</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button
-              id="syncYtBtn"
-              onclick="syncWithYouTube()"
-              class="text-xs px-2.5 py-1 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 transition font-bold"
-              title="Sync upload & schedule status directly with YouTube channel"
-            >
-              <i data-lucide="refresh-cw" class="w-3 h-3"></i> Sync YT
-            </button>
-            <button id="refreshVideosBtn" onclick="loadVideos()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1 transition">
-              <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> Reload
-            </button>
-          </div>
-        </div>
-
-        <!-- Library Live Search Bar -->
-        <div class="relative">
-          <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+      <!-- Search & Status Filter Controls -->
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+        <!-- Live Keystroke Search Input -->
+        <div class="relative flex-1 max-w-md">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
           <input
             type="text"
             id="librarySearchInput"
-            placeholder="Search productions by title or niche..."
+            placeholder="Search vault by title, topic, or niche..."
             oninput="filterVideosBySearch()"
-            class="w-full text-xs pl-8 pr-3 py-1.5 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500/50"
+            class="w-full text-xs pl-9 pr-3 py-2 rounded-full bg-black/60 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500/50"
           />
         </div>
 
-        <!-- Filter Segmented Tabs (NO "ALL" TABS — DIRECT TOGGLES) -->
-        <div class="grid grid-cols-4 gap-1 p-1 bg-black/50 rounded-xl border border-white/5 text-[11px] font-bold">
+        <!-- Filter Segmented Tabs -->
+        <div class="flex flex-wrap items-center gap-1 p-1 bg-black/50 rounded-full border border-white/10 text-[11px] font-bold">
           <button
             id="tab-shorts"
             onclick="setTab('shorts')"
-            class="tab-btn active py-1.5 px-1 rounded-lg transition flex items-center justify-center gap-1 text-white bg-[#0071e3]"
+            class="tab-btn active py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-white bg-[#0071e3] cursor-pointer"
             title="9:16 Vertical Shorts"
           >
             <span>📱 Shorts</span>
-            <span id="badge-count-shorts" class="text-[10px] font-mono px-1 rounded-full bg-white/20">0</span>
+            <span id="badge-count-shorts" class="text-[10px] font-mono px-1.5 rounded-full bg-white/20">0</span>
           </button>
           <button
             id="tab-longform"
             onclick="setTab('longform')"
-            class="tab-btn py-1.5 px-1 rounded-lg transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            class="tab-btn py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200 cursor-pointer"
             title="16:9 Long-Form Productions"
           >
             <span>🎬 16:9</span>
-            <span id="badge-count-longform" class="text-[10px] font-mono px-1 rounded-full bg-sky-500/20 text-sky-300">0</span>
+            <span id="badge-count-longform" class="text-[10px] font-mono px-1.5 rounded-full bg-sky-500/20 text-sky-300">0</span>
           </button>
           <button
             id="tab-unuploaded"
             onclick="setTab('unuploaded')"
-            class="tab-btn py-1.5 px-1 rounded-lg transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            class="tab-btn py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200 cursor-pointer"
             title="Videos ready to be posted"
           >
             <span>⏳ Ready</span>
-            <span id="badge-count-unuploaded" class="text-[10px] font-mono px-1 rounded-full bg-amber-500/20 text-amber-300">0</span>
+            <span id="badge-count-unuploaded" class="text-[10px] font-mono px-1.5 rounded-full bg-amber-500/20 text-amber-300">0</span>
           </button>
           <button
             id="tab-uploaded"
             onclick="setTab('uploaded')"
-            class="tab-btn py-1.5 px-1 rounded-lg transition flex items-center justify-center gap-1 text-slate-400 hover:text-slate-200"
+            class="tab-btn py-1.5 px-3 rounded-full transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200 cursor-pointer"
             title="Videos already uploaded or scheduled"
           >
             <span>✅ Live</span>
-            <span id="badge-count-uploaded" class="text-[10px] font-mono px-1 rounded-full bg-purple-500/20 text-purple-300">0</span>
+            <span id="badge-count-uploaded" class="text-[10px] font-mono px-1.5 rounded-full bg-purple-500/20 text-purple-300">0</span>
           </button>
         </div>
+      </div>
 
-        <!-- Categorized List Container -->
-        <div id="videoList" class="flex flex-col gap-2 max-h-[320px] overflow-y-auto custom-scrollbar pr-1">
-          <div class="p-6 rounded-2xl glass-input text-center text-slate-400 text-xs">
-            Loading production library...
-          </div>
+      <!-- Video Grid Container -->
+      <div id="videoList" class="min-h-[220px]">
+        <div class="p-8 rounded-2xl glass-input text-center text-slate-400 text-xs">
+          Loading production library...
         </div>
       </div>
 
-      <!-- Live Video Player Preview (Adaptive 16:9 / 9:16 Ratio) -->
-      <div class="glass-panel rounded-3xl p-5 flex flex-col items-center gap-4 shadow-xl">
-        <div class="w-full flex items-center justify-between text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
-          <span id="playerFormatLabel" class="flex items-center gap-2">
-            <i data-lucide="play-circle" class="w-4 h-4 text-emerald-400"></i>
-            Video Preview Player
-          </span>
-          <span id="videoStatsBadge" class="text-slate-500 text-[11px]">No video selected</span>
-        </div>
+    </div>
+  </section>
 
-        <!-- Video Container -->
-        <div id="videoContainer" class="relative w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-2xl flex items-center justify-center group transition-all duration-300">
-          <video
-            id="videoPlayer"
-            class="w-full h-full object-contain bg-black"
-            controls
-            playsinline
-            preload="metadata"
-          ></video>
-          <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-slate-500 pointer-events-none">
-            <i data-lucide="video-off" class="w-10 h-10 mb-2 stroke-[1.5]"></i>
-            <span class="text-xs">Select a clip above to preview</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- High-Converting Thumbnail Studio Card (Adaptive 9:16 Shorts / 16:9 Long-Form) -->
-      <div class="glass-panel rounded-3xl p-5 flex flex-col gap-3.5 shadow-xl">
-        <div class="w-full flex items-center justify-between text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
-          <span class="flex items-center gap-2">
-            <i data-lucide="image" class="w-4 h-4 text-amber-400"></i>
-            Thumbnail & Visual Cover
-          </span>
-          <span id="thumbnailBadge" class="text-emerald-400 text-[11px] font-mono font-bold flex items-center gap-1">
-            <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Ready
-          </span>
-        </div>
-
-        <!-- Thumbnail Display Container (Adaptive Ratio) -->
-        <div id="thumbnailContainer" class="relative w-full max-w-[260px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300">
-          <img
-            id="thumbnailImg"
-            src=""
-            alt="Thumbnail Preview"
-            class="w-full h-full object-contain transition duration-300 group-hover:scale-[1.02]"
-            style="display: none;"
-          />
-          <div id="thumbnailPlaceholder" class="flex flex-col items-center justify-center p-6 text-center text-slate-500">
-            <i data-lucide="image-plus" class="w-10 h-10 mb-2 stroke-[1.5] text-slate-600"></i>
-            <span class="text-xs">Generating thumbnail...</span>
-          </div>
-
-          <!-- Overlay Hover Controls -->
-          <div id="thumbnailOverlay" class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2.5 backdrop-blur-[2px]">
-            <button
-              onclick="downloadThumbnail()"
-              id="downloadThumbBtn"
-              class="px-3 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white backdrop-blur-md transition shadow-lg flex items-center gap-1.5 text-xs font-bold"
-              title="Download 4K Thumbnail PNG"
-            >
-              <i data-lucide="download" class="w-3.5 h-3.5"></i> Download
-            </button>
-            <a
-              id="viewThumbFullBtn"
-              href="#"
-              target="_blank"
-              class="px-3 py-1.5 rounded-xl bg-sky-500/30 hover:bg-sky-500/40 text-sky-200 backdrop-blur-md border border-sky-400/30 transition shadow-lg flex items-center gap-1.5 text-xs font-bold"
-            >
-              <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> View
-            </a>
-          </div>
-        </div>
-
-        <!-- Thumbnail Info & Auto-Upload Status -->
-        <div class="flex items-center justify-between gap-3 pt-1 border-t border-white/5">
-          <div class="flex items-center gap-2 text-[11px] text-slate-400 font-mono">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
-            <span>Auto-attached on YouTube Upload</span>
-          </div>
-          <span id="thumbnailRatioBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 font-bold">
-            9:16 Shorts
-          </span>
-        </div>
-      </div>
-
-    </section>
-
-
-    <!-- RIGHT COLUMN: VIRAL METADATA & POSTING / SCHEDULING STATION (7 Cols) -->
-    <section class="lg:col-span-7 flex flex-col gap-6">
+  <!-- ======================================================== -->
+  <!-- 🚀 SECTION: RELEASE LAUNCHPAD (METADATA & MULTI-PLATFORM) -->
+  <!-- ======================================================== -->
+  <section id="launchpadSection" class="max-w-7xl w-full mx-auto px-6 md:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
-      <div class="glass-panel rounded-3xl p-6 md:p-7 flex flex-col gap-6 shadow-xl">
-        
-        <!-- Header -->
-        <div class="flex items-center justify-between border-b border-white/10 pb-4">
-          <div class="flex items-center gap-2.5">
-            <div class="p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
-              <i data-lucide="file-text" class="w-4 h-4"></i>
+      <!-- LEFT LAUNCHPAD: THUMBNAIL STUDIO & COVER CARD (5 Cols) -->
+      <div class="lg:col-span-5 flex flex-col gap-4">
+        <div class="glass-panel rounded-3xl p-6 flex flex-col gap-4 shadow-xl border border-white/10">
+          <div class="w-full flex items-center justify-between text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
+            <span class="flex items-center gap-2">
+              <i data-lucide="image" class="w-4 h-4 text-amber-400"></i>
+              Thumbnail & Visual Cover
+            </span>
+            <span id="thumbnailBadge" class="text-emerald-400 text-[11px] font-mono font-bold flex items-center gap-1">
+              <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Ready
+            </span>
+          </div>
+
+          <!-- Thumbnail Display Container (Adaptive Ratio) -->
+          <div id="thumbnailContainer" class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300">
+            <img
+              id="thumbnailImg"
+              src=""
+              alt="Thumbnail Preview"
+              class="w-full h-full object-contain transition duration-300 group-hover:scale-[1.02]"
+            />
+            <div id="thumbnailPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-slate-500 pointer-events-none">
+              <i data-lucide="image-off" class="w-10 h-10 mb-2 stroke-[1.5]"></i>
+              <span class="text-xs">Select a clip to view thumbnail</span>
             </div>
-            <div>
-              <h2 class="text-base font-bold text-white">Publishing & Scheduling Station</h2>
-              <p class="text-xs text-slate-400">Viral metadata generator, instant publishing & scheduled release</p>
+            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
+              <button
+                id="viewThumbFullBtn"
+                onclick="openThumbnailFull()"
+                class="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-bold backdrop-blur-md transition flex items-center gap-1.5 cursor-pointer"
+              >
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> View 4K
+              </button>
             </div>
           </div>
-          <span id="activeFormatBadge" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
-            <i data-lucide="zap" class="w-3 h-3"></i> 9:16 Shorts
-          </span>
-        </div>
 
-        <!-- UPLOAD / SCHEDULE STATUS BANNER -->
-        <div id="uploadStatusBanner" class="p-4 rounded-2xl border transition flex items-center justify-between gap-3">
-          <!-- Dynamic Status Banner populated by selectVideo() -->
-        </div>
-
-        <!-- Viral Title -->
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center justify-between text-xs font-bold text-slate-300">
-            <label for="metaTitle" class="flex items-center gap-1.5">
-              <span>Video Title</span>
-              <span class="text-[#38bdf8]">*</span>
-            </label>
-            <span id="titleCharCount" class="font-mono text-slate-500 text-[11px]">0 / 100</span>
+          <!-- Ratio & Category Badges -->
+          <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs font-mono">
+            <span id="thumbnailRatioBadge" class="text-slate-400 font-bold">9:16 Shorts Cover</span>
+            <span class="text-amber-400 font-bold">Frame 0 High-CTR</span>
           </div>
-          <input
-            type="text"
-            id="metaTitle"
-            maxlength="100"
-            placeholder="Enter viral title..."
-            class="w-full px-4 py-3 rounded-2xl glass-input text-sm text-white font-medium placeholder:text-slate-600"
-          />
         </div>
+      </div>
 
-        <!-- Description & Hashtags / Chapters -->
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center justify-between text-xs font-bold text-slate-300">
-            <label for="metaDescription" class="flex items-center gap-1.5">
-              <span>Description, Chapters & Viral Hashtags</span>
-            </label>
-            <span class="text-[11px] text-slate-500 font-mono">Includes SEO hashtags</span>
+      <!-- RIGHT LAUNCHPAD: METADATA & MULTI-PLATFORM PUBLISHER (7 Cols) -->
+      <div class="lg:col-span-7 flex flex-col gap-4">
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-xl border border-white/10">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-[#0071e3] to-sky-400 flex items-center justify-center text-white font-bold text-xs">
+                ⚡
+              </div>
+              <h3 class="text-sm font-black text-white uppercase tracking-wider">Metadata & Release Station</h3>
+            </div>
+            <span id="schedModeBadge" class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">Direct Mode</span>
           </div>
-          <textarea
-            id="metaDescription"
-            rows="6"
-            placeholder="Paste or edit description..."
-            class="w-full px-4 py-3 rounded-2xl glass-input text-xs text-slate-200 font-medium placeholder:text-slate-600 leading-relaxed custom-scrollbar"
-          ></textarea>
-        </div>
 
-        <!-- Tags Manager -->
-        <div class="flex flex-col gap-2">
-          <label class="text-xs font-bold text-slate-300 flex items-center justify-between">
-            <span>Tags & Keywords</span>
-            <span class="text-[11px] text-slate-500 font-normal">Press Enter to add tag</span>
-          </label>
-          <div id="tagsContainer" class="p-3 rounded-2xl glass-input min-h-[50px] flex flex-wrap gap-2 items-center">
-            <!-- Tag chips inserted via JS -->
+          <!-- Video Title with Char Counter -->
+          <div class="flex flex-col gap-1.5">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-300">
+              <label for="editTitle" class="font-bold flex items-center gap-1.5">
+                <i data-lucide="type" class="w-3.5 h-3.5 text-sky-400"></i>
+                <span>Viral Video Title</span>
+              </label>
+              <span id="titleCharCount" class="text-slate-500">0/100</span>
+            </div>
             <input
               type="text"
-              id="tagInput"
-              placeholder="+ Add tag..."
-              class="bg-transparent text-xs text-white placeholder:text-slate-600 outline-none flex-1 min-w-[90px]"
+              id="editTitle"
+              placeholder="e.g. Why You Pretend Not to Care (The Fear of Trying) #Shorts"
+              class="w-full text-xs px-3.5 py-2.5 rounded-xl glass-input text-white focus:border-sky-400"
+              oninput="updateTitleCharCount()"
             />
+            <input type="hidden" id="metaTitle" />
           </div>
-        <!-- High-Retention Suggested Pinned Comment -->
-        <div class="flex flex-col gap-2 p-4 rounded-2xl glass-input border border-sky-500/30 bg-sky-500/5 shadow-lg">
-          <div class="flex items-center justify-between">
-            <label class="text-xs font-bold text-sky-300 flex items-center gap-2">
-              <i data-lucide="message-square-quote" class="w-4 h-4 text-sky-400"></i>
-              <span>Suggested Pinned Discussion Comment</span>
+
+          <!-- Description Box -->
+          <div class="flex flex-col gap-1.5">
+            <label for="metaDescription" class="text-xs font-mono font-bold text-slate-300 flex items-center gap-1.5">
+              <i data-lucide="align-left" class="w-3.5 h-3.5 text-indigo-400"></i>
+              <span>Description</span>
             </label>
-            <button
-              type="button"
-              id="copyPinnedCommentBtn"
-              onclick="copyPinnedComment()"
-              class="px-2.5 py-1 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 text-[11px] font-bold border border-sky-500/30 flex items-center gap-1.5 transition"
-              title="Copy comment to clipboard"
-            >
-              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-              <span id="copyPinnedCommentBtnText">Copy</span>
-            </button>
+            <textarea
+              id="metaDescription"
+              rows="3"
+              placeholder="Detailed description with scientific context..."
+              class="w-full text-xs p-3 rounded-xl glass-input text-white focus:border-sky-400 custom-scrollbar"
+            ></textarea>
           </div>
-          <textarea
-            id="metaPinnedComment"
-            rows="3"
-            placeholder="AI-generated high-retention pinned comment prompt to spark audience replies..."
-            class="w-full px-3 py-2.5 rounded-xl bg-black/40 border border-sky-500/20 text-xs text-slate-200 font-medium placeholder:text-slate-600 leading-relaxed custom-scrollbar focus:border-sky-400 outline-none"
-          ></textarea>
-          <div class="flex items-center justify-between pt-1 border-t border-sky-500/10 text-[11px]">
-            <label class="flex items-center gap-2 text-slate-300 cursor-pointer select-none">
-              <input type="checkbox" id="autoPostCommentCheck" checked class="rounded bg-slate-900 border-slate-700 text-sky-500 focus:ring-sky-500" />
-              <span>Auto-post comment on upload</span>
+
+          <!-- Hashtags Manager -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-mono font-bold text-slate-300 flex items-center gap-1.5">
+              <i data-lucide="hash" class="w-3.5 h-3.5 text-pink-400"></i>
+              <span>Hashtags & Tags</span>
             </label>
-            <button
-              type="button"
-              id="postCommentNowBtn"
-              onclick="postCommentNow()"
-              class="hidden px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold border border-emerald-500/30 transition flex items-center gap-1"
-              title="Post this comment to the live YouTube video right now"
-            >
-              <i data-lucide="send" class="w-3 h-3"></i>
-              <span>Post Now</span>
-            </button>
+            <div id="tagsContainer" class="flex flex-wrap items-center gap-1.5 p-2 rounded-xl glass-input min-h-[42px]">
+              <input
+                type="text"
+                id="tagInput"
+                placeholder="+ Add tag..."
+                class="text-xs bg-transparent border-none text-white focus:outline-none min-w-[80px]"
+                onkeydown="if(event.key==='Enter'||event.key===','){event.preventDefault();addTagFromInput();}"
+              />
+            </div>
           </div>
-        </div>
+
+          <!-- Interactive Spoken CTA & Pinned Comment -->
+          <div class="flex flex-col gap-1.5 p-3.5 rounded-2xl bg-sky-950/20 border border-sky-500/20">
+            <div class="flex items-center justify-between">
+              <label for="metaPinnedComment" class="text-xs font-mono font-bold text-sky-300 flex items-center gap-1.5">
+                <i data-lucide="message-square" class="w-3.5 h-3.5 text-sky-400"></i>
+                <span>Provocative Pinned Comment</span>
+              </label>
+              <button
+                type="button"
+                onclick="copyPinnedComment()"
+                class="text-[10px] font-mono px-2 py-0.5 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-500/30 transition flex items-center gap-1 cursor-pointer"
+              >
+                <i data-lucide="copy" class="w-3 h-3"></i>
+                <span id="copyPinnedCommentBtnText">Copy</span>
+              </button>
+            </div>
+            <textarea
+              id="metaPinnedComment"
+              rows="2"
+              placeholder="Question for you: What's the one thing you secretly care about? 👇"
+              class="w-full text-xs p-2.5 rounded-xl glass-input text-white focus:border-sky-400 custom-scrollbar"
+            ></textarea>
+            <div class="flex items-center justify-between pt-1">
+              <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+                <input type="checkbox" id="autoPostCommentCheck" checked class="rounded border-white/20 text-sky-500 focus:ring-sky-500" />
+                <span>Auto-pin on upload</span>
+              </label>
+              <button
+                id="postCommentNowBtn"
+                onclick="postPinnedCommentNow()"
+                class="text-[11px] font-bold text-slate-400 hover:text-white transition flex items-center gap-1 cursor-pointer"
+              >
+                <i data-lucide="send" class="w-3 h-3"></i>
+                <span>Post Comment Now</span>
+              </button>
+            </div>
+          </div>
 
         <!-- Settings Row: Visibility / Scheduling & Category -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
@@ -851,8 +982,8 @@
         </div>
 
       </div>
-
-    </section>
+    </div>
+  </section>
 
   </main>
 
@@ -1591,6 +1722,22 @@
         } catch (e) {
           console.warn('Lucide icon warning:', e);
         }
+      }
+    }
+
+    // Smooth Navigation & Quick Focus Helpers
+    function focusTopicInput() {
+      const el = document.getElementById('newTopicInput');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => el.focus(), 300);
+      }
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
@@ -2765,7 +2912,7 @@
       }
 
       videoList.innerHTML = `
-        <div class="flex flex-col gap-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
           ${list.map(v => renderCardHtml(v)).join('')}
         </div>
       `;
