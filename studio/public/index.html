@@ -189,7 +189,7 @@
             </button>
 
             <!-- Floating Video Switcher Dropdown -->
-            <div id="videoSwitcherDropdown" class="hidden absolute top-12 right-0 w-72 max-h-[400px] overflow-y-auto custom-scrollbar frosted-glass-card rounded-2xl border border-white/20 shadow-2xl z-50 flex-col p-2 gap-1 backdrop-blur-3xl">
+            <div id="videoSwitcherDropdown" class="hidden absolute top-12 right-0 w-72 max-h-[400px] overflow-y-auto custom-scrollbar bg-[#050505]/95 backdrop-blur-[64px] rounded-2xl border border-[#fdf8e1]/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-[100] flex-col p-2 gap-1">
               <!-- JS Populates List Here -->
             </div>
           </div>
@@ -1762,7 +1762,7 @@
             </div>
             <div class="flex items-center justify-between text-[9px] font-mono opacity-60">
               <span>${v.sizeMb} MB</span>
-              <span>${formatDateTime(v.modifiedAt).relative}</span>
+              <span>${formatDateTime(v.modifiedAt)}</span>
             </div>
           </button>
         `;
