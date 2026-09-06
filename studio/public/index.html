@@ -20,504 +20,193 @@
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at 12% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
-                  radial-gradient(circle at 88% 22%, rgba(139, 92, 246, 0.07) 0%, transparent 50%),
-                  radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
-                  #030712;
-      color: #f8fafc;
+      background-color: #000000;
+      color: #ffffff;
       min-height: 100vh;
     }
 
-    .glass-panel {
-      background: rgba(10, 15, 29, 0.72);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+    .sleek-card {
+      background-color: #050505;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
     }
 
-    .glass-card {
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .glass-card:hover {
-      border-color: rgba(56, 189, 248, 0.3);
-      box-shadow: 0 10px 30px -5px rgba(56, 189, 248, 0.15);
-      transform: translateY(-2px);
+    .sleek-grid-bg {
+      background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), 
+                        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
     }
 
-    .glass-input {
-      background: rgba(8, 12, 24, 0.85);
+    .sleek-panel {
+      background-color: #0a0a0c;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+    
+    .sleek-panel:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .sleek-input {
+      background-color: #0f0f12;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.2s ease;
+      border-radius: 12px;
+      color: #ffffff;
+      transition: all 0.2s;
     }
-    .glass-input:focus {
-      border-color: #0071e3;
-      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.25);
+    .sleek-input:focus {
+      border-color: rgba(139, 92, 246, 0.5);
       outline: none;
     }
 
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.02);
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.25);
+    .text-gradient {
+      background: linear-gradient(to right, #e8b0ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .gradient-border-btn {
-      background: linear-gradient(135deg, #0071e3 0%, #6366f1 100%);
-      box-shadow: 0 10px 30px -5px rgba(0, 113, 227, 0.4);
-      transition: all 0.2s ease;
+    .pill-btn-primary {
+      background: linear-gradient(to right, #4f46e5, #7c3aed);
+      color: white;
+      transition: opacity 0.2s;
     }
-    .gradient-border-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 15px 35px -5px rgba(0, 113, 227, 0.6);
-    }
-    .gradient-border-btn:active {
-      transform: scale(0.98);
+    .pill-btn-primary:hover {
+      opacity: 0.9;
     }
 
-    .ig-gradient-btn {
-      background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      box-shadow: 0 10px 30px -5px rgba(220, 39, 67, 0.4);
-      transition: all 0.2s ease;
+    .pill-btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: background 0.2s;
     }
-    .ig-gradient-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 15px 35px -5px rgba(220, 39, 67, 0.6);
-    }
-    .ig-gradient-btn:active {
-      transform: scale(0.98);
-    }
-
-    .blast-gradient-btn {
-      background: linear-gradient(135deg, #ff007a 0%, #7928ca 50%, #0070f3 100%);
-      box-shadow: 0 10px 30px -5px rgba(121, 40, 202, 0.4);
-      transition: all 0.2s ease;
-    }
-    .blast-gradient-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 15px 35px -5px rgba(121, 40, 202, 0.6);
-    }
-    .blast-gradient-btn:active {
-      transform: scale(0.98);
+    .pill-btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .tab-btn.active {
-      background: #0071e3;
-      color: #ffffff;
-      border-color: #0071e3;
-      box-shadow: 0 4px 16px rgba(0, 113, 227, 0.4);
+      background: rgba(139, 92, 246, 0.15);
+      color: #e8b0ff;
+      border-color: rgba(139, 92, 246, 0.3);
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    @keyframes cosmicPulse {
-      0%, 100% { opacity: 0.7; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.03); }
-    }
-    .animate-cosmic-pulse {
-      animation: cosmicPulse 6s ease-in-out infinite;
-    }
-
-    @keyframes starPulse {
-      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.85; }
-      50% { transform: scale(1.18) rotate(12deg); opacity: 1; filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.7)); }
-    }
-    .animate-star-pulse {
-      animation: starPulse 4s ease-in-out infinite;
-    }
-
-    @keyframes eqBounce {
-      0%, 100% { height: 4px; }
-      50% { height: 16px; }
-    }
-
-    .hero-showcase-card {
-      transform: perspective(1000px) rotateY(-5deg) rotateX(3deg);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 30px 70px -15px rgba(0, 113, 227, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.12);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(8, 12, 26, 0.88);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-    }
-    .hero-showcase-card:hover {
-      transform: perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(-4px);
-      box-shadow: 0 35px 85px -15px rgba(0, 113, 227, 0.55), 0 0 0 1px rgba(56, 189, 248, 0.45);
-    }
-
-    .btn-pill-primary {
-      background: #0071e3;
-      box-shadow: 0 10px 25px -4px rgba(0, 113, 227, 0.5);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .btn-pill-primary:hover {
-      background: #0077ed;
-      transform: translateY(-1px);
-      box-shadow: 0 14px 32px -4px rgba(0, 113, 227, 0.65);
-    }
-    .btn-pill-primary:active {
-      transform: scale(0.97);
-    }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased custom-scrollbar">
 
   <!-- TOP COMMAND APP BAR -->
-  <header class="sticky top-0 z-50 glass-panel border-b border-white/10 px-6 md:px-8 py-3.5 flex items-center justify-between">
-    <!-- Left: Brandmark & Studio Version -->
-    <div class="flex items-center gap-3.5 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-      <div class="relative w-10 h-10 flex items-center justify-center">
-        <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-500/30 via-indigo-500/20 to-purple-500/30 blur-md group-hover:blur-lg transition-all duration-300"></div>
-        <img src="/logo.svg" alt="RightClips Logo" class="relative w-9 h-9 drop-shadow-[0_0_12px_rgba(56,189,248,0.5)] group-hover:scale-105 transition-transform duration-300" />
+  <header class="sticky top-0 z-50 bg-[#000000]/90 backdrop-blur-md border-b border-white/5 px-6 md:px-8 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-2">
+        <img src="logo.svg" alt="RightClips" class="w-6 h-6" />
+        <span class="text-white font-bold text-lg tracking-tight">RightClips</span>
       </div>
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="font-black text-lg tracking-tight text-white">Right<span class="bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Clips</span></span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-sky-500/15 text-sky-300 border border-sky-500/30">v3.5 • Enterprise AI</span>
-        </div>
-        <p class="text-[11px] text-slate-400 font-medium">Autonomous Short-Form Video Studio • Multi-Platform Engine</p>
-      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-gray-400 font-medium">
+        <button onclick="scrollToSection('heroSection')" class="hover:text-white transition">Studio</button>
+        <button onclick="scrollToSection('vaultSection')" class="hover:text-white transition">Vault</button>
+        <button onclick="scrollToSection('launchpadSection')" class="hover:text-white transition">Launchpad</button>
+        <button onclick="openMemeBoardModal()" class="hover:text-white transition">Memes</button>
+      </nav>
     </div>
-
-    <!-- Center: Global Modern Nav Links -->
-    <div class="hidden lg:flex items-center gap-1 p-1 rounded-full glass-input border border-white/10 shadow-inner">
-      <button onclick="scrollToSection('heroSection')" id="navTabStudio" class="px-4 py-1.5 rounded-full text-xs font-bold text-white bg-sky-600/40 border border-sky-400/40 flex items-center gap-2 shadow-sm transition cursor-pointer">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-sky-400"></i>
-        <span>Studio</span>
-      </button>
-      <button onclick="scrollToSection('vaultSection')" id="navTabVault" class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-2 transition cursor-pointer">
-        <i data-lucide="film" class="w-3.5 h-3.5 text-slate-400"></i>
-        <span>Production Vault</span>
-      </button>
-      <button onclick="scrollToSection('launchpadSection')" id="navTabLaunchpad" class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-2 transition cursor-pointer">
-        <i data-lucide="send" class="w-3.5 h-3.5 text-slate-400"></i>
-        <span>Launchpad</span>
-      </button>
-      <button id="navTabMemes" onclick="openMemeBoardModal()" class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-2 transition cursor-pointer">
-        <i data-lucide="smile" class="w-3.5 h-3.5 text-purple-400"></i>
-        <span>Memes</span>
-        <span class="px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">21</span>
-      </button>
-    </div>
-
-    <!-- Right Header Actions: Telemetry, Accounts, Settings & Pill CTA -->
-    <div class="flex items-center gap-3">
-      <!-- Live Engine Telemetry Badge -->
-      <div id="systemHealthBadge" onclick="fetchSystemHealth()" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full glass-input text-emerald-400 text-xs font-mono font-bold border border-emerald-500/30 hover:bg-emerald-500/10 transition cursor-pointer" title="Engine Status • Click to Refresh">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        <span id="systemHealthText">ONLINE</span>
+    <div class="flex items-center gap-4">
+      <div id="systemHealthBadge" onclick="fetchSystemHealth()" class="hidden sm:flex items-center gap-2 text-emerald-400 text-xs font-mono font-bold cursor-pointer">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> <span id="systemHealthText">ONLINE</span>
       </div>
-      
-      <!-- Instagram Account Pill -->
-      <div id="instagramAuthSection" class="flex items-center gap-2">
-        <div class="flex items-center gap-2 text-slate-400 text-xs px-3 py-1.5 rounded-full glass-input">
-          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-          Checking IG...
-        </div>
-      </div>
-
-      <!-- YouTube Auth Profile / Connect Button -->
-      <div id="authSection" class="flex items-center gap-3">
-        <div class="flex items-center gap-2 text-slate-400 text-xs">
-          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-          Connecting to YouTube...
-        </div>
-      </div>
-
-      <!-- Settings & API Button -->
-      <button
-        onclick="openSettingsModal()"
-        class="w-9 h-9 rounded-full glass-input hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 hover:border-sky-400/50 transition flex items-center justify-center shadow-md cursor-pointer relative"
-        title="Configure YouTube API & Studio Settings"
-      >
-        <i data-lucide="settings" class="w-4 h-4 text-sky-400"></i>
-        <span id="settingsStatusDot" class="w-2 h-2 rounded-full bg-amber-400 absolute top-1 right-1"></span>
-      </button>
-
-      <!-- Primary Pill CTA Button (Matching Reference Screenshot) -->
-      <button
-        onclick="focusTopicInput()"
-        class="btn-pill-primary px-4 sm:px-5 py-2 rounded-full text-white text-xs font-black flex items-center gap-2 cursor-pointer shrink-0"
-      >
-        <span>Create Clip</span>
-        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-      </button>
+      <div id="instagramAuthSection" class="hidden text-xs text-gray-500">IG</div>
+      <div id="authSection" class="hidden text-xs text-gray-500">YT</div>
+      <button onclick="openSettingsModal()" class="pill-btn-outline px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5"><i data-lucide="settings" class="w-3.5 h-3.5"></i> Settings<span id="settingsStatusDot" class="w-1.5 h-1.5 rounded-full bg-amber-400"></span></button>
+      <button onclick="focusTopicInput()" class="pill-btn-primary px-5 py-1.5 rounded-full text-xs font-bold shadow-[0_0_15px_rgba(139,92,246,0.3)]">Create Clip</button>
     </div>
   </header>
 
   <!-- ======================================================== -->
-  <!-- 🌟 HERO SECTION (MODERN SAAS SHOWCASE WITH 3D GLASS CARD) -->
-  <!-- ======================================================== -->
-  <section id="heroSection" class="relative max-w-7xl w-full mx-auto px-6 md:px-8 pt-10 pb-16 lg:py-16">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+  <!-- 🌟 HERO SECTION -->
+  <section id="heroSection" class="relative max-w-6xl w-full mx-auto px-4 md:px-8 pt-8 pb-16">
+    <div class="sleek-card w-full rounded-[32px] p-8 md:p-14 flex flex-col items-center text-center">
       
-      <!-- LEFT HERO COLUMN: HEADLINE, HIGHLIGHT DOODLE & COMMAND BAR -->
-      <div class="lg:col-span-7 flex flex-col gap-6 relative">
-        <!-- Golden Star Sparkle #1 (Top-Left) -->
-        <svg class="w-6 h-6 text-amber-400 absolute -top-5 -left-3 animate-star-pulse pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/>
-        </svg>
+      <!-- Background Grid & Radial Glow -->
+      <div class="absolute inset-0 sleek-grid-bg pointer-events-none opacity-30"></div>
+      <div class="absolute bottom-[-15%] left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-600/15 blur-[100px] rounded-full pointer-events-none"></div>
 
-        <!-- Enterprise Studio Pill -->
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/25 text-sky-300 text-xs font-mono font-bold w-fit shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
-          <span>Next-Gen Autonomous Video Engine</span>
-        </div>
-
-        <!-- Giant Bold Hero Headline with Hand-Drawn Yellow Circle Doodle -->
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.12]">
-          Autonomous AI Studio<br />
-          <span class="relative inline-block mt-1">
-            <span>Viral In </span>
-            <span class="relative inline-block px-2 text-amber-300">
-              Seconds
-              <!-- Hand-drawn yellow scribble / circular doodle -->
-              <svg class="absolute -inset-x-3 -inset-y-2 w-[calc(100%+24px)] h-[calc(100%+16px)] pointer-events-none" viewBox="0 0 160 52" fill="none" preserveAspectRatio="none">
-                <path d="M12,28 C20,10 130,6 150,22 C158,28 152,44 110,48 C60,53 18,48 10,36 C5,28 20,16 55,12 C95,8 142,12 152,26" stroke="#facc15" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </span>
-          </span>
+      <div class="relative z-10 w-full flex flex-col items-center">
+        <!-- Title & Subtitle -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-4 leading-tight">
+          All-In-One <span class="text-gradient">Video Studio</span>
         </h1>
-
-        <!-- Subtitle Paragraph -->
-        <p class="text-base sm:text-lg text-slate-300 max-w-xl font-medium leading-relaxed">
-          Formulate 2-beat curiosity gap scripts, high-retention tactical memes, clean Vox-style editorial visuals, and 4K thumbnail covers in a single automated click.
+        <p class="text-gray-400 text-sm md:text-base max-w-2xl mb-12 leading-relaxed">
+          Discover how our voice AI transforms your content by generating high-retention psychological hooks, neural voiceovers, kinetic captions, and 4K thumbnails in seconds.
         </p>
 
-        <!-- Sleek Pill Creation Bar -->
-        <div class="glass-panel p-2 sm:p-2.5 rounded-2xl sm:rounded-full flex flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-xl border border-white/15 shadow-2xl bg-black/60 mt-1">
-          <div class="relative flex-1 flex items-center pl-3.5">
-            <i data-lucide="sparkles" class="w-4 h-4 text-sky-400 mr-2 shrink-0"></i>
-            <input
-              type="text"
-              id="newTopicInput"
-              placeholder="Enter topic prompt or add niche below..."
-              class="w-full text-xs sm:text-sm bg-transparent border-0 text-white placeholder-slate-400 focus:outline-none"
-              onkeydown="if (event.key === 'Enter') addManualTopic()"
-            />
+        <!-- Centered Video Player -->
+        <div class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black mb-12 group">
+          <video id="videoPlayer" class="w-full h-full object-cover" controls playsinline></video>
+          
+          <div class="absolute inset-0 pointer-events-none border border-white/5 rounded-2xl"></div>
+          
+          <!-- Floating Status / Pipeline (Styled like the white floating element in reference) -->
+          <div id="topicPipeline" class="hidden absolute bottom-4 left-1/2 -translate-x-1/2 w-[85%] bg-white rounded-xl p-3 shadow-2xl flex-col items-center gap-2 z-20 transition-all">
+             <div class="flex items-center justify-between w-full">
+               <div class="flex items-center gap-2">
+                 <img src="logo.svg" class="w-5 h-5 rounded-full bg-black p-0.5" />
+                 <span id="pipelineStageText" class="text-xs font-bold text-gray-800">Synthesizing...</span>
+               </div>
+               <i data-lucide="loader-2" class="w-3.5 h-3.5 text-blue-600 animate-spin"></i>
+             </div>
+             <div class="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+               <div id="pipelineProgress" class="h-full bg-blue-600 transition-all duration-300" style="width: 0%"></div>
+             </div>
           </div>
-          <button
-            onclick="addManualTopic()"
-            class="btn-pill-primary px-6 py-2.5 sm:py-3 rounded-full text-white text-xs sm:text-sm font-black flex items-center justify-center gap-2 cursor-pointer shrink-0"
-          >
-            <span>Create Clip</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </div>
+
+        <!-- Quick Tag Chips -->
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
+          <button onclick="insertTag('{Self Improvement}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{Self Improvement}</button>
+          <button onclick="insertTag('{Finance}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{Finance}</button>
+          <button onclick="insertTag('{Health}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{Health}</button>
+          <button onclick="insertTag('{facecam}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{facecam}</button>
+          <button onclick="insertTag('{andrew}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{andrew}</button>
+          <button onclick="insertTag('{no meme}')" class="px-3 py-1 rounded-full border border-white/10 bg-[#111] text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">{no meme}</button>
+        </div>
+
+        <!-- Bottom Pill Input -->
+        <div class="w-full max-w-2xl bg-[#0f0f11] border border-white/10 rounded-full p-1.5 flex items-center shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all focus-within:border-purple-500/50 focus-within:shadow-[0_8px_32px_rgba(139,92,246,0.15)]">
+          <div class="pl-4 pr-2">
+            <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
+          </div>
+          <input type="text" id="newTopicInput" class="flex-1 bg-transparent border-none outline-none text-white text-sm px-2 placeholder-gray-500" placeholder="Ask me anything. Press '/' for prompt." />
+          <button onclick="startTopicGeneration()" class="ml-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 hover:opacity-90 transition">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i> Generate
           </button>
         </div>
-
-        <!-- Prompt Quick-Tags -->
-        <div class="flex flex-wrap items-center gap-1.5 max-w-xl">
-          <span class="text-[10px] font-mono text-slate-400 font-bold uppercase mr-1">Niches:</span>
-          <button type="button" onclick="insertPromptTag('{Self Improvement}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-500/30 transition cursor-pointer">+ {Self Improvement}</button>
-          <button type="button" onclick="insertPromptTag('{Finance}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition cursor-pointer">+ {Finance}</button>
-          <button type="button" onclick="insertPromptTag('{Health}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 transition cursor-pointer">+ {Health}</button>
-          <button type="button" onclick="insertPromptTag('{facecam}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-500/30 transition cursor-pointer">+ {facecam}</button>
-          <span class="text-[10px] font-mono text-slate-400 font-bold uppercase ml-2 mr-1">Modifiers:</span>
-          <button type="button" onclick="insertPromptTag('{andrew}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition cursor-pointer">+ {andrew}</button>
-          <button type="button" onclick="insertPromptTag('{no meme}')" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition cursor-pointer">+ {no meme}</button>
-        </div>
-
-        <!-- Topic Pipeline Progression Drawer -->
-        <div class="glass-card rounded-2xl p-3.5 border border-white/10 max-w-xl shadow-xl">
-          <div class="flex items-center justify-between text-xs font-mono text-slate-300 mb-2">
-            <div class="flex items-center gap-2">
-              <i data-lucide="git-commit" class="w-3.5 h-3.5 text-cyan-400"></i>
-              <span class="font-bold">Content Progression Pipeline</span>
-            </div>
-            <span id="pipelineActiveNichePill" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-semibold">{Self Improvement}</span>
-          </div>
-          <div id="pipelineList" class="flex flex-col gap-1.5 max-h-[140px] overflow-y-auto custom-scrollbar pr-1">
-            <div class="p-2 text-center text-slate-500 text-xs">Loading topic pipeline...</div>
-          </div>
-        </div>
-
-        <!-- Golden Star Sparkle #2 (Bottom-Right of Left Col) -->
-        <svg class="w-5 h-5 text-amber-400 absolute -bottom-3 right-12 animate-star-pulse pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/>
-        </svg>
       </div>
-
-      <!-- RIGHT HERO COLUMN: 3D FLOATING SHOWCASE CARD & GLOWING BACKDROP -->
-      <div class="lg:col-span-5 flex items-center justify-center relative">
-        <!-- Glowing Circular Backdrop Disc -->
-        <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-sky-500/30 via-blue-600/40 to-indigo-600/25 blur-3xl -z-10 animate-pulse"></div>
-
-        <!-- Golden Star Sparkle #3 (Top Right of Card) -->
-        <svg class="w-7 h-7 text-amber-300 absolute -top-6 -right-4 animate-star-pulse pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/>
-        </svg>
-
-        <!-- 3D Tilted Showcase Glass Card -->
-        <div class="hero-showcase-card w-full max-w-[360px] rounded-3xl p-4 sm:p-5 flex flex-col gap-3.5 border border-white/15 relative overflow-hidden backdrop-blur-2xl">
-          <!-- Card Header Strip with Soundwave Equalizer -->
-          <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
-            <div class="flex items-center gap-2">
-              <div class="flex items-end gap-0.5 h-4">
-                <span class="w-0.5 h-2 bg-sky-400 rounded-full animate-[eqBounce_0.8s_ease-in-out_infinite]"></span>
-                <span class="w-0.5 h-3.5 bg-blue-400 rounded-full animate-[eqBounce_0.8s_ease-in-out_0.2s_infinite]"></span>
-                <span class="w-0.5 h-1.5 bg-indigo-400 rounded-full animate-[eqBounce_0.8s_ease-in-out_0.4s_infinite]"></span>
-                <span class="w-0.5 h-3 bg-cyan-400 rounded-full animate-[eqBounce_0.8s_ease-in-out_0.1s_infinite]"></span>
-              </div>
-              <span id="playerFormatLabel" class="text-xs font-mono font-bold text-slate-200">Video Preview</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span id="activeFormatBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Shorts</span>
-              <span id="videoStatsBadge" class="text-[10px] font-mono text-slate-400">Ready</span>
-            </div>
-          </div>
-
-          <!-- Video Player Container (Adaptive Ratio) -->
-          <div id="videoContainer" class="relative w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-black/90 border border-white/10 shadow-2xl flex items-center justify-center group mx-auto transition-all duration-300">
-            <video
-              id="videoPlayer"
-              class="w-full h-full object-contain bg-black"
-              controls
-              playsinline
-              preload="metadata"
-            ></video>
-            <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-slate-500 pointer-events-none">
-              <i data-lucide="video-off" class="w-10 h-10 mb-2 stroke-[1.5]"></i>
-              <span class="text-xs">Select a clip below to preview</span>
-            </div>
-          </div>
-
-          <!-- Multi-Platform Status Banner -->
-          <div id="uploadStatusBanner" class="hidden rounded-xl bg-black/40 border border-white/10 p-2 text-xs"></div>
-
-          <!-- Quick Action Buttons -->
-          <div class="grid grid-cols-2 gap-2 pt-1">
-            <button
-              onclick="openQuickPublishModal()"
-              class="btn-pill-primary px-3 py-2 rounded-xl text-white text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer"
-            >
-              <span>🚀 1-Click Post</span>
-            </button>
-            <button
-              onclick="scrollToSection('launchpadSection')"
-              class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer border border-white/10"
-            >
-              <i data-lucide="settings-2" class="w-3.5 h-3.5 text-sky-400"></i>
-              <span>Launchpad</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Golden Star Sparkle #4 (Bottom Left of Card) -->
-        <svg class="w-5 h-5 text-amber-400 absolute -bottom-4 -left-3 animate-star-pulse pointer-events-none" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0 L14.5 9.5 L24 12 L14.5 14.5 L12 24 L9.5 14.5 L0 12 L9.5 9.5 Z"/>
-        </svg>
-      </div>
-
     </div>
   </section>
 
-  <!-- ======================================================== -->
-  <!-- 📺 SOVEREIGN CHANNEL NICHE SELECTOR DECK -->
-  <!-- ======================================================== -->
-  <section class="max-w-7xl w-full mx-auto px-6 md:px-8 pb-6">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-      <!-- 1. Judy Insights Switcher -->
-      <div
-        id="switch-self_improvement"
-        onclick="selectNicheChannel('self_improvement')"
-        class="channel-switch-chip px-4 py-3 rounded-2xl border-2 border-sky-500/60 bg-sky-950/35 flex items-center justify-between transition-all cursor-pointer group shadow-lg shadow-sky-500/10 hover:border-sky-400"
-      >
-        <div class="flex items-center gap-3 min-w-0">
-          <span class="text-2xl">🧘</span>
-          <div class="min-w-0">
-            <div class="flex items-center gap-2 leading-tight">
-              <span class="text-xs font-bold text-white group-hover:text-sky-300 transition">Judy Insights</span>
-              <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-semibold">{Self Improvement}</span>
-            </div>
-            <div class="text-[11px] font-mono text-slate-400 truncate flex items-center gap-2 mt-1">
-              <span class="text-red-400 font-bold">● YT</span>
-              <span class="text-pink-400 font-bold">● IG</span>
-              <span id="deck-yt-self_improvement" class="text-slate-300 font-semibold truncate">@thejudyinsights</span>
-            </div>
-          </div>
-        </div>
-        <button onclick="event.stopPropagation(); openNicheAccountModal('self_improvement')" class="text-slate-500 hover:text-white p-1.5 rounded-xl hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
-          <i data-lucide="settings-2" class="w-4 h-4 text-sky-400"></i>
-        </button>
-      </div>
-
-      <!-- 2. Apex Wealth Switcher -->
-      <div
-        id="switch-finance"
-        onclick="selectNicheChannel('finance')"
-        class="channel-switch-chip px-4 py-3 rounded-2xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm"
-      >
-        <div class="flex items-center gap-3 min-w-0">
-          <span class="text-2xl">💹</span>
-          <div class="min-w-0">
-            <div class="flex items-center gap-2 leading-tight">
-              <span class="text-xs font-bold text-slate-300 group-hover:text-emerald-300 transition">Apex Wealth</span>
-              <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-semibold">{Finance}</span>
-            </div>
-            <div class="text-[11px] font-mono text-slate-400 truncate flex items-center gap-2 mt-1">
-              <span class="text-slate-500">○ YT</span>
-              <span class="text-slate-500">○ IG</span>
-              <span id="deck-yt-finance" class="text-slate-400 font-semibold truncate">+ Connect</span>
-            </div>
-          </div>
-        </div>
-        <button onclick="event.stopPropagation(); openNicheAccountModal('finance')" class="text-slate-500 hover:text-white p-1.5 rounded-xl hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
-          <i data-lucide="settings-2" class="w-4 h-4 text-emerald-400"></i>
-        </button>
-      </div>
-
-      <!-- 3. BioMatrix Switcher -->
-      <div
-        id="switch-health"
-        onclick="selectNicheChannel('health')"
-        class="channel-switch-chip px-4 py-3 rounded-2xl border border-white/10 bg-black/40 hover:bg-white/5 flex items-center justify-between transition-all cursor-pointer group opacity-60 hover:opacity-90 shadow-sm"
-      >
-        <div class="flex items-center gap-3 min-w-0">
-          <span class="text-2xl">🫀</span>
-          <div class="min-w-0">
-            <div class="flex items-center gap-2 leading-tight">
-              <span class="text-xs font-bold text-slate-300 group-hover:text-cyan-300 transition">BioMatrix</span>
-              <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 font-semibold">{Health}</span>
-            </div>
-            <div class="text-[11px] font-mono text-slate-400 truncate flex items-center gap-2 mt-1">
-              <span class="text-slate-500">○ YT</span>
-              <span class="text-slate-500">○ IG</span>
-              <span id="deck-yt-health" class="text-slate-400 font-semibold truncate">+ Connect</span>
-            </div>
-          </div>
-        </div>
-        <button onclick="event.stopPropagation(); openNicheAccountModal('health')" class="text-slate-500 hover:text-white p-1.5 rounded-xl hover:bg-white/10 transition cursor-pointer" title="Configure Bound Accounts">
-          <i data-lucide="settings-2" class="w-4 h-4 text-cyan-400"></i>
-        </button>
-      </div>
-    </div>
+  <!-- 📺 CHANNELS DECK -->
+  <section class="max-w-6xl w-full mx-auto px-4 md:px-8 pb-16 hidden">
+    <!-- Preserved IDs for channel active states, though visually hidden or minimalized if user wants pure UI. Let's keep them as sleek panels. -->
+    <div id="switch-self_improvement" class="hidden"></div>
+    <div id="switch-finance" class="hidden"></div>
+    <div id="switch-health" class="hidden"></div>
   </section>
 
   <!-- ======================================================== -->
   <!-- 🎬 SECTION: PRODUCTION VAULT (VIDEO LIBRARY) -->
   <!-- ======================================================== -->
   <section id="vaultSection" class="max-w-7xl w-full mx-auto px-6 md:px-8 py-8">
-    <div class="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-2xl border border-white/10">
+    <div class="sleek-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-2xl border border-white/10">
       
       <!-- Vault Header Strip -->
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-white/10">
@@ -540,7 +229,7 @@
             <i data-lucide="refresh-cw" class="w-3 h-3"></i>
             <span>Sync YouTube</span>
           </button>
-          <button id="refreshVideosBtn" onclick="loadVideos()" class="text-xs px-3 py-1.5 rounded-full glass-input text-slate-300 hover:text-white flex items-center gap-1 transition cursor-pointer">
+          <button id="refreshVideosBtn" onclick="loadVideos()" class="text-xs px-3 py-1.5 rounded-full sleek-input text-slate-300 hover:text-white flex items-center gap-1 transition cursor-pointer">
             <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
             <span>Reload</span>
           </button>
@@ -604,7 +293,7 @@
 
       <!-- Video Grid Container -->
       <div id="videoList" class="min-h-[220px]">
-        <div class="p-8 rounded-2xl glass-input text-center text-slate-400 text-xs">
+        <div class="p-8 rounded-2xl sleek-input text-center text-slate-400 text-xs">
           Loading production library...
         </div>
       </div>
@@ -620,7 +309,7 @@
       
       <!-- LEFT LAUNCHPAD: THUMBNAIL STUDIO & COVER CARD (5 Cols) -->
       <div class="lg:col-span-5 flex flex-col gap-4">
-        <div class="glass-panel rounded-3xl p-6 flex flex-col gap-4 shadow-xl border border-white/10">
+        <div class="sleek-panel rounded-3xl p-6 flex flex-col gap-4 shadow-xl border border-white/10">
           <div class="w-full flex items-center justify-between text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">
             <span class="flex items-center gap-2">
               <i data-lucide="image" class="w-4 h-4 text-amber-400"></i>
@@ -664,7 +353,7 @@
 
       <!-- RIGHT LAUNCHPAD: METADATA & MULTI-PLATFORM PUBLISHER (7 Cols) -->
       <div class="lg:col-span-7 flex flex-col gap-4">
-        <div class="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-xl border border-white/10">
+        <div class="sleek-panel rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-xl border border-white/10">
           <div class="flex items-center justify-between border-b border-white/10 pb-3">
             <div class="flex items-center gap-2.5">
               <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-[#0071e3] to-sky-400 flex items-center justify-center text-white font-bold text-xs">
@@ -688,7 +377,7 @@
               type="text"
               id="editTitle"
               placeholder="e.g. Why You Pretend Not to Care (The Fear of Trying) #Shorts"
-              class="w-full text-xs px-3.5 py-2.5 rounded-xl glass-input text-white focus:border-sky-400"
+              class="w-full text-xs px-3.5 py-2.5 rounded-xl sleek-input text-white focus:border-sky-400"
               oninput="updateTitleCharCount()"
             />
             <input type="hidden" id="metaTitle" />
@@ -704,7 +393,7 @@
               id="metaDescription"
               rows="3"
               placeholder="Detailed description with scientific context..."
-              class="w-full text-xs p-3 rounded-xl glass-input text-white focus:border-sky-400 custom-scrollbar"
+              class="w-full text-xs p-3 rounded-xl sleek-input text-white focus:border-sky-400 custom-scrollbar"
             ></textarea>
           </div>
 
@@ -714,7 +403,7 @@
               <i data-lucide="hash" class="w-3.5 h-3.5 text-pink-400"></i>
               <span>Hashtags & Tags</span>
             </label>
-            <div id="tagsContainer" class="flex flex-wrap items-center gap-1.5 p-2 rounded-xl glass-input min-h-[42px]">
+            <div id="tagsContainer" class="flex flex-wrap items-center gap-1.5 p-2 rounded-xl sleek-input min-h-[42px]">
               <input
                 type="text"
                 id="tagInput"
@@ -745,7 +434,7 @@
               id="metaPinnedComment"
               rows="2"
               placeholder="Question for you: What's the one thing you secretly care about? 👇"
-              class="w-full text-xs p-2.5 rounded-xl glass-input text-white focus:border-sky-400 custom-scrollbar"
+              class="w-full text-xs p-2.5 rounded-xl sleek-input text-white focus:border-sky-400 custom-scrollbar"
             ></textarea>
             <div class="flex items-center justify-between pt-1">
               <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
@@ -775,7 +464,7 @@
             <select
               id="metaPrivacy"
               onchange="onPrivacyChange()"
-              class="px-4 py-3 rounded-2xl glass-input text-xs text-white font-semibold cursor-pointer"
+              class="px-4 py-3 rounded-2xl sleek-input text-xs text-white font-semibold cursor-pointer"
             >
               <option value="public" class="bg-slate-900 text-emerald-400">🌐 Public (Immediate Live)</option>
               <option value="scheduled" class="bg-slate-900 text-purple-400">📅 Scheduled Release (Upload now, publish later)</option>
@@ -789,7 +478,7 @@
             <label class="text-xs font-bold text-slate-300">Category</label>
             <select
               id="metaCategory"
-              class="px-4 py-3 rounded-2xl glass-input text-xs text-white font-semibold cursor-pointer"
+              class="px-4 py-3 rounded-2xl sleek-input text-xs text-white font-semibold cursor-pointer"
             >
               <option value="27" class="bg-slate-900">🎓 Education & Self Improvement</option>
               <option value="22" class="bg-slate-900">👤 People & Blogs</option>
@@ -801,7 +490,7 @@
         </div>
 
         <!-- DEDICATED SCHEDULING CONTROL PANEL (Revealed when 'scheduled' is selected) -->
-        <div id="scheduleControlBox" class="hidden p-5 rounded-2xl glass-input border border-purple-500/40 bg-purple-500/10 flex flex-col gap-4 shadow-xl">
+        <div id="scheduleControlBox" class="hidden p-5 rounded-2xl sleek-input border border-purple-500/40 bg-purple-500/10 flex flex-col gap-4 shadow-xl">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2 text-xs font-extrabold text-purple-300 uppercase tracking-wide">
               <i data-lucide="calendar-clock" class="w-4 h-4 text-purple-400"></i>
@@ -818,7 +507,7 @@
               type="datetime-local"
               id="scheduleDateTime"
               onchange="updateSchedulePreview()"
-              class="w-full sm:flex-1 px-4 py-3 rounded-2xl glass-input text-sm text-white font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
+              class="w-full sm:flex-1 px-4 py-3 rounded-2xl sleek-input text-sm text-white font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
             />
             <div class="flex items-center gap-2 w-full sm:w-auto">
               <button
@@ -929,7 +618,7 @@
         <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <button
             onclick="saveMetadataOnly()"
-            class="w-full sm:w-auto px-4 py-3 rounded-2xl glass-input hover:bg-white/5 text-slate-300 text-xs font-bold transition flex items-center justify-center gap-1.5"
+            class="w-full sm:w-auto px-4 py-3 rounded-2xl sleek-input hover:bg-white/5 text-slate-300 text-xs font-bold transition flex items-center justify-center gap-1.5"
           >
             <i data-lucide="save" class="w-4 h-4"></i>
             Save Draft
@@ -939,7 +628,7 @@
             <!-- 1. Single YouTube Button -->
             <button
               onclick="openPublishModal('youtube')"
-              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl gradient-border-btn text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
             >
               <i data-lucide="play" class="w-4 h-4"></i>
               <span>YouTube</span>
@@ -948,7 +637,7 @@
             <!-- 2. Single Instagram Button -->
             <button
               onclick="openPublishModal('instagram')"
-              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl ig-gradient-btn text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
             >
               <i data-lucide="camera" class="w-4 h-4"></i>
               <span>Instagram</span>
@@ -957,7 +646,7 @@
             <!-- 3. BLAST BOTH PLATFORMS BUTTON -->
             <button
               onclick="openPublishModal('both')"
-              class="flex-1 sm:flex-initial px-5 py-3 rounded-2xl blast-gradient-btn text-white text-xs font-black flex items-center justify-center gap-2 shadow-xl cursor-pointer"
+              class="flex-1 sm:flex-initial px-5 py-3 rounded-2xl pill-btn-primary text-white text-xs font-black flex items-center justify-center gap-2 shadow-xl cursor-pointer"
               title="Publish or Schedule to BOTH YouTube & Instagram at once"
             >
               <i data-lucide="rocket" class="w-4 h-4"></i>
@@ -967,7 +656,7 @@
         </div>
 
         <!-- Live Upload Progress Card -->
-        <div id="uploadProgressCard" class="hidden p-4 rounded-2xl glass-input flex flex-col gap-3 border-[#0071e3]/40 bg-[#0071e3]/5">
+        <div id="uploadProgressCard" class="hidden p-4 rounded-2xl bg-[#111] border border-white/10 flex flex-col gap-3">
           <div class="flex items-center justify-between text-xs font-bold">
             <span id="uploadStageText" class="text-sky-300 flex items-center gap-2">
               <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
@@ -991,7 +680,7 @@
   <!-- 🎭 TACTICAL MEME CULTURE BOARD MODAL (21 CURATED MEMES) -->
   <!-- ======================================================== -->
   <div id="memeBoardModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="glass-panel w-full max-w-6xl max-h-[90vh] rounded-3xl p-6 md:p-8 flex flex-col gap-4 shadow-2xl border border-white/15 relative overflow-hidden bg-[#070b16]/95">
+    <div class="sleek-panel w-full max-w-6xl max-h-[90vh] rounded-3xl p-6 md:p-8 flex flex-col gap-4 shadow-2xl border border-white/15 relative overflow-hidden bg-[#050505]/95">
       <!-- Modal Header -->
       <div class="flex items-center justify-between border-b border-white/10 pb-4 shrink-0">
         <div class="flex items-center gap-3.5">
@@ -1052,7 +741,7 @@
   <!-- 1-CLICK SOVEREIGN NICHE PUBLISH & SCHEDULE MODAL -->
   <!-- ======================================================== -->
   <div id="quickPublishModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="glass-panel w-full max-w-lg rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
+    <div class="sleek-panel w-full max-w-lg rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
       <!-- Header -->
       <div class="flex items-center justify-between border-b border-white/10 pb-4">
         <div class="flex items-center gap-3">
@@ -1067,13 +756,13 @@
             <p id="quickModalSub" class="text-xs text-slate-400">Routes automatically to this niche's connected accounts</p>
           </div>
         </div>
-        <button onclick="closeQuickPublishModal()" class="p-2 rounded-xl glass-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
+        <button onclick="closeQuickPublishModal()" class="p-2 rounded-xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <!-- Target Account Summary Card -->
-      <div class="p-3.5 rounded-2xl glass-input bg-black/40 border border-white/10 flex flex-col gap-2">
+      <div class="p-3.5 rounded-2xl sleek-input bg-black/40 border border-white/10 flex flex-col gap-2">
         <div class="text-[10px] font-mono uppercase text-slate-400 font-bold">Bound Destination Accounts:</div>
         <div class="flex items-center justify-between gap-2 text-xs font-mono">
           <div id="quickModalYtSummary" class="flex items-center gap-1.5 text-red-300 font-bold">
@@ -1142,7 +831,7 @@
             <input
               type="datetime-local"
               id="quickScheduleDateTime"
-              class="w-full px-3 py-2 rounded-xl glass-input text-xs font-mono text-white border border-white/10"
+              class="w-full px-3 py-2 rounded-xl sleek-input text-xs font-mono text-white border border-white/10"
             />
           </div>
         </div>
@@ -1164,13 +853,13 @@
   <!-- NICHE ACCOUNT BINDING MODAL -->
   <!-- ======================================================== -->
   <div id="nicheAccountModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="glass-panel w-full max-w-md rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
+    <div class="sleek-panel w-full max-w-md rounded-3xl p-6 md:p-8 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
       <div class="flex items-center justify-between border-b border-white/10 pb-4">
         <div>
           <h2 id="nicheModalTitle" class="text-base font-black text-white tracking-tight">Configure Niche Accounts</h2>
           <p class="text-xs text-slate-400">Bind dedicated YouTube & Instagram accounts</p>
         </div>
-        <button onclick="closeNicheAccountModal()" class="p-2 rounded-xl glass-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
+        <button onclick="closeNicheAccountModal()" class="p-2 rounded-xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -1180,7 +869,7 @@
         <label class="text-xs font-mono font-bold uppercase text-slate-300 flex items-center gap-1.5">
           <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> YouTube Channel
         </label>
-        <select id="nicheYtSelect" class="w-full px-3 py-2.5 rounded-xl glass-input text-xs font-mono text-white border border-white/10">
+        <select id="nicheYtSelect" class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-mono text-white border border-white/10">
           <option value="">-- No Channel Assigned --</option>
         </select>
         <p class="text-[10px] text-slate-400">Need to add another channel? Use Settings & API to connect via Google OAuth.</p>
@@ -1195,7 +884,7 @@
           type="text"
           id="nicheIgInput"
           placeholder="e.g. thejudyinsights"
-          class="w-full px-3 py-2.5 rounded-xl glass-input text-xs font-mono text-white border border-white/10"
+          class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-mono text-white border border-white/10"
         />
         <p class="text-[10px] text-slate-400">Enter the Instagram username bound to this niche's Reels.</p>
       </div>
@@ -1214,7 +903,7 @@
   <!-- SMART MULTI-PLATFORM PUBLISH & SCHEDULE MODAL -->
   <!-- ======================================================== -->
   <div id="publishModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="glass-panel w-full max-w-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+    <div class="sleek-panel w-full max-w-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
       
       <!-- Modal Header -->
       <div class="flex items-center justify-between border-b border-white/10 pb-4">
@@ -1229,7 +918,7 @@
         </div>
         <button
           onclick="closePublishModal()"
-          class="p-2 rounded-xl glass-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
+          class="p-2 rounded-xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
         >
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
@@ -1247,7 +936,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           <!-- YouTube Channels Box -->
-          <div class="p-3.5 rounded-2xl glass-input border border-white/10 flex flex-col gap-2.5">
+          <div class="p-3.5 rounded-2xl sleek-input border border-white/10 flex flex-col gap-2.5">
             <div class="flex items-center justify-between border-b border-white/5 pb-2">
               <div class="flex items-center gap-2">
                 <div class="w-6 h-6 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center">
@@ -1268,7 +957,7 @@
           </div>
 
           <!-- Instagram Accounts Box -->
-          <div class="p-3.5 rounded-2xl glass-input border border-white/10 flex flex-col gap-2.5">
+          <div class="p-3.5 rounded-2xl sleek-input border border-white/10 flex flex-col gap-2.5">
             <div class="flex items-center justify-between border-b border-white/5 pb-2">
               <div class="flex items-center gap-2">
                 <div class="w-6 h-6 rounded-lg bg-pink-600/20 text-pink-400 border border-pink-500/30 flex items-center justify-center">
@@ -1302,7 +991,7 @@
             type="button"
             id="timingBtnNow"
             onclick="setModalTiming('now')"
-            class="p-3.5 rounded-2xl glass-input border border-[#0071e3] bg-[#0071e3]/15 text-left flex flex-col gap-1 transition cursor-pointer"
+            class="p-3.5 rounded-2xl sleek-input border border-[#0071e3] bg-[#0071e3]/15 text-left flex flex-col gap-1 transition cursor-pointer"
           >
             <div class="flex items-center justify-between">
               <i data-lucide="zap" class="w-4 h-4 text-sky-400"></i>
@@ -1317,7 +1006,7 @@
             type="button"
             id="timingBtnSchedule"
             onclick="setModalTiming('schedule')"
-            class="p-3.5 rounded-2xl glass-input border border-white/10 hover:border-purple-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
+            class="p-3.5 rounded-2xl sleek-input border border-white/10 hover:border-purple-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
           >
             <div class="flex items-center justify-between">
               <i data-lucide="calendar-clock" class="w-4 h-4 text-purple-400"></i>
@@ -1332,7 +1021,7 @@
             type="button"
             id="timingBtnDraft"
             onclick="setModalTiming('draft')"
-            class="p-3.5 rounded-2xl glass-input border border-white/10 hover:border-amber-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
+            class="p-3.5 rounded-2xl sleek-input border border-white/10 hover:border-amber-400/50 text-left flex flex-col gap-1 transition cursor-pointer"
           >
             <div class="flex items-center justify-between">
               <i data-lucide="lock" class="w-4 h-4 text-amber-400"></i>
@@ -1357,7 +1046,7 @@
               type="datetime-local"
               id="modalScheduleDateTime"
               onchange="updateModalSchedulePreview()"
-              class="w-full sm:flex-1 px-4 py-2.5 rounded-xl glass-input text-xs text-white font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
+              class="w-full sm:flex-1 px-4 py-2.5 rounded-xl sleek-input text-xs text-white font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
             />
             <div class="flex items-center gap-1.5 w-full sm:w-auto">
               <button
@@ -1421,7 +1110,7 @@
       <div class="pt-4 border-t border-white/10 flex items-center justify-between gap-4">
         <button
           onclick="closePublishModal()"
-          class="px-5 py-3 rounded-2xl glass-input hover:bg-white/10 text-slate-400 hover:text-white text-xs font-bold transition"
+          class="px-5 py-3 rounded-2xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white text-xs font-bold transition"
         >
           Cancel
         </button>
@@ -1429,7 +1118,7 @@
         <button
           id="confirmPublishBtn"
           onclick="executeMultiPlatformPublish()"
-          class="px-8 py-3.5 rounded-2xl blast-gradient-btn text-white text-sm font-black flex items-center gap-2 shadow-2xl cursor-pointer"
+          class="px-8 py-3.5 rounded-2xl pill-btn-primary text-white text-sm font-black flex items-center gap-2 shadow-2xl cursor-pointer"
         >
           <i data-lucide="rocket" class="w-4 h-4"></i>
           <span id="confirmPublishBtnText">Publish to Selected Platforms</span>
@@ -1441,7 +1130,7 @@
 
   <!-- SETTINGS & YOUTUBE API MODAL -->
   <div id="settingsModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="glass-panel w-full max-w-3xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+    <div class="sleek-panel w-full max-w-3xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
       
       <!-- Modal Header -->
       <div class="flex items-center justify-between border-b border-white/10 pb-4">
@@ -1456,7 +1145,7 @@
         </div>
         <button
           onclick="closeSettingsModal()"
-          class="p-2 rounded-xl glass-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
+          class="p-2 rounded-xl sleek-input hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
         >
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
@@ -1498,7 +1187,7 @@
             <button
               type="button"
               onclick="openConnectChannelModal()"
-              class="px-3.5 py-1.5 rounded-xl gradient-border-btn text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+              class="px-3.5 py-1.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
             >
               <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
               <span>Connect Channel</span>
@@ -1542,14 +1231,14 @@
               type="text"
               id="clientSecretsProjectName"
               placeholder="Friendly Project Name (e.g. Primary Studio Console, Second Channel Project)"
-              class="w-full px-3.5 py-2.5 rounded-xl glass-input text-xs font-medium text-white placeholder:text-slate-600 focus:border-sky-400"
+              class="w-full px-3.5 py-2.5 rounded-xl sleek-input text-xs font-medium text-white placeholder:text-slate-600 focus:border-sky-400"
             />
 
             <textarea
               id="clientSecretsText"
               rows="4"
               placeholder='{"installed":{"client_id":"YOUR_CLIENT_ID.apps.googleusercontent.com","project_id":"...","client_secret":"YOUR_CLIENT_SECRET",...}}'
-              class="w-full px-4 py-2.5 rounded-xl glass-input text-xs font-mono text-slate-200 placeholder:text-slate-600 focus:border-sky-400 custom-scrollbar leading-relaxed"
+              class="w-full px-4 py-2.5 rounded-xl sleek-input text-xs font-mono text-slate-200 placeholder:text-slate-600 focus:border-sky-400 custom-scrollbar leading-relaxed"
             ></textarea>
 
             <div class="flex items-center justify-between gap-3">
@@ -1557,7 +1246,7 @@
                 type="button"
                 onclick="saveYoutubeSecrets()"
                 id="saveSecretsBtn"
-                class="px-5 py-2.5 rounded-xl gradient-border-btn text-white text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
+                class="px-5 py-2.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-extrabold flex items-center gap-2 shadow-xl cursor-pointer"
               >
                 <i data-lucide="plus-circle" class="w-4 h-4"></i>
                 <span>Add Google Cloud Project</span>
@@ -1566,7 +1255,7 @@
               <button
                 type="button"
                 onclick="resetYoutubeSecrets()"
-                class="px-4 py-2 rounded-xl glass-input hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                class="px-4 py-2 rounded-xl sleek-input hover:bg-rose-500/10 text-slate-400 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
                 title="Reset existing credentials"
               >
                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
@@ -1641,7 +1330,7 @@
             <button
               type="button"
               onclick="loginInstagram()"
-              class="px-3.5 py-1.5 rounded-xl ig-gradient-btn text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+              class="px-3.5 py-1.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
             >
               <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
               <span>Add IG Account</span>
@@ -1659,7 +1348,7 @@
 
   <!-- CONNECT YOUTUBE CHANNEL MODAL (SELECT GOOGLE PROJECT) -->
   <div id="connectChannelModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="glass-panel w-full max-w-md rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15">
+    <div class="sleek-panel w-full max-w-md rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15">
       <div class="flex items-center justify-between border-b border-white/10 pb-3">
         <div class="flex items-center gap-2.5">
           <div class="w-9 h-9 rounded-xl bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center">
@@ -1677,7 +1366,7 @@
         
         <div class="flex flex-col gap-1.5">
           <label class="font-bold text-slate-200">Google Cloud API Project</label>
-          <select id="connectChannelProjectSelect" class="w-full px-3 py-2.5 rounded-xl glass-input text-xs font-bold text-white bg-slate-900 border border-white/10">
+          <select id="connectChannelProjectSelect" class="w-full px-3 py-2.5 rounded-xl sleek-input text-xs font-bold text-white bg-slate-900 border border-white/10">
             <!-- Dynamically populated -->
           </select>
         </div>
@@ -1688,8 +1377,8 @@
       </div>
 
       <div class="flex items-center justify-end gap-2 pt-2 border-t border-white/10">
-        <button onclick="closeConnectChannelModal()" class="px-4 py-2 rounded-xl glass-input text-slate-400 hover:text-white text-xs font-bold">Cancel</button>
-        <button onclick="proceedConnectChannel()" class="px-5 py-2.5 rounded-xl gradient-border-btn text-white text-xs font-black flex items-center gap-2">
+        <button onclick="closeConnectChannelModal()" class="px-4 py-2 rounded-xl sleek-input text-slate-400 hover:text-white text-xs font-bold">Cancel</button>
+        <button onclick="proceedConnectChannel()" class="px-5 py-2.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-black flex items-center gap-2">
           <span>Continue to Google</span>
           <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </button>
@@ -1698,7 +1387,7 @@
   </div>
 
   <!-- NOTIFICATION TOAST -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 glass-panel px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-white flex items-center gap-3">
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 sleek-panel px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-white flex items-center gap-3">
     <i data-lucide="info" class="w-4 h-4 text-[#38bdf8]"></i>
     <span id="toastMessage">Notification</span>
   </div>
@@ -1858,7 +1547,7 @@
             <div class="relative">
               <button
                 onclick="toggleIgDropdown(event)"
-                class="flex items-center gap-2 px-3 py-1.5 rounded-2xl glass-input border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 transition cursor-pointer"
+                class="flex items-center gap-2 px-3 py-1.5 rounded-2xl sleek-input border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 transition cursor-pointer"
                 title="Switch Instagram Account"
               >
                 <img
@@ -1871,7 +1560,7 @@
                 <i data-lucide="chevron-down" class="w-3 h-3 text-pink-300"></i>
               </button>
 
-              <div id="igAccountsDropdown" class="hidden absolute right-0 top-full mt-2 w-64 rounded-2xl glass-panel border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
+              <div id="igAccountsDropdown" class="hidden absolute right-0 top-full mt-2 w-64 rounded-2xl sleek-panel border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
                 <div class="px-2 py-1 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
                   <span>Instagram Accounts</span>
                   <span class="text-pink-300">${allIgAccounts.length} Connected</span>
@@ -1918,7 +1607,7 @@
           `;
         } else {
           igSection.innerHTML = `
-            <button onclick="loginInstagram()" class="px-3 py-1.5 rounded-2xl ig-gradient-btn text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer">
+            <button onclick="loginInstagram()" class="px-3 py-1.5 rounded-2xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer">
               <i data-lucide="camera" class="w-3.5 h-3.5"></i>
               <span>Connect IG</span>
             </button>
@@ -1948,14 +1637,14 @@
                     ${!isActive ? `
                       <button
                         onclick="switchInstagramAccount('${a.username}')"
-                        class="px-3 py-1.5 rounded-xl glass-input hover:bg-pink-500/20 text-pink-300 text-xs font-bold border border-pink-500/30 transition cursor-pointer"
+                        class="px-3 py-1.5 rounded-xl sleek-input hover:bg-pink-500/20 text-pink-300 text-xs font-bold border border-pink-500/30 transition cursor-pointer"
                       >
                         Set Active
                       </button>
                     ` : ''}
                     <button
                       onclick="disconnectInstagram('${a.username}')"
-                      class="px-3 py-1.5 rounded-xl glass-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/10 hover:border-rose-500/30 transition cursor-pointer"
+                      class="px-3 py-1.5 rounded-xl sleek-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/10 hover:border-rose-500/30 transition cursor-pointer"
                     >
                       Disconnect
                     </button>
@@ -1975,7 +1664,7 @@
                     <div class="text-[11px] text-slate-400">Log in once via Playwright to enable 1-click Instagram Reels uploads.</div>
                   </div>
                 </div>
-                <button onclick="loginInstagram()" class="px-4 py-2.5 rounded-xl ig-gradient-btn text-white text-xs font-black flex items-center gap-1.5 shadow-lg">
+                <button onclick="loginInstagram()" class="px-4 py-2.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-black flex items-center gap-1.5 shadow-lg">
                   <i data-lucide="log-in" class="w-4 h-4"></i> Connect IG
                 </button>
               </div>
@@ -2062,7 +1751,7 @@
         if (ytContent) ytContent.classList.remove('hidden');
         if (igContent) igContent.classList.add('hidden');
       } else {
-        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 ig-gradient-btn text-white shadow-md cursor-pointer";
+        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#111] border border-white/10 hover:bg-white/5 text-white shadow-md cursor-pointer";
         ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-slate-400 hover:text-white cursor-pointer";
         if (igContent) igContent.classList.remove('hidden');
         if (ytContent) ytContent.classList.add('hidden');
@@ -2142,14 +1831,14 @@
                     ${!isActive ? `
                       <button
                         onclick="switchYouTubeChannel('${ch.channelId}')"
-                        class="px-3 py-1.5 rounded-xl glass-input hover:bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 transition cursor-pointer"
+                        class="px-3 py-1.5 rounded-xl sleek-input hover:bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 transition cursor-pointer"
                       >
                         Set Active
                       </button>
                     ` : ''}
                     <button
                       onclick="disconnectChannel('${ch.channelId}')"
-                      class="px-3 py-1.5 rounded-xl glass-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/10 hover:border-rose-500/30 transition cursor-pointer"
+                      class="px-3 py-1.5 rounded-xl sleek-input hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-white/10 hover:border-rose-500/30 transition cursor-pointer"
                     >
                       Disconnect
                     </button>
@@ -2161,7 +1850,7 @@
             channelsContainer.innerHTML = `
               <div class="p-4 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-between gap-3 text-slate-400">
                 <div class="text-xs text-slate-300">No YouTube channels connected yet. Click <strong>Connect Channel</strong> above.</div>
-                <button onclick="openConnectChannelModal()" class="px-3 py-1.5 rounded-xl gradient-border-btn text-white text-xs font-bold">Connect</button>
+                <button onclick="openConnectChannelModal()" class="px-3 py-1.5 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold">Connect</button>
               </div>
             `;
           }
@@ -2366,7 +2055,7 @@
             <div class="relative">
               <button
                 onclick="toggleYtDropdown(event)"
-                class="flex items-center gap-2.5 px-3 py-1.5 rounded-2xl glass-input border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 transition cursor-pointer"
+                class="flex items-center gap-2.5 px-3 py-1.5 rounded-2xl sleek-input border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 transition cursor-pointer"
                 title="Switch YouTube Channel"
               >
                 <div class="relative">
@@ -2390,7 +2079,7 @@
                 </div>
               </button>
 
-              <div id="ytChannelsDropdown" class="hidden absolute right-0 top-full mt-2 w-72 rounded-2xl glass-panel border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
+              <div id="ytChannelsDropdown" class="hidden absolute right-0 top-full mt-2 w-72 rounded-2xl sleek-panel border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
                 <div class="px-2 py-1 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
                   <span>YouTube Channels</span>
                   <span class="text-emerald-300">${allChannels.length} Connected</span>
@@ -2448,7 +2137,7 @@
           `;
         } else {
           authSection.innerHTML = `
-            <button onclick="openConnectChannelModal()" class="px-4 py-2 rounded-xl gradient-border-btn text-white text-xs font-bold flex items-center gap-2 shadow-lg cursor-pointer">
+            <button onclick="openConnectChannelModal()" class="px-4 py-2 rounded-xl bg-[#111] border border-white/10 hover:bg-white/5 text-white text-xs font-bold flex items-center gap-2 shadow-lg cursor-pointer">
               <i data-lucide="link" class="w-3.5 h-3.5"></i>
               <span>Connect YouTube Studio</span>
             </button>
@@ -2973,7 +2662,7 @@
         <div
           onclick="selectVideo('${v.filename}')"
           id="video-card-${v.filename}"
-          class="video-card p-3 rounded-2xl glass-input hover:bg-white/5 cursor-pointer transition flex items-center justify-between gap-3 ${isSelected ? 'border-[#0071e3] bg-[#0071e3]/15 shadow-lg shadow-sky-500/10' : ''}"
+          class="video-card p-3 rounded-2xl sleek-input hover:bg-white/5 cursor-pointer transition flex items-center justify-between gap-3 ${isSelected ? 'border-[#0071e3] bg-[#0071e3]/15 shadow-lg shadow-sky-500/10' : ''}"
         >
           <div class="flex items-center gap-3 min-w-0 flex-1">
             <!-- Thumbnail Visual Preview Tile -->
@@ -3851,17 +3540,17 @@
       const schedBox = document.getElementById('modalScheduleBox');
 
       [btnNow, btnSched, btnDraft].forEach(b => {
-        if (b) b.className = "p-3.5 rounded-2xl glass-input border border-white/10 hover:border-sky-400/50 text-left flex flex-col gap-1 transition cursor-pointer";
+        if (b) b.className = "p-3.5 rounded-2xl sleek-input border border-white/10 hover:border-sky-400/50 text-left flex flex-col gap-1 transition cursor-pointer";
       });
 
       if (timing === 'now') {
-        if (btnNow) btnNow.className = "p-3.5 rounded-2xl glass-input border border-[#0071e3] bg-[#0071e3]/15 text-left flex flex-col gap-1 transition cursor-pointer";
+        if (btnNow) btnNow.className = "p-3.5 rounded-2xl sleek-input border border-[#0071e3] bg-[#0071e3]/15 text-left flex flex-col gap-1 transition cursor-pointer";
         if (schedBox) schedBox.classList.add('hidden');
       } else if (timing === 'schedule') {
-        if (btnSched) btnSched.className = "p-3.5 rounded-2xl glass-input border border-purple-500 bg-purple-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
+        if (btnSched) btnSched.className = "p-3.5 rounded-2xl sleek-input border border-purple-500 bg-purple-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
         if (schedBox) schedBox.classList.remove('hidden');
       } else {
-        if (btnDraft) btnDraft.className = "p-3.5 rounded-2xl glass-input border border-amber-500 bg-amber-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
+        if (btnDraft) btnDraft.className = "p-3.5 rounded-2xl sleek-input border border-amber-500 bg-amber-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
         if (schedBox) schedBox.classList.add('hidden');
       }
 
@@ -4217,7 +3906,7 @@
       grid.innerHTML = list.map(m => {
         const perfBullets = (m.perfect_for || []).slice(0, 2).map(p => `• ${p}`).join('<br>');
         return `
-          <div class="glass-card rounded-2xl p-3 flex flex-col gap-2.5 border border-white/10 hover:border-purple-500/40 transition group">
+          <div class="sleek-panel rounded-2xl p-3 flex flex-col gap-2.5 border border-white/10 hover:border-purple-500/40 transition group">
             <!-- Video Preview (Hover to Play) -->
             <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black/80 border border-white/10 flex items-center justify-center">
               <video
