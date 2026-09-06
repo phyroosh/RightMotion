@@ -49,8 +49,10 @@ If the user includes **`{no topics}`** (or **`{no topic}`**, case-insensitive) a
    [VOICEOVER]
    <clean voiceover script>
    ```
-3. **Organic Community CTA**:
-   - End with a grounded channel/subscriber invitation (e.g. *"If you're trying to figure yourself out without all the noise, stick around. We unpack these patterns every day."* or *"Follow along if you want more breakdowns on how your brain actually works."*).
+3. **Mandatory Spoken Interactive Question CTA**:
+   - End with a direct, open-ended, or polarizing spoken question directed to the viewer (e.g. *"Be honest: have you ever stayed just so you wouldn't feel alone? Tell me below."* or *"Question for you: what's the one thing you secretly care about, but pretend is no big deal? Tell me below."*).
+   - Permanent ban on passive voiceover endings (never say *"Follow along for more breakdowns"* or *"Stick around"*). Spoken questions trigger comment bursts!
+   - Enforce an intimate 200–250ms breath pause before asking the question.
 4. **Sanitization**:
    - Strip `{no meta}` and `{meta}` from all prompt text, titles, canvas text, and audio synthesis so the tags never appear in video assets.
 
@@ -84,11 +86,17 @@ If the user includes **`{no topics}`** (or **`{no topic}`**, case-insensitive) a
 
 #### 3. Judy Scriptwriting Persona & Quality Standards:
 - **Persona**: Female anime-style host (Judy) with a soft, warm, intelligent, emotionally grounded voice ("smart older sister" or "caring friend").
-- **Length & Pacing**: Strict **65–85 words** (~24–30s, hard cap 90 words). *Empirical channel data proves shorter runtimes (24–30s) deliver 65–75%+ retention and 10x higher view velocity.*
-- **Structure**:
-  - **Hook (0–3s)**: High-velocity pattern interrupt. Lead with a **cognitive paradox, hypocrisy, or concrete behavioral quirk** (*"Why smart people keep making bad choices"*, *"Notice how you pretend not to care about the things you want most"*).
-  - **The 7-Second Retention Pivot (3–8s)**: By second 5.5–7.0, deliver the counter-intuitive psychological/neurological mechanism (*"It's not laziness — your nervous system is in dorsal vagal freeze."* or *"Psychologists call this the Counter-Intentional Loop."*). Never allow a narrative or visual lull at the 7-second mark!
-  - **Actionable Shift & Ending (8–28s)**: Concrete, micro-habit rewiring $\rightarrow$ grounded CTA.
+- **Length & Pacing**: Strict **55–70 words** (~20–24s, hard cap 75 words). *Empirical YouTube Studio data proves ultra-tight runtimes (20–24s) deliver 68–78%+ retention and exponential feed velocity.*
+- **The 2-Beat Curiosity Gap Structure**:
+  - **Hook (0–3s)**: High-velocity pattern interrupt. Lead with a **cognitive paradox, hypocrisy, or concrete behavioral quirk** (*"Why being single feels lonely, but dating leaves you exhausted"*).
+  - **Beat 1 — The Mechanism (3–8s)**: Name the psychological/neurological concept with scientific authority (*"Psychologists call this Identity Borrowing."*). Spoken cue is synchronized with on-screen `<ConceptKeywordSlam />`.
+  - **Beat 2 — The Trap / The Twist (9–15s)**: **IMMEDIATELY raise the stakes** so curiosity peaks a second time! (*"And here's the trap: your nervous system confuses anxiety with chemistry. So the more walking on eggshells you do, the more in love you think you are."*). Never let curiosity die after naming the term!
+  - **Beat 3 — The Rewire Shift (16–20s)**: Sharp, memorable psychological rule (*"If you have to shrink yourself to keep them, that's not connection — it's nervous system panic."*).
+  - **Beat 4 — The Spoken Interactive CTA (21–24s)**: After an intimate 200–250ms breath pause, Judy asks a direct, open-ended question looking into the camera (*"Be honest: have you ever lost yourself trying to keep someone else happy? Tell me below."*).
+- **PERMANENT BAN ON PASSIVE CTA ENDINGS**:
+  - ❌ *"Follow along if you want more honest breakdowns on how your brain actually works."*
+  - ❌ *"Stick around for daily breakdowns on how your mind works."*
+  - ✅ **Direct Spoken Questions Only**: Viewers comment on YouTube Shorts because the creator looked them in the eye and asked a question they want to answer.
 - **PERMANENT BAN ON VAGUE COMFORT TOPICS (ANTI-FLOP RULE)**:
   - ❌ *"When life feels unfair"* (scored 20.8% retention — 80% swipe-away rate!)
   - ❌ *"You are not alone"*, *"Believe in yourself"*, *"It's okay to feel sad"* (scrollers swipe away from broad motivational comfort expecting an unhelpful lecture).

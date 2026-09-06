@@ -189,6 +189,56 @@ def synthesize_tags(topic: str, niche: str = "self_improvement") -> List[str]:
     combined = list(dict.fromkeys(base_tags + niche_tags + topic_tags + [clean]))
     return combined[:12]
 
+def synthesize_spoken_cta(topic: str, niche: str = "self_improvement") -> str:
+    """
+    Synthesizes an intimate, high-friction spoken interactive question for the voiceover ending.
+    Begins with an ellipsis/dash to trigger a natural 200-250ms breath pause in TTS before Judy asks.
+    """
+    clean = sanitize_raw_topic(topic)
+    lower = clean.lower()
+
+    if "relationship" in lower or "dating" in lower:
+        return "... Be honest: have you ever stayed in something just so you wouldn't feel alone? Tell me below."
+    if "caught trying" in lower or "seen trying" in lower:
+        return "... Question for you: what's the one thing you secretly care deeply about, but pretend is no big deal? Tell me below."
+    if "social media" in lower:
+        return "... Be honest: what's the first app you open when you feel bored? Drop it below."
+    if "boundar" in lower:
+        return "... Have you ever felt guilty for finally saying no to a friend? Tell me below."
+    if "overthink" in lower:
+        return "... Be honest: do you ever replay awkward conversations in your head for hours? Tell me below."
+    if "side character" in lower:
+        return "... Do you ever catch yourself living for other people's approval? Drop your thoughts below."
+    if "dopamine" in lower or "loop" in lower:
+        return "... What's the one bad habit loop you keep falling back into? Drop it below."
+    if "cortisol" in lower or "sleep" in lower or "3 am" in lower:
+        return "... Do you wake up feeling calm, or with your chest already tight? Tell me below."
+
+    if niche == "finance":
+        return "... Would you rather take 10k right now, or 100k locked for three years? Tell me below."
+    if niche == "health":
+        return "... Do you wake up energized, or needing coffee just to function? Tell me below."
+
+    return f"... Have you ever caught yourself doing this? Drop your thoughts below."
+
+def synthesize_interactive_pill_text(topic: str, niche: str = "self_improvement") -> Tuple[str, str]:
+    """
+    Returns (pill_prompt, pill_tag) for on-screen InteractiveEngagementPill.
+    """
+    clean = sanitize_raw_topic(topic)
+    lower = clean.lower()
+
+    if "relationship" in lower or "dating" in lower:
+        return ("Mistaken anxiety for chemistry? Tell me below 👇", "CONFESSION")
+    if "caught trying" in lower:
+        return ("Pretending not to care? Be honest 👇", "REALITY CHECK")
+    if "overthink" in lower:
+        return ("Replaying 2 AM thoughts? Drop them 👇", "COMMUNITY")
+    if "boundar" in lower:
+        return ("Hard to say no to friends? Tell me below 👇", "BOUNDARIES")
+    
+    return ("Have you felt this? Drop your thoughts 👇", "COMMUNITY")
+
 def generate_full_metadata(topic: str, niche: str = "self_improvement", script: str = "", pinned_comment: str = "") -> Dict[str, Any]:
     """
     Master generator: outputs the complete metadata package for YouTube/Instagram.
@@ -198,6 +248,13 @@ def generate_full_metadata(topic: str, niche: str = "self_improvement", script: 
     thumb_title, highlight_word, thumb_sub = synthesize_thumbnail_title(clean, niche)
     description = synthesize_rich_description(clean, niche, script)
     tags = synthesize_tags(clean, niche)
+    spoken_cta = synthesize_spoken_cta(clean, niche)
+    pill_prompt, pill_tag = synthesize_interactive_pill_text(clean, niche)
+
+    # If pinned_comment not passed, align it with the spoken question!
+    if not pinned_comment:
+        clean_question = spoken_cta.strip(". —").strip()
+        pinned_comment = f"{clean_question} 👇"
 
     return {
         "raw_topic": topic,
@@ -206,11 +263,14 @@ def generate_full_metadata(topic: str, niche: str = "self_improvement", script: 
         "thumbnail_title": thumb_title,
         "thumbnail_highlight": highlight_word,
         "thumbnail_subtitle": thumb_sub,
+        "spoken_cta": spoken_cta,
+        "pill_prompt": pill_prompt,
+        "pill_tag": pill_tag,
         "description": description,
         "tags": tags,
         "categoryId": "27",
         "privacyStatus": "public",
-        "pinnedComment": pinned_comment or ""
+        "pinnedComment": pinned_comment
     }
 
 if __name__ == "__main__":

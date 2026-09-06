@@ -82,8 +82,9 @@
   - **MANDATORY SILENT PDF RULE**: Spoken voiceover must NEVER say "Photon" or the page number aloud (visual proof is rendered on screen).
 - **Judy Persona Rules**:
   - Warm, intelligent older sister / caring friend voice.
-  - 65–85 words target (~24–30s, hard cap 90 words).
+  - 55–70 words target (~20–24s, hard cap 75 words).
   - Permanent ban on AI clichés (*"here's the thing"*, *"the truth is"*, *"you're not lazy"*) and sales hype (*"life-changing"*, *"must-read"*).
+  - Mandatory Spoken Question CTA ending with 200–250ms breath pause (never passive "Follow along" pitches).
 
 ## 8. Autonomous Painterly Illustrations & Motion Graphics Protocol
 - **Signature Fine-Art Aesthetic**:
@@ -106,19 +107,24 @@
     - Beat 3 (~5.5s): Angled diagnostic warning stamp (`<IllustrationStamp />`) with `impact_hit` sound.
   - Split long sentences ($\ge 16$ words) on contrast conjunctions so Scene 1 transitions into Scene 2 by ~7–8s.
 
-## 9. High-Retention Blueprint, 7-Second Pivot & Pinned Comment Engine
-- **Runtime Hard-Cap**: Strict **24–32 seconds** (~65–85 words). Empirical channel data proves shorter videos achieve 65–75%+ retention and 10x higher view velocity.
+## 9. High-Retention Blueprint, 2-Beat Curiosity Gap & Spoken CTA Engine
+- **Runtime Hard-Cap**: Strict **20–24 seconds** (~55–70 words, hard cap 75 words). Empirical YouTube Studio data proves ultra-tight videos achieve 68–78%+ retention and exponential view velocity.
 - **The Cognitive Paradox Standard (Anti-Flop)**:
   - Ban vague emotional comfort (*"When life feels unfair"* $\rightarrow$ 20.8% retention).
-  - Target concrete behavioral contradictions & self-sabotage mechanisms (*"Why smart people keep making bad choices"* $\rightarrow$ 63.2% retention).
-- **The 7-Second Retention Pivot**:
-  - The 7-second mark is where 75% of viewers swipe away if there's a lull.
-  - Deliver the counter-intuitive psychological/neurological mechanism by second 5.5–7.0.
-  - Eliminate dead air pauses in audio and ensure Scene 1 transitions into Scene 2 by Frame 190–220.
+  - Target concrete behavioral contradictions & self-sabotage mechanisms (*"Why being single feels lonely, but dating leaves you exhausted"* $\rightarrow$ 23.6% stayed-to-watch, 24x reach!).
+- **The 2-Beat Curiosity Gap Structure (9-Second Drop-off Killer)**:
+  - **Hook (0–3s)**: Cognitive paradox or hypocrisy.
+  - **Beat 1 — The Mechanism (4–8s)**: Name the concept with scientific authority (*"Psychologists call this Identity Borrowing."*). Spoken cue is synchronized with on-screen `<ConceptKeywordSlam />`.
+  - **Beat 2 — The Trap / The Twist (9–15s)**: **IMMEDIATELY raise the stakes** so curiosity peaks a second time! (*"And here's the trap: your nervous system confuses anxiety with chemistry. So the more walking on eggshells you do, the more in love you think you are."*). Never let curiosity die after naming the term!
+  - **Beat 3 — The Rewire Shift (16–20s)**: Sharp, memorable psychological rule (*"If you have to shrink yourself to keep them, that's not connection — it's nervous system panic."*).
+  - **Beat 4 — The Spoken Interactive CTA (21–24s)**: After an intimate 200–250ms breath pause, Judy asks a direct, open-ended question looking into the camera (*"Be honest: have you ever stayed just so you wouldn't feel alone? Tell me below."*).
+- **Concept Keyword Slam (`<ConceptKeywordSlam />`)**:
+  - High-impact visual reinforcement component that pops on screen at the exact spoken frame of the psychological concept (e.g. 0:06–0:09).
+  - Massive bold typography, floating monospace telemetry HUD badge, specular glass sheen sweep, and acoustic impact sound design (`impact_hit` + `whoosh_fast`).
 - **Interactive Engagement Overlay (`<InteractiveEngagementPill />`)**:
-  - Pops in at ~70% timeline (seconds 18–22) for 3.5s just above the caption safe zone to prompt comments and likes (*"Have you felt this? Drop a 🧠 below"*, *"Save this for later 📌"*).
+  - Synchronized with Judy's final spoken question at ~70% timeline (seconds 18–22) for 3.5s just above the caption safe zone to prompt comments and likes (*"Mistaken anxiety for love? Tell me below 👇"*).
 - **Autonomous Pinned Comment Engine**:
-  - Output `[PINNED COMMENT]` with every script generation.
+  - Output `[PINNED COMMENT]` aligned with the spoken question.
   - Stored in `studio/metadata.json` under `pinnedComment`.
   - Automatically posted to YouTube via YouTube Data API (`commentThreads.insert`) on upload.
 

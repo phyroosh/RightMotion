@@ -193,29 +193,87 @@ def select_cutout_assets(topic: str, script: str):
 
     return problem_id, solution_id
 
+def split_body_and_closing_question(text: str) -> Tuple[str, str]:
+    """
+    Separates the main narrative from the final reflective question.
+    """
+    clean = text.strip()
+    sentences = [s.strip() for s in re.split(r'(?<=[.!?])\s+', clean) if s.strip()]
+    if len(sentences) >= 2:
+        last = sentences[-1]
+        if last.endswith("?") or any(last.lower().startswith(p) for p in ["tell me", "drop your", "drop a", "be honest", "question for you", "what would you", "have you ever"]):
+            body = " ".join(sentences[:-1])
+            question = last
+            return body, question
+    return clean, ""
+
 async def synthesize_speech(text: str, output_path: Path, voice: str = "en-US-AvaMultilingualNeural"):
     import edge_tts
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    raw_path = output_path.with_name("raw_" + output_path.name)
-    print(f"🎙️ [1/4] Synthesizing neural speech with voice '{voice}' (rate=+8% for retention)...")
-    # Clean text to avoid pauses
-    norm_text = text.replace("…", ",").replace("...", ",").replace("\r\n", "\n").replace("\n\n", " ").replace("\n", " ").strip()
-    communicate = edge_tts.Communicate(text=norm_text, voice=voice, rate="+8%")
-    await communicate.save(str(raw_path))
+    body_text, closing_question = split_body_and_closing_question(text)
 
-    # Compress pauses > 0.18s
-    try:
-        cmd = [
-            "ffmpeg", "-y", "-i", str(raw_path),
+    if closing_question:
+        print(f"🎙️ [1/4] Synthesizing neural speech with intimate 220ms reflection breath before closing question...")
+        work_dir = output_path.parent / "tts_temp"
+        work_dir.mkdir(parents=True, exist_ok=True)
+        body_raw = work_dir / "body_raw.mp3"
+        body_norm = work_dir / "body_norm.mp3"
+        q_raw = work_dir / "q_raw.mp3"
+        q_norm = work_dir / "q_norm.mp3"
+        pause_gap = work_dir / "pause_220ms.mp3"
+
+        # Synthesize body
+        comm_b = edge_tts.Communicate(text=body_text.replace("…", ",").replace("...", ","), voice=voice, rate="+8%")
+        await comm_b.save(str(body_raw))
+        subprocess.run([
+            "ffmpeg", "-y", "-i", str(body_raw),
             "-af", "silenceremove=stop_periods=-1:stop_duration=0.18:stop_threshold=-35dB:detection=peak",
-            "-b:a", "192k",
-            str(output_path)
-        ]
-        subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        print(f"      Pause-compressed master audio saved to: {output_path}")
-    except Exception as e:
-        print(f"      Pause compression fallback: {e}")
-        shutil.copy2(str(raw_path), str(output_path))
+            "-ar", "44100", "-ac", "2", "-b:a", "192k", str(body_norm)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        # Synthesize closing question
+        comm_q = edge_tts.Communicate(text=closing_question.replace("…", ",").replace("...", ","), voice=voice, rate="+6%")
+        await comm_q.save(str(q_raw))
+        subprocess.run([
+            "ffmpeg", "-y", "-i", str(q_raw),
+            "-af", "silenceremove=stop_periods=-1:stop_duration=0.18:stop_threshold=-35dB:detection=peak",
+            "-ar", "44100", "-ac", "2", "-b:a", "192k", str(q_norm)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        # Generate 220ms breath pause gap
+        subprocess.run([
+            "ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+            "-t", "0.22", "-ar", "44100", "-ac", "2", "-b:a", "192k", str(pause_gap)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        # Concat with demuxer
+        concat_list = work_dir / "concat.txt"
+        concat_list.write_text(f"file '{body_norm.resolve().as_posix()}'\nfile '{pause_gap.resolve().as_posix()}'\nfile '{q_norm.resolve().as_posix()}'\n", encoding="utf-8")
+        subprocess.run([
+            "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
+            "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2", str(output_path)
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        print(f"      Seamless master audio saved with 220ms breath pause to: {output_path}")
+    else:
+        raw_path = output_path.with_name("raw_" + output_path.name)
+        print(f"🎙️ [1/4] Synthesizing neural speech with voice '{voice}' (rate=+8% for retention)...")
+        norm_text = text.replace("…", ",").replace("...", ",").replace("\r\n", "\n").replace("\n\n", " ").replace("\n", " ").strip()
+        communicate = edge_tts.Communicate(text=norm_text, voice=voice, rate="+8%")
+        await communicate.save(str(raw_path))
+
+        # Compress pauses > 0.20s
+        try:
+            cmd = [
+                "ffmpeg", "-y", "-i", str(raw_path),
+                "-af", "silenceremove=stop_periods=-1:stop_duration=0.20:stop_threshold=-35dB:detection=peak",
+                "-ar", "44100", "-ac", "2", "-b:a", "192k",
+                str(output_path)
+            ]
+            subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            print(f"      Pause-compressed master audio saved to: {output_path}")
+        except Exception as e:
+            print(f"      Pause compression fallback: {e}")
+            shutil.copy2(str(raw_path), str(output_path))
 
 def transcribe_audio(audio_path: Path, output_json: Path):
     from faster_whisper import WhisperModel
@@ -266,6 +324,64 @@ def transcribe_audio(audio_path: Path, output_json: Path):
     duration_sec = words_list[-1]["end"] / 1000.0 if words_list else 5.0
     print(f"      Transcribed {len(words_list)} words -> {output_json} ({duration_sec:.2f}s)")
     return words_list, duration_sec
+
+def extract_concept_keyword(script_text: str, topic: str = "", niche: str = "self_improvement") -> Tuple[str, str, str]:
+    """
+    Extracts the core psychological, financial, or biological concept keyword,
+    a short 1-sentence definition, and category badge for ConceptKeywordSlam.
+    Returns: (term, definition, category_badge)
+    """
+    clean_s = re.sub(r"(?:^|\s+)(?:judy|andrew)\s*:\s*", " ", script_text, flags=re.IGNORECASE).strip()
+    lower_s = clean_s.lower()
+
+    # Pattern 1: "Psychologists call this [concept]" / "Psychology calls this [concept]"
+    m_psych = re.search(r"(?:psychologists?|scientists?|doctors?|researchers?)\s+call\s+this\s+([a-zA-Z\s\-]+?)(?=[.!,;\?]|\s+when|\s+where|\s+because|$)", clean_s, re.IGNORECASE)
+    if m_psych:
+        term = m_psych.group(1).strip().upper()
+        post_text = clean_s[m_psych.end():].strip(" .!,;—")
+        sentences = [s.strip() for s in re.split(r"[.!?]+", post_text) if len(s.strip()) > 10]
+        definition = sentences[0] if sentences else "The subconscious mechanism driving this behavioral loop."
+        badge = "PSYCHOLOGICAL MECHANISM // 01" if niche == "self_improvement" else "COGNITIVE FRAMEWORK // 01"
+        return (term, definition, badge)
+
+    # Pattern 2: "This is called [concept]" / "Known as [concept]"
+    m_called = re.search(r"(?:this is called|known as|termed|it's called)\s+([a-zA-Z\s\-]+?)(?=[.!,;\?]|\s+when|\s+where|\s+because|$)", clean_s, re.IGNORECASE)
+    if m_called:
+        term = m_called.group(1).strip().upper()
+        post_text = clean_s[m_called.end():].strip(" .!,;—")
+        sentences = [s.strip() for s in re.split(r"[.!?]+", post_text) if len(s.strip()) > 10]
+        definition = sentences[0] if sentences else "The automatic neurological response to environmental friction."
+        badge = "NEUROLOGICAL PROTOCOL // 01" if niche == "health" else "CORE MECHANISM // 01"
+        return (term, definition, badge)
+
+    # Pattern 3: Domain-specific high-impact concept dictionary
+    concept_dict = {
+        "identity borrowing": ("IDENTITY BORROWING", "Confusing the rush of being chosen with actual compatibility", "PSYCHOLOGICAL MECHANISM // 01"),
+        "dorsal vagal": ("DORSAL VAGAL FREEZE", "Nervous system shutdown response under chronic emotional stress", "AUTONOMIC NERVOUS SYSTEM // 01"),
+        "counter-intentional": ("COUNTER-INTENTIONAL LOOP", "Subconsciously self-sabotaging the exact outcomes you desire", "COGNITIVE PARADOX // 01"),
+        "dopamine loop": ("DOPAMINE AUTOPILOT", "Compulsive habit loops triggered by environmental micro-cues", "NEUROCHEMICAL PROTOCOL // 01"),
+        "hyperbolic discount": ("HYPERBOLIC DISCOUNTING", "Prioritizing immediate relief over exponential long-term capital", "BEHAVIORAL FINANCE // 01"),
+        "cortisol spike": ("CORTISOL SPIKE PROTOCOL", "Acute adrenal activation disrupting restorative REM sleep", "CIRCADIAN BIOLOGY // 01"),
+        "fear of trying": ("THE FEAR OF TRYING", "Pretending indifference to avoid public evaluation and failure", "EGO DEFENSE MECHANISM // 01"),
+        "side character": ("SIDE CHARACTER SYNDROME", "Subconsciously minimizing your presence for others' comfort", "IDENTITY BLUEPRINT // 01"),
+    }
+    for k, (t, d, b) in concept_dict.items():
+        if k in lower_s:
+            return (t, d, b)
+
+    # Fallback: Extract from topic / niche via metadata_engine
+    try:
+        from metadata_engine import synthesize_thumbnail_title
+        short_title, highlight, sub = synthesize_thumbnail_title(topic, niche)
+    except Exception:
+        short_title, sub = topic[:30].upper(), "Core Mechanism & Protocol"
+
+    badge = "COGNITIVE DIAGNOSTIC // 01"
+    if niche == "finance":
+        badge = "CAPITAL MODEL // 01"
+    elif niche == "health":
+        badge = "CELLULAR TELEMETRY // 01"
+    return (short_title, sub, badge)
 
 def parse_script_into_concepts(script_text: str):
     # Strip speaker prefixes (e.g. JUDY:, ANDREW:) for visual cards
@@ -504,6 +620,10 @@ def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_se
         niche = "health"
     else:
         niche = "self_improvement"
+
+    from metadata_engine import generate_full_metadata
+    meta_package = generate_full_metadata(raw_topic, niche=niche, script=script_text, pinned_comment=pinned_comment or "")
+    concept_term, concept_def, concept_badge = extract_concept_keyword(script_text, topic, niche)
 
     if niche == "finance":
         bg_code = f"""import React from "react";
@@ -760,11 +880,28 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     if pill_entrance > total_frames - 90:
         pill_entrance = max(s2_start + 20, total_frames - 120)
 
-    pill_prompt = generate_engagement_pill_text(topic, niche)
+    pill_prompt = meta_package.get("pill_prompt", generate_engagement_pill_text(topic, niche))
+    pill_tag = meta_package.get("pill_tag", "COMMUNITY")
     pill_theme = "obsidian" if niche in ("finance", "facecam") else ("biotech_cyan" if niche == "health" else "apple_studio")
     pill_icon = "pin" if niche == "finance" else ("heart" if niche == "health" else "brain")
-    pill_tag = "WEALTH CHECK" if niche == "finance" else ("BIO CHECK" if niche == "health" else "COMMUNITY")
     sfx_cues.append({"frame": pill_entrance, "type": "click", "volume": 0.28})
+
+    # 4c. Concept Keyword Slam Engine (Visual reinforcement for core psychological terms)
+    concept_entrance = s2_start
+    concept_dur = 75
+    if s3_start - s2_start < 130:
+        concept_dur = min(75, max(45, (s3_start - s2_start) // 2))
+    concept_exit = s2_start + concept_dur
+
+    slam_theme = "obsidian" if niche in ("finance", "facecam") else ("biotech_cyan" if niche == "health" else "apple_studio")
+    slam_icon = "target" if niche == "finance" else ("activity" if niche == "health" else "brain")
+
+    sfx_cues.append({"frame": concept_entrance, "type": "impact_hit", "volume": 0.32})
+    sfx_cues.append({"frame": concept_entrance, "type": "whoosh_fast", "volume": 0.28})
+    sfx_cues.append({"frame": concept_exit, "type": "whoosh_sparkle", "volume": 0.24})
+
+    s2_clean_header = meta_package.get("thumbnail_title", clean_thumbnail_title(topic))
+    s2_clean_sub = meta_package.get("thumbnail_subtitle", "Core Principles & Breakdown")
 
     illustration_beats = []
     s1_subtitle_frame = f_c1_cutout
@@ -788,7 +925,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
                 sfx_cues.append({"frame": b["frame"], "type": "impact_hit", "volume": 0.32})
 
     for idx, pt in enumerate(s2_items):
-        p_frame = pt["startFrame"]
+        p_frame = max(pt["startFrame"], concept_exit)
         p_text = pt["text"]
         clean_text = re.sub(r"^(\d+[\.\)]\s*|[-*]\s*)", "", p_text).strip()
         parts = clean_text.split(":", 1) if ":" in clean_text else [clean_text]
@@ -1010,6 +1147,7 @@ import {{ ProductPageShowcase }} from "../../components/ProductPageShowcase";
 import {{ CinematicIllustrationCard }} from "../../components/CinematicIllustrationCard";
 import {{ InteractiveEngagementPill }} from "../../components/InteractiveEngagementPill";
 import {{ TacticalMemeCard, TacticalMemeFrame }} from "../../components/TacticalMemeCard";
+import {{ ConceptKeywordSlam }} from "../../components/ConceptKeywordSlam";
 import {{ Sparkles, Zap, ArrowRight }} from "lucide-react";
 import {{ WordTimestamp }} from "../../types";
 
@@ -1029,10 +1167,29 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
       {scene1_content_jsx}
 
       {{/* ======================================================== */}}
-      {{/* SCENE 2: THE BREAKDOWN (REVEALED ONE-BY-ONE AS SPOKEN!)  */}}
-      {{/* (Frames {s2_start} - {s3_start})                          */}}
+      {{/* SCENE 2A: HIGH-IMPACT CONCEPT KEYWORD SLAM              */}}
+      {{/* (Frames {concept_entrance} - {concept_exit})             */}}
       {{/* ======================================================== */}}
-      {{frame >= {s2_start} && frame < {s3_start} && (() => {{
+      {{frame >= {concept_entrance} && frame < {concept_exit} && (
+        <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-150">
+          <ConceptKeywordSlam
+            term="{concept_term}"
+            definition="{concept_def}"
+            categoryBadge="{concept_badge}"
+            entranceFrame={{{concept_entrance}}}
+            durationFrames={{{concept_dur}}}
+            theme="{slam_theme}"
+            icon="{slam_icon}"
+            width={{920}}
+          />
+        </div>
+      )}}
+
+      {{/* ======================================================== */}}
+      {{/* SCENE 2B: THE BREAKDOWN (REVEALED ONE-BY-ONE AS SPOKEN!)  */}}
+      {{/* (Frames {concept_exit} - {s3_start})                     */}}
+      {{/* ======================================================== */}}
+      {{frame >= {concept_exit} && frame < {s3_start} && (() => {{
         {s2_spring_str}
 
         return (
@@ -1046,16 +1203,16 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
                 tiltX={{-5}}
                 tiltY={{4}}
                 elevation={{44}}
-                impactMs={{{round((s2_start/fps)*1000)}}}
+                impactMs={{{round((concept_exit/fps)*1000)}}}
                 className="{card_class}"
               >
-                {{/* Clean Uncrowded Section Header */}}
+                {{/* Clean Uncrowded Section Header - NO RAW TOPIC LEAKS */}}
                 <div className="text-center mt-1">
-                  <h2 className="text-5xl font-black {text_color} leading-tight">
-                    {topic}
+                  <h2 className="text-5xl font-black {text_color} leading-tight uppercase tracking-tight">
+                    {s2_clean_header}
                   </h2>
                   <div className="text-2xl font-mono {accent_color} font-bold mt-1 tracking-wider uppercase">
-                    Core Principles & Breakdown
+                    {s2_clean_sub}
                   </div>
                 </div>
 
