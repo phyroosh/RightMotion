@@ -23,9 +23,7 @@ export interface TacticalMemeFrameProps {
 const MEME_LABEL_MAP: Record<string, string> = {
   ishowspeed_stare: "COGNITIVE FREEZE // SPEECHLESS",
   doctor_strange_loop: "AUTOPILOT LOOP // RECURSION",
-  side_eye_dog: "SKEPTICISM // CAUGHT",
   angry_grandpa_rage: "BREAKING POINT // EXPLOSION",
-  awkward_smile_dog: "SOCIAL MASK // THIS IS FINE",
   confused_kid: "PARADOX // COGNITIVE DISSONANCE",
   walter_white_despair: "ROCK BOTTOM // SYSTEM FAILURE",
   office_rage_smash: "BURNOUT OVERLOAD // CRASH",

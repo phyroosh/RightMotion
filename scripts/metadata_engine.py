@@ -97,15 +97,49 @@ def synthesize_thumbnail_title(topic: str, niche: str = "self_improvement") -> T
         return ("DIAGRAM YOUR LOOP", "LOOP", "Audit Your Dopamine Triggers")
     if "minimum" in lower:
         return ("THE MINIMUM VIABLE DAY", "MINIMUM", "Emergency Baseline Survival")
+    if "cortisol" in lower and ("3 am" in lower or "wake" in lower):
+        return ("THE 3 AM CORTISOL SPIKE", "CORTISOL", "Why You Wake Up in a Panic")
 
-    # Generic shortener: take first 3-4 impactful words
+    # High-impact semantic stop words to isolate core psychological concepts
+    STOP_WORDS = {
+        "why", "how", "what", "is", "are", "was", "were", "do", "does", "did",
+        "the", "a", "an", "and", "or", "to", "of", "in", "for", "on", "with", "at", "by",
+        "from", "be", "being", "been", "you", "your", "we", "our", "so", "that", "this",
+        "it", "its", "when", "where", "feel", "feels", "feeling", "make", "makes", "making",
+        "really", "actually", "always", "never", "about", "secretly", "quietly", "someone",
+        "anyone", "everyone", "nobody", "things", "thing"
+    }
+
+    raw_words = [re.sub(r"[^\w-]", "", w) for w in clean.split() if re.sub(r"[^\w-]", "", w)]
+    core_words = [w for w in raw_words if w.lower() not in STOP_WORDS and len(w) > 2]
+
+    if core_words:
+        if len(core_words) == 1:
+            short_title = f"THE {core_words[0].upper()} TRAP"
+            highlight = core_words[0].upper()
+        elif len(core_words) == 2:
+            short_title = f"{core_words[0].upper()} {core_words[1].upper()}"
+            highlight = core_words[1].upper() if len(core_words[1]) >= len(core_words[0]) else core_words[0].upper()
+        else:
+            short_title = f"{core_words[0].upper()} {core_words[1].upper()} {core_words[2].upper()}"
+            # Select the longest / most vivid emotional term as the glowing highlight word
+            highlight = max(core_words[:3], key=len).upper()
+
+        topic_phrase = f"{core_words[0].capitalize()} {core_words[1].capitalize()}" if len(core_words) > 1 else core_words[0].capitalize()
+        if niche == "finance":
+            subtitle = f"The Compound Leverage of {topic_phrase}"
+        elif niche == "health":
+            subtitle = f"The Biological Mechanism Behind {topic_phrase}"
+        elif niche == "facecam":
+            subtitle = f"Operator Breakdown: {topic_phrase}"
+        else:
+            subtitle = f"The Psychology Behind {topic_phrase}"
+        return (short_title, highlight, subtitle)
+
+    # Clean fallback if no core words survived stop-word filter
     words = clean.split()
-    if len(words) > 4:
-        short_title = " ".join(words[:4]).upper()
-    else:
-        short_title = clean.upper()
-
-    highlight = words[0].upper() if words else "TRUTH"
+    short_title = " ".join(words[:3]).upper() if words else "THE COGNITIVE TRAP"
+    highlight = words[0].upper() if words else "TRAP"
     subtitle = "High-Retention Psychology Breakdown" if niche == "self_improvement" else "Strategic Capital & Wealth Protocol"
     return (short_title, highlight, subtitle)
 

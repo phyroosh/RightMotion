@@ -4,6 +4,7 @@ import { Zap, ShieldAlert } from "lucide-react";
 
 export interface CortisolSpikeGraphProps {
   startMs?: number;
+  frame?: number;
   className?: string;
 }
 
@@ -13,9 +14,11 @@ export interface CortisolSpikeGraphProps {
  */
 export const CortisolSpikeGraph: React.FC<CortisolSpikeGraphProps> = ({
   startMs = 0,
+  frame: frameProp,
   className = "",
 }) => {
-  const frame = useCurrentFrame();
+  const currentFrame = useCurrentFrame();
+  const frame = frameProp !== undefined ? frameProp : currentFrame;
   const { fps } = useVideoConfig();
 
   const startFrame = Math.floor((startMs / 1000) * fps);

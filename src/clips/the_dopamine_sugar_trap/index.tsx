@@ -7,7 +7,15 @@ import { TheDopamineSugarTrapBackground } from "./Background";
 import { TheDopamineSugarTrapCanvas } from "./Canvas";
 import { TheDopamineSugarTrapPresenter } from "./Presenter";
 import { TheDopamineSugarTrapThumbnail } from "../../thumbnails";
-import transcript from "./transcript.json";
+import rawTranscript from "./transcript.json";
+import { WordTimestamp } from "../../types";
+
+const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({
+  word: t.word,
+  startMs: t.startMs ?? (t.start < 1000 ? Math.round(t.start * 1000) : t.start),
+  endMs: t.endMs ?? (t.end < 1000 ? Math.round(t.end * 1000) : t.end),
+  speaker: t.speaker,
+}));
 
 export const TheDopamineSugarTrapComposition: React.FC = () => {
   const frame = useCurrentFrame();

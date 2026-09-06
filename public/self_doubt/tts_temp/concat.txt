@@ -1,0 +1,3 @@
+file '/home/phyroosh/TopProducts/RightClips/public/self_doubt/tts_temp/body_norm.mp3'
+file '/home/phyroosh/TopProducts/RightClips/public/self_doubt/tts_temp/pause_220ms.mp3'
+file '/home/phyroosh/TopProducts/RightClips/public/self_doubt/tts_temp/q_norm.mp3'

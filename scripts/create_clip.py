@@ -831,7 +831,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     # 4a. Tactical Meme Integration (< 2.5s Strict Retention Cap, Muted, 1.4x Fast-Forward)
     meme_jsx = ""
     if meme_meta:
-        m_id = meme_meta.get("id", "side_eye_dog")
+        m_id = meme_meta.get("id", "ishowspeed_stare")
         m_dur = min(meme_meta.get("default_duration_frames", 45), 66)
         m_start = int(meme_meta.get("start_frame", 0))  # Default 0 for instant opening hook
         m_speed = meme_meta.get("playback_rate", 1.4)
@@ -1494,7 +1494,7 @@ async def main():
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
     parser.add_argument("--duo", action="store_true", help="Enable Conversational Duo mode (Judy & Andrew)")
     parser.add_argument("--andrew", action="store_true", help="Include Andrew character (Conversational Duo mode with Judy, runtime up to 40s)")
-    parser.add_argument("--meme", default=None, help="Meme ID override (e.g. side_eye_dog) or 'auto'")
+    parser.add_argument("--meme", default=None, help="Meme ID override (e.g. ishowspeed_stare) or 'auto'")
     parser.add_argument("--meme-start", type=int, default=0, help="Meme start frame (default: 0 for instant opening hook)")
     parser.add_argument("--meme-mode", choices=["video", "frame"], default="video", help="Meme display mode (video card or still frame)")
     parser.add_argument("--no-meme", action="store_true", help="Disable Tactical Meme pop (memes are enabled by default)")

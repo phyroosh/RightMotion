@@ -666,3 +666,18 @@ export const RealityOfSocialMediaThumbnail: React.FC = () => (
     extraBadge="FOCUS"
   />
 );
+
+export const SelfDoubtThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHY YOU DOUBT YOURSELF"
+    highlightWord="DOUBT"
+    highlightColor="amber"
+    subtitle="The Psychology of Imposter Syndrome"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="CLARITY"
+  />
+);
+

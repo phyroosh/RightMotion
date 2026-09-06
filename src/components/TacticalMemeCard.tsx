@@ -25,9 +25,7 @@ export interface TacticalMemeCardProps {
 const MEME_FILE_MAP: Record<string, { filename: string; defaultLabel: string }> = {
   ishowspeed_stare: { filename: "ishowspeed_stare.mp4", defaultLabel: "COGNITIVE FREEZE // SPEECHLESS" },
   doctor_strange_loop: { filename: "doctor_strange_loop.mp4", defaultLabel: "AUTOPILOT LOOP // RECURSION" },
-  side_eye_dog: { filename: "side_eye_dog.mp4", defaultLabel: "SKEPTICISM // CAUGHT" },
   angry_grandpa_rage: { filename: "angry_grandpa_rage.mp4", defaultLabel: "BREAKING POINT // EXPLOSION" },
-  awkward_smile_dog: { filename: "awkward_smile_dog.mp4", defaultLabel: "SOCIAL MASK // THIS IS FINE" },
   confused_kid: { filename: "confused_kid.mp4", defaultLabel: "PARADOX // COGNITIVE DISSONANCE" },
   walter_white_despair: { filename: "walter_white_despair.mp4", defaultLabel: "ROCK BOTTOM // SYSTEM FAILURE" },
   office_rage_smash: { filename: "office_rage_smash.mp4", defaultLabel: "BURNOUT OVERLOAD // CRASH" },

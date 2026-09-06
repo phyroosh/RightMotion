@@ -4,6 +4,8 @@
   "description": "Automated YouTube Shorts Motion Graphics Engine with Remotion",
   "scripts": {
     "start": "remotion preview",
+    "typecheck": "tsc --noEmit",
+    "validate": "python3 scripts/validate_clip.py",
     "studio": "node studio/server.js",
     "build": "remotion render MainComposition out/video.mp4",
     "generate": "python generate_assets.py",

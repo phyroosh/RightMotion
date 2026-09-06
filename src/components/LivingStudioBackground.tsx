@@ -5,6 +5,8 @@ export interface LivingStudioBackgroundProps {
   className?: string;
   dotGridOpacity?: number;
   enableBreathing?: boolean;
+  orbColor1?: string;
+  orbColor2?: string;
 }
 
 /**
@@ -20,6 +22,8 @@ export const LivingStudioBackground: React.FC<LivingStudioBackgroundProps> = ({
   className = "",
   dotGridOpacity = 0.28,
   enableBreathing = true,
+  orbColor1 = "rgba(245, 158, 11, 0.24)",
+  orbColor2 = "rgba(37, 99, 235, 0.22)",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -50,7 +54,7 @@ export const LivingStudioBackground: React.FC<LivingStudioBackgroundProps> = ({
           width: "900px",
           height: "900px",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(245, 158, 11, 0.24) 0%, rgba(251, 191, 36, 0.10) 50%, transparent 75%)",
+          background: `radial-gradient(circle, ${orbColor1} 0%, transparent 75%)`,
           filter: "blur(120px)",
           transform: `translate3d(${amberFloatX}px, ${amberFloatY}px, 0px) scale(${amberScale})`,
           willChange: "transform",
@@ -66,7 +70,7 @@ export const LivingStudioBackground: React.FC<LivingStudioBackgroundProps> = ({
           width: "950px",
           height: "950px",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(37, 99, 235, 0.22) 0%, rgba(14, 165, 233, 0.10) 50%, transparent 75%)",
+          background: `radial-gradient(circle, ${orbColor2} 0%, transparent 75%)`,
           filter: "blur(130px)",
           transform: `translate3d(${blueFloatX}px, ${blueFloatY}px, 0px) scale(${blueScale})`,
           willChange: "transform",

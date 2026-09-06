@@ -2,8 +2,8 @@ import React from "react";
 import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { evaluateCurve, MotionCurves } from "./MotionGraph";
 
-export type SceneInType = "snap_up" | "zoom_in" | "whip_right" | "fade";
-export type SceneOutType = "snap_up" | "zoom_out" | "whip_left" | "fade";
+export type SceneInType = "snap_up" | "zoom_in" | "whip_right" | "whip_left" | "fade";
+export type SceneOutType = "snap_up" | "zoom_out" | "whip_left" | "whip_right" | "fade";
 
 export interface KineticSceneProps {
   startMs: number;
@@ -13,6 +13,7 @@ export interface KineticSceneProps {
   inDurationMs?: number;
   outDurationMs?: number;
   livingDrift?: boolean;
+  currentMs?: number;
   className?: string;
   style?: React.CSSProperties;
   children: React.ReactNode;
@@ -95,6 +96,10 @@ export const KineticScene: React.FC<KineticSceneProps> = ({
         translateX = (1 - inProgress) * -80;
         blurPx = (1 - inProgress) * 10;
         break;
+      case "whip_left":
+        translateX = (1 - inProgress) * 80;
+        blurPx = (1 - inProgress) * 10;
+        break;
       case "fade":
         blurPx = (1 - inProgress) * 4;
         break;
@@ -116,6 +121,10 @@ export const KineticScene: React.FC<KineticSceneProps> = ({
         break;
       case "whip_left":
         translateX = outProgress * -90;
+        blurPx = outProgress * 12;
+        break;
+      case "whip_right":
+        translateX = outProgress * 90;
         blurPx = outProgress * 12;
         break;
       case "fade":

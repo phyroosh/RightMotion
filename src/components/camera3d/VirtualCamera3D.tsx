@@ -16,6 +16,7 @@ export interface VirtualCamera3DProps {
   durationMs?: number;
   currentMs?: number;
   readabilityLock?: boolean; // Smoothly flattens angle during reading window
+  readabilityLockMs?: number; // Custom timing for readability flat lock
   customPitch?: number;      // rotateX in degrees
   customYaw?: number;        // rotateY in degrees
   customRoll?: number;       // rotateZ in degrees

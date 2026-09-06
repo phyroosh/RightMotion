@@ -55,6 +55,8 @@ import { LonelinessComposition } from "./clips/loneliness";
 import lonelinessTranscript from "./clips/loneliness/transcript.json";
 import { SayingNoComposition } from "./clips/saying_no";
 import sayingNoTranscript from "./clips/saying_no/transcript.json";
+import { SelfDoubtComposition } from "./clips/self_doubt";
+import self_doubtTranscript from "./clips/self_doubt/transcript.json";
 import {
   NeuroproductivityThumbnail,
   ProcrastinationThumbnail,
@@ -91,6 +93,7 @@ import {
   CortisolAwakeningRoutineThumbnail,
   DiagramYourLoopThumbnail,
   BuildToScaleTHFThumbnail,
+  SelfDoubtThumbnail,
 } from "./thumbnails";
 import adhdTranscript from "./clips/adhd/transcript.json";
 import comparisonTranscript from "./clips/comparison/transcript.json";
@@ -169,6 +172,7 @@ export const RemotionRoot: React.FC = () => {
   const theDopamineSugarTrapDuration = calculateDurationInFrames(theDopamineSugarTrapTranscript as any[], fps);
   const cortisolAwakeningRoutineDuration = calculateDurationInFrames(cortisolAwakeningRoutineTranscript as any[], fps);
   const diagram_your_loopDuration = calculateDurationInFrames(diagram_your_loopTranscript as any[], fps);
+  const self_doubtDuration = calculateDurationInFrames(self_doubtTranscript as any[], fps);
   const buildToScaleTHFDuration = 1322; // 44.06s video at 30 fps
 
 
@@ -751,6 +755,21 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="TeenageRelationshipsThumbnail"
         component={TeenageRelationshipsThumbnail}
+        width={1080}
+        height={1920}
+      />
+
+      <Composition
+        id="SelfDoubtVideo"
+        component={SelfDoubtComposition}
+        durationInFrames={self_doubtDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+      <Still
+        id="SelfDoubtThumbnail"
+        component={SelfDoubtThumbnail}
         width={1080}
         height={1920}
       />

@@ -14,11 +14,9 @@ FRAMES_DIR = MEMES_DIR / "frames"
 
 # Tuned peak timestamps for maximum comedic and emotional expression
 PEAK_TIMESTAMPS = {
-    "side_eye_dog": 0.8,
     "lego_bruce_flabbergasted": 0.9,
     "ishowspeed_stare": 0.7,
     "confused_kid": 0.6,
-    "awkward_smile_dog": 0.5,
     "bateman_iphone_inspection": 1.1,
     "cat_laughing_pointing": 0.6,
     "rdj_shocked_closeup": 0.7,

@@ -60,15 +60,16 @@ const SFX_CONFIG: Record<SfxType, { src: string; defaultVolume: number; duration
   },
 };
 
-interface SoundDesignEngineProps {
-  cues: SfxCue[];
+export interface SoundDesignEngineProps {
+  cues?: SfxCue[];
+  currentMs?: number;
 }
 
 /**
  * Universal Sound Design Engine for RightClips
  * Renders layered cinematic sound effects synced to exact frames.
  */
-export const SoundDesignEngine: React.FC<SoundDesignEngineProps> = ({ cues }) => {
+export const SoundDesignEngine: React.FC<SoundDesignEngineProps> = ({ cues = [] }) => {
   return (
     <>
       {cues.map((cue, idx) => {
