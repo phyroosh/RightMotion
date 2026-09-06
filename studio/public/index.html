@@ -160,7 +160,6 @@
       <div id="instagramAuthSection" class="hidden text-xs text-gray-500">IG</div>
       <div id="authSection" class="hidden text-xs text-gray-500">YT</div>
       
-      <button onclick="focusTopicInput()" class="solid-white-btn px-5 py-1.5 rounded-full text-xs font-bold shadow-[0_0_15px_rgba(139,92,246,0.3)]">Create Clip</button>
     </div>
   </header>
 
@@ -182,48 +181,14 @@
           Discover how our voice AI transforms your content by generating high-retention psychological hooks, neural voiceovers, kinetic captions, and 4K thumbnails in seconds.
         </p>
 
-        <!-- Quick Tag Chips -->
-        <div class="flex flex-wrap justify-center gap-2 mb-6">
-          <button onclick="insertTag('{Self Improvement}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{Self Improvement}</button>
-          <button onclick="insertTag('{Finance}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{Finance}</button>
-          <button onclick="insertTag('{Health}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{Health}</button>
-          <button onclick="insertTag('{facecam}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{facecam}</button>
-          <button onclick="insertTag('{andrew}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{andrew}</button>
-          <button onclick="insertTag('{no meme}')" class="px-4 py-1.5 rounded-full translucent-btn text-sm font-medium">{no meme}</button>
-        </div>
-
-        <!-- Bottom Pill Input -->
-        <div class="w-full max-w-2xl glass-input-wrapper p-1.5 flex items-center">
-          <div class="pl-4 pr-2">
-            <i data-lucide="video" class="w-4 h-4 text-[#fdf8e1]/60"></i>
-          </div>
-          <input type="text" id="newTopicInput" class="flex-1 bg-transparent border-none outline-none text-[#fdf8e1] text-sm px-2 placeholder-gray-500" placeholder="Enter a video topic (e.g. 'Why perfectionism is ruining your life')..." />
-          <button onclick="startTopicGeneration()" class="ml-2 solid-white-btn text-black px-6 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 hover:opacity-90 transition">
-            <i data-lucide="send" class="w-3.5 h-3.5"></i> Generate
-          </button>
-        </div>
-      
-
-<!-- Centered Video Player -->
+        <!-- Centered Video Player -->
         <div id="videoContainer" class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-transparent mb-12 group mx-auto transition-all duration-300">
           <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-gray-500 text-xs"><i data-lucide="play-circle" class="w-10 h-10 mb-2 opacity-20"></i>No video generated yet</div>
           <video id="videoPlayer" class="w-full h-full object-cover" controls playsinline></video>
           
           <div class="absolute inset-0 pointer-events-none border border-white/5 rounded-2xl"></div>
           
-          <!-- Floating Status / Pipeline (Styled like the white floating element in reference) -->
-          <div id="topicPipeline" class="hidden absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%] thick-glass-pill p-4 flex-col items-center gap-3 z-20 transition-all">
-             <div class="flex items-center justify-between w-full">
-               <div class="flex items-center gap-2">
-                 <img src="logo.svg" class="w-5 h-5 rounded-full bg-transparent p-0.5" />
-                 <span id="pipelineStageText" class="text-xs font-bold text-gray-800">Synthesizing...</span>
-               </div>
-               <i data-lucide="loader-2" class="w-3.5 h-3.5 text-[#fdf8e1] animate-spin"></i>
-             </div>
-             <div class="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-               <div id="pipelineProgress" class="h-full bg-[#fdf8e1] transition-all duration-300" style="width: 0%"></div>
-             </div>
-          </div>
+          
         </div>
 
         </div>
@@ -1450,10 +1415,6 @@
     }
 
     // Smooth Navigation & Quick Focus Helpers
-    function focusTopicInput() {
-      const el = document.getElementById('newTopicInput');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         setTimeout(() => el.focus(), 300);
       }
     }
