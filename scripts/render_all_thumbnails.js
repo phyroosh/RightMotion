@@ -23,6 +23,7 @@ const THUMBNAIL_MAP = {
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
   'promises_video.mp4': 'PromisesThumbnail',
+  'stop_comparing_video.mp4': 'StopComparingThumbnail',
   'teenage_relationships_video.mp4': 'TeenageRelationshipsThumbnail',
   'test_autonomous_mode_b_video.mp4': 'TestAutonomousModeBThumbnail',
   'test_autonomous_mode_a_video.mp4': 'TestAutonomousModeAThumbnail',

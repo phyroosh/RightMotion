@@ -13,6 +13,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const ROOT_DIR = path.resolve(__dirname, '..');
+const ROOT_PUBLIC_DIR = path.join(ROOT_DIR, 'public');
+const MEMES_REGISTRY_PATH = path.join(ROOT_PUBLIC_DIR, 'memes', 'registry.json');
+
+app.use('/memes', express.static(path.join(ROOT_PUBLIC_DIR, 'memes')));
+app.use('/public', express.static(ROOT_PUBLIC_DIR));
+
 const CLIENT_SECRETS_PATH = path.join(__dirname, 'client_secrets.json');
 const TOKEN_PATH = path.join(__dirname, 'token.json');
 const METADATA_PATH = path.join(__dirname, 'metadata.json');
@@ -313,6 +320,57 @@ function classifyVideoNiche(filename, meta = {}) {
 
   return 'self_improvement';
 }
+
+// 0a. API: Get Tactical Meme Board Registry (21 internet culture memes)
+app.get('/api/memes', (req, res) => {
+  if (fs.existsSync(MEMES_REGISTRY_PATH)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(MEMES_REGISTRY_PATH, 'utf-8'));
+      return res.json(data);
+    } catch (err) {
+      console.error('Error reading memes registry:', err);
+    }
+  }
+  return res.json({ memes: [], total: 0 });
+});
+
+// 0b. API: Engine Telemetry & System Health
+app.get('/api/system/health', (req, res) => {
+  try {
+    const clipsDir = path.join(ROOT_DIR, 'src', 'clips');
+    const clipsCount = fs.existsSync(clipsDir)
+      ? fs.readdirSync(clipsDir).filter((f) => {
+          try {
+            return fs.statSync(path.join(clipsDir, f)).isDirectory();
+          } catch (e) {
+            return false;
+          }
+        }).length
+      : 0;
+
+    let renderedCount = 0;
+    if (fs.existsSync(OUT_DIR)) {
+      renderedCount = fs.readdirSync(OUT_DIR).filter((f) => f.endsWith('.mp4')).length;
+    }
+
+    const venvPython = path.join(ROOT_DIR, '.venv', 'bin', 'python3');
+    const pythonReady = fs.existsSync(venvPython);
+
+    return res.json({
+      status: 'online',
+      version: '3.5.0',
+      nodeVersion: process.version,
+      remotionVersion: '4.0.240',
+      pythonReady,
+      clipsCount,
+      renderedCount,
+      totalMemes: 21,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (err) {
+    return res.status(500).json({ status: 'degraded', error: err.message });
+  }
+});
 
 // 1. API: List all rendered videos sorted by date (newest first) & categorized with live upload and schedule status
 app.get('/api/videos', async (req, res) => {

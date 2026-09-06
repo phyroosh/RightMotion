@@ -681,3 +681,17 @@ export const SelfDoubtThumbnail: React.FC = () => (
   />
 );
 
+
+export const StopComparingThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="THE COMPARISON TRAP"
+    highlightWord="COMPARISON"
+    highlightColor="rose"
+    subtitle="How to Break Upward Comparison"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);

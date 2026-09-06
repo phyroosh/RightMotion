@@ -43,6 +43,8 @@ import { BuildToScaleTHFComposition } from "./clips/build_to_scale_thf";
 import buildToScaleTHFTranscript from "./clips/build_to_scale_thf/transcript.json";
 import { TeenageRelationshipsComposition } from "./clips/teenage_relationships";
 import teenage_relationshipsTranscript from "./clips/teenage_relationships/transcript.json";
+import { StopComparingComposition } from "./clips/stop_comparing";
+import stop_comparingTranscript from "./clips/stop_comparing/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -72,6 +74,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  StopComparingThumbnail,
   TeenageRelationshipsThumbnail,
   YouAreNotAloneThumbnail,
   MapTheGapThumbnail,
@@ -159,6 +162,8 @@ export const RemotionRoot: React.FC = () => {
   
   
   const teenage_relationshipsDuration = calculateDurationInFrames(teenage_relationshipsTranscript as any[], fps);
+  
+  const stop_comparingDuration = calculateDurationInFrames(stop_comparingTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -309,6 +314,16 @@ export const RemotionRoot: React.FC = () => {
         id="TeenageRelationshipsVideo"
         component={TeenageRelationshipsComposition}
         durationInFrames={teenage_relationshipsDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="StopComparingVideo"
+        component={StopComparingComposition}
+        durationInFrames={stop_comparingDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -770,6 +785,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="SelfDoubtThumbnail"
         component={SelfDoubtThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="StopComparingThumbnail"
+        component={StopComparingThumbnail}
         width={1080}
         height={1920}
       />

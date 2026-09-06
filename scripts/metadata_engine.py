@@ -33,6 +33,8 @@ def synthesize_viral_title(topic: str, niche: str = "self_improvement", script: 
         return "Why Teenage Relationships Feel So Exhausting 💔 #Shorts"
     if "caught trying" in lower or "seen trying" in lower:
         return "Why You Pretend Not to Care (The Fear of Trying) 🎭 #Shorts"
+    if "compar" in lower:
+        return "Why You Can't Stop Comparing Yourself 🪞 #Shorts"
     if "social media" in lower and "teen" in lower:
         return "How Social Media Quietly Destroys Your Focus 📱 #Shorts"
     if "boundar" in lower and "friend" in lower:
@@ -83,6 +85,8 @@ def synthesize_thumbnail_title(topic: str, niche: str = "self_improvement") -> T
         return ("THE DATING TRAP", "DATING", "Why Teenage Relationships Exhaust You")
     if "caught trying" in lower or "seen trying" in lower:
         return ("FEAR OF TRYING", "TRYING", "Why You Pretend Indifference")
+    if "compar" in lower:
+        return ("THE COMPARISON TRAP", "COMPARISON", "How to Break Upward Comparison")
     if "social media" in lower:
         return ("SOCIAL MEDIA TRAP", "TRAP", "Why It Destroys Teen Focus")
     if "boundar" in lower:
@@ -235,6 +239,8 @@ def synthesize_spoken_cta(topic: str, niche: str = "self_improvement") -> str:
         return "... Be honest: have you ever stayed in something just so you wouldn't feel alone? Tell me below."
     if "caught trying" in lower or "seen trying" in lower:
         return "... Question for you: what's the one thing you secretly care deeply about, but pretend is no big deal? Tell me below."
+    if "compar" in lower:
+        return "... Be honest: who do you secretly compare yourself to most? Tell me below."
     if "social media" in lower:
         return "... Be honest: what's the first app you open when you feel bored? Drop it below."
     if "boundar" in lower:
@@ -266,6 +272,8 @@ def synthesize_interactive_pill_text(topic: str, niche: str = "self_improvement"
         return ("Mistaken anxiety for chemistry? Tell me below 👇", "CONFESSION")
     if "caught trying" in lower:
         return ("Pretending not to care? Be honest 👇", "REALITY CHECK")
+    if "compar" in lower:
+        return ("Secretly comparing yourself? Be honest 👇", "COMPARISON")
     if "overthink" in lower:
         return ("Replaying 2 AM thoughts? Drop them 👇", "COMMUNITY")
     if "boundar" in lower:
