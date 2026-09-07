@@ -830,7 +830,28 @@ app.post('/api/credentials', (req, res) => {
   if (!jsonContent) return res.status(400).json({ error: 'jsonContent is required' });
   try {
     const project = multiChannel.addCredential({ name, jsonContent });
-    res.json({ success: true, project });
+    let authUrl = null;
+    try {
+      const { oauth2Client, credentialId } = multiChannel.getOAuth2ClientForCredential(project.id, PORT);
+      const statePayload = Buffer.from(JSON.stringify({ credentialId })).toString('base64');
+      authUrl = oauth2Client.generateAuthUrl({
+        access_type: 'offline',
+        prompt: 'consent',
+        scope: [
+          'https://www.googleapis.com/auth/youtube.upload',
+          'https://www.googleapis.com/auth/youtube',
+          'https://www.googleapis.com/auth/youtube.readonly',
+          'https://www.googleapis.com/auth/userinfo.profile',
+        ],
+        state: statePayload,
+      });
+    } catch (e) {}
+    res.json({
+      success: true,
+      project,
+      authUrl,
+      message: `Google Cloud credentials "${project.name}" saved!`,
+    });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
