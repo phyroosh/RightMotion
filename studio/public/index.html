@@ -135,6 +135,135 @@
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* ═══════════════════════════════════════════════════ */
+    /* ULTRA-PREMIUM MICRO-ANIMATIONS & SLEEK UI EFFECTS  */
+    /* ═══════════════════════════════════════════════════ */
+
+    /* Custom Dropdown Spring Reveal Animation */
+    .dropdown-anim {
+      animation: dropdownSpring 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform-origin: top center;
+    }
+    @keyframes dropdownSpring {
+      0% {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Continuous Diagonal Shimmer Sheen for Blast Both Button */
+    .shimmer-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.45) 25%,
+        transparent 30%
+      );
+      animation: shimmerSweep 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      pointer-events: none;
+    }
+    @keyframes shimmerSweep {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(25deg); }
+      25% { transform: translateX(100%) translateY(100%) rotate(25deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(25deg); }
+    }
+
+    /* Ambient Pulsing Glow for Status Dots & Active Slots */
+    .live-pulse-dot {
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+      animation: livePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes livePulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+
+    .purple-pulse-dot {
+      box-shadow: 0 0 0 0 rgba(192, 132, 252, 0.7);
+      animation: purplePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes purplePulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(192, 132, 252, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(192, 132, 252, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(192, 132, 252, 0); }
+    }
+
+    /* Button Hover Atmospheric Auras */
+    .btn-yt-aura {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-yt-aura:hover {
+      border-color: rgba(239, 68, 68, 0.5) !important;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transform: translateY(-1.5px);
+    }
+    .btn-yt-aura:active {
+      transform: translateY(0.5px) scale(0.98);
+    }
+
+    .btn-ig-aura {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-ig-aura:hover {
+      border-color: rgba(225, 48, 108, 0.5) !important;
+      box-shadow: 0 0 25px rgba(225, 48, 108, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transform: translateY(-1.5px);
+    }
+    .btn-ig-aura:active {
+      transform: translateY(0.5px) scale(0.98);
+    }
+
+    .btn-draft-aura {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-draft-aura:hover {
+      border-color: rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+      transform: translateY(-1.5px);
+    }
+    .btn-draft-aura:active {
+      transform: translateY(0.5px) scale(0.98);
+    }
+
+    /* Rocket Icon Tilt Animation on Blast Both */
+    .blast-btn-group:hover .rocket-icon {
+      transform: translateY(-2px) rotate(15deg) scale(1.15);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Active Peak Slot Glow Indicator */
+    .active-slot-pill {
+      border-color: rgba(192, 132, 252, 0.8) !important;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.3) 0%, rgba(147, 51, 234, 0.15) 100%) !important;
+      box-shadow: 0 0 18px rgba(168, 85, 247, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+      transform: scale(1.02);
+    }
+
+    /* Copy Button Success Burst */
+    .copy-burst {
+      animation: copyPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes copyPop {
+      0% { transform: scale(0.9); }
+      50% { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased custom-scrollbar">
@@ -300,18 +429,23 @@
           </div>
 
           <!-- Interactive Spoken CTA & Pinned Comment -->
-          <div class="flex flex-col gap-1.5 p-3.5 rounded-2xl bg-white/5 border border-white/10">
+          <div class="flex flex-col gap-2 p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-300 focus-within:border-white/30 focus-within:shadow-[0_0_25px_rgba(253,248,225,0.06)]">
             <div class="flex items-center justify-between">
-              <label for="metaPinnedComment" class="text-xs font-mono font-bold text-[#fdf8e1]/80 flex items-center gap-1.5">
-                <i data-lucide="message-square" class="w-3.5 h-3.5 text-[#fdf8e1]/80"></i>
+              <label for="metaPinnedComment" class="text-xs font-mono font-bold text-[#fdf8e1] flex items-center gap-2">
+                <div class="w-5 h-5 rounded-lg bg-amber-400/15 border border-amber-400/30 flex items-center justify-center text-amber-300 shrink-0">
+                  <i data-lucide="message-square" class="w-3 h-3"></i>
+                </div>
                 <span>Provocative Pinned Comment</span>
+                <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-[#fdf8e1]/70 border border-white/10">CTA HOOK</span>
               </label>
               <button
                 type="button"
+                id="copyPinnedCommentBtn"
                 onclick="copyPinnedComment()"
-                class="text-[10px] font-mono px-2 py-0.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#fdf8e1]/80 border border-white/10 transition flex items-center gap-1 cursor-pointer"
+                class="text-[10px] font-mono px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-[#fdf8e1] border border-white/10 hover:border-white/25 transition-all duration-200 flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-90"
+                title="Copy comment to clipboard"
               >
-                <i data-lucide="copy" class="w-3 h-3"></i>
+                <i data-lucide="copy" id="copyPinnedCommentBtnIcon" class="w-3 h-3"></i>
                 <span id="copyPinnedCommentBtnText">Copy</span>
               </button>
             </div>
@@ -319,70 +453,227 @@
               id="metaPinnedComment"
               rows="2"
               placeholder="Question for you: What's the one thing you secretly care about? 👇"
-              class="w-full text-xs p-2.5 rounded-xl sleek-input text-[#fdf8e1] focus:border-white/50 custom-scrollbar"
+              class="w-full text-xs p-3 rounded-xl sleek-input text-[#fdf8e1] focus:border-white/40 custom-scrollbar leading-relaxed bg-black/40"
             ></textarea>
             <div class="flex items-center justify-between pt-1">
-              <label class="flex items-center gap-2 cursor-pointer text-xs text-[#fdf8e1]/80">
-                <input type="checkbox" id="autoPostCommentCheck" checked class="rounded border-white/20 text-white focus:ring-white" />
-                <span>Auto-pin on upload</span>
+              <label class="flex items-center gap-2 cursor-pointer text-xs text-[#fdf8e1]/80 hover:text-[#fdf8e1] transition">
+                <input type="checkbox" id="autoPostCommentCheck" checked class="w-4 h-4 rounded accent-[#fdf8e1] cursor-pointer" />
+                <span class="font-medium">Auto-pin on upload</span>
               </label>
               <button
                 id="postCommentNowBtn"
                 onclick="postPinnedCommentNow()"
-                class="text-[11px] font-bold text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition flex items-center gap-1 cursor-pointer"
+                class="text-[11px] font-bold text-[#fdf8e1]/70 hover:text-[#fdf8e1] transition-all flex items-center gap-1.5 cursor-pointer px-3 py-1 rounded-xl hover:bg-white/10 group"
               >
-                <i data-lucide="send" class="w-3 h-3"></i>
+                <i data-lucide="send" class="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"></i>
                 <span>Post Comment Now</span>
               </button>
             </div>
           </div>
 
-        <!-- Settings Row: Visibility / Scheduling & Category -->
+        <!-- Settings Row: Custom Glass Visibility / Scheduling & Category -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
           
-          <!-- Visibility Status with Scheduled Option -->
-          <div class="flex flex-col gap-1.5">
-            <label class="text-xs font-bold text-[#fdf8e1]/80 flex items-center justify-between">
-              <span>Visibility & Schedule</span>
-              <span id="schedModeBadge" class="hidden text-[10px] font-mono font-bold text-[#fdf8e1]/60">📅 AUTO-TIMER</span>
+          <!-- Hidden native selects to preserve 100% API & script compatibility -->
+          <select id="metaPrivacy" onchange="onPrivacyChange()" class="hidden">
+            <option value="public">public</option>
+            <option value="scheduled">scheduled</option>
+            <option value="unlisted">unlisted</option>
+            <option value="private">private</option>
+          </select>
+          <select id="metaCategory" class="hidden">
+            <option value="27">27</option>
+            <option value="22">22</option>
+            <option value="24">24</option>
+            <option value="26">26</option>
+          </select>
+
+          <!-- Custom Animated Visibility & Schedule Selector -->
+          <div class="flex flex-col gap-1.5 relative" id="customPrivacyContainer">
+            <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider flex items-center justify-between">
+              <span class="flex items-center gap-1.5">
+                <i data-lucide="shield" class="w-3.5 h-3.5 text-[#fdf8e1]/60"></i>
+                Visibility & Schedule
+              </span>
+              <span id="schedModeBadge" class="hidden text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 animate-pulse">
+                📅 AUTO-TIMER ACTIVE
+              </span>
             </label>
-            <select
-              id="metaPrivacy"
-              onchange="onPrivacyChange()"
-              class="px-4 py-3 rounded-2xl sleek-input text-xs text-[#fdf8e1] font-semibold cursor-pointer"
+
+            <!-- Custom Trigger Button -->
+            <button
+              type="button"
+              id="customPrivacyTrigger"
+              onclick="toggleCustomDropdown('privacy')"
+              class="w-full px-4 py-3 rounded-2xl sleek-input border border-white/10 hover:border-white/25 bg-white/5 flex items-center justify-between cursor-pointer transition-all duration-300 focus:outline-none focus:border-white/40 shadow-sm group"
             >
-              <option value="public" class="bg-[#111] text-[#fdf8e1]/80">🌐 Public (Immediate Live)</option>
-              <option value="scheduled" class="bg-[#111] text-[#fdf8e1]/60">📅 Scheduled Release (Upload now, publish later)</option>
-              <option value="unlisted" class="bg-[#111] text-[#fdf8e1]/80">🔗 Unlisted (Link Only)</option>
-              <option value="private" class="bg-[#111] text-amber-400">🔒 Private (Draft)</option>
-            </select>
+              <div class="flex items-center gap-2.5 min-w-0" id="customPrivacyDisplay">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 live-pulse-dot shrink-0"></span>
+                <span class="text-xs font-extrabold text-[#fdf8e1] tracking-tight truncate">🌐 Public (Immediate Live)</span>
+              </div>
+              <i data-lucide="chevron-down" id="customPrivacyChevron" class="w-4 h-4 text-[#fdf8e1]/60 group-hover:text-[#fdf8e1] transition-transform duration-300 shrink-0"></i>
+            </button>
+
+            <!-- Custom Animated Dropdown Menu -->
+            <div
+              id="customPrivacyMenu"
+              class="hidden absolute left-0 right-0 top-full mt-2 z-50 p-2 rounded-2xl bg-[#0c0c0e]/95 backdrop-blur-3xl border border-white/15 shadow-2xl flex flex-col gap-1 dropdown-anim"
+            >
+              <!-- 1. Public Option -->
+              <div
+                onclick="selectCustomPrivacy('public')"
+                class="privacy-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
+                data-value="public"
+              >
+                <div class="flex items-center gap-3">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 live-pulse-dot shrink-0"></span>
+                  <div>
+                    <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-emerald-300 transition-colors">🌐 Public (Immediate Live)</div>
+                    <div class="text-[10px] text-[#fdf8e1]/60">Pushes directly to YouTube & subscribers instantly</div>
+                  </div>
+                </div>
+                <i data-lucide="check" class="privacy-check w-4 h-4 text-emerald-400 opacity-100 shrink-0"></i>
+              </div>
+
+              <!-- 2. Scheduled Option -->
+              <div
+                onclick="selectCustomPrivacy('scheduled')"
+                class="privacy-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
+                data-value="scheduled"
+              >
+                <div class="flex items-center gap-3">
+                  <span class="w-2.5 h-2.5 rounded-full bg-purple-400 purple-pulse-dot shrink-0"></span>
+                  <div>
+                    <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-purple-300 transition-colors">📅 Scheduled Release (Auto-Publish)</div>
+                    <div class="text-[10px] text-[#fdf8e1]/60">Upload now, automatically go public at peak engagement time</div>
+                  </div>
+                </div>
+                <i data-lucide="check" class="privacy-check w-4 h-4 text-purple-400 opacity-0 shrink-0"></i>
+              </div>
+
+              <!-- 3. Unlisted Option -->
+              <div
+                onclick="selectCustomPrivacy('unlisted')"
+                class="privacy-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
+                data-value="unlisted"
+              >
+                <div class="flex items-center gap-3">
+                  <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span>
+                  <div>
+                    <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-sky-300 transition-colors">🔗 Unlisted (Link Only)</div>
+                    <div class="text-[10px] text-[#fdf8e1]/60">Only people with the secret link can view</div>
+                  </div>
+                </div>
+                <i data-lucide="check" class="privacy-check w-4 h-4 text-sky-400 opacity-0 shrink-0"></i>
+              </div>
+
+              <!-- 4. Private Option -->
+              <div
+                onclick="selectCustomPrivacy('private')"
+                class="privacy-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
+                data-value="private"
+              >
+                <div class="flex items-center gap-3">
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0"></span>
+                  <div>
+                    <div class="text-xs font-bold text-amber-300 group-hover:text-amber-200 transition-colors">🔒 Private (Draft)</div>
+                    <div class="text-[10px] text-[#fdf8e1]/60">Hidden draft visible only to account owner</div>
+                  </div>
+                </div>
+                <i data-lucide="check" class="privacy-check w-4 h-4 text-amber-400 opacity-0 shrink-0"></i>
+              </div>
+            </div>
           </div>
 
-          <!-- YouTube Category -->
-          <div class="flex flex-col gap-1.5">
-            <label class="text-xs font-bold text-[#fdf8e1]/80">Category</label>
-            <select
-              id="metaCategory"
-              class="px-4 py-3 rounded-2xl sleek-input text-xs text-[#fdf8e1] font-semibold cursor-pointer"
+          <!-- Custom Animated Category Selector -->
+          <div class="flex flex-col gap-1.5 relative" id="customCategoryContainer">
+            <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-1.5">
+              <i data-lucide="tag" class="w-3.5 h-3.5 text-[#fdf8e1]/60"></i>
+              Category
+            </label>
+
+            <!-- Custom Category Trigger Button -->
+            <button
+              type="button"
+              id="customCategoryTrigger"
+              onclick="toggleCustomDropdown('category')"
+              class="w-full px-4 py-3 rounded-2xl sleek-input border border-white/10 hover:border-white/25 bg-white/5 flex items-center justify-between cursor-pointer transition-all duration-300 focus:outline-none focus:border-white/40 shadow-sm group"
             >
-              <option value="27" class="bg-[#111]">🎓 Education & Self Improvement</option>
-              <option value="22" class="bg-[#111]">👤 People & Blogs</option>
-              <option value="24" class="bg-[#111]">🎬 Entertainment</option>
-              <option value="26" class="bg-[#111]">💡 Howto & Style</option>
-            </select>
+              <div class="flex items-center gap-2.5 min-w-0" id="customCategoryDisplay">
+                <span class="text-base">🎓</span>
+                <span class="text-xs font-extrabold text-[#fdf8e1] tracking-tight truncate">Education & Self Improvement</span>
+              </div>
+              <i data-lucide="chevron-down" id="customCategoryChevron" class="w-4 h-4 text-[#fdf8e1]/60 group-hover:text-[#fdf8e1] transition-transform duration-300 shrink-0"></i>
+            </button>
+
+            <!-- Custom Category Dropdown Menu -->
+            <div
+              id="customCategoryMenu"
+              class="hidden absolute left-0 right-0 top-full mt-2 z-50 p-2 rounded-2xl bg-[#0c0c0e]/95 backdrop-blur-3xl border border-white/15 shadow-2xl flex flex-col gap-1 dropdown-anim"
+            >
+              <div
+                onclick="selectCustomCategory('27')"
+                class="category-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
+                data-value="27"
+              >
+                <div class="flex items-center gap-2.5">
+                  <span class="text-base">🎓</span>
+                  <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-amber-200 transition-colors">Education & Self Improvement</div>
+                </div>
+                <i data-lucide="check" class="category-check w-4 h-4 text-[#fdf8e1] opacity-100 shrink-0"></i>
+              </div>
+
+              <div
+                onclick="selectCustomCategory('22')"
+                class="category-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
+                data-value="22"
+              >
+                <div class="flex items-center gap-2.5">
+                  <span class="text-base">👤</span>
+                  <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-amber-200 transition-colors">People & Blogs</div>
+                </div>
+                <i data-lucide="check" class="category-check w-4 h-4 text-[#fdf8e1] opacity-0 shrink-0"></i>
+              </div>
+
+              <div
+                onclick="selectCustomCategory('24')"
+                class="category-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
+                data-value="24"
+              >
+                <div class="flex items-center gap-2.5">
+                  <span class="text-base">🎬</span>
+                  <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-amber-200 transition-colors">Entertainment</div>
+                </div>
+                <i data-lucide="check" class="category-check w-4 h-4 text-[#fdf8e1] opacity-0 shrink-0"></i>
+              </div>
+
+              <div
+                onclick="selectCustomCategory('26')"
+                class="category-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
+                data-value="26"
+              >
+                <div class="flex items-center gap-2.5">
+                  <span class="text-base">💡</span>
+                  <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-amber-200 transition-colors">Howto & Style</div>
+                </div>
+                <i data-lucide="check" class="category-check w-4 h-4 text-[#fdf8e1] opacity-0 shrink-0"></i>
+              </div>
+            </div>
           </div>
 
         </div>
 
         <!-- DEDICATED SCHEDULING CONTROL PANEL (Revealed when 'scheduled' is selected) -->
-        <div id="scheduleControlBox" class="hidden p-5 rounded-2xl sleek-input border border-purple-500/40 bg-purple-500/10 flex flex-col gap-4 shadow-xl">
+        <div id="scheduleControlBox" class="hidden p-5 rounded-3xl sleek-input border border-purple-500/40 bg-gradient-to-b from-purple-950/25 to-black/60 flex flex-col gap-4 shadow-2xl transition-all duration-300 dropdown-anim">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2 text-xs font-extrabold text-[#fdf8e1] uppercase tracking-wide">
-              <i data-lucide="calendar-clock" class="w-4 h-4 text-[#fdf8e1]/60"></i>
+              <div class="w-6 h-6 rounded-lg bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300">
+                <i data-lucide="calendar-clock" class="w-3.5 h-3.5"></i>
+              </div>
               <span>Scheduled Auto-Publish Timer</span>
             </div>
-            <span class="text-[10px] font-mono text-[#fdf8e1] bg-purple-500/20 px-2 py-0.5 rounded-full border border-purple-500/30">
-              YouTube Native Scheduler
+            <span class="text-[10px] font-mono text-purple-200 bg-purple-500/20 px-2.5 py-0.5 rounded-full border border-purple-500/30 font-bold">
+              YouTube Cloud Queue
             </span>
           </div>
 
@@ -391,14 +682,14 @@
             <input
               type="datetime-local"
               id="scheduleDateTime"
-              onchange="updateSchedulePreview()"
-              class="w-full sm:flex-1 px-4 py-3 rounded-2xl sleek-input text-sm text-[#fdf8e1] font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
+              onchange="onDashboardScheduleDateTimeChange()"
+              class="w-full sm:flex-1 px-4 py-3 rounded-2xl sleek-input text-sm text-[#fdf8e1] font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer shadow-inner"
             />
             <div class="flex items-center gap-2 w-full sm:w-auto">
               <button
                 type="button"
                 onclick="setQuickSchedule(1)"
-                class="flex-1 sm:flex-initial px-3 py-2.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-[#fdf8e1] text-xs font-bold border border-purple-500/30 transition whitespace-nowrap"
+                class="flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/35 text-purple-200 text-xs font-bold border border-purple-500/30 transition whitespace-nowrap active:scale-95 cursor-pointer"
                 title="Schedule in 1 hour"
               >
                 +1 Hour
@@ -406,7 +697,7 @@
               <button
                 type="button"
                 onclick="setQuickSchedule(2)"
-                class="flex-1 sm:flex-initial px-3 py-2.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-[#fdf8e1] text-xs font-bold border border-purple-500/30 transition whitespace-nowrap"
+                class="flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/35 text-purple-200 text-xs font-bold border border-purple-500/30 transition whitespace-nowrap active:scale-95 cursor-pointer"
                 title="Schedule in 2 hours"
               >
                 +2 Hours
@@ -414,22 +705,23 @@
             </div>
           </div>
 
-          <!-- User's Exact 5 Quick Time Slot Options -->
+          <!-- User's Exact 5 Quick Time Slot Options with Interactive Glow States -->
           <div class="flex flex-col gap-2 pt-1 border-t border-purple-500/20">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-mono font-extrabold uppercase text-[#fdf8e1] tracking-wider flex items-center gap-1.5">
-                <i data-lucide="zap" class="w-3 h-3 text-yellow-400"></i>
+                <i data-lucide="zap" class="w-3.5 h-3.5 text-yellow-400"></i>
                 Select Peak Time Slot:
               </span>
-              <span class="text-[10px] text-[#fdf8e1]/60 font-mono">Auto-picks upcoming slot</span>
+              <span class="text-[10px] text-[#fdf8e1]/60 font-mono">Highlights matching slot</span>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
               <!-- 1. 1:00 AM -->
               <button
                 type="button"
+                data-hour="1"
                 onclick="setQuickTargetTime(1, 0)"
-                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="slot-btn px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
               >
                 <div class="flex items-center gap-1 text-[#fdf8e1] font-black">
                   <span>🌙</span>
@@ -441,8 +733,9 @@
               <!-- 2. 2:00 AM -->
               <button
                 type="button"
+                data-hour="2"
                 onclick="setQuickTargetTime(2, 0)"
-                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="slot-btn px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
               >
                 <div class="flex items-center gap-1 text-[#fdf8e1] font-black">
                   <span>🌙</span>
@@ -454,8 +747,9 @@
               <!-- 3. 7:00 AM -->
               <button
                 type="button"
+                data-hour="7"
                 onclick="setQuickTargetTime(7, 0)"
-                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="slot-btn px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
               >
                 <div class="flex items-center gap-1 text-amber-300 font-black">
                   <span>🌅</span>
@@ -467,8 +761,9 @@
               <!-- 4. 2:00 PM -->
               <button
                 type="button"
+                data-hour="14"
                 onclick="setQuickTargetTime(14, 0)"
-                class="px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="slot-btn px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
               >
                 <div class="flex items-center gap-1 text-[#fdf8e1]/80 font-black">
                   <span>☀️</span>
@@ -480,8 +775,9 @@
               <!-- 5. 9:00 PM -->
               <button
                 type="button"
+                data-hour="21"
                 onclick="setQuickTargetTime(21, 0)"
-                class="col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group"
+                class="slot-btn col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
               >
                 <div class="flex items-center gap-1 text-rose-300 font-black">
                   <span>🌆</span>
@@ -500,42 +796,42 @@
         </div>
 
         <!-- 3 DEDICATED MULTI-PLATFORM PUBLISH BUTTONS -->
-        <div class="pt-4 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
           <button
             onclick="saveMetadataOnly()"
-            class="w-full sm:w-auto px-4 py-3 rounded-2xl sleek-input hover:bg-white/5 text-[#fdf8e1]/80 text-xs font-bold transition flex items-center justify-center gap-1.5"
+            class="w-full sm:w-auto px-4 py-3 rounded-2xl btn-draft-aura sleek-input hover:bg-white/5 text-[#fdf8e1]/80 text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <i data-lucide="save" class="w-4 h-4"></i>
-            Save Draft
+            <span>Save Draft</span>
           </button>
 
-          <div class="flex items-center gap-2 w-full sm:w-auto">
-            <!-- 1. Single YouTube Button -->
+          <div class="flex items-center gap-2.5 w-full sm:w-auto">
+            <!-- 1. YouTube Button -->
             <button
               onclick="openPublishModal('youtube')"
-              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111]/80 border border-white/15 btn-yt-aura text-[#fdf8e1] text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer group"
             >
-              <i data-lucide="play" class="w-4 h-4"></i>
-              <span>YouTube</span>
+              <i id="dashboardYtBtnIcon" data-lucide="play" class="w-4 h-4 text-red-400 group-hover:scale-110 transition-transform"></i>
+              <span id="dashboardYtBtnText">YouTube</span>
             </button>
 
-            <!-- 2. Single Instagram Button -->
+            <!-- 2. Instagram Button -->
             <button
               onclick="openPublishModal('instagram')"
-              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111]/80 border border-white/15 btn-ig-aura text-[#fdf8e1] text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer group"
             >
-              <i data-lucide="camera" class="w-4 h-4"></i>
+              <i data-lucide="camera" class="w-4 h-4 text-pink-400 group-hover:scale-110 transition-transform"></i>
               <span>Instagram</span>
             </button>
 
             <!-- 3. BLAST BOTH PLATFORMS BUTTON -->
             <button
               onclick="openPublishModal('both')"
-              class="flex-1 sm:flex-initial px-5 py-3 rounded-2xl solid-white-btn text-xs font-black flex items-center justify-center gap-2 shadow-xl cursor-pointer"
+              class="flex-1 sm:flex-initial px-5 py-3 rounded-2xl solid-white-btn shimmer-btn blast-btn-group text-xs font-black flex items-center justify-center gap-2 shadow-xl cursor-pointer"
               title="Publish or Schedule to BOTH YouTube & Instagram at once"
             >
-              <i data-lucide="rocket" class="w-4 h-4"></i>
-              <span>Blast Both</span>
+              <i data-lucide="rocket" class="w-4 h-4 rocket-icon"></i>
+              <span id="dashboardBlastBtnText">Blast Both</span>
             </button>
           </div>
         </div>
@@ -918,8 +1214,34 @@
           </button>
         </div>
 
-        <!-- Schedule Options Picker (Shown when Schedule is selected) -->
-        <div id="modalScheduleBox" class="hidden p-4 rounded-2xl border border-purple-500/40 bg-purple-500/10 flex flex-col gap-3.5 mt-1">
+        <!-- Confirmed Pre-Set Schedule Card (Shown when coming from dashboard with pre-set schedule) -->
+        <div id="modalScheduleConfirmedCard" class="hidden p-4 rounded-2xl border border-purple-500/40 bg-gradient-to-r from-purple-950/40 via-purple-900/20 to-black/60 flex items-center justify-between mt-1 shadow-lg dropdown-anim">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300 shrink-0">
+              <i data-lucide="calendar-check" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="text-[10px] font-mono uppercase tracking-wider text-purple-300 font-bold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-purple-400 purple-pulse-dot"></span>
+                Pre-Set Scheduled Release
+              </div>
+              <div id="modalConfirmedTimeText" class="text-xs sm:text-sm font-extrabold text-[#fdf8e1] font-mono mt-0.5">
+                --
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            onclick="toggleModalScheduleEdit()"
+            class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#fdf8e1] border border-white/15 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95 shrink-0"
+          >
+            <i data-lucide="edit-3" id="modalScheduleEditBtnIcon" class="w-3.5 h-3.5"></i>
+            <span id="modalScheduleEditBtnText">Edit Time</span>
+          </button>
+        </div>
+
+        <!-- Schedule Options Picker (Shown when Schedule is selected directly or when clicking Edit Time) -->
+        <div id="modalScheduleBox" class="hidden p-4 rounded-2xl border border-purple-500/40 bg-purple-500/10 flex flex-col gap-3.5 mt-1 dropdown-anim">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold text-purple-200 flex items-center gap-1.5">
               <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#fdf8e1]/60"></i> Select YouTube Release Time
@@ -931,21 +1253,21 @@
             <input
               type="datetime-local"
               id="modalScheduleDateTime"
-              onchange="updateModalSchedulePreview()"
+              onchange="onModalScheduleDateTimeChange()"
               class="w-full sm:flex-1 px-4 py-2.5 rounded-xl sleek-input text-xs text-[#fdf8e1] font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer"
             />
             <div class="flex items-center gap-1.5 w-full sm:w-auto">
               <button
                 type="button"
                 onclick="setModalQuickHours(2)"
-                class="px-3 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs font-bold transition"
+                class="px-3 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs font-bold transition cursor-pointer active:scale-95"
               >
                 +2 Hrs
               </button>
               <button
                 type="button"
                 onclick="setModalQuickHours(4)"
-                class="px-3 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs font-bold transition"
+                class="px-3 py-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs font-bold transition cursor-pointer active:scale-95"
               >
                 +4 Hrs
               </button>
@@ -954,23 +1276,23 @@
 
           <!-- Quick Peak Time Slots -->
           <div class="grid grid-cols-5 gap-1.5">
-            <button type="button" onclick="setModalTargetTime(1, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+            <button type="button" onclick="setModalTargetTime(1, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition cursor-pointer active:scale-95">
               <div class="text-[11px] font-black text-[#fdf8e1]">1:00 AM</div>
               <div class="text-[8px] text-[#fdf8e1]/60">Night</div>
             </button>
-            <button type="button" onclick="setModalTargetTime(2, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+            <button type="button" onclick="setModalTargetTime(2, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition cursor-pointer active:scale-95">
               <div class="text-[11px] font-black text-[#fdf8e1]">2:00 AM</div>
               <div class="text-[8px] text-[#fdf8e1]/60">Late</div>
             </button>
-            <button type="button" onclick="setModalTargetTime(7, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+            <button type="button" onclick="setModalTargetTime(7, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition cursor-pointer active:scale-95">
               <div class="text-[11px] font-black text-amber-300">7:00 AM</div>
               <div class="text-[8px] text-[#fdf8e1]/60">Morning</div>
             </button>
-            <button type="button" onclick="setModalTargetTime(14, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+            <button type="button" onclick="setModalTargetTime(14, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition cursor-pointer active:scale-95">
               <div class="text-[11px] font-black text-[#fdf8e1]/80">2:00 PM</div>
               <div class="text-[8px] text-[#fdf8e1]/60">Afternoon</div>
             </button>
-            <button type="button" onclick="setModalTargetTime(21, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition">
+            <button type="button" onclick="setModalTargetTime(21, 0)" class="p-2 rounded-xl bg-black/50 hover:bg-purple-500/25 border border-purple-500/30 text-center transition cursor-pointer active:scale-95">
               <div class="text-[11px] font-black text-rose-300">9:00 PM</div>
               <div class="text-[8px] text-[#fdf8e1]/60">Prime</div>
             </button>
@@ -2941,46 +3263,191 @@
       showToast('⬇️ Downloading high-resolution thumbnail .PNG');
     }
 
-    // Handle Visibility Dropdown change
+    // ═══════════════════════════════════════════════════
+    // CUSTOM GLASSMORPHIC SELECT DROPDOWNS & SYNC SUITE
+    // ═══════════════════════════════════════════════════
+
+    const PRIVACY_CONFIG = {
+      public: {
+        label: '🌐 Public (Immediate Live)',
+        dotClass: 'bg-emerald-400 live-pulse-dot',
+        textColor: 'text-[#fdf8e1]',
+        icon: 'globe'
+      },
+      scheduled: {
+        label: '📅 Scheduled Release (Auto-Publish)',
+        dotClass: 'bg-purple-400 purple-pulse-dot',
+        textColor: 'text-[#fdf8e1]',
+        icon: 'calendar-clock'
+      },
+      unlisted: {
+        label: '🔗 Unlisted (Link Only)',
+        dotClass: 'bg-sky-400',
+        textColor: 'text-[#fdf8e1]',
+        icon: 'link'
+      },
+      private: {
+        label: '🔒 Private (Draft)',
+        dotClass: 'bg-amber-400',
+        textColor: 'text-amber-300',
+        icon: 'lock'
+      }
+    };
+
+    const CATEGORY_CONFIG = {
+      '27': { label: 'Education & Self Improvement', emoji: '🎓' },
+      '22': { label: 'People & Blogs', emoji: '👤' },
+      '24': { label: 'Entertainment', emoji: '🎬' },
+      '26': { label: 'Howto & Style', emoji: '💡' }
+    };
+
+    function toggleCustomDropdown(type) {
+      const privacyMenu = document.getElementById('customPrivacyMenu');
+      const categoryMenu = document.getElementById('customCategoryMenu');
+      const privacyChevron = document.getElementById('customPrivacyChevron');
+      const categoryChevron = document.getElementById('customCategoryChevron');
+
+      if (type === 'privacy') {
+        const isHidden = privacyMenu.classList.contains('hidden');
+        closeAllCustomDropdowns();
+        if (isHidden) {
+          privacyMenu.classList.remove('hidden');
+          if (privacyChevron) privacyChevron.classList.add('rotate-180');
+        }
+      } else if (type === 'category') {
+        const isHidden = categoryMenu.classList.contains('hidden');
+        closeAllCustomDropdowns();
+        if (isHidden) {
+          categoryMenu.classList.remove('hidden');
+          if (categoryChevron) categoryChevron.classList.add('rotate-180');
+        }
+      }
+      safeCreateIcons();
+    }
+
+    function closeAllCustomDropdowns() {
+      const privacyMenu = document.getElementById('customPrivacyMenu');
+      const categoryMenu = document.getElementById('customCategoryMenu');
+      const privacyChevron = document.getElementById('customPrivacyChevron');
+      const categoryChevron = document.getElementById('customCategoryChevron');
+
+      if (privacyMenu) privacyMenu.classList.add('hidden');
+      if (categoryMenu) categoryMenu.classList.add('hidden');
+      if (privacyChevron) privacyChevron.classList.remove('rotate-180');
+      if (categoryChevron) categoryChevron.classList.remove('rotate-180');
+    }
+
+    // Close custom dropdowns on click outside
+    document.addEventListener('click', (e) => {
+      const pContainer = document.getElementById('customPrivacyContainer');
+      const cContainer = document.getElementById('customCategoryContainer');
+      if (pContainer && !pContainer.contains(e.target) && cContainer && !cContainer.contains(e.target)) {
+        closeAllCustomDropdowns();
+      }
+    });
+
+    function selectCustomPrivacy(value) {
+      const nativeSelect = document.getElementById('metaPrivacy');
+      if (nativeSelect) {
+        nativeSelect.value = value;
+      }
+      onPrivacyChange();
+      closeAllCustomDropdowns();
+    }
+
+    function selectCustomCategory(value) {
+      const nativeSelect = document.getElementById('metaCategory');
+      if (nativeSelect) {
+        nativeSelect.value = value;
+      }
+      syncCustomSelects();
+      closeAllCustomDropdowns();
+    }
+
+    function syncCustomSelects() {
+      // 1. Sync Privacy Select
+      const privacyVal = document.getElementById('metaPrivacy')?.value || 'public';
+      const privacyConf = PRIVACY_CONFIG[privacyVal] || PRIVACY_CONFIG.public;
+      const privacyDisplay = document.getElementById('customPrivacyDisplay');
+      if (privacyDisplay) {
+        privacyDisplay.innerHTML = `
+          <span class="w-2.5 h-2.5 rounded-full ${privacyConf.dotClass} shrink-0"></span>
+          <span class="text-xs font-extrabold ${privacyConf.textColor} tracking-tight truncate">${privacyConf.label}</span>
+        `;
+      }
+      document.querySelectorAll('.privacy-option-item').forEach(item => {
+        const val = item.getAttribute('data-value');
+        const check = item.querySelector('.privacy-check');
+        if (check) {
+          check.style.opacity = (val === privacyVal) ? '1' : '0';
+        }
+      });
+
+      // 2. Sync Category Select
+      const categoryVal = document.getElementById('metaCategory')?.value || '27';
+      const catConf = CATEGORY_CONFIG[categoryVal] || CATEGORY_CONFIG['27'];
+      const categoryDisplay = document.getElementById('customCategoryDisplay');
+      if (categoryDisplay) {
+        categoryDisplay.innerHTML = `
+          <span class="text-base">${catConf.emoji}</span>
+          <span class="text-xs font-extrabold text-[#fdf8e1] tracking-tight truncate">${catConf.label}</span>
+        `;
+      }
+      document.querySelectorAll('.category-option-item').forEach(item => {
+        const val = item.getAttribute('data-value');
+        const check = item.querySelector('.category-check');
+        if (check) {
+          check.style.opacity = (val === categoryVal) ? '1' : '0';
+        }
+      });
+    }
+
+    // Handle Visibility Dropdown change & Sync UI
     function onPrivacyChange() {
       const privacyEl = document.getElementById('metaPrivacy');
       if (!privacyEl) return;
       const privacy = privacyEl.value;
       const schedBox = document.getElementById('scheduleControlBox');
       const schedBadge = document.getElementById('schedModeBadge');
-      const uploadBtnText = document.getElementById('uploadBtnText');
-      const uploadBtnIcon = document.getElementById('uploadBtnIcon');
+      const ytBtnText = document.getElementById('dashboardYtBtnText');
+      const ytBtnIcon = document.getElementById('dashboardYtBtnIcon');
+      const blastBtnText = document.getElementById('dashboardBlastBtnText');
 
       if (privacy === 'scheduled') {
         if (schedBox) schedBox.classList.remove('hidden');
         if (schedBadge) schedBadge.classList.remove('hidden');
-        if (uploadBtnText) uploadBtnText.textContent = "Schedule Video on YouTube";
-        if (uploadBtnIcon) uploadBtnIcon.setAttribute('data-lucide', 'calendar-clock');
+        if (ytBtnText) ytBtnText.textContent = "Schedule on YouTube";
+        if (ytBtnIcon) {
+          ytBtnIcon.setAttribute('data-lucide', 'calendar-clock');
+          ytBtnIcon.className = "w-4 h-4 text-purple-400 group-hover:scale-110 transition-transform";
+        }
+        if (blastBtnText) blastBtnText.textContent = "Schedule on Both";
         updateSchedulePreview();
       } else {
         if (schedBox) schedBox.classList.add('hidden');
         if (schedBadge) schedBadge.classList.add('hidden');
-        if (uploadBtnText) {
-          if (selectedVideo && selectedVideo.isUploaded) {
-            uploadBtnText.textContent = "Re-Upload / Update Video";
-          } else {
-            uploadBtnText.textContent = "Post to YouTube";
-          }
+        if (ytBtnText) ytBtnText.textContent = "YouTube";
+        if (ytBtnIcon) {
+          ytBtnIcon.setAttribute('data-lucide', 'play');
+          ytBtnIcon.className = "w-4 h-4 text-red-400 group-hover:scale-110 transition-transform";
         }
-        if (uploadBtnIcon) uploadBtnIcon.setAttribute('data-lucide', 'upload-cloud');
+        if (blastBtnText) blastBtnText.textContent = "Blast Both";
       }
+
+      syncCustomSelects();
       safeCreateIcons();
     }
 
-    // Set Quick Schedule Hours Offset
+    // Set Quick Schedule Hours Offset from Dashboard
     function setQuickSchedule(hours) {
       const d = new Date();
       d.setHours(d.getHours() + hours);
-      document.getElementById('scheduleDateTime').value = toLocalISOString(d);
-      updateSchedulePreview();
+      const iso = toLocalISOString(d);
+      document.getElementById('scheduleDateTime').value = iso;
+      onDashboardScheduleDateTimeChange();
     }
 
-    // Smart Set Specific Target Peak Times (1AM, 2AM, 7AM, 2PM, 9PM)
+    // Smart Set Specific Target Peak Times (1AM, 2AM, 7AM, 2PM, 9PM) from Dashboard
     function setQuickTargetTime(targetHour, targetMinute = 0) {
       const d = new Date();
       d.setHours(targetHour, targetMinute, 0, 0);
@@ -2990,36 +3457,70 @@
         d.setDate(d.getDate() + 1);
       }
       
-      document.getElementById('scheduleDateTime').value = toLocalISOString(d);
-      updateSchedulePreview();
+      const iso = toLocalISOString(d);
+      document.getElementById('scheduleDateTime').value = iso;
+      onDashboardScheduleDateTimeChange();
     }
 
-    // Update Schedule Preview Text
+    // Handle change of schedule date/time in dashboard
+    function onDashboardScheduleDateTimeChange() {
+      updateSchedulePreview();
+      const val = document.getElementById('scheduleDateTime')?.value;
+      const modalSched = document.getElementById('modalScheduleDateTime');
+      if (modalSched && val) {
+        modalSched.value = val;
+        updateModalSchedulePreview();
+      }
+    }
+
+    // Update Schedule Preview Text & Highlight Active Peak Slot
     function updateSchedulePreview() {
-      const val = document.getElementById('scheduleDateTime').value;
+      const val = document.getElementById('scheduleDateTime')?.value;
       const previewText = document.getElementById('schedulePreviewText');
       if (!val) return;
 
       const schedDate = new Date(val);
       const now = new Date();
       if (schedDate.getTime() <= now.getTime()) {
-        previewText.innerHTML = `
-          <span class="text-rose-400 font-bold flex items-center gap-1.5">
-            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Please choose a future time (at least 5 minutes ahead).
-          </span>
-        `;
-        safeCreateIcons();
+        if (previewText) {
+          previewText.innerHTML = `
+            <span class="text-rose-400 font-bold flex items-center gap-1.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i> Please choose a future time (at least 5 minutes ahead).
+            </span>
+          `;
+          safeCreateIcons();
+        }
         return;
       }
 
       const formatted = formatScheduleTime(val);
-      previewText.innerHTML = `
-        <span class="text-[#fdf8e1] font-bold flex items-center gap-1.5">
-          <i data-lucide="calendar-check" class="w-4 h-4 text-[#fdf8e1]/60"></i>
-          Will automatically go PUBLIC on YouTube on <strong>${formatted}</strong> (Local Time)
-        </span>
-      `;
-      safeCreateIcons();
+      if (previewText) {
+        previewText.innerHTML = `
+          <span class="text-purple-200 font-bold flex items-center gap-1.5">
+            <i data-lucide="calendar-check" class="w-4 h-4 text-purple-300"></i>
+            Will automatically go PUBLIC on YouTube on <strong>${formatted}</strong> (Local Time)
+          </span>
+        `;
+        safeCreateIcons();
+      }
+
+      // Highlight active peak slot pill on dashboard
+      const targetHour = schedDate.getHours();
+      const targetMin = schedDate.getMinutes();
+      document.querySelectorAll('.slot-btn').forEach(btn => {
+        const h = parseInt(btn.getAttribute('data-hour'), 10);
+        if (h === targetHour && targetMin === 0) {
+          btn.classList.add('active-slot-pill');
+        } else {
+          btn.classList.remove('active-slot-pill');
+        }
+      });
+
+      // Synchronize confirmed banner in modal
+      const modalConfirmedText = document.getElementById('modalConfirmedTimeText');
+      if (modalConfirmedText) {
+        modalConfirmedText.textContent = `${formatted} (Google Cloud Queue)`;
+      }
     }
 
     // Title Char Count
@@ -3108,11 +3609,27 @@
         return;
       }
       navigator.clipboard.writeText(commentEl.value.trim());
+
+      const btn = document.getElementById('copyPinnedCommentBtn');
+      const btnIcon = document.getElementById('copyPinnedCommentBtnIcon');
       const btnText = document.getElementById('copyPinnedCommentBtnText');
-      if (btnText) {
-        btnText.textContent = 'Copied!';
-        setTimeout(() => { btnText.textContent = 'Copy'; }, 2000);
+
+      if (btn) {
+        btn.classList.add('copy-burst', 'bg-emerald-500/20', 'border-emerald-500/40', 'text-emerald-300');
       }
+      if (btnIcon) btnIcon.setAttribute('data-lucide', 'check');
+      if (btnText) btnText.textContent = 'Copied!';
+      safeCreateIcons();
+
+      setTimeout(() => {
+        if (btn) {
+          btn.classList.remove('copy-burst', 'bg-emerald-500/20', 'border-emerald-500/40', 'text-emerald-300');
+        }
+        if (btnIcon) btnIcon.setAttribute('data-lucide', 'copy');
+        if (btnText) btnText.textContent = 'Copy';
+        safeCreateIcons();
+      }, 2000);
+
       showToast('📋 Discussion comment copied to clipboard!');
     }
 
@@ -3262,11 +3779,11 @@
       const dashboardSchedule = document.getElementById('scheduleDateTime')?.value || '';
 
       if (dashboardPrivacy === 'scheduled') {
-        setModalTiming('schedule');
         if (dashboardSchedule) {
           const mSched = document.getElementById('modalScheduleDateTime');
           if (mSched) mSched.value = dashboardSchedule;
         }
+        setModalTiming('schedule', true);
       } else if (dashboardPrivacy === 'private' || dashboardPrivacy === 'unlisted') {
         setModalTiming('draft');
       } else {
@@ -3359,12 +3876,14 @@
       }
     }
 
-    function setModalTiming(timing) {
+    function setModalTiming(timing, fromDashboard = false) {
       currentModalTiming = timing;
       const btnNow = document.getElementById('timingBtnNow');
       const btnSched = document.getElementById('timingBtnSchedule');
       const btnDraft = document.getElementById('timingBtnDraft');
       const schedBox = document.getElementById('modalScheduleBox');
+      const confirmedCard = document.getElementById('modalScheduleConfirmedCard');
+      const confirmedTimeText = document.getElementById('modalConfirmedTimeText');
 
       [btnNow, btnSched, btnDraft].forEach(b => {
         if (b) b.className = "p-3.5 rounded-2xl sleek-input border border-white/20 hover:border-white/40 text-left flex flex-col gap-1 transition cursor-pointer";
@@ -3373,12 +3892,33 @@
       if (timing === 'now') {
         if (btnNow) btnNow.className = "p-3.5 rounded-2xl sleek-input border border-[#fdf8e1]/40 bg-white/10 text-left flex flex-col gap-1 transition cursor-pointer";
         if (schedBox) schedBox.classList.add('hidden');
+        if (confirmedCard) confirmedCard.classList.add('hidden');
       } else if (timing === 'schedule') {
         if (btnSched) btnSched.className = "p-3.5 rounded-2xl sleek-input border border-purple-500 bg-purple-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
-        if (schedBox) schedBox.classList.remove('hidden');
+        
+        const currentSchedVal = document.getElementById('modalScheduleDateTime')?.value || document.getElementById('scheduleDateTime')?.value;
+        const formatted = currentSchedVal ? formatScheduleTime(currentSchedVal) : 'Upcoming peak time';
+
+        if (fromDashboard) {
+          // Pre-set on dashboard card: display sleek confirmed card instead of redundant picker!
+          if (confirmedCard) {
+            confirmedCard.classList.remove('hidden');
+            if (confirmedTimeText) confirmedTimeText.textContent = `${formatted} (Google Cloud Queue)`;
+          }
+          if (schedBox) schedBox.classList.add('hidden');
+          const editBtnText = document.getElementById('modalScheduleEditBtnText');
+          if (editBtnText) editBtnText.textContent = 'Edit Time';
+          const editBtnIcon = document.getElementById('modalScheduleEditBtnIcon');
+          if (editBtnIcon) editBtnIcon.setAttribute('data-lucide', 'edit-3');
+        } else {
+          // User clicked "Schedule Release" directly inside the modal
+          if (confirmedCard) confirmedCard.classList.add('hidden');
+          if (schedBox) schedBox.classList.remove('hidden');
+        }
       } else {
         if (btnDraft) btnDraft.className = "p-3.5 rounded-2xl sleek-input border border-amber-500 bg-amber-500/15 text-left flex flex-col gap-1 transition cursor-pointer";
         if (schedBox) schedBox.classList.add('hidden');
+        if (confirmedCard) confirmedCard.classList.add('hidden');
       }
 
       const ytChecked = document.querySelectorAll('.modal-yt-channel-cb:checked').length;
@@ -3387,11 +3927,51 @@
       safeCreateIcons();
     }
 
+    function toggleModalScheduleEdit() {
+      const schedBox = document.getElementById('modalScheduleBox');
+      const editBtnText = document.getElementById('modalScheduleEditBtnText');
+      const editBtnIcon = document.getElementById('modalScheduleEditBtnIcon');
+      if (!schedBox) return;
+
+      const isHidden = schedBox.classList.contains('hidden');
+      if (isHidden) {
+        schedBox.classList.remove('hidden');
+        if (editBtnText) editBtnText.textContent = 'Hide Picker';
+        if (editBtnIcon) editBtnIcon.setAttribute('data-lucide', 'chevron-up');
+      } else {
+        schedBox.classList.add('hidden');
+        if (editBtnText) editBtnText.textContent = 'Edit Time';
+        if (editBtnIcon) editBtnIcon.setAttribute('data-lucide', 'edit-3');
+      }
+      safeCreateIcons();
+    }
+
+    function onModalScheduleDateTimeChange() {
+      const val = document.getElementById('modalScheduleDateTime')?.value;
+      if (!val) return;
+
+      // Sync back to dashboard controls
+      const dashSched = document.getElementById('scheduleDateTime');
+      if (dashSched) {
+        dashSched.value = val;
+        updateSchedulePreview();
+      }
+
+      // Update confirmed banner
+      const formatted = formatScheduleTime(val);
+      const modalConfirmedText = document.getElementById('modalConfirmedTimeText');
+      if (modalConfirmedText) {
+        modalConfirmedText.textContent = `${formatted} (Google Cloud Queue)`;
+      }
+
+      updateModalSchedulePreview();
+    }
+
     function setModalQuickHours(hours) {
       const d = new Date();
       d.setHours(d.getHours() + hours);
       document.getElementById('modalScheduleDateTime').value = toLocalISOString(d);
-      updateModalSchedulePreview();
+      onModalScheduleDateTimeChange();
     }
 
     function setModalTargetTime(hour, minute = 0) {
@@ -3401,7 +3981,7 @@
         d.setDate(d.getDate() + 1);
       }
       document.getElementById('modalScheduleDateTime').value = toLocalISOString(d);
-      updateModalSchedulePreview();
+      onModalScheduleDateTimeChange();
     }
 
     function updateModalSchedulePreview() {
@@ -3848,6 +4428,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       checkAuthStatus();
       checkInstagramStatus();
+      syncCustomSelects();
       loadVideos();
       loadMemeBoard();
       fetchSystemHealth();
