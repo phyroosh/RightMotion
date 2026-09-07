@@ -695,3 +695,17 @@ export const StopComparingThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TrueRelationshipsThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="REAL RELATIONSHIPS"
+    highlightWord="RELATIONSHIPS"
+    highlightColor="rose"
+    subtitle="Why Real Love Still Exists"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="CONNECTION"
+  />
+);

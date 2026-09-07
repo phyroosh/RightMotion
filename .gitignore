@@ -33,6 +33,8 @@ public/*/*.mp3
 public/**/*.mp3
 public/*/facecam.mp4
 public/**/*.mp4
+public/*/tts_temp/
+public/**/tts_temp/
 !public/memes/
 !public/memes/*
 !public/memes/*.mp4

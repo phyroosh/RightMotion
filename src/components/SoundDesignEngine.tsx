@@ -7,6 +7,7 @@ export type SfxType =
   | "whoosh_deep"
   | "whoosh_sparkle"
   | "impact_hit"
+  | "piano_hit"
   | "whoosh_cinematic"
   | "marker_scribble"
   | "tape_snap";
@@ -39,9 +40,14 @@ const SFX_CONFIG: Record<SfxType, { src: string; defaultVolume: number; duration
     durationFrames: 40,
   },
   impact_hit: {
-    src: "audio/sfx/impact_hit.wav",
-    defaultVolume: 0.18,
-    durationFrames: 30,
+    src: "audio/sfx/universfield-cinematic-piano-hit-567216.mp3",
+    defaultVolume: 0.24,
+    durationFrames: 90, // 3.0s resonant cinematic reverb tail
+  },
+  piano_hit: {
+    src: "audio/sfx/universfield-cinematic-piano-hit-567216.mp3",
+    defaultVolume: 0.24,
+    durationFrames: 90,
   },
   whoosh_cinematic: {
     src: "audio/sfx/whoosh_cinematic.wav",

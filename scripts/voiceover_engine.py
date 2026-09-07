@@ -10,12 +10,15 @@ Permanent Rules Implemented:
 
 import sys
 import os
+import re
 import site
 import argparse
 import asyncio
 import json
 import subprocess
 from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -52,7 +55,21 @@ def normalize_text_for_tts(raw_text: str) -> str:
         .strip()
     )
 
-async def generate_raw_tts(clean_text: str, raw_mp3_path: str, voice: str = "en-US-JennyNeural"):
+def split_body_and_closing_question(text: str) -> tuple[str, str]:
+    """
+    Separates the main narrative from the final reflective question.
+    """
+    clean = text.strip()
+    sentences = [s.strip() for s in re.split(r'(?<=[.!?])\s+', clean) if s.strip()]
+    if len(sentences) >= 2:
+        last = sentences[-1]
+        if last.endswith("?") or any(last.lower().startswith(p) for p in ["tell me", "drop your", "drop a", "be honest", "question for you", "what would you", "have you ever"]):
+            body = " ".join(sentences[:-1])
+            question = last
+            return body, question
+    return clean, ""
+
+async def generate_raw_tts(clean_text: str, raw_mp3_path: str, voice: str = "en-US-AvaMultilingualNeural"):
     """
     Synthesizes speech with smart tempo boost (rate="+8%") for high viewer retention.
     """
@@ -113,19 +130,66 @@ def transcribe_timestamps(audio_path: str, transcript_json_path: str):
         json.dump(words_list, f, indent=2, ensure_ascii=False)
     print(f"✅ Timestamps saved to {transcript_json_path}")
 
-async def process_voiceover(script_text: str, topic: str, root_dir: str = r"C:\Toptier Products\RightClips"):
+async def process_voiceover(script_text: str, topic: str, root_dir: str = str(ROOT_DIR), voice: str = "en-US-AvaMultilingualNeural"):
     public_dir = os.path.join(root_dir, "public", topic)
     clips_dir = os.path.join(root_dir, "src", "clips", topic)
     os.makedirs(public_dir, exist_ok=True)
     os.makedirs(clips_dir, exist_ok=True)
 
-    raw_mp3 = os.path.join(public_dir, "raw_voiceover.mp3")
     final_mp3 = os.path.join(public_dir, "voiceover.mp3")
     transcript_json = os.path.join(clips_dir, "transcript.json")
 
     clean_text = normalize_text_for_tts(script_text)
-    await generate_raw_tts(clean_text, raw_mp3)
-    compress_pauses(raw_mp3, final_mp3)
+    body_text, closing_question = split_body_and_closing_question(clean_text)
+
+    if closing_question:
+        print(f"🎙️ Synthesizing voice with intimate 220ms reflection breath before closing question ({voice})...")
+        work_dir = os.path.join(public_dir, "tts_temp")
+        os.makedirs(work_dir, exist_ok=True)
+        body_raw = os.path.join(work_dir, "body_raw.mp3")
+        body_norm = os.path.join(work_dir, "body_norm.mp3")
+        q_raw = os.path.join(work_dir, "q_raw.mp3")
+        q_norm = os.path.join(work_dir, "q_norm.mp3")
+        pause_gap = os.path.join(work_dir, "pause_220ms.mp3")
+
+        # Synthesize body
+        comm_b = edge_tts.Communicate(text=body_text, voice=voice, rate="+8%")
+        await comm_b.save(body_raw)
+        subprocess.run([
+            "ffmpeg", "-y", "-i", body_raw,
+            "-af", "silenceremove=stop_periods=-1:stop_duration=0.18:stop_threshold=-35dB:detection=peak",
+            "-ar", "44100", "-ac", "2", "-b:a", "192k", body_norm
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        # Synthesize closing question (+6% slightly more deliberate)
+        comm_q = edge_tts.Communicate(text=closing_question, voice=voice, rate="+6%")
+        await comm_q.save(q_raw)
+        subprocess.run([
+            "ffmpeg", "-y", "-i", q_raw,
+            "-af", "silenceremove=stop_periods=-1:stop_duration=0.18:stop_threshold=-35dB:detection=peak",
+            "-ar", "44100", "-ac", "2", "-b:a", "192k", q_norm
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        # Generate 220ms breath pause gap
+        subprocess.run([
+            "ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+            "-t", "0.22", "-ar", "44100", "-ac", "2", "-b:a", "192k", pause_gap
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        # Concat with demuxer
+        concat_list = os.path.join(work_dir, "concat.txt")
+        with open(concat_list, "w", encoding="utf-8") as f:
+            f.write(f"file '{Path(body_norm).resolve().as_posix()}'\nfile '{Path(pause_gap).resolve().as_posix()}'\nfile '{Path(q_norm).resolve().as_posix()}'\n")
+        subprocess.run([
+            "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", concat_list,
+            "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2", final_mp3
+        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        print(f"✅ Seamless master audio saved with 220ms breath pause to {final_mp3}")
+    else:
+        raw_mp3 = os.path.join(public_dir, "raw_voiceover.mp3")
+        await generate_raw_tts(clean_text, raw_mp3, voice=voice)
+        compress_pauses(raw_mp3, final_mp3)
+
     transcribe_timestamps(final_mp3, transcript_json)
     print(f"\n🎉 Voiceover pipeline complete for '{topic}'!")
 
@@ -134,6 +198,7 @@ def main():
     parser.add_argument("--text", type=str, help="Script text string")
     parser.add_argument("--file", type=str, help="Path to text file containing script")
     parser.add_argument("--topic", type=str, required=True, help="Clip folder name (e.g. strength, focus, habit)")
+    parser.add_argument("--voice", type=str, default="en-US-AvaMultilingualNeural", help="Neural TTS voice name")
     args = parser.parse_args()
 
     if args.text:
@@ -145,7 +210,7 @@ def main():
         print("Error: Either --text or --file must be specified.")
         sys.exit(1)
 
-    asyncio.run(process_voiceover(text, args.topic))
+    asyncio.run(process_voiceover(text, args.topic, voice=args.voice))
 
 if __name__ == "__main__":
     main()

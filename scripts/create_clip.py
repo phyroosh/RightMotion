@@ -920,7 +920,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
                 sfx_cues.append({"frame": b["frame"], "type": "whoosh_fast", "volume": 0.28})
                 sfx_cues.append({"frame": b["frame"], "type": "click", "volume": 0.24})
             elif b["type"] == "stamp":
-                sfx_cues.append({"frame": b["frame"], "type": "impact_hit", "volume": 0.28})
+                sfx_cues.append({"frame": b["frame"], "type": "whoosh_deep", "volume": 0.28})
 
     for idx, pt in enumerate(s2_items):
         p_frame = max(pt["startFrame"], concept_exit)

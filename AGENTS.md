@@ -160,6 +160,18 @@ Every short-form script follows the high-retention 4-beat structure:
 4. **Beat 3 — The Rewire Shift (16–20s)**: Sharp, memorable psychological rule (*"If you have to shrink yourself to keep them, that's not connection — it's nervous system panic."*).
 5. **Beat 4 — The Spoken Interactive CTA (21–24s)**: After an intimate 200–250ms breath pause, Judy asks a direct, open-ended question looking into the camera (*"Be honest: have you ever lost yourself trying to keep someone else happy? Tell me below."*).
 
+### The 9 Core Psychological Archetypes (Mode B Classification):
+The scriptwriter autonomously categorizes uncurated topics into 9 proven psychological archetypes (62–68 words, 21–24s runtime) or synthesizes an exact 2-Beat curiosity gap script:
+1. **People-Pleasing & Boundaries**: Fawn Response Conditioning (*"Notice how saying yes to plans you dread always leaves you resenting the other person?..."*)
+2. **Comparison & Timelines**: Upward Social Anchoring (*"Notice how achieving your goals never stops you from feeling five years behind everyone else?..."*)
+3. **Fear of Trying & Casual Mask**: Anticipatory Self-Handicapping (*"Notice how you pretend not to care about the things you want most?..."*)
+4. **Dopamine & Screen Loops**: Dopamine Loop Hijacking (*"Ever close an app only to reopen it five seconds later without thinking?..."*)
+5. **Chronic Overthinking**: Threat Simulation Rumination (*"Why does your brain wait until your head hits the pillow to replay an awkward text?..."*)
+6. **Burnout & Freeze**: Autonomic Nervous System Freeze (*"Notice how resting on the couch doesn't recharge you when your mind is screaming with guilt?..."*)
+7. **Relationships & Attachment**: Anxious Attachment Mirroring (*"Why does dating leave you exhausted, but being alone feels unbearable?..."*)
+8. **Wealth & Hedonic Spending**: The Hedonic Treadmill Effect (*"Notice how earning more money never makes you feel financially secure?..."*)
+9. **Sleep & Biology**: The Cortisol Awakening Mismatch (*"Why do you wake up with a racing heart at three AM even when exhausted?..."*)
+
 ### Banned AI Clichés & Sales Hype:
 - ❌ *"Here's the thing..."*, *"The truth is..."*, *"You're not lazy, you're..."*, *"What most people don't realize is..."*, *"The tricky part is..."*
 - ❌ *"masterpiece"*, *"life-changing"*, *"must-read"*, *"buy now"*, *"game-changer"*
@@ -179,7 +191,7 @@ Every short-form script follows the high-retention 4-beat structure:
    - NEVER apply continuous `ambientFloat` (`Math.sin`), vertical bobbing, or breathing loops to cards, cutouts, or text.
 3. **Acoustic Sound Design (Multi-SFX Suite)**:
    - `whoosh_deep` / `whoosh_fast`: Major transitions & presenter entrances (`vol: 0.30 - 0.34`).
-   - `impact_hit`: Concept slams, diagnostic reveals, cutout stamps (`vol: 0.20 - 0.24`).
+   - `impact_hit` / `piano_hit`: High-impact concept reveals, diagnostic reveals, cutout stamps (`vol: 0.24`, `durationFrames: 90`). Mapped to the iconic Dhruv Rathee cinematic piano hit (`universfield-cinematic-piano-hit-567216.mp3` with 3.0s resonant decay).
    - `click`: Tactile UI pills, chips, badges (`vol: 0.24 - 0.28`).
    - `whoosh_sparkle`: Key psychological revelations, solution cutouts (`vol: 0.30 - 0.35`).
 4. **Frame 0 High-CTR Thumbnail Standard**:

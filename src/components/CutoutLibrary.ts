@@ -10,7 +10,7 @@ export interface CutoutMetadata {
   title: string;
   description: string;
   tone: string;
-  recommendedSfx: "click" | "impact_hit" | "whoosh_fast" | "whoosh_deep" | "whoosh_sparkle" | "whoosh_cinematic";
+  recommendedSfx: "click" | "impact_hit" | "piano_hit" | "whoosh_fast" | "whoosh_deep" | "whoosh_sparkle" | "whoosh_cinematic";
   keywords: string[];
   width: number;
   height: number;

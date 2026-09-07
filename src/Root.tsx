@@ -45,6 +45,8 @@ import { TeenageRelationshipsComposition } from "./clips/teenage_relationships";
 import teenage_relationshipsTranscript from "./clips/teenage_relationships/transcript.json";
 import { StopComparingComposition } from "./clips/stop_comparing";
 import stop_comparingTranscript from "./clips/stop_comparing/transcript.json";
+import { TrueRelationshipsComposition } from "./clips/true_relationships";
+import true_relationshipsTranscript from "./clips/true_relationships/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -74,6 +76,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TrueRelationshipsThumbnail,
   StopComparingThumbnail,
   TeenageRelationshipsThumbnail,
   YouAreNotAloneThumbnail,
@@ -164,6 +167,8 @@ export const RemotionRoot: React.FC = () => {
   const teenage_relationshipsDuration = calculateDurationInFrames(teenage_relationshipsTranscript as any[], fps);
   
   const stop_comparingDuration = calculateDurationInFrames(stop_comparingTranscript as any[], fps);
+  
+  const true_relationshipsDuration = calculateDurationInFrames(true_relationshipsTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -324,6 +329,16 @@ export const RemotionRoot: React.FC = () => {
         id="StopComparingVideo"
         component={StopComparingComposition}
         durationInFrames={stop_comparingDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TrueRelationshipsVideo"
+        component={TrueRelationshipsComposition}
+        durationInFrames={true_relationshipsDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -792,6 +807,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="StopComparingThumbnail"
         component={StopComparingThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TrueRelationshipsThumbnail"
+        component={TrueRelationshipsThumbnail}
         width={1080}
         height={1920}
       />
