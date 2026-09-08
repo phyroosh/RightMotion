@@ -100,13 +100,23 @@ export const PhysicalCard: React.FC<PhysicalCardProps> = ({
         className="relative w-full h-full transition-transform duration-75"
         style={{
           transform: `translateY(${effectiveTranslateY}px) rotateX(${effectiveTiltX}deg) rotateY(${effectiveTiltY}deg) rotateZ(${effectiveTiltZ}deg)`,
-          filter: `drop-shadow(0 ${elevation * 1.2}px ${elevation * 2.2}px rgba(0, 0, 0, 0.35))`,
+          // Grounded multi-layered studio shadows: contact shadow + diffuse shadow + ambient air shadow
+          filter: `drop-shadow(0 2px 4px rgba(0, 0, 0, 0.10)) drop-shadow(0 ${Math.round(elevation * 0.6)}px ${Math.round(elevation * 1.2)}px rgba(0, 0, 0, 0.18)) drop-shadow(0 ${Math.round(elevation * 1.3)}px ${Math.round(elevation * 2.4)}px rgba(0, 0, 0, 0.12))`,
           willChange: "transform",
         }}
       >
+        {/* Tactile Letterpress Edge Deboss & Bevel */}
+        <div
+          className="absolute inset-0 rounded-[inherit] pointer-events-none z-30"
+          style={{
+            boxShadow:
+              "inset 0 1.5px 1px rgba(255, 255, 255, 0.85), inset 0 -1.5px 2px rgba(0, 0, 0, 0.07), inset 1px 0 1px rgba(255, 255, 255, 0.4), inset -1px 0 1px rgba(0, 0, 0, 0.04)",
+          }}
+        />
+
         {/* Specular Glare Overlay */}
         <div
-          className="absolute inset-0 rounded-[inherit] pointer-events-none z-30 opacity-20"
+          className="absolute inset-0 rounded-[inherit] pointer-events-none z-30 opacity-18"
           style={{
             background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.7) 0%, transparent 65%)`,
             mixBlendMode: "overlay",

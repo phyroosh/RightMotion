@@ -7,6 +7,7 @@ import { AppleProgressBar } from "../../components/AppleProgressBar";
 import { AppleKineticCaptions } from "../../components/AppleKineticCaptions";
 import { SoundDesignEngine, SfxCue } from "../../components/SoundDesignEngine";
 import { TrueRelationshipsThumbnail } from "../../thumbnails";
+import { GroundedTextureEngine } from "../../components/texture";
 import rawTranscript from "./transcript.json";
 import { WordTimestamp } from "../../types";
 import "../../style.css";
@@ -143,6 +144,9 @@ export const TrueRelationshipsComposition: React.FC = () => {
 
       {/* 8. Kinetic Captions with Neon Apple Glow */}
       <AppleKineticCaptions transcript={transcript} />
+
+      {/* 9. Grounded Finishing Texture (35mm Living Grain + Halation + Vignette) */}
+      <GroundedTextureEngine grainOpacity={0.042} />
     </div>
   );
 };

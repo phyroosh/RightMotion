@@ -1,5 +1,6 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
+import { ArchivalPaperCanvas } from "./texture/ArchivalPaperCanvas";
 
 export interface LivingStudioBackgroundProps {
   className?: string;
@@ -7,23 +8,25 @@ export interface LivingStudioBackgroundProps {
   enableBreathing?: boolean;
   orbColor1?: string;
   orbColor2?: string;
+  paperToothOpacity?: number;
 }
 
 /**
  * 🎬 LivingStudioBackground
- * Signature Apple Studio Canvas with organic living ambient auras.
- * Matches the Judy Insights channel banner aesthetic:
- * - Pure studio white/slate-50 base
+ * Signature Editorial Archival Canvas with living ambient auras.
+ * - 300gsm Archival cotton paper tooth substrate (replaces sterile plastic ad look)
+ * - Pure studio warm-white base (#faf8f5 / #ffffff)
  * - Left Warm Amber Sparkle Aura (gentle sine wave drift)
  * - Right Electric Cognitive Blue Aura (counter-phase cosine drift)
  * - Tactile graphite dot-grid texture
  */
 export const LivingStudioBackground: React.FC<LivingStudioBackgroundProps> = ({
   className = "",
-  dotGridOpacity = 0.28,
+  dotGridOpacity = 0.24,
   enableBreathing = true,
-  orbColor1 = "rgba(245, 158, 11, 0.24)",
-  orbColor2 = "rgba(37, 99, 235, 0.22)",
+  orbColor1 = "rgba(245, 158, 11, 0.22)",
+  orbColor2 = "rgba(37, 99, 235, 0.20)",
+  paperToothOpacity = 0.32,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -40,11 +43,13 @@ export const LivingStudioBackground: React.FC<LivingStudioBackgroundProps> = ({
 
   return (
     <div
-      className={`absolute inset-0 w-full h-full bg-[#fbfbfd] overflow-hidden pointer-events-none select-none ${className}`}
-      style={{
-        background: "radial-gradient(ellipse at 50% 0%, #ffffff 0%, #f8fafc 55%, #f1f5f9 100%)",
-      }}
+      className={`absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none ${className}`}
     >
+      {/* 0. Grounded Archival 300gsm Cotton Paper Tooth Substrate */}
+      <ArchivalPaperCanvas
+        paperToothOpacity={paperToothOpacity}
+        warmth="warm_editorial"
+      />
       {/* 1. Left Warm Amber Sparkle Aura (Judy Insights Signature) */}
       <div
         style={{

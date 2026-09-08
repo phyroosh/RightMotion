@@ -8,6 +8,7 @@ import { CinematicIllustrationCard } from "../../components/CinematicIllustratio
 import { InteractiveEngagementPill } from "../../components/InteractiveEngagementPill";
 import { TacticalMemeCard, TacticalMemeFrame } from "../../components/TacticalMemeCard";
 import { ConceptKeywordSlam } from "../../components/ConceptKeywordSlam";
+import { MemeStickerOverlay } from "../../components/MemeStickerOverlay";
 import { Sparkles, Zap, ArrowRight } from "lucide-react";
 import { WordTimestamp } from "../../types";
 
@@ -251,6 +252,24 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
         hudLabel="SELF-CONFESSION // GUILTY AS CHARGED"
         theme="apple_studio"
         position="top"
+      />
+
+      {/* ======================================================== */}
+      {/* MID-VIDEO GEN-Z MEME REACTION STICKERS                   */}
+      {/* ======================================================== */}
+      <MemeStickerOverlay
+        stickerId="verne_turtle_shock"
+        startFrame={335}
+        durationFrames={36}
+        position="bottom-right"
+        badgeText="LIVE REACTION"
+      />
+      <MemeStickerOverlay
+        stickerId="anya_smug"
+        startFrame={455}
+        durationFrames={34}
+        position="top-right"
+        badgeText="HEH 𓁹‿𓁹"
       />
 
     </div>

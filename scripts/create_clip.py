@@ -42,7 +42,7 @@ def sanitize_tags(text: str) -> str:
         return ""
     # Strip {Health}, {Finance}, {Self Improvement}, {facecam}, {no topics}, {no meta}, {meta}, {no meme}, {andrew}, {duo}, {meme: ...}, and product tags
     pattern = re.compile(
-        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|andrew|duo|meme(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
+        r"\{\s*(?:health|finance|self\s*improv?ement|facecam|no\s*topics?|no\s*meta|meta|no\s*memes?|no\s*stickers?|andrew|duo|meme(?:\s*:\s*[^}]+)?|sticker(?:\s*:\s*[^}]+)?|(?:product|pdf)\s*:\s*[^,}]+,\s*page\s*:\s*\d+)\s*\}",
         re.IGNORECASE,
     )
     cleaned = pattern.sub("", text)
@@ -598,7 +598,7 @@ def align_concepts(concepts, words_list, fps=30):
         })
     return aligned
 
-def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False, meme_meta: dict = None):
+def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False, meme_meta: dict = None, sticker_meta: dict = None):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
     print(f"🎨 [3/4] Scaffolding Remotion clip files with Speech-Synchronized Progressive Reveal in src/clips/{name}/...")
@@ -873,6 +873,28 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
       />
 """
 
+    # 4a2. Mid-Video Gen-Z Meme Reaction Sticker Pop (Seconds 10–16 / Scene 2B)
+    sticker_jsx = ""
+    if sticker_meta:
+        st_id = sticker_meta.get("id", "verne_turtle_shock")
+        st_badge = sticker_meta.get("default_badge", "LIVE REACTION")
+        st_pos = sticker_meta.get("position", "bottom-right")
+        st_start = s2_start + 35
+        st_dur = 34
+        sfx_cues.append({"frame": st_start, "type": "click", "volume": 0.26})
+        sticker_jsx = f"""
+      {{/* ======================================================== */}}
+      {{/* MID-VIDEO GEN-Z MEME REACTION STICKER POP               */}}
+      {{/* ======================================================== */}}
+      <MemeStickerOverlay
+        stickerId="{st_id}"
+        startFrame={{{st_start}}}
+        durationFrames={{{st_dur}}}
+        position="{st_pos}"
+        badgeText="{st_badge}"
+      />
+"""
+
     # 4b. Interactive Engagement Pill (Seconds 18–22 / ~70% timeline to boost likes and comments)
     pill_entrance = round(total_frames * 0.70)
     if pill_entrance < s2_start + 45:
@@ -1142,6 +1164,7 @@ import {{ CinematicIllustrationCard }} from "../../components/CinematicIllustrat
 import {{ InteractiveEngagementPill }} from "../../components/InteractiveEngagementPill";
 import {{ TacticalMemeCard, TacticalMemeFrame }} from "../../components/TacticalMemeCard";
 import {{ ConceptKeywordSlam }} from "../../components/ConceptKeywordSlam";
+import {{ MemeStickerOverlay }} from "../../components/MemeStickerOverlay";
 import {{ Sparkles, Zap, ArrowRight }} from "lucide-react";
 import {{ WordTimestamp }} from "../../types";
 
@@ -1237,6 +1260,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
         theme="{pill_theme}"
       />
       {meme_jsx}
+      {sticker_jsx}
     </div>
   );
 }};
@@ -1254,6 +1278,7 @@ import {{ {pascal_name}Presenter }} from "./Presenter";
 import {{ AppleProgressBar }} from "../../components/AppleProgressBar";
 import {{ AppleKineticCaptions }} from "../../components/AppleKineticCaptions";
 import {{ SoundDesignEngine, SfxCue }} from "../../components/SoundDesignEngine";
+import {{ GroundedTextureEngine }} from "../../components/texture";
 import {{ {pascal_name}Thumbnail }} from "../../thumbnails";
 import rawTranscript from "./transcript.json";
 import {{ WordTimestamp }} from "../../types";
@@ -1320,6 +1345,9 @@ export const {pascal_name}Composition: React.FC = () => {{
 
       {{/* 8. Kinetic Captions with Neon Apple Glow */}}
       <AppleKineticCaptions transcript={{transcript}} />
+
+      {{/* 9. Grounded Finishing Texture (35mm Living Grain + Halation + Vignette) */}}
+      <GroundedTextureEngine grainOpacity={{0.042}} />
     </div>
   );
 }};
@@ -1491,7 +1519,8 @@ async def main():
     parser.add_argument("--meme", default=None, help="Meme ID override (e.g. ishowspeed_stare) or 'auto'")
     parser.add_argument("--meme-start", type=int, default=0, help="Meme start frame (default: 0 for instant opening hook)")
     parser.add_argument("--meme-mode", choices=["video", "frame"], default="video", help="Meme display mode (video card or still frame)")
-    parser.add_argument("--no-meme", action="store_true", help="Disable Tactical Meme pop (memes are enabled by default)")
+    parser.add_argument("--sticker", default=None, help="Gen-Z meme reaction sticker ID (e.g. verne_turtle_shock) or 'none'")
+    parser.add_argument("--no-sticker", action="store_true", help="Disable mid-video Gen-Z meme reaction stickers")
     parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
@@ -1662,6 +1691,34 @@ async def main():
     else:
         print(f"🔇 [Meme Engine] Tactical meme disabled via {{no meme}} / --no-meme.")
 
+    # 3b. Gen-Z Mid-Video Meme Reaction Sticker Engine
+    has_no_sticker = (
+        args.no_sticker
+        or bool(re.search(r"\{\s*no\s*stickers?\s*\}", raw_combined, re.IGNORECASE))
+        or (args.sticker and args.sticker.lower() in ("none", "false", "no", "off", "disable", "disabled"))
+    )
+
+    explicit_sticker = args.sticker
+    has_explicit_sticker_tag = bool(re.search(r"\{\s*sticker\s*:\s*([a-zA-Z0-9_\-]+)\s*\}", raw_combined, re.IGNORECASE))
+    if not explicit_sticker and has_explicit_sticker_tag:
+        tag_st = re.search(r"\{\s*sticker\s*:\s*([a-zA-Z0-9_\-]+)\s*\}", raw_combined, re.IGNORECASE)
+        if tag_st:
+            explicit_sticker = tag_st.group(1)
+
+    sticker_match = None
+    if not has_no_sticker:
+        from meme_sticker_matcher import find_best_sticker
+        target_sticker_id = explicit_sticker if (explicit_sticker and explicit_sticker != "auto") else None
+        sticker_match = find_best_sticker(
+            f"{raw_topic} {clean_script}",
+            explicit_id=target_sticker_id
+        )
+        if sticker_match:
+            override_str = f" (explicit override: {explicit_sticker})" if target_sticker_id else " (DEFAULT auto-matched)"
+            print(f"🏷️ [Sticker Engine] Gen-Z reaction sticker enabled{override_str}: '{sticker_match['name']}' ({sticker_match['id']})")
+    else:
+        print(f"🔇 [Sticker Engine] Mid-video sticker disabled via {{no sticker}} / --no-sticker.")
+
     illustration_path = args.illustration
     if illustration_path:
         p_ill = Path(illustration_path)
@@ -1683,7 +1740,8 @@ async def main():
     pascal_name = scaffold_clip_files(
         name, topic, args.format, duration_sec, clean_script, words, product_meta,
         illustration_path=illustration_path, pinned_comment=script_pinned_comment, is_duo=is_duo,
-        meme_meta=meme_match
+        meme_meta=meme_match,
+        sticker_meta=sticker_match
     )
     register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche, pinned_comment=script_pinned_comment, script_text=clean_script)
 

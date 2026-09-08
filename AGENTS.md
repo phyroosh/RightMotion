@@ -129,6 +129,32 @@ Every video script submitted to RightClips is tagged with one of four channel ni
    - If user includes `{no meme}` or `--no-meme`, memes are strictly disabled.
    - Override with `{meme: <id>}` (e.g. `{meme: ronaldo_sipping_tea}`).
 
+5. **Gen-Z Mid-Video Meme Reaction Stickers (`<MemeStickerOverlay />`)**:
+   - Distinct from opening video memes: formatted as **tactile die-cut stickers** with thick white borders (`border: 4px solid white`), tactile drop shadows, and Gen-Z reaction badge tags (`[ LIVE REACTION ]`, `[ HEH 𓁹‿𓁹 ]`, `[ TALKING TO A WALL ]`, `[ HEAD EMPTY ]`).
+   - Designed to pop in during **Beat 1, Beat 2, or Beat 3 (seconds 9–16)** for 24–36 frames (~0.8s–1.2s) as an authentic, relatable reaction spike without interrupting voiceover audio.
+   - 15 curated internet reaction stickers in `public/memes/stickers/`:
+     - `anya_crying` (Dramatic breakdown over tiny friction), `talking_to_brick_wall` (Communicating to unresponsive/stubborn people), `verne_turtle_shock` (Live reaction to uncomfortable truth), `patrick_drool` (Zero thoughts 2 AM brainrot), `anya_smug` (Caught in 4K / knowing you're right), `toddler_head_panic` (Sudden deadline panic attack), `crying_kid_homework` (Reluctant adulting / procrastination pain), `assignment_overload_cram` (11:59 PM deadline panic), `girl_crying_at_desk` (Quiet emotional burnout), `spiderman_scheming_chair` (Mastermind overthinking / let him cook), `tai_lung_laptop_despair` (Confronting receipts / checking bank account), `shannon_sharpe_suit_flex` (Main character swagger & boundaries), `shaq_timeout_pause` (Reality check pattern interrupt), `tom_holland_knuckle_bite` (Agonizing suspense / waiting for text), `friends_dapping_laughing` (Real camaraderie / mutual validation).
+   - Matched automatically via `scripts/meme_sticker_matcher.py` or overridden with `{sticker: <id>}` / `--sticker <id>`. Disable with `{no sticker}` / `--no-sticker`.
+
+---
+
+## 📜 Rule 4.5: Grounded Editorial Texture Architecture (Anti-Ad Directive)
+
+> [!CRITICAL]
+> **NO MORE STERILE SAAS AD COMMERCIALS! ENFORCE GROUNDED EDITORIAL TACTILITY!**
+
+1. **300gsm Archival Cotton Paper Tooth (`<ArchivalPaperCanvas />`)**:
+   - Replaces sterile digital vector gradients with an organic 300gsm cotton rag tooth substrate via deterministic SVG fractal micro-noise and warm editorial off-white tint (`#faf8f5` / `#f4f0e8`).
+   - Integrated into `LivingStudioBackground.tsx` as the foundational substrate.
+2. **35mm Living Film Grain & Optical Halation (`<GroundedTextureEngine />`)**:
+   - **35mm Living Film Grain**: Procedural temporal grain flutter (3.5%–4.2% opacity) synchronized with frame count, giving life to static frames.
+   - **Warm Optical Halation**: Softens harsh digital vector anti-aliasing with warm editorial highlight bloom (`rgba(255, 248, 235, 0.05)`).
+   - **Prime Cinema Lens Vignette**: Subtle edge falloff (`radial-gradient`) directing mobile viewer focus to the center.
+   - Mounted at the top of the render stack in `index.tsx` with `z-50 pointer-events-none`.
+3. **Letterpress Edge Deboss & Studio Shadow Depth (`<PhysicalCard />`)**:
+   - Multi-layered tactile shadow: ambient occlusion contact shadow (`0 2px 4px rgba(0,0,0,0.10)`), direct diffuse shadow, and outer air shadow.
+   - Letterpress deboss edge: subtle inner hairline border/bevel (`boxShadow: inset 0 1.5px 1px rgba(255,255,255,0.85), inset 0 -1.5px 2px rgba(0,0,0,0.07)`).
+
 ---
 
 ## 🎨 Rule 5: Autonomous Clean Editorial Hero Visual Protocol
