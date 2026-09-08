@@ -723,3 +723,17 @@ export const TheProcrastinationLoopThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TheCortisolInversionThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="CORTISOL INVERSION"
+    highlightWord="INVERSION"
+    highlightColor="rose"
+    subtitle="Why You're Exhausted All Morning"
+    categoryBadge="JUDY INSIGHTS • MINDSET"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="CIRCADIAN"
+  />
+);

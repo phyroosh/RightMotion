@@ -146,6 +146,8 @@ def sanitize_topic(raw_topic: str) -> str:
     )
     text = re.sub(r"\b(?:page|pg\.?|p\.)\s*\d+\b", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\b\w+\.pdf\b", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"^topic\s*[:\-_–—]\s*", "", text, flags=re.IGNORECASE).strip()
+    text = re.sub(r"^topic\s+", "", text, flags=re.IGNORECASE).strip()
     text = re.sub(r"[\s\-_:–—]+$", "", text).strip()
     text = re.sub(r"^[\s\-_:–—]+", "", text).strip()
     return re.sub(r"\s+", " ", text).strip()
@@ -335,12 +337,13 @@ def extract_concept_keyword(script_text: str, topic: str = "", niche: str = "sel
     lower_s = clean_s.lower()
 
     # Pattern 1: "Psychologists call this [concept]" / "Psychology calls this [concept]"
-    m_psych = re.search(r"(?:psychologists?|scientists?|doctors?|researchers?)\s+call\s+this\s+([a-zA-Z\s\-]+?)(?=[.!,;\?]|\s+when|\s+where|\s+because|$)", clean_s, re.IGNORECASE)
+    m_psych = re.search(r"(?:psychologists?|scientists?|doctors?|researchers?|chronobiologists?|biologists?|neuroscientists?|economists?)\s+call\s+this\s+([a-zA-Z\s\-]+?)(?=[.!,;\?]|\s+when|\s+where|\s+because|$)", clean_s, re.IGNORECASE)
     if m_psych:
         term = m_psych.group(1).strip().upper()
         post_text = clean_s[m_psych.end():].strip(" .!,;—")
         sentences = [s.strip() for s in re.split(r"[.!?]+", post_text) if len(s.strip()) > 10]
         definition = sentences[0] if sentences else "The subconscious mechanism driving this behavioral loop."
+        definition = re.sub(r"^and\s+here\'?s\s+the\s+trap\s*[:\-_–—]\s*", "", definition, flags=re.IGNORECASE).strip()
         badge = "PSYCHOLOGICAL MECHANISM // 01" if niche == "self_improvement" else "COGNITIVE FRAMEWORK // 01"
         return (term, definition, badge)
 
@@ -598,7 +601,7 @@ def align_concepts(concepts, words_list, fps=30):
         })
     return aligned
 
-def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False, meme_meta: dict = None, sticker_meta: dict = None):
+def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False, meme_meta: dict = None, sticker_meta: dict = None, niche: str = None):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
     print(f"🎨 [3/4] Scaffolding Remotion clip files with Speech-Synchronized Progressive Reveal in src/clips/{name}/...")
@@ -611,15 +614,26 @@ def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_se
     problem_cutout, solution_cutout = select_cutout_assets(topic, script_text)
 
     # 1. Niche Detection & Design System Mapping
-    lower_text = f"{topic} {script_text}".lower()
-    if "{facecam}" in lower_text or "facecam" in lower_text:
-        niche = "facecam"
-    elif "{finance}" in lower_text or "apex wealth" in lower_text or "roth" in lower_text or "credit" in lower_text or "invest" in lower_text or "money" in lower_text or "wealth" in lower_text:
-        niche = "finance"
-    elif "{health}" in lower_text or "biomatrix" in lower_text or "cortisol" in lower_text or "circadian" in lower_text or "sleep" in lower_text or "dopamine" in lower_text or "adenosine" in lower_text or "body" in lower_text:
-        niche = "health"
-    else:
-        niche = "self_improvement"
+    if not niche:
+        lower_raw = f"{raw_topic} {raw_script}".lower()
+        if re.search(r"\{\s*self\s*improv?ement\s*\}", lower_raw):
+            niche = "self_improvement"
+        elif "{facecam}" in lower_raw or "facecam" in lower_raw:
+            niche = "facecam"
+        elif "{finance}" in lower_raw or "apex wealth" in lower_raw:
+            niche = "finance"
+        elif "{health}" in lower_raw or "biomatrix" in lower_raw:
+            niche = "health"
+        else:
+            lower_text = f"{topic} {script_text}".lower()
+            if "facecam" in lower_text:
+                niche = "facecam"
+            elif "apex wealth" in lower_text or "roth" in lower_text or "credit" in lower_text or "invest" in lower_text or "money" in lower_text or "wealth" in lower_text:
+                niche = "finance"
+            elif "biomatrix" in lower_text or "cortisol" in lower_text or "circadian" in lower_text or "sleep" in lower_text or "dopamine" in lower_text or "adenosine" in lower_text:
+                niche = "health"
+            else:
+                niche = "self_improvement"
 
     from metadata_engine import generate_full_metadata
     meta_package = generate_full_metadata(raw_topic, niche=niche, script=script_text, pinned_comment=pinned_comment or "")
@@ -1167,6 +1181,8 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
             s1_sub = ""
 
         c_term_first = concept_term.split()[0] if concept_term else "PARADOX"
+        lead_match = re.search(r"(?:psychologists?|scientists?|doctors?|researchers?|chronobiologists?|biologists?|neuroscientists?|economists?)\s+call\s+this", script_text, re.IGNORECASE)
+        concept_lead_in = lead_match.group(0).capitalize() if lead_match else "Psychologists call this"
 
         s2_editorial_scenes = []
         if len(s2_items) > 0:
@@ -1319,7 +1335,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
           <div className="absolute top-[30%] inset-x-0 px-8 flex flex-col items-center justify-center">
             <EditorialTypographyScene
               ghostEcho="{c_term_first}"
-              leadIn="Psychologists call this"
+              leadIn="{concept_lead_in}"
               focusWord="{concept_term}."
               subline="{concept_def}"
               focusStyle="serif_italic"
@@ -1875,7 +1891,9 @@ async def main():
     
     # Determine niche string
     raw_niche_check = f"{raw_topic} {raw_script}".lower()
-    if is_facecam:
+    if re.search(r"\{\s*self\s*improv?ement\s*\}", raw_niche_check) or args.style == "self_improvement":
+        detected_niche = "self_improvement"
+    elif is_facecam or "{facecam}" in raw_niche_check or args.style == "facecam":
         detected_niche = "facecam"
     elif "{finance}" in raw_niche_check or args.style == "finance":
         detected_niche = "finance"
@@ -1994,7 +2012,8 @@ async def main():
         name, topic, args.format, duration_sec, clean_script, words, product_meta,
         illustration_path=illustration_path, pinned_comment=script_pinned_comment, is_duo=is_duo,
         meme_meta=meme_match,
-        sticker_meta=sticker_match
+        sticker_meta=sticker_match,
+        niche=detected_niche
     )
     register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche, pinned_comment=script_pinned_comment, script_text=clean_script)
 

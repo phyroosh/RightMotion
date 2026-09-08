@@ -49,6 +49,8 @@ import { TrueRelationshipsComposition } from "./clips/true_relationships";
 import true_relationshipsTranscript from "./clips/true_relationships/transcript.json";
 import { TheProcrastinationLoopComposition } from "./clips/the_procrastination_loop";
 import the_procrastination_loopTranscript from "./clips/the_procrastination_loop/transcript.json";
+import { TheCortisolInversionComposition } from "./clips/the_cortisol_inversion";
+import the_cortisol_inversionTranscript from "./clips/the_cortisol_inversion/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -78,6 +80,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TheCortisolInversionThumbnail,
   TheProcrastinationLoopThumbnail,
   TrueRelationshipsThumbnail,
   StopComparingThumbnail,
@@ -174,6 +177,8 @@ export const RemotionRoot: React.FC = () => {
   const true_relationshipsDuration = calculateDurationInFrames(true_relationshipsTranscript as any[], fps);
   
   const the_procrastination_loopDuration = calculateDurationInFrames(the_procrastination_loopTranscript as any[], fps);
+  
+  const the_cortisol_inversionDuration = calculateDurationInFrames(the_cortisol_inversionTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -354,6 +359,16 @@ export const RemotionRoot: React.FC = () => {
         id="TheProcrastinationLoopVideo"
         component={TheProcrastinationLoopComposition}
         durationInFrames={the_procrastination_loopDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TheCortisolInversionVideo"
+        component={TheCortisolInversionComposition}
+        durationInFrames={the_cortisol_inversionDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -836,6 +851,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="TheProcrastinationLoopThumbnail"
         component={TheProcrastinationLoopThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheCortisolInversionThumbnail"
+        component={TheCortisolInversionThumbnail}
         width={1080}
         height={1920}
       />
