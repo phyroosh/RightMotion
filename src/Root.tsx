@@ -53,6 +53,8 @@ import { TheCortisolInversionComposition } from "./clips/the_cortisol_inversion"
 import the_cortisol_inversionTranscript from "./clips/the_cortisol_inversion/transcript.json";
 import { CortisolEnergyEngineComposition } from "./clips/cortisol_energy_engine";
 import cortisol_energy_engineTranscript from "./clips/cortisol_energy_engine/transcript.json";
+import { TheTruthAboutSleepComposition } from "./clips/the_truth_about_sleep";
+import the_truth_about_sleepTranscript from "./clips/the_truth_about_sleep/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -82,6 +84,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TheTruthAboutSleepThumbnail,
   CortisolEnergyEngineThumbnail,
   TheCortisolInversionThumbnail,
   TheProcrastinationLoopThumbnail,
@@ -184,6 +187,8 @@ export const RemotionRoot: React.FC = () => {
   const the_cortisol_inversionDuration = calculateDurationInFrames(the_cortisol_inversionTranscript as any[], fps);
   
   const cortisol_energy_engineDuration = calculateDurationInFrames(cortisol_energy_engineTranscript as any[], fps);
+  
+  const the_truth_about_sleepDuration = calculateDurationInFrames(the_truth_about_sleepTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -384,6 +389,16 @@ export const RemotionRoot: React.FC = () => {
         id="CortisolEnergyEngineVideo"
         component={CortisolEnergyEngineComposition}
         durationInFrames={cortisol_energy_engineDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TheTruthAboutSleepVideo"
+        component={TheTruthAboutSleepComposition}
+        durationInFrames={the_truth_about_sleepDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -880,6 +895,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="CortisolEnergyEngineThumbnail"
         component={CortisolEnergyEngineThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheTruthAboutSleepThumbnail"
+        component={TheTruthAboutSleepThumbnail}
         width={1080}
         height={1920}
       />

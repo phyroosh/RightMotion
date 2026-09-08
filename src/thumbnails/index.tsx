@@ -751,3 +751,17 @@ export const CortisolEnergyEngineThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TheTruthAboutSleepThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="SHOCKING TRUTH SLEEP"
+    highlightWord="SHOCKING"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Shocking Truth"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);

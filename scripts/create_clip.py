@@ -612,249 +612,447 @@ def generate_glossy_canvas_code(
     meme_jsx: str = "",
     sticker_jsx: str = "",
 ) -> str:
-    s2_mid = max(s2_start + 45, s2_start + (s3_start - s2_start) // 2)
+    """
+    🎬 AFTER EFFECTS-GRADE MULTI-LAYER CANVAS GENERATOR
+    ====================================================
+    Generates Jordan Brown-quality $10k motion design compositions.
+    Every scene has 5–8 LAYERED elements revealing at DIFFERENT FRAMES:
+      - Atmospheric glow orbs pulsing behind elements
+      - Cinematic camera push-in (scale 1.0→1.06 bezier)
+      - Asymmetric graph+callout layouts (NOT centered single component)
+      - Floating data callout pins with spring-bounce entrance
+      - Staggered metric counters that spin up
+      - Neon word slams (individual words at different start frames)
+      - Frosted-glass side panels sliding in from opposite sides
+      - Glowing separator lines that draw themselves
+      - GlossyFloorStage is GONE — raw layout with direct positioning
+    """
+    storyboard = motion_plan.get("storyboard", []) if motion_plan else []
+
+    # Determine 4 distinct scene boundaries
+    s4_start = s3_start + max(80, (total_frames - s3_start) // 2)
+    if s4_start >= total_frames - 30:
+        s4_start = s3_start + 80
     scene_bounds = [
         (s1_start, s2_start),
-        (s2_start, s2_mid),
-        (s2_mid, s3_start),
-        (s3_start, total_frames),
+        (s2_start, s3_start),
+        (s3_start, s4_start),
+        (s4_start, total_frames),
     ]
 
-    storyboard = motion_plan.get("storyboard", []) if motion_plan else []
+    # Pull archetypes & colors from motion plan
     default_archetypes = [
-        ("GlossyGlowGraph", "rgba(244, 63, 94, 0.18)", "THE PARADOX"),
-        ("GlossyFrictionSlider", "rgba(16, 185, 129, 0.20)", "THE MECHANISM"),
-        ("GlossyBalanceScale", "rgba(56, 189, 248, 0.18)", "THE BREAKTHROUGH"),
-        ("GlossyRadialDial", "rgba(251, 191, 36, 0.20)", "THE PROTOCOL"),
+        ("GlossyGlowGraph",        "rgba(244, 63, 94, 0.22)",  "#f43f5e",  "THE PARADOX"),
+        ("GlossyFrictionSlider",   "rgba(16, 185, 129, 0.20)", "#10b981",  "THE MECHANISM"),
+        ("GlossyBalanceScale",     "rgba(56, 189, 248, 0.18)", "#38bdf8",  "THE SHIFT"),
+        ("SteppedProgressionStairs","rgba(251, 191, 36, 0.20)","#fbbf24",  "THE PROTOCOL"),
     ]
 
-    scene_blocks = []
-    for idx in range(4):
+    scene_archetypes = []
+    for i in range(4):
+        sc = storyboard[i] if i < len(storyboard) else {}
+        arch  = sc.get("archetype") or default_archetypes[i][0]
+        glow  = sc.get("lighting", {}).get("glowColor") or default_archetypes[i][1]
+        color = default_archetypes[i][2]
+        title = sc.get("title") or default_archetypes[i][3]
+        motion= sc.get("motion", {})
+        scene_archetypes.append((arch, glow, color, title, motion))
+
+    def make_scene_block(idx: int) -> str:
         start_f, end_f = scene_bounds[idx]
-        sc_data = storyboard[idx] if idx < len(storyboard) else {}
-        archetype = sc_data.get("archetype") or default_archetypes[idx][0]
-        glow_color = sc_data.get("lighting", {}).get("glowColor") or default_archetypes[idx][1]
-        title = sc_data.get("title") or default_archetypes[idx][2]
-        motion = sc_data.get("motion", {})
+        arch, glow, color, title, motion = scene_archetypes[idx]
         is_last = (idx == 3)
-        condition = f"frame >= {start_f}" if is_last else f"frame >= {start_f} && frame < {end_f}"
+        cond = f"frame >= {start_f}" if is_last else f"frame >= {start_f} && frame < {end_f}"
 
-        if archetype == "GlossyGlowGraph":
-            if motion.get("curves") or motion.get("type") == "Dual Comparative Curves (Reference 1 Style)":
-                curves_code = f"""curves={{[
-                {{
-                  id: "optimal_curve",
-                  color: "#10b981",
-                  glowColor: "#10b981",
-                  startFrame: {start_f + 10},
-                  durationFrames: 45,
-                  showArrow: true,
-                  pathD: "M 100 320 C 180 140, 260 110, 340 130 C 440 160, 500 280, 550 300",
-                  areaD: "M 100 340 L 100 320 C 180 140, 260 110, 340 130 C 440 160, 500 280, 550 300 L 550 340 Z",
-                  tipX: 550,
-                  tipY: 300,
-                }},
-                {{
-                  id: "trap_curve",
-                  color: "#f43f5e",
-                  glowColor: "#f43f5e",
-                  startFrame: {start_f + 25},
-                  durationFrames: 50,
-                  showArrow: true,
-                  pathD: "M 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90",
-                  areaD: "M 100 340 L 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90 L 550 340 Z",
-                  tipX: 550,
-                  tipY: 90,
-                }},
-              ]}}"""
-            else:
-                c_col = motion.get("curveColor", "#f43f5e")
-                curves_code = f"""curves={{[
-                {{
-                  id: "spike_curve",
-                  color: "{c_col}",
-                  glowColor: "{c_col}",
-                  startFrame: {start_f + 15},
-                  durationFrames: 50,
-                  showArrow: true,
-                  pathD: "M 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90",
-                  areaD: "M 100 340 L 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90 L 550 340 Z",
-                  tipX: 550,
-                  tipY: 90,
-                }},
-              ]}}"""
+        # Opposite accent color (green if primary red/amber, rose if primary green)
+        accent2 = "#10b981" if color in ("#f43f5e", "#fb923c", "#fbbf24") else "#f43f5e"
 
-            comp_code = f"""<GlossyGlowGraph
-              title="{title}"
+        # ── Scene 1: Hook ─ Asymmetric dual-curve graph LEFT + callouts RIGHT ──
+        if idx == 0:
+            return f"""      {{/* ======================== SCENE 1: {title} (Frames {start_f}-{end_f}) ======================== */}}
+      {{{cond} && (() => {{
+        const cam1 = interpolate(frame, [{start_f}, {end_f}], [1.0, 1.06], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.0, 0.0, 0.2, 1.0) }});
+        const sp1  = spring({{ frame: Math.max(0, frame - {start_f}), fps, config: {{ damping: 18, mass: 0.9, stiffness: 100 }} }});
+        const titleOp = interpolate(sp1, [0, 0.4], [0, 1], {{ extrapolateRight: "clamp" }});
+        const titleY  = interpolate(sp1, [0, 1], [14, 0]);
+        const c1Op  = interpolate(frame, [{start_f + 45}, {start_f + 65}], [0, 1], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const c1X   = interpolate(frame, [{start_f + 45}, {start_f + 65}], [-16, 0], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const c2Op  = interpolate(frame, [{start_f + 62}, {start_f + 82}], [0, 1], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp" }});
+        const c3Op  = interpolate(frame, [{start_f + 82}, {start_f + 102}], [0, 1], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp" }});
+        const cntProg = interpolate(frame, [{start_f + 80}, {start_f + 120}], [0, 1], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const breathe = 1 + Math.sin((frame / fps) * 1.1) * 0.06;
+        return (
+          <div className="absolute inset-0" style={{{{ transform: `scale(${{cam1}})`, transformOrigin: "55% 50%" }}}}>
+            {{/* Atmospheric glow orbs */}}
+            <div className="absolute pointer-events-none" style={{{{ left: "35%", top: "52%", width: `${{580 * breathe}}px`, height: `${{580 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {glow} 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "72%", top: "36%", width: `${{240 * breathe}}px`, height: `${{240 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}22 0%, transparent 65%)", borderRadius: "50%", filter: "blur(20px)" }}}} />
+
+            {{/* GRAPH — shifted left-center */}}
+            <div className="absolute" style={{{{ left: "-4%", top: "50%", transform: "translateY(-52%)" }}}}>
+              <GlossyGlowGraph
+                title=""
+                entranceFrame={{{start_f + 5}}}
+                yLabel="INTENSITY"
+                xLabels={{["START", "MID-DAY", "EVENING", "PEAK"]}}
+                showFloorReflection={{true}}
+                reflectionOpacity={{0.30}}
+                curves={{[
+                  {{
+                    id: "optimal_{idx}",
+                    label: "OPTIMAL",
+                    color: "{accent2}",
+                    glowColor: "{accent2}",
+                    startFrame: {start_f + 12},
+                    durationFrames: 38,
+                    showArrow: true,
+                    pathD: "M 100 310 C 160 130, 240 100, 310 128 C 390 165, 470 295, 548 318",
+                    areaD: "M 100 340 L 100 310 C 160 130, 240 100, 310 128 C 390 165, 470 295, 548 318 L 548 340 Z",
+                    tipX: 548,
+                    tipY: 318,
+                  }},
+                  {{
+                    id: "trap_{idx}",
+                    label: "THE TRAP",
+                    color: "{color}",
+                    glowColor: "{color}",
+                    startFrame: {start_f + 30},
+                    durationFrames: 50,
+                    showArrow: true,
+                    pathD: "M 100 310 C 200 306, 320 310, 400 308 C 455 305, 502 162, 550 84",
+                    areaD: "M 100 340 L 100 310 C 200 306, 320 310, 400 308 C 455 305, 502 162, 550 84 L 550 340 Z",
+                    tipX: 550,
+                    tipY: 84,
+                  }},
+                ]}}
+                width={{740}}
+                height={{420}}
+              />
+            </div>
+
+            {{/* GLOWING TITLE — top-right slam */}}
+            <div className="absolute pointer-events-none" style={{{{ left: "57%", top: "8%", opacity: titleOp, transform: `translateY(${{titleY}}px)` }}}}>
+              <span className="block font-black uppercase" style={{{{ fontSize: "72px", color: "#fff", textShadow: `0 0 24px {color}, 0 0 55px {color}88`, letterSpacing: "0.05em", lineHeight: 1 }}}}>
+                {title.split()[0] if title.split() else title}
+              </span>
+              <span className="block font-bold uppercase" style={{{{ fontSize: "42px", color: "#ffffffcc", letterSpacing: "0.08em", lineHeight: 1, marginTop: "4px", textShadow: "0 0 16px rgba(255,255,255,0.3)" }}}}>
+                {(" ".join(title.split()[1:]) or "PARADOX")}
+              </span>
+              {{/* Glow separator */}}
+              <div style={{{{ marginTop: "14px", height: "2px", width: `${{interpolate(frame, [{start_f + 25}, {start_f + 48}], [0, 180], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp" }})}}px`, background: "linear-gradient(to right, {color}cc, transparent)", boxShadow: "0 0 12px {color}88" }}}} />
+            </div>
+
+            {{/* STAGGERED DATA CALLOUTS — right side */}}
+            <div className="absolute pointer-events-none" style={{{{ left: "60%", top: "38%", opacity: c1Op, transform: `translateX(${{c1X}}px)` }}}}>
+              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{accent2}12", border: "1.5px solid {accent2}45", backdropFilter: "blur(8px)", boxShadow: "0 0 18px {accent2}18" }}}}>
+                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{accent2}99", letterSpacing: "0.14em" }}}}>OPTIMAL PEAK</span>
+                <span className="text-2xl font-black font-mono" style={{{{ color: "#fff", textShadow: "0 0 16px {accent2}cc" }}}}>MORNING</span>
+              </div>
+            </div>
+            <div className="absolute pointer-events-none" style={{{{ left: "60%", top: "54%", opacity: c2Op }}}}>
+              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{color}10", border: "1.5px solid {color}40", backdropFilter: "blur(8px)" }}}}>
+                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{color}99", letterSpacing: "0.14em" }}}}>INVERTED SPIKE</span>
+                <span className="text-2xl font-black font-mono" style={{{{ color: "#fff", textShadow: "0 0 16px {color}cc" }}}}>MIDNIGHT</span>
+              </div>
+            </div>
+            <div className="absolute pointer-events-none" style={{{{ left: "60%", top: "70%", opacity: c3Op }}}}>
+              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "#fb923c10", border: "1.5px solid #fb923c40", backdropFilter: "blur(8px)" }}}}>
+                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "#fb923c99", letterSpacing: "0.14em" }}}}>ENERGY DEFICIT</span>
+                <span className="text-2xl font-black font-mono" style={{{{ color: "#fff", textShadow: "0 0 16px #fb923ccc" }}}}>ALL DAY</span>
+              </div>
+            </div>
+
+            {{/* ANIMATED COUNTER bottom-right */}}
+            <div className="absolute pointer-events-none flex flex-col items-center" style={{{{ left: "72%", bottom: "10%", opacity: c3Op }}}}>
+              <span className="font-black font-mono" style={{{{ fontSize: "46px", color: "#fff", textShadow: `0 0 24px {color}cc`, lineHeight: 1 }}}}>
+                {{Math.round(cntProg * 78)}}<span style={{{{ fontSize: "0.45em", color: "{color}", verticalAlign: "super" }}}}>%</span>
+              </span>
+              <span className="text-xs font-bold tracking-widest uppercase" style={{{{ color: "rgba(255,255,255,0.4)", marginTop: "4px" }}}}>daily lethargy</span>
+            </div>
+
+            {{/* Vertical glow separator */}}
+            <div className="absolute pointer-events-none" style={{{{
+              left: "57.5%", top: "28%",
+              width: "2px",
+              height: `${{interpolate(frame, [{start_f + 38}, {start_f + 62}], [0, 240], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp" }})}}px`,
+              background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.2), transparent)",
+              boxShadow: "0 0 10px rgba(255,255,255,0.1)"
+            }}}} />
+          </div>
+        );
+      }})()}}"""
+
+        # ── Scene 2: Mechanism ─ Full-width dual graph + bottom stat row ──
+        elif idx == 1:
+            return f"""      {{/* ======================== SCENE 2: {title} (Frames {start_f}-{end_f}) ======================== */}}
+      {{{cond} && (() => {{
+        const cam2   = interpolate(frame, [{start_f}, {end_f}], [1.04, 1.0], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const sceneF = frame - {start_f};
+        const labelOp = interpolate(sceneF, [0, 18], [0, 1], {{ extrapolateRight: "clamp" }});
+        const p1Op   = interpolate(sceneF, [58, 78], [0, 1], {{ extrapolateRight: "clamp" }});
+        const p2Op   = interpolate(sceneF, [80, 100], [0, 1], {{ extrapolateRight: "clamp" }});
+        const statsOp = interpolate(sceneF, [72, 92], [0, 1], {{ extrapolateRight: "clamp" }});
+        const breathe = 1 + Math.sin((frame / fps) * 1.1) * 0.06;
+        return (
+          <div className="absolute inset-0 flex flex-col items-center justify-center" style={{{{ transform: `scale(${{cam2}})`, transformOrigin: "50% 48%" }}}}>
+            <div className="absolute pointer-events-none" style={{{{ left: "28%", top: "55%", width: `${{400 * breathe}}px`, height: `${{400 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "72%", top: "55%", width: `${{400 * breathe}}px`, height: `${{400 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {color}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
+
+            {{/* Scene label */}}
+            <div className="absolute" style={{{{ top: "7%", left: "50%", transform: "translateX(-50%)", opacity: labelOp }}}}>
+              <span className="text-sm font-black tracking-[0.25em] uppercase" style={{{{ color: "rgba(255,255,255,0.42)", letterSpacing: "0.25em" }}}}>
+                {title}
+              </span>
+            </div>
+
+            {{/* Dual comparison graph */}}
+            <div style={{{{ marginTop: "32px" }}}}>
+              <GlossyGlowGraph
+                title=""
+                entranceFrame={{{start_f + 8}}}
+                yLabel="ENERGY"
+                xLabels={{["WAKE", "NOON", "6 PM", "MIDNIGHT"]}}
+                showFloorReflection={{true}}
+                reflectionOpacity={{0.26}}
+                curves={{[
+                  {{
+                    id: "good_{idx}",
+                    label: "OPTIMAL",
+                    color: "{accent2}",
+                    glowColor: "{accent2}",
+                    startFrame: {start_f + 15},
+                    durationFrames: 42,
+                    showArrow: true,
+                    pathD: "M 100 305 C 155 120, 240 95, 315 118 C 400 148, 475 290, 548 315",
+                    areaD: "M 100 340 L 100 305 C 155 120, 240 95, 315 118 C 400 148, 475 290, 548 315 L 548 340 Z",
+                    tipX: 548,
+                    tipY: 315,
+                  }},
+                  {{
+                    id: "bad_{idx}",
+                    label: "TRAP",
+                    color: "{color}",
+                    glowColor: "{color}",
+                    startFrame: {start_f + 42},
+                    durationFrames: 44,
+                    showArrow: true,
+                    pathD: "M 100 312 C 200 308, 330 312, 400 308 C 450 305, 500 162, 548 88",
+                    areaD: "M 100 340 L 100 312 C 200 308, 330 312, 400 308 C 450 305, 500 162, 548 88 L 548 340 Z",
+                    tipX: 548,
+                    tipY: 88,
+                  }},
+                ]}}
+                width={{820}}
+                height={{420}}
+              />
+            </div>
+
+            {{/* Floating data pins above graph curves */}}
+            <div className="absolute pointer-events-none" style={{{{ left: "18%", top: "22%", opacity: p1Op }}}}>
+              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{accent2}12", border: "1.5px solid {accent2}45", backdropFilter: "blur(8px)" }}}}>
+                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{accent2}99", letterSpacing: "0.12em" }}}}>OPTIMAL CURVE</span>
+                <span className="text-xl font-black font-mono" style={{{{ color: "#fff" }}}}>MORNING PEAK</span>
+              </div>
+            </div>
+            <div className="absolute pointer-events-none" style={{{{ right: "5%", top: "10%", opacity: p2Op }}}}>
+              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{color}10", border: "1.5px solid {color}40", backdropFilter: "blur(8px)" }}}}>
+                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{color}99", letterSpacing: "0.12em" }}}}>INVERTED CURVE</span>
+                <span className="text-xl font-black font-mono" style={{{{ color: "#fff" }}}}>MIDNIGHT SPIKE</span>
+              </div>
+            </div>
+
+            {{/* Bottom stats row */}}
+            <div className="absolute flex gap-14 items-center" style={{{{ bottom: "5%", left: "50%", transform: "translateX(-50%)", opacity: statsOp }}}}>
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-3xl font-black font-mono" style={{{{ color: "{accent2}", textShadow: "0 0 20px {accent2}88" }}}}>+340%</span>
+                <span className="text-xs font-bold tracking-widest uppercase" style={{{{ color: "rgba(255,255,255,0.4)" }}}}>daytime energy</span>
+              </div>
+              <div style={{{{ width: "1px", height: "36px", background: "rgba(255,255,255,0.15)" }}}} />
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-3xl font-black font-mono" style={{{{ color: "{color}", textShadow: "0 0 20px {color}88" }}}}>−16 HRS</span>
+                <span className="text-xs font-bold tracking-widest uppercase" style={{{{ color: "rgba(255,255,255,0.4)" }}}}>delayed melatonin</span>
+              </div>
+            </div>
+          </div>
+        );
+      }})()}}"""
+
+        # ── Scene 3: Comparative Shift ─ Balance scale + flanking stat panels ──
+        elif idx == 2:
+            return f"""      {{/* ======================== SCENE 3: {title} (Frames {start_f}-{end_f}) ======================== */}}
+      {{{cond} && (() => {{
+        const cam3    = interpolate(frame, [{start_f}, {start_f + 90}], [0.96, 1.02], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const sceneF  = frame - {start_f};
+        const leftX   = interpolate(sceneF, [0, 28], [-80, 0], {{ extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const leftOp  = interpolate(sceneF, [0, 22], [0, 1], {{ extrapolateRight: "clamp" }});
+        const rightX  = interpolate(sceneF, [12, 40], [80, 0], {{ extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const rightOp = interpolate(sceneF, [12, 34], [0, 1], {{ extrapolateRight: "clamp" }});
+        const labelOp = interpolate(sceneF, [0, 16], [0, 1], {{ extrapolateRight: "clamp" }});
+        const breathe = 1 + Math.sin((frame / fps) * 1.1) * 0.06;
+        const rows = ["ENERGY", "CORTISOL", "SLEEP", "FOCUS"];
+        return (
+          <div className="absolute inset-0 flex items-center justify-center" style={{{{ transform: `scale(${{cam3}})`, transformOrigin: "50% 50%" }}}}>
+            <div className="absolute pointer-events-none" style={{{{ left: "25%", top: "50%", width: `${{460 * breathe}}px`, height: `${{460 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {color}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "75%", top: "50%", width: `${{460 * breathe}}px`, height: `${{460 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "50%", top: "50%", width: `${{180 * breathe}}px`, height: `${{180 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, #38bdf828 0%, transparent 65%)", borderRadius: "50%", filter: "blur(16px)" }}}} />
+
+            {{/* Scene label */}}
+            <div className="absolute" style={{{{ top: "6%", left: "50%", transform: "translateX(-50%)", opacity: labelOp }}}}>
+              <span className="text-sm font-black tracking-[0.25em] uppercase" style={{{{ color: "rgba(255,255,255,0.4)" }}}}>THE CIRCADIAN SHIFT</span>
+            </div>
+
+            {{/* LEFT stat panel — slides from left */}}
+            <div className="absolute flex flex-col gap-2" style={{{{ left: "3%", top: "50%", transform: `translateY(-50%) translateX(${{leftX}}px)`, opacity: leftOp, width: "210px" }}}}>
+              <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{color}99", letterSpacing: "0.2em" }}}}>WITHOUT PROTOCOL</span>
+              {{rows.map((row, i) => (
+                <div key={{i}} className="flex items-center justify-between px-3 py-2 rounded-lg" style={{{{
+                  background: "rgba(244, 63, 94, 0.08)",
+                  border: "1px solid rgba(244, 63, 94, 0.22)",
+                  opacity: interpolate(sceneF, [i * 12, i * 12 + 18], [0, 1], {{ extrapolateRight: "clamp" }})
+                }}}}>
+                  <span className="text-xs font-semibold" style={{{{ color: "rgba(255,255,255,0.5)" }}}}>{{row}}</span>
+                  <span className="text-xs font-black" style={{{{ color: "{color}" }}}}>BROKEN</span>
+                </div>
+              ))}}
+            </div>
+
+            {{/* CENTER: Balance scale */}}
+            <GlossyBalanceScale
+              title=""
               titleColor="#ffffff"
-              entranceFrame={{{start_f}}}
-              yLabel="INTENSITY"
-              xLabels={{["START", "MID-DAY", "EVENING", "PEAK"]}}
-              showFloorReflection={{true}}
-              reflectionOpacity={{0.36}}
-              {curves_code}
-              width={{780}}
-              height={{440}}
-            />"""
-
-        elif archetype == "GlossyFrictionSlider":
-            s_lbl = motion.get("startLabel", "LETHARGY")
-            e_lbl = motion.get("endLabel", "PHYSICAL DRIVE")
-            s_pct = motion.get("startPercent", 15)
-            e_pct = motion.get("endPercent", 94)
-            acc = motion.get("accentColor", "#10b981")
-            comp_code = f"""<GlossyFrictionSlider
-              title="{title}"
-              titleColor="#ffffff"
-              startLabel="{s_lbl}"
-              endLabel="{e_lbl}"
-              startPercent={{{s_pct}}}
-              endPercent={{{e_pct}}}
-              accentColor="{acc}"
-              glowColor="{glow_color}"
-              startFrame={{{start_f}}}
-              dragDurationFrames={{50}}
-              width={{680}}
-              showCursor={{true}}
-              showFloorReflection={{true}}
-              reflectionOpacity={{0.36}}
-            />"""
-
-        elif archetype == "GlossyBalanceScale":
-            l_lbl = motion.get("leftLabel", "THE TRAP")
-            l_sub = motion.get("leftSub", "Comfort & Freeze")
-            r_lbl = motion.get("rightLabel", "THE SOLUTION")
-            r_sub = motion.get("rightSub", "Freedom & Focus")
-            comp_code = f"""<GlossyBalanceScale
-              title="{title}"
-              titleColor="#ffffff"
-              leftLabel="{l_lbl}"
-              leftSub="{l_sub}"
-              leftColor="#f43f5e"
-              rightLabel="{r_lbl}"
-              rightSub="{r_sub}"
-              rightColor="#10b981"
+              leftLabel="NO SUNLIGHT"
+              leftSub="Inverted curve"
+              leftColor="{color}"
+              rightLabel="MORNING LIGHT"
+              rightSub="Optimal reset"
+              rightColor="{accent2}"
               winner="right"
               startFrame={{{start_f}}}
-              width={{680}}
-              height={{420}}
-              glowColor="{glow_color}"
+              width={{500}}
+              height={{380}}
+              glowColor="rgba(56, 189, 248, 0.18)"
               showFloorReflection={{true}}
-              reflectionOpacity={{0.36}}
-            />"""
+              reflectionOpacity={{0.30}}
+            />
 
-        elif archetype == "GlossyBarChart":
-            comp_code = f"""<GlossyBarChart
-              title="{title}"
-              titleColor="#ffffff"
-              startFrame={{{start_f}}}
-              width={{680}}
-              height={{440}}
-              bars={{[
-                {{ id: "b1", label: "INVERTED TRAP", value: 25, isOptimal: false, color: "#f43f5e" }},
-                {{ id: "b2", label: "OPTIMAL REWIRE", value: 92, isOptimal: true, color: "#10b981" }},
-              ]}}
-              glowColor="{glow_color}"
-              showFloorReflection={{true}}
-              reflectionOpacity={{0.36}}
-            />"""
+            {{/* RIGHT stat panel — slides from right */}}
+            <div className="absolute flex flex-col gap-2" style={{{{ right: "3%", top: "50%", transform: `translateY(-50%) translateX(${{rightX}}px)`, opacity: rightOp, width: "210px" }}}}>
+              <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{accent2}99", letterSpacing: "0.2em" }}}}>WITH PROTOCOL</span>
+              {{rows.map((row, i) => (
+                <div key={{i}} className="flex items-center justify-between px-3 py-2 rounded-lg" style={{{{
+                  background: "rgba(16, 185, 129, 0.08)",
+                  border: "1px solid rgba(16, 185, 129, 0.22)",
+                  opacity: interpolate(sceneF, [i * 12 + 8, i * 12 + 26], [0, 1], {{ extrapolateRight: "clamp" }})
+                }}}}>
+                  <span className="text-xs font-semibold" style={{{{ color: "rgba(255,255,255,0.5)" }}}}>{{row}}</span>
+                  <span className="text-xs font-black" style={{{{ color: "{accent2}" }}}}>OPTIMAL</span>
+                </div>
+              ))}}
+            </div>
+          </div>
+        );
+      }})()}}"""
 
-        elif archetype == "GlossyRadialDial":
-            t_pct = motion.get("targetPercent", 85)
-            val_t = motion.get("valueText", "16 HRS")
-            lbl_t = motion.get("labelText", "MELATONIN TIMER")
-            acc = motion.get("accentColor", "#38bdf8")
-            comp_code = f"""<GlossyRadialDial
-              title="{title}"
-              titleColor="#ffffff"
-              startFrame={{{start_f}}}
-              targetPercent={{{t_pct}}}
-              valueText="{val_t}"
-              labelText="{lbl_t}"
-              accentColor="{acc}"
-              glowColor="{glow_color}"
-              size={{440}}
-              showFloorReflection={{true}}
-              reflectionOpacity={{0.36}}
-            />"""
+        # ── Scene 4: Solution ─ Staircase LEFT + Radial Dial RIGHT + word slam ──
+        else:
+            return f"""      {{/* ======================== SCENE 4: {title} (Frames {start_f}-end) ======================== */}}
+      {{{cond} && (() => {{
+        const cam4   = interpolate(frame, [{start_f}, {start_f + 120}], [0.95, 1.01], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const sceneF = frame - {start_f};
+        const labelOp = interpolate(sceneF, [0, 16], [0, 1], {{ extrapolateRight: "clamp" }});
+        const pin1Op  = interpolate(sceneF, [30, 50], [0, 1], {{ extrapolateRight: "clamp" }});
+        const pin2Op  = interpolate(sceneF, [52, 72], [0, 1], {{ extrapolateRight: "clamp" }});
+        const w1Sp = spring({{ frame: Math.max(0, sceneF - 68), fps, config: {{ damping: 14, mass: 0.6, stiffness: 180 }} }});
+        const w2Sp = spring({{ frame: Math.max(0, sceneF - 84), fps, config: {{ damping: 14, mass: 0.6, stiffness: 180 }} }});
+        const w1Scale = interpolate(w1Sp, [0, 1], [0.6, 1.0]);
+        const w1Op    = interpolate(w1Sp, [0, 0.5], [0, 1], {{ extrapolateRight: "clamp" }});
+        const w2Scale = interpolate(w2Sp, [0, 1], [0.6, 1.0]);
+        const w2Op    = interpolate(w2Sp, [0, 0.5], [0, 1], {{ extrapolateRight: "clamp" }});
+        const divH = interpolate(sceneF, [18, 42], [0, 280], {{ extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const breathe = 1 + Math.sin((frame / fps) * 1.1) * 0.06;
+        return (
+          <div className="absolute inset-0 flex items-center" style={{{{ transform: `scale(${{cam4}})`, transformOrigin: "50% 50%" }}}}>
+            <div className="absolute pointer-events-none" style={{{{ left: "68%", top: "48%", width: `${{400 * breathe}}px`, height: `${{400 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {color}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "28%", top: "52%", width: `${{300 * breathe}}px`, height: `${{300 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}22 0%, transparent 65%)", borderRadius: "50%", filter: "blur(22px)" }}}} />
 
-        elif archetype == "GlossyToggleBoard":
-            comp_code = f"""<GlossyToggleBoard
-              title="{title}"
-              titleColor="#ffffff"
-              entranceFrame={{{start_f}}}
-              showFloorReflection={{true}}
-              reflectionOpacity={{0.35}}
-              items={{[
-                {{ id: "t1", label: "TRIGGER IDENTIFIED", activeFrame: {start_f + 20}, activeColor: "#10b981" }},
-                {{ id: "t2", label: "KINETIC SHIFT", activeFrame: {start_f + 48}, activeColor: "#10b981" }},
-              ]}}
-              width={{620}}
-            />"""
+            {{/* Scene label */}}
+            <div className="absolute" style={{{{ top: "6%", left: "50%", transform: "translateX(-50%)", opacity: labelOp }}}}>
+              <span className="text-sm font-black tracking-[0.25em] uppercase" style={{{{ color: "rgba(255,255,255,0.4)" }}}}>THE PROTOCOL</span>
+            </div>
 
-        elif archetype == "SteppedProgressionStairs":
-            comp_code = f"""<SteppedProgressionStairs
-              title="{title}"
-              titleColor="#ffffff"
-              orbColor="#fbbf24"
-              startFrame={{{start_f}}}
-              stepDurationFrames={{28}}
-              showFloorReflection={{true}}
-              reflectionOpacity={{0.35}}
-              width={{700}}
-              height={{460}}
-              steps={{[
-                {{ id: "step_1", label: "AWARENESS" }},
-                {{ id: "step_2", label: "PAUSE" }},
-                {{ id: "step_3", label: "REWIRE" }},
-                {{ id: "step_4", label: "ACTION", isGoal: true }},
-              ]}}
-            />"""
+            {{/* LEFT: Stepped Staircase */}}
+            <div className="absolute" style={{{{ left: "0%", top: "50%", transform: "translateY(-50%)" }}}}>
+              <SteppedProgressionStairs
+                title=""
+                titleColor="#ffffff"
+                orbColor="{accent2}"
+                startFrame={{{start_f}}}
+                stepDurationFrames={{24}}
+                showFloorReflection={{true}}
+                reflectionOpacity={{0.26}}
+                width={{460}}
+                height={{380}}
+                steps={{[
+                  {{ id: "s1_{idx}", label: "WAKE UP" }},
+                  {{ id: "s2_{idx}", label: "STEP OUTSIDE" }},
+                  {{ id: "s3_{idx}", label: "DIRECT SUNLIGHT" }},
+                  {{ id: "s4_{idx}", label: "10–15 MIN", isGoal: true }},
+                ]}}
+              />
+            </div>
 
-        elif archetype == "GlossyFeatureGrid":
-            comp_code = f"""<GlossyFeatureGrid
-              title="{title}"
-              titleColor="#ffffff"
-              entranceFrame={{{start_f}}}
-              showFloorReflection={{true}}
-              reflectionOpacity={{0.35}}
-              items={{[
-                {{ id: "f1", label: "OBSERVE", icon: "zap", activeFrame: {start_f + 15} }},
-                {{ id: "f2", label: "REGULATE", icon: "shield", activeFrame: {start_f + 35} }},
-                {{ id: "f3", label: "TRANSCEND", icon: "target", activeFrame: {start_f + 55} }},
-              ]}}
-              width={{640}}
-            />"""
+            {{/* VERTICAL DIVIDER */}}
+            <div className="absolute pointer-events-none" style={{{{ left: "48%", top: "18%", width: "2px", height: `${{divH}}px`, background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.18), transparent)", boxShadow: "0 0 10px rgba(255,255,255,0.08)" }}}} />
 
-        else: # PolishStickerFloat
-            comp_code = f"""<PolishStickerFloat
-              title="{title}"
-              titleColor="#ffffff"
-              entranceFrame={{{start_f}}}
-              imageSrc="/assets/character_pointing.png"
-              showFloorReflection={{true}}
-              reflectionOpacity={{0.35}}
-              width={{520}}
-              height={{420}}
-            />"""
+            {{/* RIGHT: Radial Dial */}}
+            <div className="absolute" style={{{{ right: "1%", top: "50%", transform: "translateY(-52%)" }}}}>
+              <GlossyRadialDial
+                title=""
+                titleColor="#ffffff"
+                targetPercent={{88}}
+                valueText="60 MIN"
+                labelText="WINDOW"
+                accentColor="{color}"
+                glowColor="{glow}"
+                startFrame={{{start_f + 18}}}
+                size={{350}}
+                showFloorReflection={{true}}
+                reflectionOpacity={{0.28}}
+              />
+            </div>
 
-        scene_blocks.append(f"""      {{/* ======================================================== */}}
-      {{/* SCENE {idx + 1}: {title} (Frames {start_f} - {end_f if not is_last else total_frames}) */}}
-      {{/* ======================================================== */}}
-      {{{condition} && (
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <GlossyFloorStage glowColor="{glow_color}" glowCenterY={{42}} showReflection={{false}}>
-            {comp_code}
-          </GlossyFloorStage>
-        </div>
-      )}}""")
+            {{/* Floating data pins */}}
+            <div className="absolute pointer-events-none" style={{{{ left: "51%", top: "19%", opacity: pin1Op }}}}>
+              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{color}10", border: "1.5px solid {color}40", backdropFilter: "blur(8px)" }}}}>
+                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{color}99", letterSpacing: "0.12em" }}}}>MELATONIN RELEASE</span>
+                <span className="text-xl font-black font-mono" style={{{{ color: "#fff" }}}}>16 HRS LATER</span>
+              </div>
+            </div>
+            <div className="absolute pointer-events-none" style={{{{ left: "51%", top: "70%", opacity: pin2Op }}}}>
+              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{accent2}10", border: "1.5px solid {accent2}40", backdropFilter: "blur(8px)" }}}}>
+                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{accent2}99", letterSpacing: "0.12em" }}}}>WITHIN WAKING</span>
+                <span className="text-xl font-black font-mono" style={{{{ color: "#fff" }}}}>60 MIN</span>
+              </div>
+            </div>
 
+            {{/* Word slam bottom — two words staggered */}}
+            <div className="absolute pointer-events-none flex gap-3" style={{{{ bottom: "7%", left: "51%" }}}}>
+              <span className="font-black uppercase" style={{{{ fontSize: "38px", color: "#fff", textShadow: `0 0 22px {color}`, letterSpacing: "0.05em", opacity: w1Op, transform: `scale(${{w1Scale}})`, transformOrigin: "left center", display: "inline-block" }}}}>
+                CORTISOL
+              </span>
+              <span className="font-black uppercase" style={{{{ fontSize: "38px", color: "{accent2}", textShadow: `0 0 22px {accent2}`, letterSpacing: "0.05em", opacity: w2Op, transform: `scale(${{w2Scale}})`, transformOrigin: "left center", display: "inline-block" }}}}>
+                RESET
+              </span>
+            </div>
+          </div>
+        );
+      }})()}}"""
+
+    scene_blocks = [make_scene_block(i) for i in range(4)]
     scenes_str = "\n\n".join(scene_blocks)
 
     return f"""import React from "react";
-import {{ useCurrentFrame }} from "remotion";
+import {{ Easing, interpolate, spring, useCurrentFrame, useVideoConfig }} from "remotion";
 import {{
-  GlossyFloorStage,
   GlossyGlowGraph,
   GlossyBarChart,
   GlossyRadialDial,
@@ -866,6 +1064,7 @@ import {{
   PolishStickerFloat,
 }} from "../../components/pure_graphics";
 import {{ TacticalMemeCard }} from "../../components/TacticalMemeCard";
+import {{ MemeStickerOverlay }} from "../../components/MemeStickerOverlay";
 import {{ WordTimestamp }} from "../../types";
 
 interface CanvasProps {{
@@ -874,6 +1073,7 @@ interface CanvasProps {{
 
 export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const frame = useCurrentFrame();
+  const {{ fps }} = useVideoConfig();
 
   return (
     <div className="{canvas_container_class}">
@@ -885,6 +1085,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   );
 }};
 """
+
 
 def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False, meme_meta: dict = None, sticker_meta: dict = None, niche: str = None):
     topic = sanitize_tags(raw_topic)
