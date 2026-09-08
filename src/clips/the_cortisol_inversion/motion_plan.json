@@ -1,0 +1,225 @@
+{
+  "topic": "The Cortisol Inversion",
+  "domain": "Health/Biology",
+  "artDirection": {
+    "aesthetic": "10/10 Dark Obsidian Void & Wet-Floor Mirror Reflection",
+    "canvasBackground": "#000000",
+    "typographyDirective": "Zero text walls; exactly 1-2 uppercase glowing focus words per scene",
+    "captionsDirective": "Spoken dialogue handled 100% by AppleKineticCaptions in dark mode with neon glow",
+    "antiPillDirective": "STRICT BAN on decorative pills, status badges, and diagnostic tags"
+  },
+  "storyboard": [
+    {
+      "scene": 1,
+      "name": "The Root Paradox & Disruption",
+      "timing": "0.0s - 4.8s (Frames 0 - 145)",
+      "archetype": "GlossyGlowGraph",
+      "title": "CORTISOL INVERSION",
+      "titleColor": "#ffffff",
+      "lighting": {
+        "backdrop": "#000000",
+        "glowColor": "rgba(244, 63, 94, 0.18)",
+        "glowCenterY": 42
+      },
+      "motion": {
+        "component": "GlossyGlowGraph",
+        "type": "Single Rising/Spike Curve",
+        "curveColor": "#f43f5e",
+        "yLabel": "INTENSITY",
+        "xLabels": [
+          "START",
+          "MID-DAY",
+          "EVENING",
+          "PEAK"
+        ],
+        "beaconHead": true,
+        "areaGradient": true,
+        "showFloorReflection": true,
+        "reflectionOpacity": 0.38
+      },
+      "sfx": [
+        {
+          "frame": 0,
+          "type": "whoosh_deep",
+          "volume": 0.32
+        },
+        {
+          "frame": 15,
+          "type": "whoosh_fast",
+          "volume": 0.28
+        }
+      ]
+    },
+    {
+      "scene": 2,
+      "name": "The System Mechanism",
+      "timing": "4.8s - 9.8s (Frames 145 - 295)",
+      "archetype": "GlossyToggleBoard",
+      "title": "ENERGY DEPLOYMENT",
+      "titleColor": "#ffffff",
+      "headerBg": "rgba(16, 185, 129, 0.28)",
+      "lighting": {
+        "backdrop": "#000000",
+        "glowColor": "rgba(16, 185, 129, 0.20)",
+        "glowCenterY": 42
+      },
+      "motion": {
+        "component": "GlossyToggleBoard",
+        "width": 620,
+        "showCursor": true,
+        "cursorClickFrame": 180,
+        "toggles": [
+          {
+            "id": "toggle_1",
+            "label": "GLUCOSE RELEASE",
+            "activeColor": "#10b981"
+          },
+          {
+            "id": "toggle_2",
+            "label": "PHYSICAL DRIVE",
+            "activeColor": "#10b981"
+          },
+          {
+            "id": "toggle_3",
+            "label": "CELLULAR ENERGY",
+            "activeColor": "#10b981"
+          }
+        ],
+        "showFloorReflection": true,
+        "reflectionOpacity": 0.35
+      },
+      "sfx": [
+        {
+          "frame": 145,
+          "type": "whoosh_deep",
+          "volume": 0.3
+        },
+        {
+          "frame": 180,
+          "type": "click",
+          "volume": 0.28
+        },
+        {
+          "frame": 220,
+          "type": "click",
+          "volume": 0.28
+        },
+        {
+          "frame": 250,
+          "type": "click",
+          "volume": 0.28
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "name": "The Comparative Breakthrough",
+      "timing": "9.8s - 16.8s (Frames 295 - 505)",
+      "archetype": "GlossyGlowGraph",
+      "title": "SUNLIGHT vs DARKNESS",
+      "titleColor": "#ffffff",
+      "lighting": {
+        "backdrop": "#000000",
+        "glowColor": "rgba(56, 189, 248, 0.16)",
+        "glowCenterY": 42
+      },
+      "motion": {
+        "component": "GlossyGlowGraph",
+        "type": "Dual Comparative Curves (Reference 1 Style)",
+        "curves": [
+          {
+            "id": "optimal",
+            "label": "OPTIMAL (REWIRE)",
+            "color": "#10b981",
+            "glow": "#10b981",
+            "behavior": "Surging early peak with graceful natural taper",
+            "beaconHead": true
+          },
+          {
+            "id": "trap",
+            "label": "THE TRAP (INVERTED)",
+            "color": "#f43f5e",
+            "glow": "#f43f5e",
+            "behavior": "Flatlined lethargy followed by emergency spike",
+            "beaconHead": true
+          }
+        ],
+        "showFloorReflection": true,
+        "reflectionOpacity": 0.38
+      },
+      "sfx": [
+        {
+          "frame": 295,
+          "type": "whoosh_sparkle",
+          "volume": 0.32
+        },
+        {
+          "frame": 360,
+          "type": "whoosh_fast",
+          "volume": 0.28
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "name": "The Action Protocol & Spoken CTA",
+      "timing": "16.8s - 24.0s (Frames 505 - 720)",
+      "archetype": "SteppedProgressionStairs",
+      "title": "60-MINUTE PROTOCOL",
+      "titleColor": "#ffffff",
+      "lighting": {
+        "backdrop": "#000000",
+        "glowColor": "rgba(251, 191, 36, 0.20)",
+        "glowCenterY": 42
+      },
+      "motion": {
+        "component": "SteppedProgressionStairs",
+        "orbColor": "#fbbf24",
+        "physics": "Parabolic ballistic jump with radial bloom onto steps",
+        "steps": [
+          {
+            "id": "step_1",
+            "label": "WAKE UP"
+          },
+          {
+            "id": "step_2",
+            "label": "60 MIN"
+          },
+          {
+            "id": "step_3",
+            "label": "LIGHT"
+          },
+          {
+            "id": "step_4",
+            "label": "OPTIMAL",
+            "isGoal": true
+          }
+        ],
+        "showFloorReflection": true,
+        "reflectionOpacity": 0.35
+      },
+      "sfx": [
+        {
+          "frame": 505,
+          "type": "whoosh_deep",
+          "volume": 0.32
+        },
+        {
+          "frame": 540,
+          "type": "click",
+          "volume": 0.24
+        },
+        {
+          "frame": 580,
+          "type": "click",
+          "volume": 0.24
+        },
+        {
+          "frame": 620,
+          "type": "whoosh_sparkle",
+          "volume": 0.35
+        }
+      ]
+    }
+  ]
+}

@@ -608,6 +608,17 @@ def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_se
     clip_dir = ROOT_DIR / "src" / "clips" / name
     clip_dir.mkdir(parents=True, exist_ok=True)
 
+    # 🎬 Professional After Effects Motion Design Planning Step
+    try:
+        from plan_motion_design import analyze_topic_and_script, print_storyboard_table
+        motion_plan = analyze_topic_and_script(topic, script_text)
+        print_storyboard_table(motion_plan)
+        with open(clip_dir / "motion_plan.json", "w", encoding="utf-8") as f:
+            json.dump(motion_plan, f, indent=2)
+        print(f"📋 Motion design storyboard saved to {clip_dir / 'motion_plan.json'}")
+    except Exception as e:
+        print(f"⚠️ Motion design planner notice: {e}")
+
     fps = 30
     total_frames = round(duration_sec * fps)
     pascal_name = "".join(w.capitalize() for w in re.split(r"[_\-\s]+", name))

@@ -16,16 +16,28 @@ This document is the **authoritative specification** for any AI Agent (Antigravi
 >    - Formulate the 2-Beat Curiosity Gap voiceover script and viral metadata.
 >    - **Mode B (Organic Growth)** is DEFAULT: strictly skip PDF hunting and omit the `[METADATA]` block. (Mode A product PDF search ONLY runs when `{meta}` is explicitly present).
 >    - Enforce the Spoken Interactive Question CTA and generate a `[PINNED COMMENT]`.
-> 2. **Step 2 — Clean Editorial Hero Illustration**:
+> 2. **Step 2 — Professional After Effects Motion Design Planning (MANDATORY)**:
+>    - **Plan like a Senior After Effects / Cinema 4D Motion Design Artist before touching code!**
+>    - Run:
+>      ```bash
+>      python3 scripts/plan_motion_design.py --topic "<topic>" --script "<script>"
+>      ```
+>    - Formulate a scene-by-scene storyboard (Beats 1–4) enforcing the **10/10 Dark Glossy Reflection System**:
+>      - **Scene 1 (Hook/Paradox)**: Upright glowing vector graph (`GlossyGlowGraph`) with starting tension/spike curve, glowing focus title, and downward wet-floor mirror reflection.
+>      - **Scene 2 (Mechanism)**: Frosted glass switchboard (`GlossyToggleBoard`) with authentic glove pointer cursor (`public/assets/cursor_pointer.png`) clicking toggles to neon green, or 3D asset float (`PolishStickerFloat`).
+>      - **Scene 3 (Twist / Comparative Shift)**: Dual-curve comparative graph (`GlossyGlowGraph`) contrasting Trap (Red) vs Optimal Rewire (Green).
+>      - **Scene 4 (Action Protocol & CTA)**: Frosted glass staircase (`SteppedProgressionStairs`) with hopping radiant golden orb up to the Goal.
+>    - **Strict Anti-Clutter Laws**: Exactly 1–2 uppercase glowing focus words per scene. ZERO small pills or diagnostic tags. Spoken words handled 100% by dark neon `AppleKineticCaptions`.
+> 3. **Step 3 — Clean Editorial Hero Illustration (When applicable)**:
 >    - Derive the prompt using `python3 scripts/generate_illustration_prompt.py --topic "<topic>" --script "<hook>"`.
 >    - Call `generate_image` with `AspectRatio="16:9"` (do NOT pass fixed reference images). Save to `public/<clip_name>/assets/scene_illustration.png`.
-> 3. **Step 3 — Master CLI Execution**:
+> 4. **Step 4 — Master CLI Execution**:
 >    - Execute:
 >      ```bash
 >      .venv/bin/python3 scripts/create_clip.py --name "<clip_name>" --topic "<topic>" --script "<script>" [--andrew] [--meta]
 >      ```
->    - This autonomously synthesizes neural audio (with 220ms CTA breath pause), transcribes Faster-Whisper millisecond timestamps, selects the culturally accurate tactical meme from the Meme Board, scaffolds Remotion components, and registers the 4K thumbnail.
-> 4. **Step 4 — Final Audit & Delivery**:
+>    - This autonomously synthesizes neural audio (with 220ms CTA breath pause), transcribes Faster-Whisper timestamps, selects the tactical meme, scaffolds the 10/10 pure graphics components, and registers the 4K thumbnail.
+> 5. **Step 5 — Final Audit & Delivery**:
 >    - Verify the scaffolded composition and deliver the final viral title, thumbnail title, and pinned comment to the user.
 >
 > *(The agent only outputs the script alone if the user explicitly writes "script only" or "write a script").*
@@ -178,25 +190,28 @@ Every video script submitted to RightClips is tagged with one of four channel ni
 
 ---
 
-## 🖋️ Rule 5.5: Bare-Canvas Cinematic Editorial Motion Graphics (Anti-SaaS Directive)
+## 💎 Rule 5.5: The 10/10 Dark Glossy Reflection Motion Graphics System (Master Standard)
 
 > [!CRITICAL]
-> **PERMANENT BAN ON STERILE SAAS UI CARDS! ENFORCE BARE-CANVAS EDITORIAL VISUAL STORYTELLING!**
-> Stacking white card boxes with numbered lists (`01`, `02`) and dashboard metric bars is strictly banned for `{Self Improvement}` organic videos!
-> Videos must match the high-fashion editorial storytelling aesthetic of the reference:
+> **ZERO TEXT WALLS, ZERO DECORATIVE PILLS, 100% CINEMATIC MOTION DESIGN!**
+> Videos must match the high-end dark obsidian, wet-floor glossy reflection aesthetic of `/home/phyroosh/Desktop/Editing Upgrade/`:
 
-1. **Bare Archival Canvas & Peripheral Studio Bokeh (`<LivingStudioBackground />`)**:
-   - Content floats directly on the tactile 300gsm cotton rag paper substrate (`ArchivalPaperCanvas`).
-   - Out-of-focus peripheral 3D star props (`<StudioDepthProps />`) are mounted in the peripheral corners with 12–16px Gaussian lens blur, creating cinematic prime lens shallow depth of field.
-2. **Editorial Serif Typography (`<EditorialTypographyScene />`)**:
-   - High-contrast Playfair Display serif typography with italic conversational lead-ins (*"Let's suppose you're"*, *"Psychologists call this"*).
-   - Monumental ghost watermarks (`ghostEcho`) rendered at `text-[220px]` in 6–8% opacity behind the text, giving vast typographic depth.
-   - Dynamic self-drawing ink underlines that smoothly trace underneath the focal term.
-3. **Floating Visual Props & Tactile Scalloped Stamps (`<VisualPropCard />`)**:
-   - Minimalist squircle photo cards (`rounded-[44px]`) and transparent 3D cutouts (e.g. `hyperrealistic_3d_glowing_brain`) with natural ambient drop shadows (`box-shadow: 0 30px 80px -15px rgba(0,0,0,0.22)`).
-   - Tactile scalloped circular stamp seals (matching the iconic red "TRUSTED" seal from the reference) with 3 stars and spring rotation pop-in.
-4. **Handwritten Annotation Arrows (`<HandwrittenArrow />`)**:
-   - Self-drawing SVG ink-flow curving and looping arrows (`preset="loop_down"`, `"swoop_right"`) connecting visual metaphors to text insights.
+1. **Pitch-Black Obsidian Void & Atmospheric Lighting (`<GlossyFloorStage />`)**:
+   - Deep obsidian background (`#000000`) with atmospheric radial color auras (`glowColor`) pulsating behind the active graphic.
+   - **Downward Glossy Wet-Floor Mirror Reflections**: Every standing element reflects downward (`transform: scaleY(-1)`) with soft blur (`blur: 2-2.5px`) and vertical alpha falloff (`opacity: 0.35-0.42`).
+2. **Minimalist Glowing Typography (Anti-Text-Wall Law)**:
+   - Exactly **1–2 uppercase words** glowing in 3D space with soft neon bloom (`text-shadow: 0 0 20px ...`).
+   - Spoken dialogue is handled **100% by kinetic captions** (`<AppleKineticCaptions theme="dark" />`).
+   - **PERMANENT BAN ON SMALL PILL BADGES**: Never render decorative status tags (`[LIVE REACTION]`, `[PARADOX]`, `[CRITICAL DIAGNOSTIC]`, `[COMMUNITY CHECK]`).
+3. **The 4 Flagship Motion Archetypes (`src/components/pure_graphics/`)**:
+   - **`<GlossyGlowGraph />`** (*Ref 1: Motivation vs Discipline*): Upright standing coordinate frame, single or dual comparative glowing Bezier curves (Green Optimal vs Red Inverted), pulsing beacon heads, area gradients, and floor reflections.
+   - **`<GlossyToggleBoard />`** (*Ref 3: "SUCCESS" Switchboard*): Frosted glass panel with tactile iOS toggle switches that flip from grey to glowing emerald green, clicked by the authentic cartoon glove pointer cursor (`public/assets/cursor_pointer.png`).
+   - **`<SteppedProgressionStairs />`** (*Ref 2: Plan -> Action -> Goal*): Ascending staircase of frosted glass step blocks with a radiant golden orb leaping dynamically between steps.
+   - **`<GlossyFeatureGrid />`** (*Ref 4: 3x3 Tile Grid*): Matrix of square frosted glass tiles popping in with sequential checkmark illuminates.
+4. **Authentic Tactile Cursor Integration (`<TactileCursorPointer />`)**:
+   - Uses the permanent high-res glove cursor cutout in `public/assets/cursor_pointer.png` with natural click spring scale (`scale: 0.86`) and realistic drop shadow.
+5. **3D Floating Holographic Assets (`<PolishStickerFloat />`)**:
+   - Assets and reaction characters float with 3D perspective tilt (`rotateX`, `rotateY`), smooth floating sine physics, and soft neon rim glow, completely free of tacky badge borders.
 
 ---
 

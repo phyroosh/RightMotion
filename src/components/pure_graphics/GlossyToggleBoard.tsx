@@ -1,5 +1,5 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 
 export interface ToggleItem {
   id: string;
@@ -137,32 +137,27 @@ export const GlossyToggleBoard: React.FC<GlossyToggleBoardProps> = ({
         })}
       </div>
 
-      {/* Animated Hand Cursor Clicking */}
+      {/* Animated Hand Cursor Clicking (Authentic Glove Pointer) */}
       {!isReflection && showCursor && (
         <div
-          className="absolute pointer-events-none transition-all duration-300"
+          className="absolute pointer-events-none transition-all duration-300 z-30"
           style={{
-            right: "50px",
-            top: `${145 + cursorTargetIndex * 76}px`,
+            right: "42px",
+            top: `${142 + cursorTargetIndex * 76}px`,
             opacity: frame >= cursorClickFrame - 10 && frame <= cursorClickFrame + 40 ? 1 : 0,
             transform: `scale(${
-              frame >= cursorClickFrame && frame <= cursorClickFrame + 8 ? 0.88 : 1.0
+              frame >= cursorClickFrame && frame <= cursorClickFrame + 8 ? 0.86 : 1.0
             })`,
           }}
         >
-          <svg
-            width="42"
-            height="42"
-            viewBox="0 0 24 24"
-            fill="white"
-            stroke="#000000"
-            strokeWidth="1.5"
+          <img
+            src={staticFile("assets/cursor_pointer.png")}
+            alt="Hand Pointer Cursor"
+            className="w-14 h-14 object-contain"
             style={{
-              filter: "drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7))",
+              filter: "drop-shadow(0 10px 20px rgba(0, 0, 0, 0.85))",
             }}
-          >
-            <path d="M10 11V3a1 1 0 0 1 2 0v7h1V5a1 1 0 0 1 2 0v5h1V7a1 1 0 0 1 2 0v5h1a2 2 0 0 1 2 2v3a7 7 0 0 1-7 7H9a7 7 0 0 1-7-7v-3a2 2 0 0 1 2-2h6z" />
-          </svg>
+          />
         </div>
       )}
     </div>

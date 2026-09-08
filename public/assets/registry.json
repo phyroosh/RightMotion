@@ -889,5 +889,27 @@
     ],
     "width": 1080,
     "height": 1080
+  },
+  "cursor_pointer": {
+    "id": "cursor_pointer",
+    "filename": "cursor_pointer.png",
+    "category": "ui",
+    "path": "assets/cursor_pointer.png",
+    "title": "Tactile Cartoon Glove Pointer Cursor",
+    "description": "Clean Mickey-style hand cursor for tactile switchboard and button activations",
+    "tone": "tactile",
+    "recommendedSfx": "click",
+    "keywords": [
+      "cursor",
+      "pointer",
+      "hand",
+      "click",
+      "toggle",
+      "switch",
+      "button",
+      "select"
+    ],
+    "width": 604,
+    "height": 641
   }
 }

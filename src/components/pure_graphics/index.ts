@@ -2,6 +2,7 @@ export * from "./GlossyFloorStage";
 export * from "./GlossyGlowGraph";
 export * from "./SteppedProgressionStairs";
 export * from "./GlossyToggleBoard";
+export * from "./TactileCursorPointer";
 export * from "./GlossyFeatureGrid";
 export * from "./PolishStickerFloat";
 export * from "./AppleToggleSwitch";
