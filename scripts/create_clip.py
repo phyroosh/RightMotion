@@ -1154,7 +1154,259 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         else "absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none"
     )
 
-    canvas_code = f"""import React from "react";
+    if niche == "self_improvement" and not product_meta:
+        # High-fashion cinematic editorial layout matching reference video (bare canvas, serif typography, visual props, stamps, loop arrows)
+        h_words = c1_hook_text.split()
+        if len(h_words) > 4:
+            s1_lead = " ".join(h_words[:3])
+            s1_focus = " ".join(h_words[3:6])
+            s1_sub = " ".join(h_words[6:])
+        else:
+            s1_lead = "Notice how"
+            s1_focus = c1_hook_text
+            s1_sub = ""
+
+        c_term_first = concept_term.split()[0] if concept_term else "PARADOX"
+
+        s2_editorial_scenes = []
+        if len(s2_items) > 0:
+            pt1 = s2_items[0]
+            clean_pt1 = re.sub(r"^(\d+[\.\)]\s*|[-*]\s*)", "", pt1["text"]).strip()
+            parts1 = clean_pt1.split(":", 1) if ":" in clean_pt1 else [clean_pt1]
+            t1 = parts1[0].strip()
+            d1 = parts1[1].strip() if len(parts1) > 1 else ""
+            s2_p1_start = max(pt1["startFrame"], concept_exit)
+            s2_p1_end = s2_items[1]["startFrame"] if len(s2_items) > 1 else s3_start
+            
+            s2_editorial_scenes.append(f"""
+      {{/* SCENE 2B: THE FIRST MECHANISM (Frames {s2_p1_start} - {s2_p1_end}) */}}
+      {{frame >= {s2_p1_start} && frame < {s2_p1_end} && (
+        <div className="w-full h-full flex flex-col items-center justify-center relative">
+          <div className="absolute top-[12%] inset-x-0 px-8 flex justify-center">
+            <EditorialTypographyScene
+              ghostEcho="MECHANISM"
+              leadIn="The hidden pattern:"
+              focusWord="{t1}"
+              subline="{d1}"
+              focusStyle="serif_bold"
+              colorTheme="charcoal"
+              entranceFrame={{{s2_p1_start}}}
+              focusWordDelay={{10}}
+              sublineDelay={{22}}
+              showUnderline
+            />
+          </div>
+
+          <div className="absolute top-[44%] inset-x-0 flex justify-center">
+            <VisualPropCard
+              cutoutId="{solution_cutout or 'hyperrealistic_3d_glowing_brain'}"
+              width={{560}}
+              height={{420}}
+              entranceFrame={{{s2_p1_start + 8}}}
+              ghostEcho="{c_term_first}"
+              stampText="NEURAL SHIFT"
+              stampSubtext="SUBSTRATE"
+              stampFrame={{{s2_p1_start + 45}}}
+              stampTheme="verified_blue"
+            />
+          </div>
+        </div>
+      )}}""")
+
+        if len(s2_items) > 1:
+            pt2 = s2_items[1]
+            clean_pt2 = re.sub(r"^(\d+[\.\)]\s*|[-*]\s*)", "", pt2["text"]).strip()
+            parts2 = clean_pt2.split(":", 1) if ":" in clean_pt2 else [clean_pt2]
+            t2 = parts2[0].strip()
+            d2 = parts2[1].strip() if len(parts2) > 1 else ""
+            s2_p2_start = pt2["startFrame"]
+            s2_editorial_scenes.append(f"""
+      {{/* SCENE 2C: THE REWIRE TRUTH (Frames {s2_p2_start} - {s3_start}) */}}
+      {{frame >= {s2_p2_start} && frame < {s3_start} && (
+        <div className="w-full h-full flex flex-col items-center justify-center relative">
+          <div className="absolute top-[26%] inset-x-0 px-8 flex flex-col items-center justify-center">
+            <EditorialTypographyScene
+              ghostEcho="TRUTH"
+              leadIn="The psychological rule:"
+              focusWord="{t2}"
+              subline="{d2}"
+              focusStyle="serif_italic"
+              colorTheme="rose"
+              entranceFrame={{{s2_p2_start}}}
+              focusWordDelay={{10}}
+              sublineDelay={{22}}
+              showUnderline
+              arrowPreset="loop_down"
+            />
+          </div>
+        </div>
+      )}}""")
+
+        s2_editorial_jsx = "\n".join(s2_editorial_scenes)
+
+        s3_q_words = s3_c1["text"].split()
+        if len(s3_q_words) > 4:
+            s3_lead = " ".join(s3_q_words[:2])
+            s3_focus = " ".join(s3_q_words[2:5])
+            s3_sub = " ".join(s3_q_words[5:])
+        else:
+            s3_lead = "Be honest:"
+            s3_focus = s3_c1["text"]
+            s3_sub = ""
+
+        prop_attr = f'imageSrc="{illustration_path}"' if illustration_path else f'cutoutId="{problem_cutout}"'
+
+        canvas_code = f"""import React from "react";
+import {{ useCurrentFrame, useVideoConfig, spring, interpolate }} from "remotion";
+import {{ VisualPropCard }} from "../../components/VisualPropCard";
+import {{ EditorialTypographyScene }} from "../../components/EditorialTypographyScene";
+import {{ HandwrittenArrow }} from "../../components/HandwrittenArrow";
+import {{ TacticalMemeCard }} from "../../components/TacticalMemeCard";
+import {{ MemeStickerOverlay }} from "../../components/MemeStickerOverlay";
+import {{ InteractiveEngagementPill }} from "../../components/InteractiveEngagementPill";
+import {{ WordTimestamp }} from "../../types";
+
+interface CanvasProps {{
+  transcript: WordTimestamp[];
+}}
+
+export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
+  const frame = useCurrentFrame();
+  const {{ fps }} = useVideoConfig();
+
+  return (
+    <div className="{canvas_container_class}">
+      {{/* ======================================================== */}}
+      {{/* SCENE 1: THE ROOT HOOK (Frames {s1_start} - {s2_start}) */}}
+      {{/* ======================================================== */}}
+      {{frame >= {s1_start} && frame < {s2_start} && (
+        <div className="w-full h-full flex flex-col items-center justify-center relative">
+          <div className="absolute top-[12%] inset-x-0 px-8 flex justify-center">
+            <EditorialTypographyScene
+              ghostEcho="{c_term_first}"
+              leadIn="{s1_lead}"
+              focusWord="{s1_focus}"
+              subline="{s1_sub}"
+              focusStyle="serif_italic"
+              colorTheme="charcoal"
+              entranceFrame={{20}}
+              focusWordDelay={{12}}
+              sublineDelay={{24}}
+              showUnderline
+            />
+          </div>
+
+          <div className="absolute top-[38%] inset-x-0 flex justify-center">
+            <VisualPropCard
+              {prop_attr}
+              width={{780}}
+              height={{440}}
+              entranceFrame={{10}}
+              stampText="PARADOX"
+              stampSubtext="INSIGHT"
+              stampFrame={{80}}
+              stampTheme="trusted_red"
+            />
+          </div>
+        </div>
+      )}}
+
+      {{/* ======================================================== */}}
+      {{/* SCENE 2A: PSYCHOLOGICAL CONCEPT SLAM (Frames {concept_entrance} - {concept_exit}) */}}
+      {{/* ======================================================== */}}
+      {{frame >= {concept_entrance} && frame < {concept_exit} && (
+        <div className="w-full h-full flex flex-col items-center justify-center relative">
+          <div className="absolute top-[30%] inset-x-0 px-8 flex flex-col items-center justify-center">
+            <EditorialTypographyScene
+              ghostEcho="{c_term_first}"
+              leadIn="Psychologists call this"
+              focusWord="{concept_term}."
+              subline="{concept_def}"
+              focusStyle="serif_italic"
+              colorTheme="sky"
+              entranceFrame={{{concept_entrance}}}
+              focusWordDelay={{14}}
+              sublineDelay={{26}}
+              showUnderline
+              arrowPreset="loop_down"
+            />
+          </div>
+        </div>
+      )}}
+
+      {s2_editorial_jsx}
+
+      {{/* ======================================================== */}}
+      {{/* SCENE 3: SPOKEN INTERACTIVE QUESTION CTA (Frames {s3_start}+) */}}
+      {{/* ======================================================== */}}
+      {{frame >= {s3_start} && (() => {{
+        const spTellMe = spring({{
+          frame: Math.max(0, frame - {f_s3_finale}),
+          fps,
+          config: {{ damping: 12, stiffness: 180 }},
+        }});
+
+        return (
+          <div className="w-full h-full flex flex-col items-center justify-center relative">
+            <div className="absolute top-[16%] inset-x-0 px-8 flex flex-col items-center text-center">
+              <EditorialTypographyScene
+                ghostEcho="HONESTY"
+                leadIn="{s3_lead}"
+                focusWord="{s3_focus}"
+                subline="{s3_sub}"
+                focusStyle="serif_italic"
+                colorTheme="sky"
+                entranceFrame={{{s3_start}}}
+                focusWordDelay={{12}}
+                sublineDelay={{22}}
+              />
+
+              {{frame >= {f_s3_finale} && (
+                <div
+                  className="mt-6 flex flex-col items-center gap-3 pointer-events-none"
+                  style={{{{
+                    opacity: Math.min(1, spTellMe * 1.5),
+                    transform: `scale(${{interpolate(spTellMe, [0, 1], [0.85, 1])}}) translateY(${{interpolate(
+                      spTellMe,
+                      [0, 1],
+                      [20, 0]
+                    )}}px)`,
+                  }}}}
+                >
+                  <HandwrittenArrow
+                    preset="loop_down"
+                    entranceFrame={{{f_s3_finale}}}
+                    color="#0071e3"
+                    width={{110}}
+                    height={{120}}
+                  />
+                  <div className="px-8 py-3.5 rounded-full bg-slate-900 text-white font-mono font-black text-2xl uppercase tracking-wider shadow-2xl flex items-center gap-3">
+                    <span>Tell me below 👇</span>
+                  </div>
+                </div>
+              )}}
+            </div>
+          </div>
+        );
+      }})()}}
+
+      {meme_jsx}
+      {sticker_jsx}
+
+      <InteractiveEngagementPill
+        entranceFrame={{{pill_entrance}}}
+        durationFrames={{105}}
+        prompt="{pill_prompt}"
+        tag="{pill_tag}"
+        icon="{pill_icon}"
+        theme="{pill_theme}"
+      />
+    </div>
+  );
+}};
+"""
+    else:
+        canvas_code = f"""import React from "react";
 import {{ useCurrentFrame, useVideoConfig, spring, interpolate }} from "remotion";
 import {{ PhysicalCard }} from "../../components/physics/PhysicalCard";
 import {{ TapeStrip }} from "../../components/collage/TapeStrip";

@@ -1,15 +1,11 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
-import { PhysicalCard } from "../../components/physics/PhysicalCard";
-import { TapeStrip } from "../../components/collage/TapeStrip";
-import { ProCutout } from "../../components/ProCutout";
-import { ProductPageShowcase } from "../../components/ProductPageShowcase";
-import { CinematicIllustrationCard } from "../../components/CinematicIllustrationCard";
-import { InteractiveEngagementPill } from "../../components/InteractiveEngagementPill";
-import { TacticalMemeCard, TacticalMemeFrame } from "../../components/TacticalMemeCard";
-import { ConceptKeywordSlam } from "../../components/ConceptKeywordSlam";
+import { VisualPropCard } from "../../components/VisualPropCard";
+import { EditorialTypographyScene } from "../../components/EditorialTypographyScene";
+import { HandwrittenArrow } from "../../components/HandwrittenArrow";
+import { TacticalMemeCard } from "../../components/TacticalMemeCard";
 import { MemeStickerOverlay } from "../../components/MemeStickerOverlay";
-import { Sparkles, Zap, ArrowRight } from "lucide-react";
+import { InteractiveEngagementPill } from "../../components/InteractiveEngagementPill";
 import { WordTimestamp } from "../../types";
 
 interface CanvasProps {
@@ -21,228 +17,193 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
   const { fps } = useVideoConfig();
 
   return (
-    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none">
+    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none pointer-events-none">
       {/* ======================================================== */}
-      {/* SCENE 1: THE ROOT FRICTION & HOOK (Frames 0 - 217) */}
+      {/* SCENE 1: THE ROOT HOOK (Frames 0 - 144)                   */}
+      {/* "Ever feel like genuine love disappeared the moment..."   */}
       {/* ======================================================== */}
-      {frame >= 0 && frame < 217 && (
-        <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
-          <CinematicIllustrationCard
-            imageSrc="true_relationships/assets/scene_illustration.png"
-            accentColor="blue"
-            entranceFrame={0}
-            beats={[
-            {
-                        "frame": 91,
-                        "type": "callout",
-                        "text": "ONLINE REALITY",
-                        "subtext": "Psychologists call this Curated Distortion.",
-                        "position": "top-right",
-                        "icon": "target",
-                        "color": "blue",
-                        "zoomLevel": 1.15,
-                        "targetX": 50,
-                        "targetY": 40
-            },
-            {
-                        "frame": 164,
-                        "type": "stamp",
-                        "text": "SUBCONSCIOUS PARALYSIS",
-                        "subtext": "COGNITIVE OVERLOAD",
-                        "position": "bottom-left",
-                        "icon": "alert",
-                        "color": "rose"
-            }
-]}
-            width={920}
-            height={520}
-            tiltX={3}
-            tiltY={-3}
-          />
-        </div>
-      )}
-
-      {/* ======================================================== */}
-      {/* SCENE 2A: HIGH-IMPACT CONCEPT KEYWORD SLAM              */}
-      {/* (Frames 217 - 292)             */}
-      {/* ======================================================== */}
-      {frame >= 217 && frame < 292 && (
-        <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-150">
-          <ConceptKeywordSlam
-            term="CURATED DISTORTION"
-            definition="Your brain judges real-life intimacy against highlight reels, mistaking quiet consistency for a lack of passion"
-            categoryBadge="PSYCHOLOGICAL MECHANISM // 01"
-            entranceFrame={217}
-            durationFrames={75}
-            theme="apple_studio"
-            icon="brain"
-            width={920}
-          />
-        </div>
-      )}
-
-      {/* ======================================================== */}
-      {/* SCENE 2B: THE BREAKDOWN (REVEALED ONE-BY-ONE AS SPOKEN!)  */}
-      {/* (Frames 292 - 527)                     */}
-      {/* ======================================================== */}
-      {frame >= 292 && frame < 527 && (() => {
-        const spP1 = spring({ frame: frame - 292, fps, config: { damping: 13, stiffness: 140 } });
-        const spP2 = spring({ frame: frame - 403, fps, config: { damping: 13, stiffness: 140 } });
-
-        return (
-          <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
-            <div className="relative w-full max-w-[920px]">
-              <div className="absolute -top-7 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
-                <TapeStrip position="center-top" width={180} height={48} enableWobble />
-              </div>
-
-              <PhysicalCard
-                tiltX={-5}
-                tiltY={4}
-                elevation={44}
-                impactMs={9733}
-                className="w-full p-8 rounded-3xl bg-white/95 border-2 border-sky-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
-              >
-                {/* Clean Uncrowded Section Header - NO RAW TOPIC LEAKS */}
-                <div className="text-center mt-1">
-                  <h2 className="text-5xl font-black text-slate-950 leading-tight uppercase tracking-tight">
-                    SOCIAL MEDIA TRAP
-                  </h2>
-                  <div className="text-2xl font-mono text-[#0071e3] font-bold mt-1 tracking-wider uppercase">
-                    Why It Destroys Teen Focus
-                  </div>
-                </div>
-
-                {/* PROGRESSIVE SEQUENTIAL REVEALS: ONE BY ONE ON EXACT WORDS */}
-                <div className="flex flex-col gap-4 w-full my-1">
-                  
-                {/* Progressive Item 1 (Spoken Frame: 292) */}
-                <div
-                  style={{
-                    opacity: frame >= 292 ? Math.min(1, spP1 * 1.2) : 0,
-                    transform: `scale(${frame >= 292 ? interpolate(spP1, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 292 ? interpolate(spP1, [0, 1], [25, 0]) : 25}px)`,
-                    pointerEvents: frame >= 292 ? "auto" : "none",
-                  }}
-                >
-                  <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-[#0071e3]/15 text-[#0071e3] flex items-center justify-center text-3xl font-black font-mono shrink-0">
-                        01
-                      </div>
-                      <div>
-                        <div className="text-3xl font-black text-slate-950">
-                          Your brain judges real-life intimacy against highlight reels, mistaking quiet consistency for a lack of passion.
-                        </div>
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Progressive Item 2 (Spoken Frame: 403) */}
-                <div
-                  style={{
-                    opacity: frame >= 403 ? Math.min(1, spP2 * 1.2) : 0,
-                    transform: `scale(${frame >= 403 ? interpolate(spP2, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 403 ? interpolate(spP2, [0, 1], [25, 0]) : 25}px)`,
-                    pointerEvents: frame >= 403 ? "auto" : "none",
-                  }}
-                >
-                  <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-[#0071e3]/15 text-[#0071e3] flex items-center justify-center text-3xl font-black font-mono shrink-0">
-                        02
-                      </div>
-                      <div>
-                        <div className="text-3xl font-black text-slate-950">
-                          Healthy love is private, unglamorous, and boring to an algorithm.
-                        </div>
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </PhysicalCard>
-            </div>
+      {frame >= 0 && frame < 144 && (
+        <div className="w-full h-full flex flex-col items-center justify-center relative">
+          {/* Editorial Hook Typography above the prop */}
+          <div className="absolute top-[12%] inset-x-0 px-8 flex justify-center">
+            <EditorialTypographyScene
+              ghostEcho="LOVE"
+              leadIn="Ever feel like"
+              focusWord="Genuine Love"
+              subline="disappeared the moment relationships became content?"
+              focusStyle="serif_italic"
+              colorTheme="charcoal"
+              entranceFrame={20}
+              focusWordDelay={12}
+              sublineDelay={24}
+              showUnderline
+            />
           </div>
-        );
-      })()}
+
+          {/* Floating Editorial Photo Prop with Scalloped Stamp */}
+          <div className="absolute top-[38%] inset-x-0 flex justify-center">
+            <VisualPropCard
+              imageSrc="true_relationships/assets/scene_illustration.png"
+              width={780}
+              height={440}
+              entranceFrame={10}
+              stampText="CURATED"
+              stampSubtext="DISTORTION"
+              stampFrame={80}
+              stampTheme="trusted_red"
+            />
+          </div>
+        </div>
+      )}
 
       {/* ======================================================== */}
-      {/* SCENE 3: SOLUTION PROTOCOL / PRODUCT SHOWCASE (Frames 527 - 598) */}
+      {/* SCENE 2A: PSYCHOLOGICAL CONCEPT SLAM (Frames 144 - 217)   */}
+      {/* "Psychologists call this curated distortion."             */}
       {/* ======================================================== */}
-      {frame >= 527 && (() => {
-        const spSolCutout = spring({ frame: frame - 527, fps, config: { damping: 13, stiffness: 140 } });
-        const spFinale = spring({ frame: frame - 660, fps, config: { damping: 13, stiffness: 140 } });
+      {frame >= 144 && frame < 217 && (
+        <div className="w-full h-full flex flex-col items-center justify-center relative">
+          <div className="absolute top-[30%] inset-x-0 px-8 flex flex-col items-center justify-center">
+            <EditorialTypographyScene
+              ghostEcho="DISTORTION"
+              leadIn="Psychologists call this"
+              focusWord="Curated Distortion."
+              subline="Your subconscious measures reality against impossible highlight reels."
+              focusStyle="serif_italic"
+              colorTheme="sky"
+              entranceFrame={144}
+              focusWordDelay={14}
+              sublineDelay={26}
+              showUnderline
+              arrowPreset="loop_down"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* SCENE 2B: THE MECHANISM VISUALIZATION (Frames 217 - 400)  */}
+      {/* "Your brain judges real-life intimacy against highlight   */}
+      {/*  reels, mistaking quiet consistency for a lack of passion"*/}
+      {/* ======================================================== */}
+      {frame >= 217 && frame < 400 && (
+        <div className="w-full h-full flex flex-col items-center justify-center relative">
+          {/* Top Typography */}
+          <div className="absolute top-[12%] inset-x-0 px-8 flex justify-center">
+            <EditorialTypographyScene
+              ghostEcho="THE TRAP"
+              leadIn="Your brain judges real intimacy against"
+              focusWord="Highlight Reels"
+              subline="Mistaking quiet consistency for a lack of passion."
+              focusStyle="serif_bold"
+              colorTheme="charcoal"
+              entranceFrame={217}
+              focusWordDelay={10}
+              sublineDelay={24}
+              showUnderline
+            />
+          </div>
+
+          {/* 3D Neural Brain Prop Floating Cleanly with Soft Ambient Occlusion */}
+          <div className="absolute top-[44%] inset-x-0 flex justify-center">
+            <VisualPropCard
+              cutoutId="hyperrealistic_3d_glowing_brain"
+              width={560}
+              height={420}
+              entranceFrame={225}
+              ghostEcho="CONSISTENCY"
+              stampText="QUIET REALITY"
+              stampSubtext="NOT PASSION DEFICIT"
+              stampFrame={310}
+              stampTheme="verified_blue"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* SCENE 2C: THE REWIRE TRUTH (Frames 400 - 526)             */}
+      {/* "Healthy love is private, unglamorous, and boring to an   */}
+      {/*  algorithm."                                             */}
+      {/* ======================================================== */}
+      {frame >= 400 && frame < 526 && (
+        <div className="w-full h-full flex flex-col items-center justify-center relative">
+          <div className="absolute top-[26%] inset-x-0 px-8 flex flex-col items-center justify-center">
+            <EditorialTypographyScene
+              ghostEcho="ALGORITHM"
+              leadIn="Healthy love is"
+              focusWord="Private & Unglamorous"
+              subline="...and deeply boring to an engagement algorithm."
+              focusStyle="serif_italic"
+              colorTheme="rose"
+              entranceFrame={400}
+              focusWordDelay={10}
+              sublineDelay={22}
+              showUnderline
+              arrowPreset="loop_down"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* SCENE 3: SPOKEN INTERACTIVE QUESTION CTA (Frames 526+)    */}
+      {/* "Be honest: has scrolling ever made you question an       */}
+      {/*  otherwise good relationship? Tell me below."             */}
+      {/* ======================================================== */}
+      {frame >= 526 && (() => {
+        const spTellMe = spring({
+          frame: Math.max(0, frame - 660),
+          fps,
+          config: { damping: 12, stiffness: 180 },
+        });
 
         return (
-          <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
-            <div className="relative w-full max-w-[920px]">
-              <div className="absolute -top-7 left-8 z-30 pointer-events-none">
-                <TapeStrip position="top-left" width={180} height={48} enableWobble />
-              </div>
+          <div className="w-full h-full flex flex-col items-center justify-center relative">
+            <div className="absolute top-[16%] inset-x-0 px-8 flex flex-col items-center text-center">
+              <EditorialTypographyScene
+                ghostEcho="HONESTY"
+                leadIn="Be honest:"
+                focusWord="Has Scrolling"
+                subline="ever made you question an otherwise good relationship?"
+                focusStyle="serif_italic"
+                colorTheme="sky"
+                entranceFrame={526}
+                focusWordDelay={12}
+                sublineDelay={22}
+              />
 
-              <PhysicalCard
-                tiltX={3}
-                tiltY={-3}
-                elevation={45}
-                impactMs={17567}
-                className="w-full p-8 rounded-3xl bg-white/95 border-2 border-sky-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
-              >
-                <h3 className="text-5xl font-black text-slate-950 leading-tight mt-1">
-                  Be honest: has scrolling ever made you question an otherwise good relationship?
-                </h3>
-
+              {/* Dynamic Call-To-Action Floating Direct on Canvas */}
+              {frame >= 660 && (
                 <div
-                  className="w-full flex justify-center items-center my-2 transition-all"
+                  className="mt-6 flex flex-col items-center gap-3 pointer-events-none"
                   style={{
-                    opacity: frame >= 527 ? Math.min(1, spSolCutout * 1.2) : 0,
-                    transform: `scale(${frame >= 527 ? interpolate(spSolCutout, [0, 1], [0.6, 1]) : 0.6}) translateY(${frame >= 527 ? interpolate(spSolCutout, [0, 1], [30, 0]) : 30}px)`,
-                    pointerEvents: frame >= 527 ? "auto" : "none",
+                    opacity: Math.min(1, spTellMe * 1.5),
+                    transform: `scale(${interpolate(spTellMe, [0, 1], [0.85, 1])}) translateY(${interpolate(
+                      spTellMe,
+                      [0, 1],
+                      [20, 0]
+                    )}px)`,
                   }}
                 >
-                  <ProCutout
-                    assetId="hyperrealistic_3d_glowing_brain"
-                    glowColor="amber"
-                    animation="stamp_impact"
-                    width={420}
-                    height={320}
-                    ghostText="REWIRE"
+                  <HandwrittenArrow
+                    preset="loop_down"
+                    entranceFrame={660}
+                    color="#0071e3"
+                    width={110}
+                    height={120}
                   />
-                </div>
-
-                <div
-                  className="w-full transition-all"
-                  style={{
-                    opacity: frame >= 660 ? Math.min(1, spFinale * 1.2) : 0,
-                    transform: `scale(${frame >= 660 ? interpolate(spFinale, [0, 1], [0.8, 1]) : 0.8})`,
-                    pointerEvents: frame >= 660 ? "auto" : "none",
-                  }}
-                >
-                  <div className="w-full p-5 rounded-2xl bg-black/60 border border-emerald-500/30 flex items-center justify-center gap-3 text-3xl font-black text-[#0071e3] shadow-xl">
-                    <Sparkles className="w-7 h-7 text-emerald-400 shrink-0" />
-                    <span>Tell me below.</span>
+                  <div className="px-8 py-3.5 rounded-full bg-slate-900 text-white font-mono font-black text-2xl uppercase tracking-wider shadow-2xl flex items-center gap-3">
+                    <span>Tell me below 👇</span>
                   </div>
                 </div>
-              </PhysicalCard>
+              )}
             </div>
           </div>
         );
       })()}
 
       {/* ======================================================== */}
-      {/* ON-SCREEN INTERACTIVE ENGAGEMENT PILL (Seconds 18–22)    */}
-      {/* ======================================================== */}
-      <InteractiveEngagementPill
-        entranceFrame={471}
-        durationFrames={105}
-        prompt="Mistaken anxiety for chemistry? Tell me below 👇"
-        tag="CONFESSION"
-        icon="brain"
-        theme="apple_studio"
-      />
-      
-      {/* ======================================================== */}
-      {/* TACTICAL RETENTION MEME POP (< 2.5s Strict Cap)          */}
+      {/* TACTICAL RETENTION MEME POP (< 2.0s Frame 0 Hook)         */}
       {/* ======================================================== */}
       <TacticalMemeCard
         memeId="courtroom_shout_me"
@@ -272,6 +233,17 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
         badgeText="HEH 𓁹‿𓁹"
       />
 
+      {/* ======================================================== */}
+      {/* SPOKEN INTERACTIVE PILL (Seconds 18–22)                  */}
+      {/* ======================================================== */}
+      <InteractiveEngagementPill
+        entranceFrame={530}
+        durationFrames={105}
+        prompt="Questioned good love due to reels? Tell me below 👇"
+        tag="CONFESSION"
+        icon="brain"
+        theme="apple_studio"
+      />
     </div>
   );
 };

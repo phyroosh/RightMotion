@@ -178,6 +178,28 @@ Every video script submitted to RightClips is tagged with one of four channel ni
 
 ---
 
+## 🖋️ Rule 5.5: Bare-Canvas Cinematic Editorial Motion Graphics (Anti-SaaS Directive)
+
+> [!CRITICAL]
+> **PERMANENT BAN ON STERILE SAAS UI CARDS! ENFORCE BARE-CANVAS EDITORIAL VISUAL STORYTELLING!**
+> Stacking white card boxes with numbered lists (`01`, `02`) and dashboard metric bars is strictly banned for `{Self Improvement}` organic videos!
+> Videos must match the high-fashion editorial storytelling aesthetic of the reference:
+
+1. **Bare Archival Canvas & Peripheral Studio Bokeh (`<LivingStudioBackground />`)**:
+   - Content floats directly on the tactile 300gsm cotton rag paper substrate (`ArchivalPaperCanvas`).
+   - Out-of-focus peripheral 3D star props (`<StudioDepthProps />`) are mounted in the peripheral corners with 12–16px Gaussian lens blur, creating cinematic prime lens shallow depth of field.
+2. **Editorial Serif Typography (`<EditorialTypographyScene />`)**:
+   - High-contrast Playfair Display serif typography with italic conversational lead-ins (*"Let's suppose you're"*, *"Psychologists call this"*).
+   - Monumental ghost watermarks (`ghostEcho`) rendered at `text-[220px]` in 6–8% opacity behind the text, giving vast typographic depth.
+   - Dynamic self-drawing ink underlines that smoothly trace underneath the focal term.
+3. **Floating Visual Props & Tactile Scalloped Stamps (`<VisualPropCard />`)**:
+   - Minimalist squircle photo cards (`rounded-[44px]`) and transparent 3D cutouts (e.g. `hyperrealistic_3d_glowing_brain`) with natural ambient drop shadows (`box-shadow: 0 30px 80px -15px rgba(0,0,0,0.22)`).
+   - Tactile scalloped circular stamp seals (matching the iconic red "TRUSTED" seal from the reference) with 3 stars and spring rotation pop-in.
+4. **Handwritten Annotation Arrows (`<HandwrittenArrow />`)**:
+   - Self-drawing SVG ink-flow curving and looping arrows (`preset="loop_down"`, `"swoop_right"`) connecting visual metaphors to text insights.
+
+---
+
 ## ⚡ Rule 6: The 2-Beat Curiosity Gap Framework & Scriptwriting Standards
 
 Every short-form script follows the high-retention 4-beat structure:

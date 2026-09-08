@@ -1,5 +1,6 @@
 import React from "react";
 import { ArchivalPaperCanvas } from "./texture/ArchivalPaperCanvas";
+import { StudioDepthProps } from "./texture/StudioDepthProps";
 
 export interface LivingStudioBackgroundProps {
   className?: string;
@@ -8,6 +9,7 @@ export interface LivingStudioBackgroundProps {
   orbColor1?: string;
   orbColor2?: string;
   paperToothOpacity?: number;
+  enableDepthProps?: boolean;
 }
 
 /**
@@ -25,6 +27,7 @@ export const LivingStudioBackground: React.FC<LivingStudioBackgroundProps> = ({
   orbColor1,               // retained for compat
   orbColor2,               // retained for compat
   paperToothOpacity = 0.52,
+  enableDepthProps = true,
 }) => {
   return (
     <div
@@ -46,6 +49,9 @@ export const LivingStudioBackground: React.FC<LivingStudioBackgroundProps> = ({
           pointerEvents: "none",
         }}
       />
+
+      {/* 3. Out-of-focus peripheral studio depth props (cinema bokeh stars) */}
+      {enableDepthProps && <StudioDepthProps opacity={0.52} />}
     </div>
   );
 };

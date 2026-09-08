@@ -29,6 +29,19 @@ module.exports = {
           "Helvetica Neue",
           "sans-serif",
         ],
+        serif: [
+          "Playfair Display",
+          "Didot",
+          "Bodoni MT",
+          "Cinzel",
+          "Georgia",
+          "Cambria",
+          "serif",
+        ],
+        handwriting: [
+          "Caveat",
+          "cursive",
+        ],
       },
       boxShadow: {
         "apple-glass": "0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.9)",
