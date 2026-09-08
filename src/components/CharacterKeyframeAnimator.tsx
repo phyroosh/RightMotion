@@ -53,6 +53,14 @@ export const CharacterKeyframeAnimator: React.FC<CharacterKeyframeAnimatorProps>
   // Sort keyframes chronologically
   const sorted = [...keyframes].sort((a, b) => a.timeMs - b.timeMs);
 
+  // Deduplicate: interpolate() requires strictly monotonically increasing inputRange.
+  // If create_clip generates duplicate timestamps, nudge each duplicate +1ms forward.
+  for (let i = 1; i < sorted.length; i++) {
+    if (sorted[i].timeMs <= sorted[i - 1].timeMs) {
+      sorted[i] = { ...sorted[i], timeMs: sorted[i - 1].timeMs + 1 };
+    }
+  }
+
   const times = sorted.map((k) => k.timeMs);
   const scales = sorted.map((k) => k.scale ?? 1.0);
   const xs = sorted.map((k) => k.x ?? 0);
