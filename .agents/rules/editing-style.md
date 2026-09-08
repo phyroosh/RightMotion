@@ -67,19 +67,17 @@ Never squish the avatar in a corner or have graphics fighting for space on scree
 - **Timing & Multi-Beat Overlays**: Enters at Frame 0 as the instant hero hook. Judy presents the outro (`isFinale`) cleanly without card clutter. Never leave the illustration static for $>3.5$s: add camera punch zoom (`1.15x`), tactical callout pins (`<IllustrationCalloutPin />`), and angled diagnostic stamps (`<IllustrationStamp />`) every 1.5–2.5s.
 - **Graceful Multi-Agent Fallback**: Agents with `generate_image` (Antigravity) generate the bespoke 16:9 art; agents without it (Claude Code) skip image generation and fall back to `ProCutout` seamlessly.
 
-## 7. High-Retention Blueprint, 2-Beat Curiosity Gap & Spoken CTA Engine
-- **Runtime Standard**: Strict **20–24 seconds** (~55–70 words, hard cap 75 words). Empirical YouTube Studio data proves ultra-tight runtimes (20–24s) push retention to 68–78%+ and maximize recommendation reach.
-- **Cognitive Paradox Standard**: Ban vague comfort cliches (*"When life feels unfair"* $\rightarrow$ 20.8% retention); lead with behavioral contradictions (*"Why being single feels lonely, but dating leaves you exhausted"* $\rightarrow$ 23.6% stayed-to-watch, 24x reach!).
-- **The 2-Beat Curiosity Gap (9-Second Drop-off Killer)**:
-  - **Hook (0–3s)**: Cognitive paradox or hypocrisy.
-  - **Beat 1 — The Mechanism (4–8s)**: Name the concept with scientific authority (*"Psychologists call this Identity Borrowing."*). Spoken cue is synchronized with on-screen `<ConceptKeywordSlam />`.
-  - **Beat 2 — The Trap / The Twist (9–15s)**: **IMMEDIATELY raise the stakes** so curiosity peaks a second time! (*"And here's the trap: your nervous system confuses anxiety with chemistry. So the more walking on eggshells you do, the more in love you think you are."*). Never let curiosity die after naming the term!
-  - **Beat 3 — The Rewire Shift (16–20s)**: Sharp, memorable psychological rule (*"If you have to shrink yourself to keep them, that's not connection — it's nervous system panic."*).
-  - **Beat 4 — The Spoken Interactive CTA (21–24s)**: After an intimate 200–250ms breath pause, Judy asks a direct, open-ended question looking into the camera (*"Be honest: have you ever stayed just so you wouldn't feel alone? Tell me below."*).
-- **Concept Keyword Slam (`<ConceptKeywordSlam />`)**: High-impact visual reinforcement component that pops on screen at the exact spoken frame of the psychological concept (e.g. 0:06–0:09) with HUD telemetry and acoustic impact hits (`impact_hit` + `whoosh_fast`).
-- **On-Screen Interactive Overlay (`<InteractiveEngagementPill />`)**: Renders at ~70% timeline (seconds 18–22) synchronized with Judy's spoken question to convert viewers into comments and likes.
-- **Autonomous Pinned Comment**: Generate `[PINNED COMMENT]` aligned with the spoken question; auto-posted to YouTube via YouTube Data API (`commentThreads.insert`) on upload.
-- **Organic Growth Mode by Default (Zero PDF Hunt)**: All videos default to Mode B (pure organic psychological insights with spoken question CTA). Only search product PDFs and extract worksheet proof when `{meta}`, `--meta`, or `{product: ...}` is explicitly requested.
+## 7. High-Retention Blueprint: 3-Pillar Pure Information Architecture (STRICTLY NO CTA)
+- **Runtime Standard**: Strict **25–35 seconds** (~70–100 words, hard cap 105 words). Gives full narrative space to Introduce Problem -> Explain the Logic -> Deliver the High-Leverage Solution with maximum clarity.
+- **Cognitive Paradox Standard**: Ban vague comfort cliches (*"When life feels unfair"*); lead with behavioral contradictions (*"Why being single feels lonely, but dating leaves you exhausted"*).
+- **The 3-Pillar Pure Information Architecture**:
+  - **Pillar 1 — Introduce the Problem (0–8s)**: Cognitive paradox, biological quirk, or behavioral hypocrisy.
+  - **Pillar 2 — Explain the Logic (8–22s)**: Mechanism, root biological/cognitive cause, and why intuition fails (the trap).
+  - **Pillar 3 — Deliver the Solution (22–32s)**: Concrete, actionable high-leverage protocol or rewire shift.
+  - **STRICT NO-CTA LAW**: Video ends decisively on the solution itself. ZERO ending questions, ZERO "tell me below", ZERO "comment below".
+- **Concept Keyword Slam (`<ConceptKeywordSlam />`)**: High-impact visual reinforcement component that pops on screen at the exact spoken frame of the core concept with acoustic impact hits (`impact_hit` + `whoosh_fast`).
+- **Autonomous Pinned Comment**: Generate authoritative `[PINNED COMMENT]` summarizing the core takeaway or protocol; auto-posted to YouTube via YouTube Data API (`commentThreads.insert`) on upload.
+- **Organic Growth Mode by Default (Zero PDF Hunt)**: All videos default to Mode B (pure organic psychological insights with zero CTA). Only search product PDFs and extract worksheet proof when `{meta}`, `--meta`, or `{product: ...}` is explicitly requested.
 
 ## 8. Tactical Meme Integration Engine (Default-On, < 2.5s Retention Booster)
 - **Default-On Policy**: Memes are **ENABLED BY DEFAULT** for all videos! Strictly deployed as the opening HOOK from Frame 0 (`startFrame={0}`). PERMANENT BAN on mid-video and outro memes. Max 1 meme per standard video.

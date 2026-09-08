@@ -54,8 +54,8 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
 
     scene_1 = {
         "scene": 1,
-        "name": "The Root Paradox & Disruption",
-        "timing": "0.0s - 4.8s (Frames 0 - 145)",
+        "name": "The Root Paradox & Disruption (Introduce the Problem)",
+        "timing": "0.0s - 7.0s (Frames 0 - 210)",
         "archetype": "GlossyGlowGraph",
         "title": s1_title,
         "titleColor": "#ffffff",
@@ -77,11 +77,11 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
         },
         "sfx": [
             {"frame": 0, "type": "whoosh_deep", "volume": 0.32},
-            {"frame": 15, "type": "whoosh_fast", "volume": 0.28}
+            {"frame": 20, "type": "whoosh_fast", "volume": 0.28}
         ]
     }
 
-    # --- BEAT 2: THE MECHANISM & BIOLOGICAL/COGNITIVE SYSTEM ---
+    # --- BEAT 2: THE MECHANISM & BIOLOGICAL/COGNITIVE SYSTEM (EXPLAIN THE LOGIC) ---
     if is_health:
         s2_title = "ENERGY DEPLOYMENT"
         s2_header_bg = "rgba(16, 185, 129, 0.28)"
@@ -109,8 +109,8 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
 
     scene_2 = {
         "scene": 2,
-        "name": "The System Mechanism",
-        "timing": "4.8s - 9.8s (Frames 145 - 295)",
+        "name": "The System Mechanism (Explain the Logic)",
+        "timing": "7.0s - 14.5s (Frames 210 - 435)",
         "archetype": "GlossyToggleBoard",
         "title": s2_title,
         "titleColor": "#ffffff",
@@ -124,24 +124,24 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
             "component": "GlossyToggleBoard",
             "width": 620,
             "showCursor": True,
-            "cursorClickFrame": 180,
+            "cursorClickFrame": 260,
             "toggles": s2_items,
             "showFloorReflection": True,
             "reflectionOpacity": 0.35
         },
         "sfx": [
-            {"frame": 145, "type": "whoosh_deep", "volume": 0.30},
-            {"frame": 180, "type": "click", "volume": 0.28},
-            {"frame": 220, "type": "click", "volume": 0.28},
-            {"frame": 250, "type": "click", "volume": 0.28}
+            {"frame": 210, "type": "whoosh_deep", "volume": 0.30},
+            {"frame": 260, "type": "click", "volume": 0.28},
+            {"frame": 310, "type": "click", "volume": 0.28},
+            {"frame": 360, "type": "click", "volume": 0.28}
         ]
     }
 
-    # --- BEAT 3: THE TWIST & COMPARATIVE DUAL CURVE ---
+    # --- BEAT 3: THE TWIST & COMPARATIVE DUAL CURVE (EXPLAIN THE LOGIC) ---
     scene_3 = {
         "scene": 3,
-        "name": "The Comparative Breakthrough",
-        "timing": "9.8s - 16.8s (Frames 295 - 505)",
+        "name": "The Comparative Breakthrough (Logic Breakdown)",
+        "timing": "14.5s - 22.0s (Frames 435 - 660)",
         "archetype": "GlossyGlowGraph",
         "title": "OPTIMAL vs INVERTED" if not is_health else "SUNLIGHT vs DARKNESS",
         "titleColor": "#ffffff",
@@ -175,12 +175,12 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
             "reflectionOpacity": 0.38
         },
         "sfx": [
-            {"frame": 295, "type": "whoosh_sparkle", "volume": 0.32},
-            {"frame": 360, "type": "whoosh_fast", "volume": 0.28}
+            {"frame": 435, "type": "whoosh_sparkle", "volume": 0.32},
+            {"frame": 520, "type": "whoosh_fast", "volume": 0.28}
         ]
     }
 
-    # --- BEAT 4: THE ACTION PROTOCOL & SPOKEN CTA ---
+    # --- BEAT 4: THE ACTION PROTOCOL & HIGH-LEVERAGE SOLUTION (ZERO CTA) ---
     steps = [
         {"id": "step_1", "label": "AWARENESS"},
         {"id": "step_2", "label": "PAUSE"},
@@ -197,8 +197,8 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
 
     scene_4 = {
         "scene": 4,
-        "name": "The Action Protocol & Spoken CTA",
-        "timing": "16.8s - 24.0s (Frames 505 - 720)",
+        "name": "The High-Leverage Solution & Protocol",
+        "timing": "22.0s - 30.0s (Frames 660 - 900)",
         "archetype": "SteppedProgressionStairs",
         "title": "THE REWIRE PROTOCOL" if not is_health else "60-MINUTE PROTOCOL",
         "titleColor": "#ffffff",
@@ -216,10 +216,10 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
             "reflectionOpacity": 0.35
         },
         "sfx": [
-            {"frame": 505, "type": "whoosh_deep", "volume": 0.32},
-            {"frame": 540, "type": "click", "volume": 0.24},
-            {"frame": 580, "type": "click", "volume": 0.24},
-            {"frame": 620, "type": "whoosh_sparkle", "volume": 0.35}
+            {"frame": 660, "type": "whoosh_deep", "volume": 0.32},
+            {"frame": 710, "type": "click", "volume": 0.24},
+            {"frame": 760, "type": "click", "volume": 0.24},
+            {"frame": 820, "type": "whoosh_sparkle", "volume": 0.35}
         ]
     }
 
@@ -229,6 +229,7 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
         "artDirection": {
             "aesthetic": "10/10 Dark Obsidian Void & Wet-Floor Mirror Reflection",
             "canvasBackground": "#000000",
+            "narrativeStructure": "Introduce Problem > Explain the Logic > Give the Solution (25-35s runtime, ZERO CTA)",
             "typographyDirective": "Zero text walls; exactly 1-2 uppercase glowing focus words per scene",
             "captionsDirective": "Spoken dialogue handled 100% by AppleKineticCaptions in dark mode with neon glow",
             "antiPillDirective": "STRICT BAN on decorative pills, status badges, and diagnostic tags"

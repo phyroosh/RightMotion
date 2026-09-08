@@ -13,9 +13,11 @@ This document is the **authoritative specification** for any AI Agent (Antigravi
 > The AI Agent MUST autonomously execute the complete 4-step production workflow in that **SAME turn**:
 >
 > 1. **Step 1 — Script & Viral Metadata**:
->    - Formulate the 2-Beat Curiosity Gap voiceover script and viral metadata.
+>    - Formulate the script using the **3-Pillar Pure Information Architecture**: Introduce Problem > Explain the Logic > Deliver the Solution.
+>    - **Runtime**: Strict **25–35 seconds** (**70–100 words**, hard cap 105 words).
+>    - **STRICTLY NO CTA AT THE END!** Pure high-density information only. ZERO ending questions, ZERO passive pitches, ZERO comments requests.
 >    - **Mode B (Organic Growth)** is DEFAULT: strictly skip PDF hunting and omit the `[METADATA]` block. (Mode A product PDF search ONLY runs when `{meta}` is explicitly present).
->    - Enforce the Spoken Interactive Question CTA and generate a `[PINNED COMMENT]`.
+>    - Generate an authoritative `[PINNED COMMENT]` summarizing the core takeaway or protocol rule.
 > 2. **Step 2 — Professional After Effects Motion Design Planning (MANDATORY)**:
 >    - **Plan like a Senior After Effects / Cinema 4D Motion Design Artist before touching code!**
 >    - Run:
@@ -23,10 +25,10 @@ This document is the **authoritative specification** for any AI Agent (Antigravi
 >      python3 scripts/plan_motion_design.py --topic "<topic>" --script "<script>"
 >      ```
 >    - Formulate a scene-by-scene storyboard (Beats 1–4) enforcing the **10/10 Dark Glossy Reflection System**:
->      - **Scene 1 (Hook/Paradox)**: Upright glowing vector graph (`GlossyGlowGraph`) with starting tension/spike curve, glowing focus title, and downward wet-floor mirror reflection.
->      - **Scene 2 (Mechanism)**: Frosted glass switchboard (`GlossyToggleBoard`) with authentic glove pointer cursor (`public/assets/cursor_pointer.png`) clicking toggles to neon green, or 3D asset float (`PolishStickerFloat`).
->      - **Scene 3 (Twist / Comparative Shift)**: Dual-curve comparative graph (`GlossyGlowGraph`) contrasting Trap (Red) vs Optimal Rewire (Green).
->      - **Scene 4 (Action Protocol & CTA)**: Frosted glass staircase (`SteppedProgressionStairs`) with hopping radiant golden orb up to the Goal.
+>      - **Scene 1 (Hook/Paradox — Introduce the Problem)**: Upright glowing vector graph (`GlossyGlowGraph`) with starting tension/spike curve, glowing focus title, and downward wet-floor mirror reflection.
+>      - **Scene 2 (Mechanism — Explain the Logic)**: Frosted glass switchboard (`GlossyToggleBoard`) with authentic glove pointer cursor (`public/assets/cursor_pointer.png`) clicking toggles to neon green, or 3D asset float (`PolishStickerFloat`).
+>      - **Scene 3 (Twist / Comparative Shift — Logic Deep-Dive)**: Dual-curve comparative graph (`GlossyGlowGraph`) contrasting Trap (Red) vs Optimal Rewire (Green).
+>      - **Scene 4 (High-Leverage Solution & Protocol Resolution)**: Frosted glass staircase (`SteppedProgressionStairs`) with hopping radiant golden orb up to the Goal, or optimal resolution curve. (ZERO CTA).
 >    - **Strict Anti-Clutter Laws**: Exactly 1–2 uppercase glowing focus words per scene. ZERO small pills or diagnostic tags. Spoken words handled 100% by dark neon `AppleKineticCaptions`.
 > 3. **Step 3 — Clean Editorial Hero Illustration (When applicable)**:
 >    - Derive the prompt using `python3 scripts/generate_illustration_prompt.py --topic "<topic>" --script "<hook>"`.
@@ -36,7 +38,7 @@ This document is the **authoritative specification** for any AI Agent (Antigravi
 >      ```bash
 >      .venv/bin/python3 scripts/create_clip.py --name "<clip_name>" --topic "<topic>" --script "<script>" [--andrew] [--meta]
 >      ```
->    - This autonomously synthesizes neural audio (with 220ms CTA breath pause), transcribes Faster-Whisper timestamps, selects the tactical meme, scaffolds the 10/10 pure graphics components, and registers the 4K thumbnail.
+>    - This autonomously synthesizes neural audio (with fast-paced tempo and pause compression), transcribes Faster-Whisper timestamps, selects the tactical meme, scaffolds the 10/10 pure graphics components, and registers the 4K thumbnail.
 > 5. **Step 5 — Final Audit & Delivery**:
 >    - Verify the scaffolded composition and deliver the final viral title, thumbnail title, and pinned comment to the user.
 >
@@ -73,14 +75,14 @@ Every video script submitted to RightClips is tagged with one of four channel ni
 > **EXPLICIT {andrew} OPT-IN TRIGGER & RUNTIME ALLOCATION:**
 >
 > 1. **Solo Judy (DEFAULT without `{andrew}`)**:
->    - Strict **20–24s runtime** (**55–70 words**, hard cap 75 words).
->    - *Why*: YouTube Studio analytics prove 20–24s runtimes achieve **68–78%+ completion rates**, driving exponential Shorts feed recommendation.
+>    - Strict **25–35s runtime** (**70–100 words**, hard cap 105 words).
+>    - *Why*: Delivers the complete 3-pillar depth: Introduce Problem -> Explain the Logic -> Deliver the High-Leverage Solution with maximum clarity and retention.
 >    - Voice: `en-US-AvaMultilingualNeural` at `rate="+8%"`.
 >    - Framing: Screen-intimate waist-up cutouts (`baseHeight={1280 - 1550}`) in `public/` (`character_pointing.png`, `character_crossed.png`, `character_open.png`). (Far head-to-toe avatars are permanently archived).
 >
 > 2. **Judy & Andrew Duo (OPT-IN with `{andrew}` or `--andrew`)**:
 >    - Andrew is included **ONLY** when **`{andrew}`** or `--andrew` is explicitly present in the prompt or command. Never trigger Andrew automatically from raw script dialogue!
->    - Allowed **up to 40s runtime** (**75–115 words**, hard cap 120 words) with 140ms snappy inter-turn pause compression.
+>    - Allowed **up to 40s runtime** (**80–120 words**, hard cap 125 words) with 140ms snappy inter-turn pause compression.
 >    - Staging: `<DuoPresenter />` with turn-based speaker scaling (`1.08x` active, `0.92x` listening), top broadcast HUD badge (`top-[5.5%]`), and dual-color kinetic captions (Amber `#f59e0b` for Andrew, Electric Sky Blue `#38bdf8` / `#0071e3` for Judy).
 >    - Voice Profiles: Judy (`en-US-AvaMultilingualNeural`, `+8%`) & Andrew (`en-US-SteffanNeural`, `+7%`).
 >
@@ -96,13 +98,12 @@ Every video script submitted to RightClips is tagged with one of four channel ni
 
 ### 1. Mode B: Organic / Growth Video — DEFAULT (When '{meta}' is ABSENT):
 1. **STRICTLY SKIP ALL PDF SEARCH**: Do NOT inspect `Products/*.pdf`, do NOT extract product screenshots, and do NOT output a `[METADATA]` block inside the script.
-2. **Script Format**: Output the clean `[VOICEOVER]` text directly.
-3. **Mandatory Spoken Interactive Question CTA**:
-   - Voiceover must conclude with an open-ended, polarizing spoken question directed to the viewer (*"Be honest: what's the one thing you secretly care about, but pretend is no big deal? Tell me below."*).
-   - Permanent ban on passive CTA endings (*"Follow along for more breakdowns"* or *"Stick around"*).
-   - Enforce an intimate 200–250ms breath pause before the question.
-4. **Mandatory `[PINNED COMMENT]`**:
-   - Formulate an aligned provocative pinned comment to ignite viewer replies from 0 (e.g. *"Question for you: What's the one thing you secretly care deeply about, but pretend is no big deal? Be honest 👇"*).
+2. **Script Format**: Output the clean `[VOICEOVER]` text directly using the 3-Pillar Pure Information Architecture (Introduce Problem > Explain Logic > Deliver Solution).
+3. **Strict No-CTA & No-Ending-Question Directive**:
+   - The video must deliver 100% pure high-density information.
+   - **PERMANENT BAN ON ALL CTAs AND CLOSING QUESTIONS**: NEVER ask the audience a question at the end (*"Tell me below"*, *"What do you think?"*, *"Be honest: ..."* are strictly forbidden). NEVER ask viewers to follow, subscribe, or comment. The video must end crisply and decisively on the actionable solution itself.
+4. **Authoritative `[PINNED COMMENT]`**:
+   - Formulate an authoritative protocol rule or key takeaway summarizing the solution (e.g. *"The Protocol: Morning photons trigger an immediate cortisol surge that powers daytime energy, while setting a natural timer to release melatonin sixteen hours later."*).
 
 ### 2. Mode A: Standard (Product-Linked Video) — OPT-IN ONLY (When '{meta}' IS PRESENT):
 1. **Scan Product PDFs**: Inspect `Products/*.pdf` (e.g. `Photon.pdf`) via `python3 scripts/pdf_topic_matcher.py --topic "<topic>"`.
@@ -215,36 +216,36 @@ Every video script submitted to RightClips is tagged with one of four channel ni
 
 ---
 
-## ⚡ Rule 6: The 2-Beat Curiosity Gap Framework & Scriptwriting Standards
+## ⚡ Rule 6: The 3-Pillar Pure Information Architecture & Scriptwriting Standards
 
-Every short-form script follows the high-retention 4-beat structure:
+Every short-form script follows the high-retention 3-pillar information architecture (25–35s runtime, 70–100 words, **STRICTLY NO CTA**):
 
-1. **Hook (0–3s)**: High-velocity cognitive paradox, hypocrisy, or behavioral quirk (*"Why being single feels lonely, but dating leaves you exhausted"*).
-2. **Beat 1 — The Mechanism (4–8s)**: Names the psychological concept with scientific authority (*"Psychologists call this Identity Borrowing."*). Spoken cue is synchronized with on-screen `<ConceptKeywordSlam />`.
-3. **Beat 2 — The Trap / The Twist (9–15s)**: **Immediately raises the stakes** so curiosity peaks a second time (*"And here's the trap: your nervous system confuses anxiety with chemistry..."*). Never let curiosity die after naming the term!
-4. **Beat 3 — The Rewire Shift (16–20s)**: Sharp, memorable psychological rule (*"If you have to shrink yourself to keep them, that's not connection — it's nervous system panic."*).
-5. **Beat 4 — The Spoken Interactive CTA (21–24s)**: After an intimate 200–250ms breath pause, Judy asks a direct, open-ended question looking into the camera (*"Be honest: have you ever lost yourself trying to keep someone else happy? Tell me below."*).
+1. **Pillar 1 — Introduce the Problem (0–8s)**: High-velocity cognitive paradox, biological quirk, or behavioral hypocrisy (*"You wake up exhausted because your daily cortisol curve is completely inverted."*).
+2. **Pillar 2 — Explain the Logic (8–22s)**: Scientific mechanism, underlying biological/cognitive system, and why standard intuition fails or traps you (*"Cortisol isn't just stress—it is an energy-deploying hormone designed to unlock glucose and drive physical alertness. When you miss morning sunlight, your cortisol stays flat all day and surges late at night..."*).
+3. **Pillar 3 — Deliver the Solution (22–32s)**: Concrete, actionable high-leverage protocol or rewire shift that directly resolves the problem (*"The solution is getting direct outdoor sunlight into your eyes for ten to fifteen minutes within sixty minutes of waking. Morning photons trigger an immediate cortisol surge that powers daytime energy, while setting a natural timer to release melatonin sixteen hours later."*).
+4. **STRICT NO-CTA LAW**: The video ends decisively and crisply on the solution itself. **ZERO audience questions**, ZERO "tell me below", ZERO "comment below", ZERO follow/subscribe pitches.
 
 ### The "Comfort" Title Trap & Tier-1 Linguistic Filter:
 - ❌ **THE "COMFORT" TITLE TRAP BAN**: Never output comforting reassurances or optimistic platitudes (*"True relationships still exist..."*, *"When life feels unfair..."*, *"You are not alone"*). Impatient scrollers stop ONLY for cognitive tension, paradoxes, and uncomfortable truths (*"Why Social Media Convinced You Love Isn't Real"*, *"The Dating Illusion That's Exhausting Your Brain"*).
 - ❌ **TIER-1 AMERICAN LINGUISTIC FILTER**: Strictly enforce natural American English idioms. Ban unnatural literal phrasing like *"made it look untrue"* (replace with *"made it feel fake"*, *"lied to you"*, *"distorted reality"*).
 
 ### The 9 Core Psychological Archetypes (Mode B Classification):
-The scriptwriter autonomously categorizes uncurated topics into 9 proven psychological archetypes (62–68 words, 21–24s runtime) or synthesizes an exact 2-Beat curiosity gap script:
-1. **People-Pleasing & Boundaries**: Fawn Response Conditioning (*"Notice how saying yes to plans you dread always leaves you resenting the other person?..."*)
-2. **Comparison & Timelines**: Upward Social Anchoring (*"Notice how achieving your goals never stops you from feeling five years behind everyone else?..."*)
-3. **Fear of Trying & Casual Mask**: Anticipatory Self-Handicapping (*"Notice how you pretend not to care about the things you want most?..."*)
-4. **Dopamine & Screen Loops**: Dopamine Loop Hijacking (*"Ever close an app only to reopen it five seconds later without thinking?..."*)
-5. **Chronic Overthinking**: Threat Simulation Rumination (*"Why does your brain wait until your head hits the pillow to replay an awkward text?..."*)
-6. **Burnout & Freeze**: Autonomic Nervous System Freeze (*"Notice how resting on the couch doesn't recharge you when your mind is screaming with guilt?..."*)
-7. **Relationships & Attachment**: Anxious Attachment Mirroring (*"Why does dating leave you exhausted, but being alone feels unbearable?..."*)
-8. **Wealth & Hedonic Spending**: The Hedonic Treadmill Effect (*"Notice how earning more money never makes you feel financially secure?..."*)
-9. **Sleep & Biology**: The Cortisol Awakening Mismatch (*"Why do you wake up with a racing heart at three AM even when exhausted?..."*)
+The scriptwriter autonomously categorizes uncurated topics into 9 proven psychological archetypes (75–95 words, 25–35s runtime, pure Problem > Logic > Solution, ZERO CTA):
+1. **People-Pleasing & Boundaries**: Fawn Response Conditioning (*"Notice how saying yes to plans you dread always leaves you secretly resenting the other person?..."*) $\rightarrow$ 24-Hour Delay Rule.
+2. **Comparison & Timelines**: Upward Social Anchoring (*"Notice how achieving your goals never stops you from feeling five years behind everyone else?..."*) $\rightarrow$ Reverse Tracking Protocol.
+3. **Fear of Trying & Casual Mask**: Anticipatory Self-Handicapping (*"Notice how you pretend not to care about the things you secretly want most in life?..."*) $\rightarrow$ Radical Public Effort Protocol.
+4. **Dopamine & Screen Loops**: Dopamine Variable Reward Hijacking (*"Ever open your phone to check a quick message, only to lose forty-five minutes scrolling on autopilot?..."*) $\rightarrow$ Grayscale Display Friction Protocol.
+5. **Chronic Overthinking**: Threat Simulation Rumination (*"Why does your brain wait until your head hits the pillow to replay an awkward conversation from three years ago?..."*) $\rightarrow$ Physical Brain Dump Protocol.
+6. **Burnout & Freeze**: Autonomic Nervous System Freeze (*"Notice how lying on the couch scrolling doesn't recharge you when your mind is screaming with guilt?..."*) $\rightarrow$ Active Physiological Regulation Protocol.
+7. **Relationships & Attachment**: Anxious Attachment Mirroring (*"Why does modern dating leave you completely exhausted, yet being alone feels unbearable?..."*) $\rightarrow$ Nervous System Grounding Rule.
+8. **Wealth & Hedonic Spending**: The Hedonic Treadmill Effect (*"Notice how earning more money never makes you feel permanently financially secure?..."*) $\rightarrow$ 50% Reverse-Budget Protocol.
+9. **Sleep & Biology**: The Cortisol Awakening Mismatch (*"You wake up exhausted because your daily cortisol curve is completely inverted..."*) $\rightarrow$ 60-Minute Outdoor Sunlight Protocol.
 
 ### Banned AI Clichés & Sales Hype:
 - ❌ *"Here's the thing..."*, *"The truth is..."*, *"You're not lazy, you're..."*, *"What most people don't realize is..."*, *"The tricky part is..."*
 - ❌ *"masterpiece"*, *"life-changing"*, *"must-read"*, *"buy now"*, *"game-changer"*
 - ❌ Vague comfort topics (*"When life feels unfair"*, *"You are not alone"*). Use concrete quirks only!
+- ❌ Banned ending CTAs: *"tell me below"*, *"comment below"*, *"drop a comment"*, *"what do you think?"*, *"be honest:"*.
 
 ---
 

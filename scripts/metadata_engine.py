@@ -331,13 +331,13 @@ def generate_full_metadata(topic: str, niche: str = "self_improvement", script: 
     thumb_title, highlight_word, thumb_sub = synthesize_thumbnail_title(clean, niche)
     description = synthesize_rich_description(clean, niche, script)
     tags = synthesize_tags(clean, niche)
-    spoken_cta = synthesize_spoken_cta(clean, niche)
+    # Strict No-CTA Directive: Spoken voiceover is 100% pure high-density information (Problem > Logic > Solution)
+    spoken_cta = ""
     pill_prompt, pill_tag = synthesize_interactive_pill_text(clean, niche)
 
-    # If pinned_comment not passed, align it with the spoken question!
+    # If pinned_comment not passed, provide an authoritative protocol insight
     if not pinned_comment:
-        clean_question = spoken_cta.strip(". —").strip()
-        pinned_comment = f"{clean_question} 👇"
+        pinned_comment = f"The Protocol: Action precedes motivation. Shrink the initiation threshold to 2 minutes to break the kinetic barrier."
 
     return {
         "raw_topic": topic,
