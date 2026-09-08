@@ -1521,6 +1521,7 @@ async def main():
     parser.add_argument("--meme-mode", choices=["video", "frame"], default="video", help="Meme display mode (video card or still frame)")
     parser.add_argument("--sticker", default=None, help="Gen-Z meme reaction sticker ID (e.g. verne_turtle_shock) or 'none'")
     parser.add_argument("--no-sticker", action="store_true", help="Disable mid-video Gen-Z meme reaction stickers")
+    parser.add_argument("--no-meme", action="store_true", help="Disable the opening tactical retention meme")
     parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")

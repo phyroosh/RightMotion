@@ -709,3 +709,17 @@ export const TrueRelationshipsThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TheProcrastinationLoopThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="THE PROCRASTINATION TRAP"
+    highlightWord="PROCRASTINATION"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Procrastination"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
