@@ -25,10 +25,13 @@ This document is the **authoritative specification** for any AI Agent (Antigravi
 >      python3 scripts/plan_motion_design.py --topic "<topic>" --script "<script>"
 >      ```
 >    - Formulate a scene-by-scene storyboard (Beats 1–4) enforcing the **10/10 Dark Glossy Reflection System**:
+>      - **Mandatory Judy Intro Pop-Up**: For `{Self Improvement}` videos, Judy pops up waist-up at Frame 0 (0.0s – ~3.8s / Frames 0–110) with eye contact and downward glossy wet-floor reflection (`GlossyJudyIntro`), then gently glides out before Scene 2.
+>      - **Strict Anti-Repetition Law**: The 4 scenes in any video must each employ **distinct motion archetypes** from the 9-archetype library. Never repeat the same graphic twice in a single video.
+>      - **Fast-Paced yet Gentle Non-Linear Easing**: All vector graphs and motion elements must utilize cubic-bezier path trimming (`Easing.bezier(0.22, 1, 0.36, 1)`), gentle living wave micro-motion (`Math.sin`), and damped spring torque. Linear animations are permanently banned.
 >      - **Scene 1 (Hook/Paradox — Introduce the Problem)**: Upright glowing vector graph (`GlossyGlowGraph`) with starting tension/spike curve, glowing focus title, and downward wet-floor mirror reflection.
->      - **Scene 2 (Mechanism — Explain the Logic)**: Frosted glass switchboard (`GlossyToggleBoard`) with authentic glove pointer cursor (`public/assets/cursor_pointer.png`) clicking toggles to neon green, or 3D asset float (`PolishStickerFloat`).
->      - **Scene 3 (Twist / Comparative Shift — Logic Deep-Dive)**: Dual-curve comparative graph (`GlossyGlowGraph`) contrasting Trap (Red) vs Optimal Rewire (Green).
->      - **Scene 4 (High-Leverage Solution & Protocol Resolution)**: Frosted glass staircase (`SteppedProgressionStairs`) with hopping radiant golden orb up to the Goal, or optimal resolution curve. (ZERO CTA).
+>      - **Scene 2 (Mechanism — Explain the Logic)**: Tactile friction slider (`GlossyFrictionSlider`) dragged by authentic glove pointer cursor (`public/assets/cursor_pointer.png`), frosted glass switchboard (`GlossyToggleBoard`), or 3D asset float (`PolishStickerFloat`).
+>      - **Scene 3 (Twist / Comparative Shift — Logic Deep-Dive)**: Dynamic comparative balance see-saw (`GlossyBalanceScale`), dual-curve comparative graph (`GlossyGlowGraph`), or vertical comparative columns (`GlossyBarChart`).
+>      - **Scene 4 (High-Leverage Solution & Protocol Resolution)**: 360° circular progress gauge / chronograph (`GlossyRadialDial`), frosted glass staircase (`SteppedProgressionStairs`) with hopping radiant golden orb up to the Goal, or optimal resolution curve. (ZERO CTA).
 >    - **Strict Anti-Clutter Laws**: Exactly 1–2 uppercase glowing focus words per scene. ZERO small pills or diagnostic tags. Spoken words handled 100% by dark neon `AppleKineticCaptions`.
 > 3. **Step 3 — Clean Editorial Hero Illustration (When applicable)**:
 >    - Derive the prompt using `python3 scripts/generate_illustration_prompt.py --topic "<topic>" --script "<hook>"`.
@@ -204,11 +207,16 @@ Every video script submitted to RightClips is tagged with one of four channel ni
    - Exactly **1–2 uppercase words** glowing in 3D space with soft neon bloom (`text-shadow: 0 0 20px ...`).
    - Spoken dialogue is handled **100% by kinetic captions** (`<AppleKineticCaptions theme="dark" />`).
    - **PERMANENT BAN ON SMALL PILL BADGES**: Never render decorative status tags (`[LIVE REACTION]`, `[PARADOX]`, `[CRITICAL DIAGNOSTIC]`, `[COMMUNITY CHECK]`).
-3. **The 4 Flagship Motion Archetypes (`src/components/pure_graphics/`)**:
-   - **`<GlossyGlowGraph />`** (*Ref 1: Motivation vs Discipline*): Upright standing coordinate frame, single or dual comparative glowing Bezier curves (Green Optimal vs Red Inverted), pulsing beacon heads, area gradients, and floor reflections.
+3. **The 9 Motion Design Archetypes (`src/components/pure_graphics/`)**:
+   - **`<GlossyJudyIntro />`** (*Mandatory Intro Host Pop-Up*): Waist-up Judy cutout with atmospheric back-glow, downward glossy wet-floor mirror reflection, spring punch entrance, and non-linear cushioned slide-down exit.
+   - **`<GlossyGlowGraph />`** (*Ref 1: Dynamic Coordinate Graphs*): Upright standing coordinate frame, variable-speed cubic bezier path trimming, single spike or dual comparative curves (Green Optimal vs Red Inverted), radiating ripple rings on the beacon head, and floor reflection.
+   - **`<GlossyFrictionSlider />`** (*Ref 3: Tactile Friction Slider*): Frosted glass horizontal slider track clicked and dragged by the authentic cartoon glove pointer cursor (`public/assets/cursor_pointer.png`) from high friction to flow state.
+   - **`<GlossyBalanceScale />`** (*3D Comparative Balance See-Saw*): Dynamic see-saw comparing the Trap (Red) vs the Protocol (Green) with spring torque and weight settling physics.
+   - **`<GlossyBarChart />`** (*3D Frosted Glass Metric Columns*): Vertical glass columns with glowing gradient tops, staggered non-linear springs, live value tickers, and floor reflection.
+   - **`<GlossyRadialDial />`** (*360° Circular Telemetry Dial / Chronograph*): Circular gauge with animated glowing radial arc, digital center readout, and floor reflection. Ideal for time thresholds and countdown timers.
    - **`<GlossyToggleBoard />`** (*Ref 3: "SUCCESS" Switchboard*): Frosted glass panel with tactile iOS toggle switches that flip from grey to glowing emerald green, clicked by the authentic cartoon glove pointer cursor (`public/assets/cursor_pointer.png`).
    - **`<SteppedProgressionStairs />`** (*Ref 2: Plan -> Action -> Goal*): Ascending staircase of frosted glass step blocks with a radiant golden orb leaping dynamically between steps.
-   - **`<GlossyFeatureGrid />`** (*Ref 4: 3x3 Tile Grid*): Matrix of square frosted glass tiles popping in with sequential checkmark illuminates.
+   - **`<GlossyFeatureGrid />`** (*Ref 4: 3x3 Tile Grid*) & **`<PolishStickerFloat />`**: Matrix of square frosted glass tiles popping in with sequential checkmarks, or floating 3D perspective assets with smooth floating sine physics.
 4. **Authentic Tactile Cursor Integration (`<TactileCursorPointer />`)**:
    - Uses the permanent high-res glove cursor cutout in `public/assets/cursor_pointer.png` with natural click spring scale (`scale: 0.86`) and realistic drop shadow.
 5. **3D Floating Holographic Assets (`<PolishStickerFloat />`)**:

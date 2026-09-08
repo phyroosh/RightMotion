@@ -51,6 +51,8 @@ import { TheProcrastinationLoopComposition } from "./clips/the_procrastination_l
 import the_procrastination_loopTranscript from "./clips/the_procrastination_loop/transcript.json";
 import { TheCortisolInversionComposition } from "./clips/the_cortisol_inversion";
 import the_cortisol_inversionTranscript from "./clips/the_cortisol_inversion/transcript.json";
+import { CortisolEnergyEngineComposition } from "./clips/cortisol_energy_engine";
+import cortisol_energy_engineTranscript from "./clips/cortisol_energy_engine/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -80,6 +82,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  CortisolEnergyEngineThumbnail,
   TheCortisolInversionThumbnail,
   TheProcrastinationLoopThumbnail,
   TrueRelationshipsThumbnail,
@@ -179,6 +182,8 @@ export const RemotionRoot: React.FC = () => {
   const the_procrastination_loopDuration = calculateDurationInFrames(the_procrastination_loopTranscript as any[], fps);
   
   const the_cortisol_inversionDuration = calculateDurationInFrames(the_cortisol_inversionTranscript as any[], fps);
+  
+  const cortisol_energy_engineDuration = calculateDurationInFrames(cortisol_energy_engineTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -369,6 +374,16 @@ export const RemotionRoot: React.FC = () => {
         id="TheCortisolInversionVideo"
         component={TheCortisolInversionComposition}
         durationInFrames={the_cortisol_inversionDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="CortisolEnergyEngineVideo"
+        component={CortisolEnergyEngineComposition}
+        durationInFrames={cortisol_energy_engineDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -858,6 +873,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="TheCortisolInversionThumbnail"
         component={TheCortisolInversionThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="CortisolEnergyEngineThumbnail"
+        component={CortisolEnergyEngineThumbnail}
         width={1080}
         height={1920}
       />

@@ -1,5 +1,5 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 
 export interface GraphCurve {
   id: string;
@@ -161,14 +161,21 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
         {curves.map((curve) => {
           const curveRel = Math.max(0, frame - curve.startFrame);
           const duration = curve.durationFrames || 35;
+          // Non-linear variable speed path trimming: fast initial rise, gentle landing
           const drawProgress = interpolate(curveRel, [0, duration], [0, 1], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
+            easing: Easing.bezier(0.22, 1, 0.36, 1),
           });
 
           const pathLength = 1200;
           const dashOffset = (1 - drawProgress) * pathLength;
           const glow = curve.glowColor || curve.color;
+
+          // Gentle living wave micro-motion
+          const waveHover = drawProgress > 0.85 ? Math.sin((frame / fps) * 3 + curve.startFrame) * 2.5 : 0;
+          const rippleRadius = 10 + ((frame * 1.5) % 24);
+          const rippleOpacity = Math.max(0, 1 - ((frame * 1.5) % 24) / 24);
 
           return (
             <g key={curve.id}>
@@ -215,23 +222,37 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
                 }}
               />
 
-              {/* 4. Pulsing Beacon Head at Peak/Tip */}
+              {/* 4. Pulsing Beacon Head & Expanding Ripple Rings at Peak/Tip */}
               {curve.tipX !== undefined && curve.tipY !== undefined && drawProgress > 0.85 && (
                 <g>
+                  {/* Outer Radiating Ripple Ring */}
+                  {!isReflection && (
+                    <circle
+                      cx={curve.tipX}
+                      cy={curve.tipY + waveHover}
+                      r={rippleRadius}
+                      fill="none"
+                      stroke={curve.color}
+                      strokeWidth="1.5"
+                      opacity={rippleOpacity * 0.65}
+                    />
+                  )}
+                  {/* Ambient Beacon Glow */}
                   <circle
                     cx={curve.tipX}
-                    cy={curve.tipY}
+                    cy={curve.tipY + waveHover}
                     r={14 + Math.sin(frame * 0.2) * 3}
                     fill={glow}
-                    opacity={0.35}
+                    opacity={0.4}
                   />
+                  {/* Core White Hot Center */}
                   <circle
                     cx={curve.tipX}
-                    cy={curve.tipY}
-                    r="6"
+                    cy={curve.tipY + waveHover}
+                    r="6.5"
                     fill="#ffffff"
                     style={{
-                      filter: `drop-shadow(0 0 6px ${curve.color})`,
+                      filter: `drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 15px ${curve.color})`,
                     }}
                   />
                 </g>

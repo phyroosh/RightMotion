@@ -737,3 +737,17 @@ export const TheCortisolInversionThumbnail: React.FC = () => (
     extraBadge="CIRCADIAN"
   />
 );
+
+export const CortisolEnergyEngineThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="CORTISOL NOT JUST"
+    highlightWord="CORTISOL"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Cortisol Not"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);

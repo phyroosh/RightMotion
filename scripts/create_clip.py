@@ -601,6 +601,291 @@ def align_concepts(concepts, words_list, fps=30):
         })
     return aligned
 
+def generate_glossy_canvas_code(
+    pascal_name: str,
+    canvas_container_class: str,
+    motion_plan: dict,
+    s1_start: int,
+    s2_start: int,
+    s3_start: int,
+    total_frames: int,
+    meme_jsx: str = "",
+    sticker_jsx: str = "",
+) -> str:
+    s2_mid = max(s2_start + 45, s2_start + (s3_start - s2_start) // 2)
+    scene_bounds = [
+        (s1_start, s2_start),
+        (s2_start, s2_mid),
+        (s2_mid, s3_start),
+        (s3_start, total_frames),
+    ]
+
+    storyboard = motion_plan.get("storyboard", []) if motion_plan else []
+    default_archetypes = [
+        ("GlossyGlowGraph", "rgba(244, 63, 94, 0.18)", "THE PARADOX"),
+        ("GlossyFrictionSlider", "rgba(16, 185, 129, 0.20)", "THE MECHANISM"),
+        ("GlossyBalanceScale", "rgba(56, 189, 248, 0.18)", "THE BREAKTHROUGH"),
+        ("GlossyRadialDial", "rgba(251, 191, 36, 0.20)", "THE PROTOCOL"),
+    ]
+
+    scene_blocks = []
+    for idx in range(4):
+        start_f, end_f = scene_bounds[idx]
+        sc_data = storyboard[idx] if idx < len(storyboard) else {}
+        archetype = sc_data.get("archetype") or default_archetypes[idx][0]
+        glow_color = sc_data.get("lighting", {}).get("glowColor") or default_archetypes[idx][1]
+        title = sc_data.get("title") or default_archetypes[idx][2]
+        motion = sc_data.get("motion", {})
+        is_last = (idx == 3)
+        condition = f"frame >= {start_f}" if is_last else f"frame >= {start_f} && frame < {end_f}"
+
+        if archetype == "GlossyGlowGraph":
+            if motion.get("curves") or motion.get("type") == "Dual Comparative Curves (Reference 1 Style)":
+                curves_code = f"""curves={{[
+                {{
+                  id: "optimal_curve",
+                  color: "#10b981",
+                  glowColor: "#10b981",
+                  startFrame: {start_f + 10},
+                  durationFrames: 45,
+                  showArrow: true,
+                  pathD: "M 100 320 C 180 140, 260 110, 340 130 C 440 160, 500 280, 550 300",
+                  areaD: "M 100 340 L 100 320 C 180 140, 260 110, 340 130 C 440 160, 500 280, 550 300 L 550 340 Z",
+                  tipX: 550,
+                  tipY: 300,
+                }},
+                {{
+                  id: "trap_curve",
+                  color: "#f43f5e",
+                  glowColor: "#f43f5e",
+                  startFrame: {start_f + 25},
+                  durationFrames: 50,
+                  showArrow: true,
+                  pathD: "M 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90",
+                  areaD: "M 100 340 L 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90 L 550 340 Z",
+                  tipX: 550,
+                  tipY: 90,
+                }},
+              ]}}"""
+            else:
+                c_col = motion.get("curveColor", "#f43f5e")
+                curves_code = f"""curves={{[
+                {{
+                  id: "spike_curve",
+                  color: "{c_col}",
+                  glowColor: "{c_col}",
+                  startFrame: {start_f + 15},
+                  durationFrames: 50,
+                  showArrow: true,
+                  pathD: "M 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90",
+                  areaD: "M 100 340 L 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90 L 550 340 Z",
+                  tipX: 550,
+                  tipY: 90,
+                }},
+              ]}}"""
+
+            comp_code = f"""<GlossyGlowGraph
+              title="{title}"
+              titleColor="#ffffff"
+              entranceFrame={{{start_f}}}
+              yLabel="INTENSITY"
+              xLabels={{["START", "MID-DAY", "EVENING", "PEAK"]}}
+              showFloorReflection={{true}}
+              reflectionOpacity={{0.36}}
+              {curves_code}
+              width={{780}}
+              height={{440}}
+            />"""
+
+        elif archetype == "GlossyFrictionSlider":
+            s_lbl = motion.get("startLabel", "LETHARGY")
+            e_lbl = motion.get("endLabel", "PHYSICAL DRIVE")
+            s_pct = motion.get("startPercent", 15)
+            e_pct = motion.get("endPercent", 94)
+            acc = motion.get("accentColor", "#10b981")
+            comp_code = f"""<GlossyFrictionSlider
+              title="{title}"
+              titleColor="#ffffff"
+              startLabel="{s_lbl}"
+              endLabel="{e_lbl}"
+              startPercent={{{s_pct}}}
+              endPercent={{{e_pct}}}
+              accentColor="{acc}"
+              glowColor="{glow_color}"
+              startFrame={{{start_f}}}
+              dragDurationFrames={{50}}
+              width={{680}}
+              showCursor={{true}}
+              showFloorReflection={{true}}
+              reflectionOpacity={{0.36}}
+            />"""
+
+        elif archetype == "GlossyBalanceScale":
+            l_lbl = motion.get("leftLabel", "THE TRAP")
+            l_sub = motion.get("leftSub", "Comfort & Freeze")
+            r_lbl = motion.get("rightLabel", "THE SOLUTION")
+            r_sub = motion.get("rightSub", "Freedom & Focus")
+            comp_code = f"""<GlossyBalanceScale
+              title="{title}"
+              titleColor="#ffffff"
+              leftLabel="{l_lbl}"
+              leftSub="{l_sub}"
+              leftColor="#f43f5e"
+              rightLabel="{r_lbl}"
+              rightSub="{r_sub}"
+              rightColor="#10b981"
+              winner="right"
+              startFrame={{{start_f}}}
+              width={{680}}
+              height={{420}}
+              glowColor="{glow_color}"
+              showFloorReflection={{true}}
+              reflectionOpacity={{0.36}}
+            />"""
+
+        elif archetype == "GlossyBarChart":
+            comp_code = f"""<GlossyBarChart
+              title="{title}"
+              titleColor="#ffffff"
+              startFrame={{{start_f}}}
+              width={{680}}
+              height={{440}}
+              bars={{[
+                {{ id: "b1", label: "INVERTED TRAP", value: 25, isOptimal: false, color: "#f43f5e" }},
+                {{ id: "b2", label: "OPTIMAL REWIRE", value: 92, isOptimal: true, color: "#10b981" }},
+              ]}}
+              glowColor="{glow_color}"
+              showFloorReflection={{true}}
+              reflectionOpacity={{0.36}}
+            />"""
+
+        elif archetype == "GlossyRadialDial":
+            t_pct = motion.get("targetPercent", 85)
+            val_t = motion.get("valueText", "16 HRS")
+            lbl_t = motion.get("labelText", "MELATONIN TIMER")
+            acc = motion.get("accentColor", "#38bdf8")
+            comp_code = f"""<GlossyRadialDial
+              title="{title}"
+              titleColor="#ffffff"
+              startFrame={{{start_f}}}
+              targetPercent={{{t_pct}}}
+              valueText="{val_t}"
+              labelText="{lbl_t}"
+              accentColor="{acc}"
+              glowColor="{glow_color}"
+              size={{440}}
+              showFloorReflection={{true}}
+              reflectionOpacity={{0.36}}
+            />"""
+
+        elif archetype == "GlossyToggleBoard":
+            comp_code = f"""<GlossyToggleBoard
+              title="{title}"
+              titleColor="#ffffff"
+              entranceFrame={{{start_f}}}
+              showFloorReflection={{true}}
+              reflectionOpacity={{0.35}}
+              items={{[
+                {{ id: "t1", label: "TRIGGER IDENTIFIED", activeFrame: {start_f + 20}, activeColor: "#10b981" }},
+                {{ id: "t2", label: "KINETIC SHIFT", activeFrame: {start_f + 48}, activeColor: "#10b981" }},
+              ]}}
+              width={{620}}
+            />"""
+
+        elif archetype == "SteppedProgressionStairs":
+            comp_code = f"""<SteppedProgressionStairs
+              title="{title}"
+              titleColor="#ffffff"
+              orbColor="#fbbf24"
+              startFrame={{{start_f}}}
+              stepDurationFrames={{28}}
+              showFloorReflection={{true}}
+              reflectionOpacity={{0.35}}
+              width={{700}}
+              height={{460}}
+              steps={{[
+                {{ id: "step_1", label: "AWARENESS" }},
+                {{ id: "step_2", label: "PAUSE" }},
+                {{ id: "step_3", label: "REWIRE" }},
+                {{ id: "step_4", label: "ACTION", isGoal: true }},
+              ]}}
+            />"""
+
+        elif archetype == "GlossyFeatureGrid":
+            comp_code = f"""<GlossyFeatureGrid
+              title="{title}"
+              titleColor="#ffffff"
+              entranceFrame={{{start_f}}}
+              showFloorReflection={{true}}
+              reflectionOpacity={{0.35}}
+              items={{[
+                {{ id: "f1", label: "OBSERVE", icon: "zap", activeFrame: {start_f + 15} }},
+                {{ id: "f2", label: "REGULATE", icon: "shield", activeFrame: {start_f + 35} }},
+                {{ id: "f3", label: "TRANSCEND", icon: "target", activeFrame: {start_f + 55} }},
+              ]}}
+              width={{640}}
+            />"""
+
+        else: # PolishStickerFloat
+            comp_code = f"""<PolishStickerFloat
+              title="{title}"
+              titleColor="#ffffff"
+              entranceFrame={{{start_f}}}
+              imageSrc="/assets/character_pointing.png"
+              showFloorReflection={{true}}
+              reflectionOpacity={{0.35}}
+              width={{520}}
+              height={{420}}
+            />"""
+
+        scene_blocks.append(f"""      {{/* ======================================================== */}}
+      {{/* SCENE {idx + 1}: {title} (Frames {start_f} - {end_f if not is_last else total_frames}) */}}
+      {{/* ======================================================== */}}
+      {{{condition} && (
+        <div className="w-full h-full flex flex-col items-center justify-center">
+          <GlossyFloorStage glowColor="{glow_color}" glowCenterY={{42}} showReflection={{false}}>
+            {comp_code}
+          </GlossyFloorStage>
+        </div>
+      )}}""")
+
+    scenes_str = "\n\n".join(scene_blocks)
+
+    return f"""import React from "react";
+import {{ useCurrentFrame }} from "remotion";
+import {{
+  GlossyFloorStage,
+  GlossyGlowGraph,
+  GlossyBarChart,
+  GlossyRadialDial,
+  GlossyBalanceScale,
+  GlossyFrictionSlider,
+  GlossyToggleBoard,
+  SteppedProgressionStairs,
+  GlossyFeatureGrid,
+  PolishStickerFloat,
+}} from "../../components/pure_graphics";
+import {{ TacticalMemeCard }} from "../../components/TacticalMemeCard";
+import {{ WordTimestamp }} from "../../types";
+
+interface CanvasProps {{
+  transcript: WordTimestamp[];
+}}
+
+export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
+  const frame = useCurrentFrame();
+
+  return (
+    <div className="{canvas_container_class}">
+{scenes_str}
+
+      {meme_jsx}
+      {sticker_jsx}
+    </div>
+  );
+}};
+"""
+
 def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False, meme_meta: dict = None, sticker_meta: dict = None, niche: str = None):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
@@ -801,41 +1086,51 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
   );
 }};
 """
-    else:
+    elif niche in ("finance", "health"):
         pres_code = f"""import React from "react";
-import {{ spring, useCurrentFrame, useVideoConfig }} from "remotion";
-import {{ CharacterKeyframeAnimator, KeyframePoint }} from "../../components/CharacterKeyframeAnimator";
-import {{ Zap }} from "lucide-react";
 
 interface PresenterProps {{
   currentMs: number;
 }}
 
-export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}) => {{
-  const frame = useCurrentFrame();
-  const {{ fps }} = useVideoConfig();
+export const {pascal_name}Presenter: React.FC<PresenterProps> = () => null;
+"""
+    else:
+        intro_title = "THE PARADOX"
+        intro_glow = "rgba(244, 63, 94, 0.22)"
+        intro_exit = 110
+        intro_pose = "character_pointing.png"
+        if motion_plan and "judyIntro" in motion_plan:
+            ji = motion_plan["judyIntro"]
+            intro_title = ji.get("title", intro_title)
+            intro_glow = ji.get("glowColor", intro_glow)
+            intro_exit = ji.get("exitFrame", 110)
+            intro_pose = ji.get("pose", intro_pose)
+        elif concept_term:
+            intro_title = concept_term.split()[0].upper()
 
-  const keyframes: KeyframePoint[] = [
-    {{ timeMs: 0, pose: "fullbody_pointing", scale: 1.0, y: 80, rotate: -1, opacity: 0 }},
-    {{ timeMs: 350, pose: "fullbody_pointing", scale: 1.0, y: 0, rotate: 0, opacity: 1 }},
-    {{ timeMs: {intro_ms - 600}, pose: "fullbody_pointing", scale: 1.03, y: -4, rotate: 0, opacity: 1 }},
-    {{ timeMs: {intro_ms}, pose: "fullbody_pointing", scale: 0.96, y: 90, rotate: 1, opacity: 0 }},
-    {{ timeMs: {outro_ms}, pose: "fullbody_open", scale: 0.96, y: 80, rotate: -1, opacity: 0 }},
-    {{ timeMs: {outro_ms + 400}, pose: "fullbody_open", scale: 1.0, y: 0, rotate: 0, opacity: 1 }},
-    {{ timeMs: {round(duration_sec * 1000)}, pose: "fullbody_open", scale: 1.04, y: -6, rotate: 0, opacity: 1 }},
-  ];
+        pres_code = f"""import React from "react";
+import {{ GlossyJudyIntro }} from "../../components/pure_graphics";
 
-  const isIntro = {"false" if illustration_path else f"currentMs >= 0 && currentMs < {intro_ms}"};
-  const isFinale = currentMs >= {outro_ms};
-  const isPresenterActive = isIntro || isFinale;
+interface PresenterProps {{
+  currentMs: number;
+}}
 
-  const badgeSpring = spring({{ frame, fps, config: {{ damping: 18, mass: 0.8, stiffness: 110 }} }});
-  if (!isPresenterActive) return null;
-
+/**
+ * 🎬 {pascal_name}Presenter
+ * Mounts the mandatory Judy Intro pop-up during the opening problem hook (0.0s - 3.8s / Frames 0 - {intro_exit}).
+ * Backed by an atmospheric radial aura and wet-floor mirror reflection, then gently glides out.
+ */
+export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
   return (
-    <div className="absolute inset-0 pointer-events-none z-30 flex flex-col items-center justify-end overflow-hidden">
-      <CharacterKeyframeAnimator keyframes={{keyframes}} currentMs={{currentMs}} baseHeight={{1550}} />
-    </div>
+    <GlossyJudyIntro
+      startFrame={{0}}
+      exitFrame={{{intro_exit}}}
+      glowColor="{intro_glow}"
+      pose="{intro_pose}"
+      reflectionOpacity={{0.36}}
+      baseHeight={{1040}}
+    />
   );
 }};
 """
@@ -847,11 +1142,17 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
     # Build Scene 2 points JSX
     s2_points_jsx = []
     s2_spring_defs = []
-    sfx_cues = [
-        {"frame": 0, "type": "whoosh_deep", "volume": 0.32},
-        {"frame": f_c1_cutout, "type": "whoosh_fast", "volume": 0.32},
-        {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
-    ]
+    sfx_cues = []
+    if motion_plan and "storyboard" in motion_plan:
+        for sc in motion_plan["storyboard"]:
+            for cue in sc.get("sfx", []):
+                sfx_cues.append(cue)
+    if not sfx_cues:
+        sfx_cues = [
+            {"frame": 0, "type": "whoosh_deep", "volume": 0.32},
+            {"frame": f_c1_cutout, "type": "whoosh_fast", "volume": 0.32},
+            {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
+        ]
 
     # 4a. Tactical Meme Integration (< 2.5s Strict Retention Cap, Muted, 1.4x Fast-Forward)
     meme_jsx = ""
@@ -1179,214 +1480,18 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         else "absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none"
     )
 
-    if niche == "self_improvement" and not product_meta:
-        # High-fashion cinematic editorial layout matching reference video (bare canvas, serif typography, visual props, stamps, loop arrows)
-        h_words = c1_hook_text.split()
-        if len(h_words) > 4:
-            s1_lead = " ".join(h_words[:3])
-            s1_focus = " ".join(h_words[3:6])
-            s1_sub = " ".join(h_words[6:])
-        else:
-            s1_lead = "Notice how"
-            s1_focus = c1_hook_text
-            s1_sub = ""
-
-        c_term_first = concept_term.split()[0] if concept_term else "PARADOX"
-        lead_match = re.search(r"(?:psychologists?|scientists?|doctors?|researchers?|chronobiologists?|biologists?|neuroscientists?|economists?)\s+call\s+this", script_text, re.IGNORECASE)
-        concept_lead_in = lead_match.group(0).capitalize() if lead_match else "Psychologists call this"
-
-        s2_editorial_scenes = []
-        if len(s2_items) > 0:
-            pt1 = s2_items[0]
-            clean_pt1 = re.sub(r"^(\d+[\.\)]\s*|[-*]\s*)", "", pt1["text"]).strip()
-            parts1 = clean_pt1.split(":", 1) if ":" in clean_pt1 else [clean_pt1]
-            t1 = parts1[0].strip()
-            d1 = parts1[1].strip() if len(parts1) > 1 else ""
-            s2_p1_start = max(pt1["startFrame"], concept_exit)
-            s2_p1_end = s2_items[1]["startFrame"] if len(s2_items) > 1 else s3_start
-            
-            s2_editorial_scenes.append(f"""
-      {{/* SCENE 2B: THE FIRST MECHANISM (Frames {s2_p1_start} - {s2_p1_end}) */}}
-      {{frame >= {s2_p1_start} && frame < {s2_p1_end} && (
-        <div className="w-full h-full flex flex-col items-center justify-center relative">
-          <div className="absolute top-[12%] inset-x-0 px-8 flex justify-center">
-            <EditorialTypographyScene
-              ghostEcho="MECHANISM"
-              leadIn="The hidden pattern:"
-              focusWord="{t1}"
-              subline="{d1}"
-              focusStyle="serif_bold"
-              colorTheme="charcoal"
-              entranceFrame={{{s2_p1_start}}}
-              focusWordDelay={{10}}
-              sublineDelay={{22}}
-              showUnderline
-            />
-          </div>
-
-          <div className="absolute top-[44%] inset-x-0 flex justify-center">
-            <VisualPropCard
-              cutoutId="{solution_cutout or 'hyperrealistic_3d_glowing_brain'}"
-              width={{560}}
-              height={{420}}
-              entranceFrame={{{s2_p1_start + 8}}}
-              ghostEcho="{c_term_first}"
-              stampText="NEURAL SHIFT"
-              stampSubtext="SUBSTRATE"
-              stampFrame={{{s2_p1_start + 45}}}
-              stampTheme="verified_blue"
-            />
-          </div>
-        </div>
-      )}}""")
-
-        if len(s2_items) > 1:
-            pt2 = s2_items[1]
-            clean_pt2 = re.sub(r"^(\d+[\.\)]\s*|[-*]\s*)", "", pt2["text"]).strip()
-            parts2 = clean_pt2.split(":", 1) if ":" in clean_pt2 else [clean_pt2]
-            t2 = parts2[0].strip()
-            d2 = parts2[1].strip() if len(parts2) > 1 else ""
-            s2_p2_start = pt2["startFrame"]
-            s2_editorial_scenes.append(f"""
-      {{/* SCENE 2C: THE REWIRE TRUTH (Frames {s2_p2_start} - {s3_start}) */}}
-      {{frame >= {s2_p2_start} && frame < {s3_start} && (
-        <div className="w-full h-full flex flex-col items-center justify-center relative">
-          <div className="absolute top-[26%] inset-x-0 px-8 flex flex-col items-center justify-center">
-            <EditorialTypographyScene
-              ghostEcho="TRUTH"
-              leadIn="The psychological rule:"
-              focusWord="{t2}"
-              subline="{d2}"
-              focusStyle="serif_italic"
-              colorTheme="rose"
-              entranceFrame={{{s2_p2_start}}}
-              focusWordDelay={{10}}
-              sublineDelay={{22}}
-              showUnderline
-              arrowPreset="loop_down"
-            />
-          </div>
-        </div>
-      )}}""")
-
-        s2_editorial_jsx = "\n".join(s2_editorial_scenes)
-
-        s3_q_words = s3_c1["text"].split()
-        if len(s3_q_words) > 4:
-            s3_lead = " ".join(s3_q_words[:2])
-            s3_focus = " ".join(s3_q_words[2:5])
-            s3_sub = " ".join(s3_q_words[5:])
-        else:
-            s3_lead = "Be honest:"
-            s3_focus = s3_c1["text"]
-            s3_sub = ""
-
-        prop_attr = f'imageSrc="{illustration_path}"' if illustration_path else f'cutoutId="{problem_cutout}"'
-
-        canvas_code = f"""import React from "react";
-import {{ useCurrentFrame, useVideoConfig }} from "remotion";
-import {{
-  GlossyFloorStage,
-  GlossyGlowGraph,
-  GlossyToggleBoard,
-  SteppedProgressionStairs,
-  PolishStickerFloat,
-}} from "../../components/pure_graphics";
-import {{ TacticalMemeCard }} from "../../components/TacticalMemeCard";
-import {{ WordTimestamp }} from "../../types";
-
-interface CanvasProps {{
-  transcript: WordTimestamp[];
-}}
-
-export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
-  const frame = useCurrentFrame();
-
-  return (
-    <div className="{canvas_container_class}">
-      {{/* ======================================================== */}}
-      {{/* SCENE 1: THE ROOT HOOK GRAPH (Frames {s1_start} - {s2_start}) */}}
-      {{/* ======================================================== */}}
-      {{frame >= {s1_start} && frame < {s2_start} && (
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <GlossyFloorStage glowColor="rgba(244, 63, 94, 0.16)">
-            <GlossyGlowGraph
-              title="{c_term_first}"
-              titleColor="#ffffff"
-              entranceFrame={{{s1_start}}}
-              showFloorReflection={{true}}
-              curves={[
-                {{
-                  id: "hook_curve",
-                  color: "#f43f5e",
-                  startFrame: {s1_start + 10},
-                  durationFrames: 45,
-                  showArrow: true,
-                  pathD: "M 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90",
-                  areaD: "M 100 340 L 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90 L 550 340 Z",
-                  tipX: 550,
-                  tipY: 90,
-                }}
-              ]}
-              width={{780}}
-              height={{440}}
-            />
-          </GlossyFloorStage>
-        </div>
-      )}}
-
-      {{/* ======================================================== */}}
-      {{/* SCENE 2: COGNITIVE MECHANISM SWITCHBOARD (Frames {concept_entrance} - {s3_start}) */}}
-      {{/* ======================================================== */}}
-      {{frame >= {concept_entrance} && frame < {s3_start} && (
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <GlossyFloorStage glowColor="rgba(16, 185, 129, 0.20)">
-            <GlossyToggleBoard
-              title="{concept_term.upper() if concept_term else 'THE MECHANISM'}"
-              titleColor="#ffffff"
-              entranceFrame={{{concept_entrance}}}
-              showFloorReflection={{true}}
-              items={[
-                {{ id: "mech_1", label: "{t1.upper() if len(s2_items) > 0 else 'CORE PATTERN'}", activeFrame: {concept_entrance + 20}, activeColor: "#10b981" }},
-                {{ id: "mech_2", label: "{t2.upper() if len(s2_items) > 1 else 'PSYCHOLOGICAL SHIFT'}", activeFrame: {concept_entrance + 50}, activeColor: "#10b981" }},
-              ]}
-              width={{620}}
-            />
-          </GlossyFloorStage>
-        </div>
-      )}}
-
-      {{/* ======================================================== */}}
-      {{/* SCENE 3: ACTION PROTOCOL STAIRS (Frames {s3_start}+) */}}
-      {{/* ======================================================== */}}
-      {{frame >= {s3_start} && (
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <GlossyFloorStage glowColor="rgba(251, 191, 36, 0.20)">
-            <SteppedProgressionStairs
-              title="{s3_lead.upper()}"
-              titleColor="#ffffff"
-              orbColor="#fbbf24"
-              startFrame={{{s3_start}}}
-              stepDurationFrames={{30}}
-              showFloorReflection={{true}}
-              width={{700}}
-              height={{460}}
-              steps={[
-                {{ id: "step_1", label: "AWARENESS" }},
-                {{ id: "step_2", label: "PAUSE" }},
-                {{ id: "step_3", label: "REWIRE" }},
-                {{ id: "step_4", label: "ACTION", isGoal: true }},
-              ]}
-            />
-          </GlossyFloorStage>
-        </div>
-      )}}
-
-      {meme_jsx}
-    </div>
-  );
-}};
-"""
+    if not product_meta:
+        canvas_code = generate_glossy_canvas_code(
+            pascal_name=pascal_name,
+            canvas_container_class=canvas_container_class,
+            motion_plan=motion_plan,
+            s1_start=s1_start,
+            s2_start=s2_start,
+            s3_start=s3_start,
+            total_frames=total_frames,
+            meme_jsx=meme_jsx,
+            sticker_jsx=sticker_jsx,
+        )
     else:
         canvas_code = f"""import React from "react";
 import {{ useCurrentFrame, useVideoConfig, spring, interpolate }} from "remotion";

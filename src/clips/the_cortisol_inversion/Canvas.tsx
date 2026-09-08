@@ -1,11 +1,11 @@
 import React from "react";
-import { useCurrentFrame, useVideoConfig } from "remotion";
+import { useCurrentFrame } from "remotion";
 import {
   GlossyFloorStage,
   GlossyGlowGraph,
-  GlossyToggleBoard,
-  SteppedProgressionStairs,
-  PolishStickerFloat,
+  GlossyFrictionSlider,
+  GlossyBalanceScale,
+  GlossyRadialDial,
 } from "../../components/pure_graphics";
 import { WordTimestamp } from "../../types";
 
@@ -19,12 +19,12 @@ export const TheCortisolInversionCanvas: React.FC<CanvasProps> = () => {
   return (
     <div className="absolute inset-0 w-full h-full select-none">
       {/* ======================================================== */}
-      {/* SCENE 1: THE INVERTED CURVE PARADOX (Frames 0 - 145 / 0-4.8s) */}
+      {/* SCENE 1: THE INVERTED CURVE PARADOX (Frames 0 - 150 / 0-5.0s) */}
       {/* ======================================================== */}
-      {frame >= 0 && frame < 145 && (
+      {frame >= 0 && frame < 150 && (
         <div className="w-full h-full flex flex-col items-center justify-center">
           <GlossyFloorStage
-            glowColor="rgba(244, 63, 94, 0.16)"
+            glowColor="rgba(244, 63, 94, 0.18)"
             glowCenterY={42}
             showReflection={false}
           >
@@ -41,11 +41,13 @@ export const TheCortisolInversionCanvas: React.FC<CanvasProps> = () => {
                   id: "inverted_spike",
                   color: "#f43f5e",
                   glowColor: "#f43f5e",
-                  startFrame: 15,
-                  durationFrames: 50,
+                  startFrame: 20,
+                  durationFrames: 55,
                   showArrow: true,
-                  pathD: "M 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90",
-                  areaD: "M 100 340 L 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90 L 550 340 Z",
+                  pathD:
+                    "M 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90",
+                  areaD:
+                    "M 100 340 L 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90 L 550 340 Z",
                   tipX: 550,
                   tipY: 90,
                 },
@@ -58,131 +60,88 @@ export const TheCortisolInversionCanvas: React.FC<CanvasProps> = () => {
       )}
 
       {/* ======================================================== */}
-      {/* SCENE 2: ENERGY DEPLOYMENT SWITCHBOARD (Frames 145 - 295 / 4.8-9.8s) */}
+      {/* SCENE 2: TACTILE FRICTION SLIDER (Frames 150 - 300 / 5.0-10.0s) */}
       {/* ======================================================== */}
-      {frame >= 145 && frame < 295 && (
+      {frame >= 150 && frame < 300 && (
         <div className="w-full h-full flex flex-col items-center justify-center">
           <GlossyFloorStage
             glowColor="rgba(16, 185, 129, 0.20)"
             glowCenterY={42}
             showReflection={false}
           >
-            <GlossyToggleBoard
+            <GlossyFrictionSlider
               title="ENERGY DEPLOYMENT"
               titleColor="#ffffff"
-              headerBg="rgba(16, 185, 129, 0.28)"
-              entranceFrame={145}
+              startLabel="LETHARGY"
+              endLabel="PHYSICAL DRIVE"
+              startPercent={18}
+              endPercent={94}
+              accentColor="#10b981"
+              glowColor="rgba(16, 185, 129, 0.22)"
+              startFrame={150}
+              dragDurationFrames={50}
+              width={660}
               showCursor={true}
-              cursorTargetIndex={0}
-              cursorClickFrame={180}
               showFloorReflection={true}
-              reflectionOpacity={0.34}
-              items={[
-                {
-                  id: "glucose",
-                  label: "GLUCOSE RELEASE",
-                  activeFrame: 180,
-                  activeColor: "#10b981",
-                },
-                {
-                  id: "drive",
-                  label: "PHYSICAL DRIVE",
-                  activeFrame: 220,
-                  activeColor: "#10b981",
-                },
-                {
-                  id: "wakefulness",
-                  label: "CELLULAR ENERGY",
-                  activeFrame: 250,
-                  activeColor: "#10b981",
-                },
-              ]}
-              width={580}
+              reflectionOpacity={0.35}
             />
           </GlossyFloorStage>
         </div>
       )}
 
       {/* ======================================================== */}
-      {/* SCENE 3: SUNLIGHT VS DARKNESS COMPARATIVE GRAPH (Frames 295 - 505 / 9.8-16.8s) */}
+      {/* SCENE 3: COMPARATIVE BALANCE SCALE (Frames 300 - 470 / 10.0-15.6s) */}
       {/* ======================================================== */}
-      {frame >= 295 && frame < 505 && (
+      {frame >= 300 && frame < 470 && (
         <div className="w-full h-full flex flex-col items-center justify-center">
           <GlossyFloorStage
-            glowColor="rgba(56, 189, 248, 0.16)"
+            glowColor="rgba(56, 189, 248, 0.18)"
             glowCenterY={42}
             showReflection={false}
           >
-            <GlossyGlowGraph
-              title="SUNLIGHT vs DARKNESS"
+            <GlossyBalanceScale
+              title="THE CIRCADIAN SHIFT"
               titleColor="#ffffff"
-              entranceFrame={295}
-              yLabel="CORTISOL SURGE"
-              xLabels={["8 AM", "12 PM", "6 PM", "12 AM"]}
+              leftLabel="MISS MORNING LIGHT"
+              leftSub="Flatlined Cortisol"
+              leftColor="#f43f5e"
+              rightLabel="EARLY PHOTONS"
+              rightSub="Optimal Morning Peak"
+              rightColor="#10b981"
+              winner="right"
+              startFrame={300}
+              width={680}
+              height={420}
+              glowColor="rgba(56, 189, 248, 0.20)"
               showFloorReflection={true}
               reflectionOpacity={0.36}
-              curves={[
-                {
-                  id: "optimal",
-                  label: "OPTIMAL (SUNLIGHT)",
-                  color: "#10b981",
-                  glowColor: "#10b981",
-                  startFrame: 300,
-                  durationFrames: 45,
-                  showArrow: true,
-                  pathD: "M 100 130 C 140 80, 200 75, 270 140 C 360 220, 460 300, 550 320",
-                  areaD: "M 100 340 L 100 130 C 140 80, 200 75, 270 140 C 360 220, 460 300, 550 320 L 550 340 Z",
-                  tipX: 200,
-                  tipY: 75,
-                },
-                {
-                  id: "inverted",
-                  label: "INVERTED (NO LIGHT)",
-                  color: "#f43f5e",
-                  glowColor: "#f43f5e",
-                  startFrame: 360,
-                  durationFrames: 45,
-                  showArrow: true,
-                  pathD: "M 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 160, 550 110",
-                  areaD: "M 100 340 L 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 160, 550 110 L 550 340 Z",
-                  tipX: 550,
-                  tipY: 110,
-                },
-              ]}
-              width={820}
-              height={440}
             />
           </GlossyFloorStage>
         </div>
       )}
 
       {/* ======================================================== */}
-      {/* SCENE 4: 60-MINUTE PROTOCOL STAIRS (Frames 505 - 720 / 16.8-24.0s) */}
+      {/* SCENE 4: 16-HOUR MELATONIN CHRONO DIAL (Frames 470 - End / 15.6s-End) */}
       {/* ======================================================== */}
-      {frame >= 505 && (
+      {frame >= 470 && (
         <div className="w-full h-full flex flex-col items-center justify-center">
           <GlossyFloorStage
             glowColor="rgba(251, 191, 36, 0.20)"
             glowCenterY={42}
             showReflection={false}
           >
-            <SteppedProgressionStairs
-              title="60-MINUTE PROTOCOL"
+            <GlossyRadialDial
+              title="THE 60-MINUTE PROTOCOL"
               titleColor="#ffffff"
-              orbColor="#fbbf24"
-              startFrame={505}
-              stepDurationFrames={32}
+              targetPercent={85}
+              valueText="16 HRS"
+              labelText="MELATONIN RELEASE TIMER"
+              accentColor="#fbbf24"
+              glowColor="rgba(251, 191, 36, 0.22)"
+              startFrame={470}
+              size={460}
               showFloorReflection={true}
-              reflectionOpacity={0.34}
-              width={700}
-              height={460}
-              steps={[
-                { id: "wake", label: "WAKE UP" },
-                { id: "window", label: "60 MIN" },
-                { id: "sunlight", label: "LIGHT" },
-                { id: "reset", label: "RESET" },
-                { id: "sleep", label: "OPTIMAL", isGoal: true },
-              ]}
+              reflectionOpacity={0.35}
             />
           </GlossyFloorStage>
         </div>
