@@ -22,85 +22,75 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({
 // Multi-SFX audio cues synchronized with progressive visual reveals
 const SFX_CUES: SfxCue[] = [
   {
-    "frame": 0,
-    "type": "whoosh_deep",
-    "volume": 0.32
+    frame: 0,
+    type: "whoosh_deep",
+    volume: 0.32,
   },
   {
-    "frame": 136,
-    "type": "whoosh_fast",
-    "volume": 0.32
+    frame: 15,
+    type: "whoosh_fast",
+    volume: 0.28,
   },
   {
-    "frame": 213,
-    "type": "whoosh_fast",
-    "volume": 0.34
+    frame: 70,
+    type: "click",
+    volume: 0.22,
   },
   {
-    "frame": 0,
-    "type": "whoosh_deep",
-    "volume": 0.32
+    frame: 145,
+    type: "whoosh_deep",
+    volume: 0.30,
   },
   {
-    "frame": 48,
-    "type": "click",
-    "volume": 0.22
+    frame: 180,
+    type: "click",
+    volume: 0.28,
   },
   {
-    "frame": 248,
-    "type": "click",
-    "volume": 0.26
+    frame: 220,
+    type: "click",
+    volume: 0.28,
   },
   {
-    "frame": 481,
-    "type": "click",
-    "volume": 0.28
+    frame: 250,
+    type: "click",
+    volume: 0.28,
   },
   {
-    "frame": 288,
-    "type": "whoosh_sparkle",
-    "volume": 0.24
+    frame: 295,
+    type: "whoosh_sparkle",
+    volume: 0.32,
   },
   {
-    "frame": 69,
-    "type": "whoosh_fast",
-    "volume": 0.28
+    frame: 360,
+    type: "whoosh_fast",
+    volume: 0.28,
   },
   {
-    "frame": 69,
-    "type": "click",
-    "volume": 0.24
+    frame: 505,
+    type: "whoosh_deep",
+    volume: 0.32,
   },
   {
-    "frame": 153,
-    "type": "whoosh_deep",
-    "volume": 0.28
+    frame: 537,
+    type: "click",
+    volume: 0.24,
   },
   {
-    "frame": 288,
-    "type": "click",
-    "volume": 0.26
+    frame: 569,
+    type: "click",
+    volume: 0.24,
   },
   {
-    "frame": 296,
-    "type": "click",
-    "volume": 0.26
+    frame: 601,
+    type: "click",
+    volume: 0.24,
   },
   {
-    "frame": 400,
-    "type": "click",
-    "volume": 0.26
+    frame: 633,
+    type: "whoosh_sparkle",
+    volume: 0.35,
   },
-  {
-    "frame": 587,
-    "type": "whoosh_sparkle",
-    "volume": 0.32
-  },
-  {
-    "frame": 673,
-    "type": "click",
-    "volume": 0.32
-  }
 ];
 
 export const TheCortisolInversionComposition: React.FC = () => {
@@ -110,7 +100,7 @@ export const TheCortisolInversionComposition: React.FC = () => {
 
   return (
     <div
-      className="relative w-full h-full bg-[#fbfbfd] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans"
+      className="relative w-full h-full bg-black text-white flex flex-col justify-between overflow-hidden select-none font-sans"
       style={{ width, height }}
     >
       {/* 0. High-Converting 4K Thumbnail First-Frame */}
@@ -141,22 +131,27 @@ export const TheCortisolInversionComposition: React.FC = () => {
       <SoundDesignEngine cues={SFX_CUES} />
 
       {/* 4. Top Apple Progress Bar */}
-      <AppleProgressBar />
+      <AppleProgressBar accentColor="#38bdf8" />
 
-      {/* 5. Niche Living Background */}
+      {/* 5. Deep Obsidian Void Background */}
       <TheCortisolInversionBackground />
 
-      {/* 6. Speech-Synchronized Progressive Reveal Canvas */}
+      {/* 6. Pure 10/10 Motion Graphics Suite Canvas */}
       <TheCortisolInversionCanvas transcript={transcript} />
 
-      {/* 7. Multi-Pose Character Presenter */}
+      {/* 7. Presenter Layer */}
       <TheCortisolInversionPresenter currentMs={currentMs} />
 
       {/* 8. Kinetic Captions with Neon Apple Glow */}
-      <AppleKineticCaptions transcript={transcript} />
+      <AppleKineticCaptions
+        transcript={transcript}
+        theme="dark"
+        activeColor="#38bdf8"
+        maxWordsPerGroup={3}
+      />
 
       {/* 9. Grounded Finishing Texture (35mm Living Grain + Halation + Vignette) */}
-      <GroundedTextureEngine grainOpacity={0.042} />
+      <GroundedTextureEngine grainOpacity={0.035} />
     </div>
   );
 };

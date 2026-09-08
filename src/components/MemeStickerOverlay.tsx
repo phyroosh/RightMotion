@@ -293,9 +293,10 @@ export const MemeStickerOverlay: React.FC<MemeStickerOverlayProps> = ({
 
   return (
     <div
-      className="absolute z-45 pointer-events-none select-none"
+      className="absolute z-50 pointer-events-none select-none"
       style={{
         ...positionStyles,
+        zIndex: 50,
         width: `${size}px`,
         transform: `scale(${baseScale}) rotate(${entranceTilt}deg)`,
         transformOrigin: "center center",

@@ -1273,13 +1273,15 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         prop_attr = f'imageSrc="{illustration_path}"' if illustration_path else f'cutoutId="{problem_cutout}"'
 
         canvas_code = f"""import React from "react";
-import {{ useCurrentFrame, useVideoConfig, spring, interpolate }} from "remotion";
-import {{ VisualPropCard }} from "../../components/VisualPropCard";
-import {{ EditorialTypographyScene }} from "../../components/EditorialTypographyScene";
-import {{ HandwrittenArrow }} from "../../components/HandwrittenArrow";
+import {{ useCurrentFrame, useVideoConfig }} from "remotion";
+import {{
+  GlossyFloorStage,
+  GlossyGlowGraph,
+  GlossyToggleBoard,
+  SteppedProgressionStairs,
+  PolishStickerFloat,
+}} from "../../components/pure_graphics";
 import {{ TacticalMemeCard }} from "../../components/TacticalMemeCard";
-import {{ MemeStickerOverlay }} from "../../components/MemeStickerOverlay";
-import {{ InteractiveEngagementPill }} from "../../components/InteractiveEngagementPill";
 import {{ WordTimestamp }} from "../../types";
 
 interface CanvasProps {{
@@ -1288,135 +1290,88 @@ interface CanvasProps {{
 
 export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const frame = useCurrentFrame();
-  const {{ fps }} = useVideoConfig();
 
   return (
     <div className="{canvas_container_class}">
       {{/* ======================================================== */}}
-      {{/* SCENE 1: THE ROOT HOOK (Frames {s1_start} - {s2_start}) */}}
+      {{/* SCENE 1: THE ROOT HOOK GRAPH (Frames {s1_start} - {s2_start}) */}}
       {{/* ======================================================== */}}
       {{frame >= {s1_start} && frame < {s2_start} && (
-        <div className="w-full h-full flex flex-col items-center justify-center relative">
-          <div className="absolute top-[12%] inset-x-0 px-8 flex justify-center">
-            <EditorialTypographyScene
-              ghostEcho="{c_term_first}"
-              leadIn="{s1_lead}"
-              focusWord="{s1_focus}"
-              subline="{s1_sub}"
-              focusStyle="serif_italic"
-              colorTheme="charcoal"
-              entranceFrame={{20}}
-              focusWordDelay={{12}}
-              sublineDelay={{24}}
-              showUnderline
-            />
-          </div>
-
-          <div className="absolute top-[38%] inset-x-0 flex justify-center">
-            <VisualPropCard
-              {prop_attr}
+        <div className="w-full h-full flex flex-col items-center justify-center">
+          <GlossyFloorStage glowColor="rgba(244, 63, 94, 0.16)">
+            <GlossyGlowGraph
+              title="{c_term_first}"
+              titleColor="#ffffff"
+              entranceFrame={{{s1_start}}}
+              showFloorReflection={{true}}
+              curves={[
+                {{
+                  id: "hook_curve",
+                  color: "#f43f5e",
+                  startFrame: {s1_start + 10},
+                  durationFrames: 45,
+                  showArrow: true,
+                  pathD: "M 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90",
+                  areaD: "M 100 340 L 100 320 C 220 320, 320 320, 400 310 C 460 300, 500 150, 550 90 L 550 340 Z",
+                  tipX: 550,
+                  tipY: 90,
+                }}
+              ]}
               width={{780}}
               height={{440}}
-              entranceFrame={{10}}
-              stampText="PARADOX"
-              stampSubtext="INSIGHT"
-              stampFrame={{80}}
-              stampTheme="trusted_red"
             />
-          </div>
+          </GlossyFloorStage>
         </div>
       )}}
 
       {{/* ======================================================== */}}
-      {{/* SCENE 2A: PSYCHOLOGICAL CONCEPT SLAM (Frames {concept_entrance} - {concept_exit}) */}}
+      {{/* SCENE 2: COGNITIVE MECHANISM SWITCHBOARD (Frames {concept_entrance} - {s3_start}) */}}
       {{/* ======================================================== */}}
-      {{frame >= {concept_entrance} && frame < {concept_exit} && (
-        <div className="w-full h-full flex flex-col items-center justify-center relative">
-          <div className="absolute top-[30%] inset-x-0 px-8 flex flex-col items-center justify-center">
-            <EditorialTypographyScene
-              ghostEcho="{c_term_first}"
-              leadIn="{concept_lead_in}"
-              focusWord="{concept_term}."
-              subline="{concept_def}"
-              focusStyle="serif_italic"
-              colorTheme="sky"
+      {{frame >= {concept_entrance} && frame < {s3_start} && (
+        <div className="w-full h-full flex flex-col items-center justify-center">
+          <GlossyFloorStage glowColor="rgba(16, 185, 129, 0.20)">
+            <GlossyToggleBoard
+              title="{concept_term.upper() if concept_term else 'THE MECHANISM'}"
+              titleColor="#ffffff"
               entranceFrame={{{concept_entrance}}}
-              focusWordDelay={{14}}
-              sublineDelay={{26}}
-              showUnderline
-              arrowPreset="loop_down"
+              showFloorReflection={{true}}
+              items={[
+                {{ id: "mech_1", label: "{t1.upper() if len(s2_items) > 0 else 'CORE PATTERN'}", activeFrame: {concept_entrance + 20}, activeColor: "#10b981" }},
+                {{ id: "mech_2", label: "{t2.upper() if len(s2_items) > 1 else 'PSYCHOLOGICAL SHIFT'}", activeFrame: {concept_entrance + 50}, activeColor: "#10b981" }},
+              ]}
+              width={{620}}
             />
-          </div>
+          </GlossyFloorStage>
         </div>
       )}}
 
-      {s2_editorial_jsx}
-
       {{/* ======================================================== */}}
-      {{/* SCENE 3: SPOKEN INTERACTIVE QUESTION CTA (Frames {s3_start}+) */}}
+      {{/* SCENE 3: ACTION PROTOCOL STAIRS (Frames {s3_start}+) */}}
       {{/* ======================================================== */}}
-      {{frame >= {s3_start} && (() => {{
-        const spTellMe = spring({{
-          frame: Math.max(0, frame - {f_s3_finale}),
-          fps,
-          config: {{ damping: 12, stiffness: 180 }},
-        }});
-
-        return (
-          <div className="w-full h-full flex flex-col items-center justify-center relative">
-            <div className="absolute top-[16%] inset-x-0 px-8 flex flex-col items-center text-center">
-              <EditorialTypographyScene
-                ghostEcho="HONESTY"
-                leadIn="{s3_lead}"
-                focusWord="{s3_focus}"
-                subline="{s3_sub}"
-                focusStyle="serif_italic"
-                colorTheme="sky"
-                entranceFrame={{{s3_start}}}
-                focusWordDelay={{12}}
-                sublineDelay={{22}}
-              />
-
-              {{frame >= {f_s3_finale} && (
-                <div
-                  className="mt-6 flex flex-col items-center gap-3 pointer-events-none"
-                  style={{{{
-                    opacity: Math.min(1, spTellMe * 1.5),
-                    transform: `scale(${{interpolate(spTellMe, [0, 1], [0.85, 1])}}) translateY(${{interpolate(
-                      spTellMe,
-                      [0, 1],
-                      [20, 0]
-                    )}}px)`,
-                  }}}}
-                >
-                  <HandwrittenArrow
-                    preset="loop_down"
-                    entranceFrame={{{f_s3_finale}}}
-                    color="#0071e3"
-                    width={{110}}
-                    height={{120}}
-                  />
-                  <div className="px-8 py-3.5 rounded-full bg-slate-900 text-white font-mono font-black text-2xl uppercase tracking-wider shadow-2xl flex items-center gap-3">
-                    <span>Tell me below 👇</span>
-                  </div>
-                </div>
-              )}}
-            </div>
-          </div>
-        );
-      }})()}}
+      {{frame >= {s3_start} && (
+        <div className="w-full h-full flex flex-col items-center justify-center">
+          <GlossyFloorStage glowColor="rgba(251, 191, 36, 0.20)">
+            <SteppedProgressionStairs
+              title="{s3_lead.upper()}"
+              titleColor="#ffffff"
+              orbColor="#fbbf24"
+              startFrame={{{s3_start}}}
+              stepDurationFrames={{30}}
+              showFloorReflection={{true}}
+              width={{700}}
+              height={{460}}
+              steps={[
+                {{ id: "step_1", label: "AWARENESS" }},
+                {{ id: "step_2", label: "PAUSE" }},
+                {{ id: "step_3", label: "REWIRE" }},
+                {{ id: "step_4", label: "ACTION", isGoal: true }},
+              ]}
+            />
+          </GlossyFloorStage>
+        </div>
+      )}}
 
       {meme_jsx}
-      {sticker_jsx}
-
-      <InteractiveEngagementPill
-        entranceFrame={{{pill_entrance}}}
-        durationFrames={{105}}
-        prompt="{pill_prompt}"
-        tag="{pill_tag}"
-        icon="{pill_icon}"
-        theme="{pill_theme}"
-      />
     </div>
   );
 }};
@@ -1516,17 +1471,6 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
       {{/* ======================================================== */}}
       {scene3_content_jsx}
 
-      {{/* ======================================================== */}}
-      {{/* ON-SCREEN INTERACTIVE ENGAGEMENT PILL (Seconds 18–22)    */}}
-      {{/* ======================================================== */}}
-      <InteractiveEngagementPill
-        entranceFrame={{{pill_entrance}}}
-        durationFrames={{105}}
-        prompt="{pill_prompt}"
-        tag="{pill_tag}"
-        icon="{pill_icon}"
-        theme="{pill_theme}"
-      />
       {meme_jsx}
       {sticker_jsx}
     </div>
