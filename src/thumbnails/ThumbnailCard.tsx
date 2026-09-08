@@ -463,16 +463,16 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           zIndex: 5,
         }} />
 
-        {/* ─── LAYER 7: CHARACTER — perfectly centered, grounded at bottom ─── */}
+        {/* ─── LAYER 7: CHARACTER — intimate waist-up eye-level framing grounded at bottom ─── */}
         <div style={{
           position: 'absolute',
           bottom: 0,
           left: '50%',
           transform: `translateX(-50%) scale(${characterScale}) translateY(${characterOffsetY}px)`,
           transformOrigin: 'bottom center',
-          width: '820px',
-          height: '1380px',
-          zIndex: 10,
+          width: '980px',
+          height: '1460px',
+          zIndex: 16,
           display: 'flex',
           alignItems: 'flex-end',
           justifyContent: 'center',
@@ -498,7 +498,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
           top: 0,
           left: 0,
           right: 0,
-          height: '42%',
+          height: '28%',
           background: themes.scrimGrad,
           zIndex: 15,
         }} />

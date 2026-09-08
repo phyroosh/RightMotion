@@ -21,12 +21,41 @@ def sanitize_raw_topic(topic: str) -> str:
     clean = re.sub(r"\s+", " ", clean).strip()
     return clean
 
+def apply_linguistic_and_anti_comfort_filter(topic: str) -> str:
+    """
+    Normalizes unnatural non-native phrasing into Tier-1 American English idioms
+    and converts optimistic comforting platitudes into high-velocity cognitive tension.
+    """
+    text = topic
+    # 1. American English Linguistic Filter
+    text = re.sub(r"made?\s+it\s+look\s+untrue", "made it feel fake", text, flags=re.IGNORECASE)
+    text = re.sub(r"make\s+it\s+look\s+untrue", "make it feel fake", text, flags=re.IGNORECASE)
+    text = re.sub(r"look\s+untrue", "feel fake", text, flags=re.IGNORECASE)
+    text = re.sub(r"\buntrue\b", "fake", text, flags=re.IGNORECASE)
+    return text
+
 def synthesize_viral_title(topic: str, niche: str = "self_improvement", script: str = "") -> str:
     """
     Transforms raw topic phrasing into an irresistible short-form hook title.
+    Enforces the American linguistic filter and strictly eliminates the 'Comfort' Title Trap.
     """
-    clean = sanitize_raw_topic(topic)
+    filtered_topic = apply_linguistic_and_anti_comfort_filter(topic)
+    clean = sanitize_raw_topic(filtered_topic)
     lower = clean.lower()
+
+    # The Anti-Comfort & Linguistic Trap Filter:
+    # Frame insights through cognitive tension, conflict, and uncomfortable paradoxes
+    if ("relationship" in lower or "love" in lower) and ("social media" in lower or "fake" in lower or "untrue" in lower or "exist" in lower):
+        return "Why Social Media Convinced You Love Isn't Real 💔 #Shorts"
+
+    if "dating" in lower and ("exhaust" in lower or "drain" in lower or "illusion" in lower or "online" in lower):
+        return "The Dating Illusion That's Exhausting Your Brain 🧠 #Shorts"
+
+    if "life feels unfair" in lower or "life is unfair" in lower:
+        return "Why Trying Harder Makes Life Feel Unfair 🧠 #Shorts"
+
+    if "not alone" in lower or "you are not alone" in lower:
+        return "The Isolation Trap Your Brain Keeps Hidden 🧠 #Shorts"
 
     # Specific common question / pattern mappings
     if "relationship" in lower and ("teen" in lower or "high school" in lower or "not" in lower):
@@ -76,10 +105,20 @@ def synthesize_viral_title(topic: str, niche: str = "self_improvement", script: 
 def synthesize_thumbnail_title(topic: str, niche: str = "self_improvement") -> Tuple[str, str, str]:
     """
     Extracts a punchy 2-4 word viral thumbnail title, highlight word, and subtitle.
+    Strictly eliminates the 'Comfort' Title Trap in favor of high-CTR cognitive tension.
     Returns: (thumbnail_title, highlight_word, subtitle)
     """
-    clean = sanitize_raw_topic(topic)
+    filtered_topic = apply_linguistic_and_anti_comfort_filter(topic)
+    clean = sanitize_raw_topic(filtered_topic)
     lower = clean.lower()
+
+    # The Anti-Comfort & Conflict Filter
+    if ("relationship" in lower or "love" in lower) and ("social media" in lower or "fake" in lower or "untrue" in lower or "exist" in lower):
+        return ("THE DATING ILLUSION", "ILLUSION", "Why Social Media Convinced You Love Isn't Real")
+    if "life feels unfair" in lower or "life is unfair" in lower:
+        return ("UNFAIR ADVANTAGE", "UNFAIR", "The Psychology Behind Effort vs Outcomes")
+    if "not alone" in lower or "you are not alone" in lower:
+        return ("THE ISOLATION TRAP", "ISOLATION", "The Mechanism Your Brain Keeps Hidden")
 
     if "relationship" in lower and ("teen" in lower or "not" in lower or "dating" in lower):
         return ("THE DATING TRAP", "DATING", "Why Teenage Relationships Exhaust You")
@@ -111,7 +150,9 @@ def synthesize_thumbnail_title(topic: str, niche: str = "self_improvement") -> T
         "from", "be", "being", "been", "you", "your", "we", "our", "so", "that", "this",
         "it", "its", "when", "where", "feel", "feels", "feeling", "make", "makes", "making",
         "really", "actually", "always", "never", "about", "secretly", "quietly", "someone",
-        "anyone", "everyone", "nobody", "things", "thing"
+        "anyone", "everyone", "nobody", "things", "thing",
+        # Permanent ban on comforting platitude words
+        "true", "real", "exist", "exists", "okay", "fine", "hope", "better", "untrue", "fake"
     }
 
     raw_words = [re.sub(r"[^\w-]", "", w) for w in clean.split() if re.sub(r"[^\w-]", "", w)]

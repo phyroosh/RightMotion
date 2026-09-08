@@ -147,6 +147,7 @@ Every video script submitted to RightClips is tagged with one of four channel ni
 3. **Motion Graphics Wrap (`<CinematicIllustrationCard />`)**:
    - Clean gallery editorial presentation: wrapped in tactile 3D card tilt (`PhysicalCard tiltX={3} tiltY={-3}`), 2.5D Ken Burns slow zoom-drift (1.0x -> 1.07x), and specular diagonal glass glare sheen sweep.
    - **Strict Visual Bans**: NO masking tape strips, NO fake sci-fi telemetry HUD bars (`LIVE SIGNAL`), NO fake weather/kinetic badges (`ATMOSPHERIC CHANCE`), and NO redundant hook text blocks on the card (kinetic subtitles below handle reading and spoken words).
+   - **PERMANENT BAN ON IN-PICTURE MOTION DESIGN**: All speech-synchronized motion design elements (callouts, stamps, badges, diagnostic tags) must be displayed **STRICTLY OUTSIDE OF THE PICTURE** (floating cleanly above the card in the canvas). The hero illustration artwork must remain 100% unobstructed, pristine editorial art with zero graphical clutter, zero boxes, and zero reticles on top of subjects.
    - Sits behind the opening tactical meme hook and is revealed as the meme collapses.
 
 ---
@@ -160,6 +161,10 @@ Every short-form script follows the high-retention 4-beat structure:
 3. **Beat 2 — The Trap / The Twist (9–15s)**: **Immediately raises the stakes** so curiosity peaks a second time (*"And here's the trap: your nervous system confuses anxiety with chemistry..."*). Never let curiosity die after naming the term!
 4. **Beat 3 — The Rewire Shift (16–20s)**: Sharp, memorable psychological rule (*"If you have to shrink yourself to keep them, that's not connection — it's nervous system panic."*).
 5. **Beat 4 — The Spoken Interactive CTA (21–24s)**: After an intimate 200–250ms breath pause, Judy asks a direct, open-ended question looking into the camera (*"Be honest: have you ever lost yourself trying to keep someone else happy? Tell me below."*).
+
+### The "Comfort" Title Trap & Tier-1 Linguistic Filter:
+- ❌ **THE "COMFORT" TITLE TRAP BAN**: Never output comforting reassurances or optimistic platitudes (*"True relationships still exist..."*, *"When life feels unfair..."*, *"You are not alone"*). Impatient scrollers stop ONLY for cognitive tension, paradoxes, and uncomfortable truths (*"Why Social Media Convinced You Love Isn't Real"*, *"The Dating Illusion That's Exhausting Your Brain"*).
+- ❌ **TIER-1 AMERICAN LINGUISTIC FILTER**: Strictly enforce natural American English idioms. Ban unnatural literal phrasing like *"made it look untrue"* (replace with *"made it feel fake"*, *"lied to you"*, *"distorted reality"*).
 
 ### The 9 Core Psychological Archetypes (Mode B Classification):
 The scriptwriter autonomously categorizes uncurated topics into 9 proven psychological archetypes (62–68 words, 21–24s runtime) or synthesizes an exact 2-Beat curiosity gap script:
@@ -197,7 +202,8 @@ The scriptwriter autonomously categorizes uncurated topics into 9 proven psychol
    - `whoosh_sparkle`: Key psychological revelations, solution cutouts (`vol: 0.30 - 0.35`).
 4. **Frame 0 High-CTR Thumbnail Standard**:
    - Automatically captured by YouTube Shorts at frame 0.
-   - Pure viral hook titles only (`THE DATING TRAP`, `DIAGRAM YOUR LOOP`).
+   - Pure viral hook titles only with cognitive tension (`THE DATING ILLUSION`, `DIAGRAM YOUR LOOP`, `THE COMPARISON TRAP`).
+   - **INTIMATE WAIST-UP EYE-LEVEL THUMBNAILS**: In 9:16 vertical thumbnails, Judy must ALWAYS be framed in an intimate waist-up crop (`width: 980px - 1160px`, `height: 1460px - 1680px`), with her head and eyes positioned at eye level below the title block with zero scrim fog, commanding immediate viewer connection on mobile feeds. Far head-to-toe crops are permanently banned.
    - NEVER include page numbers or PDF names on thumbnails!
 
 ---

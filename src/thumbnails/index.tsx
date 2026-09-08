@@ -698,14 +698,14 @@ export const StopComparingThumbnail: React.FC = () => (
 
 export const TrueRelationshipsThumbnail: React.FC = () => (
   <ThumbnailCard
-    title="REAL RELATIONSHIPS"
-    highlightWord="RELATIONSHIPS"
+    title="THE DATING ILLUSION"
+    highlightWord="ILLUSION"
     highlightColor="rose"
-    subtitle="Why Real Love Still Exists"
+    subtitle="Why Social Media Convinced You Love Isn't Real"
     categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
     characterPose="character_pointing.png"
     theme="apple_studio"
     aspectRatio="9:16"
-    extraBadge="CONNECTION"
+    extraBadge="MINDSET"
   />
 );

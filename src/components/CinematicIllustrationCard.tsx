@@ -113,6 +113,10 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
 
   const relFrame = Math.max(0, frame - entranceFrame);
 
+  // Active speech-synchronized beats rendered STRICTLY OUTSIDE the picture
+  const activeBeats = beats.filter((b) => frame >= b.frame);
+  const latestActiveBeat = activeBeats.length > 0 ? activeBeats[activeBeats.length - 1] : null;
+
   // Entrance spring physics
   const spEnter = spring({
     frame: relFrame,
@@ -319,6 +323,61 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
 
       {/* 2. Physical 3D Tactile Card Container */}
       <div className="relative w-full">
+        {/* EXTERNAL FLOATING MOTION DESIGN OVERLAYS (STRICTLY OUTSIDE THE PICTURE!) */}
+        {latestActiveBeat && (() => {
+          const beatRel = frame - latestActiveBeat.frame;
+          const spBeat = spring({
+            frame: beatRel,
+            fps,
+            config: { damping: 13, stiffness: 160, mass: 0.8 },
+          });
+          const beatTheme = colorMap[latestActiveBeat.color || accentColor] || currentTheme;
+          const isStamp = latestActiveBeat.type === "stamp";
+
+          return (
+            <div
+              className="absolute left-1/2 -translate-x-1/2 z-40 pointer-events-none w-full max-w-[820px] px-2 flex justify-center"
+              style={{
+                bottom: "calc(100% + 24px)",
+                opacity: Math.min(1, spBeat * 1.5),
+                transform: `translateX(-50%) translateY(${interpolate(spBeat, [0, 1], [-16, 0])}px) scale(${interpolate(spBeat, [0, 1], [0.88, 1])})`,
+              }}
+            >
+              {isStamp ? (
+                <div className={`p-4 px-6 rounded-2xl ${beatTheme.stampBg} backdrop-blur-2xl border-2 ${beatTheme.stampBorder} shadow-[0_15px_50px_rgba(0,0,0,0.85)] flex items-center justify-between gap-4 w-full`}>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-3 h-3 rounded-full ${beatTheme.pulseColor} animate-ping shrink-0`} />
+                    {renderBeatIcon(latestActiveBeat.icon || "alert", `w-6 h-6 ${beatTheme.badgeText} shrink-0`)}
+                    <span className="text-2xl font-black text-white uppercase tracking-wider">
+                      {latestActiveBeat.text}
+                    </span>
+                  </div>
+                  {latestActiveBeat.subtext && (
+                    <div className={`text-base font-mono font-bold ${beatTheme.accentText} uppercase tracking-wider text-right truncate`}>
+                      {latestActiveBeat.subtext}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className={`p-4 px-6 rounded-2xl bg-[#080b12]/92 backdrop-blur-2xl border-2 ${beatTheme.border} shadow-[0_15px_50px_rgba(0,0,0,0.85)] flex items-center justify-between gap-4 w-full`}>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-2.5 h-2.5 rounded-full ${beatTheme.pulseColor} animate-pulse shrink-0`} />
+                    {renderBeatIcon(latestActiveBeat.icon, `w-6 h-6 ${beatTheme.badgeText} shrink-0`)}
+                    <span className={`text-2xl font-mono font-black tracking-wide uppercase ${beatTheme.badgeText}`}>
+                      {latestActiveBeat.text}
+                    </span>
+                  </div>
+                  {latestActiveBeat.subtext && (
+                    <div className="text-base font-bold text-white/90 text-right truncate max-w-[460px]">
+                      {latestActiveBeat.subtext}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })()}
+
         {/* Anchored tactile masking tape on top edge (strictly opt-in, default false) */}
         {showTape && (
           <div className="absolute -top-7 right-10 z-40 pointer-events-none drop-shadow-md">
@@ -385,143 +444,6 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
                 left: "-50%",
               }}
             />
-
-            {/* PROGRESSIVE GRAPHICAL OVERLAYS (SPEECH-SYNCHRONIZED BEATS) */}
-            {beats.map((beat, bIdx) => {
-              if (frame < beat.frame) return null;
-
-              const beatRel = frame - beat.frame;
-              const spBeat = spring({
-                frame: beatRel,
-                fps,
-                config: { damping: 11, stiffness: 170, mass: 0.8 },
-              });
-              const beatTheme = colorMap[beat.color || accentColor] || currentTheme;
-
-              // Position styles
-              const posStyle: React.CSSProperties = {};
-              const pos = beat.position || "top-right";
-              if (pos === "top-left") {
-                posStyle.top = "18px";
-                posStyle.left = "18px";
-              } else if (pos === "top-right") {
-                posStyle.top = "18px";
-                posStyle.right = "18px";
-              } else if (pos === "bottom-left") {
-                posStyle.bottom = "58px";
-                posStyle.left = "18px";
-              } else if (pos === "bottom-right") {
-                posStyle.bottom = "58px";
-                posStyle.right = "18px";
-              } else if (pos === "center") {
-                posStyle.top = "50%";
-                posStyle.left = "50%";
-                posStyle.transform = "translate(-50%, -50%)";
-              }
-
-              // 1. CALLOUT PIN with Target Reticle
-              if (beat.type === "callout") {
-                const targetX = beat.targetX ?? 50;
-                const targetY = beat.targetY ?? 40;
-
-                return (
-                  <React.Fragment key={`beat-${bIdx}`}>
-                    {/* Pulsing Target Reticle over subject */}
-                    <div
-                      className="absolute pointer-events-none transition-all -translate-x-1/2 -translate-y-1/2"
-                      style={{
-                        top: `${targetY}%`,
-                        left: `${targetX}%`,
-                        opacity: Math.min(1, spBeat * 1.5),
-                        transform: `translate(-50%, -50%) scale(${interpolate(spBeat, [0, 1], [0.4, 1])})`,
-                      }}
-                    >
-                      <div
-                        className={`w-14 h-14 rounded-full border-2 border-dashed ${beatTheme.spotlightBorder} ${beatTheme.spotlightGlow} animate-spin`}
-                        style={{ animationDuration: "12s" }}
-                      />
-                      <div className={`absolute inset-0 m-auto w-3 h-3 rounded-full ${beatTheme.pulseColor} shadow-[0_0_12px_#ffffff]`} />
-                    </div>
-
-                    {/* Floating Tactical HUD Micro-Card */}
-                    <div
-                      className="absolute pointer-events-none z-30 transition-all max-w-[420px]"
-                      style={{
-                        ...posStyle,
-                        opacity: Math.min(1, spBeat * 1.3),
-                        transform: `${posStyle.transform || ""} scale(${interpolate(spBeat, [0, 1], [0.75, 1])}) translateY(${interpolate(spBeat, [0, 1], [-20, 0])}px)`,
-                      }}
-                    >
-                      <div className={`p-4 rounded-2xl bg-[#080b12]/92 backdrop-blur-2xl border-2 ${beatTheme.border} shadow-[0_15px_40px_rgba(0,0,0,0.85)] flex flex-col gap-1.5`}>
-                        <div className="flex items-center gap-2.5">
-                          <div className={`w-2.5 h-2.5 rounded-full ${beatTheme.pulseColor} animate-pulse shrink-0`} />
-                          {renderBeatIcon(beat.icon, `w-5 h-5 ${beatTheme.badgeText} shrink-0`)}
-                          <span className={`text-xl font-mono font-black tracking-wide uppercase ${beatTheme.badgeText}`}>
-                            {beat.text}
-                          </span>
-                        </div>
-                        {beat.subtext && (
-                          <div className="text-base font-bold text-white/90 pl-5 leading-snug">
-                            {beat.subtext}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </React.Fragment>
-                );
-              }
-
-              // 2. DIAGNOSTIC WARNING / REFRAME STAMP
-              if (beat.type === "stamp") {
-                return (
-                  <div
-                    key={`beat-${bIdx}`}
-                    className="absolute pointer-events-none z-30 transition-all max-w-[440px]"
-                    style={{
-                      ...posStyle,
-                      opacity: Math.min(1, spBeat * 1.5),
-                      transform: `${posStyle.transform || ""} rotate(${interpolate(spBeat, [0, 1], [-8, -3])}deg) scale(${interpolate(spBeat, [0, 1], [1.4, 1])})`,
-                    }}
-                  >
-                    <div className={`p-4 rounded-2xl ${beatTheme.stampBg} backdrop-blur-2xl border-2 ${beatTheme.stampBorder} shadow-[0_0_40px_rgba(0,0,0,0.85)] flex flex-col gap-1`}>
-                      <div className="flex items-center gap-2.5">
-                        {renderBeatIcon(beat.icon || "alert", `w-6 h-6 ${beatTheme.badgeText} shrink-0`)}
-                        <span className="text-2xl font-black text-white uppercase tracking-wider">
-                          {beat.text}
-                        </span>
-                      </div>
-                      {beat.subtext && (
-                        <div className={`text-sm font-mono font-bold ${beatTheme.accentText} uppercase tracking-wider pl-8`}>
-                          {beat.subtext}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              }
-
-              // 3. SLEEK TELEMETRY BADGE
-              if (beat.type === "badge") {
-                return (
-                  <div
-                    key={`beat-${bIdx}`}
-                    className="absolute pointer-events-none z-30 transition-all"
-                    style={{
-                      ...posStyle,
-                      opacity: Math.min(1, spBeat * 1.3),
-                      transform: `${posStyle.transform || ""} scale(${interpolate(spBeat, [0, 1], [0.8, 1])})`,
-                    }}
-                  >
-                    <div className={`px-4 py-2 rounded-xl bg-black/85 backdrop-blur-xl border ${beatTheme.badgeBg} flex items-center gap-2 text-lg font-mono font-black ${beatTheme.badgeText} shadow-xl`}>
-                      {renderBeatIcon(beat.icon, "w-4 h-4")}
-                      <span>{beat.text}</span>
-                    </div>
-                  </div>
-                );
-              }
-
-              return null;
-            })}
 
             {/* Subtle natural glass edge vignette */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
