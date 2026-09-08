@@ -23,9 +23,9 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
   return (
     <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 select-none">
       {/* ======================================================== */}
-      {/* SCENE 1: THE ROOT FRICTION & HOOK (Frames 0 - 188) */}
+      {/* SCENE 1: THE ROOT FRICTION & HOOK (Frames 0 - 129) */}
       {/* ======================================================== */}
-      {frame >= 0 && frame < 188 && (
+      {frame >= 0 && frame < 129 && (
         <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
           <CinematicIllustrationCard
             imageSrc="the_procrastination_loop/assets/scene_illustration.png"
@@ -33,25 +33,16 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
             entranceFrame={0}
             beats={[
             {
-                        "frame": 79,
+                        "frame": 54,
                         "type": "callout",
-                        "text": "READY REALITY",
-                        "subtext": "Psychologists call this Temporal Self-Appraisal...",
+                        "text": "CLEAN REALITY",
+                        "subtext": "The Procrastination",
                         "position": "top-right",
                         "icon": "target",
                         "color": "blue",
                         "zoomLevel": 1.15,
                         "targetX": 50,
                         "targetY": 40
-            },
-            {
-                        "frame": 142,
-                        "type": "stamp",
-                        "text": "SUBCONSCIOUS PARALYSIS",
-                        "subtext": "COGNITIVE OVERLOAD",
-                        "position": "bottom-left",
-                        "icon": "alert",
-                        "color": "rose"
             }
 ]}
             width={920}
@@ -64,15 +55,15 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
 
       {/* ======================================================== */}
       {/* SCENE 2A: HIGH-IMPACT CONCEPT KEYWORD SLAM              */}
-      {/* (Frames 188 - 263)             */}
+      {/* (Frames 129 - 204)             */}
       {/* ======================================================== */}
-      {frame >= 188 && frame < 263 && (
+      {frame >= 129 && frame < 204 && (
         <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-150">
           <ConceptKeywordSlam
-            term="TEMPORAL SELF-APPRAISAL BIAS"
-            definition="Your brain doesn't fear the task — it fears the version of you that might fail at it"
-            categoryBadge="PSYCHOLOGICAL MECHANISM // 01"
-            entranceFrame={188}
+            term="THE PROCRASTINATION TRAP"
+            definition="The Psychology Behind Procrastination"
+            categoryBadge="COGNITIVE DIAGNOSTIC // 01"
+            entranceFrame={129}
             durationFrames={75}
             theme="apple_studio"
             icon="brain"
@@ -83,14 +74,18 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
 
       {/* ======================================================== */}
       {/* SCENE 2B: THE BREAKDOWN (REVEALED ONE-BY-ONE AS SPOKEN!)  */}
-      {/* (Frames 263 - 454)                     */}
+      {/* (Frames 204 - 703)                     */}
       {/* ======================================================== */}
-      {frame >= 263 && frame < 454 && (() => {
-        const spP1 = spring({ frame: frame - 263, fps, config: { damping: 13, stiffness: 140 } });
-        const spP2 = spring({ frame: frame - 263, fps, config: { damping: 13, stiffness: 140 } });
-        const spP3 = spring({ frame: frame - 317, fps, config: { damping: 13, stiffness: 140 } });
-        const spP4 = spring({ frame: frame - 370, fps, config: { damping: 13, stiffness: 140 } });
-        const spP5 = spring({ frame: frame - 418, fps, config: { damping: 13, stiffness: 140 } });
+      {frame >= 204 && frame < 703 && (() => {
+        const spP1 = spring({ frame: frame - 204, fps, config: { damping: 13, stiffness: 140 } });
+        const spP2 = spring({ frame: frame - 204, fps, config: { damping: 13, stiffness: 140 } });
+        const spP3 = spring({ frame: frame - 265, fps, config: { damping: 13, stiffness: 140 } });
+        const spP4 = spring({ frame: frame - 325, fps, config: { damping: 13, stiffness: 140 } });
+        const spP5 = spring({ frame: frame - 375, fps, config: { damping: 13, stiffness: 140 } });
+        const spP6 = spring({ frame: frame - 434, fps, config: { damping: 13, stiffness: 140 } });
+        const spP7 = spring({ frame: frame - 531, fps, config: { damping: 13, stiffness: 140 } });
+        const spP8 = spring({ frame: frame - 589, fps, config: { damping: 13, stiffness: 140 } });
+        const spP9 = spring({ frame: frame - 645, fps, config: { damping: 13, stiffness: 140 } });
 
         return (
           <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
@@ -103,7 +98,7 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
                 tiltX={-5}
                 tiltY={4}
                 elevation={44}
-                impactMs={8767}
+                impactMs={6800}
                 className="w-full p-8 rounded-3xl bg-white/95 border-2 border-sky-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
               >
                 {/* Clean Uncrowded Section Header - NO RAW TOPIC LEAKS */}
@@ -119,12 +114,12 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
                 {/* PROGRESSIVE SEQUENTIAL REVEALS: ONE BY ONE ON EXACT WORDS */}
                 <div className="flex flex-col gap-4 w-full my-1">
                   
-                {/* Progressive Item 1 (Spoken Frame: 263) */}
+                {/* Progressive Item 1 (Spoken Frame: 204) */}
                 <div
                   style={{
-                    opacity: frame >= 263 ? Math.min(1, spP1 * 1.2) : 0,
-                    transform: `scale(${frame >= 263 ? interpolate(spP1, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 263 ? interpolate(spP1, [0, 1], [25, 0]) : 25}px)`,
-                    pointerEvents: frame >= 263 ? "auto" : "none",
+                    opacity: frame >= 204 ? Math.min(1, spP1 * 1.2) : 0,
+                    transform: `scale(${frame >= 204 ? interpolate(spP1, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 204 ? interpolate(spP1, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 204 ? "auto" : "none",
                   }}
                 >
                   <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
@@ -134,19 +129,19 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
                       </div>
                       <div>
                         <div className="text-3xl font-black text-slate-950">
-                          Your brain doesn't fear the task
+                          That's not laziness.
                         </div>
                         
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* Progressive Item 2 (Spoken Frame: 263) */}
+                {/* Progressive Item 2 (Spoken Frame: 204) */}
                 <div
                   style={{
-                    opacity: frame >= 263 ? Math.min(1, spP2 * 1.2) : 0,
-                    transform: `scale(${frame >= 263 ? interpolate(spP2, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 263 ? interpolate(spP2, [0, 1], [25, 0]) : 25}px)`,
-                    pointerEvents: frame >= 263 ? "auto" : "none",
+                    opacity: frame >= 204 ? Math.min(1, spP2 * 1.2) : 0,
+                    transform: `scale(${frame >= 204 ? interpolate(spP2, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 204 ? interpolate(spP2, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 204 ? "auto" : "none",
                   }}
                 >
                   <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
@@ -156,19 +151,19 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
                       </div>
                       <div>
                         <div className="text-3xl font-black text-slate-950">
-                          it fears the version of you that might fail at it.
+                          It's your amygdala firing a threat signal at the task itself.
                         </div>
                         
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* Progressive Item 3 (Spoken Frame: 317) */}
+                {/* Progressive Item 3 (Spoken Frame: 265) */}
                 <div
                   style={{
-                    opacity: frame >= 317 ? Math.min(1, spP3 * 1.2) : 0,
-                    transform: `scale(${frame >= 317 ? interpolate(spP3, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 317 ? interpolate(spP3, [0, 1], [25, 0]) : 25}px)`,
-                    pointerEvents: frame >= 317 ? "auto" : "none",
+                    opacity: frame >= 265 ? Math.min(1, spP3 * 1.2) : 0,
+                    transform: `scale(${frame >= 265 ? interpolate(spP3, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 265 ? interpolate(spP3, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 265 ? "auto" : "none",
                   }}
                 >
                   <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
@@ -178,19 +173,19 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
                       </div>
                       <div>
                         <div className="text-3xl font-black text-slate-950">
-                          So you keep moving the start line.
+                          Psychologists call it Limbic Friction.
                         </div>
                         
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* Progressive Item 4 (Spoken Frame: 370) */}
+                {/* Progressive Item 4 (Spoken Frame: 325) */}
                 <div
                   style={{
-                    opacity: frame >= 370 ? Math.min(1, spP4 * 1.2) : 0,
-                    transform: `scale(${frame >= 370 ? interpolate(spP4, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 370 ? interpolate(spP4, [0, 1], [25, 0]) : 25}px)`,
-                    pointerEvents: frame >= 370 ? "auto" : "none",
+                    opacity: frame >= 325 ? Math.min(1, spP4 * 1.2) : 0,
+                    transform: `scale(${frame >= 325 ? interpolate(spP4, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 325 ? interpolate(spP4, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 325 ? "auto" : "none",
                   }}
                 >
                   <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
@@ -200,19 +195,19 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
                       </div>
                       <div>
                         <div className="text-3xl font-black text-slate-950">
-                          The delay isn't laziness.
+                          Your planning brain wants to go.
                         </div>
                         
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* Progressive Item 5 (Spoken Frame: 418) */}
+                {/* Progressive Item 5 (Spoken Frame: 375) */}
                 <div
                   style={{
-                    opacity: frame >= 418 ? Math.min(1, spP5 * 1.2) : 0,
-                    transform: `scale(${frame >= 418 ? interpolate(spP5, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 418 ? interpolate(spP5, [0, 1], [25, 0]) : 25}px)`,
-                    pointerEvents: frame >= 418 ? "auto" : "none",
+                    opacity: frame >= 375 ? Math.min(1, spP5 * 1.2) : 0,
+                    transform: `scale(${frame >= 375 ? interpolate(spP5, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 375 ? interpolate(spP5, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 375 ? "auto" : "none",
                   }}
                 >
                   <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
@@ -222,7 +217,95 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
                       </div>
                       <div>
                         <div className="text-3xl font-black text-slate-950">
-                          It's self-protection.
+                          Your survival brain sees risk.
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Progressive Item 6 (Spoken Frame: 434) */}
+                <div
+                  style={{
+                    opacity: frame >= 434 ? Math.min(1, spP6 * 1.2) : 0,
+                    transform: `scale(${frame >= 434 ? interpolate(spP6, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 434 ? interpolate(spP6, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 434 ? "auto" : "none",
+                  }}
+                >
+                  <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-[#0071e3]/15 text-[#0071e3] flex items-center justify-center text-3xl font-black font-mono shrink-0">
+                        06
+                      </div>
+                      <div>
+                        <div className="text-3xl font-black text-slate-950">
+                          The fix
+                        </div>
+                        <div className="text-2xl font-mono text-sky-700 font-bold mt-0.5">narrow your gaze onto your task for 10 seconds.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Progressive Item 7 (Spoken Frame: 531) */}
+                <div
+                  style={{
+                    opacity: frame >= 531 ? Math.min(1, spP7 * 1.2) : 0,
+                    transform: `scale(${frame >= 531 ? interpolate(spP7, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 531 ? interpolate(spP7, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 531 ? "auto" : "none",
+                  }}
+                >
+                  <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-[#0071e3]/15 text-[#0071e3] flex items-center justify-center text-3xl font-black font-mono shrink-0">
+                        07
+                      </div>
+                      <div>
+                        <div className="text-3xl font-black text-slate-950">
+                          That resets the threat response.
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Progressive Item 8 (Spoken Frame: 589) */}
+                <div
+                  style={{
+                    opacity: frame >= 589 ? Math.min(1, spP8 * 1.2) : 0,
+                    transform: `scale(${frame >= 589 ? interpolate(spP8, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 589 ? interpolate(spP8, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 589 ? "auto" : "none",
+                  }}
+                >
+                  <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-[#0071e3]/15 text-[#0071e3] flex items-center justify-center text-3xl font-black font-mono shrink-0">
+                        08
+                      </div>
+                      <div>
+                        <div className="text-3xl font-black text-slate-950">
+                          Your brain stops resisting the start.
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Progressive Item 9 (Spoken Frame: 645) */}
+                <div
+                  style={{
+                    opacity: frame >= 645 ? Math.min(1, spP9 * 1.2) : 0,
+                    transform: `scale(${frame >= 645 ? interpolate(spP9, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 645 ? interpolate(spP9, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 645 ? "auto" : "none",
+                  }}
+                >
+                  <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-[#0071e3]/15 text-[#0071e3] flex items-center justify-center text-3xl font-black font-mono shrink-0">
+                        09
+                      </div>
+                      <div>
+                        <div className="text-3xl font-black text-slate-950">
+                          What's the task you keep avoiding?
                         </div>
                         
                       </div>
@@ -237,11 +320,11 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
       })()}
 
       {/* ======================================================== */}
-      {/* SCENE 3: SOLUTION PROTOCOL / PRODUCT SHOWCASE (Frames 454 - 525) */}
+      {/* SCENE 3: SOLUTION PROTOCOL / PRODUCT SHOWCASE (Frames 703 - 718) */}
       {/* ======================================================== */}
-      {frame >= 454 && frame < 525 && (() => {
-        const spSolCutout = spring({ frame: frame - 454, fps, config: { damping: 13, stiffness: 140 } });
-        const spFinale = spring({ frame: frame - 584, fps, config: { damping: 13, stiffness: 140 } });
+      {frame >= 703 && frame < 718 && (() => {
+        const spSolCutout = spring({ frame: frame - 703, fps, config: { damping: 13, stiffness: 140 } });
+        const spFinale = spring({ frame: frame - 703, fps, config: { damping: 13, stiffness: 140 } });
 
         return (
           <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
@@ -254,19 +337,19 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
                 tiltX={3}
                 tiltY={-3}
                 elevation={45}
-                impactMs={15133}
+                impactMs={23433}
                 className="w-full p-8 rounded-3xl bg-white/95 border-2 border-sky-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
               >
                 <h3 className="text-5xl font-black text-slate-950 leading-tight mt-1">
-                  Be honest: what's the one thing you keep postponing that you actually care deeply about?
+                  Tell me below.
                 </h3>
 
                 <div
                   className="w-full flex justify-center items-center my-2 transition-all"
                   style={{
-                    opacity: frame >= 454 ? Math.min(1, spSolCutout * 1.2) : 0,
-                    transform: `scale(${frame >= 454 ? interpolate(spSolCutout, [0, 1], [0.6, 1]) : 0.6}) translateY(${frame >= 454 ? interpolate(spSolCutout, [0, 1], [30, 0]) : 30}px)`,
-                    pointerEvents: frame >= 454 ? "auto" : "none",
+                    opacity: frame >= 703 ? Math.min(1, spSolCutout * 1.2) : 0,
+                    transform: `scale(${frame >= 703 ? interpolate(spSolCutout, [0, 1], [0.6, 1]) : 0.6}) translateY(${frame >= 703 ? interpolate(spSolCutout, [0, 1], [30, 0]) : 30}px)`,
+                    pointerEvents: frame >= 703 ? "auto" : "none",
                   }}
                 >
                   <ProCutout
@@ -282,9 +365,9 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
                 <div
                   className="w-full transition-all"
                   style={{
-                    opacity: frame >= 584 ? Math.min(1, spFinale * 1.2) : 0,
-                    transform: `scale(${frame >= 584 ? interpolate(spFinale, [0, 1], [0.8, 1]) : 0.8})`,
-                    pointerEvents: frame >= 584 ? "auto" : "none",
+                    opacity: frame >= 703 ? Math.min(1, spFinale * 1.2) : 0,
+                    transform: `scale(${frame >= 703 ? interpolate(spFinale, [0, 1], [0.8, 1]) : 0.8})`,
+                    pointerEvents: frame >= 703 ? "auto" : "none",
                   }}
                 >
                   <div className="w-full p-5 rounded-2xl bg-black/60 border border-emerald-500/30 flex items-center justify-center gap-3 text-3xl font-black text-[#0071e3] shadow-xl">
@@ -302,7 +385,7 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
       {/* ON-SCREEN INTERACTIVE ENGAGEMENT PILL (Seconds 18–22)    */}
       {/* ======================================================== */}
       <InteractiveEngagementPill
-        entranceFrame={420}
+        entranceFrame={503}
         durationFrames={105}
         prompt="Have you felt this? Drop your thoughts 👇"
         tag="COMMUNITY"
@@ -314,11 +397,11 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
       {/* TACTICAL RETENTION MEME POP (< 2.5s Strict Cap)          */}
       {/* ======================================================== */}
       <TacticalMemeCard
-        memeId="courtroom_shout_me"
+        memeId="ishowspeed_stare"
         startFrame={0}
-        durationFrames={44}
+        durationFrames={42}
         playbackRate={1.4}
-        hudLabel="SELF-CONFESSION // GUILTY AS CHARGED"
+        hudLabel="COGNITIVE FREEZE // SPEECHLESS"
         theme="apple_studio"
         position="top"
       />
@@ -328,11 +411,11 @@ export const TheProcrastinationLoopCanvas: React.FC<CanvasProps> = () => {
       {/* MID-VIDEO GEN-Z MEME REACTION STICKER POP               */}
       {/* ======================================================== */}
       <MemeStickerOverlay
-        stickerId="anya_smug"
-        startFrame={223}
+        stickerId="shaq_timeout_pause"
+        startFrame={164}
         durationFrames={34}
-        position="top-right"
-        badgeText="HEH 𓁹‿𓁹"
+        position="center-left"
+        badgeText="HOLD UP PAUSE"
       />
 
     </div>

@@ -27,12 +27,12 @@ const SFX_CUES: SfxCue[] = [
     "volume": 0.32
   },
   {
-    "frame": 101,
+    "frame": 52,
     "type": "whoosh_fast",
     "volume": 0.32
   },
   {
-    "frame": 188,
+    "frame": 129,
     "type": "whoosh_fast",
     "volume": 0.34
   },
@@ -42,72 +42,87 @@ const SFX_CUES: SfxCue[] = [
     "volume": 0.32
   },
   {
-    "frame": 44,
+    "frame": 42,
     "type": "click",
     "volume": 0.22
   },
   {
-    "frame": 223,
+    "frame": 164,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 420,
+    "frame": 503,
     "type": "click",
     "volume": 0.28
   },
   {
-    "frame": 263,
+    "frame": 204,
     "type": "whoosh_sparkle",
     "volume": 0.24
   },
   {
-    "frame": 79,
+    "frame": 54,
     "type": "whoosh_fast",
     "volume": 0.28
   },
   {
-    "frame": 79,
+    "frame": 54,
     "type": "click",
     "volume": 0.24
   },
   {
-    "frame": 142,
-    "type": "whoosh_deep",
-    "volume": 0.28
-  },
-  {
-    "frame": 263,
+    "frame": 204,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 263,
+    "frame": 204,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 317,
+    "frame": 265,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 370,
+    "frame": 325,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 418,
+    "frame": 375,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 454,
+    "frame": 434,
+    "type": "click",
+    "volume": 0.26
+  },
+  {
+    "frame": 531,
+    "type": "click",
+    "volume": 0.26
+  },
+  {
+    "frame": 589,
+    "type": "click",
+    "volume": 0.26
+  },
+  {
+    "frame": 645,
+    "type": "click",
+    "volume": 0.26
+  },
+  {
+    "frame": 703,
     "type": "whoosh_sparkle",
     "volume": 0.32
   },
   {
-    "frame": 584,
+    "frame": 703,
     "type": "click",
     "volume": 0.32
   }
