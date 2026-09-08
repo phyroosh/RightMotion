@@ -145,7 +145,8 @@ Every video script submitted to RightClips is tagged with one of four channel ni
    - Run `python3 scripts/generate_illustration_prompt.py --topic "<topic>" --script "<hook>"` to derive the tailored prompt.
    - Call `generate_image` with `AspectRatio="16:9"`. Save to `public/<clip_name>/assets/scene_illustration.png`.
 3. **Motion Graphics Wrap (`<CinematicIllustrationCard />`)**:
-   - Wrapped in tactile 3D card tilt (`PhysicalCard tiltX={3} tiltY={-3}`), 2.5D Ken Burns slow zoom-drift (1.0x -> 1.07x), specular diagonal glass glare sheen sweep, anchored masking tape strip (`TapeStrip`), and monospace telemetry HUD badge (`COGNITIVE DIAGNOSTIC // 01`).
+   - Clean gallery editorial presentation: wrapped in tactile 3D card tilt (`PhysicalCard tiltX={3} tiltY={-3}`), 2.5D Ken Burns slow zoom-drift (1.0x -> 1.07x), and specular diagonal glass glare sheen sweep.
+   - **Strict Visual Bans**: NO masking tape strips, NO fake sci-fi telemetry HUD bars (`LIVE SIGNAL`), NO fake weather/kinetic badges (`ATMOSPHERIC CHANCE`), and NO redundant hook text blocks on the card (kinetic subtitles below handle reading and spoken words).
    - Sits behind the opening tactical meme hook and is revealed as the meme collapses.
 
 ---

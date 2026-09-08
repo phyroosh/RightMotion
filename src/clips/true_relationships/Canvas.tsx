@@ -28,12 +28,8 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
         <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
           <CinematicIllustrationCard
             imageSrc="true_relationships/assets/scene_illustration.png"
-            title="Ever feel like genuine love disappeared the moment relationships became online content?"
-            subtitle="Psychologists call this Curated Distortion."
-            badgeLabel="COGNITIVE DIAGNOSTIC // 01"
             accentColor="blue"
             entranceFrame={0}
-            subtitleFrame={91}
             beats={[
             {
                         "frame": 91,
@@ -90,7 +86,7 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
       {/* ======================================================== */}
       {frame >= 292 && frame < 527 && (() => {
         const spP1 = spring({ frame: frame - 292, fps, config: { damping: 13, stiffness: 140 } });
-        const spP2 = spring({ frame: frame - 404, fps, config: { damping: 13, stiffness: 140 } });
+        const spP2 = spring({ frame: frame - 403, fps, config: { damping: 13, stiffness: 140 } });
 
         return (
           <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
@@ -109,10 +105,10 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
                 {/* Clean Uncrowded Section Header - NO RAW TOPIC LEAKS */}
                 <div className="text-center mt-1">
                   <h2 className="text-5xl font-black text-slate-950 leading-tight uppercase tracking-tight">
-                    REAL RELATIONSHIPS
+                    SOCIAL MEDIA TRAP
                   </h2>
                   <div className="text-2xl font-mono text-[#0071e3] font-bold mt-1 tracking-wider uppercase">
-                    Why Real Love Still Exists
+                    Why It Destroys Teen Focus
                   </div>
                 </div>
 
@@ -136,16 +132,17 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
                         <div className="text-3xl font-black text-slate-950">
                           Your brain judges real-life intimacy against highlight reels, mistaking quiet consistency for a lack of passion.
                         </div>
+                        
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* Progressive Item 2 (Spoken Frame: 404) */}
+                {/* Progressive Item 2 (Spoken Frame: 403) */}
                 <div
                   style={{
-                    opacity: frame >= 404 ? Math.min(1, spP2 * 1.2) : 0,
-                    transform: `scale(${frame >= 404 ? interpolate(spP2, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 404 ? interpolate(spP2, [0, 1], [25, 0]) : 25}px)`,
-                    pointerEvents: frame >= 404 ? "auto" : "none",
+                    opacity: frame >= 403 ? Math.min(1, spP2 * 1.2) : 0,
+                    transform: `scale(${frame >= 403 ? interpolate(spP2, [0, 1], [0.8, 1]) : 0.8}) translateY(${frame >= 403 ? interpolate(spP2, [0, 1], [25, 0]) : 25}px)`,
+                    pointerEvents: frame >= 403 ? "auto" : "none",
                   }}
                 >
                   <div className="p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg">
@@ -157,6 +154,7 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
                         <div className="text-3xl font-black text-slate-950">
                           Healthy love is private, unglamorous, and boring to an algorithm.
                         </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -169,51 +167,59 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
       })()}
 
       {/* ======================================================== */}
-      {/* SCENE 3: THE SPOKEN CTA FINALE (Frames 527+)             */}
+      {/* SCENE 3: SOLUTION PROTOCOL / PRODUCT SHOWCASE (Frames 527 - 598) */}
       {/* ======================================================== */}
       {frame >= 527 && (() => {
-        const spCard = spring({ frame: frame - 527, fps, config: { damping: 14, stiffness: 130 } });
-        const spFinale = spring({ frame: frame - 659, fps, config: { damping: 14, stiffness: 130 } });
+        const spSolCutout = spring({ frame: frame - 527, fps, config: { damping: 13, stiffness: 140 } });
+        const spFinale = spring({ frame: frame - 660, fps, config: { damping: 13, stiffness: 140 } });
 
         return (
-          <div
-            className="absolute top-[11%] w-full max-w-[920px] flex flex-col items-center z-20 pointer-events-none"
-            style={{
-              opacity: Math.min(1, spCard * 1.2),
-              transform: `translateY(${interpolate(spCard, [0, 1], [-25, 0])}px) scale(${interpolate(spCard, [0, 1], [0.94, 1])})`,
-            }}
-          >
-            <div className="relative w-full">
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
-                <TapeStrip position="center-top" width={170} height={44} enableWobble />
+          <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
+            <div className="relative w-full max-w-[920px]">
+              <div className="absolute -top-7 left-8 z-30 pointer-events-none">
+                <TapeStrip position="top-left" width={180} height={48} enableWobble />
               </div>
 
               <PhysicalCard
-                tiltX={2}
-                tiltY={-2}
-                elevation={38}
+                tiltX={3}
+                tiltY={-3}
+                elevation={45}
                 impactMs={17567}
-                className="w-full p-7 rounded-3xl bg-white/95 border-2 border-sky-300/80 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-3"
+                className="w-full p-8 rounded-3xl bg-white/95 border-2 border-sky-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
               >
-                <div className="px-6 py-2 rounded-full bg-amber-100/90 border border-amber-300 text-amber-900 font-mono font-black text-2xl uppercase tracking-wider flex items-center gap-2.5">
-                  <Sparkles className="w-6 h-6 text-amber-600" />
-                  <span>BE HONEST</span>
-                </div>
-
-                <h3 className="text-4xl font-black text-slate-950 leading-snug tracking-tight px-4">
-                  Has scrolling ever made you question an otherwise good relationship?
+                <h3 className="text-5xl font-black text-slate-950 leading-tight mt-1">
+                  Be honest: has scrolling ever made you question an otherwise good relationship?
                 </h3>
 
                 <div
-                  className="w-full transition-all mt-2"
+                  className="w-full flex justify-center items-center my-2 transition-all"
                   style={{
-                    opacity: frame >= 659 ? Math.min(1, spFinale * 1.2) : 0,
-                    transform: `scale(${frame >= 659 ? interpolate(spFinale, [0, 1], [0.8, 1]) : 0.8})`,
+                    opacity: frame >= 527 ? Math.min(1, spSolCutout * 1.2) : 0,
+                    transform: `scale(${frame >= 527 ? interpolate(spSolCutout, [0, 1], [0.6, 1]) : 0.6}) translateY(${frame >= 527 ? interpolate(spSolCutout, [0, 1], [30, 0]) : 30}px)`,
+                    pointerEvents: frame >= 527 ? "auto" : "none",
                   }}
                 >
-                  <div className="w-full p-4 rounded-2xl bg-sky-50 border border-sky-300/80 flex items-center justify-center gap-3 text-3xl font-black text-[#0071e3] shadow-md">
-                    <Sparkles className="w-7 h-7 text-sky-500 shrink-0" />
-                    <span>Tell me below 👇</span>
+                  <ProCutout
+                    assetId="hyperrealistic_3d_glowing_brain"
+                    glowColor="amber"
+                    animation="stamp_impact"
+                    width={420}
+                    height={320}
+                    ghostText="REWIRE"
+                  />
+                </div>
+
+                <div
+                  className="w-full transition-all"
+                  style={{
+                    opacity: frame >= 660 ? Math.min(1, spFinale * 1.2) : 0,
+                    transform: `scale(${frame >= 660 ? interpolate(spFinale, [0, 1], [0.8, 1]) : 0.8})`,
+                    pointerEvents: frame >= 660 ? "auto" : "none",
+                  }}
+                >
+                  <div className="w-full p-5 rounded-2xl bg-black/60 border border-emerald-500/30 flex items-center justify-center gap-3 text-3xl font-black text-[#0071e3] shadow-xl">
+                    <Sparkles className="w-7 h-7 text-emerald-400 shrink-0" />
+                    <span>Tell me below.</span>
                   </div>
                 </div>
               </PhysicalCard>
@@ -228,8 +234,8 @@ export const TrueRelationshipsCanvas: React.FC<CanvasProps> = () => {
       <InteractiveEngagementPill
         entranceFrame={471}
         durationFrames={105}
-        prompt="Doubted real love from scrolling? Tell me below 👇"
-        tag="BE HONEST"
+        prompt="Mistaken anxiety for chemistry? Tell me below 👇"
+        tag="CONFESSION"
         icon="brain"
         theme="apple_studio"
       />

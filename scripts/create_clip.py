@@ -1050,12 +1050,8 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = ({{ currentMs }}
         <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-200">
           <CinematicIllustrationCard
             imageSrc="{illustration_path}"
-            title="{c1_hook_text}"
-            subtitle="{c1_problem_text}"
-            badgeLabel="COGNITIVE DIAGNOSTIC // 01"
             accentColor="{accent_choice}"
             entranceFrame={{{s1_start}}}
-            subtitleFrame={{{s1_subtitle_frame}}}
             beats={{{beats_json}}}
             width={{920}}
             height={{520}}

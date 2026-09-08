@@ -76,7 +76,7 @@ const SFX_CUES: SfxCue[] = [
     "volume": 0.26
   },
   {
-    "frame": 404,
+    "frame": 403,
     "type": "click",
     "volume": 0.26
   },
@@ -86,7 +86,7 @@ const SFX_CUES: SfxCue[] = [
     "volume": 0.32
   },
   {
-    "frame": 659,
+    "frame": 660,
     "type": "click",
     "volume": 0.32
   }
