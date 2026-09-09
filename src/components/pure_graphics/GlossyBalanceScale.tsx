@@ -116,12 +116,12 @@ export const GlossyBalanceScale: React.FC<GlossyBalanceScaleProps> = ({
         >
           {/* Frosted Glass Beam */}
           <div
-            className="absolute left-0 right-0 h-4 rounded-full"
+            className="absolute left-0 right-0 h-6 rounded-full"
             style={{
               background:
-                "linear-gradient(90deg, rgba(244,63,94,0.4) 0%, rgba(255,255,255,0.4) 50%, rgba(16,185,129,0.4) 100%)",
-              border: "1px solid rgba(255, 255, 255, 0.3)",
-              boxShadow: "0 0 25px rgba(255, 255, 255, 0.2)",
+                "linear-gradient(90deg, rgba(244,63,94,0.5) 0%, rgba(255,255,255,0.6) 50%, rgba(16,185,129,0.5) 100%)",
+              border: "2px solid rgba(255, 255, 255, 0.4)",
+              boxShadow: "0 0 30px rgba(255, 255, 255, 0.3)",
             }}
           />
 
@@ -133,26 +133,26 @@ export const GlossyBalanceScale: React.FC<GlossyBalanceScaleProps> = ({
               transition: "transform 0.05s linear",
             }}
           >
-            {/* Hanging Cable */}
-            <div className="w-[2px] h-16 bg-white/20" />
+            {/* Hanging Cable - Bold 4px for mobile */}
+            <div className="w-[4px] h-16 bg-white/40" style={{ boxShadow: "0 0 8px rgba(255,255,255,0.2)" }} />
 
             {/* Glowing Pan Card */}
             <div
-              className="p-4 rounded-2xl flex flex-col items-center text-center shadow-2xl"
+              className="px-6 py-4 rounded-2xl flex flex-col items-center text-center shadow-2xl"
               style={{
-                width: `${panWidth}px`,
-                background: "rgba(15, 23, 42, 0.85)",
-                border: `2px solid ${leftColor}66`,
-                boxShadow: `0 0 25px ${leftColor}33`,
+                width: `${Math.max(panWidth, 240)}px`,
+                background: "rgba(10, 15, 28, 0.92)",
+                border: `2.5px solid ${leftColor}88`,
+                boxShadow: `0 0 30px ${leftColor}44`,
               }}
             >
               <span
-                className="text-xs font-mono font-black tracking-widest uppercase"
+                className="text-base font-mono font-black tracking-widest uppercase"
                 style={{ color: leftColor }}
               >
                 {leftLabel}
               </span>
-              <span className="text-sm font-bold text-slate-300 mt-1">
+              <span className="text-xl font-display font-extrabold text-white mt-1.5 leading-snug">
                 {leftSub}
               </span>
             </div>
@@ -166,26 +166,26 @@ export const GlossyBalanceScale: React.FC<GlossyBalanceScaleProps> = ({
               transition: "transform 0.05s linear",
             }}
           >
-            {/* Hanging Cable */}
-            <div className="w-[2px] h-16 bg-white/20" />
+            {/* Hanging Cable - Bold 4px for mobile */}
+            <div className="w-[4px] h-16 bg-white/40" style={{ boxShadow: "0 0 8px rgba(255,255,255,0.2)" }} />
 
             {/* Glowing Pan Card */}
             <div
-              className="p-4 rounded-2xl flex flex-col items-center text-center shadow-2xl"
+              className="px-6 py-4 rounded-2xl flex flex-col items-center text-center shadow-2xl"
               style={{
-                width: `${panWidth}px`,
-                background: "rgba(15, 23, 42, 0.85)",
-                border: `2px solid ${rightColor}88`,
-                boxShadow: `0 0 35px ${rightColor}55`,
+                width: `${Math.max(panWidth, 240)}px`,
+                background: "rgba(10, 15, 28, 0.92)",
+                border: `2.5px solid ${rightColor}`,
+                boxShadow: `0 0 40px ${rightColor}66`,
               }}
             >
               <span
-                className="text-xs font-mono font-black tracking-widest uppercase"
+                className="text-base font-mono font-black tracking-widest uppercase"
                 style={{ color: rightColor }}
               >
                 {rightLabel}
               </span>
-              <span className="text-sm font-bold text-slate-100 mt-1">
+              <span className="text-xl font-display font-extrabold text-white mt-1.5 leading-snug">
                 {rightSub}
               </span>
             </div>

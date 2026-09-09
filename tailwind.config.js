@@ -20,22 +20,28 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: [
+        display: [
+          "Montserrat",
           "-apple-system",
           "BlinkMacSystemFont",
-          "SF Pro Display",
-          "SF Pro Text",
-          "Inter",
-          "Helvetica Neue",
           "sans-serif",
+        ],
+        sans: [
+          "Montserrat",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Inter",
+          "sans-serif",
+        ],
+        mono: [
+          "JetBrains Mono",
+          "SF Mono",
+          "Menlo",
+          "monospace",
         ],
         serif: [
           "Playfair Display",
           "Didot",
-          "Bodoni MT",
-          "Cinzel",
-          "Georgia",
-          "Cambria",
           "serif",
         ],
         handwriting: [

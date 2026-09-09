@@ -591,15 +591,62 @@ def align_concepts(concepts, words_list, fps=30):
             prev_end = aligned[-1]["endMs"] if aligned else 0
             start_ms = prev_end + 300
             end_ms = start_ms + 2000
-        
-        aligned.append({
-            "text": c,
-            "startMs": start_ms,
-            "endMs": end_ms,
-            "startFrame": round((start_ms / 1000) * fps),
-            "endFrame": round((end_ms / 1000) * fps)
+def extract_scene_typo_ladders(script_text: str, topic: str = "") -> list:
+    """
+    Extracts 4 scene-specific 3-tier Kinetic Typographic Ladders from the script text:
+      - Line 1 (leadIn): Context lead-in (2-4 words)
+      - Line 2 (slamWord): Massive power headline word (1-2 words)
+      - Line 3 (punchText): Bounded focus phrase (2-3 words)
+    Dynamically parses the actual script sentences so every topic receives bespoke typography!
+    """
+    cleaned = re.sub(r"^\s*(?:judy|andrew)\s*:\s*", "", script_text, flags=re.IGNORECASE | re.MULTILINE)
+    
+    # Split on sentence terminals
+    raw_sentences = [s.strip() for s in re.split(r'(?<=[.?!])\s+', cleaned) if s.strip()]
+    if len(raw_sentences) < 4:
+        raw_sentences = [s.strip() for s in re.split(r'[,;:—–]\s+', cleaned) if s.strip()]
+
+    stop_words = {
+        "a", "an", "the", "in", "on", "at", "to", "for", "of", "with", "by", "from",
+        "up", "about", "into", "over", "after", "is", "are", "was", "were", "be",
+        "been", "being", "have", "has", "had", "do", "does", "did", "and", "but",
+        "or", "as", "if", "when", "than", "that", "this", "these", "those", "then",
+        "so", "what", "which", "who", "whom", "there", "their", "they",
+        "you", "your", "we", "our", "he", "his", "she", "her", "it", "its"
+    }
+
+    results = []
+    default_leads = ["NOTICE HOW YOU", "THE MECHANISM IS", "THE HIDDEN TRAP", "THE PROTOCOL IS"]
+
+    for i in range(4):
+        sent = raw_sentences[i] if i < len(raw_sentences) else (raw_sentences[-1] if raw_sentences else (topic or "THE FOCUS"))
+        words = [re.sub(r"[^\w\-]", "", w).upper() for w in sent.split() if re.sub(r"[^\w\-]", "", w)]
+        content_words = [w for w in words if w.lower() not in stop_words and len(w) > 2]
+
+        if not content_words:
+            content_words = words if words else ["FOCUS", "SYSTEM"]
+
+        lead = default_leads[i]
+        slam = content_words[0] if len(content_words) >= 1 else "PARADOX"
+        punch = " ".join(content_words[1:3]) if len(content_words) >= 3 else (content_words[1] if len(content_words) >= 2 else "DAILY PROTOCOL")
+
+        if len(words) >= 5:
+            first_two = " ".join(words[:2])
+            for prefix in ["YOUR BRAIN", "YOU PROCRASTINATE", "YOU WAKE", "NOTICE HOW", "WHY YOU", "HEAD HITS", "EARNING MORE", "BREAK THE", "THE FIX"]:
+                if first_two.startswith(prefix):
+                    lead = first_two
+                    slam = content_words[1] if len(content_words) > 1 else content_words[0]
+                    punch = " ".join(content_words[2:4]) if len(content_words) >= 4 else (" ".join(content_words[1:3]) if len(content_words) >= 3 else punch)
+                    break
+
+        results.append({
+            "leadIn": lead,
+            "slamWord": slam,
+            "punchText": punch or "DAILY PROTOCOL"
         })
-    return aligned
+
+    return results
+
 
 def generate_glossy_canvas_code(
     pascal_name: str,
@@ -611,23 +658,20 @@ def generate_glossy_canvas_code(
     total_frames: int,
     meme_jsx: str = "",
     sticker_jsx: str = "",
+    script_text: str = "",
+    topic: str = "",
+    niche: str = "self_improvement",
 ) -> str:
     """
     🎬 AFTER EFFECTS-GRADE MULTI-LAYER CANVAS GENERATOR
-    ====================================================
-    Generates Jordan Brown-quality $10k motion design compositions.
-    Every scene has 5–8 LAYERED elements revealing at DIFFERENT FRAMES:
-      - Atmospheric glow orbs pulsing behind elements
-      - Cinematic camera push-in (scale 1.0→1.06 bezier)
-      - Asymmetric graph+callout layouts (NOT centered single component)
-      - Floating data callout pins with spring-bounce entrance
-      - Staggered metric counters that spin up
-      - Neon word slams (individual words at different start frames)
-      - Frosted-glass side panels sliding in from opposite sides
-      - Glowing separator lines that draw themselves
-      - GlossyFloorStage is GONE — raw layout with direct positioning
+    ===================================================
+    Scaffolds a clean, topic-tailored Remotion canvas with exact frame boundaries,
+    dynamic kinetic typo ladders, and structured pure graphics components.
+    AI Agents must customize each scene's animations to match the video's specific semantics!
     """
     storyboard = motion_plan.get("storyboard", []) if motion_plan else []
+    typo_ladders = extract_scene_typo_ladders(script_text, topic)
+    scene_theme = "light" if niche == "self_improvement" else "dark"
 
     # Determine 4 distinct scene boundaries
     s4_start = s3_start + max(80, (total_frames - s3_start) // 2)
@@ -640,7 +684,6 @@ def generate_glossy_canvas_code(
         (s4_start, total_frames),
     ]
 
-    # Pull archetypes & colors from motion plan
     default_archetypes = [
         ("GlossyGlowGraph",        "rgba(244, 63, 94, 0.22)",  "#f43f5e",  "THE PARADOX"),
         ("GlossyFrictionSlider",   "rgba(16, 185, 129, 0.20)", "#10b981",  "THE MECHANISM"),
@@ -661,20 +704,17 @@ def generate_glossy_canvas_code(
     def make_scene_block(idx: int) -> str:
         start_f, end_f = scene_bounds[idx]
         arch, glow, color, title, motion = scene_archetypes[idx]
+        ladder = typo_ladders[idx]
         is_last = (idx == 3)
         cond = f"frame >= {start_f}" if is_last else f"frame >= {start_f} && frame < {end_f}"
 
-        # Opposite accent color (green if primary red/amber, rose if primary green)
         accent2 = "#10b981" if color in ("#f43f5e", "#fb923c", "#fbbf24") else "#f43f5e"
 
-        # ── Scene 1: Hook ─ Asymmetric dual-curve graph LEFT + callouts RIGHT ──
+        # ── Scene 1: Hook ─ Kinetic Typographic Ladder + Graph LEFT + Callouts RIGHT ──
         if idx == 0:
             return f"""      {{/* ======================== SCENE 1: {title} (Frames {start_f}-{end_f}) ======================== */}}
       {{{cond} && (() => {{
-        const cam1 = interpolate(frame, [{start_f}, {end_f}], [1.0, 1.06], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.0, 0.0, 0.2, 1.0) }});
-        const sp1  = spring({{ frame: Math.max(0, frame - {start_f}), fps, config: {{ damping: 18, mass: 0.9, stiffness: 100 }} }});
-        const titleOp = interpolate(sp1, [0, 0.4], [0, 1], {{ extrapolateRight: "clamp" }});
-        const titleY  = interpolate(sp1, [0, 1], [14, 0]);
+        const cam1 = interpolate(frame, [{start_f}, {end_f}], [1.0, 1.05], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.0, 0.0, 0.2, 1.0) }});
         const c1Op  = interpolate(frame, [{start_f + 45}, {start_f + 65}], [0, 1], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
         const c1X   = interpolate(frame, [{start_f + 45}, {start_f + 65}], [-16, 0], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
         const c2Op  = interpolate(frame, [{start_f + 62}, {start_f + 82}], [0, 1], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp" }});
@@ -684,25 +724,41 @@ def generate_glossy_canvas_code(
         return (
           <div className="absolute inset-0" style={{{{ transform: `scale(${{cam1}})`, transformOrigin: "55% 50%" }}}}>
             {{/* Atmospheric glow orbs */}}
-            <div className="absolute pointer-events-none" style={{{{ left: "35%", top: "52%", width: `${{580 * breathe}}px`, height: `${{580 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {glow} 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
-            <div className="absolute pointer-events-none" style={{{{ left: "72%", top: "36%", width: `${{240 * breathe}}px`, height: `${{240 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}22 0%, transparent 65%)", borderRadius: "50%", filter: "blur(20px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "35%", top: "54%", width: `${{580 * breathe}}px`, height: `${{580 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {glow} 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "72%", top: "42%", width: `${{240 * breathe}}px`, height: `${{240 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}22 0%, transparent 65%)", borderRadius: "50%", filter: "blur(20px)" }}}} />
 
-            {{/* GRAPH — shifted left-center */}}
-            <div className="absolute" style={{{{ left: "-4%", top: "50%", transform: "translateY(-52%)" }}}}>
+            {{/* ── 3-TIER KINETIC TYPOGRAPHIC LADDER ── */}}
+            <KineticTypoLadder
+              leadIn="{ladder['leadIn']}"
+              slamWord="{ladder['slamWord']}"
+              punchText="{ladder['punchText']}"
+              startFrame={{{start_f + 3}}}
+              theme="{scene_theme}"
+              accentColor="{color}"
+              showSelectionBox={{true}}
+              showCursor={{true}}
+              cursorType="arrow"
+              yOffset="10%"
+              align="center"
+            />
+
+            {{/* GRAPH — shifted left-center below typography */}}
+            <div className="absolute" style={{{{ left: "-4%", top: "56%", transform: "translateY(-50%)" }}}}>
               <GlossyGlowGraph
                 title=""
-                entranceFrame={{{start_f + 5}}}
+                entranceFrame={{{start_f + 8}}}
                 yLabel="INTENSITY"
-                xLabels={{["START", "MID-DAY", "EVENING", "PEAK"]}}
+                xLabels={{["PHASE 1", "PHASE 2", "PHASE 3", "PEAK"]}}
                 showFloorReflection={{true}}
-                reflectionOpacity={{0.30}}
+                reflectionOpacity={{0.25}}
+                theme="{scene_theme}"
                 curves={{[
                   {{
                     id: "optimal_{idx}",
                     label: "OPTIMAL",
                     color: "{accent2}",
                     glowColor: "{accent2}",
-                    startFrame: {start_f + 12},
+                    startFrame: {start_f + 14},
                     durationFrames: 38,
                     showArrow: true,
                     pathD: "M 100 310 C 160 130, 240 100, 310 128 C 390 165, 470 295, 548 318",
@@ -712,7 +768,7 @@ def generate_glossy_canvas_code(
                   }},
                   {{
                     id: "trap_{idx}",
-                    label: "THE TRAP",
+                    label: "FRICTION",
                     color: "{color}",
                     glowColor: "{color}",
                     startFrame: {start_f + 30},
@@ -729,90 +785,71 @@ def generate_glossy_canvas_code(
               />
             </div>
 
-            {{/* GLOWING TITLE — top-right slam */}}
-            <div className="absolute pointer-events-none" style={{{{ left: "57%", top: "8%", opacity: titleOp, transform: `translateY(${{titleY}}px)` }}}}>
-              <span className="block font-black uppercase" style={{{{ fontSize: "72px", color: "#fff", textShadow: `0 0 24px {color}, 0 0 55px {color}88`, letterSpacing: "0.05em", lineHeight: 1 }}}}>
-                {title.split()[0] if title.split() else title}
-              </span>
-              <span className="block font-bold uppercase" style={{{{ fontSize: "42px", color: "#ffffffcc", letterSpacing: "0.08em", lineHeight: 1, marginTop: "4px", textShadow: "0 0 16px rgba(255,255,255,0.3)" }}}}>
-                {(" ".join(title.split()[1:]) or "PARADOX")}
-              </span>
-              {{/* Glow separator */}}
-              <div style={{{{ marginTop: "14px", height: "2px", width: `${{interpolate(frame, [{start_f + 25}, {start_f + 48}], [0, 180], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp" }})}}px`, background: "linear-gradient(to right, {color}cc, transparent)", boxShadow: "0 0 12px {color}88" }}}} />
-            </div>
-
-            {{/* STAGGERED DATA CALLOUTS — right side */}}
-            <div className="absolute pointer-events-none" style={{{{ left: "60%", top: "38%", opacity: c1Op, transform: `translateX(${{c1X}}px)` }}}}>
-              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{accent2}12", border: "1.5px solid {accent2}45", backdropFilter: "blur(8px)", boxShadow: "0 0 18px {accent2}18" }}}}>
-                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{accent2}99", letterSpacing: "0.14em" }}}}>OPTIMAL PEAK</span>
-                <span className="text-2xl font-black font-mono" style={{{{ color: "#fff", textShadow: "0 0 16px {accent2}cc" }}}}>MORNING</span>
+            {{/* STAGGERED DATA CALLOUTS — right side (Mobile 480p High Legibility) */}}
+            <div className="absolute pointer-events-none z-20" style={{{{ left: "58%", top: "42%", opacity: c1Op, transform: `translateX(${{c1X}}px)` }}}}>
+              <div className="flex flex-col gap-1 px-6 py-4 rounded-2xl" style={{{{ background: `linear-gradient(135deg, {accent2}20 0%, rgba(10,15,28,0.95) 100%)`, border: "2.5px solid {accent2}88", backdropFilter: "blur(16px)", boxShadow: "0 12px 30px rgba(0,0,0,0.8), 0 0 20px {accent2}33" }}}}>
+                <span className="text-lg font-mono font-black tracking-widest uppercase" style={{{{ color: "{accent2}", letterSpacing: "0.15em" }}}}>PRIMARY METRIC</span>
+                <span className="text-3xl font-display font-black tracking-tight leading-none" style={{{{ color: "#fff", textShadow: "0 0 16px {accent2}cc" }}}}>{ladder['slamWord']}</span>
               </div>
             </div>
-            <div className="absolute pointer-events-none" style={{{{ left: "60%", top: "54%", opacity: c2Op }}}}>
-              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{color}10", border: "1.5px solid {color}40", backdropFilter: "blur(8px)" }}}}>
-                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{color}99", letterSpacing: "0.14em" }}}}>INVERTED SPIKE</span>
-                <span className="text-2xl font-black font-mono" style={{{{ color: "#fff", textShadow: "0 0 16px {color}cc" }}}}>MIDNIGHT</span>
-              </div>
-            </div>
-            <div className="absolute pointer-events-none" style={{{{ left: "60%", top: "70%", opacity: c3Op }}}}>
-              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "#fb923c10", border: "1.5px solid #fb923c40", backdropFilter: "blur(8px)" }}}}>
-                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "#fb923c99", letterSpacing: "0.14em" }}}}>ENERGY DEFICIT</span>
-                <span className="text-2xl font-black font-mono" style={{{{ color: "#fff", textShadow: "0 0 16px #fb923ccc" }}}}>ALL DAY</span>
+            <div className="absolute pointer-events-none z-20" style={{{{ left: "58%", top: "56%", opacity: c2Op }}}}>
+              <div className="flex flex-col gap-1 px-6 py-4 rounded-2xl" style={{{{ background: `linear-gradient(135deg, {color}20 0%, rgba(10,15,28,0.95) 100%)`, border: "2.5px solid {color}88", backdropFilter: "blur(16px)", boxShadow: "0 12px 30px rgba(0,0,0,0.8), 0 0 20px {color}33" }}}}>
+                <span className="text-lg font-mono font-black tracking-widest uppercase" style={{{{ color: "{color}", letterSpacing: "0.15em" }}}}>CORE FRICTION</span>
+                <span className="text-3xl font-display font-black tracking-tight leading-none" style={{{{ color: "#fff", textShadow: "0 0 16px {color}cc" }}}}>{ladder['punchText']}</span>
               </div>
             </div>
 
             {{/* ANIMATED COUNTER bottom-right */}}
-            <div className="absolute pointer-events-none flex flex-col items-center" style={{{{ left: "72%", bottom: "10%", opacity: c3Op }}}}>
-              <span className="font-black font-mono" style={{{{ fontSize: "46px", color: "#fff", textShadow: `0 0 24px {color}cc`, lineHeight: 1 }}}}>
-                {{Math.round(cntProg * 78)}}<span style={{{{ fontSize: "0.45em", color: "{color}", verticalAlign: "super" }}}}>%</span>
+            <div className="absolute pointer-events-none flex flex-col items-center" style={{{{ left: "74%", bottom: "6%", opacity: c3Op }}}}>
+              <span className="font-black font-mono tracking-tight" style={{{{ fontSize: "68px", color: "#fff", textShadow: `0 0 28px {color}cc`, lineHeight: 1 }}}}>
+                {{Math.round(cntProg * 85)}}<span style={{{{ fontSize: "0.5em", color: "{color}", verticalAlign: "super", marginLeft: "4px" }}}}>%</span>
               </span>
-              <span className="text-xs font-bold tracking-widest uppercase" style={{{{ color: "rgba(255,255,255,0.4)", marginTop: "4px" }}}}>daily lethargy</span>
+              <span className="text-base font-mono font-extrabold tracking-widest uppercase mt-1.5" style={{{{ color: "rgba(255,255,255,0.7)", letterSpacing: "0.18em" }}}}>intensity</span>
             </div>
-
-            {{/* Vertical glow separator */}}
-            <div className="absolute pointer-events-none" style={{{{
-              left: "57.5%", top: "28%",
-              width: "2px",
-              height: `${{interpolate(frame, [{start_f + 38}, {start_f + 62}], [0, 240], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp" }})}}px`,
-              background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.2), transparent)",
-              boxShadow: "0 0 10px rgba(255,255,255,0.1)"
-            }}}} />
           </div>
         );
       }})()}}"""
 
-        # ── Scene 2: Mechanism ─ Full-width dual graph + bottom stat row ──
+        # ── Scene 2: Mechanism ─ Kinetic Typographic Ladder + Full-width dual graph ──
         elif idx == 1:
             return f"""      {{/* ======================== SCENE 2: {title} (Frames {start_f}-{end_f}) ======================== */}}
       {{{cond} && (() => {{
         const cam2   = interpolate(frame, [{start_f}, {end_f}], [1.04, 1.0], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
         const sceneF = frame - {start_f};
-        const labelOp = interpolate(sceneF, [0, 18], [0, 1], {{ extrapolateRight: "clamp" }});
         const p1Op   = interpolate(sceneF, [58, 78], [0, 1], {{ extrapolateRight: "clamp" }});
         const p2Op   = interpolate(sceneF, [80, 100], [0, 1], {{ extrapolateRight: "clamp" }});
         const statsOp = interpolate(sceneF, [72, 92], [0, 1], {{ extrapolateRight: "clamp" }});
         const breathe = 1 + Math.sin((frame / fps) * 1.1) * 0.06;
         return (
           <div className="absolute inset-0 flex flex-col items-center justify-center" style={{{{ transform: `scale(${{cam2}})`, transformOrigin: "50% 48%" }}}}>
-            <div className="absolute pointer-events-none" style={{{{ left: "28%", top: "55%", width: `${{400 * breathe}}px`, height: `${{400 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
-            <div className="absolute pointer-events-none" style={{{{ left: "72%", top: "55%", width: `${{400 * breathe}}px`, height: `${{400 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {color}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "28%", top: "55%", width: `${{450 * breathe}}px`, height: `${{450 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(30px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "72%", top: "55%", width: `${{450 * breathe}}px`, height: `${{450 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {color}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(30px)" }}}} />
 
-            {{/* Scene label */}}
-            <div className="absolute" style={{{{ top: "7%", left: "50%", transform: "translateX(-50%)", opacity: labelOp }}}}>
-              <span className="text-sm font-black tracking-[0.25em] uppercase" style={{{{ color: "rgba(255,255,255,0.42)", letterSpacing: "0.25em" }}}}>
-                {title}
-              </span>
-            </div>
+            {{/* ── 3-TIER KINETIC TYPOGRAPHIC LADDER ── */}}
+            <KineticTypoLadder
+              leadIn="{ladder['leadIn']}"
+              slamWord="{ladder['slamWord']}"
+              punchText="{ladder['punchText']}"
+              startFrame={{{start_f + 3}}}
+              theme="{scene_theme}"
+              accentColor="{accent2}"
+              showSelectionBox={{true}}
+              showCursor={{true}}
+              cursorType="arrow"
+              yOffset="10%"
+              align="center"
+            />
 
-            {{/* Dual comparison graph */}}
-            <div style={{{{ marginTop: "32px" }}}}>
+            {{/* Dual comparison graph positioned comfortably below Typographic Ladder */}}
+            <div style={{{{ marginTop: "140px" }}}}>
               <GlossyGlowGraph
                 title=""
                 entranceFrame={{{start_f + 8}}}
-                yLabel="ENERGY"
-                xLabels={{["WAKE", "NOON", "6 PM", "MIDNIGHT"]}}
+                yLabel="EFFICIENCY"
+                xLabels={{["STAGE 1", "STAGE 2", "STAGE 3", "PEAK"]}}
                 showFloorReflection={{true}}
-                reflectionOpacity={{0.26}}
+                reflectionOpacity={{0.25}}
+                theme="{scene_theme}"
                 curves={{[
                   {{
                     id: "good_{idx}",
@@ -829,7 +866,7 @@ def generate_glossy_canvas_code(
                   }},
                   {{
                     id: "bad_{idx}",
-                    label: "TRAP",
+                    label: "FRICTION",
                     color: "{color}",
                     glowColor: "{color}",
                     startFrame: {start_f + 42},
@@ -841,146 +878,175 @@ def generate_glossy_canvas_code(
                     tipY: 88,
                   }},
                 ]}}
-                width={{820}}
-                height={{420}}
+                width={{860}}
+                height={{440}}
               />
             </div>
 
             {{/* Floating data pins above graph curves */}}
-            <div className="absolute pointer-events-none" style={{{{ left: "18%", top: "22%", opacity: p1Op }}}}>
-              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{accent2}12", border: "1.5px solid {accent2}45", backdropFilter: "blur(8px)" }}}}>
-                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{accent2}99", letterSpacing: "0.12em" }}}}>OPTIMAL CURVE</span>
-                <span className="text-xl font-black font-mono" style={{{{ color: "#fff" }}}}>MORNING PEAK</span>
+            <div className="absolute pointer-events-none z-20" style={{{{ left: "16%", top: "44%", opacity: p1Op }}}}>
+              <div className="flex flex-col gap-1 px-6 py-4 rounded-2xl" style={{{{ background: "linear-gradient(135deg, {accent2}22 0%, rgba(10,15,28,0.95) 100%)", border: "2.5px solid {accent2}88", backdropFilter: "blur(16px)", boxShadow: "0 10px 25px rgba(0,0,0,0.8)" }}}}>
+                <span className="text-lg font-mono font-black tracking-widest uppercase" style={{{{ color: "{accent2}", letterSpacing: "0.15em" }}}}>SYSTEM ADVANTAGE</span>
+                <span className="text-3xl font-display font-black tracking-tight leading-none" style={{{{ color: "#fff" }}}}>ACTIVE DRIVE</span>
               </div>
             </div>
-            <div className="absolute pointer-events-none" style={{{{ right: "5%", top: "10%", opacity: p2Op }}}}>
-              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{color}10", border: "1.5px solid {color}40", backdropFilter: "blur(8px)" }}}}>
-                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{color}99", letterSpacing: "0.12em" }}}}>INVERTED CURVE</span>
-                <span className="text-xl font-black font-mono" style={{{{ color: "#fff" }}}}>MIDNIGHT SPIKE</span>
+            <div className="absolute pointer-events-none z-20" style={{{{ right: "4%", top: "36%", opacity: p2Op }}}}>
+              <div className="flex flex-col gap-1 px-6 py-4 rounded-2xl" style={{{{ background: "linear-gradient(135deg, {color}22 0%, rgba(10,15,28,0.95) 100%)", border: "2.5px solid {color}88", backdropFilter: "blur(16px)", boxShadow: "0 10px 25px rgba(0,0,0,0.8)" }}}}>
+                <span className="text-lg font-mono font-black tracking-widest uppercase" style={{{{ color: "{color}", letterSpacing: "0.15em" }}}}>INERTIA TRAP</span>
+                <span className="text-3xl font-display font-black tracking-tight leading-none" style={{{{ color: "#fff" }}}}>FRICTION LOSS</span>
               </div>
             </div>
 
             {{/* Bottom stats row */}}
-            <div className="absolute flex gap-14 items-center" style={{{{ bottom: "5%", left: "50%", transform: "translateX(-50%)", opacity: statsOp }}}}>
+            <div className="absolute flex gap-20 items-center px-10 py-4 rounded-3xl" style={{{{ bottom: "4%", left: "50%", transform: "translateX(-50%)", opacity: statsOp, background: "rgba(10,15,28,0.88)", border: "2px solid rgba(255,255,255,0.18)", backdropFilter: "blur(20px)" }}}}>
               <div className="flex flex-col items-center gap-1">
-                <span className="text-3xl font-black font-mono" style={{{{ color: "{accent2}", textShadow: "0 0 20px {accent2}88" }}}}>+340%</span>
-                <span className="text-xs font-bold tracking-widest uppercase" style={{{{ color: "rgba(255,255,255,0.4)" }}}}>daytime energy</span>
+                <span className="text-5xl md:text-6xl font-black font-mono tracking-tight" style={{{{ color: "{accent2}", textShadow: "0 0 25px {accent2}88" }}}}>+250%</span>
+                <span className="text-base font-mono font-black tracking-widest uppercase" style={{{{ color: "rgba(255,255,255,0.8)", letterSpacing: "0.15em" }}}}>system velocity</span>
               </div>
-              <div style={{{{ width: "1px", height: "36px", background: "rgba(255,255,255,0.15)" }}}} />
+              <div style={{{{ width: "2px", height: "46px", background: "rgba(255,255,255,0.25)" }}}} />
               <div className="flex flex-col items-center gap-1">
-                <span className="text-3xl font-black font-mono" style={{{{ color: "{color}", textShadow: "0 0 20px {color}88" }}}}>−16 HRS</span>
-                <span className="text-xs font-bold tracking-widest uppercase" style={{{{ color: "rgba(255,255,255,0.4)" }}}}>delayed melatonin</span>
+                <span className="text-5xl md:text-6xl font-black font-mono tracking-tight" style={{{{ color: "{color}", textShadow: "0 0 25px {color}88" }}}}>−80%</span>
+                <span className="text-base font-mono font-black tracking-widest uppercase" style={{{{ color: "rgba(255,255,255,0.8)", letterSpacing: "0.15em" }}}}>friction drag</span>
               </div>
             </div>
           </div>
         );
       }})()}}"""
 
-        # ── Scene 3: Comparative Shift ─ Balance scale + flanking stat panels ──
+        # ── Scene 3: Comparative Shift ─ Kinetic Typographic Ladder + Balance Scale ──
         elif idx == 2:
             return f"""      {{/* ======================== SCENE 3: {title} (Frames {start_f}-{end_f}) ======================== */}}
       {{{cond} && (() => {{
         const cam3    = interpolate(frame, [{start_f}, {start_f + 90}], [0.96, 1.02], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
         const sceneF  = frame - {start_f};
-        const leftX   = interpolate(sceneF, [0, 28], [-80, 0], {{ extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const leftX   = interpolate(sceneF, [0, 28], [-40, 0], {{ extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
         const leftOp  = interpolate(sceneF, [0, 22], [0, 1], {{ extrapolateRight: "clamp" }});
-        const rightX  = interpolate(sceneF, [12, 40], [80, 0], {{ extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const rightX  = interpolate(sceneF, [12, 40], [40, 0], {{ extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
         const rightOp = interpolate(sceneF, [12, 34], [0, 1], {{ extrapolateRight: "clamp" }});
-        const labelOp = interpolate(sceneF, [0, 16], [0, 1], {{ extrapolateRight: "clamp" }});
         const breathe = 1 + Math.sin((frame / fps) * 1.1) * 0.06;
-        const rows = ["ENERGY", "CORTISOL", "SLEEP", "FOCUS"];
         return (
-          <div className="absolute inset-0 flex items-center justify-center" style={{{{ transform: `scale(${{cam3}})`, transformOrigin: "50% 50%" }}}}>
-            <div className="absolute pointer-events-none" style={{{{ left: "25%", top: "50%", width: `${{460 * breathe}}px`, height: `${{460 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {color}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
-            <div className="absolute pointer-events-none" style={{{{ left: "75%", top: "50%", width: `${{460 * breathe}}px`, height: `${{460 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
-            <div className="absolute pointer-events-none" style={{{{ left: "50%", top: "50%", width: `${{180 * breathe}}px`, height: `${{180 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, #38bdf828 0%, transparent 65%)", borderRadius: "50%", filter: "blur(16px)" }}}} />
+          <div className="absolute inset-0 flex flex-col items-center" style={{{{ transform: `scale(${{cam3}})`, transformOrigin: "50% 50%" }}}}>
+            <div className="absolute pointer-events-none" style={{{{ left: "28%", top: "45%", width: `${{500 * breathe}}px`, height: `${{500 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {color}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(30px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "72%", top: "45%", width: `${{500 * breathe}}px`, height: `${{500 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(30px)" }}}} />
 
-            {{/* Scene label */}}
-            <div className="absolute" style={{{{ top: "6%", left: "50%", transform: "translateX(-50%)", opacity: labelOp }}}}>
-              <span className="text-sm font-black tracking-[0.25em] uppercase" style={{{{ color: "rgba(255,255,255,0.4)" }}}}>THE CIRCADIAN SHIFT</span>
-            </div>
-
-            {{/* LEFT stat panel — slides from left */}}
-            <div className="absolute flex flex-col gap-2" style={{{{ left: "3%", top: "50%", transform: `translateY(-50%) translateX(${{leftX}}px)`, opacity: leftOp, width: "210px" }}}}>
-              <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{color}99", letterSpacing: "0.2em" }}}}>WITHOUT PROTOCOL</span>
-              {{rows.map((row, i) => (
-                <div key={{i}} className="flex items-center justify-between px-3 py-2 rounded-lg" style={{{{
-                  background: "rgba(244, 63, 94, 0.08)",
-                  border: "1px solid rgba(244, 63, 94, 0.22)",
-                  opacity: interpolate(sceneF, [i * 12, i * 12 + 18], [0, 1], {{ extrapolateRight: "clamp" }})
-                }}}}>
-                  <span className="text-xs font-semibold" style={{{{ color: "rgba(255,255,255,0.5)" }}}}>{{row}}</span>
-                  <span className="text-xs font-black" style={{{{ color: "{color}" }}}}>BROKEN</span>
-                </div>
-              ))}}
-            </div>
-
-            {{/* CENTER: Balance scale */}}
-            <GlossyBalanceScale
-              title=""
-              titleColor="#ffffff"
-              leftLabel="NO SUNLIGHT"
-              leftSub="Inverted curve"
-              leftColor="{color}"
-              rightLabel="MORNING LIGHT"
-              rightSub="Optimal reset"
-              rightColor="{accent2}"
-              winner="right"
-              startFrame={{{start_f}}}
-              width={{500}}
-              height={{380}}
-              glowColor="rgba(56, 189, 248, 0.18)"
-              showFloorReflection={{true}}
-              reflectionOpacity={{0.30}}
+            {{/* ── 3-TIER KINETIC TYPOGRAPHIC LADDER ── */}}
+            <KineticTypoLadder
+              leadIn="{ladder['leadIn']}"
+              slamWord="{ladder['slamWord']}"
+              punchText="{ladder['punchText']}"
+              startFrame={{{start_f + 3}}}
+              theme="{scene_theme}"
+              accentColor="{color}"
+              showSelectionBox={{true}}
+              showCursor={{true}}
+              cursorType="arrow"
+              yOffset="10%"
+              align="center"
             />
 
-            {{/* RIGHT stat panel — slides from right */}}
-            <div className="absolute flex flex-col gap-2" style={{{{ right: "3%", top: "50%", transform: `translateY(-50%) translateX(${{rightX}}px)`, opacity: rightOp, width: "210px" }}}}>
-              <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{accent2}99", letterSpacing: "0.2em" }}}}>WITH PROTOCOL</span>
-              {{rows.map((row, i) => (
-                <div key={{i}} className="flex items-center justify-between px-3 py-2 rounded-lg" style={{{{
-                  background: "rgba(16, 185, 129, 0.08)",
-                  border: "1px solid rgba(16, 185, 129, 0.22)",
-                  opacity: interpolate(sceneF, [i * 12 + 8, i * 12 + 26], [0, 1], {{ extrapolateRight: "clamp" }})
-                }}}}>
-                  <span className="text-xs font-semibold" style={{{{ color: "rgba(255,255,255,0.5)" }}}}>{{row}}</span>
-                  <span className="text-xs font-black" style={{{{ color: "{accent2}" }}}}>OPTIMAL</span>
+            {{/* CENTER: Hero Balance scale (700x400) - Lifted to top: 32% */}}
+            <div className="absolute" style={{{{ top: "32%" }}}}>
+              <GlossyBalanceScale
+                title=""
+                titleColor="#ffffff"
+                leftLabel="THE TRAP"
+                leftSub="DEFAULT FRICTION"
+                leftColor="{color}"
+                rightLabel="THE PROTOCOL"
+                rightSub="OPTIMAL LEVERAGE"
+                rightColor="{accent2}"
+                winner="right"
+                startFrame={{{start_f}}}
+                width={{700}}
+                height={{400}}
+                glowColor="rgba(56, 189, 248, 0.22)"
+                showFloorReflection={{true}}
+                reflectionOpacity={{0.25}}
+              />
+            </div>
+
+            {{/* TWO PROMINENT COMPARATIVE VERDICT CARDS (Anchored at top: 52% for zero caption collision) */}}
+            <div className="absolute flex gap-8 items-center" style={{{{ top: "52%" }}}}>
+              <div className="flex flex-col gap-2 p-6 rounded-3xl shadow-2xl" style={{{{
+                width: "440px",
+                background: "rgba(15, 23, 42, 0.92)",
+                border: "2.5px solid {color}88",
+                boxShadow: "0 25px 60px rgba(0,0,0,0.8), 0 0 30px {color}33",
+                opacity: leftOp,
+                transform: `translateX(${{leftX}}px)`,
+              }}}}>
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-mono font-black uppercase px-4 py-1.5 rounded-full" style={{{{ background: "{color}20", color: "{color}", border: "1px solid {color}66" }}}}>
+                    THE TRAP
+                  </span>
+                  <span className="text-sm font-mono font-bold text-slate-400">DEFAULT FRICTION</span>
                 </div>
-              ))}}
+                <span className="text-3xl font-display font-black text-white mt-1 leading-tight">
+                  UNCONSCIOUS INERTIA
+                </span>
+                <span className="text-lg font-mono font-bold text-rose-400">
+                  Default habits reinforce the problem
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-2 p-6 rounded-3xl shadow-2xl" style={{{{
+                width: "440px",
+                background: "rgba(15, 23, 42, 0.92)",
+                border: "2.5px solid {accent2}88",
+                boxShadow: "0 25px 60px rgba(0,0,0,0.8), 0 0 35px {accent2}35",
+                opacity: rightOp,
+                transform: `translateX(${{rightX}}px)`,
+              }}}}>
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-mono font-black uppercase px-4 py-1.5 rounded-full" style={{{{ background: "{accent2}20", color: "{accent2}", border: "1px solid {accent2}66" }}}}>
+                    THE PROTOCOL
+                  </span>
+                  <span className="text-sm font-mono font-bold text-emerald-400">OPTIMAL LEVERAGE</span>
+                </div>
+                <span className="text-3xl font-display font-black text-white mt-1 leading-tight">
+                  INTENTIONAL REWIRE
+                </span>
+                <span className="text-lg font-mono font-bold text-emerald-300">
+                  High leverage actions compound daily
+                </span>
+              </div>
             </div>
           </div>
         );
       }})()}}"""
 
-        # ── Scene 4: Solution ─ Staircase LEFT + Radial Dial RIGHT + word slam ──
+        # ── Scene 4: Solution ─ Kinetic Typographic Ladder + Staircase + Dial ──
         else:
             return f"""      {{/* ======================== SCENE 4: {title} (Frames {start_f}-end) ======================== */}}
       {{{cond} && (() => {{
         const cam4   = interpolate(frame, [{start_f}, {start_f + 120}], [0.95, 1.01], {{ extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
         const sceneF = frame - {start_f};
-        const labelOp = interpolate(sceneF, [0, 16], [0, 1], {{ extrapolateRight: "clamp" }});
         const pin1Op  = interpolate(sceneF, [30, 50], [0, 1], {{ extrapolateRight: "clamp" }});
         const pin2Op  = interpolate(sceneF, [52, 72], [0, 1], {{ extrapolateRight: "clamp" }});
-        const w1Sp = spring({{ frame: Math.max(0, sceneF - 68), fps, config: {{ damping: 14, mass: 0.6, stiffness: 180 }} }});
-        const w2Sp = spring({{ frame: Math.max(0, sceneF - 84), fps, config: {{ damping: 14, mass: 0.6, stiffness: 180 }} }});
-        const w1Scale = interpolate(w1Sp, [0, 1], [0.6, 1.0]);
-        const w1Op    = interpolate(w1Sp, [0, 0.5], [0, 1], {{ extrapolateRight: "clamp" }});
-        const w2Scale = interpolate(w2Sp, [0, 1], [0.6, 1.0]);
-        const w2Op    = interpolate(w2Sp, [0, 0.5], [0, 1], {{ extrapolateRight: "clamp" }});
-        const divH = interpolate(sceneF, [18, 42], [0, 280], {{ extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
+        const divH = interpolate(sceneF, [18, 42], [0, 320], {{ extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }});
         const breathe = 1 + Math.sin((frame / fps) * 1.1) * 0.06;
         return (
           <div className="absolute inset-0 flex items-center" style={{{{ transform: `scale(${{cam4}})`, transformOrigin: "50% 50%" }}}}>
-            <div className="absolute pointer-events-none" style={{{{ left: "68%", top: "48%", width: `${{400 * breathe}}px`, height: `${{400 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {color}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(28px)" }}}} />
-            <div className="absolute pointer-events-none" style={{{{ left: "28%", top: "52%", width: `${{300 * breathe}}px`, height: `${{300 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}22 0%, transparent 65%)", borderRadius: "50%", filter: "blur(22px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "70%", top: "54%", width: `${{480 * breathe}}px`, height: `${{480 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {color}28 0%, transparent 65%)", borderRadius: "50%", filter: "blur(30px)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "28%", top: "54%", width: `${{400 * breathe}}px`, height: `${{400 * breathe}}px`, transform: "translate(-50%,-50%)", background: "radial-gradient(ellipse, {accent2}22 0%, transparent 65%)", borderRadius: "50%", filter: "blur(25px)" }}}} />
 
-            {{/* Scene label */}}
-            <div className="absolute" style={{{{ top: "6%", left: "50%", transform: "translateX(-50%)", opacity: labelOp }}}}>
-              <span className="text-sm font-black tracking-[0.25em] uppercase" style={{{{ color: "rgba(255,255,255,0.4)" }}}}>THE PROTOCOL</span>
-            </div>
+            {{/* ── 3-TIER KINETIC TYPOGRAPHIC LADDER ── */}}
+            <KineticTypoLadder
+              leadIn="{ladder['leadIn']}"
+              slamWord="{ladder['slamWord']}"
+              punchText="{ladder['punchText']}"
+              startFrame={{{start_f + 3}}}
+              theme="{scene_theme}"
+              accentColor="{accent2}"
+              showSelectionBox={{true}}
+              showCursor={{true}}
+              cursorType="arrow"
+              yOffset="10%"
+              align="center"
+            />
 
-            {{/* LEFT: Stepped Staircase */}}
-            <div className="absolute" style={{{{ left: "0%", top: "50%", transform: "translateY(-50%)" }}}}>
+            {{/* LEFT: Stepped Staircase (500x420) */}}
+            <div className="absolute" style={{{{ left: "2%", top: "54%", transform: "translateY(-50%)" }}}}>
               <SteppedProgressionStairs
                 title=""
                 titleColor="#ffffff"
@@ -988,67 +1054,71 @@ def generate_glossy_canvas_code(
                 startFrame={{{start_f}}}
                 stepDurationFrames={{24}}
                 showFloorReflection={{true}}
-                reflectionOpacity={{0.26}}
-                width={{460}}
-                height={{380}}
+                reflectionOpacity={{0.25}}
+                theme="{scene_theme}"
+                width={{500}}
+                height={{420}}
                 steps={{[
-                  {{ id: "s1_{idx}", label: "WAKE UP" }},
-                  {{ id: "s2_{idx}", label: "STEP OUTSIDE" }},
-                  {{ id: "s3_{idx}", label: "DIRECT SUNLIGHT" }},
-                  {{ id: "s4_{idx}", label: "10–15 MIN", isGoal: true }},
+                  {{ id: "s1_{idx}", label: "STAGE 1" }},
+                  {{ id: "s2_{idx}", label: "ACTION" }},
+                  {{ id: "s3_{idx}", label: "EXECUTE" }},
+                  {{ id: "s4_{idx}", label: "MASTERY", isGoal: true }},
                 ]}}
               />
             </div>
 
             {{/* VERTICAL DIVIDER */}}
-            <div className="absolute pointer-events-none" style={{{{ left: "48%", top: "18%", width: "2px", height: `${{divH}}px`, background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.18), transparent)", boxShadow: "0 0 10px rgba(255,255,255,0.08)" }}}} />
+            <div className="absolute pointer-events-none" style={{{{ left: "50%", top: "42%", width: "3px", height: `${{divH}}px`, background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.3), transparent)", boxShadow: "0 0 14px rgba(255,255,255,0.15)" }}}} />
 
-            {{/* RIGHT: Radial Dial */}}
-            <div className="absolute" style={{{{ right: "1%", top: "50%", transform: "translateY(-52%)" }}}}>
+            {{/* RIGHT: Radial Dial (size 400) */}}
+            <div className="absolute" style={{{{ right: "3%", top: "54%", transform: "translateY(-52%)" }}}}>
               <GlossyRadialDial
                 title=""
                 titleColor="#ffffff"
                 targetPercent={{88}}
-                valueText="60 MIN"
-                labelText="WINDOW"
+                valueText="88%"
+                labelText="PROTOCOL"
                 accentColor="{color}"
                 glowColor="{glow}"
                 startFrame={{{start_f + 18}}}
-                size={{350}}
+                size={{400}}
                 showFloorReflection={{true}}
-                reflectionOpacity={{0.28}}
+                reflectionOpacity={{0.25}}
+                theme="{scene_theme}"
               />
             </div>
 
-            {{/* Floating data pins */}}
-            <div className="absolute pointer-events-none" style={{{{ left: "51%", top: "19%", opacity: pin1Op }}}}>
-              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{color}10", border: "1.5px solid {color}40", backdropFilter: "blur(8px)" }}}}>
-                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{color}99", letterSpacing: "0.12em" }}}}>MELATONIN RELEASE</span>
-                <span className="text-xl font-black font-mono" style={{{{ color: "#fff" }}}}>16 HRS LATER</span>
+            {{/* Sleek Centered Telemetry Bar (Zero graphic overlap, sitting cleanly above captions) */}}
+            <div
+              className="absolute flex gap-10 items-center px-8 py-3.5 rounded-2xl pointer-events-none z-20"
+              style={{{{
+                top: "62%",
+                left: "50%",
+                transform: "translateX(-50%)",
+                opacity: pin1Op,
+                background: "rgba(15, 23, 42, 0.94)",
+                border: "2px solid rgba(16, 185, 129, 0.6)",
+                backdropFilter: "blur(16px)",
+                boxShadow: "0 12px 35px rgba(0,0,0,0.7), 0 0 20px rgba(16, 185, 129, 0.2)",
+              }}}}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-emerald-400" style={{{{ boxShadow: "0 0 10px #10b981" }}}} />
+                <span className="text-lg font-mono font-black text-emerald-400 tracking-wider">RULE:</span>
+                <span className="text-2xl font-display font-black text-white">HIGH LEVERAGE</span>
               </div>
-            </div>
-            <div className="absolute pointer-events-none" style={{{{ left: "51%", top: "70%", opacity: pin2Op }}}}>
-              <div className="flex flex-col gap-0.5 px-4 py-2.5 rounded-xl" style={{{{ background: "{accent2}10", border: "1.5px solid {accent2}40", backdropFilter: "blur(8px)" }}}}>
-                <span className="text-xs font-black tracking-widest uppercase" style={{{{ color: "{accent2}99", letterSpacing: "0.12em" }}}}>WITHIN WAKING</span>
-                <span className="text-xl font-black font-mono" style={{{{ color: "#fff" }}}}>60 MIN</span>
+              <div style={{{{ width: "2px", height: "28px", background: "rgba(255,255,255,0.2)" }}}} />
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-amber-400" style={{{{ boxShadow: "0 0 10px #fbbf24" }}}} />
+                <span className="text-lg font-mono font-black text-amber-400 tracking-wider">GOAL:</span>
+                <span className="text-2xl font-display font-black text-white">COMPOUND REWIRE</span>
               </div>
-            </div>
-
-            {{/* Word slam bottom — two words staggered */}}
-            <div className="absolute pointer-events-none flex gap-3" style={{{{ bottom: "7%", left: "51%" }}}}>
-              <span className="font-black uppercase" style={{{{ fontSize: "38px", color: "#fff", textShadow: `0 0 22px {color}`, letterSpacing: "0.05em", opacity: w1Op, transform: `scale(${{w1Scale}})`, transformOrigin: "left center", display: "inline-block" }}}}>
-                CORTISOL
-              </span>
-              <span className="font-black uppercase" style={{{{ fontSize: "38px", color: "{accent2}", textShadow: `0 0 22px {accent2}`, letterSpacing: "0.05em", opacity: w2Op, transform: `scale(${{w2Scale}})`, transformOrigin: "left center", display: "inline-block" }}}}>
-                RESET
-              </span>
             </div>
           </div>
         );
       }})()}}"""
 
-    scene_blocks = [make_scene_block(i) for i in range(4)]
-    scenes_str = "\n\n".join(scene_blocks)
+    scenes_code = "\n\n".join(make_scene_block(i) for i in range(4))
 
     return f"""import React from "react";
 import {{ Easing, interpolate, spring, useCurrentFrame, useVideoConfig }} from "remotion";
@@ -1062,10 +1132,33 @@ import {{
   SteppedProgressionStairs,
   GlossyFeatureGrid,
   PolishStickerFloat,
+  KineticTypoLadder,
+  ArchitecturalDraftingCanvas,
+  VectorCursor,
 }} from "../../components/pure_graphics";
-import {{ TacticalMemeCard }} from "../../components/TacticalMemeCard";
-import {{ MemeStickerOverlay }} from "../../components/MemeStickerOverlay";
+{meme_jsx}
+{sticker_jsx}
 import {{ WordTimestamp }} from "../../types";
+
+/*
+ * =====================================================================================
+ * 🎬 BESPOKE MOTION DESIGN CANVAS: {pascal_name}
+ * =====================================================================================
+ * ⚠️ NOTICE TO AI AGENTS (Antigravity, Claude Code, Cursor, Codex):
+ * DO NOT LEAVE HARDCODED TEMPLATES OR DEFAULT LABELS IN THIS FILE!
+ *
+ * RightClips requires 100% bespoke, topic-tailored Remotion motion graphics.
+ * Inspect 'transcript.json' to align graphics with the speaker's exact timing.
+ * Customize the coordinate graphs, dials, scales, and cards for this topic:
+ * Topic: "{topic}"
+ *
+ * SCENE STRUCTURE FOR THIS VIDEO:
+ * - Scene 1 (Frames {s1_start}-{s2_start}): Hook / Problem — Introduce the Paradox
+ * - Scene 2 (Frames {s2_start}-{s3_start}): Mechanism / Logic — Explain the System
+ * - Scene 3 (Frames {s3_start}-{s4_start}): Twist / Trap — Comparative Breakdown
+ * - Scene 4 (Frames {s4_start}-{total_frames}): High-Leverage Solution — Protocol Resolution
+ * =====================================================================================
+ */
 
 interface CanvasProps {{
   transcript: WordTimestamp[];
@@ -1194,10 +1287,10 @@ export const {pascal_name}Background: React.FC = () => {{
         glow_solution = "amber"
     else: # self_improvement
         bg_code = f"""import React from "react";
-import {{ LivingStudioBackground }} from "../../components/LivingStudioBackground";
+import {{ ArchitecturalDraftingCanvas }} from "../../components/pure_graphics";
 
 export const {pascal_name}Background: React.FC = () => {{
-  return <LivingStudioBackground />;
+  return <ArchitecturalDraftingCanvas theme="light" />;
 }};
 """
         card_class = "w-full p-8 rounded-3xl bg-white/95 border-2 border-sky-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
@@ -1692,6 +1785,9 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
             total_frames=total_frames,
             meme_jsx=meme_jsx,
             sticker_jsx=sticker_jsx,
+            script_text=script_text,
+            topic=topic,
+            niche=niche,
         )
     else:
         canvas_code = f"""import React from "react";
@@ -2054,6 +2150,7 @@ async def main():
     parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
+    parser.add_argument("--render", action="store_true", help="Render final MP4/PNG immediately (default: False, AI Agent should edit Canvas.tsx first)")
 
     args = parser.parse_args()
     
@@ -2279,8 +2376,20 @@ async def main():
     register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche, pinned_comment=script_pinned_comment, script_text=clean_script)
 
     # Step 4: Render
-    if not args.no_render:
+    if args.render and not args.no_render:
         render_assets(name, pascal_name)
+    else:
+        print("\n" + "=" * 80)
+        print(f"🎬 CLIP SCAFFOLDED: {name} ({pascal_name})")
+        print("=" * 80)
+        print(f"✨ Audio, transcript timestamps, and registered composition are ready!")
+        print(f"📁 Starter Canvas: src/clips/{name}/Canvas.tsx")
+        print("\n👉 MANDATORY AI AGENT ACTION:")
+        print(f"1. Open src/clips/{name}/Canvas.tsx.")
+        print(f"2. Write 100% bespoke Remotion motion graphics tailored to '{topic}'.")
+        print(f"3. Verify stills: npx remotion still src/index.ts {pascal_name}Video out/{name}_scene1.png --frame=80")
+        print(f"4. Render video: npx remotion render src/index.ts {pascal_name}Video out/{name}_video.mp4")
+        print("=" * 80 + "\n")
 
 if __name__ == "__main__":
     asyncio.run(main())

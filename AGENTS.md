@@ -7,10 +7,12 @@ This document is the **authoritative specification** for any AI Agent (Antigravi
 ## 🚀 RULE 0: MANDATORY AUTONOMOUS END-TO-END EXECUTION DIRECTIVE
 
 > [!CRITICAL]
-> **A TOPIC SUBMISSION IS AN ORDER TO PRODUCE THE FULL VIDEO, NOT JUST A SCRIPT!**
-> When a user submits any topic prompt with channel brackets (e.g. `Topic {Self Improvement}: ...`, `{Finance} ...`, etc.):
-> **The AI Agent MUST NOT HALT after generating the script!**
-> The AI Agent MUST autonomously execute the complete 4-step production workflow in that **SAME turn**:
+> **RIGHTCLIPS IS AN AGENTIC REMOTION ENGINE, NOT A STATIC TEMPLATE GENERATOR!**
+> A topic submission is an order to **code bespoke, After Effects-grade Remotion motion graphics from scratch** in `Canvas.tsx` for that exact topic!
+> Reusing the same hardcoded graphics (like cortisol/melatonin curves, sleep scales, or generic placeholders) across different topics is **STRICTLY PROHIBITED**.
+> Every topic has unique biological, psychological, or conceptual mechanics that the AI Agent MUST visually represent in Remotion.
+>
+> The AI Agent MUST autonomously execute the complete 5-step production workflow in that **SAME turn**:
 >
 > 1. **Step 1 — Script & Viral Metadata**:
 >    - Formulate the script using the **3-Pillar Pure Information Architecture**: Introduce Problem > Explain the Logic > Deliver the Solution.
@@ -18,32 +20,53 @@ This document is the **authoritative specification** for any AI Agent (Antigravi
 >    - **STRICTLY NO CTA AT THE END!** Pure high-density information only. ZERO ending questions, ZERO passive pitches, ZERO comments requests.
 >    - **Mode B (Organic Growth)** is DEFAULT: strictly skip PDF hunting and omit the `[METADATA]` block. (Mode A product PDF search ONLY runs when `{meta}` is explicitly present).
 >    - Generate an authoritative `[PINNED COMMENT]` summarizing the core takeaway or protocol rule.
-> 2. **Step 2 — Professional After Effects Motion Design Planning (MANDATORY)**:
->    - **Plan like a Senior After Effects / Cinema 4D Motion Design Artist before touching code!**
->    - Run:
->      ```bash
->      python3 scripts/plan_motion_design.py --topic "<topic>" --script "<script>"
->      ```
->    - Formulate a scene-by-scene storyboard (Beats 1–4) enforcing the **10/10 Dark Glossy Reflection System**:
->      - **Mandatory Judy Intro Pop-Up**: For `{Self Improvement}` videos, Judy pops up waist-up at Frame 0 (0.0s – ~3.8s / Frames 0–110) with eye contact and downward glossy wet-floor reflection (`GlossyJudyIntro`), then gently glides out before Scene 2.
->      - **Strict Anti-Repetition Law**: The 4 scenes in any video must each employ **distinct motion archetypes** from the 9-archetype library. Never repeat the same graphic twice in a single video.
->      - **Fast-Paced yet Gentle Non-Linear Easing**: All vector graphs and motion elements must utilize cubic-bezier path trimming (`Easing.bezier(0.22, 1, 0.36, 1)`), gentle living wave micro-motion (`Math.sin`), and damped spring torque. Linear animations are permanently banned.
->      - **Scene 1 (Hook/Paradox — Introduce the Problem)**: Upright glowing vector graph (`GlossyGlowGraph`) with starting tension/spike curve, glowing focus title, and downward wet-floor mirror reflection.
->      - **Scene 2 (Mechanism — Explain the Logic)**: Tactile friction slider (`GlossyFrictionSlider`) dragged by authentic glove pointer cursor (`public/assets/cursor_pointer.png`), frosted glass switchboard (`GlossyToggleBoard`), or 3D asset float (`PolishStickerFloat`).
->      - **Scene 3 (Twist / Comparative Shift — Logic Deep-Dive)**: Dynamic comparative balance see-saw (`GlossyBalanceScale`), dual-curve comparative graph (`GlossyGlowGraph`), or vertical comparative columns (`GlossyBarChart`).
->      - **Scene 4 (High-Leverage Solution & Protocol Resolution)**: 360° circular progress gauge / chronograph (`GlossyRadialDial`), frosted glass staircase (`SteppedProgressionStairs`) with hopping radiant golden orb up to the Goal, or optimal resolution curve. (ZERO CTA).
->    - **Strict Anti-Clutter Laws**: Exactly 1–2 uppercase glowing focus words per scene. ZERO small pills or diagnostic tags. Spoken words handled 100% by dark neon `AppleKineticCaptions`.
-> 3. **Step 3 — Clean Editorial Hero Illustration (When applicable)**:
->    - Derive the prompt using `python3 scripts/generate_illustration_prompt.py --topic "<topic>" --script "<hook>"`.
->    - Call `generate_image` with `AspectRatio="16:9"` (do NOT pass fixed reference images). Save to `public/<clip_name>/assets/scene_illustration.png`.
-> 4. **Step 4 — Master CLI Execution**:
+>
+> 2. **Step 2 — Plumbing Setup via CLI**:
 >    - Execute:
 >      ```bash
 >      .venv/bin/python3 scripts/create_clip.py --name "<clip_name>" --topic "<topic>" --script "<script>" [--andrew] [--meta]
 >      ```
->    - This autonomously synthesizes neural audio (with fast-paced tempo and pause compression), transcribes Faster-Whisper timestamps, selects the tactical meme, scaffolds the 10/10 pure graphics components, and registers the 4K thumbnail.
-> 5. **Step 5 — Final Audit & Delivery**:
->    - Verify the scaffolded composition and deliver the final viral title, thumbnail title, and pinned comment to the user.
+>    - This autonomously synthesizes neural audio, transcribes word-level Faster-Whisper timestamps (`transcript.json`), selects the opening tactical meme, registers the composition in `Root.tsx`, and scaffolds a clean starter `Canvas.tsx`.
+>    - **Note**: `create_clip.py` does NOT render the final video by default because the AI Agent MUST write `Canvas.tsx` in Step 3 first!
+>
+> 3. **Step 3 — BESPOKE REMOTION MOTION DESIGN IN `Canvas.tsx` (MANDATORY AGENT TASK)**:
+>    - **The AI Agent MUST OPEN `src/clips/<clip_name>/Canvas.tsx` AND WRITE 100% CUSTOM REMOTION MOTION GRAPHICS FROM SCRATCH!**
+>    - Inspect `transcript.json` to identify the exact frame timing of key concepts and sentences.
+>    - Design 4 distinct, topic-tailored After Effects scenes (Beats 1–4):
+>      - **Scene 1 (Hook / Problem — Introduce the Paradox)**:
+>        - Mandatory waist-up Judy intro pop-up (`GlossyJudyIntro`) at Frame 0 (0-110 frames / ~3.8s) with atmospheric back-glow and downward wet-floor reflection, gliding out before Scene 2.
+>        - 3-Tier `KineticTypoLadder` (leadIn, slamWord, punchText) with custom words from the hook + `VectorCursor` selection bounding box.
+>        - Upright vector graph (`GlossyGlowGraph`) or custom metric visualization representing the starting friction/problem.
+>      - **Scene 2 (Mechanism — Explain the Logic)**:
+>        - `KineticTypoLadder` with the core psychological/biological/financial concept.
+>        - Visual mechanism archetype: tactile friction slider (`GlossyFrictionSlider`) dragged by authentic glove cursor, frosted toggle switchboard (`GlossyToggleBoard`), or dual comparative vector pathways.
+>      - **Scene 3 (Twist / Comparative Breakdown — Logic Deep-Dive)**:
+>        - `KineticTypoLadder` highlighting the hidden trap.
+>        - Dynamic comparative balance see-saw (`GlossyBalanceScale`), vertical frosted glass columns (`GlossyBarChart`), or side-by-side comparative cards (The Trap [Red] vs The Protocol [Green]) with settling physics.
+>      - **Scene 4 (High-Leverage Solution & Protocol Resolution)**:
+>        - `KineticTypoLadder` stating the exact actionable protocol rule.
+>        - 360° circular progress gauge / chronograph (`GlossyRadialDial`), frosted glass staircase (`SteppedProgressionStairs`) with golden hopping orb, and centered high-leverage telemetry verdict bar. (ZERO CTA).
+>    - **Enforce Mobile 480p Legibility & Safe Zones**:
+>      - All primary graphics stay between `top: 6%` and `top: 68%` (`y: 115px` to `y: 1320px`).
+>      - Captions occupy `top: 73%` to `81%`. ZERO overlap with graphics!
+>      - Montserrat 78-92px slam words, JetBrains Mono 56-72px primary metrics.
+>
+> 4. **Step 4 — Visual Audit via Remotion Stills**:
+>    - Run:
+>      ```bash
+>      npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene1.png --frame=80
+>      npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene2.png --frame=250
+>      npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene3.png --frame=500
+>      npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene4.png --frame=850
+>      ```
+>    - Visually audit each still using `view_file` to confirm 10/10 Jordan Brown / Iman Gadzhi aesthetic, flawless contrast, and zero caption overlap.
+>
+> 5. **Step 5 — Final Video Export & Delivery**:
+>    - Render the master video:
+>      ```bash
+>      npx remotion render src/index.ts <PascalName>Video out/<clip_name>_video.mp4
+>      ```
+>    - Deliver the final video path, viral title, thumbnail title, and pinned comment to the user.
 >
 > *(The agent only outputs the script alone if the user explicitly writes "script only" or "write a script").*
 
@@ -224,6 +247,107 @@ Every video script submitted to RightClips is tagged with one of four channel ni
 
 ---
 
+## 📱 Rule 5.6: The Mobile 480p Legibility Standard & The 2-Font Kinetic System (Permanent Master Directive)
+
+> [!CRITICAL]
+> **MOBILE-FIRST AT 480P RESOLUTION: ZERO SQUINTING, ZERO CAPTION OVERLAP!**
+> Over 85% of YouTube Shorts and TikTok viewers watch on mobile screens (e.g. iPhone 11) frequently downscaled to 480p.
+> Desktop-sized 12px/14px fonts and hairline 1.5px lines turn into blurry mush. All agents MUST permanently enforce the following:
+
+1. **The 2-Font Kinetic Pairing System**:
+   - **Font Style 1 (Display / Headings / Slam Words / Big Values)**: **`Montserrat`** (Weights 700 Bold, 800 ExtraBold, 900 Black) via `font-display`. Wide, punchy geometric grotesque that delivers an authoritative headline presence even at 480p.
+   - **Font Style 2 (Technical / Telemetry / Metrics / Units / Timestamps / Labels)**: **`JetBrains Mono`** (Weights 700 Bold, 800 ExtraBold) via `font-mono`. Precision monospace with wide counters, unmistakable character separation, and high-tech biometric telemetry aesthetics.
+   - **Font Storage & Zero-Latency Renders**: Both fonts are permanently stored locally in `public/fonts/` (`Montserrat-Black.ttf`, `JetBrainsMono-Bold.ttf`, etc.) and loaded at runtime via `<FontLoader />` (`staticFile("fonts/...")`), backed by `@import` in `style.css`. Never use raw `url('/fonts/...')` in CSS that breaks Webpack bundling.
+
+2. **Mobile Typography Hierarchy (Render Canvas: 1080×1920)**:
+   - **Headline Slam Words**: `78px – 92px` font-display font-black (e.g. `CORTISOL`, `INVERSION`). Anchor from `right: 5%` or center to prevent bezel truncation.
+   - **Section / Scene Titles**: `30px – 36px` font-display font-black with tracking `[0.2em]` and gradient glow underlines.
+   - **Primary Metric Readouts**: `56px – 72px` font-mono font-black (e.g. `+340%`, `−16 HRS`, `78%`).
+   - **Callout Card Values**: `32px – 36px` font-display font-black.
+   - **Callout & Telemetry Labels**: `18px – 22px` font-mono font-black uppercase (never 10px–12px `text-xs`!).
+   - **Callout Containers**: Chunkier padding (`px-6 py-4 rounded-2xl`), `2.5px` vivid neon border, `16px` glass blur backdrop.
+
+3. **Stroke & Graphic Robustness Standards**:
+   - Coordinate graph axes: minimum `5px` stroke with soft glow.
+   - Glowing graph curves: `8px` core neon stroke + `18px` outer ambient blur pass.
+   - Circular telemetry dials (`GlossyRadialDial`): `14px` track ring + `18px` active glowing sweep arc.
+   - Friction sliders (`GlossyFrictionSlider`): `34px` track bar + `42px` glowing knob.
+   - Balance scales (`GlossyBalanceScale`): `6px` beam + `4px` hanging cables + `240px` minimum pan cards.
+
+4. **The Mobile Safe-Zone Architecture (Strict Anti-Caption-Collision Law)**:
+   - **Visual Sweet Spot**: `top: 6%` to `top: 68%` (`y: 115px` to `y: 1320px`). All primary graphics, coordinate axes, balance scales, dials, and callouts MUST be framed inside this zone.
+   - **The Caption & UI Exclusion Zone**: `AppleKineticCaptions` sits at `bottom-[19%]` (`top: 73%` to `top: 81%`), and player UI/scrub bar occupies the lowest 15%.
+   - **PERMANENT BAN ON LOW-ANCHORED CARDS**: Never place comparative cards, callout boxes, or word slams below `top: 68%` (or `bottom: 12%`). All bottom stat bars and word slams must sit cleanly at `top: 63% – 66%`, directly above the caption line with zero overlap.
+
+---
+
+## 📐 Rule 5.7: Architectural Drafting Grid & 3-Tier Kinetic Typographic Ladder (Master Reference Standard)
+
+> [!CRITICAL]
+> **FILL THE CANVAS: TYPOGRAPHY AS MOTION ART & ZERO DEAD ZONES!**
+> Inspired by top-tier motion design (e.g. Jordan Brown / Iman Gadzhi caliber), the canvas must never look empty or static.
+> Spoken words are reinforced by hero typographic hierarchy and tactile drafting graphics:
+
+1. **Architectural Drafting Substrate (`<ArchitecturalDraftingCanvas />`)**:
+   - **Coordinate Grid**: Minimalist dashed grid lines (`strokeDasharray="4 4"`, subtle opacity `0.07` on dark / `0.10` on light, 80px cell size) giving an authentic blueprint / technical schematic aesthetic.
+   - **Intersection Crosshairs**: Precision `+` registration marks at grid intersections with soft glow.
+   - **Geometric Matte Corner Accents**: Solid geometric 45° corner triangles (top-left & bottom-right) anchoring the vertical frame boundaries.
+   - Built directly into clip backgrounds to ground all floating vector graphs and metrics.
+
+2. **The 3-Tier Kinetic Typographic Ladder (`<KineticTypoLadder />`)**:
+   - Anchors the upper-middle zone (`top: 10%` to `16%`) of every scene, working in harmony with the lower-middle vector graphics (`top: 48%` to `74%`).
+   - **Line 1 (Context Lead-in)**: `34px - 38px` font-display font-bold uppercase with tracking `[0.2em]`. Enters at frame 0 with smooth non-linear slide-up (`translateY: 28px -> 0px`) and motion blur.
+   - **Line 2 (Headline Slam Word)**: `82px - 92px` font-display font-black uppercase (`#0f172a` on light, `#ffffff` on dark). Enters staggered at frame 6 with high-velocity spring punch and directional motion blur simulation.
+   - **Line 3 (Tactile Punchline Bounding Box)**: `42px - 48px` font-display font-bold. Enters staggered at frame 12, framed inside an interactive dashed bounding box (`2px dashed` with 8 corner/edge square selection handles).
+   - **Masked Text Transitions**: Every text line is nested in an `overflow: hidden` wrapper with spring-driven vertical reveals (`translateY`), guaranteeing pristine editorial masks without text jumping.
+
+3. **Tactile Vector Cursor Snapping (`<VectorCursor />`)**:
+   - Authentic Figma/OS style precision vector arrow and pointer cursors (`public/assets/cursor_pointer.png` and SVG path cursor).
+   - Dynamic non-linear bezier flight path (`damping: 14, stiffness: 120`) flying from off-screen or from a previous element, landing precisely on selection handles, buttons, or slider thumbs.
+   - Spring click physics (`scale: 0.82`) synchronized with tactile click sound effects (`mouse_click.mp3` / `click.mp3`), visually activating dashed bounding boxes and toggles.
+
+---
+
+## 🎨 Rule 5.8: Graphic Designer First & The "Canva Feel" Alignment Law (Master Directive)
+
+> [!CRITICAL]
+> **THINK AND PLAN LIKE A GRAPHIC DESIGNER BEFORE THINKING LIKE AN EDITOR!**
+> Motion design without graphic design fundamentals creates chaotic, lopsided, unaligned visual noise.
+> All clips MUST deliver the **"Canva Feel"**: clean, balanced, minimalistic, perfectly aligned with generous whitespace and ZERO clutter.
+> The AI Agent MUST strictly enforce the following 5 graphic design laws:
+
+1. **The 920px Central Alignment Axis (Zero Edge Bleed)**:
+   - On a 1080×1920 canvas, the active design column is strictly **`max-w-[920px]`** centered horizontally (`left: 50%, transform: translateX(-50%)` or centered flex column).
+   - Guarantees **80px minimum margins** on the left and right screen borders.
+   - **PERMANENT BAN ON ASYMMETRICAL FLOATING BOXES**: Never use arbitrary coordinates like `left: 2%` or `left: 62%` that cause cards to bleed off the edge or create diagonal dead zones.
+   - If using a 2-column layout (e.g. comparative cards), use `flex justify-between gap-6` within `w-[920px]` with symmetrical widths (e.g. `w-[440px]` each).
+
+2. **The "One Hero Centerpiece" Law (Strict Anti-Clutter Minimalist Principle)**:
+   - In any given sub-scene or visual beat, display **EXACTLY ONE PRIMARY HERO GRAPHIC** that commands attention.
+   - **PERMANENT BAN ON WIDGET SPAMMING**: Never display a graph, plus 2 cards, plus a percentage ticker, plus a ladder simultaneously. It overwhelms the viewer and destroys Canva-level elegance.
+   - If a scene has multiple concepts, split it into sequential sub-phases (e.g. Phase 1: Dial -> Phase 2: Progression Stairs -> Phase 3: Verdict Bar) rather than cramming everything on screen at once.
+
+3. **Canva-Grade Vertical Spacing & Hierarchy**:
+   - **Top Zone (`top: 10% - 24%`)**: 3-Tier `KineticTypoLadder` (Lead-in -> Slam Word -> Punch Bounding Box).
+   - **Center Hero Zone (`top: 28% - 58%`)**: The single Hero Graphic (Coordinate Graph, Radial Dial, Balance Scale, Friction Slider, or Stepped Stairs).
+   - **Supporting Zone (`top: 59% - 66%`)**: Symmetrical status pill or clean horizontal telemetry readout bar.
+   - **Caption Exclusion Zone (`top: 73% - 81%`)**: `AppleKineticCaptions`. Completely untouched with 80px+ vertical buffer above it.
+
+4. **Symmetrical Card Proportions & Interior Padding**:
+   - Cards must feel tangible, premium, and balanced:
+     - Full-width hero cards: `w-[900px] - w-[920px]`, `rounded-[32px]`, `p-8`.
+     - Dual comparative cards: `w-[440px]`, `rounded-[28px]`, `p-6`.
+     - Hairline borders (`border: 2px solid ...`), subtle glassmorphism (`backdrop-blur-xl`), and soft multi-layered studio drop shadows.
+   - Interior typography: Crisp labels, prominent headline values, and tight line heights with zero awkward text wraps.
+
+5. **Grounded Presenter Law**:
+   - Judy cutouts MUST be anchored cleanly to `bottom: 0` (`width: 980px`, `baseHeight: 1460px`, `alignItems: flex-end`).
+   - Never float cut-off thighs in mid-air with fake mid-screen reflections!
+   - Video cutout pose MUST be distinct from the thumbnail pose.
+   - ZERO background graphics while Judy is on screen. Judy must completely exit below the bottom bezel before any graphs or cards enter.
+
+---
+
 ## ⚡ Rule 6: The 3-Pillar Pure Information Architecture & Scriptwriting Standards
 
 Every short-form script follows the high-retention 3-pillar information architecture (25–35s runtime, 70–100 words, **STRICTLY NO CTA**):
@@ -280,9 +404,14 @@ The scriptwriter autonomously categorizes uncurated topics into 9 proven psychol
 
 ---
 
-## 🛠️ Rule 8: Master Production CLI Execution
+## 🛠️ Rule 8: Master Production CLI & Remotion Workflow
 
-### Master Command:
+> [!CRITICAL]
+> **DO NOT RENDER BEFORE WRITING BESPOKE REMOTION GRAPHICS!**
+> `create_clip.py` is the scaffolding pipeline; the AI Agent is the motion designer.
+> Never render a video until you have customized `Canvas.tsx` for the script's topic.
+
+### 1. Step 1 — Scaffold Assets & Composition:
 ```bash
 .venv/bin/python3 scripts/create_clip.py \
   --name "<clip_name>" \
@@ -290,22 +419,40 @@ The scriptwriter autonomously categorizes uncurated topics into 9 proven psychol
   --script "<script_text>" \
   [--andrew] \
   [--meta] \
-  [--illustration "<clip_name>/assets/scene_illustration.png"] \
   [--meme <id>] \
-  [--no-meme] \
-  [--facecam <path_to_video>]
+  [--no-meme]
 ```
+*(This creates `public/<clip_name>/voiceover.mp3`, `src/clips/<clip_name>/transcript.json`, registers the clip in `src/Root.tsx`, and generates the starter `Canvas.tsx`.)*
 
-### Render Outputs:
+### 2. Step 2 — Code Bespoke Motion Design in `Canvas.tsx`:
+- Open `src/clips/<clip_name>/Canvas.tsx`.
+- Review `src/clips/<clip_name>/transcript.json` for precise word timestamps and sentence boundaries.
+- Build 4 bespoke scenes using Remotion (`interpolate`, `spring`, `useCurrentFrame`, `useVideoConfig`).
+- Incorporate `KineticTypoLadder`, `VectorCursor`, and pure graphics components (`GlossyGlowGraph`, `GlossyBalanceScale`, `GlossyRadialDial`, `GlossyFrictionSlider`, `SteppedProgressionStairs`, etc.).
+- Strictly adhere to Mobile 480p Legibility and Safe Zones (stay between `top: 6%` and `top: 68%`, captions at `top: 73%`–`81%`).
+- **BANNED**: Never leave hardcoded Cortisol, Melatonin, Sleep, or generic placeholder text.
+
+### 3. Step 3 — Visual Audit via Remotion Stills:
 ```bash
-# Render 4K Still Thumbnail
-npx remotion still src/index.ts <clip_name>Thumbnail out/<clip_name>_thumbnail.png
+# Render scene stills to verify visual composition and zero caption collision
+npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene1.png --frame=80
+npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene2.png --frame=250
+npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene3.png --frame=500
+npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene4.png --frame=850
 
-# Render Full Video MP4
-npx remotion render src/index.ts <clip_name> out/<clip_name>.mp4
+# Render 4K Still Thumbnail
+npx remotion still src/index.ts <PascalName>Thumbnail out/<clip_name>_thumbnail.png
+```
+*Use `view_file` to audit each still before rendering the final video.*
+
+### 4. Step 4 — Master Video Render:
+```bash
+# Render Master MP4 Video
+npx remotion render src/index.ts <PascalName>Video out/<clip_name>_video.mp4
 ```
 
 ### Git Push & Clean Repo Policy:
 - Always test with `python3 -m py_compile` before committing.
 - Commit all production assets, scripts, and documentation together with clean conventional commits (`feat(clip): ...`).
 - Push to `origin main` upon completion.
+

@@ -24,6 +24,7 @@ export interface GlossyFrictionSliderProps {
   showFloorReflection?: boolean;
   reflectionOpacity?: number;
   isReflection?: boolean;
+  theme?: "dark" | "light";
 }
 
 /**
@@ -48,6 +49,7 @@ export const GlossyFrictionSlider: React.FC<GlossyFrictionSliderProps> = ({
   showFloorReflection = true,
   reflectionOpacity = 0.38,
   isReflection = false,
+  theme = "dark",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -109,80 +111,87 @@ export const GlossyFrictionSlider: React.FC<GlossyFrictionSliderProps> = ({
       )}
 
       {/* 2. Slider Track & Frame */}
-      <div
-        className="relative flex flex-col items-center p-8 rounded-3xl"
-        style={{
-          width: `${width}px`,
-          background: "rgba(15, 23, 42, 0.75)",
-          border: "1px solid rgba(255, 255, 255, 0.12)",
-          backdropFilter: "blur(20px)",
-          boxShadow: `0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px ${glowColor}33`,
-          transform: `scale(${interpolate(enterSpring, [0, 1], [0.92, 1])})`,
-          opacity: interpolate(enterSpring, [0, 0.3], [0, 1]),
-        }}
-      >
-        {/* Top Labels */}
-        <div className="w-full flex justify-between items-center mb-6 px-1">
-          <span className="text-xs font-mono font-black tracking-wider uppercase text-slate-400">
-            {startLabel}
-          </span>
-          <span
-            className="text-2xl font-mono font-black tracking-widest"
+      {(() => {
+        const isLight = theme === "light";
+        return (
+          <div
+            className="relative flex flex-col items-center p-8 rounded-3xl"
             style={{
-              color: accentColor,
-              textShadow: `0 0 16px ${accentColor}`,
+              width: `${width}px`,
+              background: isLight ? "rgba(255, 255, 255, 0.95)" : "rgba(15, 23, 42, 0.75)",
+              border: isLight ? "2.5px solid rgba(15, 23, 42, 0.12)" : "1px solid rgba(255, 255, 255, 0.12)",
+              backdropFilter: "blur(20px)",
+              boxShadow: isLight
+                ? `0 20px 50px rgba(0, 0, 0, 0.08), 0 0 35px ${glowColor}`
+                : `0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px ${glowColor}33`,
+              transform: `scale(${interpolate(enterSpring, [0, 1], [0.92, 1])})`,
+              opacity: interpolate(enterSpring, [0, 0.3], [0, 1]),
             }}
           >
-            {Math.round(currentPercent)}%
-          </span>
-          <span
-            className="text-xs font-mono font-black tracking-wider uppercase"
-            style={{ color: accentColor }}
-          >
-            {endLabel}
-          </span>
-        </div>
+            {/* Top Labels - Upgraded for mobile */}
+            <div className="w-full flex justify-between items-center mb-7 px-2">
+              <span className={`text-lg md:text-xl font-mono font-black tracking-wider uppercase ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                {startLabel}
+              </span>
+              <span
+                className="text-4xl font-mono font-black tracking-widest"
+                style={{
+                  color: accentColor,
+                  textShadow: `0 0 20px ${accentColor}`,
+                }}
+              >
+                {Math.round(currentPercent)}%
+              </span>
+              <span
+                className="text-lg md:text-xl font-mono font-black tracking-wider uppercase"
+                style={{ color: accentColor }}
+              >
+                {endLabel}
+              </span>
+            </div>
 
-        {/* Horizontal Track Bar */}
-        <div
-          className="relative h-6 rounded-full overflow-visible flex items-center"
-          style={{
-            width: `${trackWidth}px`,
-            background: "rgba(255, 255, 255, 0.08)",
-            border: "1px solid rgba(255, 255, 255, 0.15)",
-          }}
-        >
+            {/* Horizontal Track Bar - Thick 34px for 480p mobile screen visibility */}
+            <div
+              className="relative h-9 rounded-full overflow-visible flex items-center"
+              style={{
+                width: `${trackWidth}px`,
+                background: isLight ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.12)",
+                border: isLight ? "2px solid rgba(0, 0, 0, 0.12)" : "2px solid rgba(255, 255, 255, 0.25)",
+              }}
+            >
           {/* Glowing Active Track Fill */}
           <div
             className="h-full rounded-full transition-all"
             style={{
               width: `${thumbX}px`,
-              background: `linear-gradient(90deg, rgba(255,255,255,0.2) 0%, ${accentColor} 100%)`,
-              boxShadow: `0 0 20px ${accentColor}`,
+              background: `linear-gradient(90deg, rgba(255,255,255,0.3) 0%, ${accentColor} 100%)`,
+              boxShadow: `0 0 25px ${accentColor}`,
             }}
           />
 
-          {/* Draggable Glowing Thumb Knob */}
+          {/* Draggable Glowing Thumb Knob - Larger 42px */}
           <div
-            className="absolute -top-3.5 flex items-center justify-center rounded-full pointer-events-none"
+            className="absolute -top-1.5 flex items-center justify-center rounded-full pointer-events-none"
             style={{
-              left: `${thumbX - 16}px`,
-              width: "32px",
-              height: "32px",
+              left: `${thumbX - 21}px`,
+              width: "42px",
+              height: "42px",
               background: "#ffffff",
-              border: `3px solid ${accentColor}`,
-              boxShadow: `0 0 25px 5px ${accentColor}, 0 4px 15px rgba(0,0,0,0.8)`,
-              transform: `scale(${isDragging ? 1.15 : 1.0})`,
+              border: `4px solid ${accentColor}`,
+              boxShadow: `0 0 30px 8px ${accentColor}, 0 4px 20px rgba(0,0,0,0.9)`,
+              transform: `scale(${isDragging ? 1.18 : 1.0})`,
               transition: "transform 0.15s ease-out",
             }}
           >
             <div
-              className="w-2.5 h-2.5 rounded-full"
+              className="w-4 h-4 rounded-full"
               style={{ backgroundColor: accentColor }}
             />
+            </div>
           </div>
         </div>
-      </div>
+      );
+    })()}
 
       {/* 3. Authentic Cartoon Glove Pointer Cursor */}
       {!isReflection && showCursor && isDragging && (

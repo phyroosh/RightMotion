@@ -25,6 +25,7 @@ export interface GlossyRadialDialProps {
   showFloorReflection?: boolean;
   reflectionOpacity?: number;
   isReflection?: boolean;
+  theme?: "dark" | "light";
 }
 
 /**
@@ -46,6 +47,7 @@ export const GlossyRadialDial: React.FC<GlossyRadialDialProps> = ({
   showFloorReflection = true,
   reflectionOpacity = 0.38,
   isReflection = false,
+  theme = "dark",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -135,15 +137,15 @@ export const GlossyRadialDial: React.FC<GlossyRadialDialProps> = ({
             cy={size / 2}
             r={radius}
             fill="none"
-            stroke="rgba(255, 255, 255, 0.08)"
-            strokeWidth="8"
+            stroke={theme === "light" ? "rgba(15, 23, 42, 0.12)" : "rgba(255, 255, 255, 0.12)"}
+            strokeWidth="14"
           />
 
           {/* Tick Marks (Every 30 degrees) */}
           {Array.from({ length: 12 }).map((_, i) => {
             const tickAngle = (i * 30 * Math.PI) / 180;
-            const x1 = size / 2 + (radius - 14) * Math.cos(tickAngle);
-            const y1 = size / 2 + (radius - 14) * Math.sin(tickAngle);
+            const x1 = size / 2 + (radius - 18) * Math.cos(tickAngle);
+            const y1 = size / 2 + (radius - 18) * Math.sin(tickAngle);
             const x2 = size / 2 + (radius - 4) * Math.cos(tickAngle);
             const y2 = size / 2 + (radius - 4) * Math.sin(tickAngle);
             return (
@@ -153,26 +155,26 @@ export const GlossyRadialDial: React.FC<GlossyRadialDialProps> = ({
                 y1={y1}
                 x2={x2}
                 y2={y2}
-                stroke="rgba(255, 255, 255, 0.2)"
-                strokeWidth={i % 3 === 0 ? "2.5" : "1.5"}
+                stroke={theme === "light" ? "rgba(15, 23, 42, 0.25)" : "rgba(255, 255, 255, 0.3)"}
+                strokeWidth={i % 3 === 0 ? "3.5" : "2"}
               />
             );
           })}
 
-          {/* Active Glowing Arc Stroke */}
+          {/* Active Glowing Arc Stroke - Bold 18px for mobile screens */}
           <circle
             cx={size / 2}
             cy={size / 2}
             r={radius}
             fill="none"
             stroke={accentColor}
-            strokeWidth="10"
+            strokeWidth="18"
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
             transform={`rotate(-90 ${size / 2} ${size / 2})`}
             style={{
-              filter: `drop-shadow(0 0 16px ${accentColor}) drop-shadow(0 0 30px ${accentColor}88)`,
+              filter: `drop-shadow(0 0 20px ${accentColor}) drop-shadow(0 0 35px ${accentColor}aa)`,
             }}
           />
 
@@ -182,41 +184,41 @@ export const GlossyRadialDial: React.FC<GlossyRadialDialProps> = ({
               <circle
                 cx={beaconX}
                 cy={beaconY}
-                r="7"
+                r="9.5"
                 fill="#ffffff"
                 style={{
-                  filter: `drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px ${accentColor})`,
+                  filter: `drop-shadow(0 0 12px #ffffff) drop-shadow(0 0 24px ${accentColor})`,
                 }}
               />
               <circle
                 cx={beaconX}
                 cy={beaconY}
-                r="16"
+                r="20"
                 fill="none"
                 stroke={accentColor}
-                strokeWidth="2"
+                strokeWidth="2.5"
                 opacity={Math.sin((frame / fps) * 4) * 0.4 + 0.6}
               />
             </g>
           )}
         </svg>
 
-        {/* Center Digital Metric Readout */}
+        {/* Center Digital Metric Readout - Ultra-bold 2-font system */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
           <span
-            className="text-5xl font-black font-mono tracking-tight"
+            className="text-6xl font-black font-mono tracking-tight"
             style={{
-              color: "#ffffff",
-              textShadow: `0 0 25px ${accentColor}cc, 0 0 50px rgba(255,255,255,0.4)`,
+              color: theme === "light" ? "#0f172a" : "#ffffff",
+              textShadow: theme === "light" ? "none" : `0 0 25px ${accentColor}cc, 0 0 55px rgba(255,255,255,0.4)`,
             }}
           >
             {valueText}
           </span>
           <span
-            className="text-sm font-black tracking-widest uppercase font-sans mt-2"
+            className="text-xl font-black tracking-widest uppercase font-display mt-2"
             style={{
-              color: accentColor,
-              textShadow: `0 0 14px ${accentColor}`,
+              color: theme === "light" ? "#475569" : accentColor,
+              textShadow: theme === "light" ? "none" : `0 0 16px ${accentColor}`,
             }}
           >
             {labelText}

@@ -18,6 +18,7 @@ export interface SteppedProgressionStairsProps {
   height?: number;
   showFloorReflection?: boolean;
   reflectionOpacity?: number;
+  theme?: "dark" | "light";
   className?: string;
 }
 
@@ -38,6 +39,7 @@ export const SteppedProgressionStairs: React.FC<SteppedProgressionStairsProps> =
   height = 460,
   showFloorReflection = true,
   reflectionOpacity = 0.35,
+  theme = "dark",
   className = "",
 }) => {
   const frame = useCurrentFrame();
@@ -55,11 +57,11 @@ export const SteppedProgressionStairs: React.FC<SteppedProgressionStairsProps> =
 
   const jumpArc = Math.sin(interStepT * Math.PI) * 45;
 
-  const stepWidth = 135;
-  const stepHeight = 44;
-  const startX = 50;
+  const stepWidth = 155;
+  const stepHeight = 54;
+  const startX = 40;
   const startY = height - 80;
-  const deltaX = (width - startX - stepWidth - 40) / (totalSteps - 1);
+  const deltaX = (width - startX - stepWidth - 30) / (totalSteps - 1);
   const deltaY = (startY - 60) / (totalSteps - 1);
 
   const getStepCoords = (idx: number) => {
@@ -77,7 +79,7 @@ export const SteppedProgressionStairs: React.FC<SteppedProgressionStairsProps> =
     [currentCoord.x + stepWidth / 2, nextCoord.x + stepWidth / 2]
   );
   const orbY =
-    interpolate(interStepT, [0, 1], [currentCoord.y - 25, nextCoord.y - 25]) - jumpArc;
+    interpolate(interStepT, [0, 1], [currentCoord.y - 30, nextCoord.y - 30]) - jumpArc;
 
   const renderStairsContent = (isReflection: boolean = false) => (
     <div
@@ -101,7 +103,7 @@ export const SteppedProgressionStairs: React.FC<SteppedProgressionStairsProps> =
         return (
           <div
             key={step.id}
-            className="absolute flex items-center justify-center rounded-xl border transition-all duration-300"
+            className="absolute flex items-center justify-center rounded-xl border transition-all duration-300 px-2"
             style={{
               left: `${coord.x}px`,
               top: `${coord.y}px`,
@@ -111,39 +113,39 @@ export const SteppedProgressionStairs: React.FC<SteppedProgressionStairsProps> =
               opacity: stepSpring,
               backgroundColor: step.isGoal
                 ? isReached
-                  ? "rgba(251, 191, 36, 0.15)"
-                  : "rgba(255, 255, 255, 0.05)"
+                  ? "rgba(245, 158, 11, 0.28)"
+                  : theme === "light" ? "rgba(245, 158, 11, 0.12)" : "rgba(255, 255, 255, 0.06)"
                 : isReached
-                ? "rgba(255, 255, 255, 0.12)"
-                : "rgba(255, 255, 255, 0.03)",
+                ? theme === "light" ? "rgba(15, 23, 42, 0.90)" : "rgba(255, 255, 255, 0.16)"
+                : theme === "light" ? "rgba(15, 23, 42, 0.07)" : "rgba(255, 255, 255, 0.04)",
               borderColor: step.isGoal
                 ? isReached
-                  ? "rgba(251, 191, 36, 0.8)"
-                  : "rgba(251, 191, 36, 0.3)"
+                  ? "#f59e0b"
+                  : "rgba(245, 158, 11, 0.45)"
                 : isReached
-                ? "rgba(255, 255, 255, 0.7)"
-                : "rgba(255, 255, 255, 0.15)",
+                ? theme === "light" ? "#0f172a" : "rgba(255, 255, 255, 0.85)"
+                : theme === "light" ? "rgba(15, 23, 42, 0.22)" : "rgba(255, 255, 255, 0.2)",
               boxShadow: isReached
                 ? step.isGoal
-                  ? "0 0 25px rgba(251, 191, 36, 0.5), inset 0 0 15px rgba(251, 191, 36, 0.2)"
-                  : "0 0 15px rgba(255, 255, 255, 0.25)"
+                  ? "0 0 25px rgba(245, 158, 11, 0.5), inset 0 0 15px rgba(245, 158, 11, 0.25)"
+                  : theme === "light" ? "0 4px 14px rgba(0,0,0,0.15)" : "0 0 20px rgba(255, 255, 255, 0.35)"
                 : "none",
             }}
           >
             <span
-              className="text-sm md:text-base font-black tracking-widest uppercase font-mono"
+              className="text-base font-black tracking-wider uppercase font-mono text-center leading-tight"
               style={{
                 color: step.isGoal
                   ? isReached
-                    ? "#fbbf24"
-                    : "rgba(251, 191, 36, 0.6)"
+                    ? theme === "light" ? "#b45309" : "#fbbf24"
+                    : theme === "light" ? "#d97706" : "rgba(251, 191, 36, 0.8)"
                   : isReached
                   ? "#ffffff"
-                  : "rgba(255, 255, 255, 0.4)",
+                  : theme === "light" ? "#0f172a" : "rgba(255, 255, 255, 0.6)",
                 textShadow: isReached
                   ? step.isGoal
-                    ? "0 0 10px #fbbf24"
-                    : "0 0 8px rgba(255,255,255,0.8)"
+                    ? "0 0 12px #fbbf24"
+                    : theme === "light" ? "none" : "0 0 10px rgba(255,255,255,0.9)"
                   : "none",
               }}
             >

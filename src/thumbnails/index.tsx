@@ -765,3 +765,31 @@ export const TheTruthAboutSleepThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TheSelfImageTrapThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="SELF-IMAGE TRAP"
+    highlightWord="SELF-IMAGE"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Self-image Trap"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
+
+export const TrainYourBrainThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="REWIRE YOUR BRAIN"
+    highlightWord="BRAIN"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Cognitive Resistance"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);

@@ -1,0 +1,214 @@
+{
+  "topic": "Train Your Brain Better",
+  "domain": "Health/Biology",
+  "artDirection": {
+    "aesthetic": "10/10 Dark Obsidian Void & Wet-Floor Mirror Reflection",
+    "canvasBackground": "#000000",
+    "narrativeStructure": "Introduce Problem > Explain the Logic > Give the Solution (25-35s runtime, ZERO CTA)",
+    "judyIntroDirective": "Mandatory Judy pop-up at Frame 0 (0-3.8s) with floor reflection, smoothly exiting down before Scene 2",
+    "antiRepetitionDirective": "Strictly enforces 4 distinct motion graphic archetypes across all 4 scenes",
+    "easingDirective": "Fast-paced yet gentle non-linear cubic-bezier trimming and damped spring torque"
+  },
+  "judyIntro": {
+    "hasJudyIntro": true,
+    "startFrame": 0,
+    "exitFrame": 110,
+    "timing": "0.0s - 3.8s (Frames 0 - 110)",
+    "pose": "character_pointing.png",
+    "title": "BRAIN GETS",
+    "glowColor": "rgba(244, 63, 94, 0.22)",
+    "reflectionOpacity": 0.36,
+    "notes": "Judy waist-up delivers opening problem hook with eye contact, backed by radial glow and floor reflection, then non-linearly glides down."
+  },
+  "storyboard": [
+    {
+      "scene": 1,
+      "timing": "0.0s - 7.0s (Frames 0 - 210)",
+      "startFrame": 0,
+      "endFrame": 210,
+      "archetype": "GlossyGlowGraph",
+      "title": "BRAIN GETS",
+      "titleColor": "#ffffff",
+      "lighting": {
+        "backdrop": "#000000",
+        "glowColor": "rgba(244, 63, 94, 0.18)",
+        "glowCenterY": 42
+      },
+      "motion": {
+        "component": "GlossyGlowGraph",
+        "type": "Single Rising Spike Curve",
+        "curveColor": "#f43f5e",
+        "beaconHead": true,
+        "areaGradient": true,
+        "showFloorReflection": true,
+        "reflectionOpacity": 0.38
+      },
+      "sfx": [
+        {
+          "frame": 0,
+          "type": "whoosh_deep",
+          "volume": 0.3
+        },
+        {
+          "frame": 15,
+          "type": "whoosh_fast",
+          "volume": 0.26
+        }
+      ]
+    },
+    {
+      "scene": 2,
+      "timing": "7.0s - 14.5s (Frames 210 - 435)",
+      "startFrame": 210,
+      "endFrame": 435,
+      "archetype": "GlossyToggleBoard",
+      "title": "NEUROPLASTICITY STRENGTHENS",
+      "titleColor": "#ffffff",
+      "lighting": {
+        "backdrop": "#000000",
+        "glowColor": "rgba(16, 185, 129, 0.20)",
+        "glowCenterY": 42
+      },
+      "motion": {
+        "component": "GlossyToggleBoard",
+        "showCursor": true,
+        "cursorClickFrame": 234,
+        "toggles": [
+          {
+            "id": "t1",
+            "label": "TRIGGER IDENTIFIED",
+            "activeColor": "#10b981"
+          },
+          {
+            "id": "t2",
+            "label": "KINETIC SHIFT",
+            "activeColor": "#10b981"
+          },
+          {
+            "id": "t3",
+            "label": "LOOP COLLAPSED",
+            "activeColor": "#10b981"
+          }
+        ],
+        "showFloorReflection": true,
+        "reflectionOpacity": 0.35
+      },
+      "sfx": [
+        {
+          "frame": 210,
+          "type": "whoosh_deep",
+          "volume": 0.3
+        },
+        {
+          "frame": 234,
+          "type": "click",
+          "volume": 0.28
+        },
+        {
+          "frame": 254,
+          "type": "click",
+          "volume": 0.28
+        }
+      ]
+    },
+    {
+      "scene": 3,
+      "timing": "14.5s - 22.0s (Frames 435 - 660)",
+      "startFrame": 435,
+      "endFrame": 660,
+      "archetype": "GlossyBalanceScale",
+      "title": "MEANS PASSIVE",
+      "titleColor": "#ffffff",
+      "lighting": {
+        "backdrop": "#000000",
+        "glowColor": "rgba(244, 63, 94, 0.18)",
+        "glowCenterY": 42
+      },
+      "motion": {
+        "component": "GlossyBalanceScale",
+        "leftLabel": "THE TRAP",
+        "leftSub": "Comfort & Freeze",
+        "leftColor": "#f43f5e",
+        "rightLabel": "THE SOLUTION",
+        "rightSub": "Freedom & Focus",
+        "rightColor": "#10b981",
+        "winner": "right",
+        "showFloorReflection": true,
+        "reflectionOpacity": 0.38
+      },
+      "sfx": [
+        {
+          "frame": 435,
+          "type": "whoosh_deep",
+          "volume": 0.3
+        },
+        {
+          "frame": 453,
+          "type": "click",
+          "volume": 0.32
+        }
+      ]
+    },
+    {
+      "scene": 4,
+      "timing": "22.0s - 30.0s (Frames 660 - 900)",
+      "startFrame": 660,
+      "endFrame": 900,
+      "archetype": "SteppedProgressionStairs",
+      "title": "REPETITION PLUS",
+      "titleColor": "#ffffff",
+      "lighting": {
+        "backdrop": "#000000",
+        "glowColor": "rgba(16, 185, 129, 0.20)",
+        "glowCenterY": 42
+      },
+      "motion": {
+        "component": "SteppedProgressionStairs",
+        "orbColor": "#fbbf24",
+        "steps": [
+          {
+            "id": "s1",
+            "label": "AWARENESS"
+          },
+          {
+            "id": "s2",
+            "label": "PAUSE"
+          },
+          {
+            "id": "s3",
+            "label": "ACTION"
+          },
+          {
+            "id": "s4",
+            "label": "OPTIMAL",
+            "isGoal": true
+          }
+        ],
+        "showFloorReflection": true,
+        "reflectionOpacity": 0.35
+      },
+      "sfx": [
+        {
+          "frame": 660,
+          "type": "whoosh_deep",
+          "volume": 0.32
+        },
+        {
+          "frame": 680,
+          "type": "click",
+          "volume": 0.24
+        },
+        {
+          "frame": 700,
+          "type": "click",
+          "volume": 0.24
+        },
+        {
+          "frame": 720,
+          "type": "whoosh_sparkle",
+          "volume": 0.35
+        }
+      ]
+    }
+  ]
+}

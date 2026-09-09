@@ -8,6 +8,7 @@ import { AppleKineticCaptions } from "../../components/AppleKineticCaptions";
 import { SoundDesignEngine, SfxCue } from "../../components/SoundDesignEngine";
 import { GroundedTextureEngine } from "../../components/texture";
 import { TheCortisolInversionThumbnail } from "../../thumbnails";
+import { FontLoader } from "../../components/FontLoader";
 import rawTranscript from "./transcript.json";
 import { WordTimestamp } from "../../types";
 import "../../style.css";
@@ -100,9 +101,12 @@ export const TheCortisolInversionComposition: React.FC = () => {
 
   return (
     <div
-      className="relative w-full h-full bg-black text-white flex flex-col justify-between overflow-hidden select-none font-sans"
+      className="relative w-full h-full bg-black text-white flex flex-col justify-between overflow-hidden select-none font-display"
       style={{ width, height }}
     >
+      {/* Font Loader for offline + online typography */}
+      <FontLoader />
+
       {/* 0. High-Converting 4K Thumbnail First-Frame */}
       {frame === 0 && (
         <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">

@@ -55,6 +55,10 @@ import { CortisolEnergyEngineComposition } from "./clips/cortisol_energy_engine"
 import cortisol_energy_engineTranscript from "./clips/cortisol_energy_engine/transcript.json";
 import { TheTruthAboutSleepComposition } from "./clips/the_truth_about_sleep";
 import the_truth_about_sleepTranscript from "./clips/the_truth_about_sleep/transcript.json";
+import { TheSelfImageTrapComposition } from "./clips/the_self_image_trap";
+import the_self_image_trapTranscript from "./clips/the_self_image_trap/transcript.json";
+import { TrainYourBrainComposition } from "./clips/train_your_brain";
+import train_your_brainTranscript from "./clips/train_your_brain/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -84,6 +88,8 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TrainYourBrainThumbnail,
+  TheSelfImageTrapThumbnail,
   TheTruthAboutSleepThumbnail,
   CortisolEnergyEngineThumbnail,
   TheCortisolInversionThumbnail,
@@ -189,6 +195,10 @@ export const RemotionRoot: React.FC = () => {
   const cortisol_energy_engineDuration = calculateDurationInFrames(cortisol_energy_engineTranscript as any[], fps);
   
   const the_truth_about_sleepDuration = calculateDurationInFrames(the_truth_about_sleepTranscript as any[], fps);
+  
+  const the_self_image_trapDuration = calculateDurationInFrames(the_self_image_trapTranscript as any[], fps);
+  
+  const train_your_brainDuration = calculateDurationInFrames(train_your_brainTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -399,6 +409,26 @@ export const RemotionRoot: React.FC = () => {
         id="TheTruthAboutSleepVideo"
         component={TheTruthAboutSleepComposition}
         durationInFrames={the_truth_about_sleepDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TheSelfImageTrapVideo"
+        component={TheSelfImageTrapComposition}
+        durationInFrames={the_self_image_trapDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TrainYourBrainVideo"
+        component={TrainYourBrainComposition}
+        durationInFrames={train_your_brainDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -902,6 +932,20 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="TheTruthAboutSleepThumbnail"
         component={TheTruthAboutSleepThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheSelfImageTrapThumbnail"
+        component={TheSelfImageTrapThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TrainYourBrainThumbnail"
+        component={TrainYourBrainThumbnail}
         width={1080}
         height={1920}
       />

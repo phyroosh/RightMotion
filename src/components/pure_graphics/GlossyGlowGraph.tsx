@@ -26,6 +26,7 @@ export interface GlossyGlowGraphProps {
   entranceFrame?: number;
   showFloorReflection?: boolean;
   reflectionOpacity?: number;
+  theme?: "dark" | "light";
   className?: string;
 }
 
@@ -45,7 +46,8 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
   height = 440,
   entranceFrame = 0,
   showFloorReflection = true,
-  reflectionOpacity = 0.38,
+  reflectionOpacity = 0.35,
+  theme = "dark",
   className = "",
 }) => {
   const frame = useCurrentFrame();
@@ -119,7 +121,7 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
             y1={40}
             x2={x}
             y2={340}
-            stroke="rgba(255, 255, 255, 0.08)"
+            stroke={theme === "light" ? "rgba(15, 23, 42, 0.12)" : "rgba(255, 255, 255, 0.08)"}
             strokeWidth="1.5"
             strokeDasharray="4 6"
           />
@@ -132,7 +134,7 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
             y1={y}
             x2={660}
             y2={y}
-            stroke="rgba(255, 255, 255, 0.05)"
+            stroke={theme === "light" ? "rgba(15, 23, 42, 0.08)" : "rgba(255, 255, 255, 0.05)"}
             strokeWidth="1"
           />
         ))}
@@ -143,8 +145,8 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
           y1="40"
           x2="80"
           y2="340"
-          stroke="rgba(255, 255, 255, 0.45)"
-          strokeWidth="3.5"
+          stroke={theme === "light" ? "rgba(15, 23, 42, 0.75)" : "rgba(255, 255, 255, 0.6)"}
+          strokeWidth="5"
           strokeLinecap="round"
         />
         <line
@@ -152,8 +154,8 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
           y1="340"
           x2="660"
           y2="340"
-          stroke="rgba(255, 255, 255, 0.45)"
-          strokeWidth="3.5"
+          stroke={theme === "light" ? "rgba(15, 23, 42, 0.75)" : "rgba(255, 255, 255, 0.6)"}
+          strokeWidth="5"
           strokeLinecap="round"
         />
 
@@ -174,7 +176,7 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
 
           // Gentle living wave micro-motion
           const waveHover = drawProgress > 0.85 ? Math.sin((frame / fps) * 3 + curve.startFrame) * 2.5 : 0;
-          const rippleRadius = 10 + ((frame * 1.5) % 24);
+          const rippleRadius = 12 + ((frame * 1.5) % 24);
           const rippleOpacity = Math.max(0, 1 - ((frame * 1.5) % 24) / 24);
 
           return (
@@ -194,23 +196,23 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
               <path
                 d={curve.pathD}
                 stroke={glow}
-                strokeWidth="10"
+                strokeWidth="18"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeDasharray={pathLength}
                 strokeDashoffset={dashOffset}
                 fill="none"
                 style={{
-                  opacity: 0.45,
-                  filter: `blur(8px)`,
+                  opacity: 0.55,
+                  filter: `blur(10px)`,
                 }}
               />
 
-              {/* 3. Core Vibrant Neon Curve */}
+              {/* 3. Core Vibrant Neon Curve - Bold 8px stroke for 480p mobile clarity */}
               <path
                 d={curve.pathD}
                 stroke={curve.color}
-                strokeWidth="5"
+                strokeWidth="8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeDasharray={pathLength}
@@ -218,7 +220,7 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
                 fill="none"
                 markerEnd={!isReflection && curve.showArrow && drawProgress >= 0.95 ? `url(#arrow-${curve.id})` : undefined}
                 style={{
-                  filter: `drop-shadow(0 0 10px ${glow}) drop-shadow(0 0 25px ${glow}88)`,
+                  filter: `drop-shadow(0 0 12px ${glow}) drop-shadow(0 0 28px ${glow}aa)`,
                 }}
               />
 
@@ -233,26 +235,26 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
                       r={rippleRadius}
                       fill="none"
                       stroke={curve.color}
-                      strokeWidth="1.5"
-                      opacity={rippleOpacity * 0.65}
+                      strokeWidth="2.5"
+                      opacity={rippleOpacity * 0.8}
                     />
                   )}
                   {/* Ambient Beacon Glow */}
                   <circle
                     cx={curve.tipX}
                     cy={curve.tipY + waveHover}
-                    r={14 + Math.sin(frame * 0.2) * 3}
+                    r={18 + Math.sin(frame * 0.2) * 4}
                     fill={glow}
-                    opacity={0.4}
+                    opacity={0.5}
                   />
                   {/* Core White Hot Center */}
                   <circle
                     cx={curve.tipX}
                     cy={curve.tipY + waveHover}
-                    r="6.5"
+                    r="8.5"
                     fill="#ffffff"
                     style={{
-                      filter: `drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 15px ${curve.color})`,
+                      filter: `drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 18px ${curve.color})`,
                     }}
                   />
                 </g>
@@ -261,23 +263,23 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
           );
         })}
 
-        {/* Y Axis Optional Label */}
+        {/* Y Axis Optional Label - Mobile-optimized 22px JetBrains Mono */}
         {yLabel && (
           <text
             x="-180"
-            y="40"
+            y="36"
             transform="rotate(-90)"
-            fill="rgba(255, 255, 255, 0.45)"
-            fontSize="16"
-            fontWeight="900"
-            letterSpacing="3"
-            fontFamily="sans-serif"
+            fill={theme === "light" ? "rgba(15, 23, 42, 0.85)" : "rgba(255, 255, 255, 0.75)"}
+            fontSize="22"
+            fontWeight="800"
+            letterSpacing="4"
+            fontFamily="'JetBrains Mono', monospace"
           >
             {yLabel}
           </text>
         )}
 
-        {/* X Axis Time Labels */}
+        {/* X Axis Time Labels - Mobile-optimized 24px JetBrains Mono */}
         {xLabels.map((lbl, idx) => {
           const xPositions = [100, 250, 400, 550];
           const xPos = xPositions[idx] ?? 100 + idx * 140;
@@ -285,13 +287,13 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
             <text
               key={`lbl-${idx}`}
               x={xPos}
-              y="375"
+              y="380"
               textAnchor="middle"
-              fill="rgba(255, 255, 255, 0.7)"
-              fontSize="18"
+              fill={theme === "light" ? "rgba(15, 23, 42, 0.95)" : "rgba(255, 255, 255, 0.92)"}
+              fontSize="24"
               fontWeight="800"
-              letterSpacing="1"
-              fontFamily="sans-serif"
+              letterSpacing="2"
+              fontFamily="'JetBrains Mono', monospace"
             >
               {lbl}
             </text>
@@ -299,20 +301,20 @@ export const GlossyGlowGraph: React.FC<GlossyGlowGraphProps> = ({
         })}
       </svg>
 
-      {/* Legend for Dual Curves */}
+      {/* Legend for Dual Curves - Upgraded to bold 18px */}
       {!isReflection && curves.length > 1 && (
-        <div className="absolute top-2 right-4 flex items-center gap-6">
+        <div className="absolute top-2 right-4 flex items-center gap-8">
           {curves.map((c) => (
-            <div key={`legend-${c.id}`} className="flex items-center gap-2">
+            <div key={`legend-${c.id}`} className="flex items-center gap-3">
               <div
-                className="w-3.5 h-3.5 rounded-full"
+                className="w-5 h-5 rounded-full"
                 style={{
                   backgroundColor: c.color,
-                  boxShadow: `0 0 8px ${c.color}`,
+                  boxShadow: `0 0 12px ${c.color}`,
                 }}
               />
               <span
-                className="text-xs md:text-sm font-black tracking-wider uppercase"
+                className="text-lg font-mono font-black tracking-wider uppercase"
                 style={{ color: c.color }}
               >
                 {c.label || c.id}
