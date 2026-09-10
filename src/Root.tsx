@@ -59,6 +59,10 @@ import { TheSelfImageTrapComposition } from "./clips/the_self_image_trap";
 import the_self_image_trapTranscript from "./clips/the_self_image_trap/transcript.json";
 import { TrainYourBrainComposition } from "./clips/train_your_brain";
 import train_your_brainTranscript from "./clips/train_your_brain/transcript.json";
+import { GogginsStrategySystemComposition } from "./clips/goggins_strategy_system";
+import goggins_strategy_systemTranscript from "./clips/goggins_strategy_system/transcript.json";
+import { SleepDebtTrapComposition } from "./clips/sleep_debt_trap";
+import sleep_debt_trapTranscript from "./clips/sleep_debt_trap/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -88,6 +92,8 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  SleepDebtTrapThumbnail,
+  GogginsStrategySystemThumbnail,
   TrainYourBrainThumbnail,
   TheSelfImageTrapThumbnail,
   TheTruthAboutSleepThumbnail,
@@ -165,7 +171,7 @@ export const RemotionRoot: React.FC = () => {
   const procrastinationDuration = calculateDurationInFrames(procrastinationTranscript as WordTimestamp[], fps);
   const neuroproductivityDuration = calculateDurationInFrames(neuroproductivityTranscript as WordTimestamp[], fps);
   const lofiSongDuration = Math.ceil(130.86 * fps); // 130.86s audio = 3926 frames
-  
+
   const boundariesDuration = calculateDurationInFrames(boundariesTranscript as any[], fps);
   
   const dopamine_resetDuration = calculateDurationInFrames(dopamineResetTranscript as any[], fps);
@@ -197,8 +203,12 @@ export const RemotionRoot: React.FC = () => {
   const the_truth_about_sleepDuration = calculateDurationInFrames(the_truth_about_sleepTranscript as any[], fps);
   
   const the_self_image_trapDuration = calculateDurationInFrames(the_self_image_trapTranscript as any[], fps);
-  
+
   const train_your_brainDuration = calculateDurationInFrames(train_your_brainTranscript as any[], fps);
+
+  const goggins_strategy_systemDuration = calculateDurationInFrames(goggins_strategy_systemTranscript as any[], fps);
+  
+  const sleep_debt_trapDuration = calculateDurationInFrames(sleep_debt_trapTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -262,7 +272,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
-      
+
       <Composition
         id="BoundariesVideo"
         component={BoundariesComposition}
@@ -429,6 +439,26 @@ export const RemotionRoot: React.FC = () => {
         id="TrainYourBrainVideo"
         component={TrainYourBrainComposition}
         durationInFrames={train_your_brainDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+
+      <Composition
+        id="GogginsStrategySystemVideo"
+        component={GogginsStrategySystemComposition}
+        durationInFrames={goggins_strategy_systemDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="SleepDebtTrapVideo"
+        component={SleepDebtTrapComposition}
+        durationInFrames={sleep_debt_trapDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -664,7 +694,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
-    
+
       <Still
         id="BoundariesThumbnail"
         component={BoundariesThumbnail}
@@ -701,7 +731,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
-    
+
       {/* Cutout Asset Engine Showcase */}
       <Still
         id="CutoutShowcase"
@@ -949,7 +979,20 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+
+      <Still
+        id="GogginsStrategySystemThumbnail"
+        component={GogginsStrategySystemThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="SleepDebtTrapThumbnail"
+        component={SleepDebtTrapThumbnail}
+        width={1080}
+        height={1920}
+      />
     </>
   );
 };
-

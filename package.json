@@ -7,26 +7,21 @@
     "typecheck": "tsc --noEmit",
     "validate": "python3 scripts/validate_clip.py",
     "studio": "node studio/server.js",
-    "build": "remotion render MainComposition out/video.mp4",
     "generate": "python generate_assets.py",
     "render:thumbnails": "node scripts/render_all_thumbnails.js",
     "render:thumbnail": "node scripts/render_all_thumbnails.js"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.240",
-    "@remotion/media-parser": "^4.0.240",
     "@remotion/tailwind": "^4.0.240",
-    "clsx": "^2.1.1",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "googleapis": "^176.0.0",
-    "lucide": "^1.37.0",
     "lucide-react": "^0.475.0",
     "playwright": "^1.62.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "remotion": "^4.0.240",
-    "tailwind-merge": "^3.0.1"
+    "remotion": "^4.0.240"
   },
   "devDependencies": {
     "@types/node": "^22.13.4",

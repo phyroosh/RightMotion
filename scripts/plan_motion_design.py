@@ -23,6 +23,7 @@ import json
 import re
 import sys
 from typing import Dict, Any, List, Set, Tuple
+from visual_design_system import build_visual_design_plan
 
 
 def extract_punchy_title(sentence: str, fallback: str = "THE PARADOX") -> str:
@@ -350,6 +351,7 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
     logic_sentence = sentences[1] if len(sentences) > 1 else full_text
     trap_sentence = sentences[2] if len(sentences) > 2 else full_text
     solution_sentence = sentences[-1] if len(sentences) > 3 else sentences[-1]
+    visual_design = build_visual_design_plan(clean_topic, script)
 
     # Determine topic domain
     is_health = any(k in lower_text for k in ["cortisol", "hormone", "circadian", "sleep", "sunlight", "glucose", "dopamine", "energy", "biology", "body", "brain"])
@@ -405,19 +407,25 @@ def analyze_topic_and_script(topic: str, script: str) -> Dict[str, Any]:
         4, s4_arch, "22.0s - 30.0s (Frames 660 - 900)", s4_title, solution_sentence, domain, 660, 900
     )
 
+    storyboard = [scene_1, scene_2, scene_3, scene_4]
+    for scene, brief in zip(storyboard, visual_design["scenes"]):
+        scene["designBrief"] = brief
+
     return {
         "topic": clean_topic,
         "domain": domain,
         "artDirection": {
-            "aesthetic": "10/10 Dark Obsidian Void & Wet-Floor Mirror Reflection",
-            "canvasBackground": "#000000",
+            "aesthetic": "Script-led editorial motion with restrained, semantic effects",
+            "canvasBackground": "Selected per scene brief; no default HUD treatment",
             "narrativeStructure": "Introduce Problem > Explain the Logic > Give the Solution (25-35s runtime, ZERO CTA)",
             "judyIntroDirective": "Mandatory Judy pop-up at Frame 0 (0-3.8s) with floor reflection, smoothly exiting down before Scene 2",
-            "antiRepetitionDirective": "Strictly enforces 4 distinct motion graphic archetypes across all 4 scenes",
-            "easingDirective": "Fast-paced yet gentle non-linear cubic-bezier trimming and damped spring torque"
+            "antiRepetitionDirective": "Each scene uses a distinct semantic visual metaphor, layout, and motion language",
+            "easingDirective": "Motion is allowed only when it reveals hierarchy, causality, progress, or transformation",
+            "diversityScore": visual_design["diversity"]
         },
         "judyIntro": judy_intro_plan,
-        "storyboard": [scene_1, scene_2, scene_3, scene_4]
+        "storyboard": storyboard,
+        "visualDesign": visual_design,
     }
 
 

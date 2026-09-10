@@ -591,6 +591,28 @@ def align_concepts(concepts, words_list, fps=30):
             prev_end = aligned[-1]["endMs"] if aligned else 0
             start_ms = prev_end + 300
             end_ms = start_ms + 2000
+
+        aligned.append({
+            "text": c,
+            "startMs": start_ms,
+            "endMs": end_ms,
+            "startFrame": round((start_ms / 1000) * fps),
+            "endFrame": round((end_ms / 1000) * fps),
+        })
+
+    return aligned
+
+
+def assert_valid_canvas_scaffold(canvas_code: str, presenter_code: str) -> None:
+    """Fail before registration when the scaffold has known TSX ownership errors."""
+    export_at = canvas_code.find("export const")
+    for component in ("TacticalMemeCard", "TacticalMemeFrame", "MemeStickerOverlay"):
+        tag_at = canvas_code.find(f"<{component}")
+        if tag_at != -1 and (export_at == -1 or tag_at < export_at):
+            raise ValueError(f"Invalid scaffold: {component} JSX was emitted at module scope")
+    if "<GlossyJudyIntro" in canvas_code and "<GlossyJudyIntro" in presenter_code:
+        raise ValueError("Invalid scaffold: Canvas and Presenter both own GlossyJudyIntro")
+
 def extract_scene_typo_ladders(script_text: str, topic: str = "") -> list:
     """
     Extracts 4 scene-specific 3-tier Kinetic Typographic Ladders from the script text:
@@ -662,13 +684,44 @@ def generate_glossy_canvas_code(
     topic: str = "",
     niche: str = "self_improvement",
 ) -> str:
+    """Create a valid, deliberately neutral canvas brief for the motion designer.
+
+    The prior implementation emitted a fixed graph/slider/scale/dial sequence for
+    every script.  That made the *scaffold* a visual template and even injected
+    JSX at module scope.  A clip's Canvas is intentionally authored from the
+    semantic briefs below by the production agent; the scaffold only owns safe
+    imports, timing context, and optional meme overlays.
     """
-    🎬 AFTER EFFECTS-GRADE MULTI-LAYER CANVAS GENERATOR
-    ===================================================
-    Scaffolds a clean, topic-tailored Remotion canvas with exact frame boundaries,
-    dynamic kinetic typo ladders, and structured pure graphics components.
-    AI Agents must customize each scene's animations to match the video's specific semantics!
-    """
+    design_briefs = [scene.get("designBrief", {}) for scene in (motion_plan or {}).get("storyboard", [])]
+    brief_json = json.dumps(design_briefs, ensure_ascii=False, indent=2)
+    return f'''import React from "react";
+import {{ useCurrentFrame }} from "remotion";
+import {{ TacticalMemeCard, TacticalMemeFrame }} from "../../components/TacticalMemeCard";
+import {{ MemeStickerOverlay }} from "../../components/MemeStickerOverlay";
+import {{ WordTimestamp }} from "../../types";
+
+interface CanvasProps {{ transcript: WordTimestamp[]; }}
+
+/**
+ * DESIGN-BRIEF-LED CANVAS — implement bespoke scene composition here.
+ * Never substitute a generic graph, HUD, gauge, or title-card routine for a
+ * brief. Use the metaphor, composition, hierarchy, and motion language below.
+ */
+const SCENE_DESIGN_BRIEFS = {brief_json} as const;
+
+export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
+  const frame = useCurrentFrame();
+  void frame;
+  void SCENE_DESIGN_BRIEFS;
+  return (
+    <div className="absolute inset-0 overflow-hidden select-none">
+      {{/* Bespoke Remotion scene composition belongs here. Presenter ownership remains in Presenter.tsx. */}}
+{meme_jsx}
+{sticker_jsx}
+    </div>
+  );
+}};
+'''
     storyboard = motion_plan.get("storyboard", []) if motion_plan else []
     typo_ladders = extract_scene_typo_ladders(script_text, topic)
     scene_theme = "light" if niche == "self_improvement" else "dark"
@@ -1136,8 +1189,8 @@ import {{
   ArchitecturalDraftingCanvas,
   VectorCursor,
 }} from "../../components/pure_graphics";
-{meme_jsx}
-{sticker_jsx}
+import {{ TacticalMemeCard, TacticalMemeFrame }} from "../../components/TacticalMemeCard";
+import {{ MemeStickerOverlay }} from "../../components/MemeStickerOverlay";
 import {{ WordTimestamp }} from "../../types";
 
 /*
@@ -1170,7 +1223,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
 
   return (
     <div className="{canvas_container_class}">
-{scenes_str}
+{scenes_code}
 
       {meme_jsx}
       {sticker_jsx}
@@ -1891,6 +1944,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
 }};
 """
     (clip_dir / "Canvas.tsx").write_text(canvas_code, encoding="utf-8")
+    assert_valid_canvas_scaffold(canvas_code, pres_code)
 
     # 5. index.tsx with Multi-Layered Sound Design
     sfx_json = json.dumps(sfx_cues, indent=2)

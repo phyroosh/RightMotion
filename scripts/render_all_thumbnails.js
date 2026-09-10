@@ -23,6 +23,8 @@ const THUMBNAIL_MAP = {
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
   'promises_video.mp4': 'PromisesThumbnail',
+  'sleep_debt_trap_video.mp4': 'SleepDebtTrapThumbnail',
+  'goggins_strategy_system_video.mp4': 'GogginsStrategySystemThumbnail',
   'train_your_brain_video.mp4': 'TrainYourBrainThumbnail',
   'the_self_image_trap_video.mp4': 'TheSelfImageTrapThumbnail',
   'the_truth_about_sleep_video.mp4': 'TheTruthAboutSleepThumbnail',

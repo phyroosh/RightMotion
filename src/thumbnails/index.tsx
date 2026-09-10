@@ -793,3 +793,31 @@ export const TrainYourBrainThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const GogginsStrategySystemThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="PEOPLE ONLY KNOW"
+    highlightWord="PEOPLE"
+    highlightColor="rose"
+    subtitle="The Psychology Behind People Only"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
+
+export const SleepDebtTrapThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="SLEEP DEBT TRAP"
+    highlightWord="SLEEP"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Sleep Debt"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);

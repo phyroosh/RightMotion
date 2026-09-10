@@ -1,12 +1,13 @@
 import React from "react";
 import { Audio, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { GitaInTeenageBackground } from "./Background";
-import { GitaInTeenageCanvas } from "./Canvas";
-import { GitaInTeenagePresenter } from "./Presenter";
+import { GogginsStrategySystemBackground } from "./Background";
+import { GogginsStrategySystemCanvas } from "./Canvas";
+import { GogginsStrategySystemPresenter } from "./Presenter";
 import { AppleProgressBar } from "../../components/AppleProgressBar";
 import { AppleKineticCaptions } from "../../components/AppleKineticCaptions";
 import { SoundDesignEngine, SfxCue } from "../../components/SoundDesignEngine";
-import { GitaInTeenageThumbnail } from "../../thumbnails";
+import { GroundedTextureEngine } from "../../components/texture";
+import { GogginsStrategySystemThumbnail } from "../../thumbnails";
 import rawTranscript from "./transcript.json";
 import { WordTimestamp } from "../../types";
 import "../../style.css";
@@ -15,6 +16,7 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({
   word: t.word,
   startMs: t.startMs ?? t.start,
   endMs: t.endMs ?? t.end,
+  speaker: t.speaker,
 }));
 
 // Multi-SFX audio cues synchronized with progressive visual reveals
@@ -22,61 +24,106 @@ const SFX_CUES: SfxCue[] = [
   {
     "frame": 0,
     "type": "whoosh_deep",
-    "volume": 0.32
+    "volume": 0.3
   },
   {
-    "frame": 124,
+    "frame": 15,
+    "type": "whoosh_fast",
+    "volume": 0.26
+  },
+  {
+    "frame": 210,
     "type": "whoosh_deep",
-    "volume": 0.24
+    "volume": 0.3
   },
   {
-    "frame": 241,
-    "type": "whoosh_fast",
-    "volume": 0.34
-  },
-  {
-    "frame": 82,
-    "type": "whoosh_fast",
+    "frame": 228,
+    "type": "click",
     "volume": 0.28
   },
   {
-    "frame": 82,
-    "type": "click",
-    "volume": 0.24
+    "frame": 435,
+    "type": "whoosh_deep",
+    "volume": 0.3
   },
   {
-    "frame": 174,
+    "frame": 453,
+    "type": "click",
+    "volume": 0.32
+  },
+  {
+    "frame": 660,
     "type": "whoosh_deep",
     "volume": 0.32
   },
   {
-    "frame": 241,
+    "frame": 680,
+    "type": "click",
+    "volume": 0.24
+  },
+  {
+    "frame": 700,
+    "type": "click",
+    "volume": 0.24
+  },
+  {
+    "frame": 720,
+    "type": "whoosh_sparkle",
+    "volume": 0.35
+  },
+  {
+    "frame": 0,
+    "type": "whoosh_deep",
+    "volume": 0.32
+  },
+  {
+    "frame": 42,
+    "type": "click",
+    "volume": 0.22
+  },
+  {
+    "frame": 180,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 307,
+    "frame": 602,
+    "type": "click",
+    "volume": 0.28
+  },
+  {
+    "frame": 220,
+    "type": "whoosh_sparkle",
+    "volume": 0.24
+  },
+  {
+    "frame": 220,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 458,
+    "frame": 285,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 628,
+    "frame": 422,
+    "type": "click",
+    "volume": 0.26
+  },
+  {
+    "frame": 559,
     "type": "whoosh_sparkle",
     "volume": 0.32
   },
   {
-    "frame": 728,
-    "type": "whoosh_deep",
-    "volume": 0.28
+    "frame": 710,
+    "type": "click",
+    "volume": 0.32
   }
 ];
 
-export const GitaInTeenageComposition: React.FC = () => {
+export const GogginsStrategySystemComposition: React.FC = () => {
   const { width, height, fps, durationInFrames } = useVideoConfig();
   const frame = useCurrentFrame();
   const currentMs = (frame / fps) * 1000;
@@ -89,12 +136,12 @@ export const GitaInTeenageComposition: React.FC = () => {
       {/* 0. High-Converting 4K Thumbnail First-Frame */}
       {frame === 0 && (
         <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">
-          <GitaInTeenageThumbnail />
+          <GogginsStrategySystemThumbnail />
         </div>
       )}
 
       {/* 1. Voiceover Audio Track */}
-      <Audio src={staticFile("gita_in_teenage/voiceover.mp3")} volume={1.3} />
+      <Audio src={staticFile("goggins_strategy_system/voiceover.mp3")} volume={1.3} />
 
       {/* 2. Ducked Background Ambient Music */}
       <Audio
@@ -117,16 +164,18 @@ export const GitaInTeenageComposition: React.FC = () => {
       <AppleProgressBar />
 
       {/* 5. Niche Living Background */}
-      <GitaInTeenageBackground />
+      <GogginsStrategySystemBackground />
 
       {/* 6. Speech-Synchronized Progressive Reveal Canvas */}
-      <GitaInTeenageCanvas transcript={transcript} />
+      <GogginsStrategySystemCanvas transcript={transcript} />
 
-      {/* 7. Multi-Pose Character Presenter */}
-      <GitaInTeenagePresenter currentMs={currentMs} />
+      {/* 7. GlossyJudyIntro owns the opening presenter staging; avoid a duplicate cutout. */}
 
       {/* 8. Kinetic Captions with Neon Apple Glow */}
       <AppleKineticCaptions transcript={transcript} />
+
+      {/* 9. Grounded Finishing Texture (35mm Living Grain + Halation + Vignette) */}
+      <GroundedTextureEngine grainOpacity={0.042} />
     </div>
   );
 };

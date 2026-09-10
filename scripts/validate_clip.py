@@ -2,7 +2,7 @@
 """
 RightClips Autonomous Pre-Flight Video Validator.
 Audits generated clips against all production, retention, and Remotion standards:
-1. Transcript integrity & runtime policy (20-24s solo Judy, <40s Duo Andrew)
+    1. Transcript integrity & runtime policy (25-35s solo Judy, <40s Duo Andrew)
 2. Audio files (voiceover, BGM, and SFX cues)
 3. Editorial scene illustration presence
 4. Tactical meme validation (Frame 0 hook, < 2.0s duration, registered meme ID)
@@ -103,10 +103,10 @@ def validate_clip(name: str, render_still: bool = False) -> bool:
                     elif duration_sec < 18.0:
                         warnings.append(f"Duo runtime ({duration_sec:.1f}s) is unusually short (<18s)")
                 else:
-                    if duration_sec > 25.5:
-                        warnings.append(f"Solo Judy runtime ({duration_sec:.1f}s, {word_count} words) exceeds 20-24s viral sweet spot (68-78%+ completion rate sweet spot)")
-                    elif duration_sec < 15.0:
-                        warnings.append(f"Solo Judy runtime ({duration_sec:.1f}s) is unusually short (<15s)")
+                    if duration_sec > 35.0:
+                        warnings.append(f"Solo Judy runtime ({duration_sec:.1f}s, {word_count} words) exceeds the 25-35s policy")
+                    elif duration_sec < 25.0:
+                        warnings.append(f"Solo Judy runtime ({duration_sec:.1f}s) is below the 25-35s policy")
 
         except Exception as e:
             errors.append(f"Failed to parse transcript.json: {e}")
@@ -114,6 +114,21 @@ def validate_clip(name: str, render_still: bool = False) -> bool:
     # 5. Tactical Meme Audit
     if canvas_file.exists():
         canvas_code = canvas_file.read_text(encoding="utf-8")
+        # JSX components are legal only inside a React return tree.  A former
+        # scaffold bug injected meme JSX between imports, producing invalid TSX.
+        canvas_export_at = canvas_code.find("export const")
+        for component in ("TacticalMemeCard", "TacticalMemeFrame", "MemeStickerOverlay"):
+            tag_at = canvas_code.find(f"<{component}")
+            if tag_at != -1 and (canvas_export_at == -1 or tag_at < canvas_export_at):
+                errors.append(f"{component} JSX appears at module scope; move it inside the Canvas return tree")
+
+        # A clip must have exactly one owner for the mandatory opening Judy.
+        # Canvas-owned intros and Presenter-owned intros together create a
+        # visible duplicate presenter during the hook.
+        presenter_file = clip_dir / "Presenter.tsx"
+        presenter_code = presenter_file.read_text(encoding="utf-8") if presenter_file.exists() else ""
+        if "<GlossyJudyIntro" in canvas_code and "<GlossyJudyIntro" in presenter_code:
+            errors.append("Duplicate GlossyJudyIntro ownership in Canvas.tsx and Presenter.tsx")
         meme_match = re.search(r'<(?:TacticalMemeCard|TacticalMemeFrame)[^>]*memeId=["\']([^"\']+)["\'][^>]*>', canvas_code)
         if meme_match:
             meme_id = meme_match.group(1)
@@ -140,6 +155,21 @@ def validate_clip(name: str, render_still: bool = False) -> bool:
             dur_match = re.search(r'durationFrames=\{?(\d+)\}?', meme_match.group(0))
             if dur_match and int(dur_match.group(1)) > 66:
                 warnings.append(f"Tactical meme duration ({dur_match.group(1)} frames / {int(dur_match.group(1))/30:.2f}s) exceeds 2.0s retention cap")
+
+    # 5b. Scene-design brief and diversity audit.  This is static and never
+    # renders the clip, so it is safe to run before every render.
+    plan_file = clip_dir / "motion_plan.json"
+    if plan_file.exists():
+        try:
+            plan = json.loads(plan_file.read_text(encoding="utf-8"))
+            diversity = plan.get("visualDesign", {}).get("diversity") or plan.get("artDirection", {}).get("diversityScore")
+            briefs = [scene.get("designBrief") for scene in plan.get("storyboard", [])]
+            if len(briefs) != 4 or any(not brief for brief in briefs):
+                errors.append("motion_plan.json is missing one or more required scene design briefs")
+            elif not diversity or not diversity.get("passes"):
+                errors.append("motion_plan.json fails the semantic visual-diversity check")
+        except Exception as exc:
+            errors.append(f"Unable to audit motion_plan.json: {exc}")
 
     # 6. Remotion Root & Thumbnails Registration
     root_file = ROOT_DIR / "src" / "Root.tsx"
@@ -177,7 +207,7 @@ def validate_clip(name: str, render_still: bool = False) -> bool:
             print(f"   {GREEN}✓ Still thumbnail rendered successfully!{RESET}")
 
     # Final Output Summary
-    mode_str = "Judy & Andrew Duo (up to 40s)" if is_duo else "Solo Judy Insights (20-24s sweet spot)"
+    mode_str = "Judy & Andrew Duo (up to 40s)" if is_duo else "Solo Judy Insights (25-35s policy)"
     print(f"\n📊 Summary for {BOLD}{name}{RESET}:")
     print(f"   • Presenter Mode: {mode_str}")
     print(f"   • Word Count:     {word_count} words")
