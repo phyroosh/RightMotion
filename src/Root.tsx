@@ -75,6 +75,8 @@ import { BrainToleranceComposition } from "./clips/brain_tolerance";
 import brain_toleranceTranscript from "./clips/brain_tolerance/transcript.json";
 import { TheArchitectureOfFocusComposition } from "./clips/the_architecture_of_focus";
 import the_architecture_of_focusTranscript from "./clips/the_architecture_of_focus/transcript.json";
+import { TheLawOfStructuralLoadComposition } from "./clips/the_law_of_structural_load";
+import the_law_of_structural_loadTranscript from "./clips/the_law_of_structural_load/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -104,6 +106,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TheLawOfStructuralLoadThumbnail,
   TheArchitectureOfFocusThumbnail,
   BrainToleranceThumbnail,
   ThePersonYouNeverChoseThumbnail,
@@ -239,6 +242,8 @@ export const RemotionRoot: React.FC = () => {
   const brain_toleranceDuration = calculateDurationInFrames(brain_toleranceTranscript as any[], fps);
   
   const the_architecture_of_focusDuration = calculateDurationInFrames(the_architecture_of_focusTranscript as any[], fps);
+  
+  const the_law_of_structural_loadDuration = calculateDurationInFrames(the_law_of_structural_loadTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -549,6 +554,16 @@ export const RemotionRoot: React.FC = () => {
         id="TheArchitectureOfFocusVideo"
         component={TheArchitectureOfFocusComposition}
         durationInFrames={the_architecture_of_focusDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TheLawOfStructuralLoadVideo"
+        component={TheLawOfStructuralLoadComposition}
+        durationInFrames={the_law_of_structural_loadDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -1122,6 +1137,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="TheArchitectureOfFocusThumbnail"
         component={TheArchitectureOfFocusThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheLawOfStructuralLoadThumbnail"
+        component={TheLawOfStructuralLoadThumbnail}
         width={1080}
         height={1920}
       />

@@ -916,3 +916,17 @@ export const TheArchitectureOfFocusThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TheLawOfStructuralLoadThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="LAW STRUCTURAL LOAD"
+    highlightWord="STRUCTURAL"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Law Structural"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
