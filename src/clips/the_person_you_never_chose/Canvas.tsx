@@ -151,7 +151,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
                 {/* Apple Studio Metrics Contrast Card */}
                 <div className="w-[840px] bg-white/90 backdrop-blur-2xl border border-slate-200/90 rounded-[36px] p-8 shadow-[0_25px_60px_rgba(0,0,0,0.06)] flex items-center justify-between">
                   <div className="flex flex-col items-start">
-                    <span className="font-mono text-[34px] font-bold text-slate-400 uppercase">
+                    <span className="font-mono text-[36px] font-bold text-slate-400 uppercase">
                       EXTERNAL METRIC
                     </span>
                     <span className="font-sans font-black text-[56px] text-emerald-600 mt-1">
@@ -162,7 +162,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
                   <div className="h-16 w-[2px] bg-slate-200" />
 
                   <div className="flex flex-col items-end">
-                    <span className="font-mono text-[34px] font-bold text-slate-400 uppercase">
+                    <span className="font-mono text-[36px] font-bold text-slate-400 uppercase">
                       OWNERSHIP
                     </span>
                     <span className="font-sans font-black text-[56px] text-rose-600 mt-1">
@@ -207,7 +207,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
 
                     <div className="flex items-center gap-3 bg-amber-50 border border-amber-200 px-5 py-2.5 rounded-2xl">
                       <Award className="w-8 h-8 text-amber-600" />
-                      <span className="font-mono font-bold text-[34px] text-amber-700">
+                      <span className="font-mono font-bold text-[36px] text-amber-700">
                         VALIDATION
                       </span>
                     </div>
