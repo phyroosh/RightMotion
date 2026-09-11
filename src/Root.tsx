@@ -77,6 +77,8 @@ import { TheArchitectureOfFocusComposition } from "./clips/the_architecture_of_f
 import the_architecture_of_focusTranscript from "./clips/the_architecture_of_focus/transcript.json";
 import { TheLawOfStructuralLoadComposition } from "./clips/the_law_of_structural_load";
 import the_law_of_structural_loadTranscript from "./clips/the_law_of_structural_load/transcript.json";
+import { TheThresholdEffectComposition } from "./clips/the_threshold_effect";
+import the_threshold_effectTranscript from "./clips/the_threshold_effect/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -106,6 +108,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TheThresholdEffectThumbnail,
   TheLawOfStructuralLoadThumbnail,
   TheArchitectureOfFocusThumbnail,
   BrainToleranceThumbnail,
@@ -244,6 +247,8 @@ export const RemotionRoot: React.FC = () => {
   const the_architecture_of_focusDuration = calculateDurationInFrames(the_architecture_of_focusTranscript as any[], fps);
   
   const the_law_of_structural_loadDuration = calculateDurationInFrames(the_law_of_structural_loadTranscript as any[], fps);
+  
+  const the_threshold_effectDuration = calculateDurationInFrames(the_threshold_effectTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -564,6 +569,16 @@ export const RemotionRoot: React.FC = () => {
         id="TheLawOfStructuralLoadVideo"
         component={TheLawOfStructuralLoadComposition}
         durationInFrames={the_law_of_structural_loadDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TheThresholdEffectVideo"
+        component={TheThresholdEffectComposition}
+        durationInFrames={the_threshold_effectDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -1144,6 +1159,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="TheLawOfStructuralLoadThumbnail"
         component={TheLawOfStructuralLoadThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheThresholdEffectThumbnail"
+        component={TheThresholdEffectThumbnail}
         width={1080}
         height={1920}
       />

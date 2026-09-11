@@ -930,3 +930,17 @@ export const TheLawOfStructuralLoadThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TheThresholdEffectThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="THRESHOLD EFFECT PSYCHOLOGY"
+    highlightWord="PSYCHOLOGY"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Threshold Effect"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
