@@ -29,6 +29,8 @@ export interface GlossyJudyIntroProps {
   theme?: "light" | "dark";
   /** Ground character to the bottom edge like in the thumbnail (default: true) */
   grounded?: boolean;
+  /** Horizontal alignment: "center" | "right" | "left" (default: "center") */
+  position?: "center" | "right" | "left";
 }
 
 /**
@@ -51,9 +53,13 @@ export const GlossyJudyIntro: React.FC<GlossyJudyIntroProps> = ({
   baseHeight = 1460,
   theme = "light",
   grounded = true,
+  position = "center",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+
+  const leftPosition =
+    position === "right" ? "62%" : position === "left" ? "38%" : "50%";
 
   // If frame is past exitFrame + 18, unmount completely
   if (frame > exitFrame + 18) {
@@ -104,8 +110,9 @@ export const GlossyJudyIntro: React.FC<GlossyJudyIntroProps> = ({
     >
       {/* 1. Atmospheric Radial Back-Glow behind Judy */}
       <div
-        className="absolute left-1/2 bottom-[24%] -translate-x-1/2 pointer-events-none rounded-full blur-[110px]"
+        className="absolute bottom-[24%] -translate-x-1/2 pointer-events-none rounded-full blur-[110px]"
         style={{
+          left: leftPosition,
           width: "860px",
           height: "860px",
           background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`,
@@ -137,8 +144,9 @@ export const GlossyJudyIntro: React.FC<GlossyJudyIntroProps> = ({
       {/* 3. Judy Cutout Staging — Grounded intimate waist-up eye-level framing like Thumbnail */}
       {grounded ? (
         <div
-          className="absolute bottom-0 left-1/2 flex items-end justify-center pointer-events-none z-20"
+          className="absolute bottom-0 flex items-end justify-center pointer-events-none z-20"
           style={{
+            left: leftPosition,
             width: "980px",
             height: `${baseHeight}px`,
             transform: `translateX(-50%) translateY(${currentY}px) scale(${currentScale})`,

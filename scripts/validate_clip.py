@@ -111,50 +111,18 @@ def validate_clip(name: str, render_still: bool = False) -> bool:
         except Exception as e:
             errors.append(f"Failed to parse transcript.json: {e}")
 
-    # 5. Tactical Meme Audit
+    # 5. Zero Memes Policy Audit
     if canvas_file.exists():
         canvas_code = canvas_file.read_text(encoding="utf-8")
-        # JSX components are legal only inside a React return tree.  A former
-        # scaffold bug injected meme JSX between imports, producing invalid TSX.
-        canvas_export_at = canvas_code.find("export const")
         for component in ("TacticalMemeCard", "TacticalMemeFrame", "MemeStickerOverlay"):
-            tag_at = canvas_code.find(f"<{component}")
-            if tag_at != -1 and (canvas_export_at == -1 or tag_at < canvas_export_at):
-                errors.append(f"{component} JSX appears at module scope; move it inside the Canvas return tree")
+            if f"<{component}" in canvas_code:
+                warnings.append(f"{component} detected: Memes/stickers are deprecated under the Zero-Memes policy. Pivot to semantic cutouts in public/assets/.")
 
-        # A clip must have exactly one owner for the mandatory opening Judy.
-        # Canvas-owned intros and Presenter-owned intros together create a
-        # visible duplicate presenter during the hook.
+        # A clip must have exactly one owner for the opening Judy
         presenter_file = clip_dir / "Presenter.tsx"
         presenter_code = presenter_file.read_text(encoding="utf-8") if presenter_file.exists() else ""
         if "<GlossyJudyIntro" in canvas_code and "<GlossyJudyIntro" in presenter_code:
             errors.append("Duplicate GlossyJudyIntro ownership in Canvas.tsx and Presenter.tsx")
-        meme_match = re.search(r'<(?:TacticalMemeCard|TacticalMemeFrame)[^>]*memeId=["\']([^"\']+)["\'][^>]*>', canvas_code)
-        if meme_match:
-            meme_id = meme_match.group(1)
-            # Check against registry
-            registry_file = ROOT_DIR / "public" / "memes" / "registry.json"
-            if registry_file.exists():
-                with open(registry_file, "r", encoding="utf-8") as f:
-                    reg = json.load(f)
-                valid_ids = [m["id"] for m in reg.get("memes", [])]
-                if meme_id not in valid_ids:
-                    errors.append(f"Meme ID '{meme_id}' is not in public/memes/registry.json (valid: {len(valid_ids)} memes)")
-                else:
-                    # Check disk file
-                    meme_video = ROOT_DIR / "public" / "memes" / f"{meme_id}.mp4"
-                    if not meme_video.exists():
-                        errors.append(f"Meme video file missing on disk: {meme_video}")
-
-            # Check startFrame
-            start_match = re.search(r'startFrame=\{?(\d+)\}?', meme_match.group(0))
-            if start_match and int(start_match.group(1)) != 0:
-                warnings.append(f"Tactical meme starts at frame {start_match.group(1)} instead of frame 0 hook")
-
-            # Check durationFrames
-            dur_match = re.search(r'durationFrames=\{?(\d+)\}?', meme_match.group(0))
-            if dur_match and int(dur_match.group(1)) > 66:
-                warnings.append(f"Tactical meme duration ({dur_match.group(1)} frames / {int(dur_match.group(1))/30:.2f}s) exceeds 2.0s retention cap")
 
     # 5b. Scene-design brief and diversity audit.  This is static and never
     # renders the clip, so it is safe to run before every render.

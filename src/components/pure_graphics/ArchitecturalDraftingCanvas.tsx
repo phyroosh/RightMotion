@@ -18,7 +18,7 @@ export interface ArchitecturalDraftingCanvasProps {
 export const ArchitecturalDraftingCanvas: React.FC<ArchitecturalDraftingCanvasProps> = ({
   theme = "light",
   gridSize = 72,
-  showCornerFraming = true,
+  showCornerFraming,
   showCrosshairs = true,
   accentGlow,
   className = "",
@@ -27,15 +27,16 @@ export const ArchitecturalDraftingCanvas: React.FC<ArchitecturalDraftingCanvasPr
   const { width, height } = useVideoConfig();
 
   const isDark = theme === "dark";
+  const cornerFramingActive = showCornerFraming !== undefined ? showCornerFraming : (isDark ? true : false);
 
-  // Palette definition
-  const bgBase = isDark ? "#0c0e14" : "#f8f9fb";
-  const gridLineColor = isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(15, 23, 42, 0.065)";
-  const crosshairColor = isDark ? "rgba(255, 255, 255, 0.14)" : "rgba(15, 23, 42, 0.16)";
+  // Palette definition: pristine, sharp studio background
+  const bgBase = isDark ? "#0c0e14" : "#ffffff";
+  const gridLineColor = isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(15, 23, 42, 0.045)";
+  const crosshairColor = isDark ? "rgba(255, 255, 255, 0.14)" : "rgba(15, 23, 42, 0.09)";
   const cornerMatteColor = isDark ? "#181b26" : "#1e2433";
 
   // Gentle breathing motion for the background spotlight
-  const breathe = 1 + Math.sin((frame / 30) * 0.8) * 0.04;
+  const breathe = 1 + Math.sin((frame / 30) * 0.8) * 0.03;
 
   // Grid dimensions
   const cols = Math.ceil(width / gridSize);
@@ -107,7 +108,7 @@ export const ArchitecturalDraftingCanvas: React.FC<ArchitecturalDraftingCanvasPr
       </svg>
 
       {/* 3. Geometric Matte Corner Framing Shapes (Solution Wagon Trademark) */}
-      {showCornerFraming && (
+      {cornerFramingActive && (
         <>
           {/* Top-Left Geometric Triangle / Star Matte */}
           <div

@@ -1,4 +1,5 @@
 import React from 'react';
+import { staticFile } from 'remotion';
 import { ThumbnailCard } from './ThumbnailCard';
 import { Brain, Shield, Clock, Flame, Heart, Sparkles, Moon, Award, CheckCircle2 } from 'lucide-react';
 
@@ -876,5 +877,14 @@ export const ThePersonYouNeverChoseThumbnail: React.FC = () => (
     theme="apple_studio"
     aspectRatio="9:16"
     extraBadge="IDENTITY RESET"
+    visualGraphic={
+      <div className="w-full rounded-2xl overflow-hidden border-[2.5px] border-slate-900 shadow-xl">
+        <img
+          src={staticFile("the_person_you_never_chose/assets/scene_illustration.png")}
+          alt="Scene Illustration"
+          className="w-full h-44 object-cover"
+        />
+      </div>
+    }
   />
 );

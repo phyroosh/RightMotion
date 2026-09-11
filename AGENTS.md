@@ -9,20 +9,28 @@
 >
 > Execute this **complete 5-step workflow in the same turn**:
 >
-> 1. **Script** — 3-Pillar architecture (§Rule 7). 25–35s, 70–100 words (hard cap 105). No CTA. Mode B by default (§Rule 3). Generate `[PINNED COMMENT]`.
+> 1. **Script & Hero Illustration**:
+>    - 3-Pillar architecture (§Rule 7). 25–35s, 70–100 words (hard cap 105). No CTA. Mode B by default (§Rule 3). Generate `[PINNED COMMENT]`.
+>    - Generate hero illustration prompt for the Hook and Thumbnail:
+>      ```bash
+>      python3 scripts/generate_illustration_prompt.py --topic "<topic>" --script "<hook>"
+>      ```
+>    - Call `generate_image` tool (`AspectRatio="16:9"`) and copy result to `public/<name>/assets/scene_illustration.png`.
 > 2. **CLI Scaffold**:
 >    ```bash
 >    .venv/bin/python3 scripts/create_clip.py --name "<name>" --topic "<topic>" --script "<script>" [--andrew] [--meta]
 >    ```
->    Produces: neural audio, `transcript.json` (word-level timestamps), meme selection, `Root.tsx` registration, starter `Canvas.tsx`.
-> 3. **Design & implement** `src/clips/<name>/Canvas.tsx` from scratch. Read `transcript.json` for frame-accurate word timing. See Rule 5 for the creative standard.
+>    Produces: neural audio, `transcript.json` (word-level timestamps), cutout asset staging, `Root.tsx` registration, starter `Canvas.tsx`.
+> 3. **Design & implement** `src/clips/<name>/Canvas.tsx` & `Presenter.tsx`:
+>    - **Mandatory ~2.5s Hook Intro (frames 0 to ~75)**: Showcase the created picture (`scene_illustration.png`) inside an editorial card alongside Judy close-up/near to the screen (`baseHeight: 1250–1360px`, `position="right"` or intimate waist-up) so viewers on a 6-inch mobile screen feel immediately connected.
+>    - Read `transcript.json` for frame-accurate word timing. Anchor subsequent scenes with large transparent semantic cutouts (`400–750px`) from `public/assets/`. See Rule 5 for the creative standard.
 > 4. **Visual audit**:
 >    ```bash
->    npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=80
->    npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=250
->    npx remotion still src/index.ts <PascalName>Video out/<name>_scene3.png --frame=500
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_hook.png --frame=35
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=120
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=350
 >    ```
->    Inspect each still via `view_file`. Confirm quality and zero caption overlap.
+>    Inspect each still via `view_file`. Confirm razor-sharp contrast, zero dirty grain on light mode, and zero caption overlap.
 > 5. **Render**: `npx remotion render src/index.ts <PascalName>Video out/<name>_video.mp4`. Deliver path + viral title + pinned comment.
 >
 > *(Output script only if the user writes "script only" or "write a script".)*
@@ -68,15 +76,25 @@ Output `[METADATA]` block (`product_file`, `page_number`, `exercise_title`) + `[
 
 ---
 
-## 🎭 Rule 4: Meme System
+## 🎭 Rule 4: Semantic Asset Cutouts, Character Presenters & Hero Illustration Intro (Zero Memes)
 
 > [!CRITICAL]
-> **First frame only. Muted. Fast-forwarded. Max 1 per video.**
+> **ZERO MEMES POLICY**: Opening video memes (`TacticalMemeCard`, `TacticalMemeFrame`) and reaction stickers (`MemeStickerOverlay`) are **STRICTLY BANNED**. Never use memes.
+> **MANDATORY HERO ILLUSTRATION & INTIMATE PRESENTER INTRO (FIRST 2.5s / FRAMES 0–75)**:
+> Every clip hook MUST generate a bespoke hero illustration (`scripts/generate_illustration_prompt.py` + `generate_image`) and stage it in the opening ~2.5 seconds (frames 0–75) alongside a close-up presenter (Judy in Self Improvement, `baseHeight: 1250–1360px`, `position="right"` or intimate waist-up). This creates immediate personal connection and curiosity on 6-inch mobile screens (720p).
+> **FULL FOCUS ON PHYSICAL CUTOUTS**: Beyond the hero intro, every scene must be visually anchored by high-resolution transparent PNG cutouts from `public/assets/` and presenter characters (`public/character_*.png`, `public/andrew_*.png`).
 
-- **Clip:** `startFrame=0` · 40–46 frames · `volume=0` · `playbackRate=1.35–1.45`
-- **Source:** 21 curated memes in `public/memes/registry.json`. Auto-matched via `scripts/meme_matcher.py`.
-- **Disable:** `{no meme}` / `--no-meme` · **Override:** `{meme: <id>}`
-- **Mid-video stickers** (`<MemeStickerOverlay />`): seconds 9–16 only · 15 stickers in `public/memes/stickers/` · Auto-matched via `scripts/meme_sticker_matcher.py` · Disable: `{no sticker}`
+- **Asset Library (`public/assets/registry.json`)**: 40+ curated transparent semantic cutouts categorized into:
+  - `psychology/` (`hyperrealistic_3d_glowing_brain`, `dopamine_head_circuit`, `enlightened_mind_insight`, `heart_and_brain_harmony`, `tangled_confusion_chaos`, etc.)
+  - `burnout/` (`battery_low_red`, `brain_battery_depleted`, `brain_trapped_in_cage`, `exhausted_in_bed`, `overwhelmed_mind_ripples`, etc.)
+  - `relationships/` (`setting_boundary_stop_hand`, `isolated_curled_up`, `peer_pressure_criticism`, `friendship_comfort_support`, etc.)
+  - `habits/` (`target_focus_crosshair`, `calendar_habit_check`, `mood_rating_scale_emojis`, etc.)
+  - `devices/` (`phone_dopamine_overload`, `smartphone_lockscreen_notifications`, etc.)
+- **Hero Cutout Staging**:
+  - Size cutouts large: **400px–750px**. They must be bold physical subjects, not tiny decorative icons.
+  - Anchor with crisp drop-shadows (`drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)]`) or clean contrast rim glows.
+  - Animate with spring dynamics (`damping: 12–14, stiffness: 120–150, mass: 0.6`).
+- **Presenter Cutouts**: Judy poses (`character_pointing.png`, `character_crossed.png`, `character_open.png`, `character.png`) must actively accompany key moments rather than just an intro flash.
 
 ---
 
@@ -159,9 +177,15 @@ one element transforming into another · cause-effect chains · progressive cons
 
 ---
 
-### 5.4 — Background, Color & Typography
+### 5.4 — Background, Color, Typography & Sharpness Standard
 
-**Background** (characteristics, not recipes): subtle grid structures · restrained gradients · light texture · soft spatial depth · atmospheric lighting · elegant geometry · dark cinematic surfaces (Finance/Health)
+**Ultra-High Contrast & Sharpness Law (No Rough/Hazy Aesthetics):**
+- **Clean Luminous Ground:** On light canvas (`#f8fafc` / `#fbfbfd`), do NOT overlay dirty 35mm film grain or gray texture haze. Keep backgrounds pristine, clean, and razor-sharp.
+- **Deep Inky Contrast:** Headlines and primary text must use inky deep black (`#090d16` or `#000000`). Minimum **7:1 contrast ratio** against backgrounds.
+- **Zero Muddy Tone-on-Tone:** BANNED: amber text on amber background, red text on pink background, light gray text on white. High-impact color means crisp white text on bold saturated blocks, or deep dark text with solid high-contrast accents.
+- **Razor-Sharp Edge Geometry:** Containers must be solid `#ffffff` with high-definition dark borders (`border-[2.5px] border-slate-900` or crisp solid borders) and razor drop shadows (`shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)]`). No hazy, diffuse, washed-out blur boxes.
+
+**Background** (characteristics, not recipes): subtle vector grid structures · clean studio radial lighting · crisp spatial depth · atmospheric lighting · elegant geometry · dark cinematic surfaces (Finance/Health).
 
 **Color:** Restrained palette — 2–3 deliberate colors. Accent = purposeful. No neon for neon's sake. No glow as decoration. Color supports the idea.
 
@@ -191,14 +215,15 @@ Two fonts only: **Montserrat** (headlines, display, slam words) + **JetBrains Mo
 > [!CRITICAL]
 > **These are hard bans. They produce small, cluttered, illegible results that fail on mobile.**
 
-1. **Pill/capsule badges** — `● PROTOCOL // 5 PILLARS`, numbered capsules (`01 // CIRCADIAN ARCHITECTURE`), `NON-NEGOTIABLE`/`MANDATORY` chips, status tags, icon+capsule pairings. RightMotion is motion design, not a mobile app UI.
+1. **Pill/capsule badges** — `● PROTOCOL // 5 PILLARS`, `THE CONDITIONING`, numbered capsules (`01 // CIRCADIAN ARCHITECTURE`), `NON-NEGOTIABLE`/`MANDATORY` chips, status tags, icon+capsule pairings. RightMotion is motion design, not a mobile app UI.
 2. **Dashboard/list-card rows** — 3–5 stacked rows each with a number, title, sub-description, and right-side badge. This is a dashboard layout. Design a different scene — do not resize the list.
 3. **Sub-descriptions inside cards** — 2–3 lines of body text inside a card element. Audio carries the information load.
 4. **3+ simultaneous floating text elements** — unless scale contrast makes hierarchy unmistakable.
 5. **Icon + micro-text pairings** — icon < 40px paired with label < 40px. Make the icon a primary visual or remove it.
 6. **HUD/dashboard/telemetry panels** — stat rows, floating metric boxes with small type, thin-border data panels, game-HUD aesthetics.
+7. **Memes & reaction stickers** — opening memes (`TacticalMemeCard`, `TacticalMemeFrame`) and sticker pops (`MemeStickerOverlay`) are completely banned. Focus 100% on semantic cutouts and Judy character poses.
 
-**The alternative to all of these: fewer things, much larger, much bolder. Let audio carry information density.**
+**The alternative to all of these: fewer things, much larger, much bolder, razor-sharp contrast, anchored by physical semantic cutouts.**
 
 ---
 
@@ -296,7 +321,7 @@ Every element must answer: *"Does this help the viewer understand, feel, or reme
 - `collage/` — TapeStrip, HandDrawnDoodle, HighlighterStroke
 - `finance/` · `health/` · `facecam/` — channel-specific backgrounds and frames
 - `kinetic_text/` — CameraShake, GlitchText, SemanticWord
-- Root: `<KineticCaptions />` · `<AppleKineticCaptions />` · `<CinematicIllustrationCard />` · `<ConceptKeywordSlam />` · `<DuoPresenter />` · `<TacticalMemeCard />` · `<MemeStickerOverlay />`
+- Root: `<KineticCaptions />` · `<AppleKineticCaptions />` · `<CinematicIllustrationCard />` · `<ConceptKeywordSlam />` · `<DuoPresenter />`
 
 Do not cycle through this list. Do not use a component because it was used before. Use it when it genuinely serves the composition. A component IS appropriate when:
 - Graph → idea is measurable change over time
@@ -305,11 +330,14 @@ Do not cycle through this list. Do not use a component because it was used befor
 - Card → a contained information unit genuinely helps
 - Diagram → structural explanation is required
 
-**Hero illustration (optional):**
+**Mandatory Hero Illustration & 2.5s Hook Intro:**
+Every clip MUST generate a bespoke hero illustration for the hook & thumbnail:
 ```bash
 python3 scripts/generate_illustration_prompt.py --topic "<topic>" --script "<hook>"
 ```
-Call `generate_image` with `AspectRatio="16:9"`. Save to `public/<name>/assets/scene_illustration.png`. Wrap in `<CinematicIllustrationCard />`. If image generation is unavailable, build the scene entirely in Remotion. Visual ambition must not decrease.
+Call `generate_image` with `AspectRatio="16:9"`. Save to `public/<name>/assets/scene_illustration.png`.
+- **Opening 2.5s (frames 0 to ~75)**: Stage the illustration inside an editorial card (or `<CinematicIllustrationCard />`) accompanied by a close-up presenter (Judy in Self Improvement, `baseHeight: 1250–1360px`, `position="right"` or intimate waist-up). This creates immediate visual curiosity and human connection on 6-inch mobile screens (720p).
+- **Thumbnail integration**: Mount the hero illustration inside `visualGraphic` on `ThumbnailCard` in `src/thumbnails/index.tsx` so the thumbnail and video intro share the identical compelling visual world.
 
 ---
 
@@ -387,7 +415,7 @@ Do not force variety. Do not use randomness as creativity. Do not abandon RightM
 # Scaffold
 .venv/bin/python3 scripts/create_clip.py \
   --name "<name>" --topic "<topic>" --script "<script>" \
-  [--andrew] [--meta] [--meme <id>] [--no-meme]
+  [--andrew] [--meta]
 
 # Visual audit stills
 npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=80

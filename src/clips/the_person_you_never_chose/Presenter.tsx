@@ -14,11 +14,12 @@ export const ThePersonYouNeverChosePresenter: React.FC<PresenterProps> = () => {
   return (
     <GlossyJudyIntro
       startFrame={0}
-      exitFrame={110}
+      exitFrame={75}
       glowColor="rgba(244, 63, 94, 0.22)"
       pose="character_pointing.png"
       reflectionOpacity={0.36}
-      baseHeight={1040}
+      baseHeight={1280}
+      position="right"
     />
   );
 };

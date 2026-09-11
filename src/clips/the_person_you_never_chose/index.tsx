@@ -135,8 +135,8 @@ export const ThePersonYouNeverChoseComposition: React.FC = () => {
       {/* 8. Kinetic Captions with Neon Apple Glow */}
       <AppleKineticCaptions transcript={transcript} />
 
-      {/* 9. Grounded Finishing Texture (35mm Living Grain + Halation + Vignette) */}
-      <GroundedTextureEngine grainOpacity={0.042} />
+      {/* 9. Grounded Finishing Texture (Zero grain on light canvas for razor sharpness) */}
+      <GroundedTextureEngine theme="light" grainOpacity={0} enableHalation={false} vignetteStrength={0.03} />
     </div>
   );
 };

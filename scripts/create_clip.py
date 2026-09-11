@@ -677,36 +677,48 @@ def generate_canvas_scaffold(
     s2_start: int,
     s3_start: int,
     total_frames: int,
-    meme_jsx: str = "",
-    sticker_jsx: str = "",
     topic: str = "",
+    problem_cutout: str = "",
+    solution_cutout: str = "",
 ) -> str:
-    """Generate a clean, neutral Canvas.tsx scaffold.
+    """Generate a clean, high-contrast Canvas.tsx scaffold focused on semantic cutouts (Zero Memes)."""
+    registry = load_asset_registry()
+    p_meta = registry.get(problem_cutout, {})
+    s_meta = registry.get(solution_cutout, {})
+    p_path = p_meta.get("path", "assets/psychology/head_brain_clean_outline.png")
+    s_path = s_meta.get("path", "assets/psychology/enlightened_mind_insight.png")
 
-    The scaffold gives the editing AI agent timing context and meme/sticker slots.
-    The actual motion design is created by the AI — not prescribed here.
-    """
     return f'''import React from "react";
-import {{ useCurrentFrame, useVideoConfig }} from "remotion";
-import {{ TacticalMemeCard, TacticalMemeFrame }} from "../../components/TacticalMemeCard";
-import {{ MemeStickerOverlay }} from "../../components/MemeStickerOverlay";
+import {{ interpolate, spring, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
 import {{ WordTimestamp }} from "../../types";
 
 interface CanvasProps {{ transcript: WordTimestamp[]; }}
 
 /**
- * RightMotion Canvas — {pascal_name}
+ * 🎬 RightMotion Canvas — {pascal_name}
  * Topic: "{topic}"
  *
- * Scene timing (frames at 30fps):
+ * 📐 Safe Zones:
+ *   - Primary graphics: top: 6% to top: 68% (y: 115px to 1320px)
+ *   - Captions:         top: 73% to top: 81%
+ *   - Zero overlap with captions!
+ *
+ * 🎭 Physical Cutout Assets (Zero Memes Policy):
+ *   - Problem Cutout:  staticFile("{p_path}")
+ *   - Solution Cutout: staticFile("{s_path}")
+ *   - Presenter Judy:  staticFile("character_pointing.png"), staticFile("character_crossed.png"), staticFile("character_open.png")
+ *
+ * ⏱️ Scene Timing (frames at 30fps):
  *   Scene 1 — Hook / Problem:    frames {s1_start} → {s2_start}
  *   Scene 2 — Logic / Mechanism: frames {s2_start} → {s3_start}
  *   Scene 3 — Solution:          frames {s3_start} → {total_frames}
  *
- * Read transcript.json for precise word timestamps.
- * Build bespoke Remotion motion graphics that match the meaning of the script.
- * Components in src/components/ are available as building blocks — use them
- * creatively, not as a template. Choose compositions that serve the idea.
+ * 💎 Visual Standard (Ultra-High Contrast & Razor-Sharp):
+ *   - Anchor scenes with bold physical cutouts (400px–750px) + crisp drop-shadows.
+ *   - Inky deep black (#090d16) text on pure white (#ffffff) or stark background (min 7:1 contrast).
+ *   - Zero muddy tone-on-tone (no amber-on-amber, red-on-pink, light gray on white).
+ *   - Zero dirty film grain or gray texture haze on light canvas.
+ *   - Banned: pill badges, dashboard rows, sub-text in cards, memes/stickers.
  */
 export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const frame = useCurrentFrame();
@@ -715,9 +727,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
 
   return (
     <div className="absolute inset-0 overflow-hidden select-none">
-      {{/* Scene composition goes here */}}
-{meme_jsx}
-{sticker_jsx}
+      {{/* Design bespoke high-contrast motion graphics here */}}
     </div>
   );
 }};
@@ -925,7 +935,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => null;
     else:
         intro_title = "THE PARADOX"
         intro_glow = "rgba(244, 63, 94, 0.22)"
-        intro_exit = 110
+        intro_exit = 75
         intro_pose = "character_pointing.png"
         if concept_term:
             intro_title = concept_term.split()[0].upper()
@@ -939,8 +949,8 @@ interface PresenterProps {{
 
 /**
  * 🎬 {pascal_name}Presenter
- * Mounts the mandatory Judy Intro pop-up during the opening problem hook (0.0s - 3.8s / Frames 0 - {intro_exit}).
- * Backed by an atmospheric radial aura and wet-floor mirror reflection, then gently glides out.
+ * Mounts the mandatory Judy Intro pop-up during the opening problem hook (first ~2.5s / Frames 0 - {intro_exit}).
+ * Framed close-up and intimate to connect with viewers on small mobile screens.
  */
 export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
   return (
@@ -950,7 +960,8 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
       glowColor="{intro_glow}"
       pose="{intro_pose}"
       reflectionOpacity={{0.36}}
-      baseHeight={{1040}}
+      baseHeight={{1280}}
+      position="right"
     />
   );
 }};
@@ -971,72 +982,9 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
             {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
         ]
 
-    # 4a. Tactical Meme Integration (< 2.5s Strict Retention Cap, Muted, 1.4x Fast-Forward)
+    # 4a. Zero Memes Policy (Meme cards and reaction stickers permanently retired)
     meme_jsx = ""
-    if meme_meta:
-        m_id = meme_meta.get("id", "ishowspeed_stare")
-        m_dur = min(meme_meta.get("default_duration_frames", 45), 66)
-        m_start = int(meme_meta.get("start_frame", 0))  # Default 0 for instant opening hook
-        m_speed = meme_meta.get("playback_rate", 1.4)
-        m_label = meme_meta.get("hud_label", "REACTION PROTOCOL // 01")
-        m_sfx = meme_meta.get("recommended_sfx", "whoosh_fast")
-        m_mode = meme_meta.get("mode", "video")
-        m_theme = "dark_obsidian" if niche in ("finance", "facecam") else ("cyber_cyan" if niche == "health" else "apple_studio")
-
-        sfx_cues.append({"frame": m_start, "type": m_sfx, "volume": 0.32})
-        sfx_cues.append({"frame": m_start + m_dur, "type": "click", "volume": 0.22})
-
-        if m_mode == "frame":
-            meme_jsx = f"""
-      {{/* ======================================================== */}}
-      {{/* TACTICAL RETENTION MEME FRAME POP (< 2.5s Strict Cap)   */}}
-      {{/* ======================================================== */}}
-      <TacticalMemeFrame
-        memeId="{m_id}"
-        startFrame={{{m_start}}}
-        durationFrames={{{m_dur}}}
-        hudLabel="{m_label}"
-        theme="{m_theme}"
-        position="top"
-      />
-"""
-        else:
-            meme_jsx = f"""
-      {{/* ======================================================== */}}
-      {{/* TACTICAL RETENTION MEME POP (< 2.5s Strict Cap)          */}}
-      {{/* ======================================================== */}}
-      <TacticalMemeCard
-        memeId="{m_id}"
-        startFrame={{{m_start}}}
-        durationFrames={{{m_dur}}}
-        playbackRate={{{m_speed}}}
-        hudLabel="{m_label}"
-        theme="{m_theme}"
-        position="top"
-      />
-"""
-
-    # 4a2. Mid-Video Gen-Z Meme Reaction Sticker Pop (Seconds 10–16 / Scene 2B)
     sticker_jsx = ""
-    if sticker_meta:
-        st_id = sticker_meta.get("id", "verne_turtle_shock")
-        st_badge = sticker_meta.get("default_badge", "LIVE REACTION")
-        st_pos = sticker_meta.get("position", "bottom-right")
-        st_start = s2_start + 35
-        st_dur = 34
-        sfx_cues.append({"frame": st_start, "type": "click", "volume": 0.26})
-        sticker_jsx = f"""
-      {{/* ======================================================== */}}
-      {{/* MID-VIDEO GEN-Z MEME REACTION STICKER POP               */}}
-      {{/* ======================================================== */}}
-      <MemeStickerOverlay
-        stickerId="{st_id}"
-        startFrame={{{st_start}}}
-        durationFrames={{{st_dur}}}
-        position="{st_pos}"
-        badgeText="{st_badge}"
-      />
-"""
 
     # 4b. Interactive Engagement Pill (Seconds 18–22 / ~70% timeline to boost likes and comments)
     pill_entrance = round(total_frames * 0.70)
@@ -1305,9 +1253,9 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
             s2_start=s2_start,
             s3_start=s3_start,
             total_frames=total_frames,
-            meme_jsx=meme_jsx,
-            sticker_jsx=sticker_jsx,
             topic=topic,
+            problem_cutout=problem_cutout,
+            solution_cutout=solution_cutout,
         )
     else:
         canvas_code = f"""import React from "react";
@@ -1808,66 +1756,9 @@ async def main():
         words, duration_sec = transcribe_audio(audio_path, transcript_path)
 
     # Step 3: Scaffold & Register
-    # Resolve tactical retention meme (DEFAULT ENABLED unless {no meme}, {no memes}, or --no-meme)
-    has_no_meme = (
-        args.no_meme
-        or bool(re.search(r"\{\s*no\s*memes?\s*\}", raw_combined, re.IGNORECASE))
-        or (args.meme and args.meme.lower() in ("none", "false", "no", "off", "disable", "disabled"))
-    )
-
-    explicit_meme = args.meme
-    has_explicit_meme_tag = bool(re.search(r"\{\s*meme\s*:\s*([a-zA-Z0-9_\-]+)\s*\}", raw_combined, re.IGNORECASE))
-    if not explicit_meme and has_explicit_meme_tag:
-        tag_m = re.search(r"\{\s*meme\s*:\s*([a-zA-Z0-9_\-]+)\s*\}", raw_combined, re.IGNORECASE)
-        if tag_m:
-            explicit_meme = tag_m.group(1)
-
+    # Zero Memes Policy: Memes and reaction stickers are permanently retired
     meme_match = None
-    if not has_no_meme:
-        from meme_matcher import find_best_meme
-        target_meme_id = explicit_meme if (explicit_meme and explicit_meme != "auto") else None
-        meme_match = find_best_meme(
-            raw_topic,
-            clean_script,
-            explicit_meme_id=target_meme_id
-        )
-        if meme_match:
-            meme_match = dict(meme_match)
-            meme_match["start_frame"] = args.meme_start
-            meme_match["mode"] = args.meme_mode
-            override_str = f" (explicit override: {explicit_meme})" if target_meme_id else " (DEFAULT auto-matched)"
-            print(f"🎭 [Meme Engine] Tactical retention meme enabled{override_str}: '{meme_match['name']}' ({meme_match['id']})")
-            print(f"      Start: Frame {meme_match['start_frame']} ({'Instant Hook' if meme_match['start_frame'] == 0 else f'{meme_match['start_frame']/30:.1f}s'}), Mode: {meme_match['mode']}, Duration: {meme_match['default_duration_frames']} frames (< 2.5s cap), Speed: {meme_match['playback_rate']}x, SFX: {meme_match['recommended_sfx']}")
-    else:
-        print(f"🔇 [Meme Engine] Tactical meme disabled via {{no meme}} / --no-meme.")
-
-    # 3b. Gen-Z Mid-Video Meme Reaction Sticker Engine
-    has_no_sticker = (
-        args.no_sticker
-        or bool(re.search(r"\{\s*no\s*stickers?\s*\}", raw_combined, re.IGNORECASE))
-        or (args.sticker and args.sticker.lower() in ("none", "false", "no", "off", "disable", "disabled"))
-    )
-
-    explicit_sticker = args.sticker
-    has_explicit_sticker_tag = bool(re.search(r"\{\s*sticker\s*:\s*([a-zA-Z0-9_\-]+)\s*\}", raw_combined, re.IGNORECASE))
-    if not explicit_sticker and has_explicit_sticker_tag:
-        tag_st = re.search(r"\{\s*sticker\s*:\s*([a-zA-Z0-9_\-]+)\s*\}", raw_combined, re.IGNORECASE)
-        if tag_st:
-            explicit_sticker = tag_st.group(1)
-
     sticker_match = None
-    if not has_no_sticker:
-        from meme_sticker_matcher import find_best_sticker
-        target_sticker_id = explicit_sticker if (explicit_sticker and explicit_sticker != "auto") else None
-        sticker_match = find_best_sticker(
-            f"{raw_topic} {clean_script}",
-            explicit_id=target_sticker_id
-        )
-        if sticker_match:
-            override_str = f" (explicit override: {explicit_sticker})" if target_sticker_id else " (DEFAULT auto-matched)"
-            print(f"🏷️ [Sticker Engine] Gen-Z reaction sticker enabled{override_str}: '{sticker_match['name']}' ({sticker_match['id']})")
-    else:
-        print(f"🔇 [Sticker Engine] Mid-video sticker disabled via {{no sticker}} / --no-sticker.")
 
     illustration_path = args.illustration
     if illustration_path:
