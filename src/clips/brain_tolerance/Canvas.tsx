@@ -125,7 +125,7 @@ export const BrainToleranceCanvas: React.FC<CanvasProps> = () => {
                     className="relative w-[920px] bg-white border-[3px] border-slate-950 rounded-[36px] p-3.5 shadow-[0_26px_50px_-10px_rgba(0,0,0,0.22)] overflow-hidden"
                     style={{ transform: `scale(${heroSpring})` }}
                   >
-                    <div className="relative w-full h-[450px] rounded-[24px] overflow-hidden border-[1.5px] border-slate-200">
+                    <div className="relative w-full h-[520px] rounded-[24px] overflow-hidden border-[1.5px] border-slate-200">
                       <img
                         src={staticFile("brain_tolerance/assets/scene_illustration.png")}
                         alt="Your Brain Learns Tolerance"
@@ -135,14 +135,6 @@ export const BrainToleranceCanvas: React.FC<CanvasProps> = () => {
                           transformOrigin: "center center",
                         }}
                       />
-                    </div>
-                    <div className="mt-3 flex items-center justify-between px-3 py-2 bg-slate-50 rounded-xl border border-slate-200">
-                      <span className="font-mono text-[36px] font-bold text-slate-700">
-                        CONSCIOUS GOALS VS NEURAL BASELINE
-                      </span>
-                      <span className="font-mono text-[36px] font-black text-indigo-600">
-                        01 // CALIBRATION
-                      </span>
                     </div>
                   </div>
                 </div>

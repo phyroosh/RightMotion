@@ -3,7 +3,7 @@ import { Easing, interpolate, spring, staticFile, useCurrentFrame, useVideoConfi
 import { WordTimestamp } from "../../types";
 import { Compass, EyeOff, RefreshCw } from "lucide-react";
 import { AnimatedSlashStrike, KineticHighlighter } from "../../components/kinetic_text";
-import { CinematicParallaxRig } from "../../components/camera3d/CinematicParallaxRig";
+import { CinematicParallaxRig, PersistentAnchor } from "../../components/camera3d";
 
 interface CanvasProps {
   transcript: WordTimestamp[];
@@ -19,12 +19,12 @@ interface CanvasProps {
  * - Kinetic Captions reserved: top: 73% to top: 81%
  * - Zero overlap with captions!
  *
- * Visual Standard:
+ * Visual Standard (Level 100 Standards):
  * - ZERO MEMES: All memes and sticker overlays permanently removed.
  * - PHYSICAL CUTOUTS: Anchored by Judy poses and psychology cutouts with crisp drop shadows.
  * - ULTRA-HIGH CONTRAST: Inky black (#090d16) text, solid white cards, razor-sharp 2.5px borders.
- * - ZERO MUDDY TONE-ON-TONE: Crisp high-contrast contrast rows.
- * - ZERO PILL BADGES: Pure editorial hierarchy.
+ * - SPATIAL CONTINUITY: PersistentAnchor carries visual identity across scene boundaries.
+ * - THE DRAMATIC BREATH HOLD: 21-frame acoustic & visual freeze right before the central epiphany.
  */
 export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
   const frame = useCurrentFrame();
@@ -33,15 +33,33 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
   return (
     <CinematicParallaxRig
       punchIns={[
-        { frame: 630, zoom: 1.05, durationFrames: 10, targetY: -20 },
-        { frame: 875, zoom: 1.04, durationFrames: 12, targetY: -15 },
+        { frame: 521, zoom: 1.05, durationFrames: 10, targetY: -20 },
+        { frame: 630, zoom: 1.09, durationFrames: 8, targetY: -30, dutchTilt: -1.2 },
+        { frame: 875, zoom: 1.05, durationFrames: 12, targetY: -15 },
       ]}
       breathHolds={[
-        { startFrame: 415, durationFrames: 14 },
+        { startFrame: 500, durationFrames: 21 },
       ]}
       className="w-full h-full select-none font-sans"
     >
       <div className="absolute inset-0 w-full h-full">
+        {/* Cross-Scene Persistent Anchor: Identity Token bridges Scene 1 into Scene 2 */}
+        <PersistentAnchor
+          startFrame={75}
+          transitionStartFrame={380}
+          transitionEndFrame={415}
+          initialState={{ x: 0, y: 130, scale: 1.0, opacity: 1 }}
+          targetState={{ x: -280, y: 70, scale: 0.55, opacity: 0.85 }}
+          exitFrame={520}
+          className="top-0 left-1/2 -translate-x-1/2 z-30"
+        >
+          <div className="px-5 py-2 rounded-2xl bg-slate-950 text-white border-[2.5px] border-slate-800 shadow-xl flex items-center gap-3">
+            <div className="w-3.5 h-3.5 rounded-full bg-rose-500 animate-pulse" />
+            <span className="font-mono text-[28px] font-black uppercase tracking-wider">
+              BORROWED IDENTITY
+            </span>
+          </div>
+        </PersistentAnchor>
       {/* ======================================================== */}
       {/* SCENE 1: BORROWED SUCCESS & PERFORMANCE HABIT (0 → 395)  */}
       {/* "You can become incredibly successful at living a life..."*/}
