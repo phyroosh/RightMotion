@@ -52,34 +52,69 @@ const SFX_CUES: SfxCue[] = [
     "volume": 0.26
   },
   {
-    "frame": 631,
+    "frame": 445,
+    "type": "click",
+    "volume": 0.26
+  },
+  {
+    "frame": 465,
+    "type": "click",
+    "volume": 0.26
+  },
+  {
+    "frame": 495,
     "type": "click",
     "volume": 0.28
   },
   {
-    "frame": 424,
-    "type": "whoosh_sparkle",
-    "volume": 0.24
+    "frame": 520,
+    "type": "whoosh_fast",
+    "volume": 0.30
   },
   {
-    "frame": 424,
+    "frame": 545,
     "type": "click",
-    "volume": 0.26
+    "volume": 0.28
   },
   {
-    "frame": 424,
+    "frame": 600,
     "type": "click",
-    "volume": 0.26
+    "volume": 0.28
   },
   {
-    "frame": 521,
+    "frame": 630,
+    "type": "whoosh_fast",
+    "volume": 0.34
+  },
+  {
+    "frame": 631,
+    "type": "marker_scribble",
+    "volume": 0.35
+  },
+  {
+    "frame": 642,
+    "type": "click",
+    "volume": 0.30
+  },
+  {
+    "frame": 660,
     "type": "whoosh_sparkle",
     "volume": 0.32
   },
   {
-    "frame": 667,
+    "frame": 740,
     "type": "click",
     "volume": 0.32
+  },
+  {
+    "frame": 840,
+    "type": "whoosh_deep",
+    "volume": 0.32
+  },
+  {
+    "frame": 875,
+    "type": "impact_hit",
+    "volume": 0.26
   }
 ];
 

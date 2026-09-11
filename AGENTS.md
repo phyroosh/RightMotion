@@ -94,7 +94,14 @@ Output `[METADATA]` block (`product_file`, `page_number`, `exercise_title`) + `[
   - Size cutouts large: **400px–750px**. They must be bold physical subjects, not tiny decorative icons.
   - Anchor with crisp drop-shadows (`drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)]`) or clean contrast rim glows.
   - Animate with spring dynamics (`damping: 12–14, stiffness: 120–150, mass: 0.6`).
-- **Presenter Cutouts**: Judy poses (`character_pointing.png`, `character_crossed.png`, `character_open.png`, `character.png`) must actively accompany key moments rather than just an intro flash.
+- **Presenter Cutouts & The Law of Presenter Grounding (Anti-Severed-Torso)**:
+  - Judy poses (`character_pointing.png`, `character_crossed.png`, `character_open.png`, `character.png`) represent living human hosts.
+  - **Hard Ban**: NEVER float a waist-up cutout in the middle of empty canvas space with an exposed horizontal cut line! That looks amateurish and bizarre.
+  - **Mandatory Grounding**: Presenters must either:
+    1) Ground to the bottom bezel of the phone screen (waist-up `baseHeight: 1250–1360px`, anchored at `bottom: 0`, e.g. `<GlossyJudyIntro />`).
+    2) Anchor to a screen edge or emerge cleanly from behind an editorial card.
+    3) Frame inside a circular host avatar token (`w-24 h-24 rounded-full border-2 border-slate-950 overflow-hidden shadow-lg`).
+  - If a scene does not need a presenter host, do NOT force Judy into the card! Anchor the scene with large 3D semantic cutouts (`psychology/`, `burnout/`, etc.) or high-contrast kinetic typography.
 
 ---
 
@@ -234,6 +241,19 @@ smooth acceleration/deceleration · spring physics with intentional overshoot ·
 
 **Think in choreography, not independent animations.** Elements enter in sequence, react to each other, hand off focus, synchronize, push/pull/reveal. One element's exit triggers another's entrance. Camera follows objects. Objects transform into the next scene's opening state. Ask: *"Do these elements know about each other?"*
 
+**The Law of Progressive Micro-Choreography (Zero Static Layouts):**
+- Multi-row comparisons, lists, or compound cards must NEVER appear all at once like a static slide.
+- Every block, row, contradiction, and annotation MUST enter sequentially on its exact spoken word timestamp from `transcript.json`.
+- Beat 1: Container/Premise enters (`frame >= t1`) → Beat 2: Block 1 enters (`frame >= t2`) → Beat 3: Block 2 enters (`frame >= t3`) → Beat 4: Action/Payoff executes.
+
+**The Law of In-Scene Mutation (Action Over Display):**
+- Never display a static finished state when an action can be performed live.
+- Whenever an idea involves negation, rejection, contradiction, or realization (e.g. "not X", "fails", "drops", "crushes"), the canvas MUST execute that physical mutation live on screen:
+  - An animated blade or marker cut slices across the text in real-time (`<AnimatedSlashStrike />`) synced to a whoosh/scribble sound cue.
+  - A dial or slider violently drops with a haptic click.
+  - A stamp impacts with micro camera shake (`CameraShake`).
+- The viewer must SEE the action occur, not just read a pre-cancelled word.
+
 **Motion — avoid:**
 perpetual bobbing after settling · meaningless rotation · decorative particles · constant glow pulses · movement with no semantic reason
 
@@ -320,8 +340,8 @@ Every element must answer: *"Does this help the viewer understand, feel, or reme
 - `texture/` — GroundedTextureEngine, ArchivalPaperCanvas, depth layers
 - `collage/` — TapeStrip, HandDrawnDoodle, HighlighterStroke
 - `finance/` · `health/` · `facecam/` — channel-specific backgrounds and frames
-- `kinetic_text/` — CameraShake, GlitchText, SemanticWord
-- Root: `<KineticCaptions />` · `<AppleKineticCaptions />` · `<CinematicIllustrationCard />` · `<ConceptKeywordSlam />` · `<DuoPresenter />`
+- `kinetic_text/` — CameraShake, GlitchText, SemanticWord, AnimatedSlashStrike
+- Root: `<KineticCaptions />` · `<AppleKineticCaptions />` · `<CinematicIllustrationCard />` · `<ConceptKeywordSlam />` · `<DuoPresenter />` · `<AnimatedSlashStrike />`
 
 Do not cycle through this list. Do not use a component because it was used before. Use it when it genuinely serves the composition. A component IS appropriate when:
 - Graph → idea is measurable change over time

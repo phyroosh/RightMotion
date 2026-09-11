@@ -2,6 +2,7 @@ import React from "react";
 import { Easing, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { WordTimestamp } from "../../types";
 import { Compass, EyeOff, RefreshCw } from "lucide-react";
+import { AnimatedSlashStrike } from "../../components/kinetic_text/AnimatedSlashStrike";
 
 interface CanvasProps {
   transcript: WordTimestamp[];
@@ -31,11 +32,11 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
   return (
     <div className="absolute inset-0 w-full h-full select-none overflow-hidden font-sans">
       {/* ======================================================== */}
-      {/* SCENE 1: BORROWED SUCCESS & PERFORMANCE HABIT (0 → 285)  */}
+      {/* SCENE 1: BORROWED SUCCESS & PERFORMANCE HABIT (0 → 395)  */}
       {/* "You can become incredibly successful at living a life..."*/}
       {/* ======================================================== */}
-      {frame >= 0 && frame < 285 && (() => {
-        const cam1 = interpolate(frame, [0, 285], [1.0, 1.04], {
+      {frame >= 0 && frame < 395 && (() => {
+        const cam1 = interpolate(frame, [0, 395], [1.0, 1.04], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
           easing: Easing.bezier(0.16, 1, 0.3, 1),
@@ -53,7 +54,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
           config: { damping: 14, mass: 0.7, stiffness: 120 },
         });
 
-        // Part 1B: Frames 75 -> 285 (Reshaping for expectations & performance habit)
+        // Part 1B: Frames 75 -> 395 (Reshaping for expectations & performance habit)
         const part1BProgress = interpolate(frame, [75, 95], [0, 1], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
@@ -193,33 +194,21 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
       })()}
 
       {/* ======================================================== */}
-      {/* SCENE 2: THE VALIDATION LOOP & VALUE MISALIGNMENT (285→525)*/}
-      {/* "And when you do something well, people applaud..."       */}
+      {/* SCENE 2: THE VALIDATION LOOP & VALUE MISALIGNMENT (395→660)*/}
+      {/* "The loop is simple. Adapt, receive validation, repeat..." */}
+      {/* "Eventually, your decisions feel right because..."        */}
       {/* ======================================================== */}
-      {frame >= 285 && frame < 525 && (() => {
-        const cam2 = interpolate(frame, [285, 525], [1.0, 1.04], {
+      {frame >= 395 && frame < 660 && (() => {
+        const cam2 = interpolate(frame, [395, 660], [1.0, 1.05], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
           easing: Easing.bezier(0.16, 1, 0.3, 1),
         });
 
-        // Part 2A: The Closed Loop (Frames 285 -> 415)
-        const scene2AOpacity = interpolate(frame, [395, 415], [1, 0], {
+        // Part 2A: The Closed Loop (Frames 395 -> 520)
+        const scene2AOpacity = interpolate(frame, [505, 520], [1, 0], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
-        });
-
-        // Part 2B: Familiarity vs True Values (Frames 415 -> 525) — SCREENSHOT FIX SCENE
-        const truthSpring = spring({
-          frame: Math.max(0, frame - 415),
-          fps,
-          config: { damping: 12, mass: 0.6, stiffness: 140 },
-        });
-
-        const cutoutSpring = spring({
-          frame: Math.max(0, frame - 425),
-          fps,
-          config: { damping: 13, mass: 0.6, stiffness: 130 },
         });
 
         return (
@@ -228,25 +217,26 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
             style={{ transform: `scale(${cam2})`, transformOrigin: "50% 36%" }}
           >
             {/* PART 2A: THE RECURSIVE ORBITAL LOOP (Adapt -> Validate -> Repeat) */}
-            {frame < 420 && (() => {
-              const loopRotation = interpolate(frame, [285, 420], [0, 360], {
+            {frame < 522 && (() => {
+              const loopRotation = interpolate(frame, [395, 520], [0, 360], {
                 extrapolateLeft: "clamp",
                 extrapolateRight: "clamp",
                 easing: Easing.linear,
               });
 
+              // Synced to audio: "Adapt" (frame 445), "receive validation" (frame 465), "repeat" (frame 495)
               const node1Spring = spring({
-                frame: Math.max(0, frame - 285),
+                frame: Math.max(0, frame - 445),
                 fps,
                 config: { damping: 13, mass: 0.6, stiffness: 140 },
               });
               const node2Spring = spring({
-                frame: Math.max(0, frame - 315),
+                frame: Math.max(0, frame - 465),
                 fps,
                 config: { damping: 13, mass: 0.6, stiffness: 140 },
               });
               const node3Spring = spring({
-                frame: Math.max(0, frame - 345),
+                frame: Math.max(0, frame - 495),
                 fps,
                 config: { damping: 13, mass: 0.6, stiffness: 140 },
               });
@@ -270,7 +260,6 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
 
                   {/* High-Contrast Razor-Sharp Orbital Loop Container */}
                   <div className="relative w-[880px] h-[450px] bg-white border-[2.5px] border-slate-950 rounded-[44px] shadow-[0_24px_48px_-12px_rgba(0,0,0,0.18)] flex items-center justify-center">
-                    {/* Rotating SVG Vector Loop Track */}
                     <svg
                       className="absolute w-[360px] h-[360px]"
                       viewBox="0 0 360 360"
@@ -289,7 +278,6 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
                       <circle cx="180" cy="40" r="12" fill="#e11d48" />
                     </svg>
 
-                    {/* Central Core Indicator */}
                     <div className="z-10 flex flex-col items-center text-center px-6">
                       <RefreshCw className="w-12 h-12 text-slate-950 animate-spin mb-2" />
                       <span className="font-mono text-[32px] font-black text-slate-500 uppercase tracking-widest">
@@ -328,91 +316,163 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
               );
             })()}
 
-            {/* PART 2B: FAMILIAR DOES NOT EQUAL VALUES (SCREENSHOT FIX) */}
-            {frame >= 415 && (
-              <div
-                className="absolute flex flex-col items-center text-center px-8 w-full"
-                style={{
-                  top: "10%",
-                  transform: `scale(${truthSpring})`,
-                  opacity: Math.min(1, truthSpring),
-                }}
-              >
-                {/* Hero Headline: No Pill Badge! Massive inky black typography */}
-                <span className="font-mono text-[38px] font-black tracking-[0.25em] text-slate-900 uppercase mb-2">
-                  THE PSYCHOLOGICAL TRAP
-                </span>
+            {/* PART 2B: FAMILIAR DOES NOT EQUAL VALUES (PROGRESSIVE LIVE CUT) */}
+            {frame >= 520 && (() => {
+              const headerSpring = spring({
+                frame: frame - 520,
+                fps,
+                config: { damping: 13, mass: 0.6, stiffness: 140 },
+              });
 
-                <h1 className="font-sans font-black text-[92px] tracking-tight text-slate-950 leading-tight mb-8">
-                  FEELS RIGHT?
-                </h1>
+              // Block 1: "feel right ... familiar" (enters at frame 545)
+              const block1Spring = spring({
+                frame: Math.max(0, frame - 545),
+                fps,
+                config: { damping: 13, mass: 0.6, stiffness: 140 },
+              });
 
-                {/* Razor-Sharp High-Contrast Editorial Card */}
-                <div className="w-[900px] bg-white border-[2.5px] border-slate-950 rounded-[40px] p-8 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.22)] flex flex-col gap-6">
-                  {/* Row 1: Conditioned / Familiar (High Contrast) */}
-                  <div className="flex items-center justify-between p-6 rounded-2xl bg-slate-100 border-[2px] border-slate-300">
-                    <div className="px-5 py-2 rounded-xl bg-slate-950 text-white font-mono text-[34px] font-black tracking-wider uppercase">
-                      FEELS RIGHT
-                    </div>
-                    <span className="font-sans font-black text-[54px] text-amber-600 tracking-tight">
-                      JUST FAMILIAR
-                    </span>
-                  </div>
+              // Block 2: "not because they reflect your values" (enters at frame 600)
+              const block2Spring = spring({
+                frame: Math.max(0, frame - 600),
+                fps,
+                config: { damping: 13, mass: 0.6, stiffness: 140 },
+              });
 
-                  {/* Row 2: Alignment / Your Values (High Contrast) */}
-                  <div className="flex items-center justify-between p-6 rounded-2xl bg-rose-50 border-[2.5px] border-rose-500">
-                    <div className="px-5 py-2 rounded-xl bg-rose-600 text-white font-mono text-[34px] font-black tracking-wider uppercase">
-                      TRUTH
-                    </div>
-                    <span className="font-sans font-black text-[54px] text-rose-600 tracking-tight line-through decoration-rose-600 decoration-4">
-                      NOT YOUR VALUES
-                    </span>
-                  </div>
-                </div>
+              // Sub-card realization (enters at frame 642)
+              const insightSpring = spring({
+                frame: Math.max(0, frame - 642),
+                fps,
+                config: { damping: 13, mass: 0.6, stiffness: 140 },
+              });
 
-                {/* Judy Expressive Presenter Cutout Accompanying the Dilemma */}
+              const isSlashed = frame >= 630;
+
+              return (
                 <div
-                  className="mt-6 flex items-center justify-center gap-4"
-                  style={{ transform: `scale(${cutoutSpring})` }}
+                  className="absolute flex flex-col items-center text-center px-8 w-full"
+                  style={{
+                    top: "10%",
+                    transform: `scale(${headerSpring})`,
+                    opacity: Math.min(1, headerSpring),
+                  }}
                 >
-                  <img
-                    src={staticFile("character_pointing.png")}
-                    alt="Judy Insights"
-                    className="h-[380px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.22)]"
-                  />
-                  <div className="bg-slate-950 text-white px-7 py-4 rounded-2xl border border-slate-800 shadow-xl max-w-[420px] text-left">
-                    <p className="font-sans font-extrabold text-[38px] leading-snug">
-                      Familiarity is comfort.
-                      <br />
-                      <span className="text-amber-400">Not conviction.</span>
-                    </p>
+                  <span className="font-mono text-[36px] font-black tracking-[0.25em] text-slate-900 uppercase mb-2">
+                    THE PSYCHOLOGICAL TRAP
+                  </span>
+
+                  <h1 className="font-sans font-black text-[92px] tracking-tight text-slate-950 leading-tight mb-8">
+                    FEELS RIGHT?
+                  </h1>
+
+                  {/* Progressive Razor-Sharp High-Contrast Editorial Card */}
+                  <div className="w-[900px] bg-white border-[3px] border-slate-950 rounded-[40px] p-8 shadow-[0_28px_56px_-12px_rgba(0,0,0,0.22)] flex flex-col gap-6">
+                    {/* Block 1: Conditioned / Familiar (Enters at frame 545 on speech "feel right because familiar") */}
+                    {frame >= 545 && (
+                      <div
+                        className="flex items-center justify-between p-6 rounded-2xl bg-slate-100 border-[2px] border-slate-300 transition-all shadow-sm"
+                        style={{
+                          transform: `scale(${block1Spring}) translateY(${interpolate(block1Spring, [0, 1], [25, 0])}px)`,
+                          opacity: Math.min(1, block1Spring),
+                        }}
+                      >
+                        <div className="px-5 py-2 rounded-xl bg-slate-950 text-white font-mono text-[32px] font-black tracking-wider uppercase">
+                          FEELS RIGHT
+                        </div>
+                        <span className="font-sans font-black text-[54px] text-amber-600 tracking-tight">
+                          JUST FAMILIAR
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Block 2: Values (Enters at frame 600, slashed in real-time at frame 630) */}
+                    {frame >= 600 && (
+                      <div
+                        className={`flex items-center justify-between p-6 rounded-2xl border-[2.5px] transition-colors duration-150 ${
+                          isSlashed
+                            ? "bg-rose-50 border-rose-500 shadow-md"
+                            : "bg-slate-50 border-slate-300"
+                        }`}
+                        style={{
+                          transform: `scale(${block2Spring}) translateY(${interpolate(block2Spring, [0, 1], [25, 0])}px)`,
+                          opacity: Math.min(1, block2Spring),
+                        }}
+                      >
+                        <div
+                          className={`px-5 py-2 rounded-xl font-mono text-[32px] font-black tracking-wider uppercase transition-colors duration-150 ${
+                            isSlashed ? "bg-rose-600 text-white" : "bg-slate-900 text-white"
+                          }`}
+                        >
+                          TRUTH
+                        </div>
+
+                        {/* Real-time cutting action via AnimatedSlashStrike */}
+                        <div className="font-sans font-black text-[54px] tracking-tight">
+                          <AnimatedSlashStrike
+                            startFrame={630}
+                            durationFrames={7}
+                            preset="blade_slash"
+                            color="rose"
+                            strokeWidth={8}
+                          >
+                            <span
+                              className={`transition-colors duration-150 ${
+                                isSlashed ? "text-rose-600" : "text-slate-950"
+                              }`}
+                            >
+                              NOT YOUR VALUES
+                            </span>
+                          </AnimatedSlashStrike>
+                        </div>
+                      </div>
+                    )}
                   </div>
+
+                  {/* Clean Impact Insight Card (Zero floating avatars! Pure graphic punch) */}
+                  {frame >= 642 && (
+                    <div
+                      className="w-[900px] mt-6 bg-slate-950 text-white rounded-[32px] p-7 border-[2px] border-slate-900 shadow-2xl flex items-center justify-between"
+                      style={{
+                        transform: `scale(${insightSpring})`,
+                        opacity: Math.min(1, insightSpring),
+                      }}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-4 h-4 rounded-full bg-amber-400 animate-ping" />
+                        <span className="font-sans font-black text-[42px] text-white tracking-tight">
+                          COMFORT IS NOT CONVICTION
+                        </span>
+                      </div>
+                      <span className="font-mono text-[32px] font-bold text-slate-300 uppercase">
+                        CONDITIONED
+                      </span>
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
+              );
+            })()}
           </div>
         );
       })()}
 
       {/* ======================================================== */}
-      {/* SCENE 3: THE SOVEREIGN QUESTION (Frames 525 → 720)       */}
+      {/* SCENE 3: THE SOVEREIGN QUESTION (Frames 660 → 840)       */}
       {/* "Break the loop by asking one question before major..."   */}
       {/* ======================================================== */}
-      {frame >= 525 && frame < 720 && (() => {
-        const cam3 = interpolate(frame, [525, 720], [1.0, 1.04], {
+      {frame >= 660 && frame < 840 && (() => {
+        const cam3 = interpolate(frame, [660, 840], [1.0, 1.04], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
           easing: Easing.bezier(0.16, 1, 0.3, 1),
         });
 
         const scene3Enter = spring({
-          frame: Math.max(0, frame - 525),
+          frame: Math.max(0, frame - 660),
           fps,
           config: { damping: 14, mass: 0.7, stiffness: 130 },
         });
 
         const questionSpring = spring({
-          frame: Math.max(0, frame - 580),
+          frame: Math.max(0, frame - 740),
           fps,
           config: { damping: 12, mass: 0.6, stiffness: 140 },
         });
@@ -470,24 +530,24 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
       })()}
 
       {/* ======================================================== */}
-      {/* SCENE 4: ANSWERS THAT SURVIVE WITHOUT APPLAUSE (720 → 901) */}
+      {/* SCENE 4: ANSWERS THAT SURVIVE WITHOUT APPLAUSE (840 → 926) */}
       {/* "Build your life around answers that survive without..."  */}
       {/* ======================================================== */}
-      {frame >= 720 && (() => {
-        const cam4 = interpolate(frame, [720, 901], [0.99, 1.04], {
+      {frame >= 840 && (() => {
+        const cam4 = interpolate(frame, [840, 926], [0.99, 1.04], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
           easing: Easing.bezier(0.16, 1, 0.3, 1),
         });
 
         const scene4Enter = spring({
-          frame: Math.max(0, frame - 720),
+          frame: Math.max(0, frame - 840),
           fps,
           config: { damping: 14, mass: 0.7, stiffness: 130 },
         });
 
         const coreHit = spring({
-          frame: Math.max(0, frame - 780),
+          frame: Math.max(0, frame - 875),
           fps,
           config: { damping: 12, mass: 0.6, stiffness: 140 },
         });
@@ -548,7 +608,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
               </div>
 
               {/* Final Hero Impact Punch */}
-              {frame >= 770 && (
+              {frame >= 875 && (
                 <div
                   className="w-[900px] mt-6 bg-slate-950 text-white rounded-[32px] p-7 border-[2px] border-slate-900 shadow-2xl flex flex-col items-center text-center"
                   style={{ transform: `scale(${coreHit})` }}
