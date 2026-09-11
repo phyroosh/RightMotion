@@ -864,3 +864,17 @@ export const ChoiceOverloadThumbnail: React.FC = () => (
     extraBadge="DECISION FATIGUE"
   />
 );
+
+export const ThePersonYouNeverChoseThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHO ARE YOU FOR"
+    highlightWord="FOR"
+    highlightColor="rose"
+    subtitle="Stop Living A Life You Never Chose"
+    categoryBadge="JUDY INSIGHTS • AUTHENTICITY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="IDENTITY RESET"
+  />
+);

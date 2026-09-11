@@ -1,0 +1,512 @@
+[
+  {
+    "word": "You",
+    "start": 0,
+    "end": 180,
+    "confidence": 0.83
+  },
+  {
+    "word": "can",
+    "start": 180,
+    "end": 300,
+    "confidence": 0.997
+  },
+  {
+    "word": "become",
+    "start": 300,
+    "end": 640,
+    "confidence": 0.997
+  },
+  {
+    "word": "incredibly",
+    "start": 640,
+    "end": 1260,
+    "confidence": 0.992
+  },
+  {
+    "word": "successful",
+    "start": 1260,
+    "end": 1800,
+    "confidence": 0.999
+  },
+  {
+    "word": "at",
+    "start": 1800,
+    "end": 2360,
+    "confidence": 0.991
+  },
+  {
+    "word": "living",
+    "start": 2360,
+    "end": 2580,
+    "confidence": 0.997
+  },
+  {
+    "word": "a",
+    "start": 2580,
+    "end": 2760,
+    "confidence": 0.998
+  },
+  {
+    "word": "life",
+    "start": 2760,
+    "end": 2960,
+    "confidence": 0.998
+  },
+  {
+    "word": "you",
+    "start": 2960,
+    "end": 3340,
+    "confidence": 0.985
+  },
+  {
+    "word": "never",
+    "start": 3340,
+    "end": 3660,
+    "confidence": 0.996
+  },
+  {
+    "word": "actually",
+    "start": 3660,
+    "end": 4060,
+    "confidence": 0.995
+  },
+  {
+    "word": "chose.",
+    "start": 4060,
+    "end": 4440,
+    "confidence": 0.984
+  },
+  {
+    "word": "Every",
+    "start": 4940,
+    "end": 5020,
+    "confidence": 0.971
+  },
+  {
+    "word": "time",
+    "start": 5020,
+    "end": 5380,
+    "confidence": 0.968
+  },
+  {
+    "word": "you",
+    "start": 5380,
+    "end": 5540,
+    "confidence": 0.998
+  },
+  {
+    "word": "reshape",
+    "start": 5540,
+    "end": 5980,
+    "confidence": 0.996
+  },
+  {
+    "word": "your",
+    "start": 5980,
+    "end": 6080,
+    "confidence": 0.997
+  },
+  {
+    "word": "opinions,",
+    "start": 6080,
+    "end": 6460,
+    "confidence": 0.883
+  },
+  {
+    "word": "goals,",
+    "start": 6680,
+    "end": 6800,
+    "confidence": 0.994
+  },
+  {
+    "word": "or",
+    "start": 7320,
+    "end": 7360,
+    "confidence": 0.998
+  },
+  {
+    "word": "personality",
+    "start": 7360,
+    "end": 7720,
+    "confidence": 0.969
+  },
+  {
+    "word": "around",
+    "start": 7720,
+    "end": 8260,
+    "confidence": 0.993
+  },
+  {
+    "word": "someone",
+    "start": 8260,
+    "end": 8600,
+    "confidence": 0.996
+  },
+  {
+    "word": "else's",
+    "start": 8600,
+    "end": 9060,
+    "confidence": 0.992
+  },
+  {
+    "word": "expectations,",
+    "start": 9060,
+    "end": 9440,
+    "confidence": 0.994
+  },
+  {
+    "word": "approval",
+    "start": 10080,
+    "end": 10360,
+    "confidence": 0.999
+  },
+  {
+    "word": "becomes",
+    "start": 10360,
+    "end": 10820,
+    "confidence": 0.997
+  },
+  {
+    "word": "the",
+    "start": 10820,
+    "end": 10980,
+    "confidence": 0.876
+  },
+  {
+    "word": "reward,",
+    "start": 10980,
+    "end": 11220,
+    "confidence": 0.999
+  },
+  {
+    "word": "and",
+    "start": 11620,
+    "end": 11800,
+    "confidence": 0.997
+  },
+  {
+    "word": "performing",
+    "start": 11800,
+    "end": 12220,
+    "confidence": 0.962
+  },
+  {
+    "word": "becomes",
+    "start": 12220,
+    "end": 12720,
+    "confidence": 0.998
+  },
+  {
+    "word": "the",
+    "start": 12720,
+    "end": 12920,
+    "confidence": 0.997
+  },
+  {
+    "word": "habit.",
+    "start": 12920,
+    "end": 13140,
+    "confidence": 0.999
+  },
+  {
+    "word": "The",
+    "start": 13520,
+    "end": 13520,
+    "confidence": 0.85
+  },
+  {
+    "word": "loop",
+    "start": 13520,
+    "end": 13760,
+    "confidence": 0.926
+  },
+  {
+    "word": "is",
+    "start": 13760,
+    "end": 13960,
+    "confidence": 0.999
+  },
+  {
+    "word": "simple.",
+    "start": 13960,
+    "end": 14140,
+    "confidence": 0.999
+  },
+  {
+    "word": "Adapt,",
+    "start": 14840,
+    "end": 14840,
+    "confidence": 0.8
+  },
+  {
+    "word": "receive",
+    "start": 15480,
+    "end": 15580,
+    "confidence": 0.953
+  },
+  {
+    "word": "validation,",
+    "start": 15580,
+    "end": 16060,
+    "confidence": 0.99
+  },
+  {
+    "word": "repeat.",
+    "start": 16500,
+    "end": 16660,
+    "confidence": 0.997
+  },
+  {
+    "word": "Eventually,",
+    "start": 17380,
+    "end": 17460,
+    "confidence": 0.959
+  },
+  {
+    "word": "your",
+    "start": 17840,
+    "end": 17940,
+    "confidence": 0.995
+  },
+  {
+    "word": "decisions",
+    "start": 17940,
+    "end": 18240,
+    "confidence": 0.996
+  },
+  {
+    "word": "feel",
+    "start": 18240,
+    "end": 18600,
+    "confidence": 0.998
+  },
+  {
+    "word": "right",
+    "start": 18600,
+    "end": 18840,
+    "confidence": 0.999
+  },
+  {
+    "word": "because",
+    "start": 18840,
+    "end": 19120,
+    "confidence": 0.952
+  },
+  {
+    "word": "they",
+    "start": 19120,
+    "end": 19340,
+    "confidence": 0.999
+  },
+  {
+    "word": "are",
+    "start": 19340,
+    "end": 19420,
+    "confidence": 0.897
+  },
+  {
+    "word": "familiar,",
+    "start": 19420,
+    "end": 19720,
+    "confidence": 0.995
+  },
+  {
+    "word": "not",
+    "start": 20160,
+    "end": 20380,
+    "confidence": 0.998
+  },
+  {
+    "word": "because",
+    "start": 20380,
+    "end": 20700,
+    "confidence": 0.999
+  },
+  {
+    "word": "they",
+    "start": 20700,
+    "end": 20880,
+    "confidence": 0.999
+  },
+  {
+    "word": "reflect",
+    "start": 20880,
+    "end": 21120,
+    "confidence": 0.999
+  },
+  {
+    "word": "your",
+    "start": 21120,
+    "end": 21380,
+    "confidence": 0.994
+  },
+  {
+    "word": "values.",
+    "start": 21380,
+    "end": 21700,
+    "confidence": 0.999
+  },
+  {
+    "word": "Break",
+    "start": 22220,
+    "end": 22280,
+    "confidence": 0.978
+  },
+  {
+    "word": "the",
+    "start": 22280,
+    "end": 22480,
+    "confidence": 0.998
+  },
+  {
+    "word": "loop",
+    "start": 22480,
+    "end": 22660,
+    "confidence": 0.997
+  },
+  {
+    "word": "by",
+    "start": 22660,
+    "end": 23000,
+    "confidence": 0.996
+  },
+  {
+    "word": "asking",
+    "start": 23000,
+    "end": 23400,
+    "confidence": 1.0
+  },
+  {
+    "word": "one",
+    "start": 23400,
+    "end": 23620,
+    "confidence": 0.996
+  },
+  {
+    "word": "question",
+    "start": 23620,
+    "end": 23960,
+    "confidence": 0.999
+  },
+  {
+    "word": "before",
+    "start": 23960,
+    "end": 24300,
+    "confidence": 0.999
+  },
+  {
+    "word": "major",
+    "start": 24300,
+    "end": 24560,
+    "confidence": 0.901
+  },
+  {
+    "word": "decisions.",
+    "start": 24560,
+    "end": 24940,
+    "confidence": 0.998
+  },
+  {
+    "word": "Would",
+    "start": 25520,
+    "end": 25560,
+    "confidence": 0.933
+  },
+  {
+    "word": "I",
+    "start": 25560,
+    "end": 25700,
+    "confidence": 0.996
+  },
+  {
+    "word": "still",
+    "start": 25700,
+    "end": 25920,
+    "confidence": 1.0
+  },
+  {
+    "word": "choose",
+    "start": 25920,
+    "end": 26140,
+    "confidence": 0.994
+  },
+  {
+    "word": "this",
+    "start": 26140,
+    "end": 26440,
+    "confidence": 0.997
+  },
+  {
+    "word": "if",
+    "start": 26440,
+    "end": 26600,
+    "confidence": 0.97
+  },
+  {
+    "word": "nobody",
+    "start": 26600,
+    "end": 26780,
+    "confidence": 0.997
+  },
+  {
+    "word": "knew?",
+    "start": 26780,
+    "end": 27160,
+    "confidence": 0.972
+  },
+  {
+    "word": "Build",
+    "start": 27160,
+    "end": 27600,
+    "confidence": 0.455
+  },
+  {
+    "word": "your",
+    "start": 27600,
+    "end": 27760,
+    "confidence": 0.878
+  },
+  {
+    "word": "life",
+    "start": 27760,
+    "end": 27900,
+    "confidence": 0.99
+  },
+  {
+    "word": "around",
+    "start": 27900,
+    "end": 28220,
+    "confidence": 0.858
+  },
+  {
+    "word": "answers",
+    "start": 28220,
+    "end": 28680,
+    "confidence": 0.981
+  },
+  {
+    "word": "that",
+    "start": 28680,
+    "end": 28940,
+    "confidence": 0.981
+  },
+  {
+    "word": "survive",
+    "start": 28940,
+    "end": 29240,
+    "confidence": 0.98
+  },
+  {
+    "word": "without",
+    "start": 29240,
+    "end": 29720,
+    "confidence": 0.977
+  },
+  {
+    "word": "applause.",
+    "start": 29720,
+    "end": 30040,
+    "confidence": 0.96
+  }
+]

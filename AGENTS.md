@@ -1,729 +1,404 @@
 # 🎬 RightMotion — AI Agent Guide
 
-This document is the **authoritative specification** for any AI Agent working in the **RightMotion** repository.
-
 ---
 
-## 🚀 RULE 0: MANDATORY AUTONOMOUS END-TO-END EXECUTION
+## 🚀 RULE 0: MANDATORY AUTONOMOUS PRODUCTION
 
 > [!CRITICAL]
-> **RIGHTMOTION IS AN AGENTIC REMOTION ENGINE.**
-> A topic submission is an order to **write 100% bespoke Remotion motion graphics from scratch** in `Canvas.tsx` for that exact topic.
-> The editing AI makes all creative and visual design decisions. No predefined template system tells it what to design.
+> **RIGHTMOTION IS AN AGENTIC REMOTION ENGINE.** Topic → AI creative decisions → bespoke `Canvas.tsx` → rendered video. No templates. No predefined visual system. The AI agent owns every visual decision.
 >
-> The AI Agent MUST autonomously execute the complete 5-step production workflow in that **SAME turn**:
+> Execute this **complete 5-step workflow in the same turn**:
 >
-> 1. **Step 1 — Script & Viral Metadata**:
->    - Formulate the script using the **3-Pillar Pure Information Architecture**: Introduce Problem > Explain the Logic > Deliver the Solution.
->    - **Runtime**: Strict **25–35 seconds** (**70–100 words**, hard cap 105 words).
->    - **STRICTLY NO CTA AT THE END.** Pure high-density information only.
->    - **Mode B (Organic Growth)** is DEFAULT: skip PDF hunting, omit `[METADATA]` block. (Mode A only runs when `{meta}` is explicitly present).
->    - Generate an authoritative `[PINNED COMMENT]` summarizing the core takeaway.
->
-> 2. **Step 2 — Plumbing Setup via CLI**:
+> 1. **Script** — 3-Pillar architecture (§Rule 7). 25–35s, 70–100 words (hard cap 105). No CTA. Mode B by default (§Rule 3). Generate `[PINNED COMMENT]`.
+> 2. **CLI Scaffold**:
 >    ```bash
->    .venv/bin/python3 scripts/create_clip.py --name "<clip_name>" --topic "<topic>" --script "<script>" [--andrew] [--meta]
+>    .venv/bin/python3 scripts/create_clip.py --name "<name>" --topic "<topic>" --script "<script>" [--andrew] [--meta]
 >    ```
->    This synthesizes neural audio, transcribes word-level timestamps (`transcript.json`), selects the opening tactical meme, registers the composition in `Root.tsx`, and scaffolds a clean starter `Canvas.tsx`.
->
-> 3. **Step 3 — BESPOKE REMOTION MOTION DESIGN IN `Canvas.tsx`**:
->    - Open `src/clips/<clip_name>/Canvas.tsx` and write the Remotion composition from scratch.
->    - Read `transcript.json` to identify the exact frame timing of key words and sentences.
->    - Design scenes that are genuinely appropriate to **this** script's meaning — not a generic template.
->    - See **Rule 5** for the creative standard.
->
-> 4. **Step 4 — Visual Audit via Remotion Stills**:
+>    Produces: neural audio, `transcript.json` (word-level timestamps), meme selection, `Root.tsx` registration, starter `Canvas.tsx`.
+> 3. **Design & implement** `src/clips/<name>/Canvas.tsx` from scratch. Read `transcript.json` for frame-accurate word timing. See Rule 5 for the creative standard.
+> 4. **Visual audit**:
 >    ```bash
->    npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene1.png --frame=80
->    npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene2.png --frame=250
->    npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene3.png --frame=500
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=80
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=250
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_scene3.png --frame=500
 >    ```
->    Visually audit each still using `view_file` to confirm premium quality and zero caption overlap.
+>    Inspect each still via `view_file`. Confirm quality and zero caption overlap.
+> 5. **Render**: `npx remotion render src/index.ts <PascalName>Video out/<name>_video.mp4`. Deliver path + viral title + pinned comment.
 >
-> 5. **Step 5 — Final Video Export**:
->    ```bash
->    npx remotion render src/index.ts <PascalName>Video out/<clip_name>_video.mp4
->    ```
->    Deliver the final video path, viral title, and pinned comment.
->
-> *(Output the script alone only if the user explicitly writes "script only" or "write a script".)*
+> *(Output script only if the user writes "script only" or "write a script".)*
 
 ---
 
 ## 🏷️ Rule 1: Channel Routing
 
-Every video script is tagged with one of four channel niche brackets:
-
 | Tag | Channel | Visual Identity |
-| :--- | :--- | :--- |
-| **`{Self Improvement}`** | **Judy Insights** | Apple Studio Light canvas (`#f8fafc`), psychology/mindset, Judy bust presenter. |
-| **`{Finance}`** | **Apex Wealth** | Dark Obsidian & Cyber-Gold/Emerald (`#030712`), no presenter character. |
-| **`{Health}`** | **BioMatrix** | Deep Bio-Tech Navy & Cyber-Mint/Cyan (`#060913`), no presenter character. |
-| **`{facecam}`** | **Creator Facecam** | Dynamic zoom punch-ins, real speaker video/audio, kinetic captions. |
+|:---|:---|:---|
+| `{Self Improvement}` | **Judy Insights** | `#f8fafc` light canvas, Judy bust presenter |
+| `{Finance}` | **Apex Wealth** | `#030712` dark obsidian/cyber-gold, no presenter |
+| `{Health}` | **BioMatrix** | `#060913` bio-navy/cyber-mint, no presenter |
+| `{facecam}` | **Creator Facecam** | Dynamic zoom punch-ins, real speaker video/audio |
 
 > [!CRITICAL]
-> **STOP-AND-ASK RULE**:
-> If the user submits a topic **WITHOUT** one of these four tags, halt immediately and ask which style they want before taking any action.
+> **If the topic has no routing tag — STOP immediately and ask which channel before any action.**
 
 ---
 
-## 👥 Rule 2: Solo Judy vs. Judy & Andrew Duo (`{andrew}`)
+## 👥 Rule 2: Solo vs. Duo
 
 > [!CRITICAL]
-> 1. **Solo Judy (DEFAULT)**: 25–35s runtime (70–100 words, hard cap 105). Voice: `en-US-AvaMultilingualNeural` at `rate="+8%"`. Waist-up cutouts.
-> 2. **Judy & Andrew Duo (OPT-IN with `{andrew}`)**: Up to 40s runtime (80–120 words, hard cap 125). Judy (`en-US-AvaMultilingualNeural`, `+8%`) + Andrew (`en-US-SteffanNeural`, `+7%`). Use `<DuoPresenter />`.
-> 3. Strip `{andrew}` and `{duo}` from all prompt text, titles, canvas text, and speech synthesis.
+> **Solo (DEFAULT):** 25–35s · 70–100 words (hard cap 105) · Voice: `en-US-AvaMultilingualNeural` at `rate="+8%"` · Waist-up cutouts.
+> **Duo (`{andrew}` opt-in):** Up to 40s · 80–120 words (hard cap 125) · Add Andrew: `en-US-SteffanNeural` at `rate="+7%"` · Use `<DuoPresenter />`.
+> **Strip `{andrew}` and `{duo}` from all prompt text, titles, canvas text, and speech synthesis.**
 
 ---
 
-## 🧠 Rule 3: Organic Default (Mode B) vs. Product PDF (`{meta}` Mode A)
+## 🧠 Rule 3: Mode B (Organic, Default) vs. Mode A (`{meta}`)
 
 > [!CRITICAL]
-> **ORGANIC GROWTH MODE IS DEFAULT. NEVER HUNT FOR A PDF UNLESS `{meta}` IS PRESENT.**
+> **Never search for a PDF unless `{meta}` is explicitly present.**
 
-### Mode B — Organic (Default, `{meta}` absent):
-- Skip all PDF search. Output clean `[VOICEOVER]` using the 3-Pillar Architecture.
-- No CTA. No ending questions. End decisively on the solution.
-- Output an authoritative `[PINNED COMMENT]`.
+**Mode B (default, `{meta}` absent):** No PDF. Output `[VOICEOVER]` using 3-Pillar. No CTA. End decisively. Output `[PINNED COMMENT]`.
 
-### Mode A — Product-Linked (Opt-in, `{meta}` present):
-- Scan `Products/*.pdf` via `python3 scripts/pdf_topic_matcher.py --topic "<topic>"`.
-- Extract page via `python3 scripts/extract_product_page.py <pdf> <page_num>`.
-- Output `[METADATA]` block (`product_file`, `page_number`, `exercise_title`) + `[VOICEOVER]`.
-- Never speak the PDF name or page number aloud. Never include page numbers on thumbnails.
+**Mode A (`{meta}` present):**
+```bash
+python3 scripts/pdf_topic_matcher.py --topic "<topic>"
+python3 scripts/extract_product_page.py <pdf> <page_num>
+```
+Output `[METADATA]` block (`product_file`, `page_number`, `exercise_title`) + `[VOICEOVER]`. Never speak the PDF name or page number aloud. Never put page numbers on thumbnails.
 
 ---
 
-## 🎭 Rule 4: Tactical Meme Integration (< 2.0s, Frame 0)
+## 🎭 Rule 4: Meme System
 
 > [!CRITICAL]
-> **MEMES: FIRST-FRAME HOOK ONLY. < 2.0s. MUTED. FAST-FORWARDED.**
+> **First frame only. Muted. Fast-forwarded. Max 1 per video.**
 
-- Enabled by default. Max 1 per video at `startFrame=0`. No mid-video memes.
-- 21 curated memes in `public/memes/registry.json`. Auto-matched via `scripts/meme_matcher.py`.
-- **Specs**: 40–46 frames duration, `volume=0`, `playbackRate=1.35–1.45`.
-- Disable with `{no meme}` or `--no-meme`. Override with `{meme: <id>}`.
-- **Gen-Z Mid-Video Stickers** (`<MemeStickerOverlay />`): tactile die-cut sticker pops during seconds 9–16. 15 stickers in `public/memes/stickers/`. Matched via `scripts/meme_sticker_matcher.py`. Disable with `{no sticker}`.
+- **Clip:** `startFrame=0` · 40–46 frames · `volume=0` · `playbackRate=1.35–1.45`
+- **Source:** 21 curated memes in `public/memes/registry.json`. Auto-matched via `scripts/meme_matcher.py`.
+- **Disable:** `{no meme}` / `--no-meme` · **Override:** `{meme: <id>}`
+- **Mid-video stickers** (`<MemeStickerOverlay />`): seconds 9–16 only · 15 stickers in `public/memes/stickers/` · Auto-matched via `scripts/meme_sticker_matcher.py` · Disable: `{no sticker}`
 
 ---
 
-## 🎨 Rule 5: Creative Standard — The Motion Design Mandate
+## 🎨 Rule 5: Creative Standard
 
 > [!CRITICAL]
-> **THE AI AGENT MAKES ALL VISUAL DESIGN DECISIONS. There is no template to choose from.**
+> **The AI agent makes all visual design decisions. Components are implementation tools, not creative prompts.**
+> **Script → Editing AI → Remotion → Video. Not: Script → Template Selection → Remotion → Video.**
 
-The architecture of RightMotion is:
+**Creative north star (three levels of ambition):**
+> *STYLE IS CONSISTENT. COMPOSITION IS CREATIVE. VISUAL SOLUTION IS SCRIPT-DEPENDENT.*
+> *Do not animate what the script says. Design something that visually expresses what the script means.*
+> *Create visuals that make the viewer want to keep watching — not merely understand the narration.*
 
-**Script → Editing AI → Remotion → Video**
-
-Not:
-
-**Script → Template Selection → Remotion → Video**
-
----
-
-### 5.0 — The Core Distinction
-
-> **STYLE IS CONSISTENT. COMPOSITION IS CREATIVE. VISUAL SOLUTION IS SCRIPT-DEPENDENT.**
-
-RightMotion has a recognizable visual identity. It should feel premium, modern, and editorially sharp across every video.
-
-But a visual identity is **not** a template.
-
-The agent must understand:
-
-> *"Make it feel like RightMotion."*
-
-Not:
-
-> *"Make it look like the previous RightMotion video."*
-
-The channel identity controls the atmosphere. The script controls the composition. The agent decides everything else.
+Channel identity sets atmosphere and art direction. It does **not** dictate composition.
+RightMotion DNA: **premium · modern · clean · sharp · editorial · minimal · intelligent · intentional · visually sophisticated**
 
 ---
 
-### 5.1 — RightMotion Visual DNA
+### 5.1 — Design-First Sequence
 
-RightMotion should feel:
+Before writing any JSX, execute strictly in this order:
 
-**premium · modern · clean · sharp · editorial · minimal · intelligent · intentional · visually sophisticated**
-
-The work should feel closer to professional motion design than generic AI-generated social graphics. Every frame should look crafted — not assembled from defaults.
-
----
-
-### 5.2 — How to Think About a Scene (Design-First Order)
-
-Before writing any JSX, follow this sequence strictly:
-
-1. **Understand the script.** What is actually being said at this moment?
-2. **Identify the important idea.** What is the single thing the viewer must take away?
-3. **Determine the viewer's reaction.** Should they feel surprised, informed, alarmed, reassured?
-4. **Decide the visual concept.** What visual would make this idea immediately understandable? Apply the visual-thinking test from §5.8b before defaulting to typography.
-5. **Decide the composition.** Where do the important elements live on the canvas?
-6. **Decide the motion.** What moves, when, and why?
-7. **Decide the transition.** How does this scene connect to what comes next?
-8. **Only then decide which tools/components, if any, can help implement it.**
+1. **Script meaning** — what is actually being said?
+2. **Core idea** — what must the viewer take away?
+3. **Viewer reaction** — surprise? alarm? reassurance? What visual question can this scene create *before* the audio answers it?
+4. **Visual concept** — what physical visual expresses this idea? Apply the §5.3 visual-thinking test before defaulting to typography.
+5. **Composition** — where do elements live on the canvas? What approach serves the idea? (§5.2)
+6. **Motion** — what moves and why? Prefer `STATE A → transformation → STATE B` over element-appears-and-holds.
+7. **Transition** — how does this scene connect to the next?
+8. **Implementation** — which components (if any) serve this concept?
 
 > [!CAUTION]
-> **Never reverse this order. Never start by browsing the component library looking for something that fits. A component does not suggest a scene. A scene suggests whether a component is useful.**
+> **Never begin at step 8. A component does not suggest a scene — a scene suggests whether a component is useful.**
 
 ---
 
-### 5.3 — Visual Metaphor
+### 5.2 — Composition Approaches
 
-Before building a major scene, ask:
+Valid approaches (possibilities only — choose based on what the idea demands, not rotation):
 
-> *What is the idea? What visual could make that idea immediately understood without words?*
+**Typography-led · Object-led · Diagram-led · Illustration-led · Asymmetric · Split-screen · Full-bleed · Centered minimalism · Layered depth · Editorial · Geometric · Cinematic · Collage-like**
 
-A concept should often become a visual metaphor — a physical representation of the abstract:
+---
 
-| Concept | Possible visual expression |
+### 5.3 — Visual Metaphor & Visual Thinking First
+
+> [!CRITICAL]
+> **Before animating a sentence, ask:** *"Would this idea be clearer, more memorable, or more emotionally powerful if something other than text physically represented it?"* If yes — redesign the scene around that thing.
+
+A text-only scene is right when typography genuinely is the strongest representation. It is not automatically right because the sentence is important.
+
+**Physical representation starting points** (examples for thinking, not a mapping system):
+
+| Concept | Physical form |
 |---|---|
 | Growth | expansion / accumulation / multiplication |
-| Choice | branching / divergence / competing paths |
+| Choice | branching / competing paths / divergence |
 | Conflict | opposing forces / collision / tension |
-| Transformation | morphing / replacement / evolution |
-| Cause and effect | chain reactions / connected actions |
 | Pressure | compression / crowding / deformation |
-| Comparison | contrast / separation / competing spaces |
-| Repetition | looping / rhythm / recurring rhythm |
+| Transformation | morphing / one state becoming another |
+| Cause & Effect | one object triggering another in a chain |
+| Comparison | two states in spatial tension |
 | Breakthrough | obstruction → sudden release / expansion |
-| Connection | convergence / linking / shared structure |
+| Focus | convergence / elimination of noise |
+| Scarcity | shrinking / being consumed |
+| Time | accumulation / progressive timeline |
 
-These are examples of **thinking**, not a lookup table. Do not map topic keywords to rows mechanically.
+**Push past the first metaphor.** The obvious representation is usually the least memorable. Ask: *"Is there a more physically interesting or unexpected way to represent the same idea that communicates just as clearly?"* Prefer the second or third idea when it lands with more force. Clarity beats originality — but do not stop at generic.
 
----
+**Creative vocabulary** (any combination; not a checklist or quota):
+typography · animated objects/shapes · data and counters · diagrams and process flows · geometric systems · visual metaphors · generated imagery · spatial environments · parallax and depth · camera movement (push-ins, pull-backs, lateral travel, perspective shifts) · multi-layer compositions at different rates · object interactions and transformations · text-object hybrids
 
-### 5.4 — Composition Principles
+**Camera and spatial motion:** The entire composition may move. A push-in can be the reveal. A pull-back can reframe. Use when it improves storytelling — not as decoration.
 
-RightMotion should use strong composition principles: hierarchy, balance, contrast, negative space, alignment, asymmetry, scale, depth, visual rhythm, intentional framing.
+**Hybrid scenes:** Background + object + data + typography + motion — when those layers work together to communicate one idea. **Complexity without hierarchy is bad design.**
 
-The agent must be comfortable using fundamentally different compositions across scenes and across videos. Valid approaches include:
-
-- **Typography-led** — a single word or phrase at extreme scale dominates the frame
-- **Object-led** — a central visual object or diagram carries the entire meaning
-- **Diagram-led** — structured information layout, arrows, relationships, process flows
-- **Illustration-led** — generated or painterly imagery as the primary visual
-- **Asymmetric** — intentional off-balance composition for tension or dynamism
-- **Split-screen** — two competing ideas, two states, before/after
-- **Full-bleed** — a single texture, color, or image fills the entire canvas
-- **Centered minimalism** — almost nothing on screen; maximum negative space
-- **Layered depth** — foreground, mid-ground, background with spatial separation
-- **Editorial** — text and image combined like a high-end magazine spread
-- **Geometric** — pattern, structure, and mathematical shape carry the visual weight
-- **Cinematic** — wide-format feel, letterbox depth, dramatic framing
-- **Collage-like** — multiple textures, visual fragments, tactile layering
-
-These are **possibilities**, not a menu to cycle through. Choose based on what the idea demands.
+**Rich motion** comes from visual relationships, not from adding effects:
+one element transforming into another · cause-effect chains · progressive construction · accumulation in front of the viewer · scale relationships · objects crossing the frame with weight · shared elements carrying meaning between scenes · depth layers moving at different rates · text and objects aware of each other
 
 ---
 
-### 5.5 — The Anti-Template Rule
+### 5.4 — Background, Color & Typography
+
+**Background** (characteristics, not recipes): subtle grid structures · restrained gradients · light texture · soft spatial depth · atmospheric lighting · elegant geometry · dark cinematic surfaces (Finance/Health)
+
+**Color:** Restrained palette — 2–3 deliberate colors. Accent = purposeful. No neon for neon's sake. No glow as decoration. Color supports the idea.
+
+**Typography — hard minimums (1080×1920 canvas, must read at 720p on a 6-inch screen):**
+
+| Role | Minimum size | Font |
+|---|---|---|
+| Hero / slam words | **80–110px** | Montserrat Black |
+| Scene headlines | **56–72px** | Montserrat Bold |
+| Body / supporting lines | **36–44px** | Montserrat or JetBrains Mono |
+| Metric readouts | **56–80px** | JetBrains Mono Black |
+| **Absolute floor** | **36px** | Nothing rendered smaller. Ever. |
+
+Two fonts only: **Montserrat** (headlines, display, slam words) + **JetBrains Mono** (metrics, numbers, data labels). Both loaded via `<FontLoader />` + `style.css`.
 
 > [!CAUTION]
-> **Never choose a visual because it is an existing component or because a previous video used it. Choose it because it is the best way to communicate the current idea.**
+> **Never use Tailwind below `text-2xl` (24px). Never force `small label → big heading → subtitle` stacking unless it is genuinely the right choice.**
 
-Existing components are implementation tools. They are not creative instructions. Graphs, cards, gauges, sliders, scales, dials, and dashboards are all valid tools — but only when the underlying idea genuinely calls for them:
+**Typography is a tool, not the default.** It may be: oversized (80–180px dominating the canvas) · cropped at the canvas edge for tension · layered (foreground over faded background) · dynamically revealed on the audio beat · used as a visual object · at extreme scale contrast · intentionally minimal (one word, maximum space).
 
-- A graph is appropriate when the idea is about **measurable change over time**
-- A scale is appropriate when the idea involves **balance or genuine comparison**
-- A dial is appropriate when the idea involves **a spectrum or a threshold**
-- A card is appropriate when a **contained information unit** genuinely improves communication
-- A diagram is appropriate when the idea requires **structural explanation**
-
-**Do not use a visual because it already exists in the codebase. Do not use a visual because it was used in the last video.**
+**Text participates in the visual world.** Text may attach to objects · reveal or mask visuals · transform into non-text elements · collide with objects · act as measurement/annotation inside a diagram · emerge from or dissolve into the environment. Ask: *"How does this sentence behave inside the visual world?"* — not *"How do I animate this sentence?"*
 
 ---
 
-### 5.6 — Background Language
-
-Backgrounds should feel refined and editorial rather than empty or generic. The background supports the concept and the channel identity — it does not announce itself.
-
-Valid background qualities:
-
-- subtle grid structures
-- restrained gradients
-- very light texture
-- soft spatial depth
-- controlled atmospheric lighting
-- elegant geometric structure
-- subtle shadow and depth
-- clean paper or editorial surfaces
-- dark cinematic surfaces (for Finance and Health channels)
-
-These are **background characteristics**, not recipes. Do not force the same background treatment into every video.
-
----
-
-### 5.7 — Color Language
-
-Use color intentionally. Color should establish hierarchy, emphasis, contrast, semantic meaning, and emotional tone.
-
-- Prefer a **restrained palette** — two to three deliberate colors rather than many unrelated ones
-- Accent colors should feel **purposeful**, not decorative
-- Do not turn every scene into a neon interface
-- Do not use glow merely because it is available
-- Color should support the idea
-
----
-
-### 5.8 — Typography & Mobile Legibility Law
-
-Typography is one of RightMotion's strongest design tools. It must also be **readable on an iPhone 15 base model screen at 720p**. That is the minimum bar. If a viewer squinting at a 6-inch screen at arm's length cannot read something in 0.5 seconds, it does not belong on screen.
-
-**Hard size minimums (1080×1920 canvas — never go below these):**
-- Hero / slam words: **80–110px** Montserrat Black — this is the primary visual element
-- Scene headlines: **56–72px** Montserrat Bold minimum
-- Supporting body lines: **36–44px** Montserrat or JetBrains Mono — never below 36px
-- Metric readouts: **56–80px** JetBrains Mono Black
-- **Absolute floor: 36px.** Nothing rendered on canvas should be smaller than 36px. Ever.
-
-**Two fonts only:**
-- **Montserrat** — headlines, slam words, display text
-- **JetBrains Mono** — metrics, numbers, data labels, technical callouts
-- Both loaded locally via `<FontLoader />` + `style.css`
-
-> [!CAUTION]
-> **Never use `text-xs`, `text-sm`, `text-base`, or any Tailwind size class below `text-2xl` (24px). At 1080×1920, `text-2xl` is still near the absolute floor.**
-
-**Creative direction — what typography can be:**
-- oversized — a single word at extreme scale dominating the canvas (80–180px)
-- cropped — intentionally cut off at the canvas edge to create tension
-- layered — foreground text over faded background text at different opacities
-- dynamically revealed — words or lines appearing precisely on the audio beat
-- used as a visual object — the shape of the letters is part of the composition
-- extreme scale contrast — one enormous word + one much smaller supporting label together
-- intentionally minimal — one or two words, maximum negative space
-
-> [!CAUTION]
-> **Do not force every scene into "small label → big heading → subtitle." That three-line stacking structure should only be used when it is genuinely the right choice.**
-
----
-
-### 5.8a — Banned Visual Patterns (Hard Rules)
-
-These patterns are **explicitly prohibited** because they produce small, cluttered, illegible results that fail on mobile. Do not use them.
+### 5.5 — Banned Visual Patterns
 
 > [!CRITICAL]
-> **THE FOLLOWING PATTERNS ARE BANNED FROM CANVAS.TSX:**
+> **These are hard bans. They produce small, cluttered, illegible results that fail on mobile.**
 
-**1. Pill / capsule badges and tags**
-Do not render small rounded-pill labels like:
-- `● ACTION PROTOCOL // 5 PILLARS`
-- `01 // CIRCADIAN ARCHITECTURE`
-- `NON-NEGOTIABLE` / `MANDATORY` / `CARDIO` badges
-- Category tags in the corner of a card
-- Status chips, tier labels, icon+text capsules
+1. **Pill/capsule badges** — `● PROTOCOL // 5 PILLARS`, numbered capsules (`01 // CIRCADIAN ARCHITECTURE`), `NON-NEGOTIABLE`/`MANDATORY` chips, status tags, icon+capsule pairings. RightMotion is motion design, not a mobile app UI.
+2. **Dashboard/list-card rows** — 3–5 stacked rows each with a number, title, sub-description, and right-side badge. This is a dashboard layout. Design a different scene — do not resize the list.
+3. **Sub-descriptions inside cards** — 2–3 lines of body text inside a card element. Audio carries the information load.
+4. **3+ simultaneous floating text elements** — unless scale contrast makes hierarchy unmistakable.
+5. **Icon + micro-text pairings** — icon < 40px paired with label < 40px. Make the icon a primary visual or remove it.
+6. **HUD/dashboard/telemetry panels** — stat rows, floating metric boxes with small type, thin-border data panels, game-HUD aesthetics.
 
-These are UI elements. RightMotion is motion design, not a mobile app interface. These badges are unreadable at mobile scale and they make the composition feel like a wireframe.
-
-**2. Multi-item list cards / dashboard rows**
-Do not create a scene that shows 3, 4, or 5 items stacked vertically as rows, each with:
-- a numbered label
-- a title
-- a sub-description
-- a right-side badge
-
-This is a dashboard layout. It is not motion design. At mobile scale every element becomes too small to read. The solution is NOT to make the list bigger — the solution is to design a different scene that isn't a list.
-
-**3. Sub-description text inside a card**
-Do not place 2–3 lines of body explanation text inside a visual card or row element. If you need to communicate more detail, let the audio carry it. The visual should reinforce one idea, not transcribe the voiceover.
-
-**4. Multiple small floating labels simultaneously**
-Do not render more than 2 distinct text elements visible on screen at the same moment unless they are intentionally part of a typographic composition where scale contrast makes hierarchy unmistakable.
-
-**5. Icon + micro-text pairings**
-Do not pair a small icon (24–40px) with a text label smaller than 40px and treat it as a meaningful visual element. At mobile scale this becomes a blur. Either make the icon large enough to be its own visual statement, or remove it.
-
-**6. HUD-style overlays and telemetry panels**
-Do not build scenes that look like they belong in a game HUD, a health app, or a financial dashboard. No rows of stats with small mono labels, no floating metric boxes with 20px type, no data panels with thin borders and tiny percentages.
-
-**The alternative to all of these:**
-Show fewer things. Make each thing much larger. Let the audio carry the information load. Design with scale, not density.
+**The alternative to all of these: fewer things, much larger, much bolder. Let audio carry information density.**
 
 ---
 
-### 5.8b — Visual Thinking First: Typography Is a Tool, Not the Default
+### 5.6 — Motion, Choreography & Transitions
 
-> [!CRITICAL]
-> **Do not just animate what the script says. Design something that visually expresses what the script means.**
+**Motion quality — favor:**
+smooth acceleration/deceleration · spring physics with intentional overshoot · audio-synchronized timing · strong arrivals with weight · purposeful exits · state transformations · spatial continuity · rhythmic choreographic beat
 
-Typography is powerful. But it has become the default — and defaults are not creative decisions.
+**Think in choreography, not independent animations.** Elements enter in sequence, react to each other, hand off focus, synchronize, push/pull/reveal. One element's exit triggers another's entrance. Camera follows objects. Objects transform into the next scene's opening state. Ask: *"Do these elements know about each other?"*
 
-**Before reaching for a text animation, ask one question:**
+**Motion — avoid:**
+perpetual bobbing after settling · meaningless rotation · decorative particles · constant glow pulses · movement with no semantic reason
 
-> *"Would this idea become clearer, more memorable, or more emotionally powerful if something other than text physically represented it?"*
+Every significant movement must answer: **"Why is this moving?"**
+Valid answers: to reveal / explain / emphasize / transform / connect / separate / compare / guide attention / create rhythm / communicate causality.
 
-If yes — redesign the scene around that thing.
+**Transitions** connect ideas, not merely separate scenes. Choose based on the *relationship* between adjacent scenes:
 
-A text-only scene is the right choice when typography is genuinely the strongest visual representation of the idea. It is not automatically the right choice because the sentence is important.
-
----
-
-**What "visually expressing meaning" looks like:**
-
-The idea in the script is almost always about something that *happens* or *exists*. Before writing a text animation, name the physical thing or action the idea describes. Then ask what that would look like if it were actually on screen.
-
-Some starting points for this kind of thinking:
-
-- Growth → something expanding, accumulating, or multiplying on screen
-- Pressure → compression, resistance, crowding into a smaller space
-- Choice → a path splitting, two states competing, divergence
-- Cause and effect → one object triggering another, a chain in motion
-- Transformation → a shape or state physically becoming something else
-- Comparison → two things in spatial tension — separated, contrasted, competing
-- Process → stages or objects connected and moving through a system
-- Scarcity → something shrinking, running out, being consumed
-- Distraction → competing visual elements pulling attention simultaneously
-- Focus → elimination of surrounding noise, convergence onto one thing
-- Time → a progression accumulating, a timeline building, momentum
-- Overload → too much appearing at once, crowding, collision
-
-These are **examples of thinking**, not a visual menu. Do not rotate through them. Use them only when the underlying idea genuinely maps to one.
+| Transition | When to use |
+|---|---|
+| Cut | sharp idea break |
+| Scale | one idea grows into the next |
+| Spatial movement | scenes share space; camera travels between them |
+| Mask | one scene reveals from behind another |
+| Morph | element from A physically becomes element in B |
+| Shared element | object travels through the transition |
+| Typography transformation | words evolve into the next idea |
+| Sudden contrast | pivot point in the script |
 
 ---
 
-**The full creative vocabulary:**
+### 5.7 — Scene Structure, Rhythm & Escalation
 
-A scene may be built from any combination of:
+**Variation:** Before finalizing a scene, ask: *"Would a viewer perceive this as a genuinely different visual construction from the previous scene?"* "Same layout, different text" — redesign. Color and copy changes alone do not count as variation.
 
-- typography (as one element among others, or as the dominant element)
-- animated objects or shapes
-- data and counters behaving as visual objects
-- diagrams and process flows
-- geometric systems
-- visual metaphors constructed in Remotion
-- generated or illustrated imagery
-- spatial environments with foreground / midground / background
-- parallax and depth relationships
-- camera movement — push-ins, pull-backs, lateral travel, perspective shifts
-- multiple layers moving at different rates
-- objects interacting, colliding, transforming, or triggering each other
-- typography interacting with objects (text and visuals in the same frame)
-- hybrid compositions where no single element dominates
+**Escalation:** When the script builds (Problem → Logic → Solution), the visual should build with it. An element introduced in Scene 1 may transform in Scene 2 and resolve in Scene 3. The viewer should feel the video progressing toward something — not watching isolated cards reset. Avoid unnecessary visual world resets.
 
-**Camera and spatial motion:** The entire composition may move. A push-in can be the reveal. A pull-back can be the reframe. Parallax can communicate depth that static composition cannot. Use spatial motion when it improves the storytelling. Do not use it for decoration.
+**Visual rhythm:** Alternate intentionally — high-energy · quiet · dense · sparse · dramatic hold. A simple scene can be stronger than a complex one. Do not maintain uniform intensity throughout.
 
-**Hybrid scenes:** A premium scene does not have to be "text OR object OR image." It can be background + object + data + typography + motion when those layers work together to communicate one idea. Complexity is only justified when it serves hierarchy. Complexity without hierarchy is bad design.
+**Video-level consistency:** Maintain coherent typography, spacing, color relationships, shape language, motion quality, and tone across all scenes. → **Consistent art direction + varied scene design.**
 
 ---
 
-**What rich motion actually means:**
+### 5.8 — Visual Storytelling Standard
 
-Richness does not come from adding more effects. It comes from visual relationships:
+> *The goal is not merely to explain the narration. The visual should make the viewer want to keep watching.*
 
-- one element transforming into another (morph, replace, evolve)
-- cause-and-effect chains where one action triggers the next
-- progressive construction — a system building piece by piece
-- accumulation — something growing in front of the viewer
-- scale relationships — small and large elements in dialogue
-- objects crossing the frame with weight and momentum
-- shared elements that carry meaning from one scene into the next
-- layers moving at different rates to create perceived depth
-- typography and objects in the same frame, aware of each other
+**Design scenes as visual stories:**
 
-The test for any movement: **Why is this moving?** If the answer is "to show the viewer something changing or happening" — that is rich motion. If the answer is "to make the scene feel more active" — remove it.
+> **STATE A → tension/build → transformation → STATE B**
 
----
+The transformation communicates the idea. Do not merely show the final state. A scene moving from empty→full, simple→complex, blocked→released communicates through its *process*, not its endpoint alone.
 
-### 5.9 — Motion Design Standard
+**Design for attention:**
+- What visual question does this scene open before the audio answers it?
+- What changes between the first and last frame?
+- Is there a visual payoff — something the viewer *sees happen*?
 
-Motion should feel professionally authored, not procedurally generated.
+A scene that asks a visual question and answers it is more engaging than a scene that illustrates a sentence.
 
-**Favor:**
-- smooth acceleration and controlled deceleration
-- spring-like physics with intentional overshoot where appropriate
-- precise timing tied to the audio transcript
-- strong entrances — elements arrive with weight and intention
-- purposeful exits — elements leave meaningfully, not just by fading
-- meaningful transformations — one state becoming another
-- spatial continuity — elements that move feel like they exist in space
-- rhythmic choreography — motion has a beat
+**One memorable visual moment per video.** For the most important idea, find the most physically interesting, emotionally resonant, or visually unexpected representation. One extraordinary moment outperforms consistent adequacy throughout.
 
-**Avoid:**
-- perpetual floating or bobbing after an element has settled
-- meaningless rotation
-- decorative particles that fill space without purpose
-- constant glow pulses that never stop
-- movement that has no semantic reason to exist
+**10-second mute test:** Remove audio mentally. Does the visual progression still feel intentional? Would you continue watching? If no — the narration is doing all the work. Redesign the visual behavior.
 
-The question for every significant motion:
-
-> **Why is this moving?**
-
-Good answers: to reveal, to explain, to emphasize, to transform, to connect, to separate, to compare, to guide attention, to create rhythm, to communicate causality.
+**Memorability test:** Would someone describe this visual to a friend tomorrow? If no — consider a more distinct representation. Do not force novelty; do not settle for generic when a stronger concept is available and equally clear.
 
 ---
 
-### 5.10 — Transitions
+### 5.9 — Restraint & Density Limits
 
-Transitions should connect ideas, not just separate scenes.
+**Mental model:** Audio carries information load. Visuals carry one dominant impression at a time. They work together — not redundantly.
 
-Do not use the same transition repeatedly because it is available. Choose based on the **relationship between the two scenes**:
+Every element must answer: *"Does this help the viewer understand, feel, or remember the idea?"* If not — remove it.
 
-- **Cut** — sharp, immediate contrast; idea breaks cleanly
-- **Scale** — one idea grows into or out of the next
-- **Spatial movement** — scenes inhabit the same space, camera moves between them
-- **Mask** — one scene reveals from behind another
-- **Morph** — an element from Scene A transforms into an element in Scene B
-- **Typography transformation** — words change, morphing into the next idea
-- **Shared element movement** — one object travels across the transition
-- **Directional movement** — scenes slide in consistent directions to imply narrative flow
-- **Deliberate disappearance** — elements vanish with intent before the next idea arrives
-- **Sudden contrast** — total visual change to signal a pivot in the script
+**Discipline: fewer things, much larger, much bolder.**
 
----
-
-### 5.11 — Scene-to-Scene Variation
-
-Before finalizing any scene, mentally compare it to the previous one and ask:
-
-> *Would a viewer perceive this as a genuinely different visual construction?*
-
-If the answer is: *"It is basically the same layout with different text"* — redesign it. Change the underlying composition or visual concept. Changing only colors or copy does not count as variation.
+**Hard limits (1080×1920):**
+- Primary graphics zone: `top: 6%` to `top: 68%` (y: 115px–1320px)
+- Captions (`<AppleKineticCaptions />`): `top: 73%` to `top: 81%`
+- Zero overlap between graphics and captions. Zero content below the caption zone.
+- Maximum **3 distinct text elements** simultaneously on screen
+- Maximum **2 visual objects** simultaneously unless forming a single unified composition
+- Scale sanity check: *"At 360×640, is the main element still readable?"* If no — scale up or remove.
 
 ---
 
-### 5.12 — Visual Rhythm and Intensity
+### 5.10 — Originality & Components
 
-A short-form video should not maintain one visual intensity throughout its entire duration. Allow:
+**Originality:** RightMotion must produce scenes that have never existed in this repository. Invent directly in `Canvas.tsx` when the concept demands it. Do not abstract every creative solution into a reusable component.
 
-- **high-energy moments** — fast reveals, bold type, dramatic cuts
-- **quiet moments** — negative space, single elements, deliberate pause
-- **dense moments** — information-rich, multiple elements in controlled hierarchy
-- **sparse moments** — almost nothing on screen; maximum focus on one thing
-- **dramatic visual hits** — a single frame that lands hard on a key word
-
-A simple scene can be stronger than a complicated one. Do not add visual noise to make the video feel busy.
-
----
-
-### 5.13 — Video-Level Consistency
-
-Even when individual scenes are visually different, the whole video must feel like a single authored piece. Maintain a coherent combination of:
-
-- typography
-- spacing
-- color relationships
-- shape language
-- motion quality
-- overall visual tone
-
-Think: **consistent art direction + varied scene design**
-
----
-
-### 5.14 — Visual Restraint
-
-RightMotion should never feel overloaded.
-
-**The most common mistake:** building a scene that tries to show everything the audio is saying at the same time. A list of 4 items, each with a number, a title, a description, and a badge — this is not a scene. It is a dense information panel that works in a slide deck and fails completely on a phone screen.
-
-**The correct mental model:**
-- The audio carries the information load
-- The visual carries one dominant impression at a time
-- They work together, not redundantly
-
-Do not include:
-- card rows with 3+ simultaneous items at small scale
-- pill badges, status chips, or category capsules
-- sub-text descriptions inside list items
-- excessive labels that restate what the audio already says
-- decorative lines or particles without purpose
-- redundant information displayed multiple ways simultaneously
-- excessive gradients or glow stacked on top of each other
-
-Every major element must earn its place. Ask:
-
-> *Does this help the viewer understand, feel, or remember the idea?*
-
-If not, remove it. The discipline is: **fewer things, much larger, much bolder.**
-
----
-
-### 5.15 — Originality Requirement
-
-RightMotion must be capable of producing scenes that have never appeared in this repository before.
-
-The editing agent is allowed — and expected — to create new visual constructions directly in Remotion when the concept calls for them. A composition does not need to exist as a pre-built component. Do not abstract every creative solution into a reusable component. Implement it directly in the Canvas if that is the right approach.
-
----
-
-### 5.16 — Existing Components
-
-Components in `src/components/` are optional implementation tools. Use them when they genuinely serve the composition. The complete available toolset:
-
-- `pure_graphics/` — glossy obsidian graphics (GlossyGlowGraph, GlossyBalanceScale, GlossyFrictionSlider, GlossyRadialDial, GlossyBarChart, GlossyToggleBoard, GlossyFeatureGrid, SteppedProgressionStairs, KineticTypoLadder, ArchitecturalDraftingCanvas, etc.)
+**Existing components** (optional implementation tools — not a creative menu):
+- `pure_graphics/` — GlossyGlowGraph, GlossyBalanceScale, GlossyFrictionSlider, GlossyRadialDial, GlossyBarChart, GlossyToggleBoard, GlossyFeatureGrid, SteppedProgressionStairs, KineticTypoLadder, ArchitecturalDraftingCanvas
 - `physics/` — PhysicalCard, spring utilities, squash-and-stretch
 - `texture/` — GroundedTextureEngine, ArchivalPaperCanvas, depth layers
 - `collage/` — TapeStrip, HandDrawnDoodle, HighlighterStroke
-- `finance/` — dark obsidian Finance components (FinanceBackground, etc.)
-- `health/` — Bio-tech Health components (HealthBackground, etc.)
-- `facecam/` — FacecamBRoll, FacecamFrame, FacecamCaptions
+- `finance/` · `health/` · `facecam/` — channel-specific backgrounds and frames
 - `kinetic_text/` — CameraShake, GlitchText, SemanticWord
-- Root components — `<KineticCaptions />`, `<AppleKineticCaptions />`, `<CinematicIllustrationCard />`, `<ConceptKeywordSlam />`, `<DuoPresenter />`, `<TacticalMemeCard />`, `<MemeStickerOverlay />`
+- Root: `<KineticCaptions />` · `<AppleKineticCaptions />` · `<CinematicIllustrationCard />` · `<ConceptKeywordSlam />` · `<DuoPresenter />` · `<TacticalMemeCard />` · `<MemeStickerOverlay />`
 
-Do not treat this list as a menu to work through. Do not repeatedly use the same component family across every video because it worked before.
+Do not cycle through this list. Do not use a component because it was used before. Use it when it genuinely serves the composition. A component IS appropriate when:
+- Graph → idea is measurable change over time
+- Scale → idea involves genuine balance or comparison
+- Dial → idea involves a spectrum or threshold
+- Card → a contained information unit genuinely helps
+- Diagram → structural explanation is required
 
----
-
-### 5.17 — Hero Illustration (Optional)
-
+**Hero illustration (optional):**
 ```bash
 python3 scripts/generate_illustration_prompt.py --topic "<topic>" --script "<hook>"
 ```
-Then call `generate_image` with `AspectRatio="16:9"`. Save to `public/<clip_name>/assets/scene_illustration.png`. Wrap in `<CinematicIllustrationCard />`.
-
-If image generation is unavailable, create the scene entirely with Remotion. The lack of generated imagery must never reduce the ambition of the motion design.
+Call `generate_image` with `AspectRatio="16:9"`. Save to `public/<name>/assets/scene_illustration.png`. Wrap in `<CinematicIllustrationCard />`. If image generation is unavailable, build the scene entirely in Remotion. Visual ambition must not decrease.
 
 ---
 
-### 5.18 — Safe Zones & Density Limits (Non-Negotiable)
+### 5.11 — Quality Gates
 
-**Spatial zones:**
-- Primary graphics: `top: 6%` to `top: 68%` (y: 115px to y: 1320px on 1080×1920)
-- Captions (`<AppleKineticCaptions />`): `top: 73%` to `top: 81%`
-- Zero overlap between graphics and captions. Zero content below the caption zone.
+**Pre-scene checklist** (answer before implementing any major scene):
 
-**Element density limits:**
-- **Maximum 3 distinct text elements on screen at the same time.** That means 3 total — not 3 per card row.
-- **Maximum 2 visual objects** (cards, shapes, diagrams) simultaneously on screen unless they are intentionally structured as a single unified composition.
-- If a scene requires more than 3 text elements to "make sense," it is not a scene — it is a document. Redesign it.
-- One strong idea per scene. One visual per idea.
-
-**Scale sanity check:**
-Before rendering, ask: *"If this frame were displayed at 360×640 (240p), would the main element still be readable?"* If no — the elements are too small. Scale everything up or remove the small elements.
-
----
-
-### 5.19 — Channel Identity
-
-Channel identity controls the overall visual atmosphere. It does **not** dictate the exact composition.
-
-A light editorial channel (`{Self Improvement}`) can still contain:
-- typography-only scenes
-- diagrams
-- objects
-- illustrations
-- asymmetric compositions
-- cinematic moments
-- dark accents used as contrast
-
-...without abandoning its identity. The light ground, editorial tone, and Judy presenter remain consistent. What is designed within that space is free.
-
----
-
-### 5.20 — The Agent's Creative Checklist
-
-Before implementing any major scene, answer these questions:
-
-| Question | Purpose |
+| Question | Tests |
 |---|---|
-| **What is the idea?** | Meaning |
-| **What should the viewer understand immediately?** | Communication |
-| **What visual could communicate it best?** | Metaphor |
-| **Would this be clearer or more powerful if something other than text represented it?** | Anti-text-default |
-| **Where should the important elements live?** | Composition |
-| **What does the eye see first?** | Hierarchy |
-| **What moves, and why?** | Motion |
-| **How does this connect to what follows?** | Transition |
-| **How is this different from the previous scene?** | Variety |
-| **What can be removed?** | Restraint |
-| **Is the largest text at least 56px?** | Mobile legibility |
-| **Are there any capsule badges, pill labels, or list rows?** | Anti-pattern check |
-| **Would this look professionally designed at 1080×1920?** | Quality |
+| What is the idea? | Meaning |
+| What must the viewer take away? | Communication |
+| What visual best expresses this idea? | Concept |
+| Would something other than text be clearer or more powerful? | Anti-text-default |
+| Where do important elements live? | Composition |
+| What does the eye see first? | Hierarchy |
+| What moves, and why? | Motion |
+| What changes between the first and last frame? | Visual story |
+| How does this connect to the next scene? | Transition |
+| Is this genuinely different from the previous scene? | Variation |
+| What can be removed? | Restraint |
+| Largest text ≥ 56px? | Mobile legibility |
+| Any capsule badges, list rows, or dashboard panels? | Anti-pattern |
+| If audio is muted, does the progression feel intentional? | Mute test |
+| Would this look professionally designed at 1080×1920? | Quality |
+
+**Final quality test — inspect rendered stills, not just code:**
+- Looks intentionally designed?
+- Visual reinforces *this specific* script moment?
+- Compositionally distinct from the previous scene?
+- Clear visual hierarchy?
+- Anything unnecessary?
+- Every text element readable at 720p on a 6-inch screen?
+- No pill badges, capsule labels, list rows, or dashboard panels?
+- Feels like premium motion design — not an automated template?
+
+If a still frame could have come from a generic template — redesign it.
 
 ---
 
-### 5.21 — The Final Quality Test
+### 5.12 — Do Not Overcorrect
 
-Do not evaluate a video only by whether the code compiles, the render succeeds, and the timing works. Inspect the actual frames. Ask:
+Do not force variety. Do not use randomness as creativity. Do not abandon RightMotion identity in pursuit of novelty. Do not avoid a component merely because it was used before. Use repetition when repetition is genuinely the strongest artistic decision.
 
-- Does this look intentionally designed?
-- Does the visual reinforce the script at this specific moment?
-- Does this scene feel compositionally distinct from the previous one?
-- Is there meaningful visual hierarchy within the frame?
-- Is the composition clean?
-- Is anything unnecessary?
-- **Is every text element readable on a 6-inch phone screen?** Squint at the still. If you need to squint harder than 1 second to read something — it is too small.
-- **Does this scene contain any pill badges, capsule labels, list rows, or dashboard panels?** If yes — remove them and redesign.
-- Does this feel like premium motion design — or an automated template?
-
-If a still frame looks like it could have come from a generic template, redesign it.
-
----
-
-### 5.22 — Do Not Overcorrect
-
-Do not intentionally make every scene wildly different just to avoid repetition.
-
-Do not use randomness to fake creativity.
-
-Do not abandon the RightMotion visual identity in pursuit of variety.
-
-Do not avoid a component merely because it was used before.
-
-Use repetition when repetition is genuinely the strongest artistic decision.
-
-> **The goal is intentional variety, not forced variety.**
+> **Intentional variety ≠ forced variety.**
 
 ---
 
 ## 📱 Rule 6: Sound Design
 
-- `whoosh_deep` / `whoosh_fast`: Major transitions and presenter entrances (vol: 0.30–0.34).
-- `impact_hit` / `piano_hit`: High-impact concept reveals (vol: 0.24).
-- `click`: UI interactions, pills, badges (vol: 0.24–0.28).
-- `whoosh_sparkle`: Solution reveals, psychological revelations (vol: 0.30–0.35).
+| SFX | When | Volume |
+|---|---|---|
+| `whoosh_deep` / `whoosh_fast` | Major transitions, presenter entrances | 0.30–0.34 |
+| `impact_hit` / `piano_hit` | High-impact concept reveals | 0.24 |
+| `click` | UI interactions | 0.24–0.28 |
+| `whoosh_sparkle` | Solution reveals, psychological revelations | 0.30–0.35 |
 
 ---
 
-## ✍️ Rule 7: Scriptwriting Standards
+## ✍️ Rule 7: Scriptwriting
 
-### The 3-Pillar Pure Information Architecture:
-1. **Pillar 1 — Problem (0–8s)**: Cognitive paradox, biological quirk, or behavioral hypocrisy.
-2. **Pillar 2 — Logic (8–22s)**: The mechanism, root cause, why intuition fails.
-3. **Pillar 3 — Solution (22–32s)**: Concrete, actionable protocol.
+**3-Pillar Pure Information Architecture:**
+1. **Problem (0–8s):** Cognitive paradox, biological quirk, or behavioral hypocrisy
+2. **Logic (8–22s):** Mechanism, root cause, why intuition fails
+3. **Solution (22–32s):** Concrete, actionable protocol
 
-**STRICT NO-CTA LAW**: End decisively on the solution. Zero "tell me below", zero "comment below", zero follow/subscribe asks.
+**STRICT NO-CTA LAW:** End decisively on the solution. Zero "tell me below," "comment below," or subscribe asks.
 
-### Banned phrases:
-- AI clichés: "Here's the thing", "The truth is", "You're not lazy, you're..."
-- Sales hype: "life-changing", "must-read", "game-changer"
-- Comfort topics: "When life feels unfair" — use concrete paradoxes instead
-- Ending CTAs of any kind
+**Banned language:** "Here's the thing" · "The truth is" · "You're not lazy, you're…" · "life-changing" · "must-read" · "game-changer" · comfort-topic framing ("When life feels unfair") · any ending CTA
 
 ---
 
-## 🛠️ Rule 8: CLI Workflow Reference
+## 🛠️ Rule 8: CLI Reference
 
 ```bash
-# Scaffold the clip
+# Scaffold
 .venv/bin/python3 scripts/create_clip.py \
-  --name "<clip_name>" \
-  --topic "<topic>" \
-  --script "<script_text>" \
-  [--andrew] \
-  [--meta] \
-  [--meme <id>] \
-  [--no-meme]
+  --name "<name>" --topic "<topic>" --script "<script>" \
+  [--andrew] [--meta] [--meme <id>] [--no-meme]
 
-# Write bespoke Canvas.tsx — read transcript.json for word timestamps
-
-# Audit stills
-npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene1.png --frame=80
-npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene2.png --frame=250
-npx remotion still src/index.ts <PascalName>Video out/<clip_name>_scene3.png --frame=500
+# Visual audit stills
+npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=80
+npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=250
+npx remotion still src/index.ts <PascalName>Video out/<name>_scene3.png --frame=500
 
 # Render
-npx remotion render src/index.ts <PascalName>Video out/<clip_name>_video.mp4
+npx remotion render src/index.ts <PascalName>Video out/<name>_video.mp4
 
 # Thumbnail
-npx remotion still src/index.ts <PascalName>Thumbnail out/<clip_name>_thumbnail.png
+npx remotion still src/index.ts <PascalName>Thumbnail out/<name>_thumbnail.png
 ```
 
-### Git discipline:
-- Test with `python3 -m py_compile` before committing.
-- Commit all production assets together with clean conventional commits (`feat(clip): ...`).
-- Push to `origin main` upon completion.
+**Git:** `python3 -m py_compile` before commit · Conventional commits: `feat(clip): …` · Push to `origin main`.
