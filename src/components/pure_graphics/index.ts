@@ -19,3 +19,5 @@ export * from "./TimelineScrubber";
 export * from "./VectorCursor";
 export * from "./ArchitecturalDraftingCanvas";
 export * from "./KineticTypoLadder";
+export * from "./DynamicSankeyFlow";
+export * from "./KineticTensionDial";

@@ -26,12 +26,16 @@
 >    - Read `transcript.json` for frame-accurate word timing. Anchor subsequent scenes with large transparent semantic cutouts (`400–750px`) from `public/assets/`. See Rule 5 for the creative standard.
 > 4. **Visual audit**:
 >    ```bash
->    npx remotion still src/index.ts <PascalName>Video out/<name>_hook.png --frame=35
->    npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=120
->    npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=350
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_hook.png --frame=35 --gl=swangle
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=120 --gl=swangle
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=350 --gl=swangle
 >    ```
 >    Inspect each still via `view_file`. Confirm razor-sharp contrast, zero dirty grain on light mode, and zero caption overlap.
-> 5. **Render**: `npx remotion render src/index.ts <PascalName>Video out/<name>_video.mp4`. Deliver path + viral title + pinned comment.
+> 5. **Render (100% CPU Mandate)**:
+>    ```bash
+>    npx remotion render src/index.ts <PascalName>Video out/<name>_video.mp4 --gl=swangle
+>    ```
+>    *MANDATORY*: Always render on CPU using Google SwiftShader (`--gl=swangle` + CPU `libx264` software encoding). Never use GPU/CUDA. Deliver path + viral title + pinned comment.
 >
 > *(Output script only if the user writes "script only" or "write a script".)*
 
@@ -254,6 +258,15 @@ smooth acceleration/deceleration · spring physics with intentional overshoot ·
   - A stamp impacts with micro camera shake (`CameraShake`).
 - The viewer must SEE the action occur, not just read a pre-cancelled word.
 
+**The Law of Variable-Energy Pacing & The Dramatic Breath Hold:**
+- Never run an entire 30s video at flat, uniform intensity.
+- Sequence every narrative through an intentional emotional rhythm:
+  1) **Hook (0–2.5s)**: High intimacy, bespoke illustration inside editorial card + Judy grounded close-up.
+  2) **Friction & Conflict (2.5s–12s)**: Rapid progressive micro-reveals, high-contrast contradictions, subtle camera push-in.
+  3) **The Dramatic Breath Hold (~14s)**: A 12–20 frame micro-freeze right before the epiphany. Visual drift drops to zero, and audio drops into an intimate sub-bass hum.
+  4) **The Epiphany Release**: Explosive resolution (`<AnimatedSlashStrike />`, `<KineticHighlighter />`, `<CameraShake />`) with particles or glowing accents.
+  5) **Decisive Takeaway**: Grounded presenter or clean closing question with zero visual clutter.
+
 **Motion — avoid:**
 perpetual bobbing after settling · meaningless rotation · decorative particles · constant glow pulses · movement with no semantic reason
 
@@ -335,12 +348,13 @@ Every element must answer: *"Does this help the viewer understand, feel, or reme
 **Originality:** RightMotion must produce scenes that have never existed in this repository. Invent directly in `Canvas.tsx` when the concept demands it. Do not abstract every creative solution into a reusable component.
 
 **Existing components** (optional implementation tools — not a creative menu):
-- `pure_graphics/` — GlossyGlowGraph, GlossyBalanceScale, GlossyFrictionSlider, GlossyRadialDial, GlossyBarChart, GlossyToggleBoard, GlossyFeatureGrid, SteppedProgressionStairs, KineticTypoLadder, ArchitecturalDraftingCanvas
+- `camera3d/` — CinematicParallaxRig, VirtualCamera3D, IsometricCard
+- `pure_graphics/` — DynamicSankeyFlow, KineticTensionDial, GlossyGlowGraph, GlossyBalanceScale, GlossyFrictionSlider, GlossyRadialDial, GlossyBarChart, GlossyToggleBoard, GlossyFeatureGrid, SteppedProgressionStairs, KineticTypoLadder, ArchitecturalDraftingCanvas, TactileCursorPointer, VectorCursor
 - `physics/` — PhysicalCard, spring utilities, squash-and-stretch
 - `texture/` — GroundedTextureEngine, ArchivalPaperCanvas, depth layers
 - `collage/` — TapeStrip, HandDrawnDoodle, HighlighterStroke
 - `finance/` · `health/` · `facecam/` — channel-specific backgrounds and frames
-- `kinetic_text/` — CameraShake, GlitchText, SemanticWord, AnimatedSlashStrike
+- `kinetic_text/` — AnimatedSlashStrike, KineticHighlighter, CameraShake, GlitchText, SemanticWord
 - Root: `<KineticCaptions />` · `<AppleKineticCaptions />` · `<CinematicIllustrationCard />` · `<ConceptKeywordSlam />` · `<DuoPresenter />` · `<AnimatedSlashStrike />`
 
 Do not cycle through this list. Do not use a component because it was used before. Use it when it genuinely serves the composition. A component IS appropriate when:

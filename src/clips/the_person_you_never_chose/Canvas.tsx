@@ -2,7 +2,8 @@ import React from "react";
 import { Easing, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { WordTimestamp } from "../../types";
 import { Compass, EyeOff, RefreshCw } from "lucide-react";
-import { AnimatedSlashStrike } from "../../components/kinetic_text/AnimatedSlashStrike";
+import { AnimatedSlashStrike, KineticHighlighter } from "../../components/kinetic_text";
+import { CinematicParallaxRig } from "../../components/camera3d/CinematicParallaxRig";
 
 interface CanvasProps {
   transcript: WordTimestamp[];
@@ -30,7 +31,17 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
   const { fps } = useVideoConfig();
 
   return (
-    <div className="absolute inset-0 w-full h-full select-none overflow-hidden font-sans">
+    <CinematicParallaxRig
+      punchIns={[
+        { frame: 630, zoom: 1.05, durationFrames: 10, targetY: -20 },
+        { frame: 875, zoom: 1.04, durationFrames: 12, targetY: -15 },
+      ]}
+      breathHolds={[
+        { startFrame: 415, durationFrames: 14 },
+      ]}
+      className="w-full h-full select-none font-sans"
+    >
+      <div className="absolute inset-0 w-full h-full">
       {/* ======================================================== */}
       {/* SCENE 1: BORROWED SUCCESS & PERFORMANCE HABIT (0 → 395)  */}
       {/* "You can become incredibly successful at living a life..."*/}
@@ -141,7 +152,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
                 </span>
 
                 <h1 className="font-sans font-black text-[78px] leading-tight tracking-tight text-slate-950 text-center mb-6">
-                  BORROWED SUCCESS
+                  <KineticHighlighter startFrame={135} color="yellow">BORROWED</KineticHighlighter> SUCCESS
                 </h1>
 
                 {/* Main Card with Integrated Semantic Cutout */}
@@ -378,8 +389,8 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
                         <div className="px-5 py-2 rounded-xl bg-slate-950 text-white font-mono text-[32px] font-black tracking-wider uppercase">
                           FEELS RIGHT
                         </div>
-                        <span className="font-sans font-black text-[54px] text-amber-600 tracking-tight">
-                          JUST FAMILIAR
+                        <span className="font-sans font-black text-[54px] text-amber-700 tracking-tight">
+                          <KineticHighlighter startFrame={550} color="amber">JUST FAMILIAR</KineticHighlighter>
                         </span>
                       </div>
                     )}
@@ -625,6 +636,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
           </div>
         );
       })()}
-    </div>
+      </div>
+    </CinematicParallaxRig>
   );
 };

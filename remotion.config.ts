@@ -1,8 +1,9 @@
 import { Config } from "@remotion/cli/config";
 import { enableTailwind } from "@remotion/tailwind";
 
-// GPU Hardware Acceleration Configuration (NVIDIA RTX 3050 via ANGLE/Direct3D11)
-Config.setChromiumOpenGlRenderer("angle");
+// 100% Pure CPU Software Rendering Configuration (SwiftShader via Swangle, Zero GPU / Zero CUDA)
+Config.setChromiumOpenGlRenderer("swangle");
+Config.setHardwareAcceleration("disable");
 Config.setConcurrency(8);
 Config.setVideoImageFormat("jpeg");
 Config.setJpegQuality(95);

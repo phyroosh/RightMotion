@@ -888,3 +888,17 @@ export const ThePersonYouNeverChoseThumbnail: React.FC = () => (
     }
   />
 );
+
+export const BrainToleranceThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="BRAIN LEARNS TOLERANCE"
+    highlightWord="TOLERANCE"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Brain Learns"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);

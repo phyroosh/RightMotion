@@ -696,7 +696,7 @@ def generate_canvas_scaffold(
     return f'''import React from "react";
 import {{ interpolate, spring, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
 import {{ WordTimestamp }} from "../../types";
-import {{ AnimatedSlashStrike }} from "../../components/kinetic_text/AnimatedSlashStrike";
+import {{ AnimatedSlashStrike, KineticHighlighter }} from "../../components/kinetic_text";
 import {{ CinematicIllustrationCard }} from "../../components/CinematicIllustrationCard";
 
 interface CanvasProps {{
@@ -758,7 +758,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
             /* Mandatory ~2.5s Hook Intro: bespoke illustration inside editorial card */
             <div className="w-full max-w-[940px] flex flex-col items-center">
               <CinematicIllustrationCard
-                imageSrc={staticFile("scene_illustration.png")}
+                imageSrc={{staticFile("scene_illustration.png")}}
                 width={{920}}
                 height={{520}}
               />
@@ -767,7 +767,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
             /* High-definition physical cutout anchor (450–700px, crisp shadow) */
             <div className="w-full max-w-[940px] flex flex-col items-center justify-center mt-8">
               <img
-                src={staticFile("{p_path}")}
+                src={{staticFile("{p_path}")}}
                 alt="Problem Cutout"
                 className="w-[520px] h-auto object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.22)]"
               />
@@ -824,7 +824,7 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
         <div className="absolute inset-0 flex flex-col items-center justify-start pt-[12%] px-8">
           <div className="w-full max-w-[920px] flex flex-col items-center justify-center">
             <img
-              src={staticFile("{s_path}")}
+              src={{staticFile("{s_path}")}}
               alt="Solution Cutout"
               className="w-[560px] h-auto object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.20)]"
             />
