@@ -77,6 +77,11 @@ export const TheArchitectureOfFocusCanvas: React.FC<CanvasProps> = () => {
     extrapolateRight: "clamp",
   });
 
+  // Deterministic frame-based pulsing (replaces non-deterministic wall-clock CSS keyframes)
+  const dotPulse = 0.45 + 0.55 * Math.sin(frame * 0.2);
+  const redPingScale = tensionProgress > 80 ? 1.0 + 0.3 * Math.abs(Math.sin(frame * 0.35)) : 1.0;
+  const textPulse = tensionProgress > 80 ? 0.75 + 0.25 * Math.sin(frame * 0.3) : 1.0;
+
   return (
     <InfiniteWorldCanvas
       waypoints={WORLD_WAYPOINTS}
@@ -138,7 +143,10 @@ export const TheArchitectureOfFocusCanvas: React.FC<CanvasProps> = () => {
         <div className="w-full h-full flex flex-col items-center justify-start pt-10">
           {/* Sector Badge */}
           <div className="px-5 py-2 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md mb-6 flex items-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-sky-500 animate-pulse" />
+            <div
+              className="w-3 h-3 rounded-full bg-sky-500"
+              style={{ opacity: dotPulse }}
+            />
             <span className="font-mono text-[22px] font-black text-slate-900 tracking-wider uppercase">
               SECTOR 01 // COGNITIVE INTAKE
             </span>
@@ -212,7 +220,13 @@ export const TheArchitectureOfFocusCanvas: React.FC<CanvasProps> = () => {
         <div className="w-full h-full flex flex-col items-center justify-start pt-10">
           {/* Sector Badge */}
           <div className="px-5 py-2 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md mb-6 flex items-center gap-3">
-            <div className={`w-3 h-3 rounded-full ${tensionProgress > 80 ? "bg-rose-500 animate-ping" : "bg-amber-500"}`} />
+            <div
+              className={`w-3 h-3 rounded-full ${tensionProgress > 80 ? "bg-rose-500" : "bg-amber-500"}`}
+              style={{
+                transform: `scale(${redPingScale})`,
+                opacity: tensionProgress > 80 ? 0.9 : dotPulse,
+              }}
+            />
             <span className="font-mono text-[22px] font-black text-slate-900 tracking-wider uppercase">
               SECTOR 02 // FRICTION OVERLOAD
             </span>
@@ -251,7 +265,10 @@ export const TheArchitectureOfFocusCanvas: React.FC<CanvasProps> = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-[18px] text-slate-500 font-bold uppercase">STATE</span>
-                <span className={`text-[26px] font-black ${tensionProgress > 80 ? "text-rose-600 animate-pulse" : "text-slate-900"}`}>
+                <span
+                  className={`text-[26px] font-black ${tensionProgress > 80 ? "text-rose-600" : "text-slate-900"}`}
+                  style={{ opacity: textPulse }}
+                >
                   {tensionProgress > 80 ? "JAMMED" : "HEAVY"}
                 </span>
               </div>
@@ -284,7 +301,10 @@ export const TheArchitectureOfFocusCanvas: React.FC<CanvasProps> = () => {
         >
           {/* Sector Badge */}
           <div className="px-5 py-2 rounded-2xl bg-slate-950 text-white border-[2.5px] border-slate-800 shadow-md mb-6 flex items-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
+            <div
+              className="w-3 h-3 rounded-full bg-emerald-400"
+              style={{ opacity: dotPulse }}
+            />
             <span className="font-mono text-[22px] font-black tracking-wider uppercase">
               SECTOR 03 // THE SOVEREIGN MONOLITH
             </span>
@@ -346,7 +366,7 @@ export const TheArchitectureOfFocusCanvas: React.FC<CanvasProps> = () => {
       {/* ======================================================== */}
       {/* MACRO BLUEPRINT OVERLAY (Visible upon Pull-Back)         */}
       {/* ======================================================== */}
-      <WorldEntity worldX={750} worldY={800} width={3300} height={3800}>
+      <WorldEntity worldX={750} worldY={800} width={3300} height={3800} startFrame={670}>
         <div
           className="w-full h-full pointer-events-none flex flex-col items-center justify-between p-12"
           style={{ opacity: grandTitleOpacity }}

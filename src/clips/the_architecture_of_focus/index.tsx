@@ -140,8 +140,8 @@ export const TheArchitectureOfFocusComposition: React.FC = () => {
       {/* 8. Kinetic Captions with Neon Apple Glow */}
       <AppleKineticCaptions transcript={transcript} />
 
-      {/* 9. Grounded Finishing Texture (35mm Living Grain + Halation + Vignette) */}
-      <GroundedTextureEngine grainOpacity={0.042} />
+      {/* 9. Grounded Finishing Texture (Halation + Vignette, crisp clean light canvas) */}
+      <GroundedTextureEngine />
     </div>
   );
 };

@@ -272,25 +272,31 @@ export const InfiniteWorldCanvas: React.FC<InfiniteWorldCanvasProps> = ({
           </div>
         )}
 
-        {/* Global Blueprint Floor (Coordinate Grid) */}
-        {showGrid && (
-          <div
-            className="absolute pointer-events-none opacity-40 z-1"
-            style={{
-              left: "-3000px",
-              top: "-3000px",
-              width: "10000px",
-              height: "10000px",
-              transform: `translate3d(${screenTranslateX.toFixed(2)}px, ${screenTranslateY.toFixed(2)}px, 0px) scale(${finalZoom.toFixed(4)})`,
-              transformOrigin: "0 0",
-              backgroundImage: `
-                linear-gradient(to right, rgba(15, 23, 42, 0.08) 1.5px, transparent 1.5px),
-                linear-gradient(to bottom, rgba(15, 23, 42, 0.08) 1.5px, transparent 1.5px)
-              `,
-              backgroundSize: "120px 120px",
-            }}
-          />
-        )}
+        {/* Global Blueprint Floor (Coordinate Grid) - Viewport-Projected Mathematical Grid */}
+        {showGrid && (() => {
+          const gridStep = 120 * finalZoom;
+          const rawOffsetX = (540 - finalCx * finalZoom) % gridStep;
+          const offsetX = rawOffsetX < 0 ? rawOffsetX + gridStep : rawOffsetX;
+          const rawOffsetY = (960 - finalCy * finalZoom) % gridStep;
+          const offsetY = rawOffsetY < 0 ? rawOffsetY + gridStep : rawOffsetY;
+          const lineThickness = Math.max(1.0, 1.5 * finalZoom);
+
+          return (
+            <div
+              className="absolute inset-0 pointer-events-none opacity-40 z-1"
+              style={{
+                width: "1080px",
+                height: "1920px",
+                backgroundImage: `
+                  linear-gradient(to right, rgba(15, 23, 42, 0.08) ${lineThickness.toFixed(2)}px, transparent ${lineThickness.toFixed(2)}px),
+                  linear-gradient(to bottom, rgba(15, 23, 42, 0.08) ${lineThickness.toFixed(2)}px, transparent ${lineThickness.toFixed(2)}px)
+                `,
+                backgroundSize: `${gridStep.toFixed(2)}px ${gridStep.toFixed(2)}px`,
+                backgroundPosition: `${offsetX.toFixed(2)}px ${offsetY.toFixed(2)}px`,
+              }}
+            />
+          );
+        })()}
 
         {/* Main Spatial World Container */}
         <div
@@ -326,6 +332,10 @@ export interface WorldEntityProps {
   height: number;
   /** Margin buffer for frustum culling (default: 600px) */
   margin?: number;
+  /** Optional start frame for temporal lifecycle culling */
+  startFrame?: number;
+  /** Optional end frame for temporal lifecycle culling */
+  endFrame?: number;
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -334,7 +344,7 @@ export interface WorldEntityProps {
 /**
  * 📦 WorldEntity
  * Positions an element in global spatial coordinates $(worldX, worldY)$
- * with built-in frustum visibility culling to preserve CPU rendering performance.
+ * with built-in temporal and frustum visibility culling to preserve CPU/GPU rendering performance.
  */
 export const WorldEntity: React.FC<WorldEntityProps> = ({
   worldX,
@@ -342,13 +352,23 @@ export const WorldEntity: React.FC<WorldEntityProps> = ({
   width,
   height,
   margin = 600,
+  startFrame,
+  endFrame,
   children,
   className = "",
   style = {},
 }) => {
-  const { cameraX, cameraY, zoom } = useWorldCamera();
+  const { cameraX, cameraY, zoom, frame } = useWorldCamera();
 
-  // Frustum culling check: half-viewport in world units
+  // 1. Temporal lifecycle culling check
+  if (startFrame !== undefined && frame < startFrame) {
+    return null;
+  }
+  if (endFrame !== undefined && frame > endFrame) {
+    return null;
+  }
+
+  // 2. Spatial frustum culling check: half-viewport in world units
   const halfVw = 540 / zoom;
   const halfVh = 960 / zoom;
 
@@ -358,8 +378,8 @@ export const WorldEntity: React.FC<WorldEntityProps> = ({
   const isVisible = dx <= halfVw + width / 2 + margin && dy <= halfVh + height / 2 + margin;
 
   if (!isVisible) {
-    // Hidden from CPU rasterizer when outside camera view
-    return <div style={{ display: "none" }} />;
+    // Unmount completely from React and DOM when outside active camera frustum
+    return null;
   }
 
   return (

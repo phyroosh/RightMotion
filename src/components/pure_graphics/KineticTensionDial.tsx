@@ -65,11 +65,12 @@ export const KineticTensionDial: React.FC<KineticTensionDialProps> = ({
     [initialValue, targetValue]
   );
 
-  // Tremble vibration if value exceeds critical threshold
+  // Tremble vibration if value exceeds critical threshold (deterministic pseudo-random based on frame)
   const isCritical = rawValue >= criticalThreshold;
   let trembleOffset = 0;
   if (isCritical && frame >= peakFrame - 10) {
-    trembleOffset = Math.sin(frame * 1.6) * 2.8 + (Math.random() - 0.5) * 2.0;
+    const seededJitter = Math.sin(frame * 12.9898 + 78.233);
+    trembleOffset = Math.sin(frame * 1.6) * 2.8 + seededJitter * 1.0;
   }
 
   const displayValue = Math.min(100, Math.max(0, Math.round(rawValue + trembleOffset * 0.4)));
@@ -138,8 +139,7 @@ export const KineticTensionDial: React.FC<KineticTensionDialProps> = ({
         <div
           className="absolute bottom-4 left-1/2 w-2 h-[120px] -translate-x-1/2 origin-bottom z-20"
           style={{
-            transform: `translateX(-50%) rotate(${needleAngle}deg)`,
-            transition: "transform 0.05s ease-out",
+            transform: `translateX(-50%) rotate(${needleAngle.toFixed(3)}deg)`,
           }}
         >
           <div
@@ -166,9 +166,12 @@ export const KineticTensionDial: React.FC<KineticTensionDialProps> = ({
         <div
           className={`px-3 py-1 rounded-xl text-xs font-mono font-black border uppercase tracking-wider ${
             isCritical
-              ? "bg-rose-100 text-rose-700 border-rose-300 animate-pulse"
+              ? "bg-rose-100 text-rose-700 border-rose-300"
               : "bg-slate-100 text-slate-700 border-slate-300"
           }`}
+          style={{
+            opacity: isCritical ? 0.75 + 0.25 * Math.sin(frame * 0.3) : 1.0,
+          }}
         >
           {isCritical ? "CRITICAL THRESHOLD" : "NOMINAL LOAD"}
         </div>
