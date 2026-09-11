@@ -73,6 +73,8 @@ import { ThePersonYouNeverChoseComposition } from "./clips/the_person_you_never_
 import the_person_you_never_choseTranscript from "./clips/the_person_you_never_chose/transcript.json";
 import { BrainToleranceComposition } from "./clips/brain_tolerance";
 import brain_toleranceTranscript from "./clips/brain_tolerance/transcript.json";
+import { TheArchitectureOfFocusComposition } from "./clips/the_architecture_of_focus";
+import the_architecture_of_focusTranscript from "./clips/the_architecture_of_focus/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -102,6 +104,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TheArchitectureOfFocusThumbnail,
   BrainToleranceThumbnail,
   ThePersonYouNeverChoseThumbnail,
   ChoiceOverloadThumbnail,
@@ -234,6 +237,8 @@ export const RemotionRoot: React.FC = () => {
   const the_person_you_never_choseDuration = calculateDurationInFrames(the_person_you_never_choseTranscript as any[], fps);
   
   const brain_toleranceDuration = calculateDurationInFrames(brain_toleranceTranscript as any[], fps);
+  
+  const the_architecture_of_focusDuration = calculateDurationInFrames(the_architecture_of_focusTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -534,6 +539,16 @@ export const RemotionRoot: React.FC = () => {
         id="BrainToleranceVideo"
         component={BrainToleranceComposition}
         durationInFrames={brain_toleranceDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TheArchitectureOfFocusVideo"
+        component={TheArchitectureOfFocusComposition}
+        durationInFrames={the_architecture_of_focusDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -1100,6 +1115,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="BrainToleranceThumbnail"
         component={BrainToleranceThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheArchitectureOfFocusThumbnail"
+        component={TheArchitectureOfFocusThumbnail}
         width={1080}
         height={1920}
       />

@@ -902,3 +902,17 @@ export const BrainToleranceThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TheArchitectureOfFocusThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="ARCHITECTURE FOCUS"
+    highlightWord="ARCHITECTURE"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Architecture Focus"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
