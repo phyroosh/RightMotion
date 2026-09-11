@@ -159,7 +159,7 @@ Before writing any JSX, follow this sequence strictly:
 1. **Understand the script.** What is actually being said at this moment?
 2. **Identify the important idea.** What is the single thing the viewer must take away?
 3. **Determine the viewer's reaction.** Should they feel surprised, informed, alarmed, reassured?
-4. **Decide the visual concept.** What visual would make this idea immediately understandable?
+4. **Decide the visual concept.** What visual would make this idea immediately understandable? Apply the visual-thinking test from §5.8b before defaulting to typography.
 5. **Decide the composition.** Where do the important elements live on the canvas?
 6. **Decide the motion.** What moves, when, and why?
 7. **Decide the transition.** How does this scene connect to what comes next?
@@ -341,6 +341,89 @@ Do not build scenes that look like they belong in a game HUD, a health app, or a
 
 **The alternative to all of these:**
 Show fewer things. Make each thing much larger. Let the audio carry the information load. Design with scale, not density.
+
+---
+
+### 5.8b — Visual Thinking First: Typography Is a Tool, Not the Default
+
+> [!CRITICAL]
+> **Do not just animate what the script says. Design something that visually expresses what the script means.**
+
+Typography is powerful. But it has become the default — and defaults are not creative decisions.
+
+**Before reaching for a text animation, ask one question:**
+
+> *"Would this idea become clearer, more memorable, or more emotionally powerful if something other than text physically represented it?"*
+
+If yes — redesign the scene around that thing.
+
+A text-only scene is the right choice when typography is genuinely the strongest visual representation of the idea. It is not automatically the right choice because the sentence is important.
+
+---
+
+**What "visually expressing meaning" looks like:**
+
+The idea in the script is almost always about something that *happens* or *exists*. Before writing a text animation, name the physical thing or action the idea describes. Then ask what that would look like if it were actually on screen.
+
+Some starting points for this kind of thinking:
+
+- Growth → something expanding, accumulating, or multiplying on screen
+- Pressure → compression, resistance, crowding into a smaller space
+- Choice → a path splitting, two states competing, divergence
+- Cause and effect → one object triggering another, a chain in motion
+- Transformation → a shape or state physically becoming something else
+- Comparison → two things in spatial tension — separated, contrasted, competing
+- Process → stages or objects connected and moving through a system
+- Scarcity → something shrinking, running out, being consumed
+- Distraction → competing visual elements pulling attention simultaneously
+- Focus → elimination of surrounding noise, convergence onto one thing
+- Time → a progression accumulating, a timeline building, momentum
+- Overload → too much appearing at once, crowding, collision
+
+These are **examples of thinking**, not a visual menu. Do not rotate through them. Use them only when the underlying idea genuinely maps to one.
+
+---
+
+**The full creative vocabulary:**
+
+A scene may be built from any combination of:
+
+- typography (as one element among others, or as the dominant element)
+- animated objects or shapes
+- data and counters behaving as visual objects
+- diagrams and process flows
+- geometric systems
+- visual metaphors constructed in Remotion
+- generated or illustrated imagery
+- spatial environments with foreground / midground / background
+- parallax and depth relationships
+- camera movement — push-ins, pull-backs, lateral travel, perspective shifts
+- multiple layers moving at different rates
+- objects interacting, colliding, transforming, or triggering each other
+- typography interacting with objects (text and visuals in the same frame)
+- hybrid compositions where no single element dominates
+
+**Camera and spatial motion:** The entire composition may move. A push-in can be the reveal. A pull-back can be the reframe. Parallax can communicate depth that static composition cannot. Use spatial motion when it improves the storytelling. Do not use it for decoration.
+
+**Hybrid scenes:** A premium scene does not have to be "text OR object OR image." It can be background + object + data + typography + motion when those layers work together to communicate one idea. Complexity is only justified when it serves hierarchy. Complexity without hierarchy is bad design.
+
+---
+
+**What rich motion actually means:**
+
+Richness does not come from adding more effects. It comes from visual relationships:
+
+- one element transforming into another (morph, replace, evolve)
+- cause-and-effect chains where one action triggers the next
+- progressive construction — a system building piece by piece
+- accumulation — something growing in front of the viewer
+- scale relationships — small and large elements in dialogue
+- objects crossing the frame with weight and momentum
+- shared elements that carry meaning from one scene into the next
+- layers moving at different rates to create perceived depth
+- typography and objects in the same frame, aware of each other
+
+The test for any movement: **Why is this moving?** If the answer is "to show the viewer something changing or happening" — that is rich motion. If the answer is "to make the scene feel more active" — remove it.
 
 ---
 
@@ -540,6 +623,7 @@ Before implementing any major scene, answer these questions:
 | **What is the idea?** | Meaning |
 | **What should the viewer understand immediately?** | Communication |
 | **What visual could communicate it best?** | Metaphor |
+| **Would this be clearer or more powerful if something other than text represented it?** | Anti-text-default |
 | **Where should the important elements live?** | Composition |
 | **What does the eye see first?** | Hierarchy |
 | **What moves, and why?** | Motion |

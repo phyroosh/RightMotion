@@ -850,3 +850,17 @@ export const HowToRuinYourTeensThumbnail: React.FC = () => (
   />
 );
 
+
+export const ChoiceOverloadThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="CHOICE OVERLOAD"
+    highlightWord="OVERLOAD"
+    highlightColor="rose"
+    subtitle="Why Too Many Options Break Your Brain"
+    categoryBadge="JUDY INSIGHTS • COGNITIVE LOAD"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="DECISION FATIGUE"
+  />
+);

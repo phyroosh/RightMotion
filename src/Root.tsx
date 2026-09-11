@@ -67,6 +67,8 @@ import { TheMaskYouMistakeComposition } from "./clips/the_mask_you_mistake";
 import the_mask_you_mistakeTranscript from "./clips/the_mask_you_mistake/transcript.json";
 import { HowToRuinYourTeensComposition } from "./clips/how_to_ruin_your_teens";
 import how_to_ruin_your_teensTranscript from "./clips/how_to_ruin_your_teens/transcript.json";
+import { ChoiceOverloadComposition } from "./clips/choice_overload";
+import choice_overloadTranscript from "./clips/choice_overload/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -96,6 +98,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  ChoiceOverloadThumbnail,
   HowToRuinYourTeensThumbnail,
   TheMaskYouMistakeThumbnail,
   SleepDebtTrapThumbnail,
@@ -219,6 +222,8 @@ export const RemotionRoot: React.FC = () => {
   const the_mask_you_mistakeDuration = calculateDurationInFrames(the_mask_you_mistakeTranscript as any[], fps);
   
   const how_to_ruin_your_teensDuration = calculateDurationInFrames(how_to_ruin_your_teensTranscript as any[], fps);
+  
+  const choice_overloadDuration = calculateDurationInFrames(choice_overloadTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -489,6 +494,16 @@ export const RemotionRoot: React.FC = () => {
         id="HowToRuinYourTeensVideo"
         component={HowToRuinYourTeensComposition}
         durationInFrames={how_to_ruin_your_teensDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="ChoiceOverloadVideo"
+        component={ChoiceOverloadComposition}
+        durationInFrames={choice_overloadDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -1034,6 +1049,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="HowToRuinYourTeensThumbnail"
         component={HowToRuinYourTeensThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="ChoiceOverloadThumbnail"
+        component={ChoiceOverloadThumbnail}
         width={1080}
         height={1920}
       />

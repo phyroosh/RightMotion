@@ -72,8 +72,7 @@ export const TheMaskYouMistakeCanvas: React.FC<CanvasProps> = () => {
         stickerId="talking_to_brick_wall"
         startFrame={451}
         durationFrames={34}
-        customX="68%"
-        customY="12%"
+        position="top-right"
         badgeText="TALKING TO A WALL"
       />
 

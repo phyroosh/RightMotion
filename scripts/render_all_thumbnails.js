@@ -23,6 +23,7 @@ const THUMBNAIL_MAP = {
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
   'promises_video.mp4': 'PromisesThumbnail',
+  'choice_overload_video.mp4': 'ChoiceOverloadThumbnail',
   'how_to_ruin_your_teens_video.mp4': 'HowToRuinYourTeensThumbnail',
   'the_mask_you_mistake_video.mp4': 'TheMaskYouMistakeThumbnail',
   'sleep_debt_trap_video.mp4': 'SleepDebtTrapThumbnail',
