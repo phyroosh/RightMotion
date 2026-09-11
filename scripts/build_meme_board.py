@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generates the pristine RightClips Tactical Meme Registry (registry.json)
+Generates the pristine RightMotion Tactical Meme Registry (registry.json)
 and the human/agent-readable Internet Culture Meme Board (MEME_BOARD.md).
 """
 
@@ -678,7 +678,7 @@ MEMES_DATA = [
 def build_registry():
     output = {
         "$schema": "http://json-schema.org/draft-07/schema#",
-        "title": "RightClips Tactical Meme Registry",
+        "title": "RightMotion Tactical Meme Registry",
         "version": "2.0.0",
         "pacing_rules": {
             "max_duration_seconds": 2.0,
@@ -708,9 +708,9 @@ def build_meme_board():
         categories.setdefault(cat, []).append(m)
 
     lines = [
-        "# 🎭 RightClips Internet Culture Meme Board",
+        "# 🎭 RightMotion Internet Culture Meme Board",
         "",
-        "> **Authoritative Reference Board**: Defines all 21 tactical retention memes in RightClips,",
+        "> **Authoritative Reference Board**: Defines all 21 tactical retention memes in RightMotion,",
         "> their precise meaning in internet meme culture, and their exact situational triggers.",
         "",
         "---",

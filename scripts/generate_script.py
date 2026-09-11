@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Autonomous Scriptwriting Engine
+RightMotion Autonomous Scriptwriting Engine
 Generates and validates high-retention short-form scripts for the Judy Insights persona.
 Handles Mode A (Product-Linked with silent PDF rules) and Mode B ({no meta} organic growth).
 """
@@ -450,7 +450,7 @@ def generate_script_and_metadata(raw_topic: str, duo: bool = False, meta: bool =
         words = voiceover.split()
         is_valid, issues = check_script_hygiene(voiceover, is_mode_a=True)
 
-        # Extract product page image for RightClips
+        # Extract product page image for RightMotion
         try:
             extract_product_page(product_file, page_num)
         except Exception as e:
@@ -482,7 +482,7 @@ def generate_script_and_metadata(raw_topic: str, duo: bool = False, meta: bool =
         }
 
 def main():
-    parser = argparse.ArgumentParser(description="RightClips Judy Scriptwriter")
+    parser = argparse.ArgumentParser(description="RightMotion Judy Scriptwriter")
     parser.add_argument("--topic", required=True, help="Topic with channel and optional {meta} or {no meta} tag")
     parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
     parser.add_argument("--duo", action="store_true", help="Generate conversational duo script with Judy and Andrew")

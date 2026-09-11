@@ -1,6 +1,6 @@
-# 🏷️ RightClips Gen-Z Meme Reaction Stickers Board
+# 🏷️ RightMotion Gen-Z Meme Reaction Stickers Board
 
-Welcome to the **RightClips Gen-Z Meme Reaction Sticker Board**.
+Welcome to the **RightMotion Gen-Z Meme Reaction Sticker Board**.
 This board catalogs 15 iconic internet reaction memes formatted as **tactile die-cut stickers** (`<MemeStickerOverlay />`).
 
 ---

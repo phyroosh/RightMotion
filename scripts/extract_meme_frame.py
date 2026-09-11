@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Meme Frame Extractor
+RightMotion Meme Frame Extractor
 Extracts the peak, most expressive single frame from curated meme clips into public/memes/frames/<id>.png.
 """
 

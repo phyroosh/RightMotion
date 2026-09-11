@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Standard Voiceover Engine for RightClips.
+Standard Voiceover Engine for RightMotion.
 
 Permanent Rules Implemented:
 1. Natural Speech Rate: en-US-JennyNeural at rate="+0%" (Natural conversational tone, NOT artificially sped up).
@@ -194,7 +194,7 @@ async def process_voiceover(script_text: str, topic: str, root_dir: str = str(RO
     print(f"\n🎉 Voiceover pipeline complete for '{topic}'!")
 
 def main():
-    parser = argparse.ArgumentParser(description="RightClips Standard Voiceover & Silence Compression Engine")
+    parser = argparse.ArgumentParser(description="RightMotion Standard Voiceover & Silence Compression Engine")
     parser.add_argument("--text", type=str, help="Script text string")
     parser.add_argument("--file", type=str, help="Path to text file containing script")
     parser.add_argument("--topic", type=str, required=True, help="Clip folder name (e.g. strength, focus, habit)")

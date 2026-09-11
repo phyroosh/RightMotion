@@ -1,13 +1,13 @@
-# 📚 RightClips Products Library
+# 📚 RightMotion Products Library
 
-This folder stores high-conversion product PDFs (worksheets, playbooks, blueprints, and digital workbooks) that can be showcased directly inside RightClips videos.
+This folder stores high-conversion product PDFs (worksheets, playbooks, blueprints, and digital workbooks) that can be showcased directly inside RightMotion videos.
 
 ---
 
 ## 🎯 How It Works
 
 When a video script references a product page (e.g. `{product: Photon.pdf, page: 14}` or via `--product Photon.pdf --product-page 14`):
-1. The RightClips video generator automatically targets `Products/<name>.pdf`.
+1. The RightMotion video generator automatically targets `Products/<name>.pdf`.
 2. It uses `pdftoppm` to extract **only** the target page into `public/products/<name>/page_<page_num>.png` at retina resolution (220 DPI).
 3. The page is rendered on screen with:
    - Physical 3D card perspective & depth shadow

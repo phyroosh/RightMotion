@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips High-Performance Product Page & Paragraph Extraction Engine
+RightMotion High-Performance Product Page & Paragraph Extraction Engine
 Extracts specific PDF pages or focused paragraph screenshots directly from original user PDFs in Products/ or public/products/.
 """
 

@@ -1,4 +1,4 @@
-# RightClips AI Agent Guidelines
+# RightMotion AI Agent Guidelines
 
 Please read `AGENTS.md` for the complete video generation engine specification.
 

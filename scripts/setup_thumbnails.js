@@ -262,7 +262,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
       <div className="relative z-30 flex items-center justify-between pt-4 border-t border-white/10">
         <div className="flex items-center gap-3 text-slate-400 font-mono text-xs uppercase tracking-wider">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
-          <span>{is16x9 ? 'RightClips Masterclass' : 'RightClips Shorts'}</span>
+          <span>{is16x9 ? 'RightMotion' : 'RightMotion'}</span>
         </div>
 
         <div className="flex items-center gap-2 text-slate-400 font-mono text-xs">

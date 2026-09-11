@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips High-Precision Semantic Meme Matcher Engine (v2.0).
+RightMotion High-Precision Semantic Meme Matcher Engine (v2.0).
 Matches video topics and spoken hooks to iconic internet culture memes
 using archetype analysis, multi-token concept clusters, and negative keyword filtering.
 Runs in <15ms with zero agent reasoning overhead.
@@ -118,7 +118,7 @@ def find_best_meme(topic: str, script: str = "", explicit_meme_id: Optional[str]
 
 
 def main():
-    parser = argparse.ArgumentParser(description="RightClips Autonomous Meme Matcher (v2.0)")
+    parser = argparse.ArgumentParser(description="RightMotion Autonomous Meme Matcher (v2.0)")
     parser.add_argument("--topic", required=True, help="Video topic or hook")
     parser.add_argument("--script", default="", help="Spoken script text")
     parser.add_argument("--meme", default=None, help="Explicit meme ID override")

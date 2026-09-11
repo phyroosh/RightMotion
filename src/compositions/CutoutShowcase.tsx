@@ -42,7 +42,7 @@ export const CutoutShowcase: React.FC = () => {
           </div>
           <div>
             <div className="text-4xl font-black text-slate-950 tracking-tight flex items-center gap-3">
-              RightClips Cutout Asset Engine
+              RightMotion Cutout Asset Engine
               <Sparkles className="w-8 h-8 text-rose-500" />
             </div>
             <div className="text-xl font-mono font-bold text-slate-500">

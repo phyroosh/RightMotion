@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips PDF Topic Matcher & Exercise Indexer
+RightMotion PDF Topic Matcher & Exercise Indexer
 Autonomously indexes product PDFs (e.g. Products/Photon.pdf) and matches topic prompts
 to the exact chapter, page number, and exercise for high-converting visual proof cards.
 """

@@ -5,7 +5,7 @@
 > first — it supersedes the card-grid approach described below wherever the
 > two disagree.
 
-# RightClips Editing Rules & Aesthetic Specification
+# RightMotion Editing Rules & Aesthetic Specification
 
 ## 1. Visual Theme: Apple Glass & Liquid Motion (Light Mode)
 - **Background**: Apple pure studio backdrop (`#f8fafc` / `#ffffff`) with ultra-smooth radial lighting and ambient liquid glass mesh orbs.

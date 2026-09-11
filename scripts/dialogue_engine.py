@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Conversational Duo Dialogue Engine (Judy & Andrew)
+RightMotion Conversational Duo Dialogue Engine (Judy & Andrew)
 
 Features:
 1. Turn-based multi-speaker synthesis:
@@ -330,7 +330,7 @@ async def process_dialogue(script_text: str, topic: str, root_dir: Path = None):
     return words_list, turn_timings, duration_sec
 
 def main():
-    parser = argparse.ArgumentParser(description="RightClips Judy & Andrew Duo Dialogue Engine")
+    parser = argparse.ArgumentParser(description="RightMotion Judy & Andrew Duo Dialogue Engine")
     parser.add_argument("--text", type=str, help="Script text with JUDY: and ANDREW: turns")
     parser.add_argument("--file", type=str, help="Path to text file containing dialogue script")
     parser.add_argument("--topic", type=str, required=True, help="Topic / clip name")

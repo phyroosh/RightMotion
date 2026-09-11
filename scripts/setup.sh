@@ -2,7 +2,7 @@
 set -e
 
 # ===================================================================
-# 🚀 RightClips Automated Video Engine Setup (Fedora / Linux)
+# 🚀 RightMotion Automated Video Engine Setup (Fedora / Linux)
 # ===================================================================
 
 # Text colors
@@ -18,7 +18,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
 echo -e "${CYAN}===================================================================${NC}"
-echo -e "${BOLD}🚀 Setting up RightClips Automated Video Engine on Fedora Linux...${NC}"
+echo -e "${BOLD}🚀 Setting up RightMotion Automated Video Engine on Fedora Linux...${NC}"
 echo -e "${CYAN}===================================================================${NC}"
 echo ""
 
@@ -120,7 +120,7 @@ fi
 
 echo ""
 echo -e "${GREEN}===================================================================${NC}"
-echo -e "${BOLD}✅ RightClips Engine Setup Complete for Fedora Linux!${NC}"
+echo -e "${BOLD}✅ RightMotion Engine Setup Complete for Fedora Linux!${NC}"
 echo -e "${GREEN}===================================================================${NC}"
 echo ""
 echo -e "🎬 To launch Studio Web Dashboard:"

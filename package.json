@@ -1,7 +1,7 @@
 {
-  "name": "rightclips-engine",
+  "name": "rightmotion-engine",
   "version": "1.0.0",
-  "description": "Automated YouTube Shorts Motion Graphics Engine with Remotion",
+  "description": "RightMotion — AI-Powered Remotion Video Engine",
   "scripts": {
     "start": "remotion preview",
     "typecheck": "tsc --noEmit",

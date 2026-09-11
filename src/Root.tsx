@@ -63,6 +63,10 @@ import { GogginsStrategySystemComposition } from "./clips/goggins_strategy_syste
 import goggins_strategy_systemTranscript from "./clips/goggins_strategy_system/transcript.json";
 import { SleepDebtTrapComposition } from "./clips/sleep_debt_trap";
 import sleep_debt_trapTranscript from "./clips/sleep_debt_trap/transcript.json";
+import { TheMaskYouMistakeComposition } from "./clips/the_mask_you_mistake";
+import the_mask_you_mistakeTranscript from "./clips/the_mask_you_mistake/transcript.json";
+import { HowToRuinYourTeensComposition } from "./clips/how_to_ruin_your_teens";
+import how_to_ruin_your_teensTranscript from "./clips/how_to_ruin_your_teens/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -92,6 +96,8 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  HowToRuinYourTeensThumbnail,
+  TheMaskYouMistakeThumbnail,
   SleepDebtTrapThumbnail,
   GogginsStrategySystemThumbnail,
   TrainYourBrainThumbnail,
@@ -209,6 +215,10 @@ export const RemotionRoot: React.FC = () => {
   const goggins_strategy_systemDuration = calculateDurationInFrames(goggins_strategy_systemTranscript as any[], fps);
   
   const sleep_debt_trapDuration = calculateDurationInFrames(sleep_debt_trapTranscript as any[], fps);
+  
+  const the_mask_you_mistakeDuration = calculateDurationInFrames(the_mask_you_mistakeTranscript as any[], fps);
+  
+  const how_to_ruin_your_teensDuration = calculateDurationInFrames(how_to_ruin_your_teensTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -459,6 +469,26 @@ export const RemotionRoot: React.FC = () => {
         id="SleepDebtTrapVideo"
         component={SleepDebtTrapComposition}
         durationInFrames={sleep_debt_trapDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TheMaskYouMistakeVideo"
+        component={TheMaskYouMistakeComposition}
+        durationInFrames={the_mask_you_mistakeDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="HowToRuinYourTeensVideo"
+        component={HowToRuinYourTeensComposition}
+        durationInFrames={how_to_ruin_your_teensDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -990,6 +1020,20 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="SleepDebtTrapThumbnail"
         component={SleepDebtTrapThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheMaskYouMistakeThumbnail"
+        component={TheMaskYouMistakeThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="HowToRuinYourTeensThumbnail"
+        component={HowToRuinYourTeensThumbnail}
         width={1080}
         height={1920}
       />

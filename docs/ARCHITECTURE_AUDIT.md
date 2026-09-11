@@ -1,4 +1,4 @@
-# RightClips architectural bloat audit
+# RightMotion architectural bloat audit
 
 ## A. Actual architecture
 

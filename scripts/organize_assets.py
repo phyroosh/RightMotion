@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Cutout Asset Organizer & Visual Catalog Generator
+RightMotion Cutout Asset Organizer & Visual Catalog Generator
 Copies 45 cutout assets into semantic public/assets/ categories,
 generates public/assets/registry.json, and renders high-res visual contact sheets.
 """

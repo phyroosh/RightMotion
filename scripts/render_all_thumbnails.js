@@ -23,6 +23,8 @@ const THUMBNAIL_MAP = {
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
   'promises_video.mp4': 'PromisesThumbnail',
+  'how_to_ruin_your_teens_video.mp4': 'HowToRuinYourTeensThumbnail',
+  'the_mask_you_mistake_video.mp4': 'TheMaskYouMistakeThumbnail',
   'sleep_debt_trap_video.mp4': 'SleepDebtTrapThumbnail',
   'goggins_strategy_system_video.mp4': 'GogginsStrategySystemThumbnail',
   'train_your_brain_video.mp4': 'TrainYourBrainThumbnail',
@@ -56,7 +58,7 @@ const targetArg = process.argv[2];
 
 async function main() {
   console.log('\n=============================================================');
-  console.log('🎨 RightClips Automated High-Converting Thumbnail Engine');
+  console.log('🎨 RightMotion Automated High-Converting Thumbnail Engine');
   console.log('=============================================================\n');
 
   let entries = Object.entries(THUMBNAIL_MAP);

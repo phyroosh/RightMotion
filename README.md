@@ -1,4 +1,4 @@
-# 🎬 RightClips — Automated AI Video Studio & Publishing Suite
+# 🎬 RightMotion — Automated AI Video Studio & Publishing Suite
 
 > **Programmatic Video Creation, Kinetic Typography, and YouTube Publishing Engine powered by Remotion, React, Tailwind CSS, Edge-TTS, and Faster-Whisper.**
 
@@ -6,7 +6,7 @@
 
 ## 🌟 Overview
 
-**RightClips** is a high-retention video production and automated publishing platform. It transforms raw text scripts into studio-grade vertical **YouTube Shorts (9:16)** and widescreen **Video Essays (16:9)** featuring:
+**RightMotion** is a high-retention video production and automated publishing platform. It transforms raw text scripts into studio-grade vertical **YouTube Shorts (9:16)** and widescreen **Video Essays (16:9)** featuring:
 * **Tactile Apple Glass Aesthetics** with specular sheen animations, fluid spring physics, and dynamic lighting.
 * **A-Roll Presenter Mode** with multi-pose host switching (`pointing`, `crossed`, `open`).
 * **B-Roll Single-Concept Motion Graphics** with custom tactile props, stopwatch meters, and hand-annotated callouts.
@@ -18,7 +18,7 @@
 ## 🏗️ Architecture & Tech Stack
 
 ```
-RightClips/
+RightMotion/
 ├── .agents/rules/             # Core editing guidelines & permanent AI rules
 │   ├── editing-style.md      # A-Roll/B-Roll pacing, tactile props, typography
 │   └── video-pipeline.md     # Audio standards, pause-compression, GPU specs
@@ -93,7 +93,7 @@ npx remotion preview
 ```
 Open [http://localhost:3000](http://localhost:3000) to live preview and scrub any clip with hot reload.
 
-### 4. Start RightClips Studio (YouTube Publishing Dashboard)
+### 4. Start RightMotion Studio (YouTube Publishing Dashboard)
 
 **Linux / Fedora:**
 ```bash
@@ -143,4 +143,4 @@ Open [http://localhost:4000](http://localhost:4000) to view:
 ---
 
 ## 🛡️ License
-Private repository — RightClips Engine.
+Private repository — RightMotion Engine.

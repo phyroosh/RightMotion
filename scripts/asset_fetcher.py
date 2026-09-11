@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Asset Fetcher & AI Background Removal Engine
+RightMotion Asset Fetcher & AI Background Removal Engine
 Fetches images from local paths, URLs, or search queries, and removes
 the background using rembg / U2Net ONNX models to produce high-resolution,
 clean transparent PNG cutouts ready for Remotion video compositions.
@@ -78,7 +78,7 @@ def process_url_cutout(url: str, output_path: str, model_name: str = "u2netp"):
     print(f"✅ Transparent cutout saved to: {output_path} ({len(cutout_bytes):,} bytes)", flush=True)
 
 def main():
-    parser = argparse.ArgumentParser(description="AI Image Asset Fetcher & Background Remover for RightClips")
+    parser = argparse.ArgumentParser(description="AI Image Asset Fetcher & Background Remover for RightMotion")
     parser.add_argument("--input", "-i", type=str, help="Local path to source image")
     parser.add_argument("--url", "-u", type=str, help="URL of image to download")
     parser.add_argument("--model", "-m", type=str, default="u2netp", help="rembg model (u2netp, silueta, u2net, isnet-general-use)")

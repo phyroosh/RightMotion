@@ -72,7 +72,7 @@ export interface SoundDesignEngineProps {
 }
 
 /**
- * Universal Sound Design Engine for RightClips
+ * Universal Sound Design Engine for RightMotion
  * Renders layered cinematic sound effects synced to exact frames.
  */
 export const SoundDesignEngine: React.FC<SoundDesignEngineProps> = ({ cues = [] }) => {

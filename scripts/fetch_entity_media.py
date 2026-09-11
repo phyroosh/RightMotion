@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Autonomous Entity Media & B-Roll Fetcher
+RightMotion Autonomous Entity Media & B-Roll Fetcher
 ==================================================
 Empowers AI Agents to autonomously fetch, search, generate, and format
 authentic entity media (founder photos, real news articles, location maps,
@@ -255,7 +255,7 @@ def generate_search_overview(
     print(f"✅ Generated Search AI Overview: {out_path}", flush=True)
 
 def main():
-    parser = argparse.ArgumentParser(description="Autonomous Entity Media & B-Roll Fetcher for RightClips")
+    parser = argparse.ArgumentParser(description="Autonomous Entity Media & B-Roll Fetcher for RightMotion")
     parser.add_argument("--url", type=str, help="Direct URL of image to download")
     parser.add_argument("--news-clipping", action="store_true", help="Generate news clipping graphic")
     parser.add_argument("--source", type=str, default="The Economic Times", help="News publication source")

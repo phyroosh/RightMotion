@@ -1,6 +1,6 @@
-# 🎭 RightClips Internet Culture Meme Board
+# 🎭 RightMotion Internet Culture Meme Board
 
-> **Authoritative Reference Board**: Defines all 21 tactical retention memes in RightClips,
+> **Authoritative Reference Board**: Defines all 21 tactical retention memes in RightMotion,
 > their precise meaning in internet meme culture, and their exact situational triggers.
 
 ---

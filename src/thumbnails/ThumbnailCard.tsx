@@ -806,7 +806,7 @@ export const ThumbnailCard: React.FC<ThumbnailCardProps> = ({
               fontFamily: 'monospace', fontSize: '15px', fontWeight: 700,
               letterSpacing: '0.1em', color: themes.footerColor, textTransform: 'uppercase',
             }}>
-              RightClips Masterclass
+              RightMotion
             </span>
           </div>
           <span style={{

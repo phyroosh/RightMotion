@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "RightClips Tactical Meme Registry",
+  "title": "RightMotion Tactical Meme Registry",
   "version": "2.0.0",
   "pacing_rules": {
     "max_duration_seconds": 2.0,

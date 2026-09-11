@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Hero Image Prompt Generator
+RightMotion Hero Image Prompt Generator
 Generates high-converting, stylistic prompts for bespoke Hero visuals.
 Defaults to the flagship aesthetic: Clean Modern Editorial 2.5D Conceptual Art
 (Vox / The New Yorker / Apple Editorial aesthetic) with warm natural lighting,

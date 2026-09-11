@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Autonomous Viral Metadata & Hook Synthesizer.
+RightMotion Autonomous Viral Metadata & Hook Synthesizer.
 Converts raw user topic prompts into high-CTR viral titles,
 punchy thumbnail card titles, rich structured descriptions,
 and algorithmic SEO tags.
@@ -360,7 +360,7 @@ if __name__ == "__main__":
     import argparse
     import json
 
-    parser = argparse.ArgumentParser(description="RightClips Viral Metadata Engine")
+    parser = argparse.ArgumentParser(description="RightMotion Viral Metadata Engine")
     parser.add_argument("--topic", default="Should you make relationships in teenage or not", help="Raw topic prompt")
     parser.add_argument("--niche", default="self_improvement", help="Channel niche")
     parser.add_argument("--script", default="", help="Voiceover script text")

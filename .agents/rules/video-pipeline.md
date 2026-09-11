@@ -1,6 +1,6 @@
 # Video Production Pipeline & Automation Architecture
 
-This document defines the permanent file structure, hardware acceleration standards, and publishing pipeline for RightClips.
+This document defines the permanent file structure, hardware acceleration standards, and publishing pipeline for RightMotion.
 
 ## 1. Directory Structure
 

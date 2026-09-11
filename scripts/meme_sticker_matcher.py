@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Gen-Z Meme Reaction Sticker Matcher (v1.0).
+RightMotion Gen-Z Meme Reaction Sticker Matcher (v1.0).
 Matches spoken video beats or topics to the 15 Gen-Z reaction stickers
 for mid-video placement (<MemeStickerOverlay />).
 Runs in <10ms with zero agent reasoning overhead.
@@ -82,7 +82,7 @@ def find_best_sticker(text: str, explicit_id: Optional[str] = None) -> Optional[
 
 
 def main():
-    parser = argparse.ArgumentParser(description="RightClips Gen-Z Meme Sticker Matcher")
+    parser = argparse.ArgumentParser(description="RightMotion Gen-Z Meme Sticker Matcher")
     parser.add_argument("--text", type=str, required=True, help="Spoken beat text or topic to match")
     parser.add_argument("--id", type=str, default=None, help="Explicit sticker ID override")
     args = parser.parse_args()

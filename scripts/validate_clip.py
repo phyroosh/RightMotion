@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RightClips Autonomous Pre-Flight Video Validator.
+RightMotion Autonomous Pre-Flight Video Validator.
 Audits generated clips against all production, retention, and Remotion standards:
     1. Transcript integrity & runtime policy (25-35s solo Judy, <40s Duo Andrew)
 2. Audio files (voiceover, BGM, and SFX cues)
@@ -31,7 +31,7 @@ def to_pascal_case(snake_str: str) -> str:
     return "".join(word.capitalize() for word in snake_str.split("_"))
 
 def validate_clip(name: str, render_still: bool = False) -> bool:
-    print(f"\n{BOLD}{CYAN}🔍 Auditing RightClips Composition: '{name}'{RESET}")
+    print(f"\n{BOLD}{CYAN}🔍 Auditing RightMotion Composition: '{name}'{RESET}")
     print("=" * 60)
     
     errors = []
@@ -229,7 +229,7 @@ def validate_clip(name: str, render_still: bool = False) -> bool:
         return True
 
 def main():
-    parser = argparse.ArgumentParser(description="Validate a RightClips composition before rendering.")
+    parser = argparse.ArgumentParser(description="Validate a RightMotion composition before rendering.")
     parser.add_argument("name", help="Clip folder name (e.g. self_doubt, teenage_relationships)")
     parser.add_argument("--still", action="store_true", help="Perform a dry-run render of the still thumbnail")
     args = parser.parse_args()

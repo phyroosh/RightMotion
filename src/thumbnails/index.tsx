@@ -810,10 +810,10 @@ export const GogginsStrategySystemThumbnail: React.FC = () => (
 
 export const SleepDebtTrapThumbnail: React.FC = () => (
   <ThumbnailCard
-    title="SLEEP DEBT TRAP"
-    highlightWord="SLEEP"
+    title="SLEEP COSTS MORE"
+    highlightWord="COSTS"
     highlightColor="rose"
-    subtitle="The Psychology Behind Sleep Debt"
+    subtitle="The Sleep Debt Trap"
     categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
     characterPose="character_pointing.png"
     theme="apple_studio"
@@ -821,3 +821,32 @@ export const SleepDebtTrapThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TheMaskYouMistakeThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WHO ARE YOU REALLY"
+    highlightWord="REALLY"
+    highlightColor="rose"
+    subtitle="The Mask You Mistake"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="AUTONOMY PROTOCOL"
+  />
+);
+
+export const HowToRuinYourTeensThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="WASTE YOUR PRIME"
+    highlightWord="PRIME"
+    highlightColor="rose"
+    subtitle="How to Ruin Your Teens"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
+

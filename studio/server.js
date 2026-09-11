@@ -410,7 +410,7 @@ app.get('/api/videos', async (req, res) => {
       const meta = savedMetadata[filename] || {
         topic: filename.replace('.mp4', '').replace('_video', ''),
         title: filename.replace('.mp4', '').replace(/_/g, ' ').toUpperCase() + ' #Shorts',
-        description: 'Auto-generated motion graphics video by RightClips.\n\n#Shorts #Viral',
+        description: 'Auto-generated motion graphics video by RightMotion.\n\n#Shorts #Viral',
         tags: ['Shorts', 'Viral', 'Video'],
         categoryId: '27',
         privacyStatus: 'public',
@@ -2402,6 +2402,6 @@ app.post('/api/products/extract', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`\n========================================================`);
-  console.log(`🚀 RightClips Studio is running at: http://localhost:${PORT}`);
+  console.log(`🚀 RightMotion Studio is running at: http://localhost:${PORT}`);
   console.log(`========================================================\n`);
 });

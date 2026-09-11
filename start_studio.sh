@@ -2,7 +2,7 @@
 set -e
 
 # ===================================================================
-# 🚀 RightClips Studio: Smart Launcher (Fedora / Linux)
+# 🚀 RightMotion Studio: Smart Launcher (Fedora / Linux)
 #
 # Modes:
 #   ./start_studio.sh              -> Verifies all dependencies, auto-sets
@@ -50,7 +50,7 @@ if [ "$MODE" = "direct" ]; then
     fi
 
     echo -e "${CYAN}=========================================================${NC}"
-    echo -e "${BOLD}⚡ Starting RightClips Studio directly at http://localhost:4000${NC}"
+    echo -e "${BOLD}⚡ Starting RightMotion Studio directly at http://localhost:4000${NC}"
     echo -e "${CYAN}=========================================================${NC}"
     echo -e "Press ${BOLD}Ctrl+C${NC} at any time to stop the server."
     echo ""
@@ -66,7 +66,7 @@ fi
 # Full Verification & Setup Mode
 # -------------------------------------------------------------------
 echo -e "${CYAN}===================================================================${NC}"
-echo -e "${BOLD}🚀 RightClips Studio: Complete Verification & Launch (Fedora Linux)${NC}"
+echo -e "${BOLD}🚀 RightMotion Studio: Complete Verification & Launch (Fedora Linux)${NC}"
 echo -e "${CYAN}===================================================================${NC}"
 echo ""
 
@@ -172,7 +172,7 @@ mkdir -p out
 if [ "$MODE" = "setup" ]; then
     echo ""
     echo -e "${GREEN}===================================================================${NC}"
-    echo -e "${BOLD}✅ RightClips Environment Setup Complete!${NC}"
+    echo -e "${BOLD}✅ RightMotion Environment Setup Complete!${NC}"
     echo -e "${GREEN}===================================================================${NC}"
     echo -e "To launch Studio: ${CYAN}./start_studio.sh${NC} or ${CYAN}./Direct_start_server.sh${NC}"
     exit 0
@@ -181,7 +181,7 @@ fi
 # 8. Launch Server
 echo ""
 echo -e "${GREEN}===================================================================${NC}"
-echo -e "${BOLD}✅ All dependencies verified! Starting RightClips Studio Dashboard...${NC}"
+echo -e "${BOLD}✅ All dependencies verified! Starting RightMotion Studio Dashboard...${NC}"
 echo -e "${GREEN}===================================================================${NC}"
 echo -e "Local URL:  ${CYAN}${BOLD}http://localhost:4000${NC}"
 echo -e "Press ${BOLD}Ctrl+C${NC} at any time to stop the server."
