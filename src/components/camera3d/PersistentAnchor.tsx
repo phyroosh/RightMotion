@@ -23,6 +23,8 @@ export interface PersistentAnchorProps {
   targetState: AnchorState;
   /** Optional frame when element finally exits the screen */
   exitFrame?: number;
+  /** Automatically centers element horizontally via transform matrix without CSS conflict (default: true) */
+  centerAnchor?: boolean;
   /** Custom className */
   className?: string;
   /** Custom style */
@@ -43,6 +45,7 @@ export const PersistentAnchor: React.FC<PersistentAnchorProps> = ({
   initialState = { x: 0, y: 0, scale: 1, opacity: 1, rotation: 0 },
   targetState,
   exitFrame,
+  centerAnchor = true,
   className = "",
   style = {},
 }) => {
@@ -60,13 +63,13 @@ export const PersistentAnchor: React.FC<PersistentAnchorProps> = ({
     config: { damping: 14, stiffness: 120 },
   });
 
-  // Cross-scene transition progress (0 to 1)
+  // Smooth transition progress from initial state to target state
+  const relTransition = frame - transitionStartFrame;
+  const durTransition = Math.max(1, transitionEndFrame - transitionStartFrame);
   const isTransitioning = frame >= transitionStartFrame;
-  const relTransition = Math.max(0, frame - transitionStartFrame);
-  const transitionDur = Math.max(1, transitionEndFrame - transitionStartFrame);
 
   const transitionProgress = isTransitioning
-    ? interpolate(relTransition, [0, transitionDur], [0, 1], {
+    ? interpolate(relTransition, [0, durTransition], [0, 1], {
         extrapolateLeft: "clamp",
         extrapolateRight: "clamp",
       })
@@ -103,13 +106,21 @@ export const PersistentAnchor: React.FC<PersistentAnchorProps> = ({
     interpolate(transitionProgress, [0, 1], [initOpacity, targetOpacity]);
   const currentRot = interpolate(spTransition, [0, 1], [initRot, targetRot]);
 
+  // Strip conflicting -translate-x-1/2 from className to avoid CSS transform clobbering
+  const cleanClassName = className.replace("-translate-x-1/2", "").trim();
+  const xTranslate = centerAnchor
+    ? `calc(-50% + ${currentX.toFixed(2)}px)`
+    : `${currentX.toFixed(2)}px`;
+
+  const rotStr = Math.abs(currentRot) > 0.01 ? ` rotate(${currentRot.toFixed(2)}deg)` : "";
+
   return (
     <div
-      className={`absolute select-none pointer-events-none ${className}`}
+      className={`absolute select-none pointer-events-none ${cleanClassName}`}
       style={{
-        transform: `translate3d(${currentX}px, ${currentY}px, 0px) scale(${currentScale}) rotate(${currentRot}deg)`,
+        transform: `translate3d(${xTranslate}, ${currentY.toFixed(2)}px, 0px) scale(${currentScale.toFixed(4)})${rotStr}`,
         transformOrigin: "center center",
-        opacity: currentOpacity,
+        opacity: Math.max(0, Math.min(1, currentOpacity)),
         willChange: "transform, opacity",
         ...style,
       }}

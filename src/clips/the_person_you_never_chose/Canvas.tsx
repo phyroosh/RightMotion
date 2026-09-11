@@ -32,13 +32,22 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
 
   return (
     <CinematicParallaxRig
+      basePushIn={{
+        startFrame: 0,
+        endFrame: 840,
+        startZoom: 1.0,
+        endZoom: 1.045,
+      }}
       punchIns={[
-        { frame: 521, zoom: 1.05, durationFrames: 10, targetY: -20 },
-        { frame: 630, zoom: 1.09, durationFrames: 8, targetY: -30, dutchTilt: -1.2 },
-        { frame: 875, zoom: 1.05, durationFrames: 12, targetY: -15 },
+        { frame: 521, zoom: 1.06, durationFrames: 14, targetY: -20 },
+        { frame: 630, zoom: 1.10, durationFrames: 10, targetY: -35, dutchTilt: -1.0 },
+        { frame: 740, zoom: 1.07, durationFrames: 14, targetY: -25 },
       ]}
       breathHolds={[
         { startFrame: 500, durationFrames: 21 },
+      ]}
+      impacts={[
+        { frame: 630, intensity: 14, durationFrames: 10 },
       ]}
       className="w-full h-full select-none font-sans"
     >
@@ -51,7 +60,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
           initialState={{ x: 0, y: 130, scale: 1.0, opacity: 1 }}
           targetState={{ x: -280, y: 70, scale: 0.55, opacity: 0.85 }}
           exitFrame={520}
-          className="top-0 left-1/2 -translate-x-1/2 z-30"
+          className="top-0 left-1/2 z-30"
         >
           <div className="px-5 py-2 rounded-2xl bg-slate-950 text-white border-[2.5px] border-slate-800 shadow-xl flex items-center gap-3">
             <div className="w-3.5 h-3.5 rounded-full bg-rose-500 animate-pulse" />
@@ -65,12 +74,6 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
       {/* "You can become incredibly successful at living a life..."*/}
       {/* ======================================================== */}
       {frame >= 0 && frame < 395 && (() => {
-        const cam1 = interpolate(frame, [0, 395], [1.0, 1.04], {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-          easing: Easing.bezier(0.16, 1, 0.3, 1),
-        });
-
         // Part 1A: Frames 0 -> 75 (~2.5s Hook: Hero Illustration + Close-up Judy)
         const hookOpacity = interpolate(frame, [65, 75], [1, 0], {
           extrapolateLeft: "clamp",
@@ -103,10 +106,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
         });
 
         return (
-          <div
-            className="absolute inset-0 flex flex-col items-center"
-            style={{ transform: `scale(${cam1})`, transformOrigin: "50% 35%" }}
-          >
+          <div className="absolute inset-0 flex flex-col items-center">
             {/* PART 1A: 2.5s Hook with Created Illustration & Close-up Judy (Frames 0 -> 75) */}
             {frame < 78 && (
               <div
@@ -228,12 +228,6 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
       {/* "Eventually, your decisions feel right because..."        */}
       {/* ======================================================== */}
       {frame >= 395 && frame < 660 && (() => {
-        const cam2 = interpolate(frame, [395, 660], [1.0, 1.05], {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-          easing: Easing.bezier(0.16, 1, 0.3, 1),
-        });
-
         // Part 2A: The Closed Loop (Frames 395 -> 520)
         const scene2AOpacity = interpolate(frame, [505, 520], [1, 0], {
           extrapolateLeft: "clamp",
@@ -241,10 +235,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
         });
 
         return (
-          <div
-            className="absolute inset-0 flex flex-col items-center"
-            style={{ transform: `scale(${cam2})`, transformOrigin: "50% 36%" }}
-          >
+          <div className="absolute inset-0 flex flex-col items-center">
             {/* PART 2A: THE RECURSIVE ORBITAL LOOP (Adapt -> Validate -> Repeat) */}
             {frame < 522 && (() => {
               const loopRotation = interpolate(frame, [395, 520], [0, 360], {
@@ -488,12 +479,6 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
       {/* "Break the loop by asking one question before major..."   */}
       {/* ======================================================== */}
       {frame >= 660 && frame < 840 && (() => {
-        const cam3 = interpolate(frame, [660, 840], [1.0, 1.04], {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-          easing: Easing.bezier(0.16, 1, 0.3, 1),
-        });
-
         const scene3Enter = spring({
           frame: Math.max(0, frame - 660),
           fps,
@@ -507,10 +492,7 @@ export const ThePersonYouNeverChoseCanvas: React.FC<CanvasProps> = () => {
         });
 
         return (
-          <div
-            className="absolute inset-0 flex flex-col items-center"
-            style={{ transform: `scale(${cam3})`, transformOrigin: "50% 36%" }}
-          >
+          <div className="absolute inset-0 flex flex-col items-center">
             <div
               className="absolute flex flex-col items-center w-full px-8"
               style={{
