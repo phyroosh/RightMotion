@@ -33,7 +33,7 @@ def main():
     parser.add_argument("--frames", default=None, help="Specific frame range, e.g. 0-90")
     parser.add_argument("--scale", type=float, default=None, help="Downscale factor for preview (e.g. 0.5)")
     parser.add_argument("--out", default=None, help="Custom output filepath")
-    parser.add_argument("--concurrency", type=int, default=8, help="Worker concurrency (default: 8)")
+    parser.add_argument("--concurrency", type=int, default=4, help="Worker concurrency (default: 4)")
     args = parser.parse_args()
 
     clean_name = args.name.lower().strip()

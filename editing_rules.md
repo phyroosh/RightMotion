@@ -63,12 +63,15 @@
     1. The AI Agent fetches or generates authentic visual proof media using `scripts/fetch_entity_media.py` (news clippings, search AI overviews, founder photos, B-roll stills/clips).
     2. Uses `<FacecamBRoll />` in the top safe zone (`top-[6%] h-[45%]`) with subtle Ken Burns slow-zoom, rounded corners, drop shadows, and category badges.
     3. Triggers `slideDownBeats` during those B-roll intervals.
-- **Safe Zones & Occlusion Control**:
-  - Keep the speaker's eyes and mouth 100% visible and un-occluded.
-  - Non-B-roll badges and stamps occupy the lower-third chest zone (`bottom-[28%]`).
+- **Safe Zones & Platform UI Occlusion Control**:
+  - **Law**: Platform UI is part of the compositional environment (Shorts/Reels/TikTok).
+  - Primary text & graphic safe zone: `y: 280px` to `y: 1340px` (avoiding top navigation 0–240px and right engagement rail x: 910–1080px).
+  - Keep speaker's eyes and mouth 100% visible and un-occluded.
+  - Non-B-roll badges and stamps occupy the chest zone (`y: ~900px–1100px`).
 - **Speech-Synchronized Kinetic Captions**:
-  - Lower safe zone (`bottom-[18%]`), 2-3 words per chunk.
-  - Minimum 32px font size (`text-3xl font-black`), active word spring pop (`scale(1.1)`) with glowing cyan/gold highlight.
+  - Lower safe zone (`bottom-[19%]`, `y: 1380px–1560px`), 2-3 words per chunk.
+  - Minimum 36px font size (`text-3xl font-black`), active word spring pop (`scale(1.1)`) with glowing cyan/gold highlight.
+  - Zero graphics overlap into the captions zone.
 ## 7. Autonomous Scriptwriting & Direct Topic Protocol (Organic Default, '{meta}' Opt-In)
 - **Zero ChatGPT Middle Step**: Paste raw topics directly (e.g., `{Self Improvement} The Fear of Being Caught Trying`).
 - **Mode B: Organic / Growth — DEFAULT (When '{meta}' is ABSENT)**:

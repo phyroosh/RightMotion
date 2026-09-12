@@ -1587,52 +1587,39 @@ def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, 
         root_file.write_text(root_content, encoding="utf-8")
         print("      Registered composition and still in src/Root.tsx")
 
-    # Register in thumbnails/index.tsx
+    # Register in thumbnails/index.tsx (Frontier T: Thumbnail Intelligence)
     thumb_content = thumb_file.read_text(encoding="utf-8")
-    from metadata_engine import generate_full_metadata
-    meta_package = generate_full_metadata(topic, niche=niche, script=script_text or "", pinned_comment=pinned_comment or "")
+    from thumbnail_director import ThumbnailDirector
+    t_director = ThumbnailDirector()
+    aspect_str = "9:16" if format_type == "shorts" else "16:9"
+    t_manifest = t_director.orchestrate(topic, script=script_text or "", niche=niche, aspect_ratio=aspect_str)
+
+    # Persist inspectable thumbnail_plan.json
+    clip_dir = ROOT_DIR / "src" / "clips" / name
+    if clip_dir.exists():
+        (clip_dir / "thumbnail_plan.json").write_text(json.dumps(t_manifest, indent=2), encoding="utf-8")
+        print(f"      [Frontier T] Persisted thumbnail_plan.json in {clip_dir}")
 
     if f"{pascal_name}Thumbnail" not in thumb_content:
-        clean_title = meta_package["thumbnail_title"]
-        highlight = meta_package["thumbnail_highlight"]
-        sub = meta_package["thumbnail_subtitle"]
-
-        # Channel specific styling - strictly pure themes and badges, NEVER page numbers or PDF names!
-        if niche == "facecam":
-            cat_badge = "BUILD TO SCALE • FACECAM"
-            extra_badge = "STARTUP"
-            theme = "obsidian"
-        elif niche == "finance":
-            cat_badge = "APEX WEALTH • FINANCE"
-            extra_badge = "WEALTH"
-            theme = "obsidian"
-        elif niche == "health":
-            cat_badge = "BIOMATRIX • HEALTH"
-            extra_badge = "BIOHACK"
-            theme = "biotech_cyan"
-        else:
-            cat_badge = "JUDY INSIGHTS • PSYCHOLOGY"
-            extra_badge = "MINDSET"
-            theme = "apple_studio"
+        chosen_concept = t_manifest["chosenConcept"]
+        hook_word = chosen_concept["textHook"]
+        accent_color = chosen_concept["accentColor"]
+        theme = "apple_studio" if niche == "self_improvement" else ("obsidian" if niche in ["finance", "facecam"] else "biotech_cyan")
 
         thumb_decl = f"""
 export const {pascal_name}Thumbnail: React.FC = () => (
-  <ThumbnailCard
-    title="{clean_title}"
-    highlightWord="{highlight}"
-    highlightColor="rose"
-    subtitle="{sub}"
-    categoryBadge="{cat_badge}"
-    characterPose="character_pointing.png"
-    theme="{theme}"
+  <ImpossibleMetaphorLayout
+    hookWord="{hook_word}"
+    accentColor="{accent_color}"
+    heroImageSrc="{name}/assets/scene_illustration.png"
     aspectRatio="{ "9:16" if format_type == "shorts" else "16:9" }"
-    extraBadge="{extra_badge}"
+    theme="{theme}"
   />
 );
 """
         thumb_content += thumb_decl
         thumb_file.write_text(thumb_content, encoding="utf-8")
-        print("      Registered thumbnail component in src/thumbnails/index.tsx")
+        print("      [Frontier T] Registered bespoke thumbnail component in src/thumbnails/index.tsx")
 
     # Register in render_all_thumbnails.js
     render_content = render_script.read_text(encoding="utf-8")

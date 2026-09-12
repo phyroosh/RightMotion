@@ -1,7 +1,12 @@
 import React from 'react';
 import { staticFile } from 'remotion';
 import { ThumbnailCard } from './ThumbnailCard';
+import { ThumbnailCanvas } from './ThumbnailCanvas';
+import { ImpossibleMetaphorLayout } from './ImpossibleMetaphorLayout';
+import { MinimalObjectLayout } from './MinimalObjectLayout';
 import { Brain, Shield, Clock, Flame, Heart, Sparkles, Moon, Award, CheckCircle2 } from 'lucide-react';
+
+export { ThumbnailCanvas, ImpossibleMetaphorLayout, MinimalObjectLayout };
 
 // ========================================================
 // 16:9 WIDESCREEN THUMBNAILS (Long-Form Masterclasses)
@@ -972,3 +977,17 @@ export const TheArchitectureOfPressureThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const OpenBrainTabsThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="20 TABS"
+    accentWord="TABS"
+    accentColor="#f43f5e"
+    heroImageSrc="open_brain_tabs/assets/thumbnail_hero.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+    heroScale={1.02}
+  />
+);
+
+export const BrainTabsThumbnail = OpenBrainTabsThumbnail;

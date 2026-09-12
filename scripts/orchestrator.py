@@ -482,8 +482,9 @@ class CreativeOrchestrator:
                 "primaryVisual": primary_visual,
                 "secondarySupport": "Ambient studio radial lighting + deep contrast drop-shadows",
                 "mobileConstraints": [
-                    "Safe zone: top 6% to top 68% (y: 115px to 1320px)",
+                    "Platform Safe zone: y: 280px to 1340px (clearing top 0-240px nav, avoiding top 6% legacy hazard)",
                     "Captions safe zone: top 73% to top 81% (zero overlap)",
+                    "Right engagement rail clearance: max-width 880px (clearing x: 910-1080px)",
                     "Typography minimum: 56px for headlines, 36px for labels",
                     "Cutouts scaled to 400–750px; 7:1 contrast floor",
                     "Zero micro-particles or sub-pixel wireframes (<2.5px)",

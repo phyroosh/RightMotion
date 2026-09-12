@@ -11,6 +11,7 @@ import { LofiSongComposition } from "./clips/lofi_song";
 import { BoundariesComposition } from "./clips/boundaries";
 import boundariesTranscript from "./clips/boundaries/transcript.json";
 import { CutoutShowcase } from "./compositions/CutoutShowcase";
+import { PlatformSafeShowcase } from "./compositions/PlatformSafeShowcase";
 import { DopamineResetComposition } from "./clips/dopamine_reset";
 import dopamineResetTranscript from "./clips/dopamine_reset/transcript.json";
 import { ShrinkingCircleComposition } from "./clips/shrinking_circle";
@@ -83,6 +84,8 @@ import { TheLawOfTheCounterweightComposition } from "./clips/the_law_of_the_coun
 import the_law_of_the_counterweightTranscript from "./clips/the_law_of_the_counterweight/transcript.json";
 import { TheArchitectureOfPressureComposition } from "./clips/the_architecture_of_pressure";
 import the_architecture_of_pressureTranscript from "./clips/the_architecture_of_pressure/transcript.json";
+import { OpenBrainTabsComposition } from "./clips/open_brain_tabs";
+import open_brain_tabsTranscript from "./clips/open_brain_tabs/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -112,6 +115,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  OpenBrainTabsThumbnail,
   TheArchitectureOfPressureThumbnail,
   TheLawOfTheCounterweightThumbnail,
   TheThresholdEffectThumbnail,
@@ -259,6 +263,8 @@ export const RemotionRoot: React.FC = () => {
   const the_law_of_the_counterweightDuration = calculateDurationInFrames(the_law_of_the_counterweightTranscript as any[], fps);
   
   const the_architecture_of_pressureDuration = calculateDurationInFrames(the_architecture_of_pressureTranscript as any[], fps);
+  
+  const open_brain_tabsDuration = calculateDurationInFrames(open_brain_tabsTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -614,6 +620,16 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
 
+      
+      <Composition
+        id="OpenBrainTabsVideo"
+        component={OpenBrainTabsComposition}
+        durationInFrames={open_brain_tabsDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
       {/* 0. Broken Promises & Self-Trust Video (9:16 Shorts) */}
       <Composition
         id="PromisesVideo"
@@ -896,6 +912,16 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1920}
         height={1080}
+      />
+
+      {/* Platform-Safe Composition Architecture Showcase (9:16 Shorts) */}
+      <Composition
+        id="PlatformSafeShowcaseVideo"
+        component={PlatformSafeShowcase}
+        durationInFrames={120}
+        fps={30}
+        width={1080}
+        height={1920}
       />
 
     
@@ -1210,6 +1236,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="TheArchitectureOfPressureThumbnail"
         component={TheArchitectureOfPressureThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="OpenBrainTabsThumbnail"
+        component={OpenBrainTabsThumbnail}
         width={1080}
         height={1920}
       />

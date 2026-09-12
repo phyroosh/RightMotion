@@ -1,0 +1,123 @@
+{
+  "topic": "EVERY UNFINISHED TASK LEAVES A TAB OPEN IN YOUR BRAIN",
+  "coreIdea": "Every unfinished task keeps subconscious neural RAM perpetually occupied.",
+  "viewerQuestion": "Why are there literal browser windows trapped inside the mind?",
+  "thumbnailJob": "Physically visualize cognitive RAM overflow so the viewer instantly feels the weight of open loops.",
+  "chosenConcept": {
+    "conceptId": "concept_1_cranial_tabs",
+    "title": "Cranial Tab Eruption",
+    "archetype": "impossible_metaphor",
+    "visualMetaphor": "A human head / brain with physical, translucent glowing browser tabs erupting upwards and outwards like an impossible filing cabinet, each tab bearing an unclosed task alert.",
+    "focalSubject": "Silhouette head with glowing neural glass interior and 15+ physical tabs bursting out",
+    "subjectRole": "experiencing_overflow",
+    "hasPerson": true,
+    "textHook": "20 TABS",
+    "textStrategy": "minimal_punch_word",
+    "colorMood": "luminous_off_white_with_rose_accent",
+    "accentColor": "#f43f5e",
+    "groundColor": "#f8fafc",
+    "visualMechanism": "overflowing_cranial_capacity",
+    "assetStrategy": "bespoke_ai_hero_illustration",
+    "selectionReason": "Concept 'Cranial Tab Eruption' scored highest (9.49/10). Peak instant-read (9.4), highest curiosity (9.6), and unmatched mobile silhouette clarity."
+  },
+  "alternativeConcepts": [
+    {
+      "conceptId": "concept_2_crushing_tab",
+      "title": "The Monolithic Unclosed Tab",
+      "archetype": "scale_constraint",
+      "overallScore": 8.88,
+      "rejectionReason": "Lower score (8.88) compared to winner (9.49)."
+    },
+    {
+      "conceptId": "concept_4_split_calm_chaos",
+      "title": "The Dual State Brain",
+      "archetype": "split_contradiction",
+      "overallScore": 8.82,
+      "rejectionReason": "Lower score (8.82) compared to winner (9.49)."
+    },
+    {
+      "conceptId": "concept_3_infinite_tab_circuit",
+      "title": "The Unclosable Browser Window",
+      "archetype": "minimal_object",
+      "overallScore": 8.78,
+      "rejectionReason": "Lower score (8.78) compared to winner (9.49)."
+    }
+  ],
+  "primarySubject": "Silhouette head with glowing neural glass interior and 15+ physical tabs bursting out",
+  "visualMetaphor": "A human head / brain with physical, translucent glowing browser tabs erupting upwards and outwards like an impossible filing cabinet, each tab bearing an unclosed task alert.",
+  "compositionStrategy": {
+    "archetype": "impossible_metaphor",
+    "aspectRatio": "9:16",
+    "canvasWidth": 1080,
+    "canvasHeight": 1920,
+    "ground": "#f8fafc",
+    "dominantMass": "Center-weighted vertical anchor",
+    "negativeSpace": "Generous breathing room on upper 30% for high-impact hook word"
+  },
+  "textStrategy": {
+    "hookWord": "20 TABS",
+    "font": "Montserrat Black",
+    "fontSize": 104,
+    "color": "#090d16",
+    "role": "Single high-impact curiosity anchor; never an explanation",
+    "bannedElements": [
+      "categoryBadge",
+      "extraBadge",
+      "subtitleCard",
+      "articleParagraph"
+    ]
+  },
+  "focalPoint": "Silhouette head with glowing neural glass interior and 15+ physical tabs bursting out",
+  "hierarchy": {
+    "level1_hook": "Primary Hook: Silhouette head with glowing neural glass interior and 15+ physical tabs bursting out (dominant silhouette, ~60% screen area)",
+    "level2_concept": "Concept: A human head / brain with physical, translucent glowing browser tabs erupting upwards and outwards like an impossible filing cabinet, each tab bearing an unclosed task alert.",
+    "level3_support": "Support: High-impact punch text '20 TABS' in inky contrast"
+  },
+  "colorStrategy": {
+    "ground": "#f8fafc",
+    "accent": "#f43f5e",
+    "textContrastRatio": "12:1",
+    "rule": "Clean luminous ground or deep obsidian with exactly ONE saturated semantic accent"
+  },
+  "assetRequirements": {
+    "type": "bespoke_ai_hero_illustration",
+    "targetPath": "public/every_unfinished_task_le/assets/thumbnail_hero.png",
+    "needsAiGeneration": true,
+    "promptDirective": "Editorial 2.5D conceptual visual: A human head / brain with physical, translucent glowing browser tabs erupting upwards and outwards like an impossible filing cabinet, each tab bearing an unclosed task alert.. Generous negative space, studio lighting, razor-sharp edges."
+  },
+  "complexityBudget": {
+    "maxTextElements": 1,
+    "maxWordCount": 2,
+    "pillBadgesAllowed": false,
+    "subtitleCardsAllowed": false,
+    "maxPrimarySubjects": 1,
+    "contrastRatioTarget": "7:1",
+    "safeZoneTop": "8%",
+    "safeZoneBottom": "10%"
+  },
+  "mobileConstraints": {
+    "targetScale": "360x640 preview",
+    "minSubjectPixelHeight": 750,
+    "minTextPixelHeight": 80,
+    "silhouetteSeparation": "Strong high-contrast boundary against clean ground"
+  },
+  "curiosityMechanism": {
+    "type": "overflowing_cranial_capacity",
+    "gap": "Why are there literal browser windows trapped inside the mind?",
+    "resolutionInVideo": "Video explains Zeigarnik effect and how offloading tasks to external paper closes mental tabs."
+  },
+  "truthfulnessCheck": {
+    "isTruthful": true,
+    "rationale": "Directly symbolizes cognitive RAM depletion from open task loops without sensationalism or misleading claims."
+  },
+  "validationResults": {
+    "status": "APPROVED",
+    "rulesPassed": [
+      "Rule 0: Autonomous creative production",
+      "Rule 4: Zero memes, high-resolution physical metaphor",
+      "Rule 5: Creative standard, minimum sufficient composition",
+      "Rule 5.5: Zero pill badges, zero subtitle cards, zero floating waist cuts",
+      "Rule 5.4: Ultra-high contrast (12:1), luminous clean ground"
+    ]
+  }
+}

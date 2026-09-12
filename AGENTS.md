@@ -26,16 +26,16 @@
 >    - Read `transcript.json` for frame-accurate word timing. Anchor subsequent scenes with large transparent semantic cutouts (`400–750px`) from `public/assets/`. See Rule 5 for the creative standard.
 > 4. **Visual audit**:
 >    ```bash
->    npx remotion still src/index.ts <PascalName>Video out/<name>_hook.png --frame=35 --gl=swangle
->    npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=120 --gl=swangle
->    npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=350 --gl=swangle
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_hook.png --frame=35
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=120
+>    npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=350
 >    ```
 >    Inspect each still via `view_file`. Confirm razor-sharp contrast, zero dirty grain on light mode, and zero caption overlap.
-> 5. **Render (100% CPU Mandate)**:
+> 5. **Render (Optimized High-Throughput Production Path)**:
 >    ```bash
->    npx remotion render src/index.ts <PascalName>Video out/<name>_video.mp4 --gl=swangle
+>    python3 scripts/render_clip.py --name "<name>" [--concurrency=4]
 >    ```
->    *MANDATORY*: Always render on CPU using Google SwiftShader (`--gl=swangle` + CPU `libx264` software encoding). Never use GPU/CUDA. Deliver path + viral title + pinned comment.
+>    *MANDATORY PRODUCTION PIPELINE*: Always render using the unified production runner `scripts/render_clip.py` (hardware-accelerated GPU via ANGLE, defaulting to concurrency 4 for ~2-4 min exports). SwiftShader CPU mode is only an automatic fallback if GPU is unavailable. Deliver path + viral title + pinned comment.
 >
 > *(Output script only if the user writes "script only" or "write a script".)*
 
@@ -325,7 +325,7 @@ A scene that asks a visual question and answers it is more engaging than a scene
 
 ---
 
-### 5.9 — Restraint & Density Limits
+### 5.9 — Restraint, Density Limits & Platform-Safe Composition
 
 **Mental model:** Audio carries information load. Visuals carry one dominant impression at a time. They work together — not redundantly.
 
@@ -333,13 +333,31 @@ Every element must answer: *"Does this help the viewer understand, feel, or reme
 
 **Discipline: fewer things, much larger, much bolder.**
 
+> [!CRITICAL]
+> **RIGHTMOTION LAW: PLATFORM UI IS PART OF THE COMPOSITIONAL ENVIRONMENT.**
+> Vertical videos are viewed inside social feeds (YouTube Shorts, Reels, TikTok) with top navigation bars, right-side engagement rails, and bottom metadata/captions. Video Canvas + Platform Safe Region + Creative Focal Region.
+>
+> **CRITICAL CSS TRAP**: NEVER use Tailwind percentage padding (e.g. `pt-[8%]`, `pt-[9%]`) for vertical layout! In CSS, percentage padding is calculated against **CONTAINER WIDTH (1080px)**, not height! `pt-[8%]` computes to just 86px, which directly collides with the Shorts top navigation bar (0–240px). Always use explicit pixel heights: `style={{ paddingTop: 280 }}` or `useSafePlacement().safeTop`.
+
 **Hard limits (1080×1920):**
-- Primary graphics zone: `top: 6%` to `top: 68%` (y: 115px–1320px)
-- Captions (`<AppleKineticCaptions />`): `top: 73%` to `top: 81%`
-- Zero overlap between graphics and captions. Zero content below the caption zone.
-- Maximum **3 distinct text elements** simultaneously on screen
-- Maximum **2 visual objects** simultaneously unless forming a single unified composition
+- **Platform Safe Text Zone**: `y: 280px` to `y: 1340px` (clearing top navigation 0–240px and top caution buffer 240–280px).
+- **Right Engagement Rail Clearance**: Maximum width `870px` (or `max-w-[780px]` centered in `px-8`), clearing the right interaction rail (`x: 910px to 1080px` in `y: 700px to 1560px`).
+- **Optical Focal Center**: `x: 120px to 840px`, `y: 480px to 1100px` (mobile eye-level tracking).
+- **Captions Zone (`<AppleKineticCaptions />`)**: `top: 73%` to `top: 81%` (`y: 1380px to 1560px`). Zero content below caption zone.
+- Maximum **3 distinct text elements** simultaneously on screen.
+- Maximum **2 visual objects** simultaneously unless forming a single unified composition.
 - Scale sanity check: *"At 360×640, is the main element still readable?"* If no — scale up or remove.
+
+**Element Importance Classification:**
+- **`CRITICAL`**: Primary headlines, key numbers, character faces, core visual metaphors, essential diagrams. MUST remain 100% inside platform safe bounds across all frames and motion trajectories.
+- **`IMPORTANT`**: Supporting labels, secondary cards, annotations. Should preferably remain visible and clear of major obstructions.
+- **`DECORATIVE`**: Atmospheric lighting, background blur orbs, tape strips, environmental art. May touch caution/obstruction zones with intentional edge placement.
+
+**Platform Safe Pre-Flight Audit:**
+```bash
+python3 scripts/platform_safe_validator.py <clip_name>
+python3 scripts/test_platform_safe.py
+```
 
 ---
 

@@ -13,7 +13,8 @@ if (glRenderer === "swangle" || glRenderer === "swiftshader") {
   Config.setHardwareAcceleration("if-possible");
 }
 
-Config.setConcurrency(8);
+// Concurrency: 4 is optimal for modern hybrid CPUs / 4GB VRAM (avoids memory swap thrashing & context switching)
+Config.setConcurrency(4);
 Config.setVideoImageFormat("jpeg");
 Config.setJpegQuality(95);
 Config.setOverwriteOutput(true);

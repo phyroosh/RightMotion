@@ -23,6 +23,7 @@ const THUMBNAIL_MAP = {
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
   'promises_video.mp4': 'PromisesThumbnail',
+  'open_brain_tabs_video.mp4': 'OpenBrainTabsThumbnail',
   'the_architecture_of_pressure_video.mp4': 'TheArchitectureOfPressureThumbnail',
   'the_law_of_the_counterweight_video.mp4': 'TheLawOfTheCounterweightThumbnail',
   'the_threshold_effect_video.mp4': 'TheThresholdEffectThumbnail',

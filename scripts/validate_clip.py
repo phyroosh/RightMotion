@@ -19,6 +19,12 @@ import subprocess
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(ROOT_DIR / "scripts"))
+
+try:
+    from platform_safe_validator import audit_clip_source
+except ImportError:
+    audit_clip_source = None
 
 GREEN = "\033[92m"
 RED = "\033[91m"
@@ -138,6 +144,31 @@ def validate_clip(name: str, render_still: bool = False) -> bool:
                 errors.append("motion_plan.json fails the semantic visual-diversity check")
         except Exception as exc:
             errors.append(f"Unable to audit motion_plan.json: {exc}")
+
+    # 5c. Frontier T: Thumbnail Plan Audit
+    thumb_plan_file = clip_dir / "thumbnail_plan.json"
+    if thumb_plan_file.exists():
+        try:
+            t_plan = json.loads(thumb_plan_file.read_text(encoding="utf-8"))
+            if "chosenConcept" not in t_plan or "thumbnailJob" not in t_plan:
+                errors.append("thumbnail_plan.json is missing required Frontier T fields")
+            word_count = len(t_plan.get("chosenConcept", {}).get("textHook", "").split())
+            if word_count > 3:
+                errors.append(f"thumbnail_plan.json exceeds complexity budget: textHook has {word_count} words (> 3)")
+        except Exception as exc:
+            errors.append(f"Unable to audit thumbnail_plan.json: {exc}")
+
+    # 5d. Platform-Safe Composition Audit (YouTube Shorts UI clearance)
+    if audit_clip_source:
+        try:
+            platform_reports = audit_clip_source(name, root_dir=ROOT_DIR)
+            for r in platform_reports:
+                if r.status == "CRITICAL":
+                    errors.append(f"Platform Safe Collision: {r.element} ({r.intersection}) -> {r.recommended_correction}")
+                elif r.status == "WARNING":
+                    warnings.append(f"Platform Safe Caution: {r.element} ({r.intersection}) -> {r.recommended_correction}")
+        except Exception as exc:
+            warnings.append(f"Unable to run platform safe audit: {exc}")
 
     # 6. Remotion Root & Thumbnails Registration
     root_file = ROOT_DIR / "src" / "Root.tsx"
