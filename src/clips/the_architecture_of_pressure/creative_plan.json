@@ -1,0 +1,259 @@
+{
+  "clipName": "the_architecture_of_pressure",
+  "topic": "The Architecture of Pressure",
+  "totalFrames": 1800,
+  "fps": 60,
+  "overallComplexityRating": "BALANCED",
+  "scenePlans": [
+    {
+      "sceneId": "scene_1_hook",
+      "intent": {
+        "sceneId": "scene_1_hook",
+        "startFrame": 0,
+        "endFrame": 504,
+        "durationSeconds": 8.4,
+        "narrationText": "Pressure doesn't just accumulate. It builds architecturally. Every new responsibility is another heavy load placed on a mental cantilever.",
+        "coreIdea": "Pressure doesn't just accumulate. It builds architecturally. Every new responsibility is a...",
+        "emotionalTone": "claustrophobic_pressure",
+        "viewerReaction": "Experience clear physical resonance with The Architecture of Pressure",
+        "visualQuestion": "What physical consequence illustrates 'Pressure doesn't just accumulate. It builds a' before words finish?",
+        "dominantMetaphor": "compression_under_load",
+        "compositionApproach": "asymmetric_editorial"
+      },
+      "complexityBudget": {
+        "level": "MEDIUM",
+        "calculatedScore": 2.5,
+        "maxScoreAllowed": 2.5
+      },
+      "activeCapabilities": [
+        {
+          "frontierCode": "F_BASE",
+          "capabilityConcept": "progressive_kinetic_choreography",
+          "intensity": "HIGH",
+          "scope": "SCENE_LEVEL",
+          "reason": "Baseline high-contrast typographic hierarchy and semantic cutout delivery.",
+          "mappedComponents": [
+            "AnimatedSlashStrike",
+            "KineticHighlighter",
+            "CinematicIllustrationCard"
+          ]
+        },
+        {
+          "frontierCode": "F2",
+          "capabilityConcept": "viscoelastic_compressive_strain",
+          "intensity": "MEDIUM",
+          "scope": "SCENE_LEVEL",
+          "reason": "Material strain and lateral bulging visually communicate accumulating unacknowledged burden.",
+          "mappedComponents": [
+            "ViscoelasticDeformation",
+            "OpticallyStableText"
+          ]
+        }
+      ],
+      "rejectedCapabilities": [
+        {
+          "frontierCode": "F3",
+          "reason": "F3 is DORMANT_EXPERIMENTAL in features.ts. Optical rack focus and depth stratification are disabled. Replaced by high-contrast 2.5D layered composition."
+        },
+        {
+          "frontierCode": "F1",
+          "reason": "InfiniteWorldCanvas is unnecessary for 'compression_under_load' metaphor."
+        },
+        {
+          "frontierCode": "F4",
+          "reason": "Semantic Mass & Physical Consequence is unnecessary for 'compression_under_load' metaphor."
+        },
+        {
+          "frontierCode": "F5",
+          "reason": "Environmental / Diorama Worlds is unnecessary for 'compression_under_load' metaphor."
+        },
+        {
+          "frontierCode": "F6",
+          "reason": "Temporal Manipulation is unnecessary for 'compression_under_load' metaphor."
+        }
+      ],
+      "primaryVisual": "Editorial Hero Card + Judy Grounded Close-up",
+      "secondarySupport": "Ambient studio radial lighting + deep contrast drop-shadows",
+      "mobileConstraints": [
+        "Safe zone: top 6% to top 68% (y: 115px to 1320px)",
+        "Captions safe zone: top 73% to top 81% (zero overlap)",
+        "Typography minimum: 56px for headlines, 36px for labels",
+        "Cutouts scaled to 400\u2013750px; 7:1 contrast floor",
+        "Zero micro-particles or sub-pixel wireframes (<2.5px)"
+      ],
+      "performanceNotes": [
+        "100% CPU SwiftShader mandate: no GPU/CUDA assumptions",
+        "Deterministic spring physics and closed-form torque (zero physics engine stalls)"
+      ]
+    },
+    {
+      "sceneId": "scene_2_logic",
+      "intent": {
+        "sceneId": "scene_2_logic",
+        "startFrame": 504,
+        "endFrame": 1296,
+        "durationSeconds": 13.2,
+        "narrationText": "We think we can endlessly extend the beam, but physical structures have a violent sheer limit. When you ignore the warning signs, the microscopic stress fractures spreading through the steel, the system doesn't just gently lower the load. It catastrophically shears.",
+        "coreIdea": "We think we can endlessly extend the beam, but physical structures have a violent sheer li...",
+        "emotionalTone": "claustrophobic_pressure",
+        "viewerReaction": "Experience clear physical resonance with The Architecture of Pressure",
+        "visualQuestion": "What physical consequence illustrates 'We think we can endlessly extend the beam, bu' before words finish?",
+        "dominantMetaphor": "brittle_rupture",
+        "compositionApproach": "asymmetric_editorial"
+      },
+      "complexityBudget": {
+        "level": "MEDIUM",
+        "calculatedScore": 3.25,
+        "maxScoreAllowed": 4.5
+      },
+      "activeCapabilities": [
+        {
+          "frontierCode": "F_BASE",
+          "capabilityConcept": "progressive_kinetic_choreography",
+          "intensity": "HIGH",
+          "scope": "SCENE_LEVEL",
+          "reason": "Baseline high-contrast typographic hierarchy and semantic cutout delivery.",
+          "mappedComponents": [
+            "AnimatedSlashStrike",
+            "KineticHighlighter",
+            "CinematicIllustrationCard"
+          ]
+        },
+        {
+          "frontierCode": "F2",
+          "capabilityConcept": "brittle_stress_fracture_rupture",
+          "intensity": "HIGH",
+          "scope": "EVENT_LEVEL",
+          "eventWindow": {
+            "startFrame": 979,
+            "endFrame": 1296
+          },
+          "reason": "Physical rupture at threshold makes the breaking point visceral on screen.",
+          "mappedComponents": [
+            "StressFractureEngine"
+          ]
+        }
+      ],
+      "rejectedCapabilities": [
+        {
+          "frontierCode": "F3",
+          "reason": "F3 is DORMANT_EXPERIMENTAL in features.ts. Optical rack focus and depth stratification are disabled. Replaced by high-contrast 2.5D layered composition."
+        },
+        {
+          "frontierCode": "F1",
+          "reason": "InfiniteWorldCanvas is unnecessary for 'brittle_rupture' metaphor."
+        },
+        {
+          "frontierCode": "F4",
+          "reason": "Semantic Mass & Physical Consequence is unnecessary for 'brittle_rupture' metaphor."
+        },
+        {
+          "frontierCode": "F5",
+          "reason": "Environmental / Diorama Worlds is unnecessary for 'brittle_rupture' metaphor."
+        },
+        {
+          "frontierCode": "F6",
+          "reason": "Temporal Manipulation is unnecessary for 'brittle_rupture' metaphor."
+        }
+      ],
+      "primaryVisual": "Physical Brittle Rupture Anchor",
+      "secondarySupport": "Ambient studio radial lighting + deep contrast drop-shadows",
+      "mobileConstraints": [
+        "Safe zone: top 6% to top 68% (y: 115px to 1320px)",
+        "Captions safe zone: top 73% to top 81% (zero overlap)",
+        "Typography minimum: 56px for headlines, 36px for labels",
+        "Cutouts scaled to 400\u2013750px; 7:1 contrast floor",
+        "Zero micro-particles or sub-pixel wireframes (<2.5px)"
+      ],
+      "performanceNotes": [
+        "100% CPU SwiftShader mandate: no GPU/CUDA assumptions",
+        "Deterministic spring physics and closed-form torque (zero physics engine stalls)"
+      ]
+    },
+    {
+      "sceneId": "scene_3_solution",
+      "intent": {
+        "sceneId": "scene_3_solution",
+        "startFrame": 1296,
+        "endFrame": 1800,
+        "durationSeconds": 8.4,
+        "narrationText": "The entire span collapses in a single, irreversible event, leaving only shattered debris. Burnout isn't a slow fade. It is the sudden structural failure of a mind that refused to bend.",
+        "coreIdea": "The entire span collapses in a single, irreversible event, leaving only shattered debris. ...",
+        "emotionalTone": "sudden_epiphany",
+        "viewerReaction": "Experience clear physical resonance with The Architecture of Pressure",
+        "visualQuestion": "What physical consequence illustrates 'The entire span collapses in a single, irreve' before words finish?",
+        "dominantMetaphor": "sovereign_clarity",
+        "compositionApproach": "centered_minimalism"
+      },
+      "complexityBudget": {
+        "level": "LOW",
+        "calculatedScore": 1.75,
+        "maxScoreAllowed": 3.0
+      },
+      "activeCapabilities": [
+        {
+          "frontierCode": "F_BASE",
+          "capabilityConcept": "progressive_kinetic_choreography",
+          "intensity": "HIGH",
+          "scope": "SCENE_LEVEL",
+          "reason": "Baseline high-contrast typographic hierarchy and semantic cutout delivery.",
+          "mappedComponents": [
+            "AnimatedSlashStrike",
+            "KineticHighlighter",
+            "CinematicIllustrationCard"
+          ]
+        },
+        {
+          "frontierCode": "F6",
+          "capabilityConcept": "dramatic_breath_hold_freeze",
+          "intensity": "HIGH",
+          "scope": "EVENT_LEVEL",
+          "eventWindow": {
+            "startFrame": 1311,
+            "endFrame": 1331
+          },
+          "reason": "18-frame micro-freeze halting visual drift right before the cognitive epiphany.",
+          "mappedComponents": [
+            "WorldCameraBreathHold",
+            "timeSine"
+          ]
+        }
+      ],
+      "rejectedCapabilities": [
+        {
+          "frontierCode": "F3",
+          "reason": "F3 is DORMANT_EXPERIMENTAL in features.ts. Optical rack focus and depth stratification are disabled. Replaced by high-contrast 2.5D layered composition."
+        },
+        {
+          "frontierCode": "F1",
+          "reason": "InfiniteWorldCanvas is unnecessary for 'sovereign_clarity' metaphor."
+        },
+        {
+          "frontierCode": "F2",
+          "reason": "Materiality & Physical Semantics is unnecessary for 'sovereign_clarity' metaphor."
+        },
+        {
+          "frontierCode": "F4",
+          "reason": "Semantic Mass & Physical Consequence is unnecessary for 'sovereign_clarity' metaphor."
+        },
+        {
+          "frontierCode": "F5",
+          "reason": "Environmental / Diorama Worlds is unnecessary for 'sovereign_clarity' metaphor."
+        }
+      ],
+      "primaryVisual": "Physical Sovereign Clarity Anchor",
+      "secondarySupport": "Ambient studio radial lighting + deep contrast drop-shadows",
+      "mobileConstraints": [
+        "Safe zone: top 6% to top 68% (y: 115px to 1320px)",
+        "Captions safe zone: top 73% to top 81% (zero overlap)",
+        "Typography minimum: 56px for headlines, 36px for labels",
+        "Cutouts scaled to 400\u2013750px; 7:1 contrast floor",
+        "Zero micro-particles or sub-pixel wireframes (<2.5px)"
+      ],
+      "performanceNotes": [
+        "100% CPU SwiftShader mandate: no GPU/CUDA assumptions",
+        "Deterministic spring physics and closed-form torque (zero physics engine stalls)"
+      ]
+    }
+  ]
+}

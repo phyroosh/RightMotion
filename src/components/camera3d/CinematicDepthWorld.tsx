@@ -1,11 +1,13 @@
 import React, { createContext, useContext } from "react";
 import {
   InfiniteWorldCanvas,
+  WorldEntity,
   useWorldCamera,
   WorldCameraBreathHold,
   WorldCameraImpact,
   WorldWaypoint,
 } from "./InfiniteWorldCanvas";
+import { ENABLE_CINEMATIC_CAMERA_V3 } from "../../config/features";
 
 export type DepthPlaneType = "foreground" | "midground" | "background";
 
@@ -71,6 +73,22 @@ export const CinematicDepthWorld: React.FC<CinematicDepthWorldProps> = ({
   className = "",
   style = {},
 }) => {
+  if (!ENABLE_CINEMATIC_CAMERA_V3) {
+    // Frontier #3 Dormant: Delegate directly to authoritative Frontier #1 InfiniteWorldCanvas
+    return (
+      <InfiniteWorldCanvas
+        waypoints={waypoints}
+        breathHolds={breathHolds}
+        impacts={impacts}
+        showGrid={showGrid}
+        className={className}
+        style={style}
+      >
+        {children}
+      </InfiniteWorldCanvas>
+    );
+  }
+
   return (
     <InfiniteWorldCanvas
       waypoints={waypoints}
@@ -198,6 +216,30 @@ export const WorldDepthEntity: React.FC<WorldDepthEntityProps> = ({
   className = "",
   style = {},
 }) => {
+  // If Frontier #3 is dormant:
+  // - Bypass all foreground depth entities (occluders, near-lens panels)
+  // - Delegate midground/background directly to authoritative Frontier #1 WorldEntity
+  if (!ENABLE_CINEMATIC_CAMERA_V3) {
+    if (depth === "foreground") {
+      return null;
+    }
+    return (
+      <WorldEntity
+        worldX={worldX}
+        worldY={worldY}
+        width={width}
+        height={height}
+        margin={margin}
+        startFrame={startFrame}
+        endFrame={endFrame}
+        className={className}
+        style={style}
+      >
+        {children}
+      </WorldEntity>
+    );
+  }
+
   const { cameraX, cameraY, zoom, frame } = useWorldCamera();
 
   // 1. Temporal lifecycle check

@@ -106,7 +106,7 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
           return (
             <span
               key={`${item.word}-${idx}`}
-              className="relative inline-block font-black uppercase tracking-tight"
+              className="relative inline-block font-black uppercase tracking-tight text-optically-stable"
               style={{
                 fontSize,
                 letterSpacing: "-0.025em",
@@ -114,16 +114,22 @@ export const AppleKineticCaptions: React.FC<KineticCaptionsProps> = ({
                 backgroundColor: isActive
                   ? isDark
                     ? wordActiveColor
-                    : `${wordActiveColor}22`
+                    : `${wordActiveColor}24`
                   : "transparent",
-                color: isActive && isDark ? "#030712" : isActive ? wordActiveColor : isPassed ? passedColor : inactiveColor,
-                padding: isActive ? "2px 14px" : "2px 4px",
-                borderRadius: "14px",
+                color: isActive && isDark
+                  ? "#030712"
+                  : isActive
+                  ? wordActiveColor
+                  : isPassed
+                  ? passedColor
+                  : inactiveColor,
+                padding: "3px 10px",
+                borderRadius: "12px",
                 boxShadow: isActive
-                  ? `0 0 25px ${wordActiveColor}aa, 0 4px 12px rgba(0,0,0,0.4)`
+                  ? `0 0 25px ${wordActiveColor}99, 0 4px 12px rgba(0,0,0,0.25)`
                   : "none",
-                transform: isActive ? "scale(1.08)" : "scale(1)",
-                transition: "transform 0.08s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.08s ease-out, color 0.08s ease-out",
+                transform: isActive ? "translate3d(0px, -2px, 0px)" : "translate3d(0px, 0px, 0px)",
+                willChange: "transform, background-color, color",
               }}
             >
               {item.word}

@@ -48,8 +48,10 @@ export const CapillaryInkBleed: React.FC<CapillaryInkBleedProps> = ({
   // 1. Inscription reveal progress (0% -> 100% clip reveal)
   const clipWidth = interpolate(sp, [0, 1], [0, 100]);
 
-  // 2. Liquid wetness luster settling (intense wet luster settles to deep matte)
-  const wetSheenOpacity = interpolate(relFrame, [0, 8, 25], [0, 0.8, 0], {
+  // 2. Liquid wetness luster settling (intense wet luster settles to deep matte, FPS-normalized)
+  const wetMid = Math.round(8 * (fps / 30));
+  const wetEnd = Math.round(25 * (fps / 30));
+  const wetSheenOpacity = interpolate(relFrame, [0, wetMid, wetEnd], [0, 0.8, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -59,14 +61,14 @@ export const CapillaryInkBleed: React.FC<CapillaryInkBleedProps> = ({
 
   return (
     <div
-      className={`relative inline-block select-none ${className}`}
+      className={`relative inline-block select-none text-optically-stable ${className}`}
       style={{
         ...style,
       }}
     >
       {/* Background Carved Deboss Channel */}
       <div
-        className="font-sans font-black uppercase tracking-tight relative overflow-hidden"
+        className="font-sans font-black uppercase tracking-tight relative overflow-hidden text-optically-stable"
         style={{
           fontSize: `${fontSize}px`,
           color: textColor,

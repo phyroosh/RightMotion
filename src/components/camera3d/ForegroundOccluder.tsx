@@ -1,4 +1,5 @@
 import React from "react";
+import { ENABLE_CINEMATIC_CAMERA_V3 } from "../../config/features";
 
 export type OccluderType = "doorway_arch" | "monolithic_pillar" | "aperture_frame";
 
@@ -41,6 +42,11 @@ export const ForegroundOccluder: React.FC<ForegroundOccluderProps> = ({
   className = "",
   style = {},
 }) => {
+  // If Frontier #3 is dormant: bypass foreground geometry completely
+  if (!ENABLE_CINEMATIC_CAMERA_V3) {
+    return null;
+  }
+
   const jambThickness = Math.max(30, (width - apertureWidth) / 2);
   const headerThickness = Math.max(40, height - apertureHeight);
 
@@ -90,7 +96,7 @@ export const ForegroundOccluder: React.FC<ForegroundOccluderProps> = ({
           }}
         >
           <div className="flex items-center gap-3">
-            <div className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
+            <div className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]" />
             <span className="font-mono text-[16px] font-black text-white tracking-widest uppercase">
               EVENT BOUNDARY // PHYSICAL THRESHOLD
             </span>

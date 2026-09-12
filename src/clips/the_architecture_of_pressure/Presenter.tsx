@@ -1,5 +1,4 @@
 import React from "react";
-import { useVideoConfig } from "remotion";
 import { GlossyJudyIntro } from "../../components/pure_graphics";
 
 interface PresenterProps {
@@ -7,17 +6,15 @@ interface PresenterProps {
 }
 
 /**
- * 🎬 TheLawOfStructuralLoadPresenter
- * Mounts the mandatory Judy Intro pop-up during the opening problem hook (first ~2.5s).
+ * 🎬 TheArchitectureOfPressurePresenter
+ * Mounts the mandatory Judy Intro pop-up during the opening problem hook (first ~2.5s / Frames 0 - 75).
  * Framed close-up and intimate to connect with viewers on small mobile screens.
  */
-export const TheLawOfStructuralLoadPresenter: React.FC<PresenterProps> = () => {
-  const { fps } = useVideoConfig();
-
+export const TheArchitectureOfPressurePresenter: React.FC<PresenterProps> = () => {
   return (
     <GlossyJudyIntro
       startFrame={0}
-      exitFrame={Math.round(2.5 * fps)}
+      exitFrame={75}
       glowColor="rgba(244, 63, 94, 0.22)"
       pose="character_pointing.png"
       reflectionOpacity={0.36}

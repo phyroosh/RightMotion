@@ -265,606 +265,399 @@
       100% { transform: scale(1); }
     }
   </style>
+
+  
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif !important;
+      background-color: #f1f5f9 !important;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(244, 114, 182, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.06) 0%, transparent 60%) !important;
+      color: #0f172a !important;
+      height: 100vh !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+      -webkit-font-smoothing: antialiased !important;
+    }
+
+    /* Soft Tactile Surfaces with Precision Borders */
+    .surface-pearl {
+      background: rgba(255, 255, 255, 0.8) !important;
+      backdrop-filter: blur(28px) !important;
+      -webkit-backdrop-filter: blur(28px) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 
+        0 4px 6px -1px rgba(15, 23, 42, 0.03), 
+        0 12px 24px -4px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 1) !important;
+    }
+    
+    .surface-elevated {
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: 
+        0 6px 16px -2px rgba(15, 23, 42, 0.05),
+        0 2px 4px -1px rgba(15, 23, 42, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 1) !important;
+    }
+
+    .surface-recessed {
+      background: #f8fafc !important;
+      border: 1.5px solid #e2e8f0 !important;
+      box-shadow: inset 0 1.5px 3px rgba(15, 23, 42, 0.04) !important;
+    }
+
+    .badge-icon {
+      box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+    }
+
+    .btn-soft {
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease, background-color 0.15s ease !important;
+    }
+    .btn-soft:active {
+      transform: scale(0.96) !important;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06) !important;
+    }
+
+    /* Video Bezel: Precision-milled hardware frame */
+    .video-bezel {
+      background: #000000 !important;
+      border: 5px solid #ffffff !important;
+      box-shadow: 
+        0 24px 48px -12px rgba(15, 23, 42, 0.22),
+        0 0 0 1.5px #cbd5e1 !important;
+    }
+
+    /* Timeline Scrubber */
+    .timeline-track-neo {
+      position: relative !important;
+      height: 8px !important;
+      background: #e2e8f0 !important;
+      border-radius: 9999px !important;
+      cursor: pointer !important;
+      overflow: visible !important;
+    }
+    .timeline-fill-neo {
+      position: absolute !important;
+      left: 0 !important; top: 0 !important; bottom: 0 !important;
+      background: #0284c7 !important;
+      border-radius: 9999px !important;
+      pointer-events: none !important;
+    }
+    .timeline-scrubber-neo {
+      position: absolute !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      background: #ffffff !important;
+      border: 3px solid #0284c7 !important;
+      width: 16px !important;
+      height: 16px !important;
+      border-radius: 50% !important;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4) !important;
+      pointer-events: none !important;
+      z-index: 10 !important;
+    }
+
+    /* Global Dropdown styling */
+    #ytChannelsDropdown, #igAccountsDropdown, #videoSwitcherDropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) !important;
+      -webkit-backdrop-filter: blur(24px) !important;
+      border: 1.5px solid #cbd5e1 !important;
+      box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.18) !important;
+      color: #0f172a !important;
+    }
+
+    /* Tag Chips */
+    .tag-chip {
+      background: #ffffff !important;
+      border: 1.5px solid #e2e8f0 !important;
+      color: #334155 !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    }
+    .tag-chip button {
+      color: #94a3b8 !important;
+    }
+    .tag-chip button:hover {
+      color: #ef4444 !important;
+    }
+
+    /* Focus Mode */
+    .focus-mode-active #libraryPanel { transform: translateX(-120%); opacity: 0; pointer-events: none; }
+    .focus-mode-active #contextPanel { transform: translateX(120%); opacity: 0; pointer-events: none; }
+    .focus-mode-active #videoStage { transform: scale(1.08); }
+  </style>
+
+
+
 </head>
 <body class="min-h-screen flex flex-col antialiased custom-scrollbar">
 
   <!-- TOP COMMAND APP BAR -->
   
-  <header class="sticky top-0 z-50 bg-[#050505]/40 backdrop-blur-xl border-b border-white/5 px-6 md:px-8 py-4 flex items-center justify-between">
-    <div class="flex items-center gap-8">
-      <div class="flex items-center gap-2">
-        <img src="logo.svg" alt="RightClips" class="w-6 h-6" />
-        <span class="text-[#fdf8e1] font-bold text-lg tracking-tight">RightClips</span>
+  
+  <!-- TOP BAR -->
+  <!-- TOP BAR -->
+  <!-- TOP BAR -->
+  <header class="relative z-20 px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3.5">
+      <div class="w-10 h-10 rounded-2xl bg-white badge-icon flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200/80">
+         <i data-lucide="video" class="w-5 h-5"></i>
       </div>
-      
+      <span class="font-black text-2xl tracking-tight text-slate-800">Control</span>
     </div>
+    
     <div class="flex items-center gap-3">
-      <div id="systemHealthBadge" onclick="fetchSystemHealth()" class="hidden sm:flex items-center gap-2 text-[#fdf8e1]/80 text-xs font-mono font-bold cursor-pointer">
-        <span class="w-1.5 h-1.5 rounded-full bg-[#fdf8e1] animate-pulse"></span> <span id="systemHealthText">ONLINE</span>
-      </div>
-      <div id="instagramAuthSection" class="hidden text-xs text-gray-500">IG</div>
-      <div id="authSection" class="hidden text-xs text-gray-500">YT</div>
+      <div id="instagramAuthSection"></div>
+      <div id="authSection"></div>
       
-      <!-- Studio Settings Button -->
-      <button
-        type="button"
-        onclick="openSettingsModal()"
-        class="flex items-center gap-2 px-3 py-1.5 rounded-2xl sleek-input border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-[#fdf8e1] transition-all duration-200 cursor-pointer text-xs font-bold shadow-sm active:scale-95 group"
-        title="Studio Settings, Google Cloud API Credentials & Channels"
-      >
-        <i data-lucide="settings" class="w-4 h-4 text-[#fdf8e1]/80 group-hover:rotate-45 group-hover:text-amber-300 transition-all duration-300"></i>
-        <span class="hidden sm:inline">Settings</span>
+      <!-- System Health Badge -->
+      <div id="systemHealthBadge" onclick="fetchSystemHealth()" class="surface-elevated px-3.5 py-1.5 rounded-2xl flex items-center gap-2 cursor-pointer btn-soft border border-slate-200/80 shadow-sm">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 badge-icon"></span>
+        <span id="systemHealthText" class="text-xs font-bold text-slate-600 font-mono">ONLINE</span>
+      </div>
+
+      <!-- Settings -->
+      <button onclick="openSettingsModal()" class="w-10 h-10 rounded-2xl surface-elevated flex items-center justify-center text-slate-500 hover:text-slate-800 transition btn-soft border border-slate-200/80 shadow-sm" title="Studio Settings">
+        <i data-lucide="settings" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Focus Mode Toggle -->
+      <button onclick="document.body.classList.toggle('focus-mode-active')" class="w-10 h-10 rounded-2xl surface-elevated flex items-center justify-center text-sky-600 hover:text-sky-700 transition btn-soft border border-slate-200/80 shadow-sm" title="Toggle Focus Preview">
+        <i data-lucide="maximize" class="w-5 h-5"></i>
       </button>
     </div>
   </header>
-  
-  <!-- ======================================================== -->
-  <!-- 🎛️ SLEEPER DASHBOARD -->
-  <!-- ======================================================== -->
-  <section id="dashboardSection" class="max-w-7xl w-full mx-auto px-4 md:px-8 py-6">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+  <!-- MAIN WORKSPACE -->
+  <section id="dashboardSection" class="relative z-10 flex-1 h-[calc(100vh-70px)] px-6 lg:px-8 pb-5 flex gap-6 w-full">
+    
+    <!-- LEFT: LIBRARY -->
+    <aside id="libraryPanel" class="hidden lg:flex w-[290px] h-full surface-pearl rounded-[2rem] p-4.5 flex-col gap-3.5 transition-all duration-500 flex-shrink-0">
+      <div class="flex items-center justify-between px-1.5 pt-0.5">
+         <div class="flex items-center gap-2">
+           <div class="w-2 h-2 rounded-full bg-sky-500"></div>
+           <h3 class="text-sm font-black text-slate-800 tracking-tight">Projects</h3>
+         </div>
+         <div id="libraryProjectCount" class="w-6 h-6 rounded-full bg-sky-500 badge-icon flex items-center justify-center text-white text-xs font-black shadow-sm">0</div>
+      </div>
+      <div id="libraryProjectList" class="flex-1 overflow-y-auto custom-scrollbar flex flex-col gap-2.5 pr-1">
+         <!-- Populated dynamically by renderVideoList() -->
+      </div>
+    </aside>
+
+    <!-- CENTER: VIDEO STAGE (Precisely balanced 340px centerline) -->
+    <div id="videoStage" class="flex-1 flex flex-col items-center justify-center gap-3.5 transition-transform duration-500 relative min-w-0">
       
-      <!-- LEFT COLUMN: MEDIA ENGINE & SWITCHER (5 Cols) -->
-      <div class="lg:col-span-5 flex flex-col gap-4">
-        
-        <!-- Video Switcher Header & Player Box -->
-        <div class="frosted-glass-card rounded-3xl p-5 flex flex-col gap-4 shadow-xl border border-white/20">
-          
-          <!-- Switcher Bar -->
-          <div class="flex items-center justify-between border-b border-white/20 pb-3 relative">
-            <div class="flex flex-col">
-              <span class="text-[10px] font-mono text-[#fdf8e1]/50 uppercase tracking-wider">Active Engine</span>
-              <div class="flex items-center gap-2">
-                <span id="activeVideoTitle" class="text-sm font-bold text-[#fdf8e1] truncate max-w-[200px]">Select a video...</span>
-                <div id="activeVideoStatus" class="flex items-center gap-1.5 shrink-0"></div>
-              </div>
+      <!-- Video Switcher Header (Locked to 340px) -->
+      <div class="surface-elevated px-4 py-2 rounded-2xl flex items-center justify-between gap-3 relative shadow-sm border border-slate-200/90 w-full max-w-[340px]">
+         <div class="flex items-center gap-2.5 min-w-0">
+           <div class="w-7 h-7 rounded-full bg-sky-500 badge-icon flex items-center justify-center text-white shrink-0">
+              <i data-lucide="play" class="w-3 h-3 fill-current"></i>
+           </div>
+           <div class="flex flex-col min-w-0">
+              <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">Active Engine</span>
+              <span id="activeVideoTitle" class="text-xs font-black text-slate-800 truncate mt-0.5 max-w-[180px]">Select a video...</span>
+           </div>
+         </div>
+         <div class="flex items-center gap-1.5 shrink-0">
+           <div id="activeVideoStatus" class="flex items-center gap-1 shrink-0"></div>
+           <button onclick="toggleVideoSwitcher()" class="p-1 rounded-lg hover:bg-slate-100 transition text-slate-400 cursor-pointer" title="Switch Video">
+              <i data-lucide="chevron-down" class="w-4 h-4"></i>
+           </button>
+         </div>
+         <!-- Dropdown -->
+         <div id="videoSwitcherDropdown" class="hidden absolute top-full mt-2 left-0 w-full surface-elevated rounded-2xl p-2 z-[100] max-h-80 overflow-y-auto custom-scrollbar shadow-2xl border border-slate-200"></div>
+      </div>
+
+      <!-- Hero Video (Seamless 9:16 aspect ratio, zero letterboxing) -->
+      <div id="videoContainer" class="video-bezel relative h-[53vh] aspect-[9/16] rounded-[2rem] overflow-hidden shadow-2xl mx-auto transition-all duration-300">
+         <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500 text-xs font-mono">
+           No Video Selected
+         </div>
+         <video id="videoPlayer" class="w-full h-full object-contain cursor-pointer" playsinline></video>
+      </div>
+
+      <!-- Tactile Transport Dock (Locked to 340px) -->
+      <div id="videoTransportDock" class="w-full max-w-[340px] surface-elevated rounded-[2rem] p-4 flex flex-col gap-2.5 shadow-md border border-white">
+         <div class="flex items-center justify-between text-[11px] font-mono font-bold text-slate-500 px-0.5">
+           <span id="transportTimecode" class="text-sky-600 font-black">00:00.00</span>
+           <span id="transportDuration" class="text-slate-400">00:00.00</span>
+         </div>
+         <div id="timelineTrack" class="timeline-track-neo w-full">
+            <div id="timelineProgress" class="timeline-fill-neo" style="width: 0%;"></div>
+            <div id="timelineScrubber" class="timeline-scrubber-neo" style="left: 0%;"></div>
+         </div>
+         <div class="flex items-center justify-between pt-1">
+            <span id="transportFrameCount" class="text-[10px] font-mono font-bold text-slate-500 surface-recessed px-2 py-0.5 rounded-lg border border-slate-200/80">f: 0</span>
+            
+            <div class="flex items-center gap-2">
+               <button onclick="transportStep(-1)" class="w-8 h-8 rounded-full surface-recessed flex items-center justify-center text-slate-600 btn-soft shadow-sm hover:bg-white transition cursor-pointer border border-slate-200/80" title="Step Back 1 Frame"><i data-lucide="skip-back" class="w-3.5 h-3.5"></i></button>
+               <button id="transportPlayBtn" onclick="toggleTransportPlay()" class="w-11 h-11 rounded-full bg-sky-500 badge-icon text-white flex items-center justify-center btn-soft shadow-lg hover:bg-sky-400 transition cursor-pointer" title="Play / Pause">
+                  <i data-lucide="play" id="transportPlayIcon" class="w-5 h-5 fill-current translate-x-0.5"></i>
+               </button>
+               <button onclick="transportStep(1)" class="w-8 h-8 rounded-full surface-recessed flex items-center justify-center text-slate-600 btn-soft shadow-sm hover:bg-white transition cursor-pointer border border-slate-200/80" title="Step Forward 1 Frame"><i data-lucide="skip-forward" class="w-3.5 h-3.5"></i></button>
+               <button id="transportLoopBtn" onclick="toggleTransportLoop()" class="w-8 h-8 rounded-full surface-recessed flex items-center justify-center text-slate-600 btn-soft shadow-sm hover:bg-white transition cursor-pointer border border-slate-200/80" title="Toggle Loop"><i data-lucide="repeat" class="w-3 h-3"></i></button>
             </div>
             
-            <!-- 3 Dots Menu Button -->
-            <button onclick="toggleVideoSwitcher()" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#fdf8e1] transition cursor-pointer">
-              <i data-lucide="more-vertical" class="w-4 h-4"></i>
-            </button>
-
-            <!-- Floating Video Switcher Dropdown -->
-            <div id="videoSwitcherDropdown" class="hidden absolute top-12 right-0 w-72 max-h-[400px] overflow-y-auto custom-scrollbar bg-[#050505]/95 backdrop-blur-[64px] rounded-2xl border border-[#fdf8e1]/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-[100] flex-col p-2 gap-1">
-              <!-- JS Populates List Here -->
-            </div>
-          </div>
-
-          <!-- The Video Player -->
-          <div id="videoContainer" class="relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-transparent group mx-auto transition-all duration-300">
-            <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-white/40 text-xs font-mono">
-              <i data-lucide="play-circle" class="w-8 h-8 mb-2 opacity-30"></i>
-              No Video Selected
-            </div>
-            <video id="videoPlayer" class="w-full h-full object-contain" controls playsinline></video>
-            <div class="absolute inset-0 pointer-events-none border border-white/5 rounded-2xl"></div>
-          </div>
-
-          <!-- Video Badges / Stats -->
-          <div class="flex items-center justify-between pt-2 border-t border-white/20">
-            <span id="activeFormatBadge" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#fdf8e1]/15 text-[#fdf8e1]/90 border border-white/10 shadow-sm flex items-center gap-1">
-              <i data-lucide="zap" class="w-3 h-3"></i> 9:16 Shorts
-            </span>
-            <span id="videoStatsBadge" class="text-[10px] font-mono text-[#fdf8e1]/60">0.0 MB</span>
-          </div>
-
-        </div>
-
-        <!-- Thumbnail Mini-Card -->
-        <div class="frosted-glass-card rounded-3xl p-5 flex items-center gap-4 shadow-xl border border-white/20">
-          <div id="thumbnailContainer" class="relative w-16 h-28 shrink-0 rounded-xl overflow-hidden bg-black/20 border border-white/20 shadow-lg flex items-center justify-center">
-            <img id="thumbnailImg" src="" class="w-full h-full object-cover hidden" />
-            <div id="thumbnailPlaceholder" class="text-[9px] font-mono text-center text-[#fdf8e1]/40 px-1">Generating</div>
-          </div>
-          <div class="flex flex-col gap-2 w-full">
-            <div class="flex items-center justify-between text-xs font-mono font-bold uppercase text-[#fdf8e1]/60">
-              <span class="flex items-center gap-1.5"><i data-lucide="image" class="w-3.5 h-3.5 text-amber-400"></i> Cover</span>
-              <span id="thumbnailBadge" class="text-[10px] flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3 h-3"></i> Ready</span>
-            </div>
-            <div class="flex items-center gap-2 w-full">
-              <button id="previewThumbBtn" type="button" onclick="openThumbnailModal()" class="flex-1 py-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-center text-xs font-bold text-[#fdf8e1] transition cursor-pointer">
-                Preview
-              </button>
-              <a id="viewThumbFullBtn" download="thumbnail.png" class="flex-1 py-2 rounded-xl border border-[#fdf8e1]/40 bg-[#fdf8e1]/10 hover:bg-[#fdf8e1]/20 text-center text-xs font-bold text-[#fdf8e1] transition cursor-pointer">
-                Download 4K
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN: METADATA & RELEASE STATION (7 Cols) -->
-      <div class="lg:col-span-7 flex flex-col gap-4">
-        <!-- Kept original layout but removed redundant padding to fit "sleeper" density -->
-
-  <div class="frosted-glass-card rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-xl border border-white/20">
-          <div class="flex items-center justify-between border-b border-white/20 pb-3">
-            <div class="flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded-xl bg-[#fdf8e1] flex items-center justify-center text-black font-bold text-xs">
-                ⚡
-              </div>
-              <h3 class="text-sm font-black text-[#fdf8e1] uppercase tracking-wider">Metadata & Release Station</h3>
-            </div>
-            <span id="schedModeBadge" class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#fdf8e1]/20 text-[#fdf8e1]/90 font-bold">Direct Mode</span>
-          </div>
-
-          <!-- Video Title with Char Counter -->
-          <div class="flex flex-col gap-1.5">
-            <div class="flex items-center justify-between text-xs font-mono text-[#fdf8e1]/80">
-              <label for="editTitle" class="font-bold flex items-center gap-1.5">
-                <i data-lucide="type" class="w-3.5 h-3.5 text-[#fdf8e1]/80"></i>
-                <span>Viral Video Title</span>
-              </label>
-              <span id="titleCharCount" class="text-[#fdf8e1]/60">0/100</span>
-            </div>
-            <input
-              type="text"
-              id="editTitle"
-              placeholder="e.g. Why You Pretend Not to Care (The Fear of Trying) #Shorts"
-              class="w-full text-xs px-3.5 py-2.5 rounded-xl sleek-input text-[#fdf8e1] focus:border-white/50"
-              oninput="updateTitleCharCount()"
-            />
-          </div>
-
-          <!-- Description Box -->
-          <div class="flex flex-col gap-1.5">
-            <label for="metaDescription" class="text-xs font-mono font-bold text-[#fdf8e1]/80 flex items-center gap-1.5">
-              <i data-lucide="align-left" class="w-3.5 h-3.5 text-white/50"></i>
-              <span>Description</span>
-            </label>
-            <textarea
-              id="metaDescription"
-              rows="3"
-              placeholder="Detailed description with scientific context..."
-              class="w-full text-xs p-3 rounded-xl sleek-input text-[#fdf8e1] focus:border-white/50 custom-scrollbar"
-            ></textarea>
-          </div>
-
-          <!-- Hashtags Manager -->
-          <div class="flex flex-col gap-1.5">
-            <label class="text-xs font-mono font-bold text-[#fdf8e1]/80 flex items-center gap-1.5">
-              <i data-lucide="hash" class="w-3.5 h-3.5 text-[#fdf8e1]/80"></i>
-              <span>Hashtags & Tags</span>
-            </label>
-            <div id="tagsContainer" class="flex flex-wrap items-center gap-1.5 p-2 rounded-xl sleek-input min-h-[42px]">
-              <input
-                type="text"
-                id="tagInput"
-                placeholder="+ Add tag..."
-                class="text-xs bg-transparent border-none text-[#fdf8e1] focus:outline-none min-w-[80px]"
-                onkeydown="if(event.key==='Enter'||event.key===','){event.preventDefault();addTagFromInput();}"
-              />
-            </div>
-          </div>
-
-          <!-- Interactive Spoken CTA & Pinned Comment -->
-          <div class="flex flex-col gap-2 p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-300 focus-within:border-white/30 focus-within:shadow-[0_0_25px_rgba(253,248,225,0.06)]">
-            <div class="flex items-center justify-between">
-              <label for="metaPinnedComment" class="text-xs font-mono font-bold text-[#fdf8e1] flex items-center gap-2">
-                <div class="w-5 h-5 rounded-lg bg-amber-400/15 border border-amber-400/30 flex items-center justify-center text-amber-300 shrink-0">
-                  <i data-lucide="message-square" class="w-3 h-3"></i>
-                </div>
-                <span>Provocative Pinned Comment</span>
-                <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-[#fdf8e1]/70 border border-white/10">CTA HOOK</span>
-              </label>
-              <button
-                type="button"
-                id="copyPinnedCommentBtn"
-                onclick="copyPinnedComment()"
-                class="text-[10px] font-mono px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-[#fdf8e1] border border-white/10 hover:border-white/25 transition-all duration-200 flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-90"
-                title="Copy comment to clipboard"
-              >
-                <i data-lucide="copy" id="copyPinnedCommentBtnIcon" class="w-3 h-3"></i>
-                <span id="copyPinnedCommentBtnText">Copy</span>
-              </button>
-            </div>
-            <textarea
-              id="metaPinnedComment"
-              rows="2"
-              placeholder="Question for you: What's the one thing you secretly care about? 👇"
-              class="w-full text-xs p-3 rounded-xl sleek-input text-[#fdf8e1] focus:border-white/40 custom-scrollbar leading-relaxed bg-black/40"
-            ></textarea>
-            <div class="flex items-center justify-between pt-1">
-              <label class="flex items-center gap-2 cursor-pointer text-xs text-[#fdf8e1]/80 hover:text-[#fdf8e1] transition">
-                <input type="checkbox" id="autoPostCommentCheck" checked class="w-4 h-4 rounded accent-[#fdf8e1] cursor-pointer" />
-                <span class="font-medium">Auto-pin on upload</span>
-              </label>
-              <button
-                id="postCommentNowBtn"
-                onclick="postPinnedCommentNow()"
-                class="text-[11px] font-bold text-[#fdf8e1]/70 hover:text-[#fdf8e1] transition-all flex items-center gap-1.5 cursor-pointer px-3 py-1 rounded-xl hover:bg-white/10 group"
-              >
-                <i data-lucide="send" class="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"></i>
-                <span>Post Comment Now</span>
-              </button>
-            </div>
-          </div>
-
-        <!-- Settings Row: Custom Glass Visibility / Scheduling & Category -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-          
-          <!-- Hidden native selects to preserve 100% API & script compatibility -->
-          <select id="metaPrivacy" onchange="onPrivacyChange()" class="hidden">
-            <option value="public">public</option>
-            <option value="scheduled">scheduled</option>
-            <option value="unlisted">unlisted</option>
-            <option value="private">private</option>
-          </select>
-          <select id="metaCategory" class="hidden">
-            <option value="27">27</option>
-            <option value="22">22</option>
-            <option value="24">24</option>
-            <option value="26">26</option>
-          </select>
-
-          <!-- Custom Animated Visibility & Schedule Selector -->
-          <div class="flex flex-col gap-1.5 relative" id="customPrivacyContainer">
-            <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider flex items-center justify-between">
-              <span class="flex items-center gap-1.5">
-                <i data-lucide="shield" class="w-3.5 h-3.5 text-[#fdf8e1]/60"></i>
-                Visibility & Schedule
-              </span>
-              <span id="schedModeBadge" class="hidden text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 animate-pulse">
-                📅 AUTO-TIMER ACTIVE
-              </span>
-            </label>
-
-            <!-- Custom Trigger Button -->
-            <button
-              type="button"
-              id="customPrivacyTrigger"
-              onclick="toggleCustomDropdown('privacy')"
-              class="w-full px-4 py-3 rounded-2xl sleek-input border border-white/10 hover:border-white/25 bg-white/5 flex items-center justify-between cursor-pointer transition-all duration-300 focus:outline-none focus:border-white/40 shadow-sm group"
-            >
-              <div class="flex items-center gap-2.5 min-w-0" id="customPrivacyDisplay">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 live-pulse-dot shrink-0"></span>
-                <span class="text-xs font-extrabold text-[#fdf8e1] tracking-tight truncate">🌐 Public (Immediate Live)</span>
-              </div>
-              <i data-lucide="chevron-down" id="customPrivacyChevron" class="w-4 h-4 text-[#fdf8e1]/60 group-hover:text-[#fdf8e1] transition-transform duration-300 shrink-0"></i>
-            </button>
-
-            <!-- Custom Animated Dropdown Menu -->
-            <div
-              id="customPrivacyMenu"
-              class="hidden absolute left-0 right-0 top-full mt-2 z-50 p-2 rounded-2xl bg-[#0c0c0e]/95 backdrop-blur-3xl border border-white/15 shadow-2xl flex flex-col gap-1 dropdown-anim"
-            >
-              <!-- 1. Public Option -->
-              <div
-                onclick="selectCustomPrivacy('public')"
-                class="privacy-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
-                data-value="public"
-              >
-                <div class="flex items-center gap-3">
-                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 live-pulse-dot shrink-0"></span>
-                  <div>
-                    <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-emerald-300 transition-colors">🌐 Public (Immediate Live)</div>
-                    <div class="text-[10px] text-[#fdf8e1]/60">Pushes directly to YouTube & subscribers instantly</div>
-                  </div>
-                </div>
-                <i data-lucide="check" class="privacy-check w-4 h-4 text-emerald-400 opacity-100 shrink-0"></i>
-              </div>
-
-              <!-- 2. Scheduled Option -->
-              <div
-                onclick="selectCustomPrivacy('scheduled')"
-                class="privacy-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
-                data-value="scheduled"
-              >
-                <div class="flex items-center gap-3">
-                  <span class="w-2.5 h-2.5 rounded-full bg-purple-400 purple-pulse-dot shrink-0"></span>
-                  <div>
-                    <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-purple-300 transition-colors">📅 Scheduled Release (Auto-Publish)</div>
-                    <div class="text-[10px] text-[#fdf8e1]/60">Upload now, automatically go public at peak engagement time</div>
-                  </div>
-                </div>
-                <i data-lucide="check" class="privacy-check w-4 h-4 text-purple-400 opacity-0 shrink-0"></i>
-              </div>
-
-              <!-- 3. Unlisted Option -->
-              <div
-                onclick="selectCustomPrivacy('unlisted')"
-                class="privacy-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
-                data-value="unlisted"
-              >
-                <div class="flex items-center gap-3">
-                  <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span>
-                  <div>
-                    <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-sky-300 transition-colors">🔗 Unlisted (Link Only)</div>
-                    <div class="text-[10px] text-[#fdf8e1]/60">Only people with the secret link can view</div>
-                  </div>
-                </div>
-                <i data-lucide="check" class="privacy-check w-4 h-4 text-sky-400 opacity-0 shrink-0"></i>
-              </div>
-
-              <!-- 4. Private Option -->
-              <div
-                onclick="selectCustomPrivacy('private')"
-                class="privacy-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
-                data-value="private"
-              >
-                <div class="flex items-center gap-3">
-                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0"></span>
-                  <div>
-                    <div class="text-xs font-bold text-amber-300 group-hover:text-amber-200 transition-colors">🔒 Private (Draft)</div>
-                    <div class="text-[10px] text-[#fdf8e1]/60">Hidden draft visible only to account owner</div>
-                  </div>
-                </div>
-                <i data-lucide="check" class="privacy-check w-4 h-4 text-amber-400 opacity-0 shrink-0"></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Custom Animated Category Selector -->
-          <div class="flex flex-col gap-1.5 relative" id="customCategoryContainer">
-            <label class="text-xs font-mono font-bold uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-1.5">
-              <i data-lucide="tag" class="w-3.5 h-3.5 text-[#fdf8e1]/60"></i>
-              Category
-            </label>
-
-            <!-- Custom Category Trigger Button -->
-            <button
-              type="button"
-              id="customCategoryTrigger"
-              onclick="toggleCustomDropdown('category')"
-              class="w-full px-4 py-3 rounded-2xl sleek-input border border-white/10 hover:border-white/25 bg-white/5 flex items-center justify-between cursor-pointer transition-all duration-300 focus:outline-none focus:border-white/40 shadow-sm group"
-            >
-              <div class="flex items-center gap-2.5 min-w-0" id="customCategoryDisplay">
-                <span class="text-base">🎓</span>
-                <span class="text-xs font-extrabold text-[#fdf8e1] tracking-tight truncate">Education & Self Improvement</span>
-              </div>
-              <i data-lucide="chevron-down" id="customCategoryChevron" class="w-4 h-4 text-[#fdf8e1]/60 group-hover:text-[#fdf8e1] transition-transform duration-300 shrink-0"></i>
-            </button>
-
-            <!-- Custom Category Dropdown Menu -->
-            <div
-              id="customCategoryMenu"
-              class="hidden absolute left-0 right-0 top-full mt-2 z-50 p-2 rounded-2xl bg-[#0c0c0e]/95 backdrop-blur-3xl border border-white/15 shadow-2xl flex flex-col gap-1 dropdown-anim"
-            >
-              <div
-                onclick="selectCustomCategory('27')"
-                class="category-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
-                data-value="27"
-              >
-                <div class="flex items-center gap-2.5">
-                  <span class="text-base">🎓</span>
-                  <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-amber-200 transition-colors">Education & Self Improvement</div>
-                </div>
-                <i data-lucide="check" class="category-check w-4 h-4 text-[#fdf8e1] opacity-100 shrink-0"></i>
-              </div>
-
-              <div
-                onclick="selectCustomCategory('22')"
-                class="category-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
-                data-value="22"
-              >
-                <div class="flex items-center gap-2.5">
-                  <span class="text-base">👤</span>
-                  <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-amber-200 transition-colors">People & Blogs</div>
-                </div>
-                <i data-lucide="check" class="category-check w-4 h-4 text-[#fdf8e1] opacity-0 shrink-0"></i>
-              </div>
-
-              <div
-                onclick="selectCustomCategory('24')"
-                class="category-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
-                data-value="24"
-              >
-                <div class="flex items-center gap-2.5">
-                  <span class="text-base">🎬</span>
-                  <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-amber-200 transition-colors">Entertainment</div>
-                </div>
-                <i data-lucide="check" class="category-check w-4 h-4 text-[#fdf8e1] opacity-0 shrink-0"></i>
-              </div>
-
-              <div
-                onclick="selectCustomCategory('26')"
-                class="category-option-item px-3 py-2.5 rounded-xl hover:bg-white/10 flex items-center justify-between cursor-pointer transition-all duration-200 group"
-                data-value="26"
-              >
-                <div class="flex items-center gap-2.5">
-                  <span class="text-base">💡</span>
-                  <div class="text-xs font-bold text-[#fdf8e1] group-hover:text-amber-200 transition-colors">Howto & Style</div>
-                </div>
-                <i data-lucide="check" class="category-check w-4 h-4 text-[#fdf8e1] opacity-0 shrink-0"></i>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- DEDICATED SCHEDULING CONTROL PANEL (Revealed when 'scheduled' is selected) -->
-        <div id="scheduleControlBox" class="hidden p-5 rounded-3xl sleek-input border border-purple-500/40 bg-gradient-to-b from-purple-950/25 to-black/60 flex flex-col gap-4 shadow-2xl transition-all duration-300 dropdown-anim">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2 text-xs font-extrabold text-[#fdf8e1] uppercase tracking-wide">
-              <div class="w-6 h-6 rounded-lg bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300">
-                <i data-lucide="calendar-clock" class="w-3.5 h-3.5"></i>
-              </div>
-              <span>Scheduled Auto-Publish Timer</span>
-            </div>
-            <span class="text-[10px] font-mono text-purple-200 bg-purple-500/20 px-2.5 py-0.5 rounded-full border border-purple-500/30 font-bold">
-              YouTube Cloud Queue
-            </span>
-          </div>
-
-          <!-- Date-Time Input with Direct Picker -->
-          <div class="flex flex-col sm:flex-row items-center gap-3">
-            <input
-              type="datetime-local"
-              id="scheduleDateTime"
-              onchange="onDashboardScheduleDateTimeChange()"
-              class="w-full sm:flex-1 px-4 py-3 rounded-2xl sleek-input text-sm text-[#fdf8e1] font-mono font-bold bg-black/60 border-purple-500/40 focus:border-purple-400 cursor-pointer shadow-inner"
-            />
-            <div class="flex items-center gap-2 w-full sm:w-auto">
-              <button
-                type="button"
-                onclick="setQuickSchedule(1)"
-                class="flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/35 text-purple-200 text-xs font-bold border border-purple-500/30 transition whitespace-nowrap active:scale-95 cursor-pointer"
-                title="Schedule in 1 hour"
-              >
-                +1 Hour
-              </button>
-              <button
-                type="button"
-                onclick="setQuickSchedule(2)"
-                class="flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/35 text-purple-200 text-xs font-bold border border-purple-500/30 transition whitespace-nowrap active:scale-95 cursor-pointer"
-                title="Schedule in 2 hours"
-              >
-                +2 Hours
-              </button>
-            </div>
-          </div>
-
-          <!-- User's Exact 5 Quick Time Slot Options with Interactive Glow States -->
-          <div class="flex flex-col gap-2 pt-1 border-t border-purple-500/20">
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-mono font-extrabold uppercase text-[#fdf8e1] tracking-wider flex items-center gap-1.5">
-                <i data-lucide="zap" class="w-3.5 h-3.5 text-yellow-400"></i>
-                Select Peak Time Slot:
-              </span>
-              <span class="text-[10px] text-[#fdf8e1]/60 font-mono">Highlights matching slot</span>
-            </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
-              <!-- 1. 1:00 AM -->
-              <button
-                type="button"
-                data-hour="1"
-                onclick="setQuickTargetTime(1, 0)"
-                class="slot-btn px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
-              >
-                <div class="flex items-center gap-1 text-[#fdf8e1] font-black">
-                  <span>🌙</span>
-                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-purple-200">1:00 AM</span>
-                </div>
-                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Night Slot</span>
-              </button>
-
-              <!-- 2. 2:00 AM -->
-              <button
-                type="button"
-                data-hour="2"
-                onclick="setQuickTargetTime(2, 0)"
-                class="slot-btn px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
-              >
-                <div class="flex items-center gap-1 text-[#fdf8e1] font-black">
-                  <span>🌙</span>
-                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-purple-200">2:00 AM</span>
-                </div>
-                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Late Night</span>
-              </button>
-
-              <!-- 3. 7:00 AM -->
-              <button
-                type="button"
-                data-hour="7"
-                onclick="setQuickTargetTime(7, 0)"
-                class="slot-btn px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
-              >
-                <div class="flex items-center gap-1 text-amber-300 font-black">
-                  <span>🌅</span>
-                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-amber-200">7:00 AM</span>
-                </div>
-                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Morning Rush</span>
-              </button>
-
-              <!-- 4. 2:00 PM -->
-              <button
-                type="button"
-                data-hour="14"
-                onclick="setQuickTargetTime(14, 0)"
-                class="slot-btn px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
-              >
-                <div class="flex items-center gap-1 text-[#fdf8e1]/80 font-black">
-                  <span>☀️</span>
-                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-[#fdf8e1]">2:00 PM</span>
-                </div>
-                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Afternoon</span>
-              </button>
-
-              <!-- 5. 9:00 PM -->
-              <button
-                type="button"
-                data-hour="21"
-                onclick="setQuickTargetTime(21, 0)"
-                class="slot-btn col-span-2 sm:col-span-1 px-3 py-2.5 rounded-xl bg-black/50 hover:bg-purple-500/25 active:scale-95 text-xs text-[#fdf8e1] border border-purple-500/30 hover:border-purple-400 flex flex-col items-center justify-center gap-0.5 transition shadow-sm group cursor-pointer"
-              >
-                <div class="flex items-center gap-1 text-rose-300 font-black">
-                  <span>🌆</span>
-                  <span class="text-sm font-black tracking-tight text-[#fdf8e1] group-hover:text-rose-200">9:00 PM</span>
-                </div>
-                <span class="text-[9px] text-[#fdf8e1]/60 font-mono">Prime Evening</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Timezone & Confirmation Callout -->
-          <div id="schedulePreviewText" class="text-xs text-purple-200 font-medium flex items-center gap-2 pt-1 border-t border-purple-500/20">
-            <i data-lucide="info" class="w-4 h-4 text-[#fdf8e1]/60 flex-shrink-0"></i>
-            <span>Video will upload immediately in private status; YouTube will automatically make it public at your chosen time.</span>
-          </div>
-        </div>
-
-        <!-- 3 DEDICATED MULTI-PLATFORM PUBLISH BUTTONS -->
-        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <button
-            onclick="saveMetadataOnly()"
-            class="w-full sm:w-auto px-4 py-3 rounded-2xl btn-draft-aura sleek-input hover:bg-white/5 text-[#fdf8e1]/80 text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <i data-lucide="save" class="w-4 h-4"></i>
-            <span>Save Draft</span>
-          </button>
-
-          <div class="flex items-center gap-2.5 w-full sm:w-auto">
-            <!-- 1. YouTube Button -->
-            <button
-              onclick="openPublishModal('youtube')"
-              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111]/80 border border-white/15 btn-yt-aura text-[#fdf8e1] text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer group"
-            >
-              <i id="dashboardYtBtnIcon" data-lucide="play" class="w-4 h-4 text-red-400 group-hover:scale-110 transition-transform"></i>
-              <span id="dashboardYtBtnText">YouTube</span>
-            </button>
-
-            <!-- 2. Instagram Button -->
-            <button
-              onclick="openPublishModal('instagram')"
-              class="flex-1 sm:flex-initial px-4 py-3 rounded-2xl bg-[#111]/80 border border-white/15 btn-ig-aura text-[#fdf8e1] text-xs font-extrabold flex items-center justify-center gap-2 shadow-lg cursor-pointer group"
-            >
-              <i data-lucide="camera" class="w-4 h-4 text-pink-400 group-hover:scale-110 transition-transform"></i>
-              <span>Instagram</span>
-            </button>
-
-            <!-- 3. BLAST BOTH PLATFORMS BUTTON -->
-            <button
-              onclick="openPublishModal('both')"
-              class="flex-1 sm:flex-initial px-5 py-3 rounded-2xl solid-white-btn shimmer-btn blast-btn-group text-xs font-black flex items-center justify-center gap-2 shadow-xl cursor-pointer"
-              title="Publish or Schedule to BOTH YouTube & Instagram at once"
-            >
-              <i data-lucide="rocket" class="w-4 h-4 rocket-icon"></i>
-              <span id="dashboardBlastBtnText">Blast Both</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Live Upload Progress Card -->
-        <div id="uploadProgressCard" class="hidden p-4 rounded-2xl bg-[#111] border border-white/20 flex flex-col gap-3">
-          <div class="flex items-center justify-between text-xs font-bold">
-            <span id="uploadStageText" class="text-[#fdf8e1]/80 flex items-center gap-2">
-              <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
-              Uploading to YouTube...
-            </span>
-            <span id="uploadPercentText" class="font-mono text-[#fdf8e1]">0%</span>
-          </div>
-          <div class="w-full h-2 bg-black/50 rounded-full overflow-hidden">
-            <div id="uploadProgressBar" class="h-full bg-[#fdf8e1] transition-all duration-300" style="width: 0%"></div>
-          </div>
-          <div id="uploadResultLink" class="hidden text-xs text-[#fdf8e1]/80 font-bold flex items-center gap-2 mt-1"></div>
-        </div>
-
-      
+            <button id="transportMuteBtn" onclick="toggleTransportMute()" class="w-8 h-8 rounded-full surface-recessed flex items-center justify-center text-slate-600 btn-soft shadow-sm hover:bg-white transition cursor-pointer border border-slate-200/80" title="Mute / Unmute"><i data-lucide="volume-2" id="transportMuteIcon" class="w-3.5 h-3.5"></i></button>
+         </div>
       </div>
     </div>
+
+    <!-- RIGHT: CONTEXT PANEL -->
+    <aside id="contextPanel" class="w-[360px] h-full surface-pearl rounded-[2rem] p-4.5 flex flex-col justify-between overflow-hidden transition-all duration-500 flex-shrink-0">
+       
+       <!-- Top Scrollable Content -->
+       <div class="flex-1 overflow-y-auto custom-scrollbar flex flex-col gap-3 pr-1.5">
+          <!-- Context Header -->
+          <div class="flex items-center gap-2.5 px-0.5 pt-0.5">
+             <div class="w-7 h-7 rounded-full bg-purple-500 badge-icon flex items-center justify-center text-white"><i data-lucide="layers" class="w-3.5 h-3.5"></i></div>
+             <h3 class="text-sm font-black text-slate-800 tracking-tight">Context</h3>
+          </div>
+
+          <!-- Thumbnail Card -->
+          <div class="surface-elevated rounded-2xl p-3 flex items-center gap-3 border border-slate-200/90 shadow-sm">
+             <div id="thumbnailContainer" class="relative w-16 h-24 shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-inner flex items-center justify-center">
+                <img id="thumbnailImg" src="" class="w-full h-full object-cover hidden" />
+                <div id="thumbnailPlaceholder" class="absolute inset-0 flex items-center justify-center text-[9px] font-mono text-slate-400 text-center px-1">Generating</div>
+             </div>
+             <div class="flex-1 flex flex-col gap-1.5 min-w-0">
+                <div class="flex items-center justify-between">
+                   <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Thumbnail</span>
+                   <span id="thumbnailBadge" class="text-[9px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">Ready</span>
+                </div>
+                <span class="text-xs font-bold text-slate-800 truncate">Cover Image</span>
+                <div class="flex gap-1.5 pt-0.5">
+                   <button id="previewThumbBtn" onclick="openThumbnailModal()" class="flex-1 py-1.5 rounded-xl surface-recessed text-center text-[10px] font-bold text-slate-700 hover:bg-slate-200/60 transition cursor-pointer btn-soft border border-slate-200/60">Preview</button>
+                   <a id="viewThumbFullBtn" download="thumbnail.png" class="flex-1 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-center text-[10px] font-bold text-sky-700 border border-sky-200 transition cursor-pointer shadow-sm btn-soft">4K Full</a>
+                </div>
+             </div>
+          </div>
+
+          <!-- Title -->
+          <div class="flex flex-col gap-1">
+             <div class="flex justify-between text-[10px] font-bold text-slate-500 uppercase tracking-wider px-0.5">
+                <label for="editTitle">Video Title</label>
+                <span id="titleCharCount">0/100</span>
+             </div>
+             <input type="text" id="editTitle" oninput="updateTitleCharCount()" class="w-full surface-recessed rounded-xl px-3.5 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:bg-white border border-slate-200/80 transition" placeholder="Enter title...">
+          </div>
+
+          <!-- Description -->
+          <div class="flex flex-col gap-1">
+             <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-0.5">Description</label>
+             <textarea id="metaDescription" rows="2" class="w-full surface-recessed rounded-xl px-3.5 py-2 text-xs font-medium text-slate-700 focus:outline-none focus:bg-white border border-slate-200/80 custom-scrollbar transition"></textarea>
+          </div>
+
+          <!-- Tags -->
+          <div class="flex flex-col gap-1">
+             <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-0.5">Tags</label>
+             <div id="tagsContainer" class="surface-recessed rounded-xl p-2 flex flex-wrap gap-1.5 min-h-[40px] border border-slate-200/80">
+                <input type="text" id="tagInput" onkeydown="if(event.key==='Enter'||event.key===','){event.preventDefault();addTagFromInput();}" class="bg-transparent border-none text-xs text-slate-700 focus:outline-none flex-1 min-w-[80px]" placeholder="+ Add tag">
+             </div>
+          </div>
+
+          <!-- Pinned Comment -->
+          <div class="surface-elevated rounded-2xl p-3 flex flex-col gap-2 relative border border-slate-200/90 shadow-sm">
+             <div class="flex items-center justify-between px-0.5">
+                <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Pinned Comment</label>
+                <button id="copyPinnedCommentBtn" onclick="copyPinnedComment()" class="text-[10px] font-bold text-sky-600 hover:text-sky-700 flex items-center gap-1 cursor-pointer"><i data-lucide="copy" id="copyPinnedCommentBtnIcon" class="w-3 h-3"></i> <span id="copyPinnedCommentBtnText">Copy</span></button>
+             </div>
+             <textarea id="metaPinnedComment" rows="1" class="w-full surface-recessed rounded-xl px-3 py-1.5 text-xs font-medium text-slate-700 focus:outline-none border border-slate-200/80 custom-scrollbar"></textarea>
+             <div class="flex justify-between items-center px-0.5">
+                <label class="flex items-center gap-1.5 text-[10px] font-bold text-slate-500 cursor-pointer">
+                   <input type="checkbox" id="autoPostCommentCheck" checked class="accent-sky-500 w-3.5 h-3.5"> Auto-pin
+                </label>
+                <button id="postCommentNowBtn" onclick="postPinnedCommentNow()" class="text-[10px] font-bold text-purple-600 hover:text-purple-700 cursor-pointer">Post Now</button>
+             </div>
+          </div>
+
+          <!-- Visibility & Category -->
+          <select id="metaPrivacy" onchange="onPrivacyChange()" class="hidden"><option value="public">public</option><option value="scheduled">scheduled</option><option value="unlisted">unlisted</option><option value="private">private</option></select>
+          <select id="metaCategory" class="hidden"><option value="27">27</option><option value="22">22</option><option value="24">24</option><option value="26">26</option></select>
+          
+          <div class="grid grid-cols-2 gap-2.5">
+             <div id="customPrivacyContainer" class="relative">
+                <button id="customPrivacyTrigger" onclick="toggleCustomDropdown('privacy')" class="w-full surface-elevated rounded-xl px-3 py-2 flex items-center justify-between btn-soft text-left border border-slate-200/90 shadow-sm cursor-pointer">
+                   <div id="customPrivacyDisplay" class="flex items-center gap-2 text-xs font-bold text-slate-700 truncate">
+                      <div class="w-2 h-2 rounded-full bg-emerald-500 badge-icon shrink-0"></div> Public
+                   </div>
+                   <i data-lucide="chevron-down" id="customPrivacyChevron" class="w-3 h-3 text-slate-400 shrink-0"></i>
+                </button>
+                <div id="customPrivacyMenu" class="hidden absolute left-0 bottom-full mb-1 w-[150px] surface-elevated rounded-xl p-1 z-50 border border-slate-200 shadow-xl">
+                   <div onclick="selectCustomPrivacy('public')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer">Public</div>
+                   <div onclick="selectCustomPrivacy('scheduled')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer">Scheduled</div>
+                   <div onclick="selectCustomPrivacy('unlisted')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer">Unlisted</div>
+                   <div onclick="selectCustomPrivacy('private')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer">Private</div>
+                </div>
+             </div>
+             <div id="customCategoryContainer" class="relative">
+                <button id="customCategoryTrigger" onclick="toggleCustomDropdown('category')" class="w-full surface-elevated rounded-xl px-3 py-2 flex items-center justify-between btn-soft text-left border border-slate-200/90 shadow-sm cursor-pointer">
+                   <div id="customCategoryDisplay" class="flex items-center gap-2 text-xs font-bold text-slate-700 truncate">
+                      🎓 Edu
+                   </div>
+                   <i data-lucide="chevron-down" id="customCategoryChevron" class="w-3 h-3 text-slate-400 shrink-0"></i>
+                </button>
+                <div id="customCategoryMenu" class="hidden absolute right-0 bottom-full mb-1 w-[150px] surface-elevated rounded-xl p-1 z-50 border border-slate-200 shadow-xl">
+                   <div onclick="selectCustomCategory('27')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer">Education</div>
+                   <div onclick="selectCustomCategory('22')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer">People</div>
+                   <div onclick="selectCustomCategory('24')" class="px-3 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer">Entertainment</div>
+                </div>
+             </div>
+          </div>
+
+          <!-- Schedule Box -->
+          <div id="scheduleControlBox" class="hidden surface-elevated rounded-2xl p-3 flex flex-col gap-2 border border-sky-300 shadow-sm">
+             <div class="flex items-center justify-between px-0.5">
+                <span class="text-[10px] font-bold text-slate-600 uppercase tracking-wider">Auto-Publish</span>
+                <span id="schedModeBadge" class="text-[9px] font-mono font-bold bg-sky-100 text-sky-700 px-2 py-0.5 rounded-full">ACTIVE</span>
+             </div>
+             <input type="datetime-local" id="scheduleDateTime" onchange="onDashboardScheduleDateTimeChange()" class="w-full surface-recessed rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 focus:outline-none border border-slate-200/80">
+             <div class="grid grid-cols-5 gap-1">
+                <button data-hour="1" onclick="setQuickTargetTime(1, 0)" class="surface-recessed rounded-lg py-1 text-[10px] font-bold text-slate-600 hover:bg-white transition btn-soft">1a</button>
+                <button data-hour="7" onclick="setQuickTargetTime(7, 0)" class="surface-recessed rounded-lg py-1 text-[10px] font-bold text-slate-600 hover:bg-white transition btn-soft">7a</button>
+                <button data-hour="14" onclick="setQuickTargetTime(14, 0)" class="surface-recessed rounded-lg py-1 text-[10px] font-bold text-slate-600 hover:bg-white transition btn-soft">2p</button>
+                <button data-hour="18" onclick="setQuickTargetTime(18, 0)" class="surface-recessed rounded-lg py-1 text-[10px] font-bold text-slate-600 hover:bg-white transition btn-soft">6p</button>
+                <button data-hour="21" onclick="setQuickTargetTime(21, 0)" class="surface-recessed rounded-lg py-1 text-[10px] font-bold text-slate-600 hover:bg-white transition btn-soft">9p</button>
+             </div>
+             <div id="schedulePreviewText" class="text-[9px] text-slate-400 leading-tight px-0.5">Will automatically go public.</div>
+          </div>
+       </div>
+
+       <!-- Sticky Bottom Action Dock: Perfectly aligned 3-column grid -->
+       <div class="pt-2.5 border-t border-slate-200/90 flex flex-col gap-2 shrink-0">
+          <button onclick="openPublishModal('both')" class="w-full surface-elevated bg-white text-slate-800 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-2 btn-soft shadow-sm border border-slate-200/90 hover:bg-slate-50 transition cursor-pointer">
+             <div class="w-5 h-5 rounded-full bg-gradient-to-tr from-amber-400 to-pink-500 text-white flex items-center justify-center badge-icon"><i data-lucide="rocket" class="w-3 h-3"></i></div>
+             <span id="dashboardBlastBtnText">Blast Both</span>
+          </button>
+          <div class="grid grid-cols-3 gap-2">
+             <button onclick="saveMetadataOnly()" class="surface-elevated text-[11px] font-bold text-slate-700 py-2 rounded-xl hover:text-slate-900 hover:bg-slate-50 border border-slate-200/90 shadow-sm btn-soft text-center cursor-pointer truncate">Save Draft</button>
+             <button onclick="openPublishModal('youtube')" class="surface-elevated text-[11px] font-bold text-red-600 py-2 rounded-xl flex items-center justify-center gap-1 border border-red-200/80 shadow-sm hover:bg-red-50/50 btn-soft cursor-pointer"><i id="dashboardYtBtnIcon" data-lucide="play" class="w-3 h-3 fill-current"></i> <span id="dashboardYtBtnText">YouTube</span></button>
+             <button onclick="openPublishModal('instagram')" class="surface-elevated text-[11px] font-bold text-pink-600 py-2 rounded-xl flex items-center justify-center gap-1 border border-pink-200/80 shadow-sm hover:bg-pink-50/50 btn-soft cursor-pointer"><i data-lucide="camera" class="w-3 h-3"></i> Instagram</button>
+          </div>
+          <!-- Upload Progress -->
+          <div id="uploadProgressCard" class="hidden surface-elevated rounded-xl p-2.5 flex flex-col gap-1.5 border border-sky-300 shadow-sm">
+             <div class="flex items-center justify-between text-[10px] font-bold text-slate-600">
+                <span id="uploadStageText" class="flex items-center gap-1"><i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i> Uploading...</span>
+                <span id="uploadPercentText" class="text-sky-600">0%</span>
+             </div>
+             <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                <div id="uploadProgressBar" class="h-full bg-sky-500 transition-all" style="width: 0%"></div>
+             </div>
+             <div id="uploadResultLink" class="hidden text-[10px] font-bold text-emerald-600 break-all"></div>
+          </div>
+       </div>
+    </aside>
   </section>
+
   
   <!-- Preserved IDs for channel active states -->
   <div id="switch-self_improvement" class="hidden"></div>
@@ -1811,7 +1604,7 @@
     // ═══════════════════════════════════════════════════
     // INSTAGRAM PLAYWRIGHT MULTI-ACCOUNT HANDLERS
     // ═══════════════════════════════════════════════════
-    async function checkInstagramStatus() {
+        async function checkInstagramStatus() {
       const igSection = document.getElementById('instagramAuthSection');
       if (igSection) igSection.classList.remove('hidden');
       const settingsContainer = document.getElementById('settingsIgAccountsContainer');
@@ -1848,23 +1641,23 @@
             <div class="relative">
               <button
                 onclick="toggleIgDropdown(event)"
-                class="flex items-center gap-2 px-3 py-1.5 rounded-2xl sleek-input border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 transition cursor-pointer"
+                class="surface-elevated flex items-center gap-2 px-3 py-1.5 rounded-2xl border border-pink-200/80 hover:bg-pink-50/50 transition cursor-pointer shadow-sm btn-soft"
                 title="Switch Instagram Account"
               >
                 <img
                   src="${avatarUrl}"
-                  class="w-5 h-5 rounded-full object-cover border border-pink-400 shrink-0"
+                  class="w-5 h-5 rounded-full object-cover border border-pink-300 shrink-0"
                   onerror="this.src='${fallbackAvatar}';"
                 />
-                <span class="text-xs font-black text-pink-300 max-w-[100px] truncate">@${uname}</span>
-                <span class="w-1.5 h-1.5 rounded-full bg-[#fdf8e1] shadow-[0_0_6px_#fdf8e1]"></span>
-                <i data-lucide="chevron-down" class="w-3 h-3 text-pink-300"></i>
+                <span class="text-xs font-bold text-pink-700 max-w-[100px] truncate">@${uname}</span>
+                <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+                <i data-lucide="chevron-down" class="w-3 h-3 text-pink-500"></i>
               </button>
 
-              <div id="igAccountsDropdown" class="hidden absolute right-0 top-full mt-2 w-64 rounded-2xl frosted-glass-card border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
-                <div class="px-2 py-1 text-[10px] font-mono font-bold text-[#fdf8e1]/60 uppercase tracking-wider flex items-center justify-between">
+              <div id="igAccountsDropdown" class="hidden absolute right-0 top-full mt-2 w-64 rounded-2xl p-2 z-50 flex flex-col gap-1">
+                <div class="px-2 py-1 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
                   <span>Instagram Accounts</span>
-                  <span class="text-pink-300">${allIgAccounts.length} Connected</span>
+                  <span class="text-pink-600">${allIgAccounts.length} Connected</span>
                 </div>
 
                 <div class="flex flex-col gap-1 max-h-48 overflow-y-auto custom-scrollbar">
@@ -1874,23 +1667,23 @@
                     return `
                       <button
                         onclick="switchInstagramAccount('${a.username}')"
-                        class="w-full flex items-center justify-between p-2 rounded-xl hover:bg-white/5 transition text-left cursor-pointer ${isActive ? 'bg-pink-500/15 border border-pink-500/30' : ''}"
+                        class="w-full flex items-center justify-between p-2 rounded-xl hover:bg-slate-100 transition text-left cursor-pointer ${isActive ? 'bg-pink-50 border border-pink-200' : ''}"
                       >
                         <div class="flex items-center gap-2 min-w-0">
-                          <img src="${aAvatar}" class="w-6 h-6 rounded-full object-cover border border-pink-400 shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.username)}&background=e1306c&color=fff';" />
-                          <span class="text-xs font-bold text-[#fdf8e1] truncate">@${a.username}</span>
+                          <img src="${aAvatar}" class="w-6 h-6 rounded-full object-cover border border-pink-200 shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(a.username)}&background=e1306c&color=fff';" />
+                          <span class="text-xs font-bold text-slate-800 truncate">@${a.username}</span>
                         </div>
-                        ${isActive ? '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 shrink-0">ACTIVE</span>' : ''}
+                        ${isActive ? '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-pink-100 text-pink-700 shrink-0">ACTIVE</span>' : ''}
                       </button>
                     `;
                   }).join('')}
                 </div>
 
-                <div class="border-t border-white/20 my-1"></div>
+                <div class="border-t border-slate-200 my-1"></div>
 
                 <button
                   onclick="loginInstagram()"
-                  class="w-full flex items-center gap-2 p-2 rounded-xl text-pink-300 hover:bg-pink-500/10 text-xs font-bold transition cursor-pointer"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-pink-600 hover:bg-pink-50 text-xs font-bold transition cursor-pointer"
                 >
                   <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
                   <span>Add Another Account</span>
@@ -1898,7 +1691,7 @@
 
                 <button
                   onclick="disconnectInstagram('${uname}')"
-                  class="w-full flex items-center gap-2 p-2 rounded-xl text-rose-400 hover:bg-rose-500/10 text-xs font-bold transition cursor-pointer"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-rose-600 hover:bg-rose-50 text-xs font-bold transition cursor-pointer"
                 >
                   <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
                   <span>Disconnect @${uname}</span>
@@ -1908,7 +1701,7 @@
           `;
         } else {
           igSection.innerHTML = `
-            <button onclick="loginInstagram()" class="px-3 py-1.5 rounded-2xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer">
+            <button onclick="loginInstagram()" class="surface-elevated px-3 py-1.5 rounded-2xl border border-pink-200/80 hover:bg-pink-50/50 text-pink-600 text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer btn-soft">
               <i data-lucide="camera" class="w-3.5 h-3.5"></i>
               <span>Connect IG</span>
             </button>
@@ -2461,7 +2254,7 @@
     }
 
     // 1. Check Auth Status on Load & Render Live Channel Switcher
-    async function checkAuthStatus() {
+        async function checkAuthStatus() {
       const authSection = document.getElementById('authSection');
       if (authSection) authSection.classList.remove('hidden');
       try {
@@ -2485,7 +2278,7 @@
             <div class="relative">
               <button
                 onclick="toggleYtDropdown(event)"
-                class="flex items-center gap-2.5 px-3 py-1.5 rounded-2xl sleek-input border border-white/10 bg-[#fdf8e1]/10 hover:bg-[#fdf8e1]/20 transition cursor-pointer"
+                class="surface-elevated flex items-center gap-2.5 px-3 py-1.5 rounded-2xl border border-slate-200/80 hover:bg-slate-50 transition cursor-pointer shadow-sm btn-soft"
                 title="Switch YouTube Channel"
               >
                 <div class="relative">
@@ -2496,23 +2289,23 @@
                     referrerpolicy="no-referrer"
                     crossorigin="anonymous"
                     onerror="this.onerror=null; this.src='${fallbackAvatar}';"
-                    class="w-7 h-7 rounded-full border-2 border-white/30 object-cover shadow-lg shadow-[0_0_15px_rgba(253,248,225,0.15)] bg-black/50"
+                    class="w-7 h-7 rounded-full border border-slate-200 object-cover shadow-sm bg-slate-100"
                   />
-                  <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#fdf8e1] border border-[#090d16]"></span>
+                  <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white"></span>
                 </div>
                 <div class="text-left leading-tight pr-1">
                   <div class="flex items-center gap-1">
-                    <span class="text-xs font-extrabold text-[#fdf8e1] max-w-[120px] truncate">${channelName}</span>
-                    <i data-lucide="chevron-down" class="w-3 h-3 text-[#fdf8e1]/90"></i>
+                    <span class="text-xs font-bold text-slate-800 max-w-[120px] truncate">${channelName}</span>
+                    <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400"></i>
                   </div>
-                  <div class="text-[10px] text-[#fdf8e1]/80 font-mono">${customUrl}</div>
+                  <div class="text-[10px] text-slate-400 font-mono truncate max-w-[120px]">${customUrl}</div>
                 </div>
               </button>
 
-              <div id="ytChannelsDropdown" class="hidden absolute right-0 top-full mt-2 w-72 rounded-2xl frosted-glass-card border border-white/15 p-2 shadow-2xl z-50 flex flex-col gap-1">
-                <div class="px-2 py-1 text-[10px] font-mono font-bold text-[#fdf8e1]/60 uppercase tracking-wider flex items-center justify-between">
+              <div id="ytChannelsDropdown" class="hidden absolute right-0 top-full mt-2 w-72 rounded-2xl p-2 z-50 flex flex-col gap-1">
+                <div class="px-2 py-1 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
                   <span>YouTube Channels</span>
-                  <span class="text-[#fdf8e1]/90">${allChannels.length} Connected</span>
+                  <span class="text-slate-600">${allChannels.length} Connected</span>
                 </div>
 
                 <div class="flex flex-col gap-1 max-h-52 overflow-y-auto custom-scrollbar">
@@ -2522,42 +2315,42 @@
                     return `
                       <button
                         onclick="switchYouTubeChannel('${ch.channelId}')"
-                        class="w-full flex items-center justify-between p-2 rounded-xl hover:bg-white/5 transition text-left cursor-pointer ${isActive ? 'bg-[#fdf8e1]/15 border border-white/10' : ''}"
+                        class="w-full flex items-center justify-between p-2 rounded-xl hover:bg-slate-100 transition text-left cursor-pointer ${isActive ? 'bg-sky-50 border border-sky-200' : ''}"
                       >
                         <div class="flex items-center gap-2.5 min-w-0">
-                          <img src="${chAvatar}" class="w-7 h-7 rounded-full object-cover border border-white/30 shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff';" />
+                          <img src="${chAvatar}" class="w-7 h-7 rounded-full object-cover border border-slate-200 shrink-0" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(ch.title)}&background=0071e3&color=fff';" />
                           <div class="min-w-0">
-                            <div class="text-xs font-bold text-[#fdf8e1] truncate max-w-[140px]">${ch.title}</div>
-                            <div class="text-[10px] text-[#fdf8e1]/60 font-mono truncate">${ch.customUrl || ''} • ${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</div>
+                            <div class="text-xs font-bold text-slate-800 truncate max-w-[140px]">${ch.title}</div>
+                            <div class="text-[10px] text-slate-400 font-mono truncate">${ch.customUrl || ''} • ${parseInt(ch.subscriberCount || 0).toLocaleString()} subs</div>
                           </div>
                         </div>
-                        ${isActive ? '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#fdf8e1]/20 text-[#fdf8e1]/90 shrink-0">ACTIVE</span>' : ''}
+                        ${isActive ? '<span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700 shrink-0">ACTIVE</span>' : ''}
                       </button>
                     `;
                   }).join('')}
                 </div>
 
-                <div class="border-t border-white/20 my-1"></div>
+                <div class="border-t border-slate-200 my-1"></div>
 
                 <button
-                  onclick="toggleYtDropdown(); openSettingsModal();"
-                  class="w-full flex items-center gap-2 p-2 rounded-xl text-[#fdf8e1] hover:bg-white/10 text-xs font-bold transition cursor-pointer group"
+                  onclick="toggleYtDropdown(event); openSettingsModal();"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-slate-700 hover:bg-slate-100 text-xs font-bold transition cursor-pointer group"
                 >
-                  <i data-lucide="settings" class="w-3.5 h-3.5 text-amber-300 group-hover:rotate-45 transition-transform duration-300"></i>
+                  <i data-lucide="settings" class="w-3.5 h-3.5 text-amber-500 group-hover:rotate-45 transition-transform duration-300"></i>
                   <span>API Settings & GCP Projects</span>
                 </button>
 
                 <button
                   onclick="openConnectChannelModal()"
-                  class="w-full flex items-center gap-2 p-2 rounded-xl text-[#fdf8e1]/90 hover:bg-white/10 text-xs font-bold transition cursor-pointer"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-slate-700 hover:bg-slate-100 text-xs font-bold transition cursor-pointer"
                 >
-                  <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-emerald-400"></i>
+                  <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-emerald-500"></i>
                   <span>Connect Another Channel</span>
                 </button>
 
                 <button
                   onclick="syncWithYouTube()"
-                  class="w-full flex items-center gap-2 p-2 rounded-xl text-[#fdf8e1]/80 hover:bg-white/5 text-xs font-bold transition cursor-pointer"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-slate-700 hover:bg-slate-100 text-xs font-bold transition cursor-pointer"
                 >
                   <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
                   <span>Sync Channel Uploads</span>
@@ -2565,7 +2358,7 @@
 
                 <button
                   onclick="disconnectChannel('${activeChannel.channelId}')"
-                  class="w-full flex items-center gap-2 p-2 rounded-xl text-rose-400 hover:bg-rose-500/10 text-xs font-bold transition cursor-pointer"
+                  class="w-full flex items-center gap-2 p-2 rounded-xl text-rose-600 hover:bg-rose-50 text-xs font-bold transition cursor-pointer"
                 >
                   <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
                   <span>Disconnect Channel</span>
@@ -2576,8 +2369,8 @@
         } else {
           authSection.innerHTML = `
             <div class="flex items-center gap-2">
-              <button onclick="openConnectChannelModal()" class="px-3.5 py-2 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold flex items-center gap-2 shadow-lg cursor-pointer">
-                <i data-lucide="play" class="w-3.5 h-3.5 text-red-500"></i>
+              <button onclick="openConnectChannelModal()" class="surface-elevated px-3.5 py-1.5 rounded-2xl border border-red-200/80 hover:bg-red-50/50 text-red-600 text-xs font-bold flex items-center gap-2 shadow-sm cursor-pointer btn-soft">
+                <i data-lucide="play" class="w-3.5 h-3.5 text-red-500 fill-current"></i>
                 <span>Connect YouTube</span>
               </button>
             </div>
@@ -3001,47 +2794,86 @@
     }
 
     // Render Video List strictly filtered by activeNicheFilter & activeTab
-    function renderVideoList() {
+        function renderVideoList() {
       const dropdown = document.getElementById('videoSwitcherDropdown');
-      if (!dropdown) return;
+      const libraryList = document.getElementById('libraryProjectList');
+      const libraryCount = document.getElementById('libraryProjectCount');
 
       updateTabCounts();
       const nicheItems = byNicheData[activeNicheFilter] || [];
       
-      if (nicheItems.length === 0) {
-        dropdown.innerHTML = '<div class="p-4 text-center text-xs text-[#fdf8e1]/50 font-mono">No videos found.</div>';
-        return;
+      if (libraryCount) libraryCount.textContent = nicheItems.length;
+
+      if (dropdown) {
+        if (nicheItems.length === 0) {
+          dropdown.innerHTML = '<div class="p-4 text-center text-xs text-slate-400 font-mono">No videos found.</div>';
+        } else {
+          dropdown.innerHTML = nicheItems.map(v => {
+            const isSelected = selectedVideo && selectedVideo.filename === v.filename;
+            const colorClass = isSelected ? 'bg-sky-50 text-sky-900 border border-sky-200 font-bold' : 'hover:bg-slate-100 text-slate-700';
+            
+            let statusBadge = '';
+            const ytLive = Object.keys(v.channels || {}).length > 0 || v.youtube?.isUploaded;
+            const igLive = Object.keys(v.instagramAccounts || {}).length > 0 || v.instagram?.isUploaded;
+            
+            if (ytLive) statusBadge += '<i data-lucide="play" class="w-3 h-3 text-red-500 fill-red-500"></i>';
+            if (igLive) statusBadge += '<i data-lucide="camera" class="w-3 h-3 text-pink-500"></i>';
+            if (!ytLive && !igLive) statusBadge = '<span class="text-[8px] font-mono font-bold text-slate-500 border border-slate-200 bg-slate-100 rounded px-1.5 py-0.5">DRAFT</span>';
+
+            return `
+              <button onclick="selectVideo('${v.filename}'); toggleVideoSwitcher();" class="w-full text-left flex flex-col gap-1 px-3 py-2 rounded-xl transition ${colorClass}">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs truncate">${v.meta?.title || v.filename}</span>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    ${statusBadge}
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[9px] font-mono opacity-60">
+                  <span>${v.sizeMb} MB</span>
+                  <span>${formatDateTime(v.modifiedAt)}</span>
+                </div>
+              </button>
+            `;
+          }).join('');
+        }
       }
 
-      dropdown.innerHTML = nicheItems.map(v => {
-        const isSelected = selectedVideo && selectedVideo.filename === v.filename;
-        const icon = v.isLongForm ? 'tv' : 'zap';
-        const colorClass = isSelected ? 'bg-white/10 text-[#fdf8e1]' : 'hover:bg-white/5 text-[#fdf8e1]/70';
-        
-        let statusBadge = '';
-        const ytLive = Object.keys(v.channels || {}).length > 0 || v.youtube?.isUploaded;
-        const igLive = Object.keys(v.instagramAccounts || {}).length > 0 || v.instagram?.isUploaded;
-        
-        if (ytLive) statusBadge += '<i data-lucide="play" class="w-3 h-3 text-red-500"></i>';
-        if (igLive) statusBadge += '<i data-lucide="camera" class="w-3 h-3 text-pink-500"></i>';
-        if (!ytLive && !igLive) statusBadge = '<span class="text-[8px] font-mono font-bold text-[#fdf8e1]/40 border border-white/10 bg-white/5 rounded px-1 py-0.5">DRAFT</span>';
+      if (libraryList) {
+        if (nicheItems.length === 0) {
+          libraryList.innerHTML = '<div class="p-4 text-center text-xs text-slate-400 font-mono">No projects found.</div>';
+        } else {
+          libraryList.innerHTML = nicheItems.map(v => {
+            const isSelected = selectedVideo && selectedVideo.filename === v.filename;
+            const cardClass = isSelected
+              ? 'surface-elevated rounded-2xl p-3.5 flex flex-col gap-1.5 cursor-pointer btn-soft border-2 border-sky-400 shadow-md ring-2 ring-sky-400/20'
+              : 'surface-recessed rounded-2xl p-3.5 flex flex-col gap-1.5 cursor-pointer btn-soft hover:bg-white/80 transition';
+            
+            const dotColor = isSelected ? 'bg-sky-500' : 'bg-slate-300';
+            const titleColor = isSelected ? 'text-slate-900 font-extrabold' : 'text-slate-700 font-bold';
+            
+            let statusText = 'Draft';
+            const ytLive = Object.keys(v.channels || {}).length > 0 || v.youtube?.isUploaded;
+            const igLive = Object.keys(v.instagramAccounts || {}).length > 0 || v.instagram?.isUploaded;
+            if (ytLive && igLive) statusText = 'YT + IG Live';
+            else if (ytLive) statusText = 'YouTube Live';
+            else if (igLive) statusText = 'Reel Live';
 
-        return `
-          <button onclick="selectVideo('${v.filename}')" class="w-full text-left flex flex-col gap-1 px-3 py-2.5 rounded-xl transition ${colorClass}">
-            <div class="flex items-center justify-between gap-2">
-              <span class="text-xs font-bold truncate">${v.meta?.title || v.filename}</span>
-              <div class="flex items-center gap-1.5 shrink-0">
-                ${statusBadge}
+            return `
+              <div onclick="selectVideo('${v.filename}')" class="${cardClass}">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full ${dotColor} badge-icon shrink-0"></div>
+                  <span class="text-xs ${titleColor} truncate">${v.meta?.title || v.filename}</span>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono pl-4.5">
+                  <span>${statusText}</span>
+                  <span>${v.sizeMb} MB</span>
+                </div>
               </div>
-            </div>
-            <div class="flex items-center justify-between text-[9px] font-mono opacity-60">
-              <span>${v.sizeMb} MB</span>
-              <span>${formatDateTime(v.modifiedAt)}</span>
-            </div>
-          </button>
-        `;
-      }).join('');
-      
+            `;
+          }).join('');
+        }
+      }
+
       safeCreateIcons();
     }
 
@@ -3243,7 +3075,7 @@
         
         if (ytLive) statusBadge += '<span class="flex items-center gap-1 text-[9px] font-mono font-bold text-red-400 bg-red-400/10 px-1.5 py-0.5 rounded-md border border-red-400/20"><i data-lucide="play" class="w-3 h-3"></i> YT</span>';
         if (igLive) statusBadge += '<span class="flex items-center gap-1 text-[9px] font-mono font-bold text-pink-400 bg-pink-400/10 px-1.5 py-0.5 rounded-md border border-pink-400/20"><i data-lucide="camera" class="w-3 h-3"></i> IG</span>';
-        if (!ytLive && !igLive) statusBadge = '<span class="text-[9px] font-mono font-bold text-[#fdf8e1]/40 border border-white/10 bg-white/5 rounded-md px-1.5 py-0.5">DRAFT</span>';
+        if (!ytLive && !igLive) statusBadge = '<span class="text-[9px] font-mono font-bold text-slate-500 border border-slate-200 bg-slate-100 rounded-md px-1.5 py-0.5">DRAFT</span>';
         
         activeStatusEl.innerHTML = statusBadge;
       }
@@ -3268,9 +3100,9 @@
 
       if (container) {
         if (isWidescreen) {
-          container.className = "relative w-full max-w-[460px] aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black/20 mb-0 group mx-auto transition-all duration-300";
+          container.className = "video-bezel relative w-full max-w-[500px] aspect-video rounded-[2rem] overflow-hidden shadow-2xl mx-auto transition-all duration-300";
         } else {
-          container.className = "relative w-full max-w-[280px] aspect-[9/16] rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black/20 mb-0 group mx-auto transition-all duration-300";
+          container.className = "video-bezel relative h-[56vh] aspect-[9/16] rounded-[2rem] overflow-hidden shadow-2xl mx-auto transition-all duration-300";
         }
       }
       
@@ -3294,7 +3126,10 @@
 
 
 
-      if (player) player.src = `/api/video-file/${filename}`;
+      if (player) {
+        player.src = `/api/video-file/${filename}`;
+        player.load();
+      }
       if (placeholder) placeholder.style.display = 'none';
       if (stats) stats.textContent = `${selectedVideo.sizeMb} MB • ${isWidescreen ? '16:9 Widescreen' : '9:16 Shorts'}`;
 
@@ -3379,22 +3214,22 @@
       safeCreateIcons();
     }
 
-    function updateThumbnailUI() {
+        function updateThumbnailUI() {
       if (!selectedVideo) return;
       const thumbContainer = document.getElementById('thumbnailContainer');
       const thumbImg = document.getElementById('thumbnailImg');
       const thumbPlaceholder = document.getElementById('thumbnailPlaceholder');
       const thumbBadge = document.getElementById('thumbnailBadge');
-      const ratioBadge = document.getElementById('thumbnailRatioBadge');
       const viewFullBtn = document.getElementById('viewThumbFullBtn');
+      const previewBtn = document.getElementById('previewThumbBtn');
 
       const isLong = selectedVideo.isLongForm;
 
       if (thumbContainer) {
         if (isLong) {
-          thumbContainer.className = "relative w-28 h-16 shrink-0 rounded-xl overflow-hidden bg-black/20 border border-white/20 shadow-lg flex items-center justify-center transition-all duration-300";
+          thumbContainer.className = "relative w-24 h-16 shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-inner flex items-center justify-center transition-all duration-300";
         } else {
-          thumbContainer.className = "relative w-16 h-28 shrink-0 rounded-xl overflow-hidden bg-black/20 border border-white/20 shadow-lg flex items-center justify-center transition-all duration-300";
+          thumbContainer.className = "relative w-16 h-24 shrink-0 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-inner flex items-center justify-center transition-all duration-300";
         }
       }
 
@@ -3405,14 +3240,19 @@
           thumbImg.style.display = 'block';
         }
         if (thumbPlaceholder) thumbPlaceholder.style.display = 'none';
-        if (thumbBadge) thumbBadge.innerHTML = `<span class="text-[#fdf8e1]/80 font-bold flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> ${isLong ? '16:9 Cover Ready' : '9:16 Shorts Cover Ready'}</span>`;
+        if (thumbBadge) {
+          thumbBadge.className = "text-[9px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1";
+          thumbBadge.innerHTML = `<i data-lucide="check-circle-2" class="w-3 h-3 text-emerald-600"></i> Ready`;
+        }
         if (viewFullBtn) viewFullBtn.href = url;
-        const previewBtn = document.getElementById('previewThumbBtn');
         if (previewBtn) previewBtn.href = url;
       } else {
         if (thumbImg) thumbImg.style.display = 'none';
         if (thumbPlaceholder) thumbPlaceholder.style.display = 'flex';
-        if (thumbBadge) thumbBadge.innerHTML = `<span class="text-[#fdf8e1]/60 font-mono">Auto Generating...</span>`;
+        if (thumbBadge) {
+          thumbBadge.className = "text-[9px] font-mono font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200";
+          thumbBadge.textContent = "Generating...";
+        }
         if (viewFullBtn) viewFullBtn.href = '#';
       }
       safeCreateIcons();
@@ -3736,7 +3576,7 @@
     if (metaTitleEl) metaTitleEl.addEventListener('input', updateTitleCharCount);
 
     // Tags UI
-    function updateTagsUI() {
+        function updateTagsUI() {
       const container = document.getElementById('tagsContainer');
       const input = document.getElementById('tagInput');
       if (!container || !input) return;
@@ -3745,10 +3585,10 @@
 
       currentTags.forEach((tag, idx) => {
         const chip = document.createElement('span');
-        chip.className = 'tag-chip px-2.5 py-1 rounded-xl bg-white/5 border border-white/10 text-[11px] font-mono font-bold text-[#fdf8e1]/80 flex items-center gap-1.5';
+        chip.className = 'tag-chip px-2.5 py-1 rounded-xl bg-white border border-slate-200 shadow-sm text-[11px] font-mono font-bold text-slate-700 flex items-center gap-1.5';
         chip.innerHTML = `
           <span>#${tag}</span>
-          <button onclick="removeTag(${idx})" class="hover:text-rose-400">×</button>
+          <button onclick="removeTag(${idx})" class="text-slate-400 hover:text-rose-500 font-bold ml-0.5">×</button>
         `;
         container.insertBefore(chip, input);
       });
@@ -4626,6 +4466,163 @@
     }
 
     // Init on Page Load
+    
+    // ═══════════════════════════════════════════════════
+    // VIDEO TRANSPORT CONTROLLER & PLAYBACK ENGINE
+    // ═══════════════════════════════════════════════════
+    function formatTimecode(seconds) {
+      if (isNaN(seconds) || seconds < 0) return '00:00.00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      const ms = Math.floor((seconds % 1) * 100);
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${String(ms).padStart(2, '0')}`;
+    }
+
+    function toggleTransportPlay() {
+      const player = document.getElementById('videoPlayer');
+      if (!player || !player.src) return;
+      if (player.paused) {
+        player.play().catch(e => console.warn('Play interrupted:', e));
+      } else {
+        player.pause();
+      }
+    }
+
+    function toggleTransportLoop() {
+      const player = document.getElementById('videoPlayer');
+      const loopBtn = document.getElementById('transportLoopBtn');
+      if (!player) return;
+      player.loop = !player.loop;
+      if (loopBtn) {
+        if (player.loop) {
+          loopBtn.classList.add('bg-sky-100', 'text-sky-700', 'border-sky-300');
+          loopBtn.classList.remove('surface-recessed', 'text-slate-600');
+        } else {
+          loopBtn.classList.remove('bg-sky-100', 'text-sky-700', 'border-sky-300');
+          loopBtn.classList.add('surface-recessed', 'text-slate-600');
+        }
+      }
+    }
+
+    function toggleTransportMute() {
+      const player = document.getElementById('videoPlayer');
+      const muteIcon = document.getElementById('transportMuteIcon');
+      if (!player) return;
+      player.muted = !player.muted;
+      if (muteIcon) {
+        muteIcon.setAttribute('data-lucide', player.muted ? 'volume-x' : 'volume-2');
+        safeCreateIcons();
+      }
+    }
+
+    function transportStep(frames) {
+      const player = document.getElementById('videoPlayer');
+      if (!player) return;
+      player.pause();
+      const fps = 60;
+      const target = player.currentTime + (frames / fps);
+      player.currentTime = Math.max(0, Math.min(player.duration || 0, target));
+    }
+
+    let isScrubbing = false;
+
+    function initVideoTransport() {
+      const player = document.getElementById('videoPlayer');
+      const track = document.getElementById('timelineTrack');
+      const progress = document.getElementById('timelineProgress');
+      const scrubber = document.getElementById('timelineScrubber');
+      const timecode = document.getElementById('transportTimecode');
+      const duration = document.getElementById('transportDuration');
+      const frameCount = document.getElementById('transportFrameCount');
+      const playIcon = document.getElementById('transportPlayIcon');
+
+      if (!player) return;
+
+      player.addEventListener('click', toggleTransportPlay);
+
+      player.addEventListener('play', () => {
+        if (playIcon) {
+          playIcon.setAttribute('data-lucide', 'pause');
+          playIcon.classList.remove('translate-x-0.5');
+          safeCreateIcons();
+        }
+      });
+
+      player.addEventListener('pause', () => {
+        if (playIcon) {
+          playIcon.setAttribute('data-lucide', 'play');
+          playIcon.classList.add('translate-x-0.5');
+          safeCreateIcons();
+        }
+      });
+
+      player.addEventListener('loadedmetadata', () => {
+        if (duration) duration.textContent = formatTimecode(player.duration);
+        if (timecode) timecode.textContent = '00:00.00';
+        if (frameCount) frameCount.textContent = 'f: 0';
+        if (progress) progress.style.width = '0%';
+        if (scrubber) scrubber.style.left = '0%';
+      });
+
+      player.addEventListener('timeupdate', () => {
+        if (isScrubbing) return;
+        const cur = player.currentTime;
+        const dur = player.duration || 1;
+        const pct = Math.min(100, Math.max(0, (cur / dur) * 100));
+
+        if (timecode) timecode.textContent = formatTimecode(cur);
+        if (frameCount) frameCount.textContent = `f: ${Math.floor(cur * 60)}`;
+        if (progress) progress.style.width = `${pct}%`;
+        if (scrubber) scrubber.style.left = `${pct}%`;
+      });
+
+      if (track) {
+        function handleScrub(e) {
+          if (!player.duration) return;
+          const rect = track.getBoundingClientRect();
+          const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+          player.currentTime = pos * player.duration;
+          if (progress) progress.style.width = `${pos * 100}%`;
+          if (scrubber) scrubber.style.left = `${pos * 100}%`;
+          if (timecode) timecode.textContent = formatTimecode(player.currentTime);
+          if (frameCount) frameCount.textContent = `f: ${Math.floor(player.currentTime * 60)}`;
+        }
+
+        track.addEventListener('mousedown', (e) => {
+          isScrubbing = true;
+          handleScrub(e);
+          function onMove(ev) { handleScrub(ev); }
+          function onUp() {
+            isScrubbing = false;
+            window.removeEventListener('mousemove', onMove);
+            window.removeEventListener('mouseup', onUp);
+          }
+          window.addEventListener('mousemove', onMove);
+          window.addEventListener('mouseup', onUp);
+        });
+      }
+
+      // Keyboard shortcuts
+      window.addEventListener('keydown', (e) => {
+        const activeTag = document.activeElement?.tagName?.toLowerCase();
+        if (activeTag === 'input' || activeTag === 'textarea') return;
+        if (e.code === 'Space') {
+          e.preventDefault();
+          toggleTransportPlay();
+        } else if (e.code === 'ArrowLeft') {
+          e.preventDefault();
+          transportStep(e.shiftKey ? -60 : -1);
+        } else if (e.code === 'ArrowRight') {
+          e.preventDefault();
+          transportStep(e.shiftKey ? 60 : 1);
+        } else if (e.key === 'm' || e.key === 'M') {
+          toggleTransportMute();
+        } else if (e.key === 'l' || e.key === 'L') {
+          toggleTransportLoop();
+        }
+      });
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       checkAuthStatus();
       checkInstagramStatus();
@@ -4634,6 +4631,7 @@
       loadMemeBoard();
       fetchSystemHealth();
       safeCreateIcons();
+      initVideoTransport();
     });
   </script>
 </body>

@@ -944,3 +944,31 @@ export const TheThresholdEffectThumbnail: React.FC = () => (
     extraBadge="MINDSET"
   />
 );
+
+export const TheLawOfTheCounterweightThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="LAW COUNTERWEIGHT"
+    highlightWord="COUNTERWEIGHT"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Law Counterweight"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);
+
+export const TheArchitectureOfPressureThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="PSYCHOLOGICAL ARCHITECTURE MOUNTING"
+    highlightWord="PSYCHOLOGICAL"
+    highlightColor="rose"
+    subtitle="The Psychology Behind Psychological Architecture"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="MINDSET"
+  />
+);

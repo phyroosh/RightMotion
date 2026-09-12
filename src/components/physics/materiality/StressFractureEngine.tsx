@@ -61,10 +61,10 @@ export const StressFractureEngine: React.FC<StressFractureEngineProps> = ({
     extrapolateRight: "clamp",
   });
 
-  // Pre-cleavage trembling vibration when approaching shear limit
+  // Pre-cleavage trembling vibration when approaching shear limit (FPS-normalized)
   const isStrained = stress >= 0.7 && !isShattered;
   const strainJitter = isStrained
-    ? Math.sin(frame * 1.8) * 1.8 * (stress - 0.7) * 3.3
+    ? Math.sin((frame / fps) * (1.8 * 30)) * 1.8 * (stress - 0.7) * 3.3
     : 0;
 
   return (

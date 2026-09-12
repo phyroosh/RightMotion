@@ -180,20 +180,24 @@ export const CinematicParallaxRig: React.FC<CinematicParallaxRigProps> = ({
     });
   };
 
-  // 2. Smooth, Position-Anchored Breath-Hold Freezes (Zero Teleport)
+  // 2. Smooth, Position-Anchored Breath-Hold Freezes (FPS-Normalized)
   let driftX = 0;
   let driftY = 0;
   if (enableDrift) {
-    const driftSpeed = 0.024;
+    const fpsRatio = 30 / fps;
+    const driftSpeed = 0.024 * fpsRatio;
     const rawDriftX = Math.sin(frame * driftSpeed) * 6.5;
     const rawDriftY = Math.cos(frame * (driftSpeed * 0.75)) * 5.0;
+
+    const easeInFrames = Math.round(8 * (fps / 30));
+    const easeOutFrames = Math.round(12 * (fps / 30));
 
     // Check if any breath hold is active or near
     let activeHold: CameraBreathHold | null = null;
     for (const bh of breathHolds) {
       if (
-        frame >= bh.startFrame - 8 &&
-        frame <= bh.startFrame + bh.durationFrames + 12
+        frame >= bh.startFrame - easeInFrames &&
+        frame <= bh.startFrame + bh.durationFrames + easeOutFrames
       ) {
         activeHold = bh;
         break;
@@ -207,8 +211,8 @@ export const CinematicParallaxRig: React.FC<CinematicParallaxRigProps> = ({
       const freezeY = Math.cos(holdStart * (driftSpeed * 0.75)) * 5.0;
 
       if (frame < holdStart) {
-        // Smooth 8-frame deceleration into freeze point
-        const easeIn = interpolate(frame, [holdStart - 8, holdStart], [0, 1], {
+        // Smooth deceleration into freeze point
+        const easeIn = interpolate(frame, [holdStart - easeInFrames, holdStart], [0, 1], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
           easing: Easing.bezier(0.25, 0.1, 0.25, 1),
@@ -220,8 +224,8 @@ export const CinematicParallaxRig: React.FC<CinematicParallaxRigProps> = ({
         driftX = freezeX;
         driftY = freezeY;
       } else {
-        // Smooth 12-frame acceleration out of freeze point back to organic drift
-        const easeOut = interpolate(frame, [holdEnd, holdEnd + 12], [1, 0], {
+        // Smooth acceleration out of freeze point back to organic drift
+        const easeOut = interpolate(frame, [holdEnd, holdEnd + easeOutFrames], [1, 0], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
           easing: Easing.bezier(0.25, 0.1, 0.25, 1),
@@ -240,17 +244,18 @@ export const CinematicParallaxRig: React.FC<CinematicParallaxRigProps> = ({
   const kinematicState = evaluateCameraTrajectory(frame, sortedPunchIns, fps, baseZoomFn);
   const { zoom: activeZoom, targetX: activeTargetX, targetY: activeTargetY, dutch: activeDutch } = kinematicState;
 
-  // 4. Physically Damped Harmonic Impact Trauma (Impulse Response Function)
+  // 4. Physically Damped Harmonic Impact Trauma (FPS-Normalized)
   let impactShakeX = 0;
   let impactShakeY = 0;
+  const shakeFreqFactor = 30 / fps;
   for (const imp of impacts) {
     const rel = frame - imp.frame;
-    const dur = imp.durationFrames ?? 10;
+    const dur = imp.durationFrames ?? Math.round(10 * (fps / 30));
     const intensity = imp.intensity ?? 14;
     if (rel >= 0 && rel < dur) {
       const decay = Math.exp(-rel / (dur * 0.42));
-      impactShakeX += Math.sin(rel * 1.8) * intensity * decay;
-      impactShakeY += Math.cos(rel * 2.2) * (intensity * 0.65) * decay;
+      impactShakeX += Math.sin(rel * 1.8 * shakeFreqFactor) * intensity * decay;
+      impactShakeY += Math.cos(rel * 2.2 * shakeFreqFactor) * (intensity * 0.65) * decay;
     }
   }
 

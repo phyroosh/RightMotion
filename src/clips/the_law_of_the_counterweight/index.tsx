@@ -1,13 +1,13 @@
 import React from "react";
 import { Audio, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { TheLawOfStructuralLoadBackground } from "./Background";
-import { TheLawOfStructuralLoadCanvas } from "./Canvas";
-import { TheLawOfStructuralLoadPresenter } from "./Presenter";
+import { TheLawOfTheCounterweightBackground } from "./Background";
+import { TheLawOfTheCounterweightCanvas } from "./Canvas";
+import { TheLawOfTheCounterweightPresenter } from "./Presenter";
 import { AppleProgressBar } from "../../components/AppleProgressBar";
 import { AppleKineticCaptions } from "../../components/AppleKineticCaptions";
 import { SoundDesignEngine, SfxCue } from "../../components/SoundDesignEngine";
 import { GroundedTextureEngine } from "../../components/texture";
-import { TheLawOfStructuralLoadThumbnail } from "../../thumbnails";
+import { TheLawOfTheCounterweightThumbnail } from "../../thumbnails";
 import rawTranscript from "./transcript.json";
 import { WordTimestamp } from "../../types";
 import "../../style.css";
@@ -19,76 +19,64 @@ const transcript: WordTimestamp[] = (rawTranscript as any[]).map((t) => ({
   speaker: t.speaker,
 }));
 
-// Multi-SFX audio cues synchronized with progressive visual reveals (base 30 FPS)
-const BASE_SFX_CUES: SfxCue[] = [
+// Multi-SFX audio cues synchronized with progressive visual reveals
+const SFX_CUES: SfxCue[] = [
   {
     "frame": 0,
     "type": "whoosh_deep",
     "volume": 0.32
   },
   {
-    "frame": 65,
+    "frame": 53,
     "type": "whoosh_fast",
     "volume": 0.32
   },
   {
-    "frame": 151,
+    "frame": 170,
     "type": "whoosh_fast",
     "volume": 0.34
   },
   {
-    "frame": 497,
+    "frame": 502,
     "type": "click",
     "volume": 0.28
   },
   {
-    "frame": 226,
+    "frame": 245,
     "type": "whoosh_sparkle",
     "volume": 0.24
   },
   {
-    "frame": 226,
+    "frame": 245,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 282,
+    "frame": 320,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 357,
+    "frame": 353,
     "type": "click",
     "volume": 0.26
   },
   {
-    "frame": 445,
-    "type": "click",
-    "volume": 0.26
-  },
-  {
-    "frame": 476,
+    "frame": 582,
     "type": "whoosh_sparkle",
     "volume": 0.32
   },
   {
-    "frame": 566,
+    "frame": 704,
     "type": "click",
     "volume": 0.32
   }
 ];
 
-export const TheLawOfStructuralLoadComposition: React.FC = () => {
+export const TheLawOfTheCounterweightComposition: React.FC = () => {
   const { width, height, fps, durationInFrames } = useVideoConfig();
   const frame = useCurrentFrame();
   const currentMs = (frame / fps) * 1000;
-
-  const sfxCues = React.useMemo(() => {
-    return BASE_SFX_CUES.map((cue) => ({
-      ...cue,
-      frame: Math.round((cue.frame / 30) * fps),
-    }));
-  }, [fps]);
 
   return (
     <div
@@ -98,12 +86,12 @@ export const TheLawOfStructuralLoadComposition: React.FC = () => {
       {/* 0. High-Converting 4K Thumbnail First-Frame */}
       {frame === 0 && (
         <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">
-          <TheLawOfStructuralLoadThumbnail />
+          <TheLawOfTheCounterweightThumbnail />
         </div>
       )}
 
       {/* 1. Voiceover Audio Track */}
-      <Audio src={staticFile("the_law_of_structural_load/voiceover.mp3")} volume={1.3} />
+      <Audio src={staticFile("the_law_of_the_counterweight/voiceover.mp3")} volume={1.3} />
 
       {/* 2. Ducked Background Ambient Music */}
       <Audio
@@ -111,7 +99,7 @@ export const TheLawOfStructuralLoadComposition: React.FC = () => {
         volume={(f) =>
           interpolate(
             f,
-            [0, Math.round((25 / 30) * fps), durationInFrames - Math.round((35 / 30) * fps), durationInFrames],
+            [0, 25, durationInFrames - 35, durationInFrames],
             [0, 0.12, 0.12, 0],
             { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
           )
@@ -120,25 +108,25 @@ export const TheLawOfStructuralLoadComposition: React.FC = () => {
       />
 
       {/* 3. Rich Layered Sound Design Engine */}
-      <SoundDesignEngine cues={sfxCues} />
+      <SoundDesignEngine cues={SFX_CUES} />
 
       {/* 4. Top Apple Progress Bar */}
       <AppleProgressBar />
 
       {/* 5. Niche Living Background */}
-      <TheLawOfStructuralLoadBackground />
+      <TheLawOfTheCounterweightBackground />
 
       {/* 6. Speech-Synchronized Progressive Reveal Canvas */}
-      <TheLawOfStructuralLoadCanvas transcript={transcript} />
+      <TheLawOfTheCounterweightCanvas transcript={transcript} />
 
       {/* 7. Multi-Pose Character Presenter */}
-      <TheLawOfStructuralLoadPresenter currentMs={currentMs} />
+      <TheLawOfTheCounterweightPresenter currentMs={currentMs} />
 
       {/* 8. Kinetic Captions with Neon Apple Glow */}
       <AppleKineticCaptions transcript={transcript} />
 
-      {/* 9. Grounded Finishing Texture (Halation + Vignette, pristine light canvas) */}
-      <GroundedTextureEngine />
+      {/* 9. Grounded Finishing Texture (35mm Living Grain + Halation + Vignette) */}
+      <GroundedTextureEngine grainOpacity={0.042} />
     </div>
   );
 };

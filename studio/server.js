@@ -58,6 +58,26 @@ function getSavedMetadata() {
   return {};
 }
 
+// Helper to reliably find a thumbnail for a video using common naming conventions
+function resolveThumbnailPath(filename) {
+  if (!filename) return null;
+  const rawBase = filename.replace(/\.mp4$/i, '');
+  const cleanBase = rawBase.replace(/_video$/i, '').replace(/_60fps$/i, '');
+  const candidates = [
+    `${rawBase}_thumbnail.png`,
+    `${cleanBase}_thumbnail.png`,
+    `${cleanBase}_video_thumbnail.png`,
+    `${cleanBase}_60fps_thumbnail.png`,
+    `${rawBase}.png`,
+    `${cleanBase}.png`,
+  ];
+  for (const cand of candidates) {
+    const p = path.join(OUT_DIR, cand);
+    if (fs.existsSync(p)) return p;
+  }
+  return path.join(OUT_DIR, `${rawBase}_thumbnail.png`);
+}
+
 // Helper to get OAuth2 client (multi-channel enabled with fallback)
 function getOAuth2Client(channelId = null) {
   const chObj = multiChannel.getOAuth2ClientForChannel(channelId, PORT);
@@ -121,6 +141,20 @@ async function syncYouTubeUploads(targetChannelId = null) {
       const ytVideos = playlistRes.data.items || [];
       let uploads = getUploadsRecord();
       let savedMetadata = getSavedMetadata();
+      if (fs.existsSync(OUT_DIR)) {
+        try {
+          const outFiles = fs.readdirSync(OUT_DIR).filter((f) => f.endsWith('.mp4'));
+          for (const f of outFiles) {
+            if (!savedMetadata[f]) {
+              const clean = f.replace(/\.mp4$/i, '').replace(/_video$/i, '').replace(/_/g, ' ');
+              savedMetadata[f] = {
+                topic: clean,
+                title: f.replace(/\.mp4$/i, '').replace(/_/g, ' ').toUpperCase() + ' #Shorts',
+              };
+            }
+          }
+        } catch (e) {}
+      }
 
       for (const yt of ytVideos) {
         const ytTitle = yt.snippet.title.trim();
@@ -197,6 +231,20 @@ async function syncYouTubeUploads(targetChannelId = null) {
       const ytVideos = playlistRes.data.items || [];
       let uploads = getUploadsRecord();
       let savedMetadata = getSavedMetadata();
+      if (fs.existsSync(OUT_DIR)) {
+        try {
+          const outFiles = fs.readdirSync(OUT_DIR).filter((f) => f.endsWith('.mp4'));
+          for (const f of outFiles) {
+            if (!savedMetadata[f]) {
+              const clean = f.replace(/\.mp4$/i, '').replace(/_video$/i, '').replace(/_/g, ' ');
+              savedMetadata[f] = {
+                topic: clean,
+                title: f.replace(/\.mp4$/i, '').replace(/_/g, ' ').toUpperCase() + ' #Shorts',
+              };
+            }
+          }
+        } catch (e) {}
+      }
 
       for (const yt of ytVideos) {
         const ytTitle = yt.snippet.title.trim();
@@ -443,10 +491,32 @@ app.get('/api/videos', async (req, res) => {
         (meta.topic && (meta.topic.includes('essay') || meta.topic.includes('neuroproductivity') || meta.topic.includes('lofi'))) ||
         stats.size > 50 * 1024 * 1024; // > 50MB typically long form
 
-      const baseName = filename.replace(/\.mp4$/i, '');
-      const thumbFile = `${baseName}_thumbnail.png`;
-      const thumbPath = path.join(OUT_DIR, thumbFile);
-      const hasThumbnail = fs.existsSync(thumbPath);
+      const rawBase = filename.replace(/\.mp4$/i, '');
+      const cleanBase = rawBase.replace(/_video$/i, '');
+      const thumbCandidates = [
+        `${rawBase}_thumbnail.png`,
+        `${cleanBase}_thumbnail.png`,
+        `${cleanBase}_video_thumbnail.png`,
+        `${cleanBase}_hook.png`,
+        `${rawBase}_hook.png`,
+        `${cleanBase}_f75.png`,
+        `${rawBase}_f75.png`,
+        `${cleanBase}_f0.png`,
+      ];
+      let thumbFile = null;
+      for (const cand of thumbCandidates) {
+        if (fs.existsSync(path.join(OUT_DIR, cand))) {
+          thumbFile = cand;
+          break;
+        }
+      }
+      if (!thumbFile) {
+        const publicIll = path.join(__dirname, '..', 'public', cleanBase, 'assets', 'scene_illustration.png');
+        if (fs.existsSync(publicIll)) {
+          thumbFile = `public_${cleanBase}_scene_illustration.png`;
+        }
+      }
+      const hasThumbnail = !!thumbFile;
 
       const niche = classifyVideoNiche(filename, meta);
 
@@ -569,7 +639,13 @@ app.get('/api/video-file/:filename', (req, res) => {
 
 // 2b. Serve thumbnail image file
 app.get('/api/thumbnail/:filename', (req, res) => {
-  const thumbPath = path.join(OUT_DIR, req.params.filename);
+  let thumbPath = path.join(OUT_DIR, req.params.filename);
+  if (req.params.filename.startsWith('public_')) {
+    const match = req.params.filename.match(/^public_(.*)_scene_illustration\.png$/);
+    if (match) {
+      thumbPath = path.join(__dirname, '..', 'public', match[1], 'assets', 'scene_illustration.png');
+    }
+  }
   if (!fs.existsSync(thumbPath)) {
     return res.status(404).send('Thumbnail not found');
   }
@@ -714,6 +790,7 @@ app.get('/api/auth-url', (req, res) => {
       'https://www.googleapis.com/auth/youtube.upload',
       'https://www.googleapis.com/auth/youtube.readonly',
       'https://www.googleapis.com/auth/youtube',
+      'https://www.googleapis.com/auth/youtube.force-ssl',
       'https://www.googleapis.com/auth/userinfo.profile',
     ];
 
@@ -841,6 +918,7 @@ app.post('/api/credentials', (req, res) => {
           'https://www.googleapis.com/auth/youtube.upload',
           'https://www.googleapis.com/auth/youtube',
           'https://www.googleapis.com/auth/youtube.readonly',
+          'https://www.googleapis.com/auth/youtube.force-ssl',
           'https://www.googleapis.com/auth/userinfo.profile',
         ],
         state: statePayload,
@@ -1014,8 +1092,7 @@ app.post('/api/upload', async (req, res) => {
     const videoId = response.data.id;
 
     // Attach Custom Thumbnail to YouTube Video if available
-    const baseName = filename.replace(/\.mp4$/i, '');
-    const thumbPath = path.join(OUT_DIR, `${baseName}_thumbnail.png`);
+    const thumbPath = resolveThumbnailPath(filename);
     let thumbnailAttached = false;
 
     if (fs.existsSync(thumbPath)) {
@@ -1434,12 +1511,13 @@ app.post('/api/publish-multi', async (req, res) => {
 
   try {
     let uploads = getUploadsRecord();
+    const savedMetadata = getSavedMetadata();
+    const fileMeta = savedMetadata[filename] || {};
     const existing = uploads[filename] || {};
     if (!existing.channels) existing.channels = {};
     if (!existing.instagramAccounts) existing.instagramAccounts = {};
 
-    const baseName = filename.replace(/\.mp4$/i, '');
-    const thumbPath = path.join(OUT_DIR, `${baseName}_thumbnail.png`);
+    const thumbPath = resolveThumbnailPath(filename);
     const fileSize = fs.statSync(filePath).size;
 
     let stepIndex = 0;
@@ -1468,16 +1546,21 @@ app.post('/api/publish-multi', async (req, res) => {
         statusPayload.privacyStatus = youtube.privacyStatus || 'public';
       }
 
+      const targetTitle = youtube.title || fileMeta.title || filename.replace('.mp4', '').replace(/_/g, ' ').toUpperCase() + ' #Shorts';
+      const targetDescription = youtube.description || fileMeta.description || '';
+      const targetTags = (Array.isArray(youtube.tags) && youtube.tags.length > 0) ? youtube.tags : (fileMeta.tags || ['Shorts']);
+      const targetCategory = youtube.categoryId || fileMeta.categoryId || '27';
+
       const ytRes = await ytClient.videos.insert(
         {
           part: 'snippet,status',
           notifySubscribers: true,
           requestBody: {
             snippet: {
-              title: youtube.title || filename,
-              description: youtube.description || '',
-              tags: youtube.tags || ['Shorts'],
-              categoryId: youtube.categoryId || '27',
+              title: targetTitle,
+              description: targetDescription,
+              tags: targetTags,
+              categoryId: targetCategory,
               defaultLanguage: 'en',
             },
             status: statusPayload,
@@ -1513,7 +1596,9 @@ app.post('/api/publish-multi', async (req, res) => {
       }
 
       // Automatically post high-converting Discussion Pinned Comment if provided
-      const targetComment = youtube.pinnedComment || savedMetadata[filename]?.pinnedComment || null;
+      const targetComment = (youtube.pinnedComment && youtube.pinnedComment.trim())
+        ? youtube.pinnedComment.trim()
+        : (fileMeta.pinnedComment || savedMetadata[filename]?.pinnedComment || null);
       let commentPosted = false;
       let commentId = null;
       if (youtube.autoPostComment !== false && targetComment && targetComment.trim()) {
@@ -1547,11 +1632,12 @@ app.post('/api/publish-multi', async (req, res) => {
         shortsUrl: `https://youtube.com/shorts/${videoId}`,
         isScheduled: isScheduling,
         publishAt: isoPublishAt,
-        publishedAt: ytRes.data.snippet.publishedAt || new Date().toISOString(),
+        publishedAt: ytRes.data?.snippet?.publishedAt || new Date().toISOString(),
         thumbnailAttached,
         commentPosted,
         commentId,
         pinnedComment: targetComment,
+        title: targetTitle,
       };
 
       existing.channels[channel.channelId] = channelRecord;
@@ -1568,6 +1654,7 @@ app.post('/api/publish-multi', async (req, res) => {
       existing.commentPosted = commentPosted;
       existing.commentId = commentId;
       existing.pinnedComment = targetComment;
+      existing.title = targetTitle;
 
       if (!activeUpload.result.youtubeChannels) activeUpload.result.youtubeChannels = [];
       activeUpload.result.youtubeChannels.push(channelRecord);
@@ -1612,7 +1699,9 @@ app.post('/api/publish-multi', async (req, res) => {
     uploads[filename] = existing;
     saveUploadsRecord(uploads);
 
+    activeUpload.result.channels = existing.channels;
     activeUpload.inProgress = false;
+    activeUpload.error = null;
     activeUpload.progress = 100;
     activeUpload.stage = isScheduling
       ? `🎉 Successfully scheduled release across ${totalDestinations} destination(s)!`
@@ -1716,7 +1805,7 @@ app.post('/api/niches/:nicheId/publish', async (req, res) => {
         const title = meta.title || filename.replace('.mp4', '').replace(/_/g, ' ');
         const description = meta.description || '';
         const tags = meta.tags || niche.defaultTags || [];
-        const thumbPath = path.join(OUT_DIR, `${filename.replace(/\.mp4$/i, '')}_thumbnail.png`);
+        const thumbPath = resolveThumbnailPath(filename);
 
         const uploads = getUploadsRecord();
         const existing = uploads[filename] || { filename, channels: {}, instagramAccounts: {} };
@@ -1877,6 +1966,7 @@ app.get('/api/settings/youtube', async (req, res) => {
           'https://www.googleapis.com/auth/youtube.upload',
           'https://www.googleapis.com/auth/youtube',
           'https://www.googleapis.com/auth/youtube.readonly',
+          'https://www.googleapis.com/auth/youtube.force-ssl',
           'https://www.googleapis.com/auth/userinfo.profile',
         ],
         state: statePayload,
@@ -1918,6 +2008,7 @@ app.post('/api/settings/save-secrets', (req, res) => {
         'https://www.googleapis.com/auth/youtube.upload',
         'https://www.googleapis.com/auth/youtube',
         'https://www.googleapis.com/auth/youtube.readonly',
+        'https://www.googleapis.com/auth/youtube.force-ssl',
         'https://www.googleapis.com/auth/userinfo.profile',
       ],
       state: statePayload,

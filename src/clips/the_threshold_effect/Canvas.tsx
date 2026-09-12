@@ -114,23 +114,23 @@ export const TheThresholdEffectCanvas: React.FC<CanvasProps> = () => {
       {/* ======================================================== */}
       {/* LAYER 1: FOREGROUND OCCLUDERS (Z > 0, 1.55x PARALLAX)    */}
       {/* ======================================================== */}
-      {/* Foreground Doorway Arch at Chamber 1 */}
-      {/* When camera dollies right to [1400, 0], this sweeps across the lens creating a natural wipe! */}
+      {/* Foreground Doorway Arch stationed along Conduit 01 ([700, 0]) */}
+      {/* As camera dollies right from Chamber 1 -> Chamber 2, this sweeps across the lens creating a motivated portal wipe! */}
       <WorldDepthEntity
-        worldX={0}
-        worldY={-40}
-        width={1080}
-        height={1540}
+        worldX={700}
+        worldY={0}
+        width={1100}
+        height={1920}
         depth="foreground"
-        startFrame={0}
-        endFrame={260}
+        startFrame={175}
+        endFrame={255}
       >
         <ForegroundOccluder
           type="doorway_arch"
-          width={1060}
-          height={1500}
+          width={1100}
+          height={1920}
           apertureWidth={780}
-          apertureHeight={1240}
+          apertureHeight={1700}
           color="#090d16"
           label="EVENT BOUNDARY // PORTAL 01"
         />
@@ -140,12 +140,12 @@ export const TheThresholdEffectCanvas: React.FC<CanvasProps> = () => {
       {/* Passes rapidly across the camera during the 1500px vertical dive */}
       <WorldDepthEntity
         worldX={1340}
-        worldY={780}
+        worldY={650}
         width={180}
         height={800}
         depth="foreground"
         startFrame={475}
-        endFrame={540}
+        endFrame={518}
       >
         <ForegroundOccluder
           type="monolithic_pillar"
@@ -192,9 +192,21 @@ export const TheThresholdEffectCanvas: React.FC<CanvasProps> = () => {
             </div>
           )}
 
-          {/* Part 1B: The Tangled Confusion Knot (Frames 75 -> 165) */}
+          {/* Part 1B: The Tangled Confusion Knot (Frames 75 -> 180) */}
           {frame >= 74 && (
-            <div className="w-full flex flex-col items-center text-center">
+            <div
+              className="w-full flex flex-col items-center text-center"
+              style={{
+                opacity: interpolate(frame, [74, 82], [0, 1], {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                }),
+                transform: `translateY(${interpolate(frame, [74, 84], [24, 0], {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                })}px)`,
+              }}
+            >
               <h2 className="font-sans text-[64px] font-black text-slate-950 uppercase tracking-tight mb-4">
                 EVERY TASK IS A ROOM
               </h2>
@@ -275,16 +287,17 @@ export const TheThresholdEffectCanvas: React.FC<CanvasProps> = () => {
                     PERCEIVED BARRIER
                   </span>
                   <div className="relative inline-block mt-1">
-                    <span className="font-sans text-[38px] font-black text-slate-950 uppercase tracking-tight">
-                      INTERNAL RESISTANCE
-                    </span>
                     {/* Live Marker Strike slicing across the text at frame 445 */}
                     <AnimatedSlashStrike
                       startFrame={445}
                       color="rose"
                       strokeWidth={7}
                       angle={-6}
-                    />
+                    >
+                      <span className="font-sans text-[38px] font-black text-slate-950 uppercase tracking-tight">
+                        INTERNAL RESISTANCE
+                      </span>
+                    </AnimatedSlashStrike>
                   </div>
                 </div>
 
@@ -321,6 +334,14 @@ export const TheThresholdEffectCanvas: React.FC<CanvasProps> = () => {
             style={{
               background: "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 241, 242, 0.92) 100%)",
               boxShadow: "0 28px 56px -12px rgba(244, 63, 94, 0.28), 0 0 0 1px rgba(244, 63, 94, 0.15)",
+              opacity: interpolate(frame, [280, 292, 410, 426], [0, 1, 1, 0], {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+              }),
+              transform: `translateY(${interpolate(frame, [280, 292, 410, 426], [24, 0, 0, -20], {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+              })}px)`,
             }}
           >
             <div className="flex flex-col">

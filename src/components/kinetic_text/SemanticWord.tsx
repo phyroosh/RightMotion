@@ -131,8 +131,8 @@ export const SemanticWord: React.FC<SemanticWordProps> = ({
   }
 
   if (physics === "heartbeat") {
-    // Rhythmic double-beat pulse
-    const cycle = (relFrame % 30) / 30;
+    // Rhythmic double-beat pulse (1 cycle per second)
+    const cycle = (relFrame % fps) / fps;
     let pulseScale = 1.0;
     if (cycle < 0.15) {
       pulseScale = 1.0 + Math.sin((cycle / 0.15) * Math.PI) * 0.16;

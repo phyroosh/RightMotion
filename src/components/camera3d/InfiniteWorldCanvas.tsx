@@ -164,17 +164,21 @@ export const InfiniteWorldCanvas: React.FC<InfiniteWorldCanvasProps> = ({
     }
   }
 
-  // 2. Organic Camera Micro-Drift with Position-Anchored Breath-Hold Freezes
+  // 2. Organic Camera Micro-Drift with Position-Anchored Breath-Hold Freezes (FPS-Normalized)
   let driftX = 0;
   let driftY = 0;
   if (enableDrift) {
-    const driftSpeed = 0.024;
+    const fpsRatio = 30 / fps;
+    const driftSpeed = 0.024 * fpsRatio;
     const rawDriftX = Math.sin(frame * driftSpeed) * 6.0;
     const rawDriftY = Math.cos(frame * (driftSpeed * 0.75)) * 4.5;
 
+    const easeInFrames = Math.round(8 * (fps / 30));
+    const easeOutFrames = Math.round(12 * (fps / 30));
+
     let activeHold: WorldCameraBreathHold | null = null;
     for (const bh of breathHolds) {
-      if (frame >= bh.startFrame - 8 && frame <= bh.startFrame + bh.durationFrames + 12) {
+      if (frame >= bh.startFrame - easeInFrames && frame <= bh.startFrame + bh.durationFrames + easeOutFrames) {
         activeHold = bh;
         break;
       }
@@ -187,7 +191,7 @@ export const InfiniteWorldCanvas: React.FC<InfiniteWorldCanvasProps> = ({
       const freezeY = Math.cos(holdStart * (driftSpeed * 0.75)) * 4.5;
 
       if (frame < holdStart) {
-        const easeIn = interpolate(frame, [holdStart - 8, holdStart], [0, 1], {
+        const easeIn = interpolate(frame, [holdStart - easeInFrames, holdStart], [0, 1], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
           easing: Easing.bezier(0.25, 0.1, 0.25, 1),
@@ -198,7 +202,7 @@ export const InfiniteWorldCanvas: React.FC<InfiniteWorldCanvasProps> = ({
         driftX = freezeX;
         driftY = freezeY;
       } else {
-        const easeOut = interpolate(frame, [holdEnd, holdEnd + 12], [1, 0], {
+        const easeOut = interpolate(frame, [holdEnd, holdEnd + easeOutFrames], [1, 0], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
           easing: Easing.bezier(0.25, 0.1, 0.25, 1),
@@ -212,17 +216,18 @@ export const InfiniteWorldCanvas: React.FC<InfiniteWorldCanvasProps> = ({
     }
   }
 
-  // 3. Damped Harmonic Impact Shakes
+  // 3. Damped Harmonic Impact Shakes (FPS-Normalized)
   let impactShakeX = 0;
   let impactShakeY = 0;
+  const shakeFreqFactor = 30 / fps;
   for (const imp of impacts) {
     const rel = frame - imp.frame;
-    const dur = imp.durationFrames ?? 10;
+    const dur = imp.durationFrames ?? Math.round(10 * (fps / 30));
     const intensity = imp.intensity ?? 14;
     if (rel >= 0 && rel < dur) {
       const decay = Math.exp(-rel / (dur * 0.42));
-      impactShakeX += Math.sin(rel * 1.8) * intensity * decay;
-      impactShakeY += Math.cos(rel * 2.2) * (intensity * 0.65) * decay;
+      impactShakeX += Math.sin(rel * 1.8 * shakeFreqFactor) * intensity * decay;
+      impactShakeY += Math.cos(rel * 2.2 * shakeFreqFactor) * (intensity * 0.65) * decay;
     }
   }
 

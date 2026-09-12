@@ -22,3 +22,5 @@ export {
 } from "./CinematicDepthWorld";
 export { ForegroundOccluder, type ForegroundOccluderProps, type OccluderType } from "./ForegroundOccluder";
 export { RackFocus, type RackFocusProps } from "./RackFocus";
+export { FEATURES, ENABLE_CINEMATIC_CAMERA_V3 } from "../../config/features";
+

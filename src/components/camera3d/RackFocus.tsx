@@ -1,5 +1,6 @@
 import React from "react";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { ENABLE_CINEMATIC_CAMERA_V3 } from "../../config/features";
 
 export interface RackFocusProps {
   children: React.ReactNode;
@@ -38,6 +39,15 @@ export const RackFocus: React.FC<RackFocusProps> = ({
   className = "",
   style = {},
 }) => {
+  // If Frontier #3 is dormant: pass children through without any optical defocus or opacity alteration
+  if (!ENABLE_CINEMATIC_CAMERA_V3) {
+    return (
+      <div className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
+
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 

@@ -11,13 +11,15 @@ import {
   StressFractureEngine,
   ViscoelasticDeformation,
   CapillaryInkBleed,
+  OpticallyStableText,
 } from "../../components/physics/materiality";
+import { scaleWaypointsToFps, scaleImpactsToFps } from "../../utils/temporal";
 
 interface CanvasProps {
   transcript: WordTimestamp[];
 }
 
-const WORLD_WAYPOINTS: WorldWaypoint[] = [
+const BASE_WORLD_WAYPOINTS: WorldWaypoint[] = [
   // 1. Chamber 1: The Glass Premise (0 -> 135)
   { frame: 0, x: 0, y: 0, zoom: 1.0, angle: 0 },
   { frame: 135, x: 0, y: 0, zoom: 1.0, angle: 0 },
@@ -35,15 +37,27 @@ const WORLD_WAYPOINTS: WorldWaypoint[] = [
   { frame: 730, x: 700, y: 750, zoom: 0.34, angle: 0, durationFrames: 45, transitionType: "smooth" },
 ];
 
+const BASE_IMPACTS = [
+  { frame: 185, intensity: 8, durationFrames: 8 },
+  { frame: 245, intensity: 10, durationFrames: 9 },
+  { frame: 320, intensity: 12, durationFrames: 10 },
+  { frame: 446, intensity: 18, durationFrames: 14 }, // Critical Shatter Impact!
+  { frame: 508, intensity: 12, durationFrames: 10 },
+];
+
 export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const f = (frameAt30: number) => Math.round((frameAt30 / 30) * fps);
+
+  const waypoints = React.useMemo(() => scaleWaypointsToFps(BASE_WORLD_WAYPOINTS, 30, fps), [fps]);
+  const impacts = React.useMemo(() => scaleImpactsToFps(BASE_IMPACTS, 30, fps), [fps]);
 
   // Progressive load simulation in Chamber 2
   // Block 1 lands at f=180, Block 2 lands at f=245, Block 3 lands at f=320
   const compLoad = interpolate(
     frame,
-    [165, 185, 245, 320, 440],
+    [f(165), f(185), f(245), f(320), f(440)],
     [0.08, 0.35, 0.68, 0.94, 1.0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.2, 0.8, 0.2, 1) }
   );
@@ -51,19 +65,19 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
   // Stress accumulation ratio for StressFractureEngine
   const stressRatio = interpolate(
     frame,
-    [185, 245, 340, 445],
+    [f(185), f(245), f(340), f(445)],
     [0.1, 0.45, 0.82, 1.0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
   // Conduit pulse progress
-  const conduit1Progress = interpolate(frame, [130, 165], [0, 1], {
+  const conduit1Progress = interpolate(frame, [f(130), f(165)], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.bezier(0.4, 0, 0.2, 1),
   });
 
-  const conduit2Progress = interpolate(frame, [460, 505], [0, 1], {
+  const conduit2Progress = interpolate(frame, [f(460), f(505)], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.bezier(0.4, 0, 0.2, 1),
@@ -71,30 +85,24 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
 
   // Chamber 3 Monolith entrance spring
   const monolithSpring = spring({
-    frame: Math.max(0, frame - 505),
+    frame: Math.max(0, frame - f(505)),
     fps,
     config: { damping: 14, mass: 0.9, stiffness: 120 },
   });
 
   // Macro Blueprint opacity
-  const grandTitleOpacity = interpolate(frame, [695, 730], [0, 1], {
+  const grandTitleOpacity = interpolate(frame, [f(695), f(730)], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   // Deterministic badge pulse
-  const dotPulse = 0.45 + 0.55 * Math.sin(frame * 0.2);
+  const dotPulse = 0.45 + 0.55 * Math.sin((frame / fps) * (0.2 * 30));
 
   return (
     <InfiniteWorldCanvas
-      waypoints={WORLD_WAYPOINTS}
-      impacts={[
-        { frame: 185, intensity: 8, durationFrames: 8 },
-        { frame: 245, intensity: 10, durationFrames: 9 },
-        { frame: 320, intensity: 12, durationFrames: 10 },
-        { frame: 446, intensity: 18, durationFrames: 14 }, // Critical Shatter Impact!
-        { frame: 508, intensity: 12, durationFrames: 10 },
-      ]}
+      waypoints={waypoints}
+      impacts={impacts}
       showGrid={true}
       className="font-sans"
     >
@@ -144,11 +152,11 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
           </div>
 
           {/* Part 1A: Hero Illustration Card (Frames 0 -> 75) */}
-          {frame < 78 && (
+          {frame < f(78) && (
             <div
               className="w-full flex flex-col items-center"
               style={{
-                opacity: interpolate(frame, [68, 76], [1, 0], {
+                opacity: interpolate(frame, [f(68), f(76)], [1, 0], {
                   extrapolateLeft: "clamp",
                   extrapolateRight: "clamp",
                 }),
@@ -166,7 +174,7 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
           )}
 
           {/* Part 1B: Crystalline Prism Introduction (Frames 75 -> 145) */}
-          {frame >= 74 && (
+          {frame >= f(74) && (
             <div className="w-full flex flex-col items-center text-center">
               <h2 className="font-sans text-[64px] font-black text-slate-950 uppercase tracking-tight mb-4">
                 MADE OF GLASS
@@ -217,7 +225,7 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
       {/* CHAMBER 2: MECHANICAL STRAIN & FRACTURE (World: [1400, 0])*/}
       {/* "When you pile unprioritized demands onto raw grit..."    */}
       {/* ======================================================== */}
-      <WorldEntity worldX={1400} worldY={0} width={960} height={1300} startFrame={130}>
+      <WorldEntity worldX={1400} worldY={0} width={960} height={1300} startFrame={f(130)}>
         <div className="w-full h-full flex flex-col items-center justify-start pt-10">
           {/* Sector Badge */}
           <div className="px-5 py-2 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md mb-6 flex items-center gap-3">
@@ -236,11 +244,11 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
 
           {/* Dynamic Compressive Weight Blocks landing on top */}
           <div className="w-[860px] flex flex-col gap-3 mb-6">
-            {frame >= 180 && (
+            {frame >= f(180) && (
               <div
                 className="w-full p-4 rounded-2xl bg-slate-950 text-white border-[2.5px] border-slate-800 shadow-lg flex items-center justify-between font-mono"
                 style={{
-                  transform: `translateY(${interpolate(frame, [180, 185], [-40, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}px)`,
+                  transform: `translateY(${interpolate(frame, [f(180), f(185)], [-40, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}px)`,
                 }}
               >
                 <span className="text-[20px] font-bold uppercase">LOAD 01: UNPRIORITIZED DEMANDS</span>
@@ -248,11 +256,11 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
               </div>
             )}
 
-            {frame >= 240 && (
+            {frame >= f(240) && (
               <div
                 className="w-full p-4 rounded-2xl bg-slate-950 text-white border-[2.5px] border-slate-800 shadow-lg flex items-center justify-between font-mono"
                 style={{
-                  transform: `translateY(${interpolate(frame, [240, 245], [-40, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}px)`,
+                  transform: `translateY(${interpolate(frame, [f(240), f(245)], [-40, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}px)`,
                 }}
               >
                 <span className="text-[20px] font-bold uppercase">LOAD 02: RAW WILLPOWER GRIT</span>
@@ -266,12 +274,12 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
             load={compLoad}
             poissonRatio={0.45}
             maxCompression={0.14}
-            impactFrame={frame >= 320 ? 320 : undefined}
+            impactFrame={frame >= f(320) ? f(320) : undefined}
             className="flex items-center justify-center"
           >
             <StressFractureEngine
               stress={stressRatio}
-              shatterFrame={446}
+              shatterFrame={f(446)}
               width={840}
               height={420}
               className="rounded-3xl overflow-hidden"
@@ -280,45 +288,45 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
                 className="w-full h-full rounded-3xl p-8 flex flex-col items-center justify-between relative"
                 style={{
                   background:
-                    frame >= 446
+                    frame >= f(446)
                       ? "linear-gradient(135deg, rgba(254, 242, 242, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%)"
                       : "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 249, 255, 0.85) 100%)",
-                  border: frame >= 446 ? "3px solid #e11d48" : "3px solid #0284c7",
+                  border: frame >= f(446) ? "3px solid #e11d48" : "3px solid #0284c7",
                   boxShadow:
-                    frame >= 446
+                    frame >= f(446)
                       ? "0 28px 56px -12px rgba(225, 29, 72, 0.35)"
                       : "0 24px 48px -12px rgba(2, 132, 199, 0.22)",
                 }}
               >
-                <div className="w-full flex items-center justify-between border-b border-slate-200 pb-3">
+                <OpticallyStableText className="w-full flex items-center justify-between border-b border-slate-200 pb-3">
                   <span className="font-mono text-[20px] font-black uppercase text-slate-500">
                     COLUMN AXIAL STRAIN
                   </span>
                   <span
                     className={`font-mono text-[22px] font-black uppercase ${
-                      frame >= 446 ? "text-rose-600" : "text-sky-600"
+                      frame >= f(446) ? "text-rose-600" : "text-sky-600"
                     }`}
                   >
-                    {frame >= 446 ? "RUPTURED" : `${Math.round(compLoad * 100)}% SHEAR`}
+                    {frame >= f(446) ? "RUPTURED" : `${Math.round(compLoad * 100)}% SHEAR`}
                   </span>
-                </div>
+                </OpticallyStableText>
 
-                <div className="text-center my-4">
+                <OpticallyStableText className="text-center my-4">
                   <span
                     className={`font-sans text-[58px] font-black uppercase tracking-tight leading-none ${
-                      frame >= 446 ? "text-rose-600" : "text-slate-950"
+                      frame >= f(446) ? "text-rose-600" : "text-slate-950"
                     }`}
                   >
-                    {frame >= 446 ? "IT FRACTURES." : "CANNOT BEND"}
+                    {frame >= f(446) ? "IT FRACTURES." : "CANNOT BEND"}
                   </span>
-                </div>
+                </OpticallyStableText>
 
-                <div className="w-full flex items-center justify-around font-mono border-t border-slate-200 pt-3">
+                <OpticallyStableText className="w-full flex items-center justify-around font-mono border-t border-slate-200 pt-3">
                   <span className="text-[18px] text-slate-500 font-bold uppercase">ELASTICITY: 0%</span>
                   <span className="text-[18px] text-rose-600 font-black uppercase">
-                    {frame >= 446 ? "STRUCTURAL CLEAVAGE" : "BRITTLE COLLAPSE IMMINENT"}
+                    {frame >= f(446) ? "STRUCTURAL CLEAVAGE" : "BRITTLE COLLAPSE IMMINENT"}
                   </span>
-                </div>
+                </OpticallyStableText>
               </div>
             </StressFractureEngine>
           </ViscoelasticDeformation>
@@ -329,7 +337,7 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
       {/* CHAMBER 3: THE CAST-IRON MONOLITH (World: [1400, 1500])  */}
       {/* "Stop using fragile grit... Anchor your mind into..."     */}
       {/* ======================================================== */}
-      <WorldEntity worldX={1400} worldY={1500} width={960} height={1300} startFrame={470}>
+      <WorldEntity worldX={1400} worldY={1500} width={960} height={1300} startFrame={f(470)}>
         <div
           className="w-full h-full flex flex-col items-center justify-start pt-10"
           style={{
@@ -376,7 +384,7 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
               <div className="flex items-center gap-4">
                 <span className="font-mono text-[28px] font-black text-slate-500">01 //</span>
                 <CapillaryInkBleed
-                  startFrame={635}
+                  startFrame={f(635)}
                   text="WRITTEN."
                   fontSize={64}
                   textColor="#ffffff"
@@ -388,7 +396,7 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
               <div className="flex items-center gap-4">
                 <span className="font-mono text-[28px] font-black text-slate-500">02 //</span>
                 <CapillaryInkBleed
-                  startFrame={658}
+                  startFrame={f(658)}
                   text="EXTERNAL."
                   fontSize={64}
                   textColor="#ffffff"
@@ -400,7 +408,7 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
               <div className="flex items-center gap-4">
                 <span className="font-mono text-[28px] font-black text-emerald-400">03 //</span>
                 <CapillaryInkBleed
-                  startFrame={685}
+                  startFrame={f(685)}
                   text="UNBREAKABLE."
                   fontSize={64}
                   textColor="#38bdf8"
@@ -431,7 +439,7 @@ export const TheLawOfStructuralLoadCanvas: React.FC<CanvasProps> = () => {
       {/* ======================================================== */}
       {/* MACRO BLUEPRINT OVERLAY                                  */}
       {/* ======================================================== */}
-      <WorldEntity worldX={700} worldY={750} width={3300} height={3800} startFrame={685}>
+      <WorldEntity worldX={700} worldY={750} width={3300} height={3800} startFrame={f(685)}>
         <div
           className="w-full h-full pointer-events-none flex flex-col items-center justify-between p-12"
           style={{ opacity: grandTitleOpacity }}

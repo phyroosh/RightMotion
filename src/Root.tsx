@@ -79,6 +79,10 @@ import { TheLawOfStructuralLoadComposition } from "./clips/the_law_of_structural
 import the_law_of_structural_loadTranscript from "./clips/the_law_of_structural_load/transcript.json";
 import { TheThresholdEffectComposition } from "./clips/the_threshold_effect";
 import the_threshold_effectTranscript from "./clips/the_threshold_effect/transcript.json";
+import { TheLawOfTheCounterweightComposition } from "./clips/the_law_of_the_counterweight";
+import the_law_of_the_counterweightTranscript from "./clips/the_law_of_the_counterweight/transcript.json";
+import { TheArchitectureOfPressureComposition } from "./clips/the_architecture_of_pressure";
+import the_architecture_of_pressureTranscript from "./clips/the_architecture_of_pressure/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -108,6 +112,8 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TheArchitectureOfPressureThumbnail,
+  TheLawOfTheCounterweightThumbnail,
   TheThresholdEffectThumbnail,
   TheLawOfStructuralLoadThumbnail,
   TheArchitectureOfFocusThumbnail,
@@ -181,7 +187,7 @@ const calculateDurationInFrames = (transcript: any[], fps: number): number => {
 };
 
 export const RemotionRoot: React.FC = () => {
-  const fps = 30;
+  const fps = 60;
   const chaptersDuration = calculateDurationInFrames(chaptersTranscript as WordTimestamp[], fps);
   const emotionsDuration = calculateDurationInFrames(emotionsTranscript as WordTimestamp[], fps);
   const strengthDuration = calculateDurationInFrames(strengthTranscript as WordTimestamp[], fps);
@@ -249,6 +255,10 @@ export const RemotionRoot: React.FC = () => {
   const the_law_of_structural_loadDuration = calculateDurationInFrames(the_law_of_structural_loadTranscript as any[], fps);
   
   const the_threshold_effectDuration = calculateDurationInFrames(the_threshold_effectTranscript as any[], fps);
+  
+  const the_law_of_the_counterweightDuration = calculateDurationInFrames(the_law_of_the_counterweightTranscript as any[], fps);
+  
+  const the_architecture_of_pressureDuration = calculateDurationInFrames(the_architecture_of_pressureTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -579,6 +589,26 @@ export const RemotionRoot: React.FC = () => {
         id="TheThresholdEffectVideo"
         component={TheThresholdEffectComposition}
         durationInFrames={the_threshold_effectDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TheLawOfTheCounterweightVideo"
+        component={TheLawOfTheCounterweightComposition}
+        durationInFrames={the_law_of_the_counterweightDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="TheArchitectureOfPressureVideo"
+        component={TheArchitectureOfPressureComposition}
+        durationInFrames={the_architecture_of_pressureDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -1166,6 +1196,20 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="TheThresholdEffectThumbnail"
         component={TheThresholdEffectThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheLawOfTheCounterweightThumbnail"
+        component={TheLawOfTheCounterweightThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheArchitectureOfPressureThumbnail"
+        component={TheArchitectureOfPressureThumbnail}
         width={1080}
         height={1920}
       />
