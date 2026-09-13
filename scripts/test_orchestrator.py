@@ -21,11 +21,11 @@ from orchestrator import CreativeOrchestrator
 
 def run_tests():
     print("=" * 70)
-    print("🎬 RUNNING FRONTIER #0 TEST HARNESS (12 SCENARIOS)")
+    print("🎬 RUNNING FRONTIER #0 TEST HARNESS (14 SCENARIOS)")
     print("=" * 70)
 
     passed = 0
-    total = 12
+    total = 14
 
     # -------------------------------------------------------------
     # Scenario 1: Pure Minimalist Scene (Data/Metrics)
@@ -279,6 +279,36 @@ def run_tests():
         passed += 1
     else:
         print("  ❌ FAIL: Non-deterministic output detected across identical runs!")
+
+    # -------------------------------------------------------------
+    # Scenario 13: Frontier #7 Causal State Machine Selection
+    # Expected: F7 is selected for task accumulation and cognitive drain narrative.
+    # -------------------------------------------------------------
+    print("\n[Scenario 13] Frontier #7 Causal State Machine Selection...")
+    orch13 = CreativeOrchestrator()
+    plan13 = orch13.generate_plan(
+        clip_name="brain_tabs_causal",
+        topic="Open Brain Tabs",
+        script="Every unfinished task leaves an open tab in your brain. Each unresolved loop drains cognitive bandwidth until the system suffers severe fatigue. Offload the loop externally.",
+    )
+    s2_acts = [a["frontierCode"] for a in plan13["scenePlans"][1]["activeCapabilities"]]
+    if "F7" in s2_acts:
+        print("  ✅ PASS: Successfully selected F7 (Visual State Machines & Causal Storytelling) for task/drain narrative.")
+        passed += 1
+    else:
+        print(f"  ❌ FAIL: F7 not selected for task drain narrative: s2_acts={s2_acts}")
+
+    # -------------------------------------------------------------
+    # Scenario 14: Frontier #7 Capability Mapping & Component Export
+    # Expected: Mapped components include CausalWorld and useNodeState.
+    # -------------------------------------------------------------
+    print("\n[Scenario 14] Frontier #7 Component Mapping & Architecture...")
+    f7_entry = [a for a in plan13["scenePlans"][1]["activeCapabilities"] if a["frontierCode"] == "F7"]
+    if f7_entry and "CausalWorld" in f7_entry[0]["mappedComponents"]:
+        print("  ✅ PASS: F7 correctly maps CausalWorld and causal primitives.")
+        passed += 1
+    else:
+        print(f"  ❌ FAIL: F7 mapping incomplete: {f7_entry}")
 
     print("\n" + "=" * 70)
     print(f"TEST RESULTS: {passed} / {total} SCENARIOS PASSED")

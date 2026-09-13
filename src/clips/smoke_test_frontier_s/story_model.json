@@ -1,0 +1,338 @@
+{
+  "meta": {
+    "sourceType": "topic_generated",
+    "originalInput": "Notice how you delay working on how one small compromise becomes a habit before you notice even when you know it impacts your future? Psychologists call this Emotional Task Avoidance. Your brain doesn't fear the work itself—it treats emotional uncertainty as a physical threat, freezing your prefrontal cortex in comfort mode. Waiting for motivation keeps you trapped because motivation is an emotion, not an initiation trigger. The solution is shrinking the initiation threshold to two minutes: write a single sentence, open the project, or take one physical step. Breaking the kinetic barrier shifts your dopamine from avoidance to completion, building unstoppable momentum.",
+    "topic": "How One Small Compromise Becomes a Habit Before You Notice",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 102,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "e2b36c84d410b98a182eb85f551903b33b5eca21c781f0f42ebb839b900aa107"
+  },
+  "story": {
+    "coreIdea": "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+    "centralClaim": "Destructive patterns do not begin with catastrophic failures; they begin with unexamined micro-compromises.",
+    "viewerPromise": "Recognize the invisible shift where a single small concession hardens into an automatic habit.",
+    "viewerQuestion": "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+    "narrativeArchitecture": "OBSERVATION -> BASELINE_SHIFT -> ACCUMULATION -> CRITICAL_REVEAL"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "Notice how you delay working on how one small compromise becomes a habit before you notice even when you know it impacts your future?",
+      "sentenceIndices": [
+        0
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "Psychologists call this Emotional Task Avoidance. Your brain doesn't fear the work itself—it treats emotional uncertainty as a physical threat, freezing your prefrontal cortex in comfort mode.",
+      "sentenceIndices": [
+        1,
+        2
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "Waiting for motivation keeps you trapped because motivation is an emotion, not an initiation trigger. The solution is shrinking the initiation threshold to two minutes: write a single sentence, open the project, or take one physical step.",
+      "sentenceIndices": [
+        3,
+        4
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "Breaking the kinetic barrier shifts your dopamine from avoidance to completion, building unstoppable momentum.",
+      "sentenceIndices": [
+        5
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "Baseline Drift",
+      "Micro-Concession",
+      "Behavioral Normalization"
+    ],
+    "entities": [
+      "Integrity Threshold Line",
+      "Subconscious Anchor",
+      "Marker Blade"
+    ],
+    "persistentObjects": [
+      "Integrity Threshold Line (tracks baseline deflection across scenes)"
+    ]
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "Notice how you delay working on how one small compromise becomes a habit before you notice even when you know it impacts your future?",
+        "type": "causal"
+      },
+      {
+        "statement": "Psychologists call this Emotional Task Avoidance.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Your brain doesn't fear the work itself—it treats emotional uncertainty as a physical threat, freezing your prefrontal cortex in comfort mode.",
+        "type": "psychological"
+      },
+      {
+        "statement": "Waiting for motivation keeps you trapped because motivation is an emotion, not an initiation trigger.",
+        "type": "supporting"
+      },
+      {
+        "statement": "The solution is shrinking the initiation threshold to two minutes: write a single sentence, open the project, or take one physical step.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Breaking the kinetic barrier shifts your dopamine from avoidance to completion, building unstoppable momentum.",
+        "type": "psychological"
+      }
+    ],
+    "evidence": [
+      {
+        "type": "named_concept",
+        "reference": "Emotional Task Avoidance",
+        "isVerifiable": true
+      }
+    ],
+    "misconceptions": [
+      {
+        "presumed": "Intuitive assumption",
+        "actual": "you delay working on how one small compromise becomes a habit before you notice even when you know it impacts your future",
+        "revealLocation": "opening_observation"
+      }
+    ]
+  },
+  "causalGraph": {
+    "nodes": [
+      {
+        "id": "behavioral_baseline",
+        "initialCondition": "STRICT_INTEGRITY",
+        "reversibility": "PARTIALLY_REVERSIBLE"
+      },
+      {
+        "id": "compromise_accumulator",
+        "initialCondition": "ZERO",
+        "reversibility": "DECAYING"
+      }
+    ],
+    "chains": [
+      {
+        "cause": "First small unnoticed concession",
+        "mechanism": "Absence of immediate pain reduces perceived risk",
+        "event": "TRIGGER",
+        "consequence": "Internal threshold adjusts slightly downward",
+        "resultingState": "ERODING"
+      },
+      {
+        "cause": "Repeated concession over time",
+        "mechanism": "Neural adaptation normalizes the lower standard",
+        "event": "ACCUMULATION",
+        "consequence": "Compromise becomes the default subconscious baseline",
+        "resultingState": "HARDENED_HABIT"
+      }
+    ],
+    "thresholds": [
+      {
+        "source": "compromise_accumulator",
+        "condition": "repetitions >= habit_threshold",
+        "consequence": "Behavior shifts from conscious choice to automatic default"
+      }
+    ]
+  },
+  "stateModel": {
+    "initialState": "CONSCIOUS_AGENCY",
+    "intermediateStates": [
+      "UNNOTICED_EROSION",
+      "NORMALIZED_TOLERANCE"
+    ],
+    "finalState": "HARDENED_AUTOMATICITY",
+    "dynamics": "transformation"
+  },
+  "temporalModel": {
+    "pacing": "sudden_snap",
+    "hasRepetition": false,
+    "repetitionNature": "none",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "Waiting for motivation keeps you trapped because motivation ",
+      "approximateTimestampSec": 19.6,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "COMPROMISE",
+      "Psychologists",
+      "Emotional Task Avoidance",
+      "Your",
+      "Waiting",
+      "Breaking"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "contrast",
+      "physicalDescription": "A crisp horizontal baseline marker subtly shifting downward under a light weight",
+      "rationale": "Visually embodies the insidious nature of micro-concessions."
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "opportunityType": "reveal",
+      "physicalDescription": "Live marker cut slicing through text with AnimatedSlashStrike on the exact spoken realization",
+      "rationale": "Action over display: the viewer witnesses the rejection happening in real time."
+    }
+  ],
+  "visualAbsence": [
+    {
+      "textSpan": "notice how",
+      "recommendedTreatment": "spoken_only",
+      "reason": "Rhetorical glue; animating this creates visual noise without adding narrative meaning."
+    }
+  ],
+  "semanticImportance": {
+    "critical": [
+      "Destructive patterns do not begin with catastrophic failures; they begin with unexamined micro-compromises.",
+      "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+      "Notice how you delay working on how one small compromise becomes a habit before you notice even when you know it impacts your future?"
+    ],
+    "important": [
+      "Recognize the invisible shift where a single small concession hardens into an automatic habit.",
+      "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+      "Psychologists call this Emotional Task Avoidance. Your brain doesn't fear the work itself—it treats emotional uncertainty as a physical threat, freezing your prefrontal cortex in comfort mode.",
+      "Breaking the kinetic barrier shifts your dopamine from avoidance to completion, building unstoppable momentum."
+    ],
+    "supporting": [
+      "Waiting for motivation keeps you trapped because motivation is an emotion, not an initiation trigger. The solution is shrinking the initiation threshold to two minutes: write a single sentence, open the project, or take one physical step."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "At what exact moment does an unexamined concession cross into an unconscious habit?",
+    "visualContradiction": "You believed you made a single minor exception, but your subconscious made a permanent rule",
+    "mostMemorableTransformation": "A microscopic horizontal fault line widening into an immutable granite wall",
+    "textHookCandidates": [
+      "THE SLIPPAGE",
+      "NEW BASELINE",
+      "ONE COMPROMISE",
+      "FAULT LINE"
+    ],
+    "recommendedArchetype": "impossible_metaphor"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "LOW",
+        "rationale": "Intimate single-subject dialogue; camera flight would dilute message punch."
+      },
+      "F2": {
+        "signal": "HIGH",
+        "rationale": "Physical strain, compression, or brittle rupture directly expresses the core tension."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "LOW",
+        "rationale": "Clean luminous light canvas with subtle radial depth is superior."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "VERY_HIGH",
+        "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": true,
+    "issues": [],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

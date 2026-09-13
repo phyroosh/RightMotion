@@ -44,7 +44,7 @@ class CreativeOrchestrator:
         self.overrides = overrides or {}
 
     def analyze_script_pillars(
-        self, script: str, transcript: Optional[List[Dict[str, Any]]] = None, fps: int = 60
+        self, script: str, transcript: Optional[List[Dict[str, Any]]] = None, fps: int = 60, story_model: Optional[Any] = None
     ) -> List[Dict[str, Any]]:
         """Divide script into 3 standard pillars: Hook/Problem, Logic/Mechanism, Solution/Shift."""
         cleaned_text = re.sub(r"\{\s*[^}]+\s*\}", "", script).strip()
@@ -53,26 +53,48 @@ class CreativeOrchestrator:
         if not sentences:
             sentences = ["The core friction.", "The underlying mechanism.", "The decisive shift."]
 
-        total_sentences = len(sentences)
-        if total_sentences == 1:
-            p1_s = [sentences[0]]
-            p2_s = [sentences[0]]
-            p3_s = [sentences[0]]
-        elif total_sentences == 2:
-            p1_s = [sentences[0]]
-            p2_s = [sentences[1]]
-            p3_s = [sentences[1]]
-        elif total_sentences == 3:
-            p1_s = [sentences[0]]
-            p2_s = [sentences[1]]
-            p3_s = [sentences[2]]
+        # If story_model with segments is available, map segments to 3 pillars
+        segments = getattr(story_model, "segments", None) if story_model else None
+        if segments and len(segments) >= 2:
+            p1_s = []
+            p2_s = []
+            p3_s = []
+            for seg in segments:
+                s_text = seg.narrationText if hasattr(seg, "narrationText") else seg.get("narrationText", "")
+                s_role = seg.role if hasattr(seg, "role") else seg.get("role", "")
+                if s_role in ["hook", "setup"]:
+                    p1_s.append(s_text)
+                elif s_role in ["mechanism", "escalation", "contradiction"]:
+                    p2_s.append(s_text)
+                else:
+                    p3_s.append(s_text)
+            if not p1_s:
+                p1_s = [sentences[0]]
+            if not p2_s:
+                p2_s = [sentences[1]] if len(sentences) > 1 else p1_s
+            if not p3_s:
+                p3_s = [sentences[-1]]
         else:
-            # 3-pillar partition
-            idx1 = max(1, round(total_sentences * 0.28))
-            idx2 = max(idx1 + 1, round(total_sentences * 0.72))
-            p1_s = sentences[:idx1]
-            p2_s = sentences[idx1:idx2]
-            p3_s = sentences[idx2:]
+            total_sentences = len(sentences)
+            if total_sentences == 1:
+                p1_s = [sentences[0]]
+                p2_s = [sentences[0]]
+                p3_s = [sentences[0]]
+            elif total_sentences == 2:
+                p1_s = [sentences[0]]
+                p2_s = [sentences[1]]
+                p3_s = [sentences[1]]
+            elif total_sentences == 3:
+                p1_s = [sentences[0]]
+                p2_s = [sentences[1]]
+                p3_s = [sentences[2]]
+            else:
+                # 3-pillar partition
+                idx1 = max(1, round(total_sentences * 0.28))
+                idx2 = max(idx1 + 1, round(total_sentences * 0.72))
+                p1_s = sentences[:idx1]
+                p2_s = sentences[idx1:idx2]
+                p3_s = sentences[idx2:]
 
         # Calculate frame ranges
         if transcript and len(transcript) > 0:
@@ -109,7 +131,9 @@ class CreativeOrchestrator:
             },
         ]
 
-    def infer_scene_intent(self, pillar: Dict[str, Any], topic: str, fps: int = 60) -> Dict[str, Any]:
+    def infer_scene_intent(
+        self, pillar: Dict[str, Any], topic: str, fps: int = 60, story_model: Optional[Any] = None
+    ) -> Dict[str, Any]:
         """Infer the narrative, psychological, and physical intent of a scene."""
         text = pillar["narrationText"].lower()
         role = pillar["role"]
@@ -151,7 +175,11 @@ class CreativeOrchestrator:
                 tone = "analytical_clarity"
                 metaphor = "opposing_forces_balance"
                 approach = "physical_diorama"
-            elif any(k in text for k in ["chamber", "world", "loop", "stage", "architecture", "foundation"]):
+            elif any(k in text for k in ["drain", "task", "tab", "fatigue", "bandwidth", "accumulate", "erode"]):
+                tone = "claustrophobic_pressure"
+                metaphor = "accumulating_erosion"
+                approach = "asymmetric_editorial"
+            elif any(k in text for k in ["chamber", "world", "room", "door", "compartment", "stage", "architecture", "foundation"]):
                 tone = "analytical_clarity"
                 metaphor = "spatial_chambers"
                 approach = "continuous_world_chamber"
@@ -178,7 +206,16 @@ class CreativeOrchestrator:
                 metaphor = "sovereign_clarity"
                 approach = "centered_minimalism"
 
-        core_idea = pillar["narrationText"][:90] + ("..." if len(pillar["narrationText"]) > 90 else "")
+        core_idea = (
+            story_model.story.coreIdea
+            if story_model and hasattr(story_model, "story")
+            else pillar["narrationText"][:90] + ("..." if len(pillar["narrationText"]) > 90 else "")
+        )
+        visual_question = (
+            story_model.story.viewerQuestion
+            if story_model and hasattr(story_model, "story") and pillar["sceneId"] == "scene_1_hook"
+            else f"What physical consequence illustrates '{core_idea[:45]}' before words finish?"
+        )
 
         return {
             "sceneId": pillar["sceneId"],
@@ -189,13 +226,16 @@ class CreativeOrchestrator:
             "coreIdea": core_idea,
             "emotionalTone": tone,
             "viewerReaction": f"Experience clear physical resonance with {topic}",
-            "visualQuestion": f"What physical consequence illustrates '{core_idea[:45]}' before words finish?",
+            "visualQuestion": visual_question,
             "dominantMetaphor": metaphor,
             "compositionApproach": approach,
         }
 
     def evaluate_capabilities(
-        self, intent: Dict[str, Any], prev_plan: Optional[Dict[str, Any]] = None
+        self,
+        intent: Dict[str, Any],
+        prev_plan: Optional[Dict[str, Any]] = None,
+        story_model: Optional[Any] = None,
     ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], Dict[str, Any]]:
         """
         Multi-dimensional capability selection adhering to:
@@ -261,7 +301,7 @@ class CreativeOrchestrator:
             }
 
         # -------------------------------------------------------------
-        # STEP 3: Metaphor-Driven Candidate Generation
+        # STEP 3: Metaphor & Frontier S Signal-Driven Candidate Generation
         # -------------------------------------------------------------
         candidates = set()
 
@@ -279,6 +319,29 @@ class CreativeOrchestrator:
 
         if tone == "sudden_epiphany":
             candidates.add("F6")
+
+        # F7: Causal State Machines & Narrative Memory
+        narration_lower = intent["narrationText"].lower()
+        if any(w in narration_lower for w in ["task", "tab", "loop", "accumulate", "consequence", "drain", "system", "strain", "cause"]):
+            candidates.add("F7")
+        elif metaphor in ["compression_under_load", "brittle_rupture", "accumulating_erosion"]:
+            candidates.add("F7")
+
+        # Ingest Frontier S non-binding capability signals if present
+        if story_model and hasattr(story_model, "frontierSignals"):
+            sig_map = story_model.frontierSignals.signals if hasattr(story_model.frontierSignals, "signals") else story_model.frontierSignals.get("signals", {})
+            if sig_map.get("F7", {}).get("signal") in ["HIGH", "VERY_HIGH"]:
+                candidates.add("F7")
+            if sig_map.get("F6", {}).get("signal") in ["HIGH", "VERY_HIGH"] and scene_id in ["scene_2_logic", "scene_3_solution"]:
+                candidates.add("F6")
+            if sig_map.get("F4", {}).get("signal") == "HIGH":
+                candidates.add("F4")
+            if sig_map.get("F2", {}).get("signal") in ["HIGH", "VERY_HIGH"]:
+                candidates.add("F2")
+            if sig_map.get("F1", {}).get("signal") == "HIGH" and scene_id != "scene_1_hook":
+                candidates.add("F1")
+            if sig_map.get("F5", {}).get("signal") == "HIGH":
+                candidates.add("F5")
 
         # Add forced frontiers
         for f in forced_frontiers:
@@ -411,6 +474,16 @@ class CreativeOrchestrator:
                     "mappedComponents": ["WorldCameraBreathHold", "timeSine"],
                 })
 
+            elif f_code == "F7":
+                active.append({
+                    "frontierCode": "F7",
+                    "capabilityConcept": "causal_state_machine_with_narrative_memory",
+                    "intensity": "MEDIUM",
+                    "scope": "SCENE_LEVEL",
+                    "reason": "Discrete state transitions and narrative memory tracking cause-and-effect across frames.",
+                    "mappedComponents": ["CausalWorld", "CausalNode", "ThresholdReactor", "useNodeState"],
+                })
+
         # -------------------------------------------------------------
         # STEP 6: Complexity Budget Scoring & Pruning
         # -------------------------------------------------------------
@@ -456,17 +529,31 @@ class CreativeOrchestrator:
         }
 
     def generate_plan(
-        self, clip_name: str, topic: str, script: str, transcript: Optional[List[Dict[str, Any]]] = None, fps: int = 60
+        self,
+        clip_name: str,
+        topic: str,
+        script: str,
+        transcript: Optional[List[Dict[str, Any]]] = None,
+        fps: int = 60,
+        story_model: Optional[Any] = None,
     ) -> Dict[str, Any]:
         """Generate full VideoCreativePlan for all scenes."""
-        pillars = self.analyze_script_pillars(script, transcript, fps)
+        if story_model is None:
+            try:
+                from script_intelligence import ScriptIntelligence
+                intel = ScriptIntelligence()
+                story_model = intel.analyze_topic_or_script(topic=topic, script=script)
+            except Exception:
+                story_model = None
+
+        pillars = self.analyze_script_pillars(script, transcript, fps, story_model=story_model)
         scene_plans = []
         total_score = 0.0
 
         prev_plan = None
         for pillar in pillars:
-            intent = self.infer_scene_intent(pillar, topic, fps)
-            active, rejected, budget = self.evaluate_capabilities(intent, prev_plan)
+            intent = self.infer_scene_intent(pillar, topic, fps, story_model=story_model)
+            active, rejected, budget = self.evaluate_capabilities(intent, prev_plan, story_model=story_model)
             total_score += budget["calculatedScore"]
 
             primary_visual = "Editorial Hero Card + Judy Grounded Close-up" if pillar["sceneId"] == "scene_1_hook" else (
@@ -508,6 +595,7 @@ class CreativeOrchestrator:
             "totalFrames": total_frames,
             "fps": fps,
             "overallComplexityRating": overall_rating,
+            "storyModel": story_model.to_dict() if hasattr(story_model, "to_dict") else story_model,
             "scenePlans": scene_plans,
         }
 

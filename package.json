@@ -5,6 +5,7 @@
   "scripts": {
     "start": "remotion preview",
     "typecheck": "tsc --noEmit",
+    "test:causal": "npx tsx scripts/test_causal_engine.ts",
     "validate": "python3 scripts/validate_clip.py",
     "studio": "node studio/server.js",
     "generate": "python generate_assets.py",

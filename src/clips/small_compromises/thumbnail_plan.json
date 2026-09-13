@@ -1,0 +1,116 @@
+{
+  "topic": "How One Small Compromise Becomes a Habit Before You Notice",
+  "coreIdea": "Abundance of options paralyzes decision-making through cognitive friction.",
+  "viewerQuestion": "Which path actually moves forward?",
+  "thumbnailJob": "Visualize the crushing compression of divergent options suffocating action.",
+  "chosenConcept": {
+    "conceptId": "concept_1_branching_maze",
+    "title": "The Suffocating Fork",
+    "archetype": "impossible_metaphor",
+    "visualMetaphor": "A person standing at a path that instantly fractures into 50 tiny, razor-sharp diverging glass staircases leading everywhere and nowhere.",
+    "focalSubject": "Fracturing architectural pathways overwhelming lone traveler",
+    "subjectRole": "frozen_in_place",
+    "hasPerson": true,
+    "textHook": "TOO MANY",
+    "textStrategy": "minimal_punch_word",
+    "colorMood": "monochrome_with_amber_focus",
+    "accentColor": "#fbbf24",
+    "groundColor": "#080c14",
+    "visualMechanism": "divergent_fracture",
+    "assetStrategy": "bespoke_ai_hero_illustration",
+    "selectionReason": "Concept 'The Suffocating Fork' scored highest (9.49/10). Peak instant-read (9.4), highest curiosity (9.6), and unmatched mobile silhouette clarity."
+  },
+  "alternativeConcepts": [
+    {
+      "conceptId": "concept_2_drowning_doors",
+      "title": "The Wall of 100 Doors",
+      "archetype": "scale_constraint",
+      "overallScore": 8.88,
+      "rejectionReason": "Lower score (8.88) compared to winner (9.49)."
+    },
+    {
+      "conceptId": "concept_3_shattering_scale",
+      "title": "The Broken Balance Scale",
+      "archetype": "minimal_object",
+      "overallScore": 8.78,
+      "rejectionReason": "Lower score (8.78) compared to winner (9.49)."
+    }
+  ],
+  "primarySubject": "Fracturing architectural pathways overwhelming lone traveler",
+  "visualMetaphor": "A person standing at a path that instantly fractures into 50 tiny, razor-sharp diverging glass staircases leading everywhere and nowhere.",
+  "compositionStrategy": {
+    "archetype": "impossible_metaphor",
+    "aspectRatio": "9:16",
+    "canvasWidth": 1080,
+    "canvasHeight": 1920,
+    "ground": "#080c14",
+    "dominantMass": "Center-weighted vertical anchor",
+    "negativeSpace": "Generous breathing room on upper 30% for high-impact hook word"
+  },
+  "textStrategy": {
+    "hookWord": "TOO MANY",
+    "font": "Montserrat Black",
+    "fontSize": 104,
+    "color": "#ffffff",
+    "role": "Single high-impact curiosity anchor; never an explanation",
+    "bannedElements": [
+      "categoryBadge",
+      "extraBadge",
+      "subtitleCard",
+      "articleParagraph"
+    ]
+  },
+  "focalPoint": "Fracturing architectural pathways overwhelming lone traveler",
+  "hierarchy": {
+    "level1_hook": "Primary Hook: Fracturing architectural pathways overwhelming lone traveler (dominant silhouette, ~60% screen area)",
+    "level2_concept": "Concept: A person standing at a path that instantly fractures into 50 tiny, razor-sharp diverging glass staircases leading everywhere and nowhere.",
+    "level3_support": "Support: High-impact punch text 'TOO MANY' in inky contrast"
+  },
+  "colorStrategy": {
+    "ground": "#080c14",
+    "accent": "#fbbf24",
+    "textContrastRatio": "12:1",
+    "rule": "Clean luminous ground or deep obsidian with exactly ONE saturated semantic accent"
+  },
+  "assetRequirements": {
+    "type": "bespoke_ai_hero_illustration",
+    "targetPath": "public/how_one_small_compromise/assets/thumbnail_hero.png",
+    "needsAiGeneration": true,
+    "promptDirective": "Editorial 2.5D conceptual visual: A person standing at a path that instantly fractures into 50 tiny, razor-sharp diverging glass staircases leading everywhere and nowhere.. Generous negative space, studio lighting, razor-sharp edges."
+  },
+  "complexityBudget": {
+    "maxTextElements": 1,
+    "maxWordCount": 2,
+    "pillBadgesAllowed": false,
+    "subtitleCardsAllowed": false,
+    "maxPrimarySubjects": 1,
+    "contrastRatioTarget": "7:1",
+    "safeZoneTop": "8%",
+    "safeZoneBottom": "10%"
+  },
+  "mobileConstraints": {
+    "targetScale": "360x640 preview",
+    "minSubjectPixelHeight": 750,
+    "minTextPixelHeight": 80,
+    "silhouetteSeparation": "Strong high-contrast boundary against clean ground"
+  },
+  "curiosityMechanism": {
+    "type": "divergent_fracture",
+    "gap": "Which path actually moves forward?",
+    "resolutionInVideo": "Video explains Zeigarnik effect and how offloading tasks to external paper closes mental tabs."
+  },
+  "truthfulnessCheck": {
+    "isTruthful": true,
+    "rationale": "Directly symbolizes cognitive RAM depletion from open task loops without sensationalism or misleading claims."
+  },
+  "validationResults": {
+    "status": "APPROVED",
+    "rulesPassed": [
+      "Rule 0: Autonomous creative production",
+      "Rule 4: Zero memes, high-resolution physical metaphor",
+      "Rule 5: Creative standard, minimum sufficient composition",
+      "Rule 5.5: Zero pill badges, zero subtitle cards, zero floating waist cuts",
+      "Rule 5.4: Ultra-high contrast (12:1), luminous clean ground"
+    ]
+  }
+}

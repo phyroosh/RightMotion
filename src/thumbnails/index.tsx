@@ -991,3 +991,36 @@ export const OpenBrainTabsThumbnail: React.FC = () => (
 );
 
 export const BrainTabsThumbnail = OpenBrainTabsThumbnail;
+
+export const SmokeTestFrontierSThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="20 TABS"
+    accentColor="#f43f5e"
+    heroImageSrc="smoke_test_frontier_s/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const SmallCompromisesThumbnail: React.FC = () => (
+  <ThumbnailCard
+    title="JUST ONE COMPROMISE"
+    highlightWord="COMPROMISE"
+    highlightColor="rose"
+    subtitle="How One Small Exception Replaces The Rule"
+    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
+    characterPose="character_pointing.png"
+    theme="apple_studio"
+    aspectRatio="9:16"
+    extraBadge="BEHAVIORAL LAW"
+    visualGraphic={
+      <div className="w-full rounded-2xl overflow-hidden border-[2.5px] border-slate-900 shadow-xl">
+        <img
+          src={staticFile("small_compromises/assets/scene_illustration.png")}
+          alt="Scene Illustration"
+          className="w-full h-44 object-cover"
+        />
+      </div>
+    }
+  />
+);

@@ -14,54 +14,223 @@ import {
   Zap,
 } from "lucide-react";
 import { SafeContent } from "../../components/safe_area";
+import {
+  CausalWorld,
+  CausalNode,
+  ThresholdReactor,
+  StateInspector,
+  useNodeState,
+  useCausalConsequence,
+  CausalGraphDefinition,
+  RootTrigger,
+} from "../../causal";
+import { ViscoelasticDeformation } from "../../components/physics/materiality";
 
 interface CanvasProps {
   transcript: WordTimestamp[];
 }
 
 /**
- * 🎬 OpenBrainTabsCanvas — 100% Bespoke Motion Graphics
+ * 🎬 Frontier #7: Visual State Machine Definition for Open Brain Tabs
  * Topic: "Every Unfinished Task Leaves a Tab Open in Your Brain"
- * Channel: Judy Insights (Apple Studio Light Canvas #f8fafc)
- *
- * 📐 Platform-Aware Safe Zones (YouTube Shorts 9:16):
- * - Primary graphics strictly between y: 280px and y: 1340px (clearing top navigation bar 0-240px)
- * - Horizontal width: max 880px (clearing right-side engagement rail x: 910-1080px)
- * - Kinetic Captions reserved: top: 73% to top: 81% (y: 1380px to 1560px)
- * - Zero overlap with captions or platform UI!
- *
- * 4 Speech-Synchronized Narrative Scenes (FPS Adaptive):
- *   Scene 1 (0ms → 6000ms):    Browser Overload vs Brain Architecture (RAM surge & 3 Open Tabs)
- *   Scene 2 (6000ms → 19600ms): The Zeigarnik Effect (3D Brain, Urgent Priority Override & Cognitive Drain)
- *   Scene 3 (19600ms → 23600ms): The Dramatic Breath-Hold & Slashing "Mental Endurance" into External Offloading
- *   Scene 4 (23600ms → 33300ms): The External Anchor Protocol & Live Tab Shutdown Payoff
+ * 
+ * System Architecture:
+ * - Central Node: `brain_core` (Condition: NOMINAL -> ACCUMULATING -> CRITICAL_STRAIN -> COGNITIVE_LEAKAGE -> OFFLOAD_ANCHORED -> RESTORED)
+ * - Satellite Nodes: `task_tab_1`, `task_tab_2`, `task_tab_3`
+ * - Threshold: cognitiveLoad >= 70% fires CRITICAL_LOAD_THRESHOLD
+ * - Narrative Memory: Records systemicStrainRecorded, externalAnchorSecured, and loopClosed across scenes!
  */
-export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
+const BRAIN_TABS_CAUSAL_GRAPH: CausalGraphDefinition = {
+  nodes: [
+    {
+      id: "brain_core",
+      initialCondition: "NOMINAL",
+      initialValues: { cognitiveLoad: 24, attentionRemaining: 100, openLoops: 0, anxietyLevel: 10 },
+      transitions: [
+        {
+          fromCondition: "*",
+          triggerEventType: "TAB_SPAWNED",
+          toCondition: "ACCUMULATING",
+          mutations: [
+            { property: "cognitiveLoad", operation: "add", value: 23, max: 100 },
+            { property: "attentionRemaining", operation: "add", value: -25, min: 8 },
+            { property: "openLoops", operation: "add", value: 1 },
+          ],
+        },
+        {
+          fromCondition: "*",
+          triggerEventType: "CRITICAL_LOAD_THRESHOLD",
+          toCondition: "CRITICAL_STRAIN",
+          mutations: [
+            { property: "anxietyLevel", operation: "set", value: 85 },
+          ],
+          memoryUpdates: { systemicStrainRecorded: true, peakLoadPercent: 93 },
+        },
+        {
+          fromCondition: "*",
+          triggerEventType: "SUB_CONSCIOUS_DRAIN",
+          toCondition: "COGNITIVE_LEAKAGE",
+          mutations: [
+            { property: "cognitiveLoad", operation: "set", value: 94 },
+            { property: "attentionRemaining", operation: "set", value: 12 },
+            { property: "anxietyLevel", operation: "set", value: 95 },
+          ],
+          memoryUpdates: { zeigarnikLeakageActive: true },
+        },
+        {
+          fromCondition: "*",
+          triggerEventType: "EXTERNAL_ANCHOR_ESTABLISHED",
+          toCondition: "OFFLOAD_ANCHORED",
+          mutations: [
+            { property: "anxietyLevel", operation: "set", value: 20 },
+            { property: "cognitiveLoad", operation: "set", value: 45 },
+          ],
+          memoryUpdates: { externalAnchorSecured: true, protocolExecuted: "2_STEP_CLOSURE" },
+        },
+        {
+          fromCondition: "*",
+          triggerEventType: "TAB_CLOSED_SUCCESS",
+          toCondition: "RESTORED",
+          mutations: [
+            { property: "cognitiveLoad", operation: "set", value: 15 },
+            { property: "attentionRemaining", operation: "set", value: 100 },
+            { property: "openLoops", operation: "set", value: 0 },
+            { property: "anxietyLevel", operation: "set", value: 5 },
+          ],
+          memoryUpdates: { loopClosed: true, finalState: "100%_RAM_RESTORED" },
+        },
+      ],
+    },
+    {
+      id: "task_tab_1",
+      initialCondition: "PENDING",
+      transitions: [
+        {
+          fromCondition: "PENDING",
+          triggerEventType: "SPAWN_TAB_1",
+          toCondition: "ACTIVE_OPEN",
+          emitSecondaryEvents: [
+            { targetNodeId: "brain_core", eventType: "TAB_SPAWNED", delayFrames: 2 },
+          ],
+        },
+        {
+          fromCondition: "*",
+          triggerEventType: "TAB_CLOSED_SUCCESS",
+          toCondition: "ARCHIVED",
+        },
+      ],
+    },
+    {
+      id: "task_tab_2",
+      initialCondition: "PENDING",
+      transitions: [
+        {
+          fromCondition: "PENDING",
+          triggerEventType: "SPAWN_TAB_2",
+          toCondition: "ACTIVE_OPEN",
+          emitSecondaryEvents: [
+            { targetNodeId: "brain_core", eventType: "TAB_SPAWNED", delayFrames: 2 },
+          ],
+        },
+        {
+          fromCondition: "*",
+          triggerEventType: "TAB_CLOSED_SUCCESS",
+          toCondition: "ARCHIVED",
+        },
+      ],
+    },
+    {
+      id: "task_tab_3",
+      initialCondition: "PENDING",
+      transitions: [
+        {
+          fromCondition: "PENDING",
+          triggerEventType: "SPAWN_TAB_3",
+          toCondition: "ACTIVE_OPEN",
+          emitSecondaryEvents: [
+            { targetNodeId: "brain_core", eventType: "TAB_SPAWNED", delayFrames: 2 },
+          ],
+        },
+        {
+          fromCondition: "*",
+          triggerEventType: "TAB_CLOSED_SUCCESS",
+          toCondition: "ARCHIVED",
+        },
+      ],
+    },
+  ],
+  thresholds: [
+    {
+      id: "th_load_strain",
+      sourceNodeId: "brain_core",
+      property: "cognitiveLoad",
+      operator: ">=",
+      thresholdValue: 70,
+      emitEvent: {
+        targetNodeId: "brain_core",
+        eventType: "CRITICAL_LOAD_THRESHOLD",
+      },
+    },
+  ],
+};
+
+/**
+ * Speech-Synchronized Root Triggers (derived from transcript.json word timestamps)
+ */
+const buildRootTriggers = (fps: number): RootTrigger[] => {
+  const f = (ms: number) => Math.round((ms / 1000) * fps);
+  return [
+    { frame: f(2760), targetNodeId: "task_tab_1", eventType: "SPAWN_TAB_1" },
+    { frame: f(3500), targetNodeId: "task_tab_2", eventType: "SPAWN_TAB_2" },
+    { frame: f(4200), targetNodeId: "task_tab_3", eventType: "SPAWN_TAB_3" },
+    { frame: f(10900), targetNodeId: "brain_core", eventType: "SUB_CONSCIOUS_DRAIN" },
+    { frame: f(28400), targetNodeId: "brain_core", eventType: "EXTERNAL_ANCHOR_ESTABLISHED" },
+    { frame: f(31480), targetNodeId: "brain_core", eventType: "TAB_CLOSED_SUCCESS" },
+  ];
+};
+
+/**
+ * Inner Living Canvas consuming the causal state machine.
+ */
+const OpenBrainTabsCausalCanvasInner: React.FC<CanvasProps> = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-
-  // Frame helper: converts milliseconds to exact frame at current fps (e.g. 60fps)
   const f = (ms: number) => Math.round((ms / 1000) * fps);
 
-  // Scene triggers based on exact speech timestamps
+  // Read causal state and derived consequence from the living state machine
+  const brainState = useNodeState("brain_core");
+  const brainConsequence = useCausalConsequence("brain_core", "cognitiveLoad");
+
+  const tab1State = useNodeState("task_tab_1");
+  const tab2State = useNodeState("task_tab_2");
+  const tab3State = useNodeState("task_tab_3");
+
+  // Scene triggers based on speech
   const isScene1 = frame >= 0 && frame < f(6000);
   const isHookIntro = frame < f(2500);
 
   const isScene2 = frame >= f(6000) && frame < f(19600);
-
   const isScene3 = frame >= f(19600) && frame < f(23600);
-
   const isScene4 = frame >= f(23600);
+
+  // Smooth visual progress derived directly from causal value
+  const loadPercentage = Math.round(brainState.values.cognitiveLoad ?? 24);
+  const isCriticalStrain = brainConsequence.isCritical || loadPercentage >= 70;
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden select-none font-sans">
+      {/* Developer HUD: Real-time Causal State Inspection */}
+      <StateInspector
+        enabled={false} // Toggle to true during dev inspection
+        monitoredNodeIds={["brain_core", "task_tab_1", "task_tab_2", "task_tab_3"]}
+      />
+
       {/* ======================================================== */}
       {/* SCENE 1: HOOK & THE ARCHITECTURE (0ms → 6000ms)          */}
       {/* "You leave 5 browser tabs open... exact same architecture"*/}
       {/* ======================================================== */}
       {isScene1 && (
         <div className="absolute inset-0 flex flex-col items-center justify-start px-8" style={{ paddingTop: 280 }}>
-          {/* Part 1A: Mandatory 2.5s Hero Intro (0 → 2500ms) */}
           {isHookIntro ? (
             <SafeContent importance="critical" className="w-full max-w-[880px] flex flex-col items-center">
               <div
@@ -80,7 +249,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
               </div>
             </SafeContent>
           ) : (
-            /* Part 1B: The Cognitive RAM Architecture (2500ms → 6000ms) */
             <SafeContent importance="important" className="w-full max-w-[880px] flex flex-col items-center gap-5">
               {/* Architecture Header Badge */}
               <div
@@ -95,101 +263,93 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                   })}px)`,
                 }}
               >
-                <Activity className="w-6 h-6 text-rose-600" />
+                <Activity className={`w-6 h-6 ${isCriticalStrain ? "text-rose-600 animate-pulse" : "text-slate-900"}`} />
                 <span className="font-mono text-[22px] font-black text-slate-900 tracking-wider uppercase">
-                  SYSTEM MONITOR // BIOLOGICAL RAM
+                  SYSTEM MONITOR // BIOLOGICAL RAM [{brainState.condition}]
                 </span>
               </div>
 
-              {/* Cognitive RAM Meter Container */}
-              <div
-                className="w-full p-6 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] flex flex-col gap-4"
-                style={{
-                  opacity: interpolate(frame, [f(2550), f(2750)], [0, 1], {
-                    extrapolateLeft: "clamp",
-                  }),
-                  transform: `scale(${spring({
-                    frame: Math.max(0, frame - f(2550)),
-                    fps,
-                    config: { damping: 13, stiffness: 130, mass: 0.8 },
-                  })})`,
-                }}
+              {/* Cognitive Load Meter — Live Causal Value */}
+              <ThresholdReactor
+                nodeId="brain_core"
+                property="cognitiveLoad"
+                threshold={70}
+                criticalClassName="border-rose-600 shadow-[0_24px_48px_-12px_rgba(244,63,94,0.3)]"
+                normalClassName="border-slate-900"
               >
-                <div className="flex justify-between items-baseline">
-                  <span className="text-[36px] font-black text-[#090d16] uppercase tracking-tight">
-                    COGNITIVE LOAD
-                  </span>
-                  <span className="font-mono text-[52px] font-black text-rose-600">
-                    {Math.round(
-                      interpolate(frame, [f(2600), f(4200)], [24, 89], {
-                        extrapolateLeft: "clamp",
-                        extrapolateRight: "clamp",
-                        easing: Easing.bezier(0.16, 1, 0.3, 1),
-                      })
-                    )}
-                    %
-                  </span>
-                </div>
+                <div className="w-full p-6 rounded-3xl bg-white border-[2.5px] shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] flex flex-col gap-4">
+                  <div className="flex justify-between items-baseline">
+                    <span className="text-[36px] font-black text-[#090d16] uppercase tracking-tight">
+                      COGNITIVE LOAD
+                    </span>
+                    <span className={`font-mono text-[52px] font-black ${isCriticalStrain ? "text-rose-600" : "text-indigo-600"}`}>
+                      {loadPercentage}%
+                    </span>
+                  </div>
 
-                {/* Meter Bar */}
-                <div className="w-full h-7 rounded-full bg-slate-100 border-2 border-slate-900 overflow-hidden p-1">
-                  <div
-                    className="h-full rounded-full transition-all bg-gradient-to-r from-amber-500 via-rose-500 to-rose-600"
-                    style={{
-                      width: `${interpolate(frame, [f(2600), f(4200)], [24, 89], {
-                        extrapolateLeft: "clamp",
-                        extrapolateRight: "clamp",
-                      })}%`,
-                    }}
-                  />
+                  {/* Dynamic Meter Bar reacting to causal value */}
+                  <div className="w-full h-7 rounded-full bg-slate-100 border-2 border-slate-900 overflow-hidden p-1">
+                    <div
+                      className={`h-full rounded-full transition-all duration-300 ${
+                        isCriticalStrain
+                          ? "bg-gradient-to-r from-amber-500 via-rose-500 to-rose-600"
+                          : "bg-gradient-to-r from-sky-400 to-indigo-600"
+                      }`}
+                      style={{ width: `${loadPercentage}%` }}
+                    />
+                  </div>
+                  <div className="flex justify-between font-mono text-[20px] font-bold text-slate-500 uppercase">
+                    <span>BASELINE (24%)</span>
+                    <span className={isCriticalStrain ? "text-rose-600 font-black" : "text-slate-500"}>
+                      {isCriticalStrain ? "THRESHOLD EXCEEDED // STRAIN" : "NOMINAL CAPACITY"}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex justify-between font-mono text-[20px] font-bold text-slate-500 uppercase">
-                  <span>BASELINE (20%)</span>
-                  <span className="text-rose-600 font-black">CRITICAL BOTTLENECK</span>
-                </div>
-              </div>
+              </ThresholdReactor>
 
-              {/* 3 Live Open Tab Chips entering sequentially on spoken audio */}
+              {/* 3 Live Open Tab Chips — Driven by Causal Nodes */}
               <div className="w-full flex flex-col gap-3">
                 {[
-                  { label: "UNANSWERED INBOX THREAD", ms: 2760 },
-                  { label: "HALF-WRITTEN REPORT", ms: 3500 },
-                  { label: "UNRESOLVED DECISION", ms: 4200 },
-                ].map((item, idx) => {
-                  if (frame < f(item.ms)) return null;
+                  { id: "task_tab_1", label: "UNANSWERED INBOX THREAD", state: tab1State },
+                  { id: "task_tab_2", label: "HALF-WRITTEN REPORT", state: tab2State },
+                  { id: "task_tab_3", label: "UNRESOLVED DECISION", state: tab3State },
+                ].map((item) => {
+                  if (item.state.condition === "PENDING") return null;
+                  const relTrans = item.state.framesSinceTransition;
                   const tabSpring = spring({
-                    frame: frame - f(item.ms),
+                    frame: relTrans,
                     fps,
                     config: { damping: 12, stiffness: 150, mass: 0.5 },
                   });
                   return (
-                    <div
-                      key={idx}
-                      className="w-full px-6 py-4 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md flex items-center justify-between"
-                      style={{
-                        transform: `scale(${tabSpring}) translateY(${(1 - tabSpring) * 15}px)`,
-                      }}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-4 h-4 rounded-full bg-rose-500 animate-pulse" />
-                        <span className="text-[28px] font-black text-[#090d16] tracking-tight">
-                          {item.label}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-[20px] font-bold text-rose-600 uppercase">
-                          ACTIVE RAM
-                        </span>
-                        <div className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-300 flex items-center justify-center">
-                          <X className="w-5 h-5 text-slate-500" />
+                    <CausalNode key={item.id} id={item.id} className="w-full">
+                      <div
+                        className="w-full px-6 py-4 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md flex items-center justify-between"
+                        style={{
+                          transform: `scale(${tabSpring}) translateY(${(1 - tabSpring) * 15}px)`,
+                        }}
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="w-4 h-4 rounded-full bg-rose-500 animate-pulse" />
+                          <span className="text-[28px] font-black text-[#090d16] tracking-tight">
+                            {item.label}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-[20px] font-bold text-rose-600 uppercase">
+                            ACTIVE RAM (+23%)
+                          </span>
+                          <div className="w-8 h-8 rounded-lg bg-slate-100 border border-slate-300 flex items-center justify-center">
+                            <X className="w-5 h-5 text-slate-500" />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </CausalNode>
                   );
                 })}
               </div>
 
-              {/* Spoken Conclusion Slam (Frame f(5000)+: "Your brain operates on the exact same architecture") */}
+              {/* Conclusion Slam */}
               {frame >= f(4900) && (
                 <div
                   className="w-full py-5 px-7 rounded-3xl bg-[#090d16] text-white border-[2.5px] border-slate-900 shadow-2xl flex items-center justify-between mt-2"
@@ -221,7 +381,7 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
       {/* ======================================================== */}
       {isScene2 && (
         <div className="absolute inset-0 flex flex-col items-center justify-start px-8" style={{ paddingTop: 280 }}>
-          {/* Main Title Card — Critical Headline protected inside Safe Text Region */}
+          {/* Main Title Card */}
           <SafeContent importance="critical" className="w-full max-w-[880px] flex flex-col items-center">
             <div
               className="w-full p-6 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] flex flex-col items-center text-center gap-1.5"
@@ -234,7 +394,7 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
               }}
             >
               <span className="font-mono text-[22px] font-black text-indigo-600 tracking-widest uppercase">
-                1927 // COGNITIVE RECALL LAW
+                1927 // COGNITIVE RECALL LAW [{brainState.condition}]
               </span>
               <h1 className="text-[58px] font-black text-[#090d16] tracking-tight uppercase leading-none">
                 THE ZEIGARNIK EFFECT
@@ -242,65 +402,67 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
             </div>
           </SafeContent>
 
-          {/* Subconscious Brain Staging & Conflict (Center focal zone) */}
+          {/* Subconscious Brain Staging & Viscoelastic Deformation */}
           <SafeContent importance="critical" className="relative w-full max-w-[880px] flex flex-col items-center justify-center my-3">
-            {/* Cutout 1: 3D Neural Brain (6000ms → 16200ms) */}
             {frame < f(16200) ? (
-              <div
-                className="relative flex flex-col items-center justify-center"
-                style={{
-                  transform: `scale(${spring({
-                    frame: frame - f(6100),
-                    fps,
-                    config: { damping: 14, stiffness: 120 },
-                  })})`,
-                }}
+              <ViscoelasticDeformation
+                load={brainState.condition === "COGNITIVE_LEAKAGE" ? 0.85 : 0.45}
+                maxCompression={0.08}
               >
-                {/* Ambient glow backing */}
                 <div
-                  className="absolute pointer-events-none rounded-full"
+                  className="relative flex flex-col items-center justify-center"
                   style={{
-                    width: 520,
-                    height: 520,
-                    background:
-                      frame >= f(10900)
-                        ? "radial-gradient(circle, rgba(244,63,94,0.25) 0%, transparent 70%)"
-                        : "radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%)",
+                    transform: `scale(${spring({
+                      frame: frame - f(6100),
+                      fps,
+                      config: { damping: 14, stiffness: 120 },
+                    })})`,
                   }}
-                />
-                <img
-                  src={staticFile("assets/psychology/hyperrealistic_3d_glowing_brain.png")}
-                  alt="3D Neural Brain"
-                  className="w-[500px] h-auto object-contain drop-shadow-[0_32px_50px_rgba(0,0,0,0.22)]"
-                />
-
-                {/* Spoken cue at 10900ms: "subconscious treats it as an urgent priority" */}
-                {frame >= f(10900) && (
+                >
                   <div
-                    className="absolute top-[48%] -translate-y-1/2 px-8 py-4 rounded-3xl bg-rose-600 text-white border-[3px] border-slate-950 shadow-2xl flex items-center gap-4"
+                    className="absolute pointer-events-none rounded-full"
                     style={{
-                      transform: `scale(${spring({
-                        frame: frame - f(10900),
-                        fps,
-                        config: { damping: 10, stiffness: 180, mass: 0.5 },
-                      })}) rotate(-2deg)`,
+                      width: 520,
+                      height: 520,
+                      background:
+                        brainState.condition === "COGNITIVE_LEAKAGE"
+                          ? "radial-gradient(circle, rgba(244,63,94,0.30) 0%, transparent 70%)"
+                          : "radial-gradient(circle, rgba(99,102,241,0.20) 0%, transparent 70%)",
                     }}
-                  >
-                    <AlertCircle className="w-9 h-9 text-amber-300" />
-                    <div className="flex flex-col text-left">
-                      <span className="font-mono text-[18px] font-black text-rose-200 uppercase tracking-widest">
-                        THREAT STATUS
-                      </span>
-                      <span className="text-[38px] font-black tracking-tight uppercase leading-none">
-                        URGENT PRIORITY
-                      </span>
+                  />
+                  <img
+                    src={staticFile("assets/psychology/hyperrealistic_3d_glowing_brain.png")}
+                    alt="3D Neural Brain"
+                    className="w-[500px] h-auto object-contain drop-shadow-[0_32px_50px_rgba(0,0,0,0.22)]"
+                  />
+
+                  {/* Alert on subconscious drain state */}
+                  {brainState.condition === "COGNITIVE_LEAKAGE" && (
+                    <div
+                      className="absolute top-[48%] -translate-y-1/2 px-8 py-4 rounded-3xl bg-rose-600 text-white border-[3px] border-slate-950 shadow-2xl flex items-center gap-4"
+                      style={{
+                        transform: `scale(${spring({
+                          frame: brainState.framesSinceTransition,
+                          fps,
+                          config: { damping: 10, stiffness: 180, mass: 0.5 },
+                        })}) rotate(-2deg)`,
+                      }}
+                    >
+                      <AlertCircle className="w-9 h-9 text-amber-300" />
+                      <div className="flex flex-col text-left">
+                        <span className="font-mono text-[18px] font-black text-rose-200 uppercase tracking-widest">
+                          STATE // LEAKAGE
+                        </span>
+                        <span className="text-[38px] font-black tracking-tight uppercase leading-none">
+                          URGENT PRIORITY
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              </ViscoelasticDeformation>
             ) : (
-              /* Cutout 2: Depleted Brain Battery (16200ms → 19600ms) */
-              /* Spoken cue: "quietly draining your focus and elevating low-grade anxiety" */
+              /* Cutout 2: Depleted Brain Battery */
               <div
                 className="relative flex flex-col items-center justify-center"
                 style={{
@@ -316,7 +478,7 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                   style={{
                     width: 500,
                     height: 500,
-                    background: "radial-gradient(circle, rgba(239,68,68,0.22) 0%, transparent 70%)",
+                    background: "radial-gradient(circle, rgba(239,68,68,0.25) 0%, transparent 70%)",
                   }}
                 />
                 <img
@@ -328,7 +490,7 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
             )}
           </SafeContent>
 
-          {/* Lower Informational Banner: Progressive Reveal on spoken cues */}
+          {/* Lower Informational Banner */}
           {frame >= f(13780) && (
             <SafeContent importance="important" className="w-full max-w-[880px] p-6 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.14)] flex items-center justify-between"
               style={{
@@ -343,15 +505,15 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
             >
               <div className="flex flex-col">
                 <span className="font-mono text-[20px] font-bold text-slate-500 uppercase">
-                  {frame < f(16200) ? "BACKGROUND PROCESS" : "NEUROLOGICAL IMPACT"}
+                  {frame < f(16200) ? "BACKGROUND CAUSAL DRAIN" : "NEUROLOGICAL IMPAIRMENT"}
                 </span>
                 <span className="text-[34px] font-black text-[#090d16] uppercase">
-                  {frame < f(16200) ? "HOARDS ACTIVE RAM" : "ELEVATES LOW-GRADE ANXIETY"}
+                  {frame < f(16200) ? "HOARDS ACTIVE RAM (94%)" : "ELEVATES LOW-GRADE ANXIETY"}
                 </span>
               </div>
               <div className="px-5 py-2.5 rounded-2xl bg-rose-50 border border-rose-200 flex items-center gap-2">
                 <span className="font-mono text-[24px] font-black text-rose-600">
-                  {frame < f(16200) ? "-75% FOCUS" : "+90% STRESS"}
+                  {frame < f(16200) ? "-88% BANDWIDTH" : "+95% ANXIETY"}
                 </span>
               </div>
             </SafeContent>
@@ -361,27 +523,22 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
 
       {/* ======================================================== */}
       {/* SCENE 3: DRAMATIC BREATH-HOLD & EPIPHANY (19600ms → 23600ms) */}
-      {/* "The fix isn't forcing mental endurance. It's external offloading." */}
       {/* ======================================================== */}
       {isScene3 && (
         <div className="absolute inset-0 flex flex-col items-center justify-start px-8" style={{ paddingTop: 280 }}>
-          {/* Phase A: 19600ms → 22200ms — Refuting Mental Endurance with Live Slash */}
           {frame < f(22200) ? (
             <SafeContent importance="critical" className="w-full max-w-[880px] flex flex-col items-center gap-6">
-              {/* Category indicator */}
               <div className="px-6 py-2 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md">
                 <span className="font-mono text-[22px] font-black text-slate-600 tracking-wider uppercase">
                   THE COMMON FAILURE MODE
                 </span>
               </div>
 
-              {/* Flawed Premise Card */}
               <div className="w-full p-8 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] flex flex-col items-center justify-center text-center gap-4">
                 <span className="font-mono text-[22px] font-bold text-slate-400 uppercase">
                   POPULAR MISCONCEPTION
                 </span>
 
-                {/* Animated Slash Strike across "MENTAL ENDURANCE" at frame f(20800) */}
                 <div className="relative py-2 px-4">
                   <AnimatedSlashStrike
                     startFrame={f(20800)}
@@ -412,7 +569,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                 )}
               </div>
 
-              {/* Depleted Battery Physical Cutout Anchor */}
               <div
                 className="relative flex flex-col items-center justify-center mt-1"
                 style={{
@@ -430,7 +586,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                 />
               </div>
 
-              {/* Psychological Reason Line */}
               {frame >= f(21400) && (
                 <div className="text-center font-sans text-[32px] font-black text-slate-700">
                   You cannot overpower open neural loops with willpower.
@@ -438,7 +593,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
               )}
             </SafeContent>
           ) : (
-            /* Phase B: 22200ms → 23600ms — Epiphany: External Offloading */
             <SafeContent importance="critical" className="w-full max-w-[880px] flex flex-col items-center gap-6"
               style={{
                 transform: `scale(${spring({
@@ -451,11 +605,10 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
               <div className="px-6 py-2.5 rounded-2xl bg-emerald-100 border-[2.5px] border-emerald-800 shadow-md flex items-center gap-3">
                 <Zap className="w-7 h-7 text-emerald-700" />
                 <span className="font-mono text-[22px] font-black text-emerald-900 tracking-wider uppercase">
-                  THE NEURO-SOLUTION
+                  THE CAUSAL COUNTERMEASURE
                 </span>
               </div>
 
-              {/* Sovereign Breakthrough Card */}
               <div className="w-full p-8 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] flex flex-col items-center text-center gap-3">
                 <span className="font-mono text-[22px] font-bold text-slate-500 uppercase">
                   SYSTEM OVERRIDE
@@ -479,7 +632,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                 </p>
               </div>
 
-              {/* Physical Circuit Cutout Anchor */}
               <div className="relative flex flex-col items-center justify-center mt-2">
                 <img
                   src={staticFile("assets/psychology/dopamine_head_circuit.png")}
@@ -494,12 +646,9 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
 
       {/* ======================================================== */}
       {/* SCENE 4: EXTERNAL ANCHOR PROTOCOL & TAB SHUTDOWN        */}
-      {/* (23600ms → 33300ms)                                      */}
-      {/* "Write down the unfinished loop... closes the mental tab"*/}
       {/* ======================================================== */}
       {isScene4 && (
         <div className="absolute inset-0 flex flex-col items-center justify-start px-8" style={{ paddingTop: 280 }}>
-          {/* Phase 4A: The 2-Step Protocol (23600ms → 28400ms) */}
           {frame < f(28400) ? (
             <SafeContent importance="critical" className="w-full max-w-[880px] flex flex-col items-center gap-5">
               <div className="px-6 py-2 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md">
@@ -508,7 +657,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                 </span>
               </div>
 
-              {/* Step 1 Card: Write down the loop (Spoken cue at 24440ms) */}
               {frame >= f(24000) && (
                 <div
                   className="w-full p-6 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.14)] flex items-center justify-between"
@@ -539,7 +687,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                 </div>
               )}
 
-              {/* Step 2 Card: Assign exact next micro-step (Spoken cue at 26980ms) */}
               {frame >= f(26500) && (
                 <div
                   className="w-full p-6 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.14)] flex items-center justify-between"
@@ -570,7 +717,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                 </div>
               )}
 
-              {/* Center Target Focus Crosshair Anchor */}
               <div className="relative flex flex-col items-center justify-center my-2">
                 <img
                   src={staticFile("assets/habits/target_focus_crosshair.png")}
@@ -579,7 +725,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                 />
               </div>
 
-              {/* Anchored Rule Callout */}
               {frame >= f(27200) && (
                 <div
                   className="w-full py-4 px-6 rounded-2xl bg-slate-100 border-[2px] border-slate-300 text-center font-mono text-[22px] font-bold text-slate-700 uppercase"
@@ -594,9 +739,8 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
               )}
             </SafeContent>
           ) : (
-            /* Phase 4B: Secure Anchor & Live Tab Closure Payoff (28400ms → 33300ms) */
             <SafeContent importance="critical" className="w-full max-w-[880px] flex flex-col items-center gap-5">
-              {/* Spoken cue at 28440ms: "Once your brain knows the action is securely anchored" */}
+              {/* Cognitive Contract Card */}
               <div
                 className="w-full p-6 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] flex items-center justify-between"
                 style={{
@@ -613,7 +757,7 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                   </div>
                   <div className="flex flex-col">
                     <span className="font-mono text-[18px] font-bold text-emerald-600 uppercase">
-                      COGNITIVE CONTRACT
+                      COGNITIVE CONTRACT // {brainState.condition}
                     </span>
                     <span className="text-[34px] font-black text-[#090d16] uppercase">
                       SECURELY ANCHORED
@@ -625,16 +769,14 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                 </span>
               </div>
 
-              {/* Cutout / Epiphany Mind Staging (31480ms+ / f 1888) */}
-              {/* At 31480ms: "it immediately closes the mental tab" */}
+              {/* Enlightened Mind Resolution or Closing Tab */}
               <div className="relative w-full flex flex-col items-center justify-center my-2">
-                {frame >= f(31480) ? (
-                  /* Radiant Enlightened Mind cutout on tab closure */
+                {brainState.condition === "RESTORED" ? (
                   <div
                     className="relative flex flex-col items-center justify-center"
                     style={{
                       transform: `scale(${spring({
-                        frame: frame - f(31480),
+                        frame: brainState.framesSinceTransition,
                         fps,
                         config: { damping: 12, stiffness: 150 },
                       })})`,
@@ -656,7 +798,6 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                     />
                   </div>
                 ) : (
-                  /* The Open Tab getting ready to close */
                   <div
                     className="w-full p-8 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-xl flex items-center justify-between"
                     style={{
@@ -674,19 +815,19 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
                       </span>
                     </div>
                     <span className="font-mono text-[22px] font-bold text-indigo-600">
-                      CLOSING...
+                      CLOSING LOOP...
                     </span>
                   </div>
                 )}
               </div>
 
-              {/* Decisive Resolution Typography (31480ms+) */}
-              {frame >= f(31480) && (
+              {/* Decisive Resolution Typography with Narrative Memory */}
+              {brainState.condition === "RESTORED" && (
                 <div
                   className="w-full p-6 rounded-3xl bg-[#090d16] text-white border-[2.5px] border-slate-900 shadow-2xl flex flex-col items-center text-center gap-1.5"
                   style={{
                     transform: `scale(${spring({
-                      frame: frame - f(31480),
+                      frame: brainState.framesSinceTransition,
                       fps,
                       config: { damping: 13, stiffness: 150 },
                     })})`,
@@ -705,5 +846,24 @@ export const OpenBrainTabsCanvas: React.FC<CanvasProps> = () => {
         </div>
       )}
     </div>
+  );
+};
+
+/**
+ * 🎬 OpenBrainTabsCanvas
+ * Top-level canvas wrapping the scene within the Frontier #7 CausalWorld provider.
+ */
+export const OpenBrainTabsCanvas: React.FC<CanvasProps> = (props) => {
+  const { fps, durationInFrames } = useVideoConfig();
+  const rootTriggers = React.useMemo(() => buildRootTriggers(fps), [fps]);
+
+  return (
+    <CausalWorld
+      graph={BRAIN_TABS_CAUSAL_GRAPH}
+      rootTriggers={rootTriggers}
+      totalFrames={durationInFrames}
+    >
+      <OpenBrainTabsCausalCanvasInner {...props} />
+    </CausalWorld>
   );
 };

@@ -36,6 +36,7 @@ sys.path.append(str(ROOT_DIR / "scripts"))
 from extract_product_page import extract_product_page
 from generate_script import generate_script_and_metadata, check_script_hygiene
 from dialogue_engine import process_dialogue
+from script_intelligence import ScriptIntelligence
 
 def sanitize_tags(text: str) -> str:
     if not text:
@@ -1633,6 +1634,8 @@ export const {pascal_name}Thumbnail: React.FC = () => (
     # Add metadata
     if meta_file.exists():
         try:
+            from metadata_engine import generate_full_metadata
+            meta_package = generate_full_metadata(topic, niche=niche, script=script_text or "", pinned_comment=pinned_comment or "")
             meta = json.loads(meta_file.read_text(encoding="utf-8"))
             final_pinned = pinned_comment or meta_package.get("pinnedComment") or generate_pinned_comment(topic=topic, niche=niche, hook_text=topic, script_text=script_text or "")
             meta[f"{name}_video.mp4"] = {
@@ -1704,6 +1707,7 @@ async def main():
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
     parser.add_argument("--render", action="store_true", help="Render final MP4/PNG immediately (default: False, AI Agent should edit Canvas.tsx first)")
+    parser.add_argument("--inspect-intelligence", action="store_true", help="Print Frontier S Script Intelligence inspection report")
 
     args = parser.parse_args()
     
@@ -1813,6 +1817,25 @@ async def main():
     else:
         detected_niche = "self_improvement"
 
+    # Frontier S: Script Intelligence Convergence Point
+    print(f"🧠 [Frontier S] Analyzing narrative, causality, and visual opportunities with Script Intelligence...")
+    intelligence = ScriptIntelligence()
+    story_model = intelligence.analyze(
+        script=clean_script,
+        topic=topic,
+        source_type="topic_generated" if not args.script and args.topic else "user_script",
+        channel=detected_niche,
+        mode="A" if is_mode_a else "B",
+        is_duo=is_duo,
+    )
+    if getattr(args, "inspect_intelligence", False):
+        print(intelligence.format_inspection_report(story_model))
+
+    story_model_path = ROOT_DIR / "src" / "clips" / name / "story_model.json"
+    story_model_path.parent.mkdir(parents=True, exist_ok=True)
+    story_model_path.write_text(story_model.to_json(indent=2), encoding="utf-8")
+    print(f"      Normalized Story Model saved to: {story_model_path}")
+
     audio_path = ROOT_DIR / "public" / name / "voiceover.mp3"
     transcript_path = ROOT_DIR / "src" / "clips" / name / "transcript.json"
 
@@ -1880,6 +1903,7 @@ async def main():
         print("=" * 80)
         print(f"✨ Audio, transcript timestamps, and registered composition are ready!")
         print(f"📁 Starter Canvas: src/clips/{name}/Canvas.tsx")
+        print(f"🧠 Story Intelligence: src/clips/{name}/story_model.json")
         print("\n👉 MANDATORY AI AGENT ACTION:")
         print(f"1. Open src/clips/{name}/Canvas.tsx.")
         print(f"2. Write 100% bespoke Remotion motion graphics tailored to '{topic}'.")

@@ -52,6 +52,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.cache/
 .venv/
 venv/
 env/

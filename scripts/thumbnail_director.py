@@ -46,13 +46,52 @@ class ThumbnailDirector:
         self.overrides = overrides or {}
 
     def analyze_concept_foundation(
-        self, topic: str, script: str = "", niche: str = "self_improvement"
+        self, topic: str, script: str = "", niche: str = "self_improvement", story_model: Optional[Any] = None
     ) -> Dict[str, Any]:
         """
         Deconstructs topic and narration into core psychological meaning,
         emotional tension, and cognitive paradox.
+        Directly consumes Frontier S story_model.thumbnailSignals when available.
         """
         clean_topic = sanitize_raw_topic(topic)
+
+        # Frontier S Contract (Section 36): Consume thumbnailSignals directly without re-reading
+        if story_model is not None:
+            ts = getattr(story_model, "thumbnailSignals", None)
+            st = getattr(story_model, "story", None)
+            if ts and st:
+                curiosity_gap = ts.coreCuriosity if hasattr(ts, "coreCuriosity") else ts.get("coreCuriosity", "")
+                tension = ts.visualContradiction if hasattr(ts, "visualContradiction") else ts.get("visualContradiction", "")
+                core_idea = st.coreIdea if hasattr(st, "coreIdea") else st.get("coreIdea", "")
+                trans = ts.mostMemorableTransformation if hasattr(ts, "mostMemorableTransformation") else ts.get("mostMemorableTransformation", "")
+                hooks = ts.textHookCandidates if hasattr(ts, "textHookCandidates") else ts.get("textHookCandidates", [])
+                archetype = ts.recommendedArchetype if hasattr(ts, "recommendedArchetype") else ts.get("recommendedArchetype", "impossible_metaphor")
+
+                # Map to primary domain
+                combined = f"{clean_topic} {core_idea} {tension}".lower()
+                if "tab" in combined or "ram" in combined or "open loop" in combined:
+                    primary_domain = "cognitive_load"
+                elif "decision" in combined or "choice" in combined or "option" in combined:
+                    primary_domain = "decision_fatigue"
+                elif "compromise" in combined or "habit" in combined or "slippage" in combined:
+                    primary_domain = "avoidance_loop"
+                elif "pressure" in combined or "rupture" in combined or "burnout" in combined:
+                    primary_domain = "boundary_collapse"
+                else:
+                    primary_domain = "subconscious_paradox"
+
+                return {
+                    "topic": clean_topic,
+                    "coreIdea": core_idea,
+                    "emotionalTension": tension,
+                    "curiosityGap": curiosity_gap,
+                    "domain": primary_domain,
+                    "thumbnailJob": f"Visually manifest '{trans}' to trigger immediate curiosity.",
+                    "niche": niche,
+                    "textHookCandidates": hooks,
+                    "transformation": trans,
+                }
+
         clean_script = re.sub(r"\{\s*[^}]+\s*\}", "", script).strip()
         combined = f"{clean_topic} {clean_script}".lower()
 

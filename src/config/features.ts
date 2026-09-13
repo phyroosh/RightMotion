@@ -23,6 +23,9 @@ export const FEATURES = {
    * Set to `true` to re-enable Frontier #3 features with one switch.
    */
   ENABLE_CINEMATIC_CAMERA_V3: false,
+
+  /** Frontier 7: Visual State Machines & Causal Storytelling */
+  ENABLE_VISUAL_STATE_MACHINES_V7: true,
 } as const;
 
 /**

@@ -86,6 +86,10 @@ import { TheArchitectureOfPressureComposition } from "./clips/the_architecture_o
 import the_architecture_of_pressureTranscript from "./clips/the_architecture_of_pressure/transcript.json";
 import { OpenBrainTabsComposition } from "./clips/open_brain_tabs";
 import open_brain_tabsTranscript from "./clips/open_brain_tabs/transcript.json";
+import { SmokeTestFrontierSComposition } from "./clips/smoke_test_frontier_s";
+import smoke_test_frontier_sTranscript from "./clips/smoke_test_frontier_s/transcript.json";
+import { SmallCompromisesComposition } from "./clips/small_compromises";
+import small_compromisesTranscript from "./clips/small_compromises/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -115,6 +119,8 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  SmallCompromisesThumbnail,
+  SmokeTestFrontierSThumbnail,
   OpenBrainTabsThumbnail,
   TheArchitectureOfPressureThumbnail,
   TheLawOfTheCounterweightThumbnail,
@@ -265,6 +271,10 @@ export const RemotionRoot: React.FC = () => {
   const the_architecture_of_pressureDuration = calculateDurationInFrames(the_architecture_of_pressureTranscript as any[], fps);
   
   const open_brain_tabsDuration = calculateDurationInFrames(open_brain_tabsTranscript as any[], fps);
+  
+  const smoke_test_frontier_sDuration = calculateDurationInFrames(smoke_test_frontier_sTranscript as any[], fps);
+  
+  const small_compromisesDuration = calculateDurationInFrames(small_compromisesTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -625,6 +635,26 @@ export const RemotionRoot: React.FC = () => {
         id="OpenBrainTabsVideo"
         component={OpenBrainTabsComposition}
         durationInFrames={open_brain_tabsDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="SmokeTestFrontierSVideo"
+        component={SmokeTestFrontierSComposition}
+        durationInFrames={smoke_test_frontier_sDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="SmallCompromisesVideo"
+        component={SmallCompromisesComposition}
+        durationInFrames={small_compromisesDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -1243,6 +1273,20 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="OpenBrainTabsThumbnail"
         component={OpenBrainTabsThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="SmokeTestFrontierSThumbnail"
+        component={SmokeTestFrontierSThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="SmallCompromisesThumbnail"
+        component={SmallCompromisesThumbnail}
         width={1080}
         height={1920}
       />
