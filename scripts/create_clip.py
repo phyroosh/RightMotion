@@ -1471,7 +1471,6 @@ import {{ AppleProgressBar }} from "../../components/AppleProgressBar";
 import {{ AppleKineticCaptions }} from "../../components/AppleKineticCaptions";
 import {{ SoundDesignEngine, SfxCue }} from "../../components/SoundDesignEngine";
 import {{ GroundedTextureEngine }} from "../../components/texture";
-import {{ {pascal_name}Thumbnail }} from "../../thumbnails";
 import rawTranscript from "./transcript.json";
 import {{ WordTimestamp }} from "../../types";
 import "../../style.css";
@@ -1496,13 +1495,6 @@ export const {pascal_name}Composition: React.FC = () => {{
       className="relative w-full h-full bg-[#fbfbfd] text-slate-900 flex flex-col justify-between overflow-hidden select-none font-sans"
       style={{{{ width, height }}}}
     >
-      {{/* 0. High-Converting 4K Thumbnail First-Frame */}}
-      {{frame === 0 && (
-        <div className="absolute inset-0 w-full h-full z-50 pointer-events-none">
-          <{pascal_name}Thumbnail />
-        </div>
-      )}}
-
       {{/* 1. Voiceover Audio Track */}}
       <Audio src={{staticFile("{name}/voiceover.mp3")}} volume={{1.3}} />
 
@@ -1549,7 +1541,7 @@ export const {pascal_name}Composition: React.FC = () => {{
     return pascal_name
 
 
-def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, format_type: str, niche: str = 'self_improvement', pinned_comment: str = None, script_text: str = None):
+def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, format_type: str, niche: str = 'self_improvement', pinned_comment: str = None, script_text: str = None, story_model: Optional[Any] = None):
     root_file = ROOT_DIR / "src" / "Root.tsx"
     thumb_file = ROOT_DIR / "src" / "thumbnails" / "index.tsx"
     render_script = ROOT_DIR / "scripts" / "render_all_thumbnails.js"
@@ -1593,7 +1585,13 @@ def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, 
     from thumbnail_director import ThumbnailDirector
     t_director = ThumbnailDirector()
     aspect_str = "9:16" if format_type == "shorts" else "16:9"
-    t_manifest = t_director.orchestrate(topic, script=script_text or "", niche=niche, aspect_ratio=aspect_str)
+    t_manifest = t_director.orchestrate(
+        topic,
+        script=script_text or "",
+        niche=niche,
+        aspect_ratio=aspect_str,
+        story_model=story_model,
+    )
 
     # Persist inspectable thumbnail_plan.json
     clip_dir = ROOT_DIR / "src" / "clips" / name
@@ -1657,7 +1655,7 @@ export const {pascal_name}Thumbnail: React.FC = () => (
 
 def render_assets(name: str, pascal_name: str):
     print("🎥 [4/4] Rendering 4K Thumbnail & MP4 Video...")
-    out_thumb = f"out/{name}_video_thumbnail.png"
+    out_thumb = f"out/{name}_thumbnail.png"
     out_video = f"out/{name}_video.mp4"
     (ROOT_DIR / "out").mkdir(parents=True, exist_ok=True)
 
@@ -1892,7 +1890,30 @@ async def main():
         sticker_meta=sticker_match,
         niche=detected_niche
     )
-    register_composition_and_thumbnail(name, pascal_name, topic, args.format, detected_niche, pinned_comment=script_pinned_comment, script_text=clean_script)
+    register_composition_and_thumbnail(
+        name,
+        pascal_name,
+        topic,
+        args.format,
+        detected_niche,
+        pinned_comment=script_pinned_comment,
+        script_text=clean_script,
+        story_model=story_model,
+    )
+
+    try:
+        from notify import dispatch_notification
+        title_fmt = name.replace("_", " ").title()
+        dispatch_notification(
+            event_type="PROJECT_CREATED",
+            title=f"✨ New Clip Scaffolded: {title_fmt}",
+            body=f"Audio and transcript ready for '{topic}'. Starter canvas is ready.",
+            clip=f"{name}_video.mp4",
+            tab="studio",
+            category="project"
+        )
+    except Exception:
+        pass
 
     # Step 4: Render
     if args.render and not args.no_render:

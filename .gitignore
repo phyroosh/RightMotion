@@ -11,6 +11,8 @@ studio/instagram_sessions/
 studio/credentials.json
 studio/channels.json
 studio/instagram_accounts.json
+studio/remote/data/
+studio/notifications/data/
 .env
 .env.*
 *.pem

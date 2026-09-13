@@ -5,6 +5,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>RightClips — Autonomous AI Video Studio</title>
 <link href="/logo.svg" rel="icon" type="image/svg+xml"/>
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#030712"/>
 <!-- Local & Fallback Tailwind CSS -->
 <script src="/vendor/tailwind.js"></script>
 <script>
@@ -251,6 +253,15 @@ body {
   border-color: rgba(140, 180, 255, 0.3);
 }
 
+/* FROSTED GLASS CARDS: Non-transparent deep dark black with crisp glass highlights */
+.frosted-glass-card {
+  background: rgba(8, 12, 22, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.85);
+}
+
 /* MAIN WORKSPACE: 3-Column Floating Grid (NO BACKGROUND TILE) */
 .main {
   flex: 1;
@@ -461,11 +472,6 @@ body {
   border-radius: 9999px;
   padding: 4px 12px;
 }
-.stage-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 .btn-action {
   border: 1px solid rgba(140, 180, 255, 0.2);
   background: rgba(14, 22, 44, 0.55);
@@ -496,6 +502,28 @@ body {
   background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(59, 130, 246, 0.5));
   border-color: rgba(56, 189, 248, 0.8);
   box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
+}
+
+/* SOLID HIGH-CONTRAST ACTION BUTTONS (Vivid white with inky black text) */
+.solid-white-btn {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 10px 30px -5px rgba(255, 255, 255, 0.35), 0 0 20px rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.solid-white-btn:hover {
+  background-color: #f1f5f9 !important;
+  color: #000000 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 35px -5px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3) !important;
+}
+.solid-white-btn:active {
+  transform: translateY(0px) scale(0.98);
+}
+.solid-white-btn * {
+  color: #000000 !important;
 }
 
 /* VIDEO STAGE: Responsive & Floating (NEVER CLIPPED) */
@@ -700,30 +728,6 @@ body {
   padding-right: 4px;
 }
 
-.inspector-tabs {
-  display: flex;
-  gap: 4px;
-  flex-shrink: 0;
-}
-.tab-pill {
-  flex: 1;
-  border: 1px solid var(--border-subtle);
-  background: rgba(12, 18, 34, 0.4);
-  color: var(--text-dim);
-  font-size: 9px;
-  font-weight: 700;
-  padding: 6px;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-.tab-pill.active {
-  background: rgba(56, 189, 248, 0.15);
-  color: var(--accent-cyan);
-  border-color: rgba(56, 189, 248, 0.4);
-}
-
 .floating-card {
   border: 1px solid var(--border-subtle);
   background: rgba(10, 16, 32, 0.45);
@@ -797,6 +801,22 @@ body {
 .field-textarea {
   height: 52px;
   resize: none;
+}
+
+.sleek-input {
+  background: rgba(3, 7, 18, 0.75) !important;
+  color: #fdf8e1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.sleek-input:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25) !important;
+  background: rgba(3, 7, 18, 0.95) !important;
+}
+.sleek-input::placeholder {
+  color: rgba(253, 248, 225, 0.35) !important;
 }
 
 .tags-wrap {
@@ -922,6 +942,372 @@ body {
   background: #000 !important;
 }
 
+/* ===================================================================
+   MOBILE COMPANION APP ARCHITECTURE (Breakpoints & Touch UI)
+   =================================================================== */
+
+/* Desktop Default (>= 1024px): Mobile container is strictly hidden */
+#mobileAppContainer {
+  display: none !important;
+}
+
+/* Mobile & Phone Viewports (< 1024px) */
+@media (max-width: 1023px) {
+  /* 1. Hide Desktop Workstation */
+  .app > .topbar,
+  .app > .main {
+    display: none !important;
+  }
+
+  /* 2. Expand App Container to Full Mobile Viewport */
+  .app {
+    padding: 0 !important;
+    gap: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  #mobileAppContainer {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: transparent !important;
+  }
+
+  /* 3. Mobile Top App Bar (Sticky) */
+  .mobile-header {
+    height: calc(52px + env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-left: 14px;
+    padding-right: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(7, 12, 26, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+    z-index: 40;
+    flex-shrink: 0;
+  }
+
+  .mobile-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .mobile-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* 4. Mobile Screen Viewport (Scrollable Content Container) */
+  .mobile-content {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px 14px calc(72px + env(safe-area-inset-bottom, 0px)) 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* 5. Mobile Screen Tabs (Only active tab is displayed) */
+  .mobile-tab-pane {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    animation: mobileFadeIn 0.18s ease;
+  }
+
+  .mobile-tab-pane.active {
+    display: flex !important;
+  }
+
+  @keyframes mobileFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 6. Mobile Fixed Bottom Navigation Bar */
+  .mobile-nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(58px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: rgba(6, 10, 22, 0.88);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(140, 180, 255, 0.15);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+    z-index: 50;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    min-height: 48px;
+    transition: all 0.15s ease;
+    position: relative;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-nav-item:active {
+    transform: scale(0.94);
+  }
+
+  .mobile-nav-item.active {
+    color: var(--accent-cyan);
+  }
+
+  .mobile-nav-item.active .mobile-nav-icon-wrapper {
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: var(--accent-cyan);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+  }
+
+  .mobile-nav-icon-wrapper {
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+  }
+
+  /* 7. Mobile Project Cards (Touch Optimized) */
+  .mobile-project-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    background: rgba(10, 16, 32, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-subtle);
+    min-height: 64px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-project-card:active {
+    transform: scale(0.98);
+    background: rgba(20, 36, 68, 0.7);
+  }
+
+  .mobile-project-card.active {
+    border-color: var(--border-active);
+    background: rgba(20, 36, 68, 0.75);
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+  }
+
+  .mobile-project-thumb {
+    width: 44px;
+    height: 56px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 8. Mobile Video Stage & Transport */
+  .mobile-video-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    border: 1.5px solid rgba(140, 180, 255, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.1);
+  }
+
+  .mobile-video-player-wrap {
+    width: 100%;
+    aspect-ratio: 9/16;
+    max-height: 46vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .mobile-video-player-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .mobile-transport-bar {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(7, 12, 26, 0.9);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(140, 180, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .mobile-transport-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-transport-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-mobile-transport {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(140, 180, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-mobile-transport:active {
+    transform: scale(0.92);
+  }
+
+  .btn-mobile-transport-play {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    border-color: #38bdf8;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+  }
+
+  /* 9. Mobile Action Buttons (Min 44px height) */
+  .mobile-action-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: 100%;
+  }
+
+  .mobile-btn-action {
+    height: 46px;
+    border-radius: 14px;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    border: 1px solid var(--border-subtle);
+    background: rgba(14, 22, 44, 0.65);
+    color: var(--text-main);
+    backdrop-filter: blur(12px);
+    transition: all 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-btn-action:active {
+    transform: scale(0.96);
+  }
+
+  .mobile-btn-primary {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #ffffff !important;
+    box-shadow: 0 4px 18px rgba(255, 255, 255, 0.3) !important;
+  }
+
+  .mobile-btn-primary * {
+    color: #000000 !important;
+  }
+
+  /* 10. Mobile Cards & Inputs */
+  .mobile-card {
+    border: 1px solid var(--border-subtle);
+    background: rgba(10, 16, 32, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 18px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mobile-card-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-input,
+  .mobile-textarea {
+    width: 100%;
+    background: rgba(3, 7, 18, 0.7);
+    border: 1px solid rgba(140, 180, 255, 0.18);
+    border-radius: 12px;
+    padding: 10px 12px;
+    color: var(--text-main);
+    font-size: 12px;
+    font-family: inherit;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .mobile-input:focus,
+  .mobile-textarea:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+  }
+}
 </style>
 
 </head>
@@ -942,6 +1328,10 @@ body {
   <div id="badge-count-unuploaded"></div>
   <div id="badge-count-uploaded"></div>
   <div id="playerFormatLabel"></div>
+  <textarea id="metaDescription"></textarea>
+  <input id="metaCategory" value="27" />
+  <input id="metaPrivacy" value="public" />
+  <input id="scheduleDateTime" />
 </div>
 
 <div class="app">
@@ -975,7 +1365,15 @@ body {
         <span class="status-dot"></span>
         <span id="systemHealthText">ONLINE v3.5.0</span>
       </div>
-      <button class="icon-btn" onclick="openSettingsModal()" title="Settings">
+      <div id="currentUserBadge" class="hidden items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono border border-white/15 bg-white/5 cursor-pointer hover:bg-white/10 transition" onclick="handleUserBadgeClick()" title="Current User & Session">
+        <span class="w-2 h-2 rounded-full bg-emerald-400" id="currentUserDot"></span>
+        <span id="currentUserLabel" class="text-[#fdf8e1] font-bold">Owner</span>
+      </div>
+      <button class="icon-btn relative" id="desktopNotificationBellBtn" onclick="toggleNotificationCenter()" title="Notifications">
+        <i data-lucide="bell" style="width:14px;height:14px;"></i>
+        <span id="desktopNotificationBadge" class="hidden absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-cyan-500 text-slate-950 font-mono text-[10px] font-bold flex items-center justify-center shadow-lg animate-pulse">0</span>
+      </button>
+      <button class="icon-btn" id="topNavSettingsBtn" onclick="openSettingsModal()" title="Settings">
         <i data-lucide="settings" style="width:14px;height:14px;"></i>
       </button>
     </div>
@@ -1016,16 +1414,6 @@ body {
             <span class="scale-label" id="playerScaleLabel" onclick="resetPlayerScale()" title="Click to reset 100%">100%</span>
             <button class="scale-btn" onclick="adjustPlayerScale(0.1)" title="Zoom In Player">＋</button>
           </div>
-        </div>
-        <div class="stage-actions">
-          <button class="btn-action" onclick="openMemeBoardModal()">
-            <i data-lucide="sparkles" style="width:12px;height:12px;color:#38bdf8;"></i>
-            <span>AI Director</span>
-          </button>
-          <button class="btn-action btn-action-primary" onclick="openPublishModal('both')">
-            <i data-lucide="send" style="width:12px;height:12px;"></i>
-            <span>Render & Publish</span>
-          </button>
         </div>
       </div>
 
@@ -1100,11 +1488,6 @@ body {
 
     <!-- RIGHT: Inspector (Contextual floating cards) -->
     <aside class="inspector-col">
-      <div class="inspector-tabs">
-        <button class="tab-pill active">Context</button>
-        <button class="tab-pill" onclick="openPublishModal('both')">Publish</button>
-      </div>
-
       <!-- Thumbnail Card -->
       <div class="floating-card">
         <div class="card-title">
@@ -1150,7 +1533,7 @@ body {
           <span>Tags</span>
         </div>
         <div class="tags-wrap" id="tagsContainer">
-          <!-- Tag pills injected dynamically -->
+          <input type="text" id="tagInput" class="bg-transparent border-none text-[10px] text-[#fdf8e1] focus:outline-none flex-1 min-w-[70px] p-1 font-mono placeholder-[#fdf8e1]/40" placeholder="+ Add tag" />
         </div>
       </div>
 
@@ -1171,6 +1554,18 @@ body {
         </div>
       </div>
 
+      <!-- Live Upload / Publishing Progress Card -->
+      <div id="uploadProgressCard" class="hidden floating-card" style="border-color:rgba(56,189,248,0.4);background:rgba(14,22,44,0.75);">
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:700;color:var(--text-main);">
+          <span id="uploadStageText" style="display:flex;align-items:center;gap:6px;"><i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Initializing release...</span>
+          <span id="uploadPercentText" style="color:var(--accent-cyan);font-family:var(--font-mono);">0%</span>
+        </div>
+        <div style="width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:9999px;overflow:hidden;margin:6px 0;">
+          <div id="uploadProgressBar" style="height:100%;background:linear-gradient(90deg, #38bdf8, #3b82f6);width:0%;transition:width 0.3s ease;"></div>
+        </div>
+        <div id="uploadResultLink" class="hidden" style="font-size:9px;font-weight:700;color:#4ade80;word-break:break-all;"></div>
+      </div>
+
       <!-- Creative Console Card -->
       <div class="ai-console-card">
         <div style="display:flex;align-items:center;gap:8px;">
@@ -1185,6 +1580,461 @@ body {
       </div>
     </aside>
   </main>
+
+  <!-- ===================================================================
+       MOBILE COMPANION APP ARCHITECTURE (5 Dedicated Views & Touch UI)
+       =================================================================== -->
+  <div id="mobileAppContainer">
+    <!-- 1. Sticky Mobile Top App Bar -->
+    <header class="mobile-header" id="mobileAppHeader">
+      <div class="mobile-header-left">
+        <div class="brand-logo" style="width:26px;height:26px;">
+          <i data-lucide="aperture" style="width:15px;height:15px;color:#fff;"></i>
+        </div>
+        <div style="display:flex;flex-direction:column;line-height:1.1;">
+          <span style="font-size:13px;font-weight:800;letter-spacing:-0.02em;">RightMotion</span>
+          <span style="font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);">companion</span>
+        </div>
+        <!-- Niche Switcher Button -->
+        <button type="button" class="niche-btn active" id="mobileNicheBtn" onclick="cycleMobileNiche()" style="font-size:10px;padding:3px 10px;border-radius:9999px;border:1px solid rgba(56,189,248,0.4);background:rgba(56,189,248,0.12);color:var(--accent-cyan);display:flex;align-items:center;gap:4px;">
+          <span id="mobileNicheLabel">Self Improvement</span>
+          <i data-lucide="chevron-down" style="width:12px;height:12px;"></i>
+        </button>
+      </div>
+      <div class="mobile-header-right">
+        <div id="mobileUserBadge" class="hidden items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono border border-white/15 bg-white/5 cursor-pointer" onclick="switchMobileTab('more')">
+          <span class="w-2 h-2 rounded-full bg-emerald-400" id="mobileUserDot"></span>
+          <span id="mobileUserLabel">Owner</span>
+        </div>
+        <button class="icon-btn relative" id="mobileNotificationBellBtn" onclick="toggleNotificationCenter()" title="Notifications" style="width:34px;height:34px;">
+          <i data-lucide="bell" style="width:15px;height:15px;"></i>
+          <span id="mobileNotificationBadge" class="hidden absolute -top-1 -right-1 min-w-[15px] h-3.5 px-1 rounded-full bg-cyan-500 text-slate-950 font-mono text-[9px] font-bold flex items-center justify-center shadow-md">0</span>
+        </button>
+        <button class="icon-btn" onclick="openSettingsModal()" title="Settings" style="width:34px;height:34px;">
+          <i data-lucide="settings" style="width:15px;height:15px;"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- 2. Scrollable Mobile Content Area -->
+    <div class="mobile-content" id="mobileContentArea">
+
+      <!-- TAB 1: PROJECTS -->
+      <div class="mobile-tab-pane active" id="mobileTabProjects">
+        <!-- Top Project Stats & Search -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black uppercase tracking-wider text-[#fdf8e1]">Project Library</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30" id="mobileProjectCountBadge">0</span>
+          </div>
+          <button type="button" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-[11px] font-bold text-[#fdf8e1] flex items-center gap-1.5 cursor-pointer" onclick="loadVideos()">
+            <i data-lucide="refresh-cw" style="width:12px;height:12px;"></i>
+            <span>Refresh</span>
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative w-full">
+          <i data-lucide="search" style="width:14px;height:14px;position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);"></i>
+          <input type="text" id="mobileProjectSearchInput" class="mobile-input" style="padding-left:34px;" placeholder="Search clips and titles..." oninput="handleMobileSearch(this.value)" />
+        </div>
+
+        <!-- Segmented Filter Tabs -->
+        <div class="grid grid-cols-3 p-1 rounded-xl bg-black/40 border border-white/10 text-xs font-bold">
+          <button type="button" class="py-2 rounded-lg text-center cursor-pointer transition text-black bg-[#fdf8e1] font-black" id="mobileFilterAll" onclick="setMobileLibraryFilter('all')">All</button>
+          <button type="button" class="py-2 rounded-lg text-center cursor-pointer transition text-[#fdf8e1]/60" id="mobileFilterUploaded" onclick="setMobileLibraryFilter('uploaded')">Uploaded</button>
+          <button type="button" class="py-2 rounded-lg text-center cursor-pointer transition text-[#fdf8e1]/60" id="mobileFilterLocal" onclick="setMobileLibraryFilter('local')">Local</button>
+        </div>
+
+        <!-- Projects Card List -->
+        <div class="flex flex-col gap-2.5" id="mobileProjectListContainer">
+          <!-- Dynamically populated by renderMobileVideoList() -->
+        </div>
+      </div>
+
+      <!-- TAB 2: STUDIO (Video Preview & Controls) -->
+      <div class="mobile-tab-pane" id="mobileTabStudio">
+        <!-- Active Project Bar -->
+        <div class="p-3 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-3">
+          <div class="min-w-0 flex flex-col gap-0.5">
+            <span class="text-[9px] font-mono text-cyan-400 font-bold uppercase tracking-wider">SELECTED PROJECT</span>
+            <span class="text-xs font-black text-[#fdf8e1] truncate" id="mobileActiveTitle">Select a project</span>
+          </div>
+          <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-white/10 text-[#fdf8e1]/70" id="mobileSpecsBadge">9:16 Shorts</span>
+        </div>
+
+        <!-- Mobile 9:16 Video Player Card -->
+        <div class="mobile-video-container">
+          <div class="mobile-video-player-wrap">
+            <video id="mobileVideoPlayer" playsinline onclick="toggleTransportPlay()"></video>
+          </div>
+          <!-- Mobile Transport Bar -->
+          <div class="mobile-transport-bar">
+            <!-- Scrubber Track -->
+            <div class="track-lane" id="mobileTimelineTrack" style="height:12px;">
+              <div class="track-fill" id="mobileTimelineProgress" style="width:0%;"></div>
+              <div class="track-scrubber" id="mobileTimelineScrubber" style="left:0%;"></div>
+            </div>
+            <!-- Transport Buttons & Timecode -->
+            <div class="mobile-transport-row">
+              <span class="transport-time" id="mobileTransportTimecode">00:00.00</span>
+              <div class="mobile-transport-controls">
+                <button type="button" class="btn-mobile-transport" onclick="transportStep(-1)" title="Back 1 frame">
+                  <i data-lucide="skip-back" style="width:14px;height:14px;"></i>
+                </button>
+                <button type="button" class="btn-mobile-transport btn-mobile-transport-play" id="mobilePlayBtn" onclick="toggleTransportPlay()" title="Play/Pause">
+                  <i data-lucide="play" id="mobilePlayIcon" style="width:16px;height:16px;"></i>
+                </button>
+                <button type="button" class="btn-mobile-transport" onclick="transportStep(1)" title="Forward 1 frame">
+                  <i data-lucide="skip-forward" style="width:14px;height:14px;"></i>
+                </button>
+                <button type="button" class="btn-mobile-transport" id="mobileLoopBtn" onclick="toggleTransportLoop()" title="Toggle Loop">
+                  <i data-lucide="repeat" style="width:14px;height:14px;"></i>
+                </button>
+              </div>
+              <span class="transport-time" id="mobileTransportDuration">00:00.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primary Quick Actions (Min 44px height) -->
+        <div class="mobile-action-bar">
+          <button type="button" class="mobile-btn-action mobile-btn-primary" onclick="openPublishModal('both')">
+            <i data-lucide="send" style="width:14px;height:14px;"></i>
+            <span>Publish</span>
+          </button>
+          <button type="button" class="mobile-btn-action" onclick="openThumbnailModal()">
+            <i data-lucide="image" style="width:14px;height:14px;color:#38bdf8;"></i>
+            <span>Cover</span>
+          </button>
+          <button type="button" class="mobile-btn-action" onclick="saveMobileMetadata()">
+            <i data-lucide="save" style="width:14px;height:14px;color:#4ade80;"></i>
+            <span>Save Meta</span>
+          </button>
+        </div>
+
+        <!-- Metadata Card -->
+        <div class="mobile-card">
+          <div class="mobile-card-title">
+            <span>Video Metadata</span>
+            <i data-lucide="file-text" style="width:14px;height:14px;"></i>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-mono text-[#fdf8e1]/60 font-bold uppercase">Video Title</label>
+            <input type="text" class="mobile-input" id="mobileEditTitle" placeholder="Video Title..." oninput="syncMobileMetadataInput('title', this.value)" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-mono text-[#fdf8e1]/60 font-bold uppercase">Description / Pinned Comment</label>
+            <textarea class="mobile-textarea" id="mobilePinnedComment" rows="3" placeholder="Pinned comment context..." oninput="syncMobileMetadataInput('pinned', this.value)"></textarea>
+          </div>
+        </div>
+
+        <!-- Tags Card -->
+        <div class="mobile-card">
+          <div class="mobile-card-title">
+            <span>Tags &amp; Keywords</span>
+            <i data-lucide="tag" style="width:14px;height:14px;"></i>
+          </div>
+          <div class="tags-wrap" id="mobileTagsContainer">
+            <!-- Tags pills -->
+          </div>
+          <div class="flex items-center gap-2 mt-1">
+            <input type="text" id="mobileTagInput" class="mobile-input text-xs" placeholder="Add new tag..." onkeydown="handleMobileTagKey(event)" />
+            <button type="button" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-[#fdf8e1] shrink-0 cursor-pointer" onclick="addMobileTag()">
+              + Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: AI & TOOLS -->
+      <div class="mobile-tab-pane" id="mobileTabAi">
+        <div class="mobile-card" style="border-color:rgba(139,92,246,0.3);background:radial-gradient(circle at 0% 0%,rgba(139,92,246,0.15),transparent 70%),rgba(10,16,32,0.6);">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300">
+              <i data-lucide="sparkles" style="width:20px;height:20px;"></i>
+            </div>
+            <div>
+              <h3 class="text-sm font-black text-[#fdf8e1]">Creative Intelligence</h3>
+              <p class="text-[11px] text-[#fdf8e1]/60">Script ideation, tactical meme hooks &amp; generative AI</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tactical Meme Culture Board -->
+        <div class="mobile-card">
+          <div class="mobile-card-title">
+            <span>Tactical Meme Hooks</span>
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">21 Hooks</span>
+          </div>
+          <p class="text-xs text-[#fdf8e1]/70 leading-relaxed">
+            First-frame psychological retention hooks (&lt; 2.0s). Inspect curated high-retention opening hooks.
+          </p>
+          <button type="button" class="mobile-btn-action" style="height:44px;background:linear-gradient(135deg,rgba(168,85,247,0.25),rgba(147,51,234,0.35));border-color:rgba(168,85,247,0.4);color:#fff;" onclick="openMemeBoardModal()">
+            <i data-lucide="layers" style="width:16px;height:16px;"></i>
+            <span>Open Tactical Meme Board</span>
+          </button>
+        </div>
+
+        <!-- Generation Status Card -->
+        <div class="mobile-card">
+          <div class="mobile-card-title">
+            <span>AI Render Specs</span>
+            <i data-lucide="cpu" style="width:14px;height:14px;"></i>
+          </div>
+          <div class="flex flex-col gap-2 text-xs font-mono text-[#fdf8e1]/70">
+            <div class="flex justify-between">
+              <span>Voiceover Model:</span>
+              <span class="text-cyan-300 font-bold">en-US-AvaMultilingualNeural</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Speech Rate:</span>
+              <span class="text-cyan-300 font-bold">+8% (Fast / Dynamic)</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Format:</span>
+              <span class="text-emerald-400 font-bold">1080x1920 (9:16 Shorts)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: ACTIVITY -->
+      <div class="mobile-tab-pane" id="mobileTabActivity">
+        <!-- Engine Health & Diagnostics -->
+        <div class="mobile-card">
+          <div class="mobile-card-title">
+            <span>Engine Diagnostic Health</span>
+            <div class="engine-status" style="padding:2px 8px;font-size:8px;">
+              <span class="status-dot"></span>
+              <span id="mobileSystemHealthText">ONLINE v3.5.0</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+            <div class="p-2.5 rounded-xl bg-black/40 border border-white/10 flex flex-col gap-1">
+              <span class="text-[10px] text-[#fdf8e1]/50 uppercase">Studio Port</span>
+              <span class="text-cyan-400 font-bold">4000 (Active)</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-black/40 border border-white/10 flex flex-col gap-1">
+              <span class="text-[10px] text-[#fdf8e1]/50 uppercase">Renderer</span>
+              <span class="text-emerald-400 font-bold">GPU (ANGLE / Vulkan)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Upload Progress Card -->
+        <div class="mobile-card" id="mobileUploadProgressCard">
+          <div class="mobile-card-title">
+            <span>Release &amp; Publishing Queue</span>
+            <span class="text-cyan-400 font-mono text-[10px] font-bold" id="mobileUploadPercentText">0%</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden my-1">
+            <div id="mobileUploadProgressBar" class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-300" style="width:0%;"></div>
+          </div>
+          <span class="text-xs text-[#fdf8e1]/60 font-mono" id="mobileUploadStageText">Idle — no jobs in queue</span>
+        </div>
+
+        <!-- Pipeline Quick Actions -->
+        <div class="mobile-card">
+          <div class="mobile-card-title">
+            <span>Quick Pipeline Actions</span>
+            <i data-lucide="zap" style="width:14px;height:14px;"></i>
+          </div>
+          <div class="flex flex-col gap-2">
+            <button type="button" class="mobile-btn-action" onclick="loadVideos()">
+              <i data-lucide="refresh-cw" style="width:14px;height:14px;"></i>
+              <span>Rescan Local Video Cache</span>
+            </button>
+            <button type="button" class="mobile-btn-action" onclick="fetchSystemHealth()">
+              <i data-lucide="activity" style="width:14px;height:14px;"></i>
+              <span>Test System Connection</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: MORE & REMOTE CONTROL -->
+      <div class="mobile-tab-pane" id="mobileTabMore">
+        <!-- Current User Card -->
+        <div class="mobile-card">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-2xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 flex items-center justify-center">
+                <i data-lucide="shield-check" style="width:20px;height:20px;"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-xs font-black text-[#fdf8e1]" id="mobileMoreUserEmail">Owner (Local Host)</h3>
+                  <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30" id="mobileMoreUserRole">OWNER</span>
+                </div>
+                <p class="text-[11px] text-[#fdf8e1]/60 mt-0.5">Unrestricted control authority</p>
+              </div>
+            </div>
+            <button type="button" class="px-3 py-1.5 rounded-xl border border-rose-500/30 text-rose-400 text-xs font-bold cursor-pointer" onclick="handleLogout()">
+              Log Out
+            </button>
+          </div>
+        </div>
+
+        <!-- Remote Access Card -->
+        <div class="mobile-card" style="border-color:rgba(56,189,248,0.25);">
+          <div class="mobile-card-title">
+            <span>Remote Access Control</span>
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-slate-800 text-slate-400" id="mobileRemoteStatusBadge">OFFLINE</span>
+          </div>
+          <p class="text-xs text-[#fdf8e1]/70 leading-relaxed">
+            Share this RightMotion Studio instance securely over end-to-end HTTPS.
+          </p>
+          <div class="flex items-center gap-2 mt-1">
+            <button type="button" class="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer shadow" id="mobileRemoteEnableBtn" onclick="enableRemoteAccess()">
+              <i data-lucide="power" style="width:14px;height:14px;"></i>
+              <span>Enable Remote</span>
+            </button>
+            <button type="button" class="hidden flex-1 py-2.5 rounded-xl border border-rose-500/40 text-rose-300 text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer" id="mobileRemoteDisableBtn" onclick="disableRemoteAccess()">
+              <i data-lucide="power-off" style="width:14px;height:14px;"></i>
+              <span>Disable</span>
+            </button>
+          </div>
+          <!-- Public & LAN URLs with Copy -->
+          <div class="hidden flex-col gap-2 p-3 rounded-xl bg-black/60 border border-white/10 mt-1" id="mobileRemoteUrlCard">
+            <div class="flex flex-col gap-1">
+              <span class="text-[9px] font-mono text-cyan-400 uppercase font-bold">1. Public Secure HTTPS Tunnel</span>
+              <div class="flex items-center gap-2">
+                <input type="text" id="mobileRemoteUrlInput" readonly class="w-full text-xs font-mono text-cyan-300 bg-transparent border-none outline-none select-all" value="" />
+                <button type="button" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs font-bold shrink-0 cursor-pointer" onclick="copyPublicUrl()">
+                  Copy
+                </button>
+              </div>
+            </div>
+            <div class="pt-1.5 border-t border-white/10 flex flex-col gap-1">
+              <span class="text-[9px] font-mono text-emerald-400 uppercase font-bold">2. Local WiFi / Mobile Hotspot Direct</span>
+              <div class="flex items-center gap-2">
+                <input type="text" id="mobileRemoteLanUrlInput" readonly class="w-full text-xs font-mono text-emerald-300 bg-transparent border-none outline-none select-all" value="" />
+                <button type="button" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold shrink-0 cursor-pointer" onclick="copyLanUrl()">
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Push Notifications & Device Alerts -->
+        <div class="mobile-card" id="mobilePushCard" style="border-color:rgba(192,132,252,0.3);">
+          <div class="mobile-card-title">
+            <div class="flex items-center gap-2">
+              <i data-lucide="bell-ring" style="width:14px;height:14px;color:#c084fc;"></i>
+              <span>Device Push Alerts</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-slate-800 text-slate-400" id="mobilePushStatusBadge">OFF</span>
+          </div>
+          <p class="text-xs text-[#fdf8e1]/70 leading-relaxed">
+            Receive native OS lock-screen alerts on this device whenever an AI clip renders, generation finishes, or releases publish.
+          </p>
+          <div class="flex items-center gap-2 mt-1">
+            <button type="button" class="flex-1 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer shadow transition" id="mobilePushEnableBtn" onclick="enablePushNotifications()">
+              <i data-lucide="bell" style="width:14px;height:14px;"></i>
+              <span id="mobilePushBtnText">Enable Device Push</span>
+            </button>
+            <button type="button" class="px-3 py-2.5 rounded-xl border border-white/15 hover:bg-white/10 text-xs text-[#fdf8e1]/80 font-bold flex items-center justify-center gap-1.5 cursor-pointer transition" onclick="sendTestNotification()" title="Send Test Push">
+              <i data-lucide="send" style="width:13px;height:13px;"></i>
+              <span>Test</span>
+            </button>
+          </div>
+          <div class="text-[10px] font-mono text-[#fdf8e1]/40 flex items-center gap-1.5 mt-1">
+            <i data-lucide="smartphone" style="width:12px;height:12px;"></i>
+            <span id="mobilePushSupportText">Web Push API supported</span>
+          </div>
+        </div>
+
+        <!-- Collaborators & Synthetic Invites -->
+        <div class="mobile-card">
+          <div class="mobile-card-title">
+            <span>Collaborator Invites</span>
+            <i data-lucide="key" style="width:14px;height:14px;"></i>
+          </div>
+          <p class="text-xs text-[#fdf8e1]/70">
+            Generate temporary or device-scoped synthetic credentials with custom permissions.
+          </p>
+          <button type="button" class="mobile-btn-action" onclick="openGenerateInviteModal()">
+            <i data-lucide="user-plus" style="width:14px;height:14px;"></i>
+            <span>Generate New Invite Credentials</span>
+          </button>
+        </div>
+
+        <!-- Settings Shortcuts -->
+        <div class="mobile-card">
+          <div class="mobile-card-title">
+            <span>Channel &amp; OAuth Settings</span>
+            <i data-lucide="sliders" style="width:14px;height:14px;"></i>
+          </div>
+          <div class="flex flex-col gap-2">
+            <button type="button" class="mobile-btn-action" onclick="openSettingsModal(); switchSettingsTab('youtube');">
+              <i data-lucide="play" style="width:14px;height:14px;color:#ef4444;"></i>
+              <span>YouTube API &amp; Google Cloud</span>
+            </button>
+            <button type="button" class="mobile-btn-action" onclick="openSettingsModal(); switchSettingsTab('instagram');">
+              <i data-lucide="camera" style="width:14px;height:14px;color:#ec4899;"></i>
+              <span>Instagram Accounts</span>
+            </button>
+            <button type="button" class="mobile-btn-action" onclick="openSettingsModal(); switchSettingsTab('remote');">
+              <i data-lucide="shield" style="width:14px;height:14px;color:#38bdf8;"></i>
+              <span>Full Remote Access &amp; Permissions</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Emergency Kill Switch -->
+        <div class="mobile-card" style="border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04);">
+          <div class="flex items-center gap-2 text-xs text-rose-300 font-bold">
+            <i data-lucide="alert-triangle" style="width:16px;height:16px;"></i>
+            <span>Emergency Kill Switch</span>
+          </div>
+          <p class="text-[11px] text-[#fdf8e1]/60">
+            Immediately disconnect all visitor sessions and shut down remote transport while keeping your local workspace safe.
+          </p>
+          <button type="button" class="w-full py-3 rounded-xl border border-rose-500/40 bg-rose-600/15 hover:bg-rose-600 text-rose-300 hover:text-white text-xs font-black flex items-center justify-center gap-2 cursor-pointer transition active:scale-95" onclick="killAllRemoteAccess()">
+            <i data-lucide="shield-alert" style="width:14px;height:14px;"></i>
+            <span>DISABLE ALL REMOTE ACCESS</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. Fixed Mobile Bottom Navigation Bar -->
+    <nav class="mobile-nav-bar" id="mobileNavBar">
+      <button type="button" class="mobile-nav-item active" id="mobileNavItemProjects" onclick="switchMobileTab('projects')">
+        <div class="mobile-nav-icon-wrapper">
+          <i data-lucide="film" style="width:16px;height:16px;"></i>
+        </div>
+        <span>Projects</span>
+      </button>
+      <button type="button" class="mobile-nav-item" id="mobileNavItemStudio" onclick="switchMobileTab('studio')">
+        <div class="mobile-nav-icon-wrapper">
+          <i data-lucide="play-square" style="width:16px;height:16px;"></i>
+        </div>
+        <span>Studio</span>
+      </button>
+      <button type="button" class="mobile-nav-item" id="mobileNavItemAi" onclick="switchMobileTab('ai')">
+        <div class="mobile-nav-icon-wrapper">
+          <i data-lucide="sparkles" style="width:16px;height:16px;"></i>
+        </div>
+        <span>AI</span>
+      </button>
+      <button type="button" class="mobile-nav-item" id="mobileNavItemActivity" onclick="switchMobileTab('activity')">
+        <div class="mobile-nav-icon-wrapper">
+          <i data-lucide="activity" style="width:16px;height:16px;"></i>
+        </div>
+        <span>Activity</span>
+      </button>
+      <button type="button" class="mobile-nav-item" id="mobileNavItemMore" onclick="switchMobileTab('more')">
+        <div class="mobile-nav-icon-wrapper">
+          <i data-lucide="more-horizontal" style="width:16px;height:16px;"></i>
+        </div>
+        <span>More</span>
+      </button>
+    </nav>
+  </div>
 </div>
 
 <div id="modals"><div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300" id="memeBoardModal">
@@ -1352,8 +2202,8 @@ body {
         Save Account Assignment
       </button>
 </div>
-</div><div class="fixed inset-0 z-50 bg-black/20 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300" id="publishModal">
-<div class="frosted-glass-card w-full max-w-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+</div><div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300" id="publishModal">
+<div class="frosted-glass-card w-full max-w-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative bg-[#070a12]/96 backdrop-blur-2xl">
 <!-- Modal Header -->
 <div class="flex items-center justify-between border-b border-white/20 pb-4">
 <div class="flex items-center gap-3">
@@ -1537,14 +2387,14 @@ body {
 <button class="px-5 py-3 rounded-2xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] text-xs font-bold transition" onclick="closePublishModal()">
           Cancel
         </button>
-<button class="px-8 py-3.5 rounded-2xl solid-white-btn text-black text-sm font-black flex items-center gap-2 shadow-2xl cursor-pointer" id="confirmPublishBtn" onclick="executeMultiPlatformPublish()">
-<i class="w-4 h-4" data-lucide="rocket"></i>
-<span id="confirmPublishBtnText">Publish to Selected Platforms</span>
-</button>
+        <button class="px-8 py-3.5 rounded-2xl solid-white-btn bg-white hover:bg-slate-100 text-black text-sm font-black flex items-center gap-2 shadow-2xl cursor-pointer transition active:scale-95" id="confirmPublishBtn" onclick="executeMultiPlatformPublish()">
+          <i class="w-4 h-4 text-black" data-lucide="rocket"></i>
+          <span id="confirmPublishBtnText" class="text-black font-black">Publish to Selected Platforms</span>
+        </button>
 </div>
 </div>
-</div><div class="fixed inset-0 z-50 bg-black/20 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300" id="settingsModal">
-<div class="frosted-glass-card w-full max-w-3xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+</div><div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300" id="settingsModal">
+<div class="frosted-glass-card w-full max-w-3xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl border border-white/15 max-h-[90vh] overflow-y-auto custom-scrollbar relative bg-[#070a12]/96 backdrop-blur-2xl">
 <!-- Modal Header -->
 <div class="flex items-center justify-between border-b border-white/20 pb-4">
 <div class="flex items-center gap-3">
@@ -1560,15 +2410,19 @@ body {
 <i class="w-5 h-5" data-lucide="x"></i>
 </button>
 </div>
-<!-- Modal Tabs (YouTube API vs Instagram Playwright) -->
-<div class="grid grid-cols-2 p-1.5 rounded-2xl bg-black/50 border border-white/20 text-xs font-black">
+<!-- Modal Tabs (YouTube API vs Instagram Playwright vs Remote Access) -->
+<div class="grid grid-cols-3 p-1.5 rounded-2xl bg-black/50 border border-white/20 text-xs font-black">
 <button class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#fdf8e1] text-black shadow-md cursor-pointer" id="settingsTabYt" onclick="switchSettingsTab('youtube')" type="button">
 <i class="w-4 h-4 fill-white" data-lucide="play"></i>
-<span>YouTube Channel API</span>
+<span>YouTube API</span>
 </button>
 <button class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer" id="settingsTabIg" onclick="switchSettingsTab('instagram')" type="button">
 <i class="w-4 h-4 text-[#fdf8e1]/80" data-lucide="camera"></i>
-<span>Instagram Playwright Session</span>
+<span>Instagram</span>
+</button>
+<button class="py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer" id="settingsTabRemote" onclick="switchSettingsTab('remote')" type="button">
+<i class="w-4 h-4 text-cyan-400" data-lucide="shield-check"></i>
+<span>Remote Access</span>
 </button>
 </div>
 <!-- 1. YOUTUBE SETTINGS TAB CONTENT -->
@@ -1729,9 +2583,116 @@ body {
 </div>
 </div>
 </div>
+<!-- 3. REMOTE ACCESS SETTINGS TAB CONTENT -->
+<div class="hidden flex flex-col gap-6" id="settingsRemoteContent">
+  <!-- Top Banner / Transport Card -->
+  <div class="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/30 to-blue-950/20 border border-cyan-500/20 flex flex-col gap-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+          <i class="w-5 h-5" data-lucide="globe"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="text-sm font-black text-[#fdf8e1]">Remote Access &amp; Permissions</h3>
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-slate-800 text-slate-400 border border-slate-700" id="remoteStatusBadge">OFFLINE</span>
+          </div>
+          <p class="text-xs text-[#fdf8e1]/60 mt-0.5">Share your local studio safely with collaborators, reviewers, and mobile devices</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-black flex items-center gap-1.5 shadow cursor-pointer transition active:scale-95" id="remoteEnableBtn" onclick="enableRemoteAccess()">
+          <i class="w-3.5 h-3.5" data-lucide="power"></i>
+          <span>Enable Remote Access</span>
+        </button>
+        <button type="button" class="hidden px-4 py-2 rounded-xl border border-rose-500/40 hover:bg-rose-500/10 text-rose-300 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition" id="remoteDisableBtn" onclick="disableRemoteAccess()">
+          <i class="w-3.5 h-3.5" data-lucide="power-off"></i>
+          <span>Disable Remote Access</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Public URL Bar (Shown when online) -->
+    <div class="hidden flex-col gap-2.5 p-3.5 rounded-xl bg-black/60 border border-white/10" id="remotePublicUrlCard">
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] font-mono uppercase tracking-wider text-cyan-300 font-bold">1. Public Secure HTTPS Tunnel (Worldwide / Mobile Data)</span>
+        <span class="text-[10px] font-mono text-cyan-400 font-bold" id="remoteTransportLabel">Cloudflare Tunnel</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <input type="text" id="remotePublicUrlInput" readonly class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-cyan-300 select-all" value="" />
+        <button type="button" class="px-3 py-2 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/30 text-xs font-bold flex items-center gap-1 cursor-pointer shrink-0 transition" onclick="copyPublicUrl()">
+          <i class="w-3.5 h-3.5" data-lucide="copy"></i>
+          <span>Copy Link</span>
+        </button>
+      </div>
+
+      <!-- Local Network / Hotspot Direct Option -->
+      <div class="pt-2 border-t border-white/10 flex flex-col gap-1.5" id="remoteLanUrlCard">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">2. Local WiFi / Mobile Hotspot Direct</span>
+          <span class="text-[9px] font-mono text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">Ultra Low Latency</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" id="remoteLanUrlInput" readonly class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-emerald-300 select-all" value="" />
+          <button type="button" class="px-3 py-2 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center gap-1 cursor-pointer shrink-0 transition" onclick="copyLanUrl()">
+            <i class="w-3.5 h-3.5" data-lucide="copy"></i>
+            <span>Copy LAN</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emergency Kill Switch Bar -->
+    <div class="flex items-center justify-between pt-2 border-t border-white/10 text-xs">
+      <div class="flex items-center gap-2 text-[#fdf8e1]/70">
+        <i class="w-4 h-4 text-amber-400" data-lucide="alert-triangle"></i>
+        <span>Need to disconnect all visitors instantly?</span>
+      </div>
+      <button type="button" class="px-3 py-1.5 rounded-lg border border-rose-500/40 hover:bg-rose-600 text-rose-300 hover:text-white text-[11px] font-bold flex items-center gap-1 cursor-pointer transition active:scale-95" onclick="killAllRemoteAccess()">
+        <i class="w-3.5 h-3.5" data-lucide="shield-alert"></i>
+        <span>DISABLE ALL REMOTE ACCESS</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ACTIVE USERS SECTION -->
+  <div class="flex flex-col gap-3">
+    <div class="flex items-center justify-between">
+      <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-2">
+        <i class="w-4 h-4 text-emerald-400" data-lucide="users"></i>
+        <span>Active Users &amp; Presence</span>
+        <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" id="remoteActiveUsersCountBadge">1</span>
+      </div>
+      <button type="button" class="px-3 py-1 rounded-xl border border-white/10 hover:bg-white/5 text-[11px] text-[#fdf8e1]/70 cursor-pointer" onclick="revokeAllVisitors()">
+        Revoke All Visitors
+      </button>
+    </div>
+    <div class="flex flex-col gap-2" id="remoteActiveUsersContainer">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- INVITES & PERMISSIONS SECTION -->
+  <div class="flex flex-col gap-3 pt-2 border-t border-white/15">
+    <div class="flex items-center justify-between">
+      <div class="text-xs font-mono font-black uppercase text-[#fdf8e1]/80 tracking-wider flex items-center gap-2">
+        <i class="w-4 h-4 text-purple-400" data-lucide="key"></i>
+        <span>Synthetic Invites &amp; Permissions</span>
+        <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30" id="remoteInvitesCountBadge">0</span>
+      </div>
+      <button type="button" class="px-3.5 py-1.5 rounded-xl bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer" onclick="openGenerateInviteModal()">
+        <i class="w-3.5 h-3.5" data-lucide="plus-circle"></i>
+        <span>Generate Invite</span>
+      </button>
+    </div>
+    <div class="flex flex-col gap-2" id="remoteInvitesContainer">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
 </div>
-</div><div class="fixed inset-0 z-50 bg-black/20 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300" id="connectChannelModal">
-<div class="frosted-glass-card w-full max-w-md rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15">
+</div>
+</div><div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300" id="connectChannelModal">
+<div class="frosted-glass-card w-full max-w-md rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15 bg-[#070a12]/96 backdrop-blur-2xl">
 <div class="flex items-center justify-between border-b border-white/20 pb-3">
 <div class="flex items-center gap-2.5">
 <div class="w-9 h-9 rounded-xl bg-white/10 text-[#fdf8e1]/80 border border-red-500/30 flex items-center justify-center">
@@ -1780,17 +2741,304 @@ body {
 <div class="flex items-center justify-between gap-3 pt-1">
 <span class="text-xs font-mono text-[#fdf8e1]/60" id="thumbnailModalDims">1080 × 1920 (9:16 Shorts)</span>
 <div class="flex items-center gap-2">
-<button class="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 text-xs font-bold text-[#fdf8e1]/70 cursor-pointer" onclick="closeThumbnailModal()">Close</button>
-<a class="px-4 py-2 rounded-xl solid-white-btn text-xs font-black flex items-center gap-1.5 cursor-pointer" download="thumbnail.png" id="thumbnailModalDownloadBtn">
-<i class="w-3.5 h-3.5" data-lucide="download"></i> Download 4K
+          <button class="px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 text-xs font-bold text-[#fdf8e1]/70 cursor-pointer" onclick="closeThumbnailModal()">Close</button>
+          <a class="px-4 py-2 rounded-xl solid-white-btn bg-white hover:bg-slate-100 text-black text-xs font-black flex items-center gap-1.5 cursor-pointer transition active:scale-95" download="thumbnail.png" id="thumbnailModalDownloadBtn">
+            <i class="w-3.5 h-3.5 text-black" data-lucide="download"></i> <span class="text-black font-black">Download 4K</span>
           </a>
 </div>
 </div>
 </div>
-</div><div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 frosted-glass-card px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-[#fdf8e1] flex items-center gap-3" id="toast">
+</div>
+
+<!-- GENERATE INVITE MODAL -->
+<div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300" id="generateInviteModal">
+  <div class="frosted-glass-card max-w-md w-full rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15 relative">
+    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 flex items-center justify-center">
+          <i class="w-5 h-5" data-lucide="user-plus"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-[#fdf8e1]">Generate Invite Credentials</h3>
+          <p class="text-[11px] text-[#fdf8e1]/60">Create temporary or device-scoped access</p>
+        </div>
+      </div>
+      <button class="p-1.5 rounded-xl hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer" onclick="closeGenerateInviteModal()">
+        <i class="w-4 h-4" data-lucide="x"></i>
+      </button>
+    </div>
+
+    <!-- Form Section -->
+    <div class="flex flex-col gap-3.5" id="generateInviteFormSection">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div class="flex flex-col gap-1">
+          <label class="text-[10px] font-mono uppercase tracking-wider text-[#fdf8e1]/70 font-bold">Email / Username</label>
+          <input type="text" id="inviteEmailInput" class="w-full px-3 py-2 rounded-xl sleek-input bg-black/70 border border-white/15 text-xs text-[#fdf8e1] placeholder:text-[#fdf8e1]/30 focus:border-cyan-400 focus:bg-black/90" placeholder="e.g. admin, alex@gmail.com" />
+          <span class="text-[9px] text-[#fdf8e1]/40">Leave blank to auto-generate</span>
+        </div>
+        <div class="flex flex-col gap-1">
+          <div class="flex items-center justify-between">
+            <label class="text-[10px] font-mono uppercase tracking-wider text-[#fdf8e1]/70 font-bold">Password</label>
+            <button type="button" class="text-[9px] font-mono text-cyan-400 hover:text-cyan-300 font-bold cursor-pointer" onclick="fillRandomPassword()">🎲 Auto-Fill</button>
+          </div>
+          <input type="text" id="invitePasswordInput" class="w-full px-3 py-2 rounded-xl sleek-input bg-black/70 border border-white/15 text-xs text-[#fdf8e1] font-mono placeholder:text-[#fdf8e1]/30 focus:border-cyan-400 focus:bg-black/90" placeholder="Enter password or leave blank" />
+          <span class="text-[9px] text-[#fdf8e1]/40">Leave blank to auto-generate</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-mono uppercase tracking-wider text-[#fdf8e1]/70 font-bold">Collaborator / Device Label</label>
+        <input type="text" id="inviteLabelInput" class="w-full px-3 py-2 rounded-xl sleek-input bg-black/70 border border-white/15 text-xs text-[#fdf8e1] placeholder:text-[#fdf8e1]/30 focus:border-cyan-400 focus:bg-black/90" placeholder="e.g. Co-Host, Alex (Editor), My iPhone" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-mono uppercase tracking-wider text-[#fdf8e1]/70 font-bold">Role &amp; Permission Level</label>
+        <select id="invitePresetSelect" class="w-full px-3 py-2 rounded-xl sleek-input text-xs text-[#fdf8e1] bg-black/60">
+          <option value="safe_editor">Standard Collaborator (View, Edit, Generate, Render, Download — NO Upload/Publish)</option>
+          <option value="admin">👑 Full Admin / Co-Host (All Permissions + Upload, Publish &amp; Manage Invites)</option>
+          <option value="full_contributor">Full Contributor (+ Live Upload &amp; Publish)</option>
+          <option value="view_only">Viewer (View Projects, Render, Download)</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-mono uppercase tracking-wider text-[#fdf8e1]/70 font-bold">Expiration</label>
+        <select id="inviteExpirationSelect" class="w-full px-3 py-2 rounded-xl sleek-input text-xs text-[#fdf8e1] bg-black/60">
+          <option value="0">Never Expires</option>
+          <option value="24">24 Hours</option>
+          <option value="168">7 Days</option>
+          <option value="720">30 Days</option>
+        </select>
+      </div>
+
+      <div class="text-[11px] text-rose-400 font-bold hidden text-center" id="generateInviteError"></div>
+
+      <button type="button" class="w-full py-2.5 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold text-xs shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 cursor-pointer transition active:scale-95 mt-0.5" onclick="submitGenerateInvite()">
+        <i class="w-4 h-4" data-lucide="sparkles"></i>
+        <span>Create Credential</span>
+      </button>
+    </div>
+
+    <!-- Credentials Display Section (Shown ONCE upon generation) -->
+    <div class="hidden flex-col gap-4" id="generateInviteResultSection">
+      <div class="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-start gap-2.5">
+        <i class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" data-lucide="check-circle-2"></i>
+        <div class="text-xs text-emerald-200">
+          <span class="font-bold">Invite Generated!</span>
+          <p class="text-[10px] text-emerald-200/80 mt-0.5">Copy these credentials now. For security, passwords are never stored in plaintext or displayed again.</p>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-black/60 border border-white/10 flex flex-col gap-3 font-mono text-xs">
+        <div class="flex flex-col gap-1">
+          <span class="text-[10px] text-[#fdf8e1]/50 uppercase">Synthetic Email Identity</span>
+          <span class="text-[#fdf8e1] font-bold select-all" id="resultInviteEmail"></span>
+        </div>
+        <div class="flex flex-col gap-1">
+          <span class="text-[10px] text-[#fdf8e1]/50 uppercase">Generated Password</span>
+          <span class="text-amber-300 font-bold select-all text-sm tracking-wider" id="resultInvitePassword"></span>
+        </div>
+        <div class="flex flex-col gap-1" id="resultInviteUrlContainer">
+          <span class="text-[10px] text-[#fdf8e1]/50 uppercase">Public Access URL</span>
+          <span class="text-cyan-400 font-bold select-all text-[11px] truncate" id="resultInviteUrl"></span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2.5">
+        <button type="button" class="py-2.5 px-3 rounded-xl border border-white/20 hover:bg-white/10 text-xs font-bold text-[#fdf8e1] flex items-center justify-center gap-1.5 cursor-pointer" onclick="copyResultCredentials()">
+          <i class="w-3.5 h-3.5" data-lucide="copy"></i>
+          <span>Copy Credentials</span>
+        </button>
+        <button type="button" class="py-2.5 px-3 rounded-xl bg-white hover:bg-slate-200 text-black text-xs font-extrabold flex items-center justify-center gap-1.5 cursor-pointer shadow" onclick="copyResultInviteLink()">
+          <i class="w-3.5 h-3.5" data-lucide="external-link"></i>
+          <span>Copy Full Link</span>
+        </button>
+      </div>
+
+      <button type="button" class="py-2 rounded-xl text-center text-xs text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer mt-1" onclick="closeGenerateInviteModal()">
+        Done
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MANAGE PERMISSIONS MODAL -->
+<div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300" id="managePermissionsModal">
+  <div class="frosted-glass-card max-w-lg w-full rounded-3xl p-6 flex flex-col gap-5 shadow-2xl border border-white/15 max-h-[85vh] overflow-y-auto custom-scrollbar relative">
+    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-purple-500/15 text-purple-400 border border-purple-500/30 flex items-center justify-center">
+          <i class="w-5 h-5" data-lucide="sliders"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-[#fdf8e1]">Manage Permissions</h3>
+          <p class="text-[11px] font-mono text-cyan-400" id="permModalInviteEmail"></p>
+        </div>
+      </div>
+      <button class="p-1.5 rounded-xl hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer" onclick="closePermissionsModal()">
+        <i class="w-4 h-4" data-lucide="x"></i>
+      </button>
+    </div>
+
+    <!-- Permission Checkboxes List -->
+    <div class="flex flex-col gap-2 text-xs" id="permissionsCheckboxList">
+      <!-- Dynamically rendered -->
+    </div>
+
+    <div class="flex items-center justify-between pt-2 border-t border-white/10">
+      <span class="text-[10px] text-[#fdf8e1]/60">Applies immediately to active sessions</span>
+      <div class="flex items-center gap-2">
+        <button type="button" class="px-3.5 py-2 rounded-xl border border-white/10 hover:bg-white/5 text-xs text-[#fdf8e1]/70 cursor-pointer" onclick="closePermissionsModal()">Cancel</button>
+        <button type="button" class="px-5 py-2 rounded-xl bg-white hover:bg-slate-200 text-black text-xs font-black cursor-pointer shadow active:scale-95" onclick="savePermissions()">Save Permissions</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VISITOR LOGIN MODAL (Displayed for unauthenticated remote visitors) -->
+<div class="fixed inset-0 z-50 bg-[#03050c]/95 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300" id="visitorLoginModal">
+  <div class="frosted-glass-card max-w-sm w-full rounded-3xl p-7 flex flex-col gap-5 shadow-2xl border border-white/20 text-center relative">
+    <div class="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-cyan-500/30 border border-white/20" style="background: radial-gradient(circle at 30% 30%, #38bdf8 0%, #1e40af 60%, #030712 100%);">
+      <i class="w-7 h-7 text-white" data-lucide="lock"></i>
+    </div>
+    <div>
+      <h2 class="text-xl font-black text-[#fdf8e1] tracking-tight">RightMotion Studio</h2>
+      <p class="text-xs text-[#fdf8e1]/60 mt-1">Sign in with your invite credentials to access this remote workspace</p>
+    </div>
+
+    <form onsubmit="handleVisitorLogin(event)" class="flex flex-col gap-3 text-left mt-1">
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-mono uppercase tracking-wider text-[#fdf8e1]/70 font-bold">Email / Synthetic Identity</label>
+        <input type="text" id="visitorLoginEmail" required class="w-full px-3.5 py-2.5 rounded-xl sleek-input bg-black/70 border border-white/15 text-xs text-[#fdf8e1] placeholder:text-[#fdf8e1]/40 focus:border-cyan-400 focus:bg-black/90" placeholder="visitor1@rightmotion.local" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-mono uppercase tracking-wider text-[#fdf8e1]/70 font-bold">Password</label>
+        <input type="password" id="visitorLoginPassword" required class="w-full px-3.5 py-2.5 rounded-xl sleek-input bg-black/70 border border-white/15 text-xs text-[#fdf8e1] placeholder:text-[#fdf8e1]/40 font-mono focus:border-cyan-400 focus:bg-black/90" placeholder="••••••••••••" />
+      </div>
+
+      <div class="text-[11px] text-rose-400 font-bold hidden text-center" id="visitorLoginError"></div>
+
+      <button type="submit" id="visitorLoginBtn" class="w-full py-3 rounded-2xl bg-white hover:bg-slate-200 text-black text-xs font-black shadow-lg flex items-center justify-center gap-2 cursor-pointer transition active:scale-95 mt-2">
+        <i class="w-4 h-4" data-lucide="log-in"></i>
+        <span>Sign In to Studio</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ===================================================================
+     NOTIFICATION CENTER MODAL & FOREGROUND RICH TOAST
+     =================================================================== -->
+<div class="fixed inset-0 z-[120] bg-black/60 backdrop-blur-md flex items-center justify-center p-4 md:p-6 opacity-0 pointer-events-none transition-all duration-300" id="notificationCenterModal">
+  <div class="frosted-glass-card w-full max-w-lg rounded-3xl p-5 md:p-6 flex flex-col gap-4 shadow-2xl border border-white/15 max-h-[85vh] relative bg-black/95">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-white/15 pb-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 flex items-center justify-center">
+          <i data-lucide="bell" style="width:20px;height:20px;"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-base font-black text-[#fdf8e1] tracking-tight">Notification Center</h2>
+            <span id="notifCenterUnreadBadge" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500 text-slate-950">0 unread</span>
+          </div>
+          <p class="text-[11px] text-[#fdf8e1]/60">Real-time alerts, background tasks & pipeline events</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button type="button" class="px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-[11px] font-mono text-[#fdf8e1]/70 hover:text-[#fdf8e1] transition cursor-pointer" onclick="markAllNotificationsRead()" title="Mark all as read">
+          Mark all read
+        </button>
+        <button type="button" class="p-2 rounded-xl sleek-input hover:bg-white/10 text-[#fdf8e1]/60 hover:text-[#fdf8e1] transition cursor-pointer" onclick="closeNotificationCenter()">
+          <i data-lucide="x" style="width:18px;height:18px;"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Push Notification Status Strip -->
+    <div class="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10" id="notifPushPromoStrip">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center shrink-0">
+          <i data-lucide="smartphone" style="width:16px;height:16px;"></i>
+        </div>
+        <div class="leading-tight">
+          <span class="text-xs font-bold text-[#fdf8e1] block" id="notifPushPromoTitle">Browser & Device Push Alerts</span>
+          <span class="text-[10px] text-[#fdf8e1]/60 block" id="notifPushPromoDesc">Get notified on lock screen even when tab is closed</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" class="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-bold cursor-pointer transition shadow" id="notifEnablePushBtn" onclick="enablePushNotifications()">
+          Enable Push
+        </button>
+        <button type="button" class="p-1.5 rounded-lg border border-white/10 text-[#fdf8e1]/60 hover:text-white cursor-pointer" onclick="sendTestNotification()" title="Send Test Push">
+          <i data-lucide="send" style="width:13px;height:13px;"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 custom-scrollbar text-[11px] font-mono">
+      <button type="button" class="notif-filter-pill active px-3 py-1 rounded-full border border-cyan-500/40 bg-cyan-500/20 text-cyan-300 font-bold cursor-pointer transition" data-category="ALL" onclick="filterNotifications('ALL', this)">All</button>
+      <button type="button" class="notif-filter-pill px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[#fdf8e1]/70 hover:bg-white/10 font-bold cursor-pointer transition" data-category="RENDER" onclick="filterNotifications('RENDER', this)">Render</button>
+      <button type="button" class="notif-filter-pill px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[#fdf8e1]/70 hover:bg-white/10 font-bold cursor-pointer transition" data-category="PROJECT" onclick="filterNotifications('PROJECT', this)">Projects</button>
+      <button type="button" class="notif-filter-pill px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[#fdf8e1]/70 hover:bg-white/10 font-bold cursor-pointer transition" data-category="RELEASE" onclick="filterNotifications('RELEASE', this)">Releases</button>
+      <button type="button" class="notif-filter-pill px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[#fdf8e1]/70 hover:bg-white/10 font-bold cursor-pointer transition" data-category="SYSTEM" onclick="filterNotifications('SYSTEM', this)">System</button>
+    </div>
+
+    <!-- Notification List Scroll Container -->
+    <div class="flex flex-col gap-2 overflow-y-auto max-h-[48vh] custom-scrollbar pr-1" id="notificationListContainer">
+      <!-- Dynamically populated by renderNotificationList() -->
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="flex items-center justify-between pt-2 border-t border-white/10 text-[11px] font-mono text-[#fdf8e1]/50">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" id="sseLiveDot"></span>
+        <span id="sseLiveStatusText">Live SSE Connected</span>
+      </div>
+      <button type="button" class="hover:text-rose-400 transition cursor-pointer" onclick="clearNotificationHistory()">
+        Clear All History
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- RICH FOREGROUND TOAST BANNER (Interactive slide-in for active tab) -->
+<div class="fixed top-16 right-6 z-[110] max-w-sm w-full transform -translate-y-8 opacity-0 pointer-events-none transition-all duration-300" id="richNotifToast">
+  <div class="frosted-glass-card rounded-2xl p-4 shadow-2xl border border-cyan-500/40 bg-[#03050c]/95 backdrop-blur-xl flex flex-col gap-2.5 cursor-pointer hover:border-cyan-400 transition" onclick="handleRichToastClick(event)">
+    <div class="flex items-start justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded-md text-[9px] font-mono font-bold uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-500/30" id="richToastCategory">RENDER</span>
+        <span class="text-[10px] font-mono text-[#fdf8e1]/50" id="richToastTime">Just now</span>
+      </div>
+      <button type="button" class="p-1 rounded-md hover:bg-white/10 text-[#fdf8e1]/60 hover:text-white transition cursor-pointer" onclick="dismissRichToast(event)">
+        <i data-lucide="x" style="width:14px;height:14px;"></i>
+      </button>
+    </div>
+    <div class="flex items-start gap-3">
+      <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center shrink-0 mt-0.5" id="richToastIconBox">
+        <i data-lucide="clapperboard" style="width:16px;height:16px;"></i>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h4 class="text-xs font-black text-[#fdf8e1] truncate" id="richToastTitle">Notification Title</h4>
+        <p class="text-[11px] text-[#fdf8e1]/70 leading-snug line-clamp-2 mt-0.5" id="richToastBody">Notification message content.</p>
+      </div>
+    </div>
+    <div class="flex items-center justify-end gap-2 pt-1 border-t border-white/10 text-[10px] font-mono">
+      <span class="text-cyan-400 font-bold flex items-center gap-1 hover:underline">
+        <span>Open in Studio</span>
+        <i data-lucide="arrow-right" style="width:10px;height:10px;"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 frosted-glass-card px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 text-xs font-bold text-[#fdf8e1] flex items-center gap-3" id="toast">
 <i class="w-4 h-4 text-[#38bdf8]" data-lucide="info"></i>
 <span id="toastMessage">Notification</span>
-</div></div>
+</div>
+</div>
 
 <script>
     let videosData = [];
@@ -2143,23 +3391,721 @@ body {
     function switchSettingsTab(tab) {
       const ytBtn = document.getElementById('settingsTabYt');
       const igBtn = document.getElementById('settingsTabIg');
+      const remoteBtn = document.getElementById('settingsTabRemote');
       const ytContent = document.getElementById('settingsYtContent');
       const igContent = document.getElementById('settingsIgContent');
+      const remoteContent = document.getElementById('settingsRemoteContent');
 
-      if (!ytBtn || !igBtn) return;
+      if (!ytBtn || !igBtn || !remoteBtn) return;
 
-      if (tab === 'youtube') {
-        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#fdf8e1] text-black shadow-md cursor-pointer";
-        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer";
-        if (ytContent) ytContent.classList.remove('hidden');
-        if (igContent) igContent.classList.add('hidden');
-      } else {
-        igBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#111] border border-white/20 hover:bg-white/5 text-[#fdf8e1] shadow-md cursor-pointer";
-        ytBtn.className = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer";
-        if (igContent) igContent.classList.remove('hidden');
-        if (ytContent) ytContent.classList.add('hidden');
+      const activeClass = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 bg-[#fdf8e1] text-black shadow-md cursor-pointer";
+      const inactiveClass = "py-2.5 rounded-xl transition flex items-center justify-center gap-2 text-[#fdf8e1]/60 hover:text-[#fdf8e1] cursor-pointer";
+
+      ytBtn.className = tab === 'youtube' ? activeClass : inactiveClass;
+      igBtn.className = tab === 'instagram' ? activeClass : inactiveClass;
+      remoteBtn.className = tab === 'remote' ? activeClass : inactiveClass;
+
+      if (ytContent) ytContent.classList.toggle('hidden', tab !== 'youtube');
+      if (igContent) igContent.classList.toggle('hidden', tab !== 'instagram');
+      if (remoteContent) remoteContent.classList.toggle('hidden', tab !== 'remote');
+
+      if (tab === 'remote') {
+        loadRemoteAccessStatus();
       }
       safeCreateIcons();
+    }
+
+    // ═══════════════════════════════════════════════════
+    // REMOTE ACCESS & PERMISSION MANAGEMENT SYSTEM
+    // ═══════════════════════════════════════════════════
+
+    let currentAuthUser = null;
+    let remoteHeartbeatTimer = null;
+    let allRemoteInvites = [];
+    let lastGeneratedInvite = null;
+    let currentEditingInviteId = null;
+
+    const PERMISSION_DEFINITIONS = [
+      { id: 'VIEW_PROJECTS', name: 'View Projects & Library', desc: 'Browse video library, view metadata, transcripts, and timeline stages', danger: false },
+      { id: 'EDIT_PROJECTS', name: 'Edit Projects', desc: 'Edit video scripts, hook titles, tags, and category metadata', danger: false },
+      { id: 'CREATE_PROJECTS', name: 'Create & Duplicate Projects', desc: 'Scaffold new clips, clone existing projects, and create new drafts', danger: false },
+      { id: 'GENERATE', name: 'AI Asset Generation', desc: 'Generate voiceover audio, transcripts, and AI illustrations', danger: false },
+      { id: 'RENDER', name: 'Video Rendering Engine', desc: 'Trigger Remotion video rendering and preview still frames', danger: false },
+      { id: 'DOWNLOAD', name: 'Download Rendered MP4', desc: 'Download finalized high-definition video files directly to device', danger: false },
+      { id: 'UPLOAD', name: 'Channel Upload', desc: 'Upload videos as private drafts or unlisted media to YouTube & Instagram', danger: false },
+      { id: 'PUBLISH', name: 'Live Public Release', desc: 'Direct public release to subscribers across multi-destination channels', danger: true },
+      { id: 'DELETE_PROJECTS', name: 'Delete Projects', desc: 'Permanently delete projects and artifacts from disk', danger: true },
+      { id: 'MANAGE_INVITES', name: 'Manage Invites', desc: 'Generate, suspend, and revoke synthetic collaborator invite credentials', danger: false },
+      { id: 'MANAGE_SETTINGS', name: 'Manage Studio Settings', desc: 'View and configure Google Cloud client secrets and Instagram credentials', danger: true },
+      { id: 'REMOTE_ACCESS_CONTROL', name: 'Remote Access & Kill Switch', desc: 'Enable/disable remote transport and activate the Emergency Kill Switch', danger: true },
+    ];
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      return Promise.resolve();
+    }
+
+    async function initRemoteAuthAndPresence() {
+      try {
+        const res = await fetch('/api/remote/auth/me?t=' + Date.now());
+        const data = await res.json();
+
+        if (!data || !data.authenticated) {
+          // Unauthenticated remote visitor
+          const loginModal = document.getElementById('visitorLoginModal');
+          if (loginModal) {
+            loginModal.classList.remove('opacity-0', 'pointer-events-none');
+          }
+          return;
+        }
+
+        // Authenticated user (Local Owner or Authenticated Visitor)
+        currentAuthUser = data.user;
+        const loginModal = document.getElementById('visitorLoginModal');
+        if (loginModal) {
+          loginModal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // Update header user badge
+        const userBadge = document.getElementById('currentUserBadge');
+        const userLabel = document.getElementById('currentUserLabel');
+        const userDot = document.getElementById('currentUserDot');
+
+        if (userBadge && userLabel && userDot) {
+          userBadge.classList.remove('hidden');
+          userBadge.classList.add('flex');
+          if (currentAuthUser.role === 'OWNER' || currentAuthUser.isLocalOwner) {
+            userLabel.textContent = '👑 Host (Owner)';
+            userDot.className = 'w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#38bdf8]';
+          } else {
+            userLabel.textContent = `👤 ${currentAuthUser.label || currentAuthUser.email}`;
+            userDot.className = 'w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]';
+          }
+        }
+
+        if (typeof syncMobileAuthUI === 'function') syncMobileAuthUI();
+        if (typeof loadRemoteAccessStatus === 'function') loadRemoteAccessStatus();
+
+        // Apply client permissions
+        applyClientPermissions(currentAuthUser.permissions || [], currentAuthUser.role);
+
+        // Start heartbeat timer (every 25s)
+        if (remoteHeartbeatTimer) clearInterval(remoteHeartbeatTimer);
+        remoteHeartbeatTimer = setInterval(async () => {
+          try {
+            const hbRes = await fetch('/api/remote/heartbeat', { method: 'POST' });
+            if (hbRes.status === 401 || hbRes.status === 403) {
+              clearInterval(remoteHeartbeatTimer);
+              showToast('⚠️ Session expired or revoked by host.');
+              await initRemoteAuthAndPresence();
+            }
+          } catch (e) {
+            console.warn('Heartbeat notice:', e);
+          }
+        }, 25000);
+
+      } catch (err) {
+        console.error('Remote auth init error:', err);
+      }
+    }
+
+    async function handleVisitorLogin(e) {
+      if (e) e.preventDefault();
+      const email = document.getElementById('visitorLoginEmail')?.value.trim();
+      const password = document.getElementById('visitorLoginPassword')?.value;
+      const errorEl = document.getElementById('visitorLoginError');
+      const btn = document.getElementById('visitorLoginBtn');
+
+      if (!email || !password) {
+        if (errorEl) {
+          errorEl.textContent = 'Please enter both email and password.';
+          errorEl.classList.remove('hidden');
+        }
+        return;
+      }
+
+      if (errorEl) errorEl.classList.add('hidden');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Signing in...</span>`;
+        safeCreateIcons();
+      }
+
+      try {
+        const res = await fetch('/api/remote/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          throw new Error(data.error || 'Invalid credentials');
+        }
+
+        const loginModal = document.getElementById('visitorLoginModal');
+        if (loginModal) loginModal.classList.add('opacity-0', 'pointer-events-none');
+
+        showToast(`Signed in as ${data.user.label || data.user.email}!`);
+        await initRemoteAuthAndPresence();
+        if (typeof loadVideos === 'function') loadVideos();
+
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent = err.message;
+          errorEl.classList.remove('hidden');
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<i data-lucide="log-in" class="w-4 h-4"></i><span>Sign In to Studio</span>`;
+          safeCreateIcons();
+        }
+      }
+    }
+
+    async function handleLogout() {
+      try {
+        await fetch('/api/remote/auth/logout', { method: 'POST' });
+        showToast('Logged out.');
+        window.location.reload();
+      } catch (e) {
+        window.location.reload();
+      }
+    }
+
+    function handleUserBadgeClick() {
+      if (!currentAuthUser) return;
+      if (currentAuthUser.role === 'VISITOR') {
+        if (confirm(`Logged in as: ${currentAuthUser.email} (${currentAuthUser.label})\nRole: Collaborator\n\nDo you want to log out?`)) {
+          handleLogout();
+        }
+      } else {
+        openSettingsModal();
+        switchSettingsTab('remote');
+      }
+    }
+
+    function applyClientPermissions(perms, role) {
+      if (role === 'OWNER') return; // Owner has unrestricted access
+
+      const has = (p) => perms.includes(p);
+
+      // Settings visibility
+      const settingsBtn = document.getElementById('topNavSettingsBtn');
+      const tabYt = document.getElementById('settingsTabYt');
+      const tabIg = document.getElementById('settingsTabIg');
+      const tabRemote = document.getElementById('settingsTabRemote');
+
+      const canManageSettings = has('MANAGE_SETTINGS');
+      const canRemoteControl = has('REMOTE_ACCESS_CONTROL');
+
+      if (!canManageSettings && !canRemoteControl) {
+        if (settingsBtn) settingsBtn.classList.add('hidden');
+      } else {
+        if (settingsBtn) settingsBtn.classList.remove('hidden');
+        if (tabYt) tabYt.classList.toggle('hidden', !canManageSettings);
+        if (tabIg) tabIg.classList.toggle('hidden', !canManageSettings);
+        if (tabRemote) tabRemote.classList.toggle('hidden', !canRemoteControl);
+      }
+
+      // Publish / Upload buttons
+      const publishBtns = document.querySelectorAll('.btn-publish-platform');
+      publishBtns.forEach(btn => {
+        if (!has('PUBLISH') && !has('UPLOAD')) {
+          btn.disabled = true;
+          btn.title = 'No permission to publish or upload';
+          btn.style.opacity = '0.4';
+          btn.style.cursor = 'not-allowed';
+        }
+      });
+    }
+
+    async function loadRemoteAccessStatus() {
+      try {
+        const [statusRes, invitesRes, sessionsRes] = await Promise.all([
+          fetch('/api/remote/status?t=' + Date.now()),
+          fetch('/api/remote/invites?t=' + Date.now()),
+          fetch('/api/remote/sessions?t=' + Date.now()),
+        ]);
+
+        const status = statusRes.ok ? await statusRes.json() : null;
+        const invitesData = invitesRes.ok ? await invitesRes.json() : { invites: [] };
+        const sessionsData = sessionsRes.ok ? await sessionsRes.json() : { sessions: [] };
+
+        allRemoteInvites = invitesData.invites || [];
+
+        // 1. Status Banner & Public URL
+        const statusBadge = document.getElementById('remoteStatusBadge');
+        const enableBtn = document.getElementById('remoteEnableBtn');
+        const disableBtn = document.getElementById('remoteDisableBtn');
+        const publicCard = document.getElementById('remotePublicUrlCard');
+        const publicUrlInput = document.getElementById('remotePublicUrlInput');
+        const transportLabel = document.getElementById('remoteTransportLabel');
+
+        if (status && status.enabled) {
+          if (statusBadge) {
+            statusBadge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+            statusBadge.textContent = 'ONLINE';
+          }
+          if (enableBtn) enableBtn.classList.add('hidden');
+          if (disableBtn) disableBtn.classList.remove('hidden');
+
+          if (publicCard && (status.publicUrl || status.lanUrl)) {
+            publicCard.classList.remove('hidden');
+            publicCard.classList.add('flex');
+            const targetPublic = (status.isOwner && status.ownerPublicUrl) ? status.ownerPublicUrl : (status.publicUrl || status.lanUrl);
+            const targetLan = (status.isOwner && status.ownerLanUrl) ? status.ownerLanUrl : status.lanUrl;
+            if (publicUrlInput) publicUrlInput.value = targetPublic;
+            if (transportLabel) {
+              transportLabel.textContent = status.transportType === 'cloudflare'
+                ? 'Cloudflare Quick Tunnel (Worldwide HTTPS)'
+                : status.transportType === 'tailscale'
+                ? 'Tailscale Funnel (Direct End-to-End HTTPS)'
+                : 'Direct Local Network (LAN)';
+            }
+            const lanInput = document.getElementById('remoteLanUrlInput');
+            if (lanInput && targetLan) {
+              lanInput.value = targetLan;
+            }
+          }
+        } else {
+          if (statusBadge) {
+            statusBadge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-slate-800 text-slate-400 border border-slate-700';
+            statusBadge.textContent = 'OFFLINE';
+          }
+          if (enableBtn) enableBtn.classList.remove('hidden');
+          if (disableBtn) disableBtn.classList.add('hidden');
+          if (publicCard) {
+            publicCard.classList.add('hidden');
+            publicCard.classList.remove('flex');
+          }
+        }
+
+        if (typeof syncMobileRemoteUI === 'function') syncMobileRemoteUI(status);
+
+        // 2. Active Users Container
+        const activeContainer = document.getElementById('remoteActiveUsersContainer');
+        const activeBadge = document.getElementById('remoteActiveUsersCountBadge');
+        const activeList = (status && status.activeUsers) ? status.activeUsers : [];
+
+        if (activeBadge) activeBadge.textContent = activeList.length;
+
+        if (activeContainer) {
+          if (activeList.length === 0) {
+            activeContainer.innerHTML = `
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10 text-center text-xs text-[#fdf8e1]/50 font-mono">
+                No active remote users connected.
+              </div>
+            `;
+          } else {
+            activeContainer.innerHTML = activeList.map(u => {
+              const isMe = u.isCurrent;
+              const isOwner = u.role === 'OWNER';
+              return `
+                <div class="p-3 rounded-2xl border ${isMe ? 'border-cyan-500/40 bg-cyan-950/20' : 'border-white/10 bg-white/5'} flex items-center justify-between gap-3 shadow-md">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <div class="w-9 h-9 rounded-xl ${isOwner ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30' : 'bg-purple-500/15 text-purple-400 border border-purple-500/30'} flex items-center justify-center shrink-0">
+                      <i class="w-4 h-4" data-lucide="${isOwner ? 'shield' : 'user'}"></i>
+                    </div>
+                    <div class="min-w-0">
+                      <div class="flex items-center gap-2">
+                        <span class="text-xs font-black text-[#fdf8e1] truncate">${u.email || u.label}</span>
+                        <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold ${isOwner ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' : 'bg-purple-500/20 text-purple-300 border border-purple-500/30'}">${u.role}</span>
+                        ${isMe ? '<span class="px-1.5 py-0.5 rounded-full text-[8px] font-mono font-bold bg-white/20 text-white">YOU</span>' : ''}
+                      </div>
+                      <div class="text-[11px] text-[#fdf8e1]/60 font-mono mt-0.5 truncate">
+                        ${u.deviceLabel || 'Browser'} • ${u.ip} • <span class="${u.status === 'ONLINE' ? 'text-emerald-400 font-bold' : 'text-amber-400'}">${u.status}</span>
+                      </div>
+                    </div>
+                  </div>
+                  ${!isMe ? `
+                    <button type="button" onclick="revokeSession('${u.id}')" class="px-2.5 py-1 rounded-lg border border-rose-500/30 hover:bg-rose-500/20 text-rose-300 text-[11px] font-bold cursor-pointer transition shrink-0">
+                      Disconnect
+                    </button>
+                  ` : ''}
+                </div>
+              `;
+            }).join('');
+          }
+        }
+
+        // 3. Invites Container
+        const invitesContainer = document.getElementById('remoteInvitesContainer');
+        const invitesBadge = document.getElementById('remoteInvitesCountBadge');
+
+        if (invitesBadge) invitesBadge.textContent = allRemoteInvites.length;
+
+        if (invitesContainer) {
+          if (allRemoteInvites.length === 0) {
+            invitesContainer.innerHTML = `
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10 text-center text-xs text-[#fdf8e1]/50 font-mono">
+                No collaborator invites generated yet. Click "Generate Invite" to add one.
+              </div>
+            `;
+          } else {
+            invitesContainer.innerHTML = allRemoteInvites.map(inv => {
+              const statusClass = inv.status === 'ACTIVE'
+                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                : inv.status === 'SUSPENDED'
+                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                : inv.status === 'REVOKED'
+                ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                : 'bg-slate-700 text-slate-400';
+
+              return `
+                <div class="p-3.5 rounded-2xl border border-white/10 bg-white/5 flex flex-col gap-2.5 shadow-md">
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-xs font-black text-[#fdf8e1] truncate">${inv.label || 'Collaborator'}</span>
+                      <span class="text-[11px] font-mono text-cyan-400/90 truncate">${inv.email}</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold ${statusClass}">${inv.status}</span>
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-1">
+                    ${(inv.permissions || []).map(p => `
+                      <span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-white/5 text-[#fdf8e1]/70 border border-white/10">${p}</span>
+                    `).join('')}
+                  </div>
+
+                  <div class="flex items-center justify-between pt-1 border-t border-white/5 text-[10px] text-[#fdf8e1]/50 font-mono">
+                    <span>Created: ${new Date(inv.createdAt).toLocaleDateString()} ${inv.expiresAt ? `• Exp: ${new Date(inv.expiresAt).toLocaleDateString()}` : '• No Exp'}</span>
+                    <div class="flex items-center gap-2">
+                      <button type="button" class="text-cyan-400 hover:text-cyan-300 font-bold underline cursor-pointer" onclick="openPermissionsModal('${inv.id}')">
+                        Edit Perms
+                      </button>
+                      <span>•</span>
+                      <button type="button" class="${inv.status === 'ACTIVE' ? 'text-amber-400 hover:text-amber-300' : 'text-emerald-400 hover:text-emerald-300'} font-bold cursor-pointer" onclick="toggleInviteStatus('${inv.id}', '${inv.status}')">
+                        ${inv.status === 'ACTIVE' ? 'Suspend' : 'Activate'}
+                      </button>
+                      <span>•</span>
+                      <button type="button" class="text-rose-400 hover:text-rose-300 font-bold cursor-pointer" onclick="deleteInvite('${inv.id}')">
+                        Revoke
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+        }
+
+        safeCreateIcons();
+
+      } catch (err) {
+        console.error('Error loading remote status:', err);
+      }
+    }
+
+    async function enableRemoteAccess() {
+      showToast('🌐 Enabling Remote Access & secure transport...');
+      try {
+        const res = await fetch('/api/remote/enable', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transportType: 'auto' }),
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        showToast('Remote Access enabled!');
+        await loadRemoteAccessStatus();
+      } catch (err) {
+        showToast('Enable error: ' + err.message);
+      }
+    }
+
+    async function disableRemoteAccess() {
+      try {
+        const res = await fetch('/api/remote/disable', { method: 'POST' });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        showToast('Remote Access disabled.');
+        await loadRemoteAccessStatus();
+      } catch (err) {
+        showToast('Disable error: ' + err.message);
+      }
+    }
+
+    async function killAllRemoteAccess() {
+      if (!confirm('⚠️ EMERGENCY KILL SWITCH:\n\nThis will immediately disconnect all remote visitors, revoke all active sessions, and disable remote access.\n\nAre you sure you want to proceed?')) {
+        return;
+      }
+      try {
+        const res = await fetch('/api/remote/kill', { method: 'POST' });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        showToast('🚨 All remote visitor access terminated immediately.');
+        await loadRemoteAccessStatus();
+      } catch (err) {
+        showToast('Kill switch error: ' + err.message);
+      }
+    }
+
+    function copyPublicUrl() {
+      const input = document.getElementById('remotePublicUrlInput') || document.getElementById('mobileRemoteUrlInput');
+      if (!input || !input.value) return;
+      copyToClipboard(input.value);
+      showToast('📋 Public URL copied to clipboard!');
+    }
+
+    function copyLanUrl() {
+      const input = document.getElementById('remoteLanUrlInput') || document.getElementById('mobileRemoteLanUrlInput');
+      if (!input || !input.value) return;
+      copyToClipboard(input.value);
+      showToast('📋 Hotspot / Local LAN URL copied to clipboard!');
+    }
+
+    function fillRandomPassword() {
+      const chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%';
+      let pass = '';
+      for (let i = 0; i < 12; i++) {
+        pass += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      const passInput = document.getElementById('invitePasswordInput');
+      if (passInput) passInput.value = pass;
+    }
+
+    function openGenerateInviteModal() {
+      const modal = document.getElementById('generateInviteModal');
+      const formSection = document.getElementById('generateInviteFormSection');
+      const resultSection = document.getElementById('generateInviteResultSection');
+      const emailInput = document.getElementById('inviteEmailInput');
+      const passInput = document.getElementById('invitePasswordInput');
+      const labelInput = document.getElementById('inviteLabelInput');
+      const presetSelect = document.getElementById('invitePresetSelect');
+      const expSelect = document.getElementById('inviteExpirationSelect');
+      const errorEl = document.getElementById('generateInviteError');
+
+      if (emailInput) emailInput.value = '';
+      if (passInput) passInput.value = '';
+      if (labelInput) labelInput.value = '';
+      if (presetSelect) presetSelect.value = 'safe_editor';
+      if (expSelect) expSelect.value = '0';
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.classList.add('hidden');
+      }
+
+      if (formSection) formSection.classList.remove('hidden');
+      if (resultSection) resultSection.classList.add('hidden');
+
+      if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
+      safeCreateIcons();
+    }
+
+    function closeGenerateInviteModal() {
+      const modal = document.getElementById('generateInviteModal');
+      if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+      loadRemoteAccessStatus();
+    }
+
+    async function submitGenerateInvite() {
+      const emailInput = document.getElementById('inviteEmailInput');
+      const passInput = document.getElementById('invitePasswordInput');
+      const labelInput = document.getElementById('inviteLabelInput');
+      const presetSelect = document.getElementById('invitePresetSelect');
+      const expSelect = document.getElementById('inviteExpirationSelect');
+      const errorEl = document.getElementById('generateInviteError');
+
+      const email = emailInput?.value.trim() || undefined;
+      const password = passInput?.value.trim() || undefined;
+      const label = labelInput?.value.trim() || (email ? email.split('@')[0] : 'Collaborator');
+      const preset = presetSelect?.value || 'safe_editor';
+      const expiresInHours = parseInt(expSelect?.value || '0', 10);
+
+      if (errorEl) {
+        errorEl.textContent = '';
+        errorEl.classList.add('hidden');
+      }
+
+      try {
+        const res = await fetch('/api/remote/invites', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, label, preset, expiresInHours }),
+        });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || 'Failed to generate invite');
+
+        lastGeneratedInvite = data;
+
+        const formSection = document.getElementById('generateInviteFormSection');
+        const resultSection = document.getElementById('generateInviteResultSection');
+        const emailEl = document.getElementById('resultInviteEmail');
+        const passEl = document.getElementById('resultInvitePassword');
+        const urlEl = document.getElementById('resultInviteUrl');
+
+        if (emailEl) emailEl.textContent = data.credentials.email;
+        if (passEl) passEl.textContent = data.credentials.password;
+        if (urlEl) urlEl.textContent = data.publicUrl || window.location.origin;
+
+        if (formSection) formSection.classList.add('hidden');
+        if (resultSection) {
+          resultSection.classList.remove('hidden');
+          resultSection.classList.add('flex');
+        }
+
+        showToast('🎉 Credentials created successfully!');
+        safeCreateIcons();
+        loadRemoteAccessStatus();
+
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent = err.message;
+          errorEl.classList.remove('hidden');
+        }
+        showToast('Error: ' + err.message);
+      }
+    }
+
+    function copyResultCredentials() {
+      if (!lastGeneratedInvite) return;
+      const text = `RightMotion Studio Remote Access Credentials\nURL: ${lastGeneratedInvite.publicUrl || window.location.origin}\nEmail: ${lastGeneratedInvite.credentials.email}\nPassword: ${lastGeneratedInvite.credentials.password}`;
+      copyToClipboard(text);
+      showToast('📋 Credentials copied to clipboard!');
+    }
+
+    function copyResultInviteLink() {
+      if (!lastGeneratedInvite) return;
+      const url = lastGeneratedInvite.publicUrl || window.location.origin;
+      copyToClipboard(url);
+      showToast('📋 Public link copied to clipboard!');
+    }
+
+    function openPermissionsModal(inviteId) {
+      const invite = allRemoteInvites.find(i => i.id === inviteId);
+      if (!invite) return;
+
+      currentEditingInviteId = inviteId;
+      const emailEl = document.getElementById('permModalInviteEmail');
+      const listEl = document.getElementById('permissionsCheckboxList');
+      const modal = document.getElementById('managePermissionsModal');
+
+      if (emailEl) {
+        emailEl.textContent = `${invite.email} (${invite.label || 'Invite'})`;
+      }
+
+      const userPerms = invite.permissions || [];
+
+      if (listEl) {
+        listEl.innerHTML = PERMISSION_DEFINITIONS.map(p => {
+          const checked = userPerms.includes(p.id);
+          return `
+            <label class="p-2.5 rounded-xl border ${p.danger ? 'border-amber-500/30 bg-amber-500/5' : 'border-white/10 bg-white/5'} hover:bg-white/10 flex items-center justify-between gap-3 cursor-pointer transition">
+              <div class="flex flex-col gap-0.5">
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-[#fdf8e1]">${p.name}</span>
+                  ${p.danger ? '<span class="px-1.5 py-0.5 rounded text-[8px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">DANGEROUS</span>' : ''}
+                </div>
+                <p class="text-[10px] text-[#fdf8e1]/60">${p.desc}</p>
+              </div>
+              <input type="checkbox" value="${p.id}" ${checked ? 'checked' : ''} class="perm-checkbox w-4 h-4 rounded text-cyan-500 accent-cyan-500 cursor-pointer" />
+            </label>
+          `;
+        }).join('');
+      }
+
+      if (modal) modal.classList.remove('opacity-0', 'pointer-events-none');
+      safeCreateIcons();
+    }
+
+    function closePermissionsModal() {
+      const modal = document.getElementById('managePermissionsModal');
+      if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    async function savePermissions() {
+      if (!currentEditingInviteId) return;
+      const checkboxes = document.querySelectorAll('.perm-checkbox:checked');
+      const permissions = Array.from(checkboxes).map(cb => cb.value);
+
+      try {
+        const res = await fetch(`/api/remote/invites/${currentEditingInviteId}/permissions`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ permissions }),
+        });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || 'Failed to update permissions');
+
+        showToast('Permissions updated and applied in real-time!');
+        closePermissionsModal();
+        await loadRemoteAccessStatus();
+
+      } catch (err) {
+        showToast('Error: ' + err.message);
+      }
+    }
+
+    async function toggleInviteStatus(id, currentStatus) {
+      const newStatus = currentStatus === 'ACTIVE' ? 'SUSPENDED' : 'ACTIVE';
+      try {
+        const res = await fetch(`/api/remote/invites/${id}/status`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus }),
+        });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || 'Failed to update status');
+
+        showToast(`Invite ${newStatus === 'ACTIVE' ? 'activated' : 'suspended'}.`);
+        await loadRemoteAccessStatus();
+      } catch (err) {
+        showToast('Error: ' + err.message);
+      }
+    }
+
+    async function deleteInvite(id) {
+      if (!confirm('Permanently revoke and delete this invite? Any active visitor sessions will be terminated.')) {
+        return;
+      }
+      try {
+        const res = await fetch(`/api/remote/invites/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || 'Failed to delete invite');
+
+        showToast('Invite deleted.');
+        await loadRemoteAccessStatus();
+      } catch (err) {
+        showToast('Error: ' + err.message);
+      }
+    }
+
+    async function revokeSession(sessionId) {
+      try {
+        const res = await fetch(`/api/remote/sessions/${sessionId}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || 'Failed to revoke session');
+
+        showToast('Session disconnected.');
+        await loadRemoteAccessStatus();
+      } catch (err) {
+        showToast('Error: ' + err.message);
+      }
+    }
+
+    async function revokeAllVisitors() {
+      if (!confirm('Revoke all visitor sessions? Remote users will be logged out immediately.')) {
+        return;
+      }
+      try {
+        const res = await fetch('/api/remote/sessions', { method: 'DELETE' });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || 'Failed to revoke sessions');
+
+        showToast('All visitor sessions revoked.');
+        await loadRemoteAccessStatus();
+      } catch (err) {
+        showToast('Error: ' + err.message);
+      }
     }
 
     // ═══════════════════════════════════════════════════
@@ -2170,6 +4116,7 @@ body {
       modal.classList.remove('opacity-0', 'pointer-events-none');
       await loadSettingsStatus();
       await checkInstagramStatus();
+      await loadRemoteAccessStatus();
       safeCreateIcons();
     }
 
@@ -3073,10 +5020,18 @@ body {
         updateTabCounts();
         renderVideoList();
         loadPipeline(activeNicheFilter);
+        window.videosData = videosData;
+        window.byNicheData = byNicheData;
 
-        // Select first item if none selected
+        // Check URL deep link (?clip=...&tab=...) before defaulting
+        let deepLinkHandled = false;
+        if (typeof handleUrlDeepLink === 'function') {
+          deepLinkHandled = handleUrlDeepLink();
+        }
+
+        // Select first item if none selected and not handled by deep link
         const currentNicheList = byNicheData[activeNicheFilter] || [];
-        if (currentNicheList.length > 0 && !selectedVideo) {
+        if (!deepLinkHandled && currentNicheList.length > 0 && !selectedVideo) {
           selectVideo(currentNicheList[0].filename);
         }
       } catch (err) {
@@ -3372,6 +5327,7 @@ body {
 
       selectedVideo = videosData.find(v => v.filename === filename);
       if (!selectedVideo) return;
+      window.selectedVideo = selectedVideo;
 
       const activeTitleEl = document.getElementById('activeVideoTitle');
       if (activeTitleEl) activeTitleEl.textContent = selectedVideo.meta?.title || selectedVideo.filename;
@@ -3885,22 +5841,31 @@ body {
     if (metaTitleEl) metaTitleEl.addEventListener('input', updateTitleCharCount);
 
     // Tags UI
-        function updateTagsUI() {
+    function updateTagsUI() {
       const container = document.getElementById('tagsContainer');
-      const input = document.getElementById('tagInput');
-      if (!container || !input) return;
+      if (!container) return;
+      let input = document.getElementById('tagInput');
+      if (!input) {
+        input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'tagInput';
+        input.className = 'bg-transparent border-none text-[10px] text-[#fdf8e1] focus:outline-none flex-1 min-w-[70px] p-1 font-mono placeholder-[#fdf8e1]/40';
+        input.placeholder = '+ Add tag';
+        container.appendChild(input);
+      }
       
       container.querySelectorAll('.tag-chip').forEach((c) => c.remove());
 
       currentTags.forEach((tag, idx) => {
         const chip = document.createElement('span');
-        chip.className = 'tag-chip px-2.5 py-1 rounded-xl bg-white border border-slate-200 shadow-sm text-[11px] font-mono font-bold text-slate-700 flex items-center gap-1.5';
+        chip.className = 'tag-chip px-2 py-0.5 rounded-lg bg-white/10 border border-white/15 text-[10px] font-mono font-bold text-[#fdf8e1] flex items-center gap-1';
         chip.innerHTML = `
           <span>#${tag}</span>
-          <button onclick="removeTag(${idx})" class="text-slate-400 hover:text-rose-500 font-bold ml-0.5">×</button>
+          <button type="button" onclick="removeTag(${idx})" class="text-white/40 hover:text-rose-400 font-bold ml-0.5 cursor-pointer">×</button>
         `;
         container.insertBefore(chip, input);
       });
+      if (typeof updateMobileTagsUI === 'function') updateMobileTagsUI();
     }
 
     function removeTag(index) {
@@ -3908,9 +5873,9 @@ body {
       updateTagsUI();
     }
 
-    const tagInputEl = document.getElementById('tagInput');
-    if (tagInputEl) {
-      tagInputEl.addEventListener('keydown', (e) => {
+    // Attach delegated listener or dynamic listener for tag input
+    document.addEventListener('keydown', (e) => {
+      if (e.target && e.target.id === 'tagInput') {
         if (e.key === 'Enter' || e.key === ',') {
           e.preventDefault();
           const val = e.target.value.trim().replace(/^#/, '');
@@ -3920,20 +5885,20 @@ body {
             e.target.value = '';
           }
         }
-      });
-    }
+      }
+    });
 
     // Save Metadata Draft
     async function saveMetadataOnly() {
       if (!selectedVideo) return;
       const metadata = {
-        topic: selectedVideo.metadata.topic,
-        title: document.getElementById('editTitle').value.trim(),
-        description: document.getElementById('metaDescription').value.trim(),
-        tags: currentTags,
-        categoryId: document.getElementById('metaCategory').value,
-        privacyStatus: document.getElementById('metaPrivacy').value,
-        pinnedComment: document.getElementById('metaPinnedComment')?.value.trim() || '',
+        topic: selectedVideo.metadata?.topic || selectedVideo.meta?.topic || selectedVideo.filename.replace('.mp4', ''),
+        title: document.getElementById('editTitle')?.value?.trim() || selectedVideo.metadata?.title || selectedVideo.filename,
+        description: document.getElementById('metaDescription')?.value?.trim() || document.getElementById('metaPinnedComment')?.value?.trim() || selectedVideo.metadata?.description || '',
+        tags: (Array.isArray(currentTags) && currentTags.length > 0) ? currentTags : (selectedVideo.metadata?.tags || ['Shorts']),
+        categoryId: document.getElementById('metaCategory')?.value || selectedVideo.metadata?.categoryId || '27',
+        privacyStatus: document.getElementById('metaPrivacy')?.value || selectedVideo.metadata?.privacyStatus || 'public',
+        pinnedComment: document.getElementById('metaPinnedComment')?.value?.trim() || '',
       };
 
       try {
@@ -4371,7 +6336,10 @@ body {
     }
 
     async function executeMultiPlatformPublish() {
-      if (!selectedVideo) return;
+      if (!selectedVideo) {
+        showToast('⚠️ Please select a video from the library first');
+        return;
+      }
 
       const selectedYtChannelIds = Array.from(document.querySelectorAll('.modal-yt-channel-cb:checked')).map(cb => cb.value);
       const selectedIgUsernames = Array.from(document.querySelectorAll('.modal-ig-account-cb:checked')).map(cb => cb.value);
@@ -4385,22 +6353,22 @@ body {
       if (selectedYtChannelIds.length > 0) platforms.push('youtube');
       if (selectedIgUsernames.length > 0) platforms.push('instagram');
 
-      const title = document.getElementById('editTitle').value.trim() || selectedVideo.filename;
-      const description = document.getElementById('metaDescription').value.trim() || '';
-      const tags = currentTags;
-      const categoryId = document.getElementById('metaCategory')?.value || '27';
+      const title = document.getElementById('editTitle')?.value?.trim() || selectedVideo.metadata?.title || selectedVideo.meta?.title || selectedVideo.filename;
+      const description = document.getElementById('metaDescription')?.value?.trim() || document.getElementById('metaPinnedComment')?.value?.trim() || selectedVideo.metadata?.description || selectedVideo.meta?.description || '';
+      const tags = (Array.isArray(currentTags) && currentTags.length > 0) ? currentTags : (selectedVideo.metadata?.tags || selectedVideo.meta?.tags || ['Shorts']);
+      const categoryId = document.getElementById('metaCategory')?.value || selectedVideo.metadata?.categoryId || selectedVideo.meta?.categoryId || '27';
       const shareToFeed = document.getElementById('modalIgShareToFeed')?.checked ?? true;
 
       let publishAt = null;
       if (currentModalTiming === 'schedule') {
-        const scheduleVal = document.getElementById('modalScheduleDateTime').value;
+        const scheduleVal = document.getElementById('modalScheduleDateTime')?.value || document.getElementById('scheduleDateTime')?.value;
         if (!scheduleVal) {
-          showToast('Please pick a date & time for scheduling.');
+          showToast('⚠️ Please pick a date & time for scheduling.');
           return;
         }
         const schedDate = new Date(scheduleVal);
         if (schedDate.getTime() <= Date.now() + 60 * 1000) {
-          showToast('Scheduled time must be at least 2 minutes in future.');
+          showToast('⚠️ Scheduled time must be at least 2 minutes in future.');
           return;
         }
         publishAt = schedDate.toISOString();
@@ -4414,12 +6382,13 @@ body {
       const percentText = document.getElementById('uploadPercentText');
       const resultLink = document.getElementById('uploadResultLink');
 
-      progressCard.classList.remove('hidden');
-      resultLink.classList.add('hidden');
-      stageText.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Initializing multi-destination release...`;
-      percentText.textContent = `5%`;
-      progressBar.style.width = `5%`;
+      if (progressCard) progressCard.classList.remove('hidden');
+      if (resultLink) resultLink.classList.add('hidden');
+      if (stageText) stageText.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Initializing multi-destination release...`;
+      if (percentText) percentText.textContent = `5%`;
+      if (progressBar) progressBar.style.width = `5%`;
       safeCreateIcons();
+      showToast(currentModalTiming === 'schedule' ? '⏳ Scheduling release on Google Cloud Queue...' : '🚀 Publishing to selected destinations...');
 
       try {
         const res = await fetch('/api/publish-multi', {
@@ -4438,7 +6407,7 @@ body {
               tags,
               categoryId,
               privacyStatus: currentModalTiming === 'draft' ? 'private' : 'public',
-              pinnedComment: document.getElementById('metaPinnedComment')?.value.trim() || '',
+              pinnedComment: document.getElementById('metaPinnedComment')?.value?.trim() || '',
               autoPostComment: document.getElementById('autoPostCommentCheck')?.checked ?? true,
             },
             instagram: {
@@ -4452,77 +6421,83 @@ body {
         if (data.error) throw new Error(data.error);
 
         const pollInterval = setInterval(async () => {
-          const statusRes = await fetch('/api/upload-status');
-          const statusData = await statusRes.json();
+          try {
+            const statusRes = await fetch('/api/upload-status');
+            const statusData = await statusRes.json();
 
-          stageText.innerHTML = `
-            <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
-            ${statusData.stage || 'Publishing in progress...'}
-          `;
-          percentText.textContent = `${statusData.progress || 0}%`;
-          progressBar.style.width = `${statusData.progress || 0}%`;
-          safeCreateIcons();
-
-          if (!statusData.inProgress) {
-            clearInterval(pollInterval);
-
-            if (statusData.error) {
-              stageText.innerHTML = `<span class="text-rose-400">❌ ${statusData.error}</span>`;
-              showToast('Publishing failed: ' + statusData.error);
-            } else {
-              stageText.innerHTML = `<span class="text-[#fdf8e1]/80">🎉 Multi-Platform Publishing Succeeded!</span>`;
-              resultLink.classList.remove('hidden');
-
-              let linksHtml = '';
-
-              // Multi-Channel YouTube Links
-              if (statusData.result?.channels) {
-                Object.values(statusData.result.channels).forEach(ch => {
-                  const url = ch.shortsUrl || ch.youtubeUrl;
-                  linksHtml += `
-                    <a href="${url}" target="_blank" class="hover:underline flex items-center gap-1.5 text-[#fdf8e1]/80 font-extrabold">
-                      <i data-lucide="play" class="w-3.5 h-3.5"></i> ${ch.channelTitle || 'YouTube'}: ${url} ${ch.isScheduled ? '(Scheduled)' : ''}
-                    </a>
-                  `;
-                });
-              } else if (statusData.result?.youtube) {
-                const yt = statusData.result.youtube;
-                const ytUrl = selectedVideo.isLongForm ? yt.youtubeUrl : (yt.shortsUrl || yt.youtubeUrl);
-                linksHtml += `
-                  <a href="${ytUrl}" target="_blank" class="hover:underline flex items-center gap-1.5 text-[#fdf8e1]/80 font-extrabold">
-                    <i data-lucide="play" class="w-3.5 h-3.5"></i> YouTube: ${ytUrl} ${yt.isScheduled ? '(Scheduled)' : ''}
-                  </a>
-                `;
-              }
-
-              // Multi-Account Instagram Links
-              if (statusData.result?.instagramAccounts) {
-                Object.values(statusData.result.instagramAccounts).forEach(acc => {
-                  linksHtml += `
-                    <a href="${acc.reelUrl || 'https://instagram.com'}" target="_blank" class="hover:underline flex items-center gap-1.5 text-[#fdf8e1]/80 font-extrabold">
-                      <i data-lucide="camera" class="w-3.5 h-3.5"></i> @${acc.username}: ${acc.reelUrl || 'Reel Published'}
-                    </a>
-                  `;
-                });
-              } else if (statusData.result?.instagram) {
-                const ig = statusData.result.instagram;
-                linksHtml += `
-                  <a href="${ig.reelUrl || 'https://instagram.com'}" target="_blank" class="hover:underline flex items-center gap-1.5 text-[#fdf8e1]/80 font-extrabold">
-                    <i data-lucide="camera" class="w-3.5 h-3.5"></i> Instagram Reel: ${ig.reelUrl || 'Scheduled'}
-                  </a>
-                `;
-              }
-
-              resultLink.innerHTML = linksHtml;
-              showToast('🎉 Successfully processed multi-destination release!');
-              safeCreateIcons();
-              await loadVideos();
+            if (stageText) {
+              stageText.innerHTML = `
+                <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i>
+                ${statusData.stage || 'Publishing in progress...'}
+              `;
             }
+            if (percentText) percentText.textContent = `${statusData.progress || 0}%`;
+            if (progressBar) progressBar.style.width = `${statusData.progress || 0}%`;
+            safeCreateIcons();
+
+            if (!statusData.inProgress) {
+              clearInterval(pollInterval);
+
+              if (statusData.error) {
+                if (stageText) stageText.innerHTML = `<span class="text-rose-400 font-bold">❌ ${statusData.error}</span>`;
+                showToast('Publishing failed: ' + statusData.error);
+              } else {
+                if (stageText) stageText.innerHTML = `<span class="text-[#fdf8e1] font-extrabold">🎉 Multi-Platform Release Complete!</span>`;
+                if (resultLink) resultLink.classList.remove('hidden');
+
+                let linksHtml = '';
+
+                // Multi-Channel YouTube Links
+                if (statusData.result?.channels) {
+                  Object.values(statusData.result.channels).forEach(ch => {
+                    const url = ch.shortsUrl || ch.youtubeUrl;
+                    linksHtml += `
+                      <a href="${url}" target="_blank" class="hover:underline flex items-center gap-1.5 text-sky-300 font-extrabold">
+                        <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> ${ch.channelTitle || 'YouTube'}: ${url} ${ch.isScheduled ? '(Scheduled)' : ''}
+                      </a>
+                    `;
+                  });
+                } else if (statusData.result?.youtube) {
+                  const yt = statusData.result.youtube;
+                  const ytUrl = selectedVideo.isLongForm ? yt.youtubeUrl : (yt.shortsUrl || yt.youtubeUrl);
+                  linksHtml += `
+                    <a href="${ytUrl}" target="_blank" class="hover:underline flex items-center gap-1.5 text-sky-300 font-extrabold">
+                      <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> YouTube: ${ytUrl} ${yt.isScheduled ? '(Scheduled)' : ''}
+                    </a>
+                  `;
+                }
+
+                // Multi-Account Instagram Links
+                if (statusData.result?.instagramAccounts) {
+                  Object.values(statusData.result.instagramAccounts).forEach(acc => {
+                    linksHtml += `
+                      <a href="${acc.reelUrl || 'https://instagram.com'}" target="_blank" class="hover:underline flex items-center gap-1.5 text-pink-300 font-extrabold">
+                        <i data-lucide="camera" class="w-3.5 h-3.5 text-pink-400"></i> @${acc.username}: ${acc.reelUrl || 'Reel Published'}
+                      </a>
+                    `;
+                  });
+                } else if (statusData.result?.instagram) {
+                  const ig = statusData.result.instagram;
+                  linksHtml += `
+                    <a href="${ig.reelUrl || 'https://instagram.com'}" target="_blank" class="hover:underline flex items-center gap-1.5 text-pink-300 font-extrabold">
+                      <i data-lucide="camera" class="w-3.5 h-3.5 text-pink-400"></i> Instagram Reel: ${ig.reelUrl || 'Scheduled'}
+                    </a>
+                  `;
+                }
+
+                if (resultLink) resultLink.innerHTML = linksHtml;
+                showToast('🎉 Successfully processed multi-destination release!');
+                safeCreateIcons();
+                await loadVideos();
+              }
+            }
+          } catch (pollErr) {
+            console.warn('Poll error:', pollErr);
           }
         }, 1200);
 
       } catch (err) {
-        stageText.innerHTML = `<span class="text-rose-400">❌ ${err.message}</span>`;
+        if (stageText) stageText.innerHTML = `<span class="text-rose-400 font-bold">❌ ${err.message}</span>`;
         showToast('Error: ' + err.message);
       }
     }
@@ -4760,6 +6735,7 @@ body {
     // ========================================================
     async function fetchSystemHealth() {
       const badgeText = document.getElementById('systemHealthText');
+      const mobileBadgeText = document.getElementById('mobileSystemHealthText');
       try {
         const res = await fetch('/api/system/health');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -4767,9 +6743,13 @@ body {
         if (badgeText) {
           badgeText.textContent = `ONLINE (v${data.version})`;
         }
+        if (mobileBadgeText) {
+          mobileBadgeText.textContent = `ONLINE v${data.version}`;
+        }
         showToast(`⚡ Engine Active: ${data.clipsCount} clips • ${data.renderedCount} rendered • 21 tactical memes`);
       } catch (err) {
         if (badgeText) badgeText.textContent = 'STANDBY';
+        if (mobileBadgeText) mobileBadgeText.textContent = 'STANDBY';
         console.warn('System health ping failed:', err);
       }
     }
@@ -4787,8 +6767,16 @@ body {
       return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${String(ms).padStart(2, '0')}`;
     }
 
+    function getActivePlayer() {
+      if (window.innerWidth < 1024) {
+        const mp = document.getElementById('mobileVideoPlayer');
+        if (mp && mp.src) return mp;
+      }
+      return document.getElementById('videoPlayer');
+    }
+
     function toggleTransportPlay() {
-      const player = document.getElementById('videoPlayer');
+      const player = getActivePlayer();
       if (!player || !player.src) return;
       if (player.paused) {
         player.play().catch(e => console.warn('Play interrupted:', e));
@@ -4798,8 +6786,9 @@ body {
     }
 
     function toggleTransportLoop() {
-      const player = document.getElementById('videoPlayer');
+      const player = getActivePlayer();
       const loopBtn = document.getElementById('transportLoopBtn');
+      const mobileLoopBtn = document.getElementById('mobileLoopBtn');
       if (!player) return;
       player.loop = !player.loop;
       if (loopBtn) {
@@ -4811,10 +6800,19 @@ body {
           loopBtn.classList.add('surface-recessed', 'text-slate-600');
         }
       }
+      if (mobileLoopBtn) {
+        if (player.loop) {
+          mobileLoopBtn.style.color = '#38bdf8';
+          mobileLoopBtn.style.background = 'rgba(56, 189, 248, 0.2)';
+        } else {
+          mobileLoopBtn.style.color = '';
+          mobileLoopBtn.style.background = '';
+        }
+      }
     }
 
     function toggleTransportMute() {
-      const player = document.getElementById('videoPlayer');
+      const player = getActivePlayer();
       const muteIcon = document.getElementById('transportMuteIcon');
       if (!player) return;
       player.muted = !player.muted;
@@ -4825,7 +6823,7 @@ body {
     }
 
     function transportStep(frames) {
-      const player = document.getElementById('videoPlayer');
+      const player = getActivePlayer();
       if (!player) return;
       player.pause();
       const fps = 60;
@@ -4845,70 +6843,153 @@ body {
       const frameCount = document.getElementById('transportFrameCount');
       const playIcon = document.getElementById('transportPlayIcon');
 
-      if (!player) return;
+      if (player) {
+        player.addEventListener('click', toggleTransportPlay);
 
-      player.addEventListener('click', toggleTransportPlay);
-
-      player.addEventListener('play', () => {
-        if (playIcon) {
-          playIcon.setAttribute('data-lucide', 'pause');
-          playIcon.classList.remove('translate-x-0.5');
-          safeCreateIcons();
-        }
-      });
-
-      player.addEventListener('pause', () => {
-        if (playIcon) {
-          playIcon.setAttribute('data-lucide', 'play');
-          playIcon.classList.add('translate-x-0.5');
-          safeCreateIcons();
-        }
-      });
-
-      player.addEventListener('loadedmetadata', () => {
-        if (duration) duration.textContent = formatTimecode(player.duration);
-        if (timecode) timecode.textContent = '00:00.00';
-        if (frameCount) frameCount.textContent = 'f: 0';
-        if (progress) progress.style.width = '0%';
-        if (scrubber) scrubber.style.left = '0%';
-      });
-
-      player.addEventListener('timeupdate', () => {
-        if (isScrubbing) return;
-        const cur = player.currentTime;
-        const dur = player.duration || 1;
-        const pct = Math.min(100, Math.max(0, (cur / dur) * 100));
-
-        if (timecode) timecode.textContent = formatTimecode(cur);
-        if (frameCount) frameCount.textContent = `f: ${Math.floor(cur * 60)}`;
-        if (progress) progress.style.width = `${pct}%`;
-        if (scrubber) scrubber.style.left = `${pct}%`;
-      });
-
-      if (track) {
-        function handleScrub(e) {
-          if (!player.duration) return;
-          const rect = track.getBoundingClientRect();
-          const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-          player.currentTime = pos * player.duration;
-          if (progress) progress.style.width = `${pos * 100}%`;
-          if (scrubber) scrubber.style.left = `${pos * 100}%`;
-          if (timecode) timecode.textContent = formatTimecode(player.currentTime);
-          if (frameCount) frameCount.textContent = `f: ${Math.floor(player.currentTime * 60)}`;
-        }
-
-        track.addEventListener('mousedown', (e) => {
-          isScrubbing = true;
-          handleScrub(e);
-          function onMove(ev) { handleScrub(ev); }
-          function onUp() {
-            isScrubbing = false;
-            window.removeEventListener('mousemove', onMove);
-            window.removeEventListener('mouseup', onUp);
+        player.addEventListener('play', () => {
+          if (playIcon) {
+            playIcon.setAttribute('data-lucide', 'pause');
+            playIcon.classList.remove('translate-x-0.5');
+            safeCreateIcons();
           }
-          window.addEventListener('mousemove', onMove);
-          window.addEventListener('mouseup', onUp);
         });
+
+        player.addEventListener('pause', () => {
+          if (playIcon) {
+            playIcon.setAttribute('data-lucide', 'play');
+            playIcon.classList.add('translate-x-0.5');
+            safeCreateIcons();
+          }
+        });
+
+        player.addEventListener('loadedmetadata', () => {
+          if (duration) duration.textContent = formatTimecode(player.duration);
+          if (timecode) timecode.textContent = '00:00.00';
+          if (frameCount) frameCount.textContent = 'f: 0';
+          if (progress) progress.style.width = '0%';
+          if (scrubber) scrubber.style.left = '0%';
+        });
+
+        player.addEventListener('timeupdate', () => {
+          if (isScrubbing) return;
+          const cur = player.currentTime;
+          const dur = player.duration || 1;
+          const pct = Math.min(100, Math.max(0, (cur / dur) * 100));
+
+          if (timecode) timecode.textContent = formatTimecode(cur);
+          if (frameCount) frameCount.textContent = `f: ${Math.floor(cur * 60)}`;
+          if (progress) progress.style.width = `${pct}%`;
+          if (scrubber) scrubber.style.left = `${pct}%`;
+        });
+
+        if (track) {
+          function handleScrub(e) {
+            if (!player.duration) return;
+            const rect = track.getBoundingClientRect();
+            const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            player.currentTime = pos * player.duration;
+            if (progress) progress.style.width = `${pos * 100}%`;
+            if (scrubber) scrubber.style.left = `${pos * 100}%`;
+            if (timecode) timecode.textContent = formatTimecode(player.currentTime);
+            if (frameCount) frameCount.textContent = `f: ${Math.floor(player.currentTime * 60)}`;
+          }
+
+          track.addEventListener('mousedown', (e) => {
+            isScrubbing = true;
+            handleScrub(e);
+            function onMove(ev) { handleScrub(ev); }
+            function onUp() {
+              isScrubbing = false;
+              window.removeEventListener('mousemove', onMove);
+              window.removeEventListener('mouseup', onUp);
+            }
+            window.addEventListener('mousemove', onMove);
+            window.addEventListener('mouseup', onUp);
+          });
+        }
+      }
+
+      // Mobile Video Player & Scrubber Setup
+      const mobilePlayer = document.getElementById('mobileVideoPlayer');
+      const mobileTrack = document.getElementById('mobileTimelineTrack');
+      const mobileProgress = document.getElementById('mobileTimelineProgress');
+      const mobileScrubber = document.getElementById('mobileTimelineScrubber');
+      const mobileTimecode = document.getElementById('mobileTransportTimecode');
+      const mobileDuration = document.getElementById('mobileTransportDuration');
+      const mobilePlayIcon = document.getElementById('mobilePlayIcon');
+
+      if (mobilePlayer) {
+        mobilePlayer.addEventListener('play', () => {
+          if (mobilePlayIcon) {
+            mobilePlayIcon.setAttribute('data-lucide', 'pause');
+            safeCreateIcons();
+          }
+        });
+
+        mobilePlayer.addEventListener('pause', () => {
+          if (mobilePlayIcon) {
+            mobilePlayIcon.setAttribute('data-lucide', 'play');
+            safeCreateIcons();
+          }
+        });
+
+        mobilePlayer.addEventListener('loadedmetadata', () => {
+          if (mobileDuration) mobileDuration.textContent = formatTimecode(mobilePlayer.duration);
+          if (mobileTimecode) mobileTimecode.textContent = '00:00.00';
+          if (mobileProgress) mobileProgress.style.width = '0%';
+          if (mobileScrubber) mobileScrubber.style.left = '0%';
+        });
+
+        mobilePlayer.addEventListener('timeupdate', () => {
+          if (isScrubbing) return;
+          const cur = mobilePlayer.currentTime;
+          const dur = mobilePlayer.duration || 1;
+          const pct = Math.min(100, Math.max(0, (cur / dur) * 100));
+
+          if (mobileTimecode) mobileTimecode.textContent = formatTimecode(cur);
+          if (mobileProgress) mobileProgress.style.width = `${pct}%`;
+          if (mobileScrubber) mobileScrubber.style.left = `${pct}%`;
+        });
+
+        if (mobileTrack) {
+          function handleMobileScrub(clientX) {
+            if (!mobilePlayer.duration) return;
+            const rect = mobileTrack.getBoundingClientRect();
+            const pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+            mobilePlayer.currentTime = pos * mobilePlayer.duration;
+            if (mobileProgress) mobileProgress.style.width = `${pos * 100}%`;
+            if (mobileScrubber) mobileScrubber.style.left = `${pos * 100}%`;
+            if (mobileTimecode) mobileTimecode.textContent = formatTimecode(mobilePlayer.currentTime);
+          }
+
+          mobileTrack.addEventListener('touchstart', (e) => {
+            if (!e.touches || !e.touches[0]) return;
+            isScrubbing = true;
+            handleMobileScrub(e.touches[0].clientX);
+          }, { passive: true });
+
+          window.addEventListener('touchmove', (e) => {
+            if (!isScrubbing || !e.touches || !e.touches[0]) return;
+            handleMobileScrub(e.touches[0].clientX);
+          }, { passive: true });
+
+          window.addEventListener('touchend', () => {
+            isScrubbing = false;
+          });
+
+          mobileTrack.addEventListener('mousedown', (e) => {
+            isScrubbing = true;
+            handleMobileScrub(e.clientX);
+            function onMove(ev) { handleMobileScrub(ev.clientX); }
+            function onUp() {
+              isScrubbing = false;
+              window.removeEventListener('mousemove', onMove);
+              window.removeEventListener('mouseup', onUp);
+            }
+            window.addEventListener('mousemove', onMove);
+            window.addEventListener('mouseup', onUp);
+          });
+        }
       }
 
       // Keyboard shortcuts
@@ -4933,6 +7014,7 @@ body {
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      initRemoteAuthAndPresence();
       checkAuthStatus();
       checkInstagramStatus();
       syncCustomSelects();
@@ -4963,7 +7045,17 @@ window.switchNiche = function(nicheId) {
     document.querySelectorAll('.niche-btn').forEach(b => b.classList.remove('active'));
     const activeBtn = document.getElementById('niche-btn-' + nicheId);
     if (activeBtn) activeBtn.classList.add('active');
+
+    const nicheLabels = {
+        'self_improvement': 'Self Improvement',
+        'finance': 'Finance',
+        'health': 'Health'
+    };
+    const mLabel = document.getElementById('mobileNicheLabel');
+    if (mLabel) mLabel.textContent = nicheLabels[nicheId] || nicheId;
+
     renderVideoList();
+    if (typeof renderMobileVideoList === 'function') renderMobileVideoList();
     const currentNicheList = byNicheData[activeNicheFilter] || [];
     if (currentNicheList.length > 0) {
         selectVideo(currentNicheList[0].filename);
@@ -5069,6 +7161,7 @@ window.renderVideoList = function() {
 
     container.innerHTML = html;
     if (typeof safeCreateIcons === 'function') safeCreateIcons();
+    if (typeof renderMobileVideoList === 'function') renderMobileVideoList();
 };
 
 // ACTIVE PLAYER RESIZE & FULLSCREEN LOGIC
@@ -5241,6 +7334,7 @@ window.selectVideo = function(filename) {
 
     // Re-render project list to update active highlight
     renderVideoList();
+    if (typeof syncMobileUI === 'function') syncMobileUI();
     if (typeof safeCreateIcons === 'function') safeCreateIcons();
 };
 
@@ -5252,24 +7346,33 @@ function bootRightMotion() {
     try { 
         if (typeof loadVideos === 'function') {
             loadVideos().then(() => {
-                const currentNicheList = byNicheData[activeNicheFilter] || [];
-                if (currentNicheList.length > 0 && !selectedVideo) {
-                    // Prioritize selecting unuploaded local clip first
-                    const unuploaded = currentNicheList.filter(v => {
-                        const ytLive = Object.keys(v.channels || {}).length > 0 || v.youtube?.isUploaded;
-                        const igLive = Object.keys(v.instagramAccounts || {}).length > 0 || v.instagram?.isUploaded;
-                        return !ytLive && !igLive;
-                    });
-                    const firstChoice = unuploaded.length > 0 ? unuploaded[0] : currentNicheList[0];
-                    selectVideo(firstChoice.filename);
+                let deepLinkHandled = false;
+                if (typeof handleUrlDeepLink === 'function') {
+                    deepLinkHandled = handleUrlDeepLink();
+                }
+                if (!deepLinkHandled) {
+                    const currentNicheList = byNicheData[activeNicheFilter] || [];
+                    if (currentNicheList.length > 0 && !selectedVideo) {
+                        // Prioritize selecting unuploaded local clip first
+                        const unuploaded = currentNicheList.filter(v => {
+                            const ytLive = Object.keys(v.channels || {}).length > 0 || v.youtube?.isUploaded;
+                            const igLive = Object.keys(v.instagramAccounts || {}).length > 0 || v.instagram?.isUploaded;
+                            return !ytLive && !igLive;
+                        });
+                        const firstChoice = unuploaded.length > 0 ? unuploaded[0] : currentNicheList[0];
+                        selectVideo(firstChoice.filename);
+                    }
                 }
                 initResizeDrag();
             }).catch(e => console.error(e));
         }
     } catch(e) {}
+    try { if (typeof initRemoteAuthAndPresence === 'function') initRemoteAuthAndPresence(); } catch(e) {}
     try { if (typeof fetchSystemHealth === 'function') fetchSystemHealth(); } catch(e) {}
     try { if (typeof initVideoTransport === 'function') initVideoTransport(); } catch(e) {}
     try { if (typeof safeCreateIcons === 'function') safeCreateIcons(); } catch(e) {}
+    try { if (typeof initMobileApp === 'function') initMobileApp(); } catch(e) {}
+    try { if (typeof initNotificationSystem === 'function') initNotificationSystem(); } catch(e) {}
 }
 
 if (document.readyState === 'loading') {
@@ -5277,6 +7380,1073 @@ if (document.readyState === 'loading') {
 } else {
     bootRightMotion();
 }
+</script>
+
+<script>
+// ===================================================================
+// RIGHTMOTION MOBILE COMPANION APP CONTROLLER (Touch Architecture)
+// ===================================================================
+
+window.activeMobileTab = 'projects';
+window.mobileLibraryFilter = 'all';
+window.mobileSearchQuery = '';
+
+// Tab Switching
+window.switchMobileTab = function(tabId) {
+  window.activeMobileTab = tabId;
+  const tabs = ['projects', 'studio', 'ai', 'activity', 'more'];
+
+  tabs.forEach(t => {
+    const pane = document.getElementById('mobileTab' + t.charAt(0).toUpperCase() + t.slice(1));
+    const navItem = document.getElementById('mobileNavItem' + t.charAt(0).toUpperCase() + t.slice(1));
+    if (pane) {
+      if (t === tabId) {
+        pane.classList.add('active');
+      } else {
+        pane.classList.remove('active');
+      }
+    }
+    if (navItem) {
+      if (t === tabId) {
+        navItem.classList.add('active');
+      } else {
+        navItem.classList.remove('active');
+      }
+    }
+  });
+
+  if (tabId === 'studio') {
+    if (selectedVideo) {
+      syncMobileUI();
+    } else {
+      const nicheItems = byNicheData[activeNicheFilter] || [];
+      if (nicheItems.length > 0) {
+        selectVideo(nicheItems[0].filename);
+      }
+    }
+  } else if (tabId === 'projects') {
+    renderMobileVideoList();
+  } else if (tabId === 'more') {
+    if (typeof loadRemoteAccessStatus === 'function') loadRemoteAccessStatus();
+  }
+
+  const contentArea = document.getElementById('mobileContentArea');
+  if (contentArea) contentArea.scrollTop = 0;
+
+  safeCreateIcons();
+};
+
+// Library Filters (All, Uploaded, Local)
+window.setMobileLibraryFilter = function(filter) {
+  window.mobileLibraryFilter = filter;
+  ['all', 'uploaded', 'local'].forEach(f => {
+    const btn = document.getElementById('mobileFilter' + f.charAt(0).toUpperCase() + f.slice(1));
+    if (btn) {
+      if (f === filter) {
+        btn.className = 'py-2 rounded-lg text-center cursor-pointer transition text-black bg-[#fdf8e1] font-black';
+      } else {
+        btn.className = 'py-2 rounded-lg text-center cursor-pointer transition text-[#fdf8e1]/60 font-bold';
+      }
+    }
+  });
+  renderMobileVideoList();
+};
+
+// Search Filter
+window.handleMobileSearch = function(val) {
+  window.mobileSearchQuery = (val || '').toLowerCase().trim();
+  renderMobileVideoList();
+};
+
+// Niche Switching (Carousel across Self Improvement, Finance, Health)
+window.cycleMobileNiche = function() {
+  const niches = ['self_improvement', 'finance', 'health'];
+  const curIdx = niches.indexOf(activeNicheFilter);
+  const nextIdx = (curIdx + 1) % niches.length;
+  window.switchNiche(niches[nextIdx]);
+};
+
+// Render Mobile Video List
+window.renderMobileVideoList = function() {
+  const container = document.getElementById('mobileProjectListContainer');
+  if (!container) return;
+
+  const nicheItems = byNicheData[activeNicheFilter] || [];
+  const badge = document.getElementById('mobileProjectCountBadge');
+  if (badge) badge.textContent = nicheItems.length;
+
+  if (nicheItems.length === 0) {
+    container.innerHTML = '<div class="p-6 text-center text-xs font-mono text-[#fdf8e1]/50 border border-white/5 rounded-2xl bg-white/[0.02]">No projects found in this channel.</div>';
+    return;
+  }
+
+  // Filter items
+  const filtered = nicheItems.filter(v => {
+    const ytLive = Object.keys(v.channels || {}).length > 0 || v.youtube?.isUploaded;
+    const igLive = Object.keys(v.instagramAccounts || {}).length > 0 || v.instagram?.isUploaded;
+    const isUploaded = ytLive || igLive;
+
+    if (window.mobileLibraryFilter === 'uploaded' && !isUploaded) return false;
+    if (window.mobileLibraryFilter === 'local' && isUploaded) return false;
+
+    if (window.mobileSearchQuery) {
+      const q = window.mobileSearchQuery;
+      const title = (v.meta?.title || v.filename || '').toLowerCase();
+      const topic = (v.meta?.topic || '').toLowerCase();
+      if (!title.includes(q) && !topic.includes(q)) return false;
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="p-6 text-center text-xs font-mono text-[#fdf8e1]/50 border border-white/5 rounded-2xl bg-white/[0.02]">No matching projects for this filter.</div>';
+    return;
+  }
+
+  const html = filtered.map(v => {
+    const isSelected = selectedVideo && selectedVideo.filename === v.filename;
+    const activeClass = isSelected ? 'active' : '';
+
+    const ytLive = Object.keys(v.channels || {}).length > 0 || v.youtube?.isUploaded;
+    const igLive = Object.keys(v.instagramAccounts || {}).length > 0 || v.instagram?.isUploaded;
+
+    let statusBadge = '';
+    if (ytLive && igLive) {
+      statusBadge = '<span class="badge-live-yt">● YT</span> <span class="badge-live-ig">● IG</span>';
+    } else if (ytLive) {
+      statusBadge = '<span class="badge-live-yt">● YT Live</span>';
+    } else if (igLive) {
+      statusBadge = '<span class="badge-live-ig">● Reel Live</span>';
+    } else {
+      statusBadge = '<span class="badge-local">● LOCAL</span>';
+    }
+
+    const size = v.sizeMb ? `${v.sizeMb} MB` : '';
+    const isWidescreen = v.isLongForm;
+    const formatTag = isWidescreen ? '16:9' : '9:16';
+
+    const hash = v.filename.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
+    const hue1 = Math.abs(hash % 360);
+    const hue2 = (hue1 + 40) % 360;
+    const coverStyle = `background: linear-gradient(135deg, hsl(${hue1}, 45%, 20%), hsl(${hue2}, 55%, 15%), #050814);`;
+    const thumbUrl = v.thumbnailUrl ? `background-image:url('${v.thumbnailUrl}');background-size:cover;` : coverStyle;
+
+    return `
+      <div class="mobile-project-card ${activeClass}" onclick="handleMobileSelectProject('${v.filename}')">
+        <div class="mobile-project-thumb" style="${thumbUrl}"></div>
+        <div class="flex-1 min-w-0 flex flex-col gap-1">
+          <div class="text-xs font-bold text-[#fdf8e1] truncate">${v.meta?.title || v.filename}</div>
+          <div class="flex items-center gap-1.5 text-[10px] font-mono text-[#fdf8e1]/60">
+            ${statusBadge}
+            <span>· ${formatTag}</span>
+            ${size ? `<span>· ${size}</span>` : ''}
+          </div>
+        </div>
+        <i data-lucide="chevron-right" style="width:14px;height:14px;color:rgba(255,255,255,0.3);flex-shrink:0;"></i>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = html;
+  safeCreateIcons();
+};
+
+// Select Project from Mobile Card -> Transition to Studio Tab
+window.handleMobileSelectProject = function(filename) {
+  selectVideo(filename);
+  switchMobileTab('studio');
+};
+
+// Sync Mobile Studio Video & Metadata
+window.syncMobileUI = function() {
+  if (!selectedVideo) return;
+  const mobilePlayer = document.getElementById('mobileVideoPlayer');
+  if (mobilePlayer) {
+    const newSrc = `/api/video-file/${selectedVideo.filename}`;
+    if (!mobilePlayer.src.endsWith(newSrc)) {
+      mobilePlayer.src = newSrc;
+      mobilePlayer.load();
+    }
+  }
+
+  const activeTitle = document.getElementById('mobileActiveTitle');
+  if (activeTitle) {
+    activeTitle.textContent = selectedVideo.meta?.title || selectedVideo.filename;
+  }
+
+  const specsBadge = document.getElementById('mobileSpecsBadge');
+  if (specsBadge) {
+    specsBadge.textContent = selectedVideo.isLongForm ? '16:9 Long-Form' : '9:16 Shorts';
+  }
+
+  const titleInput = document.getElementById('mobileEditTitle');
+  if (titleInput) {
+    titleInput.value = selectedVideo.metadata?.title || selectedVideo.meta?.title || '';
+  }
+
+  const pinnedInput = document.getElementById('mobilePinnedComment');
+  if (pinnedInput) {
+    pinnedInput.value = selectedVideo.metadata?.pinnedComment || '';
+  }
+
+  if (typeof updateMobileTagsUI === 'function') {
+    updateMobileTagsUI();
+  }
+
+  if (typeof renderMobileVideoList === 'function') {
+    renderMobileVideoList();
+  }
+};
+
+// Live Metadata Input Synchronization
+window.syncMobileMetadataInput = function(type, val) {
+  if (!selectedVideo) return;
+  if (!selectedVideo.metadata) selectedVideo.metadata = {};
+  if (type === 'title') {
+    selectedVideo.metadata.title = val;
+    const desktopTitle = document.getElementById('editTitle');
+    if (desktopTitle) desktopTitle.value = val;
+  } else if (type === 'pinned') {
+    selectedVideo.metadata.pinnedComment = val;
+    const desktopPinned = document.getElementById('metaPinnedComment');
+    if (desktopPinned) desktopPinned.value = val;
+  }
+};
+
+// Save Metadata from Mobile
+window.saveMobileMetadata = async function() {
+  if (!selectedVideo) {
+    showToast('⚠️ No video selected to save metadata.');
+    return;
+  }
+  const mTitle = document.getElementById('mobileEditTitle')?.value?.trim();
+  const mPinned = document.getElementById('mobilePinnedComment')?.value?.trim();
+  const dTitle = document.getElementById('editTitle');
+  const dPinned = document.getElementById('metaPinnedComment');
+  if (dTitle && mTitle !== undefined) dTitle.value = mTitle;
+  if (dPinned && mPinned !== undefined) dPinned.value = mPinned;
+  await saveMetadataOnly();
+};
+
+// Mobile Tags UI
+window.updateMobileTagsUI = function() {
+  const container = document.getElementById('mobileTagsContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  (currentTags || []).forEach((tag, idx) => {
+    const chip = document.createElement('span');
+    chip.className = 'tag-chip px-2.5 py-1 rounded-xl bg-white/10 border border-white/15 text-xs font-mono font-bold text-[#fdf8e1] flex items-center gap-1.5';
+    chip.innerHTML = `
+      <span>#${tag}</span>
+      <button type="button" onclick="removeTag(${idx})" class="text-white/40 hover:text-rose-400 font-black ml-1 text-sm cursor-pointer">×</button>
+    `;
+    container.appendChild(chip);
+  });
+};
+
+window.addMobileTag = function() {
+  const input = document.getElementById('mobileTagInput');
+  if (!input) return;
+  const val = input.value.trim().replace(/^#/, '');
+  if (val && !currentTags.includes(val)) {
+    currentTags.push(val);
+    updateTagsUI();
+    updateMobileTagsUI();
+  }
+  input.value = '';
+};
+
+window.handleMobileTagKey = function(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    addMobileTag();
+  }
+};
+
+// Sync Auth / Role to Mobile Topbar and More Tab
+window.syncMobileAuthUI = function() {
+  if (!currentAuthUser) return;
+  const mBadge = document.getElementById('mobileUserBadge');
+  const mLabel = document.getElementById('mobileUserLabel');
+  const mDot = document.getElementById('mobileUserDot');
+  if (mBadge && mLabel && mDot) {
+    mBadge.classList.remove('hidden');
+    mBadge.classList.add('flex');
+    if (currentAuthUser.role === 'OWNER' || currentAuthUser.isLocalOwner) {
+      mLabel.textContent = 'Host (Owner)';
+      mDot.className = 'w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#38bdf8]';
+    } else {
+      mLabel.textContent = currentAuthUser.label || currentAuthUser.email;
+      mDot.className = 'w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]';
+    }
+  }
+  const mMoreEmail = document.getElementById('mobileMoreUserEmail');
+  const mMoreRole = document.getElementById('mobileMoreUserRole');
+  if (mMoreEmail) mMoreEmail.textContent = currentAuthUser.label || currentAuthUser.email || (currentAuthUser.isLocalOwner ? 'Owner (Local Host)' : 'Visitor');
+  if (mMoreRole) mMoreRole.textContent = currentAuthUser.role || 'OWNER';
+};
+
+// Sync Remote Access Status to Mobile More Tab
+window.syncMobileRemoteUI = function(status) {
+  const mBadge = document.getElementById('mobileRemoteStatusBadge');
+  const mEnableBtn = document.getElementById('mobileRemoteEnableBtn');
+  const mDisableBtn = document.getElementById('mobileRemoteDisableBtn');
+  const mUrlCard = document.getElementById('mobileRemoteUrlCard');
+  const mUrlInput = document.getElementById('mobileRemoteUrlInput');
+  const mLanInput = document.getElementById('mobileRemoteLanUrlInput');
+
+  if (status && status.enabled) {
+    if (mBadge) {
+      mBadge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+      mBadge.textContent = 'ONLINE';
+    }
+    if (mEnableBtn) mEnableBtn.classList.add('hidden');
+    if (mDisableBtn) mDisableBtn.classList.remove('hidden');
+    if (mUrlCard && (status.publicUrl || status.lanUrl)) {
+      mUrlCard.classList.remove('hidden');
+      mUrlCard.classList.add('flex');
+      const targetPublic = (status.isOwner && status.ownerPublicUrl) ? status.ownerPublicUrl : (status.publicUrl || status.lanUrl || '');
+      const targetLan = (status.isOwner && status.ownerLanUrl) ? status.ownerLanUrl : (status.lanUrl || '');
+      if (mUrlInput) mUrlInput.value = targetPublic;
+      if (mLanInput) mLanInput.value = targetLan;
+    }
+  } else {
+    if (mBadge) {
+      mBadge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-slate-800 text-slate-400 border border-slate-700';
+      mBadge.textContent = 'OFFLINE';
+    }
+    if (mEnableBtn) mEnableBtn.classList.remove('hidden');
+    if (mDisableBtn) mDisableBtn.classList.add('hidden');
+    if (mUrlCard) {
+      mUrlCard.classList.add('hidden');
+      mUrlCard.classList.remove('flex');
+    }
+  }
+};
+
+// Bootstrap Mobile App Component
+window.initMobileApp = function() {
+  const nicheLabels = {
+    'self_improvement': 'Self Improvement',
+    'finance': 'Finance',
+    'health': 'Health'
+  };
+  const mLabel = document.getElementById('mobileNicheLabel');
+  if (mLabel && activeNicheFilter) {
+    mLabel.textContent = nicheLabels[activeNicheFilter] || activeNicheFilter;
+  }
+
+  renderMobileVideoList();
+  if (currentAuthUser) syncMobileAuthUI();
+  if (typeof loadRemoteAccessStatus === 'function') loadRemoteAccessStatus();
+  safeCreateIcons();
+};
+
+try { window.initMobileApp(); } catch(e) {}
+</script>
+
+<script>
+// ===================================================================
+// RIGHTMOTION NOTIFICATION SYSTEM CONTROLLER
+// Channels: In-App Center, SSE Live Stream, Web Push (VAPID), Deep Links
+// ===================================================================
+
+window.notificationsData = [];
+window.unreadNotificationCount = 0;
+window.activeNotificationFilter = 'ALL';
+window.pushSubscriptionActive = false;
+window.notifSseSource = null;
+window.currentRichToastNotif = null;
+window.richToastTimeout = null;
+
+// Helper: Convert VAPID base64 string to Uint8Array for PushManager
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+// Relative time formatter
+function formatTimeAgo(isoString) {
+  if (!isoString) return 'Just now';
+  const diffMs = Date.now() - new Date(isoString).getTime();
+  const sec = Math.floor(diffMs / 1000);
+  if (sec < 45) return 'Just now';
+  const min = Math.floor(sec / 60);
+  if (min < 60) return `${min}m ago`;
+  const hr = Math.floor(min / 60);
+  if (hr < 24) return `${hr}h ago`;
+  const days = Math.floor(hr / 24);
+  if (days === 1) return 'Yesterday';
+  if (days < 7) return `${days}d ago`;
+  return new Date(isoString).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+
+// Web Audio API Synthesizer Chime
+function playNotificationChime() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
+    
+    // Tone 1 (587Hz / D5)
+    const osc1 = ctx.createOscillator();
+    const gain1 = ctx.createGain();
+    osc1.type = 'sine';
+    osc1.frequency.setValueAtTime(587.33, now);
+    gain1.gain.setValueAtTime(0.15, now);
+    gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+    osc1.connect(gain1);
+    gain1.connect(ctx.destination);
+    osc1.start(now);
+    osc1.stop(now + 0.2);
+
+    // Tone 2 (880Hz / A5 chime)
+    const osc2 = ctx.createOscillator();
+    const gain2 = ctx.createGain();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(880, now + 0.12);
+    gain2.gain.setValueAtTime(0.18, now + 0.12);
+    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+    osc2.connect(gain2);
+    gain2.connect(ctx.destination);
+    osc2.start(now + 0.12);
+    osc2.stop(now + 0.4);
+  } catch (e) {
+    // Silently ignore browser autoplay policies
+  }
+}
+
+// Category visual mapping
+function getCategoryMeta(cat) {
+  const c = (cat || 'SYSTEM').toUpperCase();
+  switch (c) {
+    case 'RENDER':
+      return { label: 'Render', color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30', icon: 'clapperboard', dot: 'bg-emerald-400' };
+    case 'PROJECT':
+      return { label: 'Project', color: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30', icon: 'folder-plus', dot: 'bg-cyan-400' };
+    case 'RELEASE':
+      return { label: 'Release', color: 'bg-amber-500/20 text-amber-300 border-amber-500/30', icon: 'rocket', dot: 'bg-amber-400' };
+    case 'SECURITY':
+      return { label: 'Security', color: 'bg-rose-500/20 text-rose-300 border-rose-500/30', icon: 'shield-alert', dot: 'bg-rose-400' };
+    default:
+      return { label: 'System', color: 'bg-blue-500/20 text-blue-300 border-blue-500/30', icon: 'bell', dot: 'bg-blue-400' };
+  }
+}
+
+// Initialize Notification System
+window.initNotificationSystem = async function() {
+  // 1. Register Service Worker if supported
+  if ('serviceWorker' in navigator) {
+    try {
+      const reg = await navigator.serviceWorker.register('/sw.js');
+      console.log('[RightMotion Notifications] ServiceWorker active:', reg.scope);
+      checkPushSubscriptionStatus();
+    } catch (err) {
+      console.warn('[RightMotion Notifications] ServiceWorker registration warning:', err);
+    }
+  } else {
+    const pushSupportText = document.getElementById('mobilePushSupportText');
+    if (pushSupportText) pushSupportText.textContent = 'ServiceWorker unsupported in this browser';
+  }
+
+  // 2. Fetch In-App History
+  await fetchNotificationHistory();
+
+  // 3. Connect Real-time SSE Stream
+  connectNotificationStream();
+
+  // 4. Listen for visibility change to restore stream if interrupted
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      if (!window.notifSseSource || window.notifSseSource.readyState === EventSource.CLOSED) {
+        connectNotificationStream();
+      }
+      fetchNotificationHistory();
+    }
+  });
+};
+
+// Connect SSE stream
+function connectNotificationStream() {
+  if (window.notifSseSource) {
+    try { window.notifSseSource.close(); } catch(e) {}
+  }
+
+  try {
+    const sse = new EventSource('/api/notifications/stream');
+    window.notifSseSource = sse;
+
+    const sseDot = document.getElementById('sseLiveDot');
+    const sseText = document.getElementById('sseLiveStatusText');
+
+    sse.onopen = function() {
+      if (sseDot) {
+        sseDot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+      }
+      if (sseText) sseText.textContent = 'Live SSE Connected';
+    };
+
+    sse.onmessage = function(event) {
+      try {
+        const payload = JSON.parse(event.data);
+        if (payload.type === 'CONNECTED') {
+          if (sseDot) sseDot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+          if (sseText) sseText.textContent = 'Live SSE Connected';
+          return;
+        }
+
+        // Incoming notification
+        const notifData = payload.notification || payload;
+        handleIncomingForegroundNotification(notifData);
+      } catch (err) {
+        console.warn('[RightMotion Notifications] SSE parse error:', err);
+      }
+    };
+
+    sse.onerror = function() {
+      if (sseDot) {
+        sseDot.className = 'w-2 h-2 rounded-full bg-amber-400';
+      }
+      if (sseText) sseText.textContent = 'Reconnecting...';
+      try { sse.close(); } catch(e) {}
+      // Retry in 4 seconds
+      setTimeout(connectNotificationStream, 4000);
+    };
+  } catch (err) {
+    console.warn('[RightMotion Notifications] SSE connection failed:', err);
+  }
+}
+
+// Foreground Notification Ingestion
+function handleIncomingForegroundNotification(notifRaw) {
+  const notif = (notifRaw && notifRaw.notification) ? notifRaw.notification : notifRaw;
+  if (!notif || !notif.id) return;
+
+  // Prepend to memory store if not already present
+  const exists = window.notificationsData.some(n => n.id === notif.id);
+  if (!exists) {
+    window.notificationsData.unshift(notif);
+    if (!notif.read) {
+      window.unreadNotificationCount++;
+    }
+  }
+
+  // Update badge UI
+  updateNotificationBadges();
+
+  // Play audio chime
+  playNotificationChime();
+
+  // Display foreground rich toast
+  showRichNotificationToast(notif);
+
+  // If modal is open, re-render list
+  const modal = document.getElementById('notificationCenterModal');
+  if (modal && !modal.classList.contains('opacity-0')) {
+    renderNotificationList();
+  }
+
+  // Background refresh of project library if event creates or changes video assets
+  const type = (notif.type || '').toUpperCase();
+  if (type === 'RENDER_COMPLETED' || type === 'PROJECT_CREATED') {
+    if (typeof loadVideos === 'function') {
+      loadVideos().catch(e => console.error(e));
+    }
+  }
+}
+
+// Fetch in-app history from server
+async function fetchNotificationHistory() {
+  try {
+    const res = await fetch('/api/notifications?t=' + Date.now());
+    const data = await res.json();
+    if (data && Array.isArray(data.notifications)) {
+      window.notificationsData = data.notifications;
+      window.unreadNotificationCount = typeof data.unreadCount === 'number'
+        ? data.unreadCount
+        : data.notifications.filter(n => !n.read).length;
+      updateNotificationBadges();
+      renderNotificationList();
+    }
+  } catch (e) {
+    console.warn('[RightMotion Notifications] Failed to fetch history:', e);
+  }
+}
+
+// Update badges on desktop & mobile headers
+function updateNotificationBadges() {
+  const dBadge = document.getElementById('desktopNotificationBadge');
+  const mBadge = document.getElementById('mobileNotificationBadge');
+  const cBadge = document.getElementById('notifCenterUnreadBadge');
+
+  const count = window.unreadNotificationCount || 0;
+  const countText = count > 99 ? '99+' : String(count);
+
+  if (dBadge) {
+    if (count > 0) {
+      dBadge.textContent = countText;
+      dBadge.classList.remove('hidden');
+      dBadge.classList.add('flex');
+    } else {
+      dBadge.classList.add('hidden');
+      dBadge.classList.remove('flex');
+    }
+  }
+
+  if (mBadge) {
+    if (count > 0) {
+      mBadge.textContent = countText;
+      mBadge.classList.remove('hidden');
+      mBadge.classList.add('flex');
+    } else {
+      mBadge.classList.add('hidden');
+      mBadge.classList.remove('flex');
+    }
+  }
+
+  if (cBadge) {
+    cBadge.textContent = `${count} unread`;
+    if (count > 0) {
+      cBadge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500 text-slate-950';
+    } else {
+      cBadge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/10 text-[#fdf8e1]/60';
+    }
+  }
+}
+
+// Notification Center Modal controls
+window.toggleNotificationCenter = function() {
+  const modal = document.getElementById('notificationCenterModal');
+  if (!modal) return;
+  if (modal.classList.contains('opacity-0')) {
+    openNotificationCenter();
+  } else {
+    closeNotificationCenter();
+  }
+};
+
+window.openNotificationCenter = function() {
+  const modal = document.getElementById('notificationCenterModal');
+  if (!modal) return;
+  modal.classList.remove('opacity-0', 'pointer-events-none');
+  modal.classList.add('pointer-events-auto');
+  renderNotificationList();
+  checkPushSubscriptionStatus();
+  safeCreateIcons();
+};
+
+window.closeNotificationCenter = function() {
+  const modal = document.getElementById('notificationCenterModal');
+  if (!modal) return;
+  modal.classList.add('opacity-0', 'pointer-events-none');
+  modal.classList.remove('pointer-events-auto');
+};
+
+// Filter pills
+window.filterNotifications = function(cat, btn) {
+  window.activeNotificationFilter = cat;
+  document.querySelectorAll('.notif-filter-pill').forEach(b => {
+    b.classList.remove('active', 'border-cyan-500/40', 'bg-cyan-500/20', 'text-cyan-300');
+    b.classList.add('border-white/10', 'bg-white/5', 'text-[#fdf8e1]/70');
+  });
+  if (btn) {
+    btn.classList.add('active', 'border-cyan-500/40', 'bg-cyan-500/20', 'text-cyan-300');
+    btn.classList.remove('border-white/10', 'bg-white/5', 'text-[#fdf8e1]/70');
+  }
+  renderNotificationList();
+};
+
+// Render Notification Center list
+function renderNotificationList() {
+  const container = document.getElementById('notificationListContainer');
+  if (!container) return;
+
+  const currentCat = window.activeNotificationFilter || 'ALL';
+  const filtered = window.notificationsData.filter(item => {
+    if (currentCat === 'ALL') return true;
+    const cat = (item.category || '').toUpperCase();
+    return cat === currentCat;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="flex flex-col items-center justify-center py-12 text-center text-[#fdf8e1]/50 gap-2">
+        <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40">
+          <i data-lucide="bell-off" style="width:24px;height:24px;"></i>
+        </div>
+        <p class="text-xs font-bold text-[#fdf8e1]/70 mt-1">No notifications</p>
+        <p class="text-[11px] text-[#fdf8e1]/40">Events and render alerts will appear here in real-time.</p>
+      </div>
+    `;
+    safeCreateIcons();
+    return;
+  }
+
+  container.innerHTML = filtered.map(item => {
+    const meta = getCategoryMeta(item.category);
+    const timeAgo = formatTimeAgo(item.timestamp);
+    const unreadDot = !item.read 
+      ? `<span class="w-2 h-2 rounded-full bg-cyan-400 shrink-0 shadow-[0_0_8px_rgba(56,189,248,0.8)]" title="Unread"></span>`
+      : '';
+    const readBtn = !item.read
+      ? `<button type="button" class="p-1 rounded-lg hover:bg-white/10 text-[#fdf8e1]/50 hover:text-cyan-300 transition" onclick="markNotificationRead('${item.id}', event)" title="Mark read">
+           <i data-lucide="check" style="width:13px;height:13px;"></i>
+         </button>`
+      : '';
+
+    return `
+      <div class="p-3.5 rounded-2xl border ${!item.read ? 'border-cyan-500/30 bg-cyan-500/5' : 'border-white/10 bg-black/40'} hover:border-cyan-500/50 transition cursor-pointer flex flex-col gap-1.5 group" onclick="openNotificationTargetById('${item.id}')">
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            ${unreadDot}
+            <span class="px-2 py-0.5 rounded-md text-[9px] font-mono font-bold uppercase border ${meta.color}">
+              ${meta.label}
+            </span>
+            <span class="text-[10px] font-mono text-[#fdf8e1]/50">${timeAgo}</span>
+          </div>
+          <div class="flex items-center gap-1">
+            ${readBtn}
+            <i data-lucide="chevron-right" style="width:13px;height:13px;color:rgba(253,248,225,0.4);" class="group-hover:translate-x-0.5 transition"></i>
+          </div>
+        </div>
+        <div class="flex items-start gap-2.5 mt-0.5">
+          <div class="w-7 h-7 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5 text-[#fdf8e1]/80">
+            <i data-lucide="${meta.icon}" style="width:14px;height:14px;"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-black text-[#fdf8e1] tracking-tight leading-tight">${item.title || 'RightMotion Studio'}</h4>
+            <p class="text-[11px] text-[#fdf8e1]/70 leading-relaxed mt-0.5">${item.body || ''}</p>
+          </div>
+        </div>
+        ${item.clip ? `<div class="flex items-center gap-1 text-[10px] font-mono text-cyan-400/80 mt-0.5">
+          <i data-lucide="film" style="width:10px;height:10px;"></i>
+          <span class="truncate">${item.clip}</span>
+        </div>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  safeCreateIcons();
+}
+
+// Mark single notification read
+window.markNotificationRead = async function(id, event) {
+  if (event) event.stopPropagation();
+  const item = window.notificationsData.find(n => n.id === id);
+  if (item && !item.read) {
+    item.read = true;
+    window.unreadNotificationCount = Math.max(0, window.unreadNotificationCount - 1);
+    updateNotificationBadges();
+    renderNotificationList();
+    try {
+      await fetch('/api/notifications/read', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      });
+    } catch (e) {}
+  }
+};
+
+// Mark all read
+window.markAllNotificationsRead = async function() {
+  window.notificationsData.forEach(n => n.read = true);
+  window.unreadNotificationCount = 0;
+  updateNotificationBadges();
+  renderNotificationList();
+  try {
+    await fetch('/api/notifications/read', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ all: true })
+    });
+  } catch (e) {}
+};
+
+// Clear all
+window.clearNotificationHistory = async function() {
+  window.notificationsData = [];
+  window.unreadNotificationCount = 0;
+  updateNotificationBadges();
+  renderNotificationList();
+  try {
+    await fetch('/api/notifications/clear', {
+      method: 'POST'
+    });
+  } catch (e) {}
+};
+
+// Foreground Rich Toast Handlers
+function showRichNotificationToast(notif) {
+  window.currentRichToastNotif = notif;
+  const toast = document.getElementById('richNotifToast');
+  if (!toast) return;
+
+  const meta = getCategoryMeta(notif.category);
+  const catEl = document.getElementById('richToastCategory');
+  const timeEl = document.getElementById('richToastTime');
+  const titleEl = document.getElementById('richToastTitle');
+  const bodyEl = document.getElementById('richToastBody');
+  const iconBox = document.getElementById('richToastIconBox');
+
+  if (catEl) {
+    catEl.className = `px-2 py-0.5 rounded-md text-[9px] font-mono font-bold uppercase border ${meta.color}`;
+    catEl.textContent = meta.label;
+  }
+  if (timeEl) timeEl.textContent = 'Just now';
+  if (titleEl) titleEl.textContent = notif.title || 'RightMotion Alert';
+  if (bodyEl) bodyEl.textContent = notif.body || '';
+  if (iconBox) {
+    iconBox.innerHTML = `<i data-lucide="${meta.icon}" style="width:16px;height:16px;"></i>`;
+  }
+
+  // Slide down into view
+  toast.classList.remove('-translate-y-8', 'opacity-0', 'pointer-events-none');
+  toast.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+
+  safeCreateIcons();
+
+  if (window.richToastTimeout) clearTimeout(window.richToastTimeout);
+  window.richToastTimeout = setTimeout(() => {
+    dismissRichToast();
+  }, 6000);
+}
+
+window.dismissRichToast = function(event) {
+  if (event) event.stopPropagation();
+  const toast = document.getElementById('richNotifToast');
+  if (!toast) return;
+  toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+  toast.classList.add('-translate-y-8', 'opacity-0', 'pointer-events-none');
+  if (window.richToastTimeout) clearTimeout(window.richToastTimeout);
+};
+
+window.handleRichToastClick = function(event) {
+  if (window.currentRichToastNotif) {
+    openNotificationTarget(window.currentRichToastNotif);
+  }
+  dismissRichToast(event);
+};
+
+// Deep linking from notification item
+window.openNotificationTargetById = function(id) {
+  const notif = window.notificationsData.find(n => n.id === id);
+  if (notif) {
+    openNotificationTarget(notif);
+  }
+};
+
+window.openNotificationTarget = function(notif) {
+  if (!notif) return;
+  markNotificationRead(notif.id);
+
+  const clipTarget = notif.clip || (notif.data && notif.data.clip);
+  if (clipTarget && Array.isArray(videosData) && videosData.length > 0) {
+    const cleanTarget = clipTarget.replace(/\.mp4$/, '');
+    const found = videosData.find(v => {
+      const vClean = (v.filename || '').replace(/\.mp4$/, '');
+      return v.filename === clipTarget || vClean === cleanTarget;
+    });
+    if (found) {
+      if (typeof selectVideo === 'function') {
+        selectVideo(found.filename);
+      }
+      if (found.niche && found.niche !== activeNicheFilter && typeof switchNiche === 'function') {
+        switchNiche(found.niche);
+      }
+    }
+  }
+
+  // Mobile companion tab routing
+  if (window.innerWidth < 1024 && typeof switchMobileTab === 'function') {
+    const targetTab = notif.tab || 'studio';
+    switchMobileTab(targetTab);
+  }
+
+  closeNotificationCenter();
+  dismissRichToast();
+};
+
+// URL Deep Linking: (?clip=...&tab=...)
+window.handleUrlDeepLink = function() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const clipParam = params.get('clip');
+    const tabParam = params.get('tab');
+
+    let handled = false;
+
+    if (tabParam && typeof switchMobileTab === 'function') {
+      switchMobileTab(tabParam);
+    }
+
+    const pool = window.videosData || (typeof videosData !== 'undefined' ? videosData : []);
+
+    if (clipParam && Array.isArray(pool) && pool.length > 0) {
+      const cleanTarget = clipParam.replace(/\.mp4$/, '');
+      const found = pool.find(v => {
+        const vClean = (v.filename || '').replace(/\.mp4$/, '');
+        return v.filename === clipParam || vClean === cleanTarget;
+      });
+
+      if (found) {
+        if (found.niche && found.niche !== activeNicheFilter && typeof switchNiche === 'function') {
+          switchNiche(found.niche);
+        }
+        if (typeof selectVideo === 'function') {
+          selectVideo(found.filename);
+          handled = true;
+        }
+        if (typeof syncMobileUI === 'function') {
+          syncMobileUI();
+        }
+      }
+    }
+
+    // Re-verify tabParam to guarantee mobile tab selection
+    if (tabParam && typeof switchMobileTab === 'function') {
+      switchMobileTab(tabParam);
+    }
+
+    return handled;
+  } catch (err) {
+    console.warn('[RightMotion DeepLink] Error handling deep link params:', err);
+    return false;
+  }
+};
+
+// Immediate invocation on evaluation
+try { window.handleUrlDeepLink(); } catch(e) {}
+
+// Check Web Push Subscription Status
+async function checkPushSubscriptionStatus() {
+  const mBadge = document.getElementById('mobilePushStatusBadge');
+  const mBtn = document.getElementById('mobilePushEnableBtn');
+  const mBtnText = document.getElementById('mobilePushBtnText');
+  const promoBtn = document.getElementById('notifEnablePushBtn');
+  const promoTitle = document.getElementById('notifPushPromoTitle');
+  const promoDesc = document.getElementById('notifPushPromoDesc');
+
+  if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+    if (mBadge) {
+      mBadge.textContent = 'UNSUPPORTED';
+      mBadge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-slate-800 text-slate-400';
+    }
+    return;
+  }
+
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    const sub = await reg.pushManager.getSubscription();
+    if (sub) {
+      window.pushSubscriptionActive = true;
+      if (mBadge) {
+        mBadge.textContent = 'ACTIVE';
+        mBadge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+      }
+      if (mBtnText) mBtnText.textContent = 'Push Notifications Active';
+      if (mBtn) {
+        mBtn.className = 'flex-1 py-2.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs font-bold flex items-center justify-center gap-1.5 cursor-default';
+      }
+      if (promoBtn) {
+        promoBtn.textContent = 'Subscribed';
+        promoBtn.className = 'px-3 py-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-[11px] font-bold cursor-default';
+      }
+      if (promoTitle) promoTitle.textContent = 'Device Push Alerts Active';
+      if (promoDesc) promoDesc.textContent = 'You will receive lock screen notifications';
+    } else {
+      window.pushSubscriptionActive = false;
+      if (mBadge) {
+        mBadge.textContent = 'OFF';
+        mBadge.className = 'px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-slate-800 text-slate-400';
+      }
+      if (mBtnText) mBtnText.textContent = 'Enable Device Push';
+    }
+  } catch (err) {
+    console.warn('[RightMotion Notifications] Push status check error:', err);
+  }
+}
+
+// Enable Web Push Subscription
+window.enablePushNotifications = async function() {
+  if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+    if (typeof showToast === 'function') showToast('Push notifications not supported in this browser environment.');
+    return;
+  }
+
+  try {
+    const perm = await Notification.requestPermission();
+    if (perm !== 'granted') {
+      if (typeof showToast === 'function') showToast('Notification permission denied or dismissed.');
+      return;
+    }
+
+    // Fetch VAPID public key
+    const keyRes = await fetch('/api/notifications/vapid-public-key');
+    const keyData = await keyRes.json();
+    if (!keyData.publicKey) {
+      throw new Error('VAPID key unavailable from server');
+    }
+
+    const reg = await navigator.serviceWorker.ready;
+    const applicationServerKey = urlBase64ToUint8Array(keyData.publicKey);
+
+    const subscription = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey
+    });
+
+    // Send subscription to server
+    const deviceName = window.innerWidth < 1024 ? 'Mobile Phone' : 'Desktop Browser';
+    const subRes = await fetch('/api/notifications/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subscription: subscription.toJSON(),
+        device: deviceName,
+        userAgent: navigator.userAgent
+      })
+    });
+
+    const subData = await subRes.json();
+    if (subData.success) {
+      if (typeof showToast === 'function') showToast('🔔 Push notifications successfully enabled!');
+      checkPushSubscriptionStatus();
+    }
+  } catch (err) {
+    console.error('[RightMotion Notifications] Push subscription failed:', err);
+    if (typeof showToast === 'function') showToast('Failed to enable push: ' + err.message);
+  }
+};
+
+// Send Test Notification
+window.sendTestNotification = async function() {
+  try {
+    if (typeof showToast === 'function') showToast('Sending test notification...');
+    const res = await fetch('/api/notifications/test', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        clip: selectedVideo ? selectedVideo.filename : 'dopamine_reality_video.mp4'
+      })
+    });
+    const data = await res.json();
+    if (data.success) {
+      if (typeof showToast === 'function') showToast('🚀 Test alert emitted across all channels!');
+    }
+  } catch (err) {
+    console.error('[RightMotion Notifications] Send test notification failed:', err);
+  }
+};
 </script>
 
 <!-- THREE.JS COSMIC ENVIRONMENT: NASA Mars + Layered Starfield + Scaled Asteroid Debris -->
@@ -5298,7 +8468,7 @@ if (document.readyState === 'loading') {
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(window.innerWidth < 1024 ? 1.0 : Math.min(window.devicePixelRatio, 2));
 
     // Studio Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
@@ -5434,6 +8604,7 @@ if (document.readyState === 'loading') {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.innerWidth < 1024 ? 1.0 : Math.min(window.devicePixelRatio, 2));
     });
 })();
 </script>

@@ -1,0 +1,116 @@
+{
+  "topic": "How cortisol actually works",
+  "coreIdea": "Capacity deforms under continuous unacknowledged pressure before structural rupture occurs.",
+  "viewerQuestion": "At what exact point did the exception become the rule?",
+  "thumbnailJob": "Visually manifest 'Pristine load-bearing plinth developing sudden violent brittle cleavage' to trigger immediate curiosity.",
+  "chosenConcept": {
+    "conceptId": "concept_2_scale_constraint",
+    "title": "The Unseen Load Limit",
+    "archetype": "scale_constraint",
+    "visualMetaphor": "A micro-scale concession magnified into an overwhelming architectural divide: Feeling proud of absorbing infinite pressure right before sudden structural fracture",
+    "focalSubject": "Severe architectural divergence showing micro-shift hardening into permanent boundary",
+    "subjectRole": "trapped_by_options",
+    "hasPerson": true,
+    "textHook": "LOAD LIMIT",
+    "textStrategy": "minimal_punch_word",
+    "colorMood": "luminous_slate_with_contrast",
+    "accentColor": "#f59e0b",
+    "groundColor": "#fbfbfd",
+    "visualMechanism": "scale_bifurcation",
+    "assetStrategy": "bespoke_ai_hero_illustration",
+    "selectionReason": "Concept 'The Unseen Load Limit' scored highest (8.88/10). Peak instant-read (8.8), highest curiosity (8.9), and unmatched mobile silhouette clarity."
+  },
+  "alternativeConcepts": [
+    {
+      "conceptId": "concept_1_story_metaphor",
+      "title": "The Snap",
+      "archetype": "minimal_object",
+      "overallScore": 8.83,
+      "rejectionReason": "Lower score (8.83) compared to winner (8.88)."
+    },
+    {
+      "conceptId": "concept_3_minimal_object",
+      "title": "The Hidden Pressure",
+      "archetype": "minimal_object",
+      "overallScore": 8.78,
+      "rejectionReason": "Lower score (8.78) compared to winner (8.88)."
+    }
+  ],
+  "primarySubject": "Severe architectural divergence showing micro-shift hardening into permanent boundary",
+  "visualMetaphor": "A micro-scale concession magnified into an overwhelming architectural divide: Feeling proud of absorbing infinite pressure right before sudden structural fracture",
+  "compositionStrategy": {
+    "archetype": "scale_constraint",
+    "aspectRatio": "9:16",
+    "canvasWidth": 1080,
+    "canvasHeight": 1920,
+    "ground": "#fbfbfd",
+    "dominantMass": "Center-weighted vertical anchor",
+    "negativeSpace": "Generous breathing room on upper 30% for high-impact hook word"
+  },
+  "textStrategy": {
+    "hookWord": "LOAD LIMIT",
+    "font": "Montserrat Black",
+    "fontSize": 104,
+    "color": "#090d16",
+    "role": "Single high-impact curiosity anchor; never an explanation",
+    "bannedElements": [
+      "categoryBadge",
+      "extraBadge",
+      "subtitleCard",
+      "articleParagraph"
+    ]
+  },
+  "focalPoint": "Severe architectural divergence showing micro-shift hardening into permanent boundary",
+  "hierarchy": {
+    "level1_hook": "Primary Hook: Severe architectural divergence showing micro-shift hardening into permanent boundary (dominant silhouette, ~60% screen area)",
+    "level2_concept": "Concept: A micro-scale concession magnified into an overwhelming architectural divide: Feeling proud of absorbing infinite pressure right before sudden structural fracture",
+    "level3_support": "Support: High-impact punch text 'LOAD LIMIT' in inky contrast"
+  },
+  "colorStrategy": {
+    "ground": "#fbfbfd",
+    "accent": "#f59e0b",
+    "textContrastRatio": "12:1",
+    "rule": "Clean luminous ground or deep obsidian with exactly ONE saturated semantic accent"
+  },
+  "assetRequirements": {
+    "type": "bespoke_ai_hero_illustration",
+    "targetPath": "public/how_cortisol_actually_wo/assets/thumbnail_hero.png",
+    "needsAiGeneration": true,
+    "promptDirective": "Editorial 2.5D conceptual visual: A micro-scale concession magnified into an overwhelming architectural divide: Feeling proud of absorbing infinite pressure right before sudden structural fracture. Generous negative space, studio lighting, razor-sharp edges."
+  },
+  "complexityBudget": {
+    "maxTextElements": 1,
+    "maxWordCount": 2,
+    "pillBadgesAllowed": false,
+    "subtitleCardsAllowed": false,
+    "maxPrimarySubjects": 1,
+    "contrastRatioTarget": "7:1",
+    "safeZoneTop": "8%",
+    "safeZoneBottom": "10%"
+  },
+  "mobileConstraints": {
+    "targetScale": "360x640 preview",
+    "minSubjectPixelHeight": 750,
+    "minTextPixelHeight": 80,
+    "silhouetteSeparation": "Strong high-contrast boundary against clean ground"
+  },
+  "curiosityMechanism": {
+    "type": "scale_bifurcation",
+    "gap": "At what exact point did the exception become the rule?",
+    "resolutionInVideo": "Video resolves how capacity deforms under continuous unacknowledged pressure before structural rupture occurs. operates through a micro-scale concession magnified into an overwhelming architectural divide: feeling proud of absorbing infinite pressure right before sudden structural fracture."
+  },
+  "truthfulnessCheck": {
+    "isTruthful": true,
+    "rationale": "Directly symbolizes capacity deforms under continuous unacknowledged pressure before structural rupture occurs. through a micro-scale concession magnified into an overwhelming architectural divide: feeling proud of absorbing infinite pressure right before sudden structural fracture without sensationalism or misleading claims."
+  },
+  "validationResults": {
+    "status": "APPROVED",
+    "rulesPassed": [
+      "Rule 0: Autonomous creative production",
+      "Rule 4: Zero memes, high-resolution physical metaphor",
+      "Rule 5: Creative standard, minimum sufficient composition",
+      "Rule 5.5: Zero pill badges, zero subtitle cards, zero floating waist cuts",
+      "Rule 5.4: Ultra-high contrast (12:1), luminous clean ground"
+    ]
+  }
+}

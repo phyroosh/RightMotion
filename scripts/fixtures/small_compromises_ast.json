@@ -1,0 +1,440 @@
+{
+  "version": "1.0.0",
+  "clipId": "small_compromises",
+  "fps": 60,
+  "totalFrames": 1816,
+  "environment": {
+    "groundColor": "#f8fafc",
+    "lightingTheme": "clean_studio_radial",
+    "gridTexture": true,
+    "safeBounds": {
+      "top": 280,
+      "bottom": 1340,
+      "left": 80,
+      "right": 1000
+    }
+  },
+  "persistentWorldMemory": [
+    {
+      "traceId": "original_standard_ghost",
+      "originatingActorId": "integrity_boundary",
+      "originatingSceneId": "scene_2_mechanism",
+      "appearance": "dashed_ghost_line",
+      "coordinates": {
+        "y": 620,
+        "startX": 120,
+        "endX": 960
+      },
+      "opacity": 0.35,
+      "persistsUntilEnd": true,
+      "semanticMeaning": "Visual memory of the uncompromised baseline standard"
+    }
+  ],
+  "scenes": [
+    {
+      "sceneId": "scene_1_hook",
+      "role": "hook",
+      "startFrame": 0,
+      "endFrame": 420,
+      "narrativeGoal": "Establish that discipline is ruined by micro-concessions, not catastrophes.",
+      "actors": [
+        {
+          "id": "hero_illustration_card",
+          "semanticRole": "hook_curiosity_anchor",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "small_compromises/assets/scene_illustration.png",
+            "widthPx": 840,
+            "heightPx": 480
+          },
+          "visualStyle": {
+            "strokeColor": "#090d16",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 560,
+            "width": 840,
+            "height": 480,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [],
+      "mutations": [],
+      "causalCouplings": [],
+      "annotations": [
+        {
+          "annotationId": "hook_word",
+          "text": "THE SLIPPAGE",
+          "font": "Montserrat Black",
+          "fontSizePx": 88,
+          "color": "#090d16",
+          "role": "hook_slam",
+          "staticPlacement": {
+            "x": 540,
+            "y": 320
+          },
+          "startFrame": 0,
+          "durationFrames": 150,
+          "inAnimation": "scale_pop"
+        }
+      ]
+    },
+    {
+      "sceneId": "scene_2_mechanism",
+      "role": "mechanism",
+      "startFrame": 420,
+      "endFrame": 950,
+      "narrativeGoal": "Demonstrate that the brain tracks precedent, recalibrating the boundary downward on first compromise.",
+      "actors": [
+        {
+          "id": "integrity_boundary",
+          "semanticRole": "the_sovereign_standard",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "continuous_boundary",
+            "orientation": "horizontal",
+            "lengthPx": 840,
+            "thicknessPx": 6,
+            "initialBaselineY": 620
+          },
+          "visualStyle": {
+            "strokeColor": "#090d16",
+            "dropShadow": "0 12px 24px rgba(0,0,0,0.12)",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 620,
+            "width": 840,
+            "height": 6,
+            "originAnchor": "center",
+            "semanticPlacement": "elevated_threshold"
+          },
+          "zIndex": 20,
+          "isPersistent": true
+        },
+        {
+          "id": "neural_brain_actor",
+          "semanticRole": "precedent_tracker",
+          "narrativeImportance": "SECONDARY",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+            "widthPx": 420,
+            "heightPx": 420
+          },
+          "visualStyle": {
+            "strokeColor": "transparent",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 960,
+            "width": 420,
+            "height": 420,
+            "originAnchor": "center",
+            "semanticPlacement": "ground_plane"
+          },
+          "zIndex": 15,
+          "isPersistent": false
+        }
+      ],
+      "forces": [
+        {
+          "forceId": "concession_impulse",
+          "targetActorId": "integrity_boundary",
+          "type": "point_impulse",
+          "triggerFrame": 680,
+          "durationFrames": 45,
+          "magnitude": 180,
+          "directionDeg": 90,
+          "timingCurve": "spring_snappy",
+          "semanticCause": "Spoken concession 'just this once' strikes the boundary with downward torque"
+        }
+      ],
+      "mutations": [
+        {
+          "mutationId": "baseline_sag",
+          "actorId": "integrity_boundary",
+          "type": "viscoelastic_sag",
+          "triggerFrame": 680,
+          "durationFrames": 50,
+          "stateBefore": "STRICT_100%_STANDARD",
+          "stateAfter": "RECALIBRATED_OPTIONAL_BASELINE",
+          "physicalRationale": "Single concession normalizes the deviation into a lower baseline",
+          "parameters": {
+            "displacementPx": 180,
+            "stabilizeY": 800
+          },
+          "createsMemoryTrace": {
+            "traceId": "original_standard_ghost",
+            "originatingActorId": "integrity_boundary",
+            "originatingSceneId": "scene_2_mechanism",
+            "appearance": "dashed_ghost_line",
+            "coordinates": {
+              "y": 620,
+              "startX": 120,
+              "endX": 960
+            },
+            "opacity": 0.35,
+            "persistsUntilEnd": true,
+            "semanticMeaning": "Visual memory of the uncompromised baseline standard"
+          }
+        },
+        {
+          "mutationId": "slash_moral_significance",
+          "actorId": "moral_significance_text",
+          "type": "marker_slash",
+          "triggerFrame": 510,
+          "durationFrames": 12,
+          "stateBefore": "ACTIVE_CONSIDERATION",
+          "stateAfter": "REJECTED_AS_IRRELEVANT",
+          "physicalRationale": "The brain does not track moral weight; it only tracks precedent",
+          "parameters": {
+            "color": "rose",
+            "strokeWidth": 8
+          }
+        }
+      ],
+      "causalCouplings": [
+        {
+          "couplingId": "impulse_solidifies_ghost",
+          "sourceEvent": {
+            "actorId": "integrity_boundary",
+            "stateChange": "viscoelastic_sag",
+            "frame": 680
+          },
+          "propagationDelayFrames": 20,
+          "targetReaction": {
+            "actorId": "original_standard_ghost",
+            "resultingMutationId": "reveal_ghost"
+          },
+          "physicalLaw": "When a boundary moves, its previous location leaves a historical trace"
+        }
+      ],
+      "annotations": [
+        {
+          "annotationId": "moral_significance_text",
+          "text": "MORAL SIGNIFICANCE",
+          "font": "Montserrat Black",
+          "fontSizePx": 60,
+          "color": "#090d16",
+          "role": "action_verb",
+          "staticPlacement": {
+            "x": 540,
+            "y": 420
+          },
+          "startFrame": 450,
+          "durationFrames": 140,
+          "inAnimation": "slam_with_shake"
+        },
+        {
+          "annotationId": "boundary_label",
+          "text": "THE STANDARD",
+          "font": "JetBrains Mono Bold",
+          "fontSizePx": 38,
+          "color": "#64748b",
+          "role": "attached_state_label",
+          "attachedToActorId": "integrity_boundary",
+          "startFrame": 430,
+          "durationFrames": 520,
+          "inAnimation": "fade_down"
+        }
+      ]
+    },
+    {
+      "sceneId": "scene_3_escalation",
+      "role": "escalation",
+      "startFrame": 950,
+      "endFrame": 1475,
+      "narrativeGoal": "Show that the second compromise requires half the friction as the furrow deepens.",
+      "actors": [
+        {
+          "id": "recalibrated_furrow",
+          "semanticRole": "neural_pathway_groove",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "conduit_pathway",
+            "start": [140, 800],
+            "end": [940, 800],
+            "curvature": 0,
+            "widthPx": 12
+          },
+          "visualStyle": {
+            "strokeColor": "#cbd5e1",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 800,
+            "width": 800,
+            "height": 12,
+            "originAnchor": "center",
+            "semanticPlacement": "elevated_threshold"
+          },
+          "zIndex": 20,
+          "isPersistent": true
+        },
+        {
+          "id": "kinetic_concession_mass",
+          "semanticRole": "the_compromise_action",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "physical_mass",
+            "shape": "circle",
+            "dimensionPx": [32, 32],
+            "massKg": 5.0
+          },
+          "visualStyle": {
+            "strokeColor": "#f43f5e",
+            "fillColor": "#f43f5e",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 140,
+            "y": 800,
+            "width": 32,
+            "height": 32,
+            "originAnchor": "center",
+            "semanticPlacement": "elevated_threshold"
+          },
+          "zIndex": 30,
+          "isPersistent": false
+        }
+      ],
+      "forces": [
+        {
+          "forceId": "pass_1_high_drag",
+          "targetActorId": "kinetic_concession_mass",
+          "type": "continuous_drag",
+          "triggerFrame": 970,
+          "durationFrames": 65,
+          "magnitude": 80,
+          "directionDeg": 0,
+          "timingCurve": "linear_continuous",
+          "semanticCause": "First traversal encounters maximum psychological friction"
+        },
+        {
+          "forceId": "pass_2_rapid_glide",
+          "targetActorId": "kinetic_concession_mass",
+          "type": "point_impulse",
+          "triggerFrame": 1070,
+          "durationFrames": 30,
+          "magnitude": 220,
+          "directionDeg": 0,
+          "timingCurve": "spring_snappy",
+          "semanticCause": "Second traversal glides through the pre-cut furrow"
+        }
+      ],
+      "mutations": [
+        {
+          "mutationId": "furrow_erosion",
+          "actorId": "recalibrated_furrow",
+          "type": "groove_wear",
+          "triggerFrame": 970,
+          "durationFrames": 65,
+          "stateBefore": "ROUGH_GROUND",
+          "stateAfter": "CARVED_FURROW",
+          "physicalRationale": "Repetition physically etches the low-resistance channel",
+          "parameters": {
+            "deepenPx": 8,
+            "finalColor": "#090d16"
+          }
+        }
+      ],
+      "causalCouplings": [
+        {
+          "couplingId": "furrow_enables_glide",
+          "sourceEvent": {
+            "actorId": "recalibrated_furrow",
+            "stateChange": "CARVED_FURROW",
+            "frame": 1035
+          },
+          "propagationDelayFrames": 35,
+          "targetReaction": {
+            "actorId": "kinetic_concession_mass",
+            "triggeredForceId": "pass_2_rapid_glide"
+          },
+          "physicalLaw": "Eroded channel reduces drag by 50%"
+        }
+      ],
+      "annotations": [
+        {
+          "annotationId": "friction_stat",
+          "text": "-50% FRICTION",
+          "font": "JetBrains Mono Bold",
+          "fontSizePx": 64,
+          "color": "#f43f5e",
+          "role": "attached_state_label",
+          "staticPlacement": {
+            "x": 540,
+            "y": 660
+          },
+          "startFrame": 1070,
+          "durationFrames": 180,
+          "inAnimation": "scale_pop"
+        }
+      ]
+    },
+    {
+      "sceneId": "scene_4_resolution",
+      "role": "resolution",
+      "startFrame": 1475,
+      "endFrame": 1816,
+      "narrativeGoal": "Deliver the decisive operational law: Defend the threshold, not the outcome.",
+      "actors": [
+        {
+          "id": "presenter_judy",
+          "semanticRole": "sovereign_host",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "presenter_host",
+            "pose": "character_pointing.png",
+            "baseHeightPx": 1320,
+            "position": "right"
+          },
+          "visualStyle": {
+            "strokeColor": "transparent",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 820,
+            "y": 1260,
+            "width": 600,
+            "height": 1320,
+            "originAnchor": "bottom_center",
+            "semanticPlacement": "ground_plane"
+          },
+          "zIndex": 40,
+          "isPersistent": false
+        }
+      ],
+      "forces": [],
+      "mutations": [],
+      "causalCouplings": [],
+      "annotations": [
+        {
+          "annotationId": "closing_rule",
+          "text": "DEFEND THE THRESHOLD",
+          "font": "Montserrat Black",
+          "fontSizePx": 72,
+          "color": "#090d16",
+          "role": "decisive_takeaway",
+          "staticPlacement": {
+            "x": 380,
+            "y": 620
+          },
+          "startFrame": 1500,
+          "durationFrames": 316,
+          "inAnimation": "slam_with_shake"
+        }
+      ]
+    }
+  ]
+}

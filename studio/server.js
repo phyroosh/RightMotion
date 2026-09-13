@@ -5,12 +5,28 @@ const path = require('path');
 const { google } = require('googleapis');
 const igPlaywright = require('./instagram_playwright');
 const multiChannel = require('./multi_channel_manager');
+const { authContextMiddleware, requirePermission, requireOwner, Permissions } = require('./remote/permissions');
+const remoteRouter = require('./remote/routes');
+const notificationsRouter = require('./notifications/routes');
+const notificationService = require('./notifications/service');
+const systemWatcher = require('./notifications/watcher');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// Security & Transport Headers
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 app.use(cors());
 app.use(express.json());
+app.use(authContextMiddleware);
+app.use('/api/remote', remoteRouter);
+app.use('/api/notifications', notificationsRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 const ROOT_DIR = path.resolve(__dirname, '..');
@@ -370,7 +386,7 @@ function classifyVideoNiche(filename, meta = {}) {
 }
 
 // 0a. API: Get Tactical Meme Board Registry (21 internet culture memes)
-app.get('/api/memes', (req, res) => {
+app.get('/api/memes', requirePermission(Permissions.VIEW_PROJECTS), (req, res) => {
   if (fs.existsSync(MEMES_REGISTRY_PATH)) {
     try {
       const data = JSON.parse(fs.readFileSync(MEMES_REGISTRY_PATH, 'utf-8'));
@@ -383,7 +399,7 @@ app.get('/api/memes', (req, res) => {
 });
 
 // 0b. API: Engine Telemetry & System Health
-app.get('/api/system/health', (req, res) => {
+app.get('/api/system/health', requirePermission(Permissions.VIEW_PROJECTS), (req, res) => {
   try {
     const clipsDir = path.join(ROOT_DIR, 'src', 'clips');
     const clipsCount = fs.existsSync(clipsDir)
@@ -421,7 +437,7 @@ app.get('/api/system/health', (req, res) => {
 });
 
 // 1. API: List all rendered videos sorted by date (newest first) & categorized with live upload and schedule status
-app.get('/api/videos', async (req, res) => {
+app.get('/api/videos', requirePermission(Permissions.VIEW_PROJECTS), async (req, res) => {
   try {
     const niches = multiChannel.getNichesRegistry();
 
@@ -592,7 +608,7 @@ app.get('/api/videos', async (req, res) => {
 });
 
 // 1b. API: Force Sync with YouTube channel
-app.post('/api/sync-uploads', async (req, res) => {
+app.post('/api/sync-uploads', requirePermission(Permissions.EDIT_PROJECTS), async (req, res) => {
   try {
     await syncYouTubeUploads();
     const uploads = getUploadsRecord();
@@ -602,9 +618,10 @@ app.post('/api/sync-uploads', async (req, res) => {
   }
 });
 
-// 2. Stream video file for HTML5 preview
-app.get('/api/video-file/:filename', (req, res) => {
-  const filePath = path.join(OUT_DIR, req.params.filename);
+// 2. Stream video file for HTML5 preview & download
+app.get('/api/video-file/:filename', requirePermission(Permissions.DOWNLOAD), (req, res) => {
+  const safeFilename = path.basename(req.params.filename);
+  const filePath = path.join(OUT_DIR, safeFilename);
   if (!fs.existsSync(filePath)) {
     return res.status(404).send('Video not found');
   }
@@ -638,12 +655,14 @@ app.get('/api/video-file/:filename', (req, res) => {
 });
 
 // 2b. Serve thumbnail image file
-app.get('/api/thumbnail/:filename', (req, res) => {
-  let thumbPath = path.join(OUT_DIR, req.params.filename);
-  if (req.params.filename.startsWith('public_')) {
-    const match = req.params.filename.match(/^public_(.*)_scene_illustration\.png$/);
+app.get('/api/thumbnail/:filename', requirePermission(Permissions.VIEW_PROJECTS), (req, res) => {
+  const safeFilename = path.basename(req.params.filename);
+  let thumbPath = path.join(OUT_DIR, safeFilename);
+  if (safeFilename.startsWith('public_')) {
+    const match = safeFilename.match(/^public_(.*)_scene_illustration\.png$/);
     if (match) {
-      thumbPath = path.join(__dirname, '..', 'public', match[1], 'assets', 'scene_illustration.png');
+      const cleanSub = path.basename(match[1]);
+      thumbPath = path.join(__dirname, '..', 'public', cleanSub, 'assets', 'scene_illustration.png');
     }
   }
   if (!fs.existsSync(thumbPath)) {
@@ -655,17 +674,21 @@ app.get('/api/thumbnail/:filename', (req, res) => {
 });
 
 // 2c. Render or Re-render Thumbnail on Demand
-app.post('/api/render-thumbnail', (req, res) => {
+app.post('/api/render-thumbnail', requirePermission(Permissions.RENDER), (req, res) => {
   const { filename } = req.body;
-  if (!filename) {
+  if (!filename || typeof filename !== 'string') {
     return res.status(400).json({ error: 'filename is required' });
   }
 
-  const { exec } = require('child_process');
-  const baseName = filename.replace(/\.mp4$/i, '');
-  const cmd = `node scripts/render_all_thumbnails.js "${filename}"`;
+  const safeFilename = path.basename(filename);
+  if (!/^[a-zA-Z0-9_\-.]+\.mp4$/i.test(safeFilename)) {
+    return res.status(400).json({ error: 'Invalid video filename format' });
+  }
 
-  exec(cmd, { cwd: path.resolve(__dirname, '..') }, (error, stdout, stderr) => {
+  const { execFile } = require('child_process');
+  const baseName = safeFilename.replace(/\.mp4$/i, '');
+
+  execFile('node', ['scripts/render_all_thumbnails.js', safeFilename], { cwd: path.resolve(__dirname, '..') }, (error, stdout, stderr) => {
     if (error) {
       console.error('Thumbnail render error:', stderr || error.message);
       return res.status(500).json({ error: error.message, stderr });
@@ -674,7 +697,7 @@ app.post('/api/render-thumbnail', (req, res) => {
     const thumbFile = `${baseName}_thumbnail.png`;
     res.json({
       success: true,
-      filename,
+      filename: safeFilename,
       thumbnailFile: thumbFile,
       thumbnailUrl: `/api/thumbnail/${thumbFile}?t=${Date.now()}`,
     });
@@ -682,7 +705,7 @@ app.post('/api/render-thumbnail', (req, res) => {
 });
 
 // 3. API: Auth status & Channel Profile (Multi-Channel & Multi-Project Enabled)
-app.get('/api/auth-status', async (req, res) => {
+app.get('/api/auth-status', requirePermission(Permissions.VIEW_PROJECTS), async (req, res) => {
   try {
     const reg = multiChannel.getChannelsRegistry();
     const credReg = multiChannel.getCredentialsRegistry();
@@ -778,7 +801,7 @@ app.get('/api/channel-avatar', async (req, res) => {
 });
 
 // 4. API: Get Google OAuth URL (Supports specifying which Google Cloud Project to authenticate with)
-app.get('/api/auth-url', (req, res) => {
+app.get('/api/auth-url', requireOwner, (req, res) => {
   try {
     const { credentialId } = req.query;
     const { oauth2Client, credentialId: resolvedCredId } = multiChannel.getOAuth2ClientForCredential(
@@ -863,12 +886,12 @@ app.get('/oauth2callback', async (req, res) => {
 });
 
 // 5b. Multi-Channel YouTube API Endpoints
-app.get('/api/channels', (req, res) => {
+app.get('/api/channels', requireOwner, (req, res) => {
   const reg = multiChannel.getChannelsRegistry();
   res.json(reg);
 });
 
-app.post('/api/channels/switch', (req, res) => {
+app.post('/api/channels/switch', requireOwner, (req, res) => {
   const channelId = (req.body || {}).channelId || null;
   if (!channelId) return res.status(400).json({ error: 'channelId is required' });
   const result = multiChannel.switchActiveChannel(channelId);
@@ -876,19 +899,19 @@ app.post('/api/channels/switch', (req, res) => {
   res.json(result);
 });
 
-app.delete('/api/channels/:channelId', (req, res) => {
+app.delete('/api/channels/:channelId', requireOwner, (req, res) => {
   const result = multiChannel.disconnectChannel(req.params.channelId);
   res.json(result);
 });
 
-app.post('/api/channels/sync', async (req, res) => {
+app.post('/api/channels/sync', requireOwner, async (req, res) => {
   const channelId = (req.body || {}).channelId || null;
   await syncYouTubeUploads(channelId).catch(() => {});
   res.json({ success: true, message: 'Channels sync completed' });
 });
 
 // Logout / Disconnect Active Channel
-app.post('/api/logout', (req, res) => {
+app.post('/api/logout', requireOwner, (req, res) => {
   const reg = multiChannel.getChannelsRegistry();
   if (reg.activeChannelId) {
     multiChannel.disconnectChannel(reg.activeChannelId);
@@ -897,12 +920,12 @@ app.post('/api/logout', (req, res) => {
 });
 
 // 5c. Multi-Project Google Cloud Credentials API Endpoints
-app.get('/api/credentials', (req, res) => {
+app.get('/api/credentials', requireOwner, (req, res) => {
   const reg = multiChannel.getCredentialsRegistry();
   res.json(reg);
 });
 
-app.post('/api/credentials', (req, res) => {
+app.post('/api/credentials', requireOwner, (req, res) => {
   const { name, jsonContent } = req.body;
   if (!jsonContent) return res.status(400).json({ error: 'jsonContent is required' });
   try {
@@ -935,7 +958,7 @@ app.post('/api/credentials', (req, res) => {
   }
 });
 
-app.delete('/api/credentials/:id', (req, res) => {
+app.delete('/api/credentials/:id', requireOwner, (req, res) => {
   const result = multiChannel.deleteCredential(req.params.id);
   res.json(result);
 });
@@ -943,7 +966,7 @@ app.delete('/api/credentials/:id', (req, res) => {
 // -------------------------------------------------------------------
 // 5d. Sovereign Niches & Multi-Account Binding API Endpoints
 // -------------------------------------------------------------------
-app.get('/api/niches', (req, res) => {
+app.get('/api/niches', requirePermission(Permissions.VIEW_PROJECTS), (req, res) => {
   try {
     const niches = multiChannel.getNichesRegistry();
     res.json(niches);
@@ -952,14 +975,14 @@ app.get('/api/niches', (req, res) => {
   }
 });
 
-app.post('/api/niches/:nicheId/bind-youtube', (req, res) => {
+app.post('/api/niches/:nicheId/bind-youtube', requireOwner, (req, res) => {
   const channelId = (req.body || {}).channelId || null;
   if (!channelId) return res.status(400).json({ error: 'channelId is required' });
   const result = multiChannel.bindYouTubeToNiche(req.params.nicheId, channelId);
   res.json(result);
 });
 
-app.post('/api/niches/:nicheId/bind-instagram', (req, res) => {
+app.post('/api/niches/:nicheId/bind-instagram', requireOwner, (req, res) => {
   const { username } = req.body;
   if (!username) return res.status(400).json({ error: 'username is required' });
   const result = multiChannel.bindInstagramToNiche(req.params.nicheId, username);
@@ -967,7 +990,7 @@ app.post('/api/niches/:nicheId/bind-instagram', (req, res) => {
 });
 
 // 6. API: Save Metadata
-app.post('/api/save-metadata', (req, res) => {
+app.post('/api/save-metadata', requirePermission(Permissions.EDIT_PROJECTS), (req, res) => {
   const { filename, metadata } = req.body;
   if (!filename || !metadata) {
     return res.status(400).json({ error: 'filename and metadata required' });
@@ -984,21 +1007,26 @@ app.post('/api/save-metadata', (req, res) => {
 });
 
 // 7. API: Upload Progress Status
-app.get('/api/upload-status', (req, res) => {
+app.get('/api/upload-status', requirePermission(Permissions.VIEW_PROJECTS), (req, res) => {
   res.json(activeUpload);
 });
 
-// 8. API: Upload or Schedule Video to YouTube
-app.post('/api/upload', async (req, res) => {
+// 8. API: Upload or Schedule Video to YouTube (Requires UPLOAD permission)
+app.post('/api/upload', requirePermission(Permissions.UPLOAD), async (req, res) => {
   const { filename, title, description, tags, categoryId, privacyStatus, publishAt, pinnedComment, autoPostComment = true } = req.body;
 
-  if (!filename) {
+  if (!filename || typeof filename !== 'string') {
     return res.status(400).json({ error: 'Filename is required' });
   }
 
-  const filePath = path.join(OUT_DIR, filename);
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).json({ error: `Video file ${filename} not found in out/` });
+  const safeFilename = path.basename(filename);
+  if (!safeFilename.toLowerCase().endsWith('.mp4')) {
+    return res.status(400).json({ error: 'Only .mp4 video files are allowed' });
+  }
+
+  const filePath = path.join(OUT_DIR, safeFilename);
+  if (!filePath.startsWith(OUT_DIR) || !fs.existsSync(filePath)) {
+    return res.status(404).json({ error: `Video file ${safeFilename} not found in out/` });
   }
 
   if (activeUpload.inProgress) {
@@ -1198,9 +1226,9 @@ app.post('/api/upload', async (req, res) => {
   }
 });
 
-// 8b. API: Post or Re-post Discussion Comment to YouTube Video
-app.post('/api/videos/:filename/comment', async (req, res) => {
-  const { filename } = req.params;
+// 8b. API: Post or Re-post Discussion Comment to YouTube Video (Requires PUBLISH permission)
+app.post('/api/videos/:filename/comment', requirePermission(Permissions.PUBLISH), async (req, res) => {
+  const filename = path.basename(req.params.filename);
   const { commentText } = req.body;
   const uploads = getUploadsRecord();
   const videoRecord = uploads[filename];
@@ -1254,7 +1282,7 @@ app.post('/api/videos/:filename/comment', async (req, res) => {
 // ========================================================
 
 // GET Instagram Session Status (active account or specific username)
-app.get('/api/instagram/status', async (req, res) => {
+app.get('/api/instagram/status', requirePermission(Permissions.VIEW_PROJECTS), async (req, res) => {
   try {
     const { username } = req.query;
     const status = await igPlaywright.checkSessionStatus(username);
@@ -1264,13 +1292,13 @@ app.get('/api/instagram/status', async (req, res) => {
   }
 });
 
-// GET All Connected Instagram Accounts
-app.get('/api/instagram/accounts', (req, res) => {
+// GET All Connected Instagram Accounts (Owner Only)
+app.get('/api/instagram/accounts', requireOwner, (req, res) => {
   res.json(igPlaywright.listAccounts());
 });
 
-// POST Switch Active Instagram Account
-app.post('/api/instagram/switch', (req, res) => {
+// POST Switch Active Instagram Account (Owner Only)
+app.post('/api/instagram/switch', requireOwner, (req, res) => {
   const { username } = req.body;
   if (!username) return res.status(400).json({ error: 'username is required' });
   const result = igPlaywright.switchActiveAccount(username);
@@ -1278,8 +1306,8 @@ app.post('/api/instagram/switch', (req, res) => {
   res.json(result);
 });
 
-// POST Start Interactive Playwright Login (Connect New or Additional IG Account)
-app.post('/api/instagram/login', async (req, res) => {
+// POST Start Interactive Playwright Login (Connect New or Additional IG Account - Owner Only)
+app.post('/api/instagram/login', requireOwner, async (req, res) => {
   try {
     activeUpload = {
       inProgress: true,
@@ -1311,8 +1339,8 @@ app.post('/api/instagram/login', async (req, res) => {
   }
 });
 
-// POST Disconnect Instagram Account
-app.post('/api/instagram/disconnect', (req, res) => {
+// POST Disconnect Instagram Account (Owner Only)
+app.post('/api/instagram/disconnect', requireOwner, (req, res) => {
   try {
     const { username } = req.body;
     const result = igPlaywright.disconnectAccount(username);
@@ -1322,17 +1350,22 @@ app.post('/api/instagram/disconnect', (req, res) => {
   }
 });
 
-// POST Upload Single Reel to Instagram (Supports targeting specific account)
-app.post('/api/instagram/upload', async (req, res) => {
+// POST Upload Single Reel to Instagram (Requires UPLOAD permission)
+app.post('/api/instagram/upload', requirePermission(Permissions.UPLOAD), async (req, res) => {
   const { filename, username, caption, shareToFeed = true, publishAt } = req.body;
 
-  if (!filename) {
+  if (!filename || typeof filename !== 'string') {
     return res.status(400).json({ error: 'filename is required' });
   }
 
-  const filePath = path.join(OUT_DIR, filename);
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).json({ error: `Video file ${filename} not found in out/` });
+  const safeFilename = path.basename(filename);
+  if (!safeFilename.toLowerCase().endsWith('.mp4')) {
+    return res.status(400).json({ error: 'Only .mp4 video files are allowed' });
+  }
+
+  const filePath = path.join(OUT_DIR, safeFilename);
+  if (!filePath.startsWith(OUT_DIR) || !fs.existsSync(filePath)) {
+    return res.status(404).json({ error: `Video file ${safeFilename} not found in out/` });
   }
 
   const baseName = filename.replace(/\.mp4$/i, '');
@@ -1423,10 +1456,10 @@ app.post('/api/instagram/upload', async (req, res) => {
 });
 
 // ========================================================
-// 8c. API: Unified Multi-Destination Publishing & Scheduling
+// 8c. API: Unified Multi-Destination Publishing & Scheduling (Requires PUBLISH permission)
 // Supports multiple YouTube Channels and multiple Instagram Accounts simultaneously!
 // ========================================================
-app.post('/api/publish-multi', async (req, res) => {
+app.post('/api/publish-multi', requirePermission(Permissions.PUBLISH), async (req, res) => {
   const {
     filename,
     platforms = ['youtube'],
@@ -1438,13 +1471,18 @@ app.post('/api/publish-multi', async (req, res) => {
     instagram = {},
   } = req.body;
 
-  if (!filename) {
+  if (!filename || typeof filename !== 'string') {
     return res.status(400).json({ error: 'filename is required' });
   }
 
-  const filePath = path.join(OUT_DIR, filename);
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).json({ error: `Video file ${filename} not found in out/` });
+  const safeFilename = path.basename(filename);
+  if (!safeFilename.toLowerCase().endsWith('.mp4')) {
+    return res.status(400).json({ error: 'Only .mp4 video files are allowed' });
+  }
+
+  const filePath = path.join(OUT_DIR, safeFilename);
+  if (!filePath.startsWith(OUT_DIR) || !fs.existsSync(filePath)) {
+    return res.status(404).json({ error: `Video file ${safeFilename} not found in out/` });
   }
 
   const isScheduling = timing === 'schedule' && !!publishAt;
@@ -1706,15 +1744,36 @@ app.post('/api/publish-multi', async (req, res) => {
     activeUpload.stage = isScheduling
       ? `🎉 Successfully scheduled release across ${totalDestinations} destination(s)!`
       : `🎉 Successfully published across ${totalDestinations} destination(s)!`;
+
+    // Emit event notification
+    notificationService.dispatch({
+      type: isScheduling ? 'PUBLISH_SCHEDULED' : 'PUBLISH_COMPLETED',
+      category: 'release',
+      title: isScheduling ? '📅 Video Scheduled for Release' : '🚀 Multi-Destination Release Live!',
+      body: `"${fileMeta.title || filename}" has been ${isScheduling ? 'scheduled' : 'published'} to ${totalDestinations} destination(s).`,
+      clip: filename,
+      tab: 'activity',
+      url: notificationService.formatDeepLink(filename, 'activity')
+    }).catch(() => {});
   } catch (err) {
     console.error('Multi-destination publish error:', err);
     activeUpload.inProgress = false;
     activeUpload.error = err.message || 'Publishing failed';
+
+    notificationService.dispatch({
+      type: 'PUBLISH_FAILED',
+      category: 'release',
+      title: '❌ Release Failed',
+      body: `Error publishing "${filename}": ${err.message}`,
+      clip: filename,
+      tab: 'activity',
+      url: notificationService.formatDeepLink(filename, 'activity')
+    }).catch(() => {});
   }
 });
 
-// 8d. API: Sovereign Niche 1-Click Publishing & Scheduling
-app.post('/api/niches/:nicheId/publish', async (req, res) => {
+// 8d. API: Sovereign Niche 1-Click Publishing & Scheduling (Requires PUBLISH permission)
+app.post('/api/niches/:nicheId/publish', requirePermission(Permissions.PUBLISH), async (req, res) => {
   const { nicheId } = req.params;
   const {
     filename,
@@ -1944,8 +2003,8 @@ app.post('/api/niches/:nicheId/publish', async (req, res) => {
 // 9. API: Settings & YouTube API Credentials Configuration
 // ========================================================
 
-// GET Settings status & active channel info (Multi-Project & Multi-Channel)
-app.get('/api/settings/youtube', async (req, res) => {
+// GET Settings status & active channel info (Multi-Project & Multi-Channel - Owner Only)
+app.get('/api/settings/youtube', requireOwner, async (req, res) => {
   const credReg = multiChannel.getCredentialsRegistry();
   const chReg = multiChannel.getChannelsRegistry();
   const activeChannel =
@@ -1989,8 +2048,8 @@ app.get('/api/settings/youtube', async (req, res) => {
   });
 });
 
-// POST Save YouTube client_secrets.json directly from UI paste/upload (Adds project to multi-credential registry)
-app.post('/api/settings/save-secrets', (req, res) => {
+// POST Save YouTube client_secrets.json directly from UI paste/upload (Owner Only)
+app.post('/api/settings/save-secrets', requireOwner, (req, res) => {
   let { jsonContent, name } = req.body;
   if (!jsonContent) {
     return res.status(400).json({ error: 'Please paste your client_secrets.json content.' });
@@ -2026,8 +2085,8 @@ app.post('/api/settings/save-secrets', (req, res) => {
   }
 });
 
-// POST Reset YouTube Credentials
-app.post('/api/settings/reset-secrets', (req, res) => {
+// POST Reset YouTube Credentials (Owner Only)
+app.post('/api/settings/reset-secrets', requireOwner, (req, res) => {
   try {
     if (fs.existsSync(CLIENT_SECRETS_PATH)) fs.unlinkSync(CLIENT_SECRETS_PATH);
     if (fs.existsSync(TOKEN_PATH)) fs.unlinkSync(TOKEN_PATH);
@@ -2062,7 +2121,7 @@ function savePipelineData(data) {
 }
 
 // 1. GET /api/pipeline?niche=health
-app.get('/api/pipeline', (req, res) => {
+app.get('/api/pipeline', requirePermission(Permissions.VIEW_PROJECTS), (req, res) => {
   const { niche } = req.query;
   const data = getPipelineData();
   if (niche && niche !== 'all' && data[niche]) {
@@ -2072,7 +2131,7 @@ app.get('/api/pipeline', (req, res) => {
 });
 
 // 2. POST /api/pipeline/topics - Add manual or suggested topic
-app.post('/api/pipeline/topics', (req, res) => {
+app.post('/api/pipeline/topics', requirePermission(Permissions.CREATE_PROJECTS), (req, res) => {
   const { title, niche = 'self_improvement', source = 'manual', status = 'upcoming' } = req.body;
   if (!title || !title.trim()) {
     return res.status(400).json({ error: 'Topic title is required' });
@@ -2100,7 +2159,7 @@ app.post('/api/pipeline/topics', (req, res) => {
 });
 
 // 3. PATCH /api/pipeline/topics/:id - Toggle completed or in_progress
-app.patch('/api/pipeline/topics/:id', (req, res) => {
+app.patch('/api/pipeline/topics/:id', requirePermission(Permissions.EDIT_PROJECTS), (req, res) => {
   const { id } = req.params;
   const { status, title, videoFilename } = req.body;
   const data = getPipelineData();
@@ -2134,7 +2193,7 @@ app.patch('/api/pipeline/topics/:id', (req, res) => {
 });
 
 // 4. DELETE /api/pipeline/topics/:id
-app.delete('/api/pipeline/topics/:id', (req, res) => {
+app.delete('/api/pipeline/topics/:id', requirePermission(Permissions.DELETE_PROJECTS), (req, res) => {
   const { id } = req.params;
   const data = getPipelineData();
   let deleted = false;
@@ -2156,8 +2215,8 @@ app.delete('/api/pipeline/topics/:id', (req, res) => {
   res.json({ success: true, id });
 });
 
-// 5. POST /api/pipeline/suggest - Enhanced Multi-Pillar AI Topic Ideation Engine
-app.post('/api/pipeline/suggest', (req, res) => {
+// 5. POST /api/pipeline/suggest - Enhanced Multi-Pillar AI Topic Ideation Engine (Requires GENERATE permission)
+app.post('/api/pipeline/suggest', requirePermission(Permissions.GENERATE), (req, res) => {
   const { niche = 'self_improvement', count = 2 } = req.body;
   const data = getPipelineData();
   if (!data[niche]) data[niche] = [];
@@ -2427,7 +2486,7 @@ function getPdfPageCount(pdfPath) {
 }
 
 // 1. GET /api/products - List all product PDFs in Products/
-app.get('/api/products', (req, res) => {
+app.get('/api/products', requirePermission(Permissions.VIEW_PROJECTS), (req, res) => {
   if (!fs.existsSync(PRODUCTS_DIR)) {
     return res.json({ products: [] });
   }
@@ -2469,30 +2528,115 @@ app.get('/api/products', (req, res) => {
 });
 
 // 2. POST /api/products/extract - Extract a specific page on demand
-app.post('/api/products/extract', (req, res) => {
+app.post('/api/products/extract', requirePermission(Permissions.CREATE_PROJECTS), (req, res) => {
   const { pdf, page } = req.body;
-  if (!pdf || !page) {
+  if (!pdf || !page || typeof pdf !== 'string') {
     return res.status(400).json({ error: 'Missing pdf or page number' });
   }
 
-  const { execSync } = require('child_process');
+  const safePdf = path.basename(pdf);
+  if (!safePdf.toLowerCase().endsWith('.pdf')) {
+    return res.status(400).json({ error: 'Invalid PDF file format' });
+  }
+
+  const cleanPage = parseInt(page, 10);
+  if (isNaN(cleanPage) || cleanPage < 1 || String(cleanPage) !== String(page).trim()) {
+    return res.status(400).json({ error: 'Page must be a positive integer' });
+  }
+
+  const pdfFullPath = path.join(PRODUCTS_DIR, safePdf);
+  if (!fs.existsSync(pdfFullPath)) {
+    return res.status(404).json({ error: `PDF file "${safePdf}" not found in Products/` });
+  }
+
+  const { execFileSync } = require('child_process');
   try {
     const scriptPath = path.resolve(__dirname, '..', 'scripts', 'extract_product_page.py');
-    const out = execSync(`python3 "${scriptPath}" --pdf "${pdf}" --page ${page}`, { encoding: 'utf-8' });
-    const stem = path.basename(pdf, path.extname(pdf));
+    const out = execFileSync('python3', [scriptPath, '--pdf', safePdf, '--page', String(cleanPage)], { encoding: 'utf-8' });
+    const stem = path.basename(safePdf, path.extname(safePdf));
     res.json({
       success: true,
       message: out.trim(),
-      publicPath: `products/${stem}/page_${page}.png`,
-      url: `/products/${stem}/page_${page}.png`
+      publicPath: `products/${stem}/page_${cleanPage}.png`,
+      url: `/products/${stem}/page_${cleanPage}.png`
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`\n========================================================`);
+const os = require('os');
+
+function getLocalIp() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return '127.0.0.1';
+}
+
+app.listen(PORT, async () => {
+  const localIp = getLocalIp();
+  console.log(`\n===================================================================`);
   console.log(`🚀 RightMotion Studio is running at: http://localhost:${PORT}`);
-  console.log(`========================================================\n`);
+  console.log(`===================================================================`);
+
+  try {
+    systemWatcher.start();
+  } catch (err) {
+    console.warn('[Watcher] Failed to start system watcher:', err.message);
+  }
+
+  // Auto-initialize Remote Access & Cloudflare Tunnel
+  try {
+    const store = require('./remote/store');
+    const { getTransport } = require('./remote/transport');
+    const ownerCap = store.getOrCreateOwnerCapability();
+    const state = store.getRemoteState();
+
+    const transport = getTransport(state.transportType || 'auto');
+    console.log(`🌐 Initializing Remote Access Transport (${transport.name})...`);
+
+    const startResult = await transport.start(PORT);
+    store.updateRemoteState({
+      enabled: true,
+      transportType: transport.name || 'cloudflare',
+      publicUrl: startResult.publicUrl,
+      transportStatus: startResult.success ? 'online' : 'error',
+      transportError: startResult.error || null,
+      enabledAt: new Date().toISOString(),
+      killSwitchActivated: false,
+    });
+
+    console.log(`\n📱 SMART PHONE COMPANION ACCESS (1-Tap Host Login):`);
+    console.log(`   ⚡ Local Hotspot / Direct LAN:`);
+    console.log(`      http://${localIp}:${PORT}/?auth=${ownerCap.ownerToken}`);
+    if (startResult.publicUrl) {
+      console.log(`   🌍 Worldwide Secure HTTPS Tunnel:`);
+      console.log(`      ${startResult.publicUrl}/?auth=${ownerCap.ownerToken}`);
+    }
+    console.log(`===================================================================\n`);
+  } catch (err) {
+    console.warn('[RemoteStartup] Remote transport notice:', err.message);
+  }
 });
+
+// Graceful cleanup
+function handleStudioShutdown() {
+  console.log('\n🛑 Shutting down RightMotion Studio & Remote Transports...');
+  try {
+    const { getTransport } = require('./remote/transport');
+    const store = require('./remote/store');
+    const state = store.getRemoteState();
+    const transport = getTransport(state.transportType);
+    transport.stop(PORT).catch(() => {});
+  } catch (e) {}
+  process.exit(0);
+}
+process.on('SIGINT', handleStudioShutdown);
+process.on('SIGTERM', handleStudioShutdown);
+

@@ -24,6 +24,7 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(ROOT_DIR / "scripts"))
 
 from orchestrator_registry import FRONTIER_REGISTRY
+from visual_concept import VisualConceptTranslator, VisualConceptPlan
 
 # Maximum allowed complexity scores per scene role
 BUDGET_CAPS = {
@@ -132,7 +133,12 @@ class CreativeOrchestrator:
         ]
 
     def infer_scene_intent(
-        self, pillar: Dict[str, Any], topic: str, fps: int = 60, story_model: Optional[Any] = None
+        self,
+        pillar: Dict[str, Any],
+        topic: str,
+        fps: int = 60,
+        story_model: Optional[Any] = None,
+        visual_concept: Optional[Any] = None,
     ) -> Dict[str, Any]:
         """Infer the narrative, psychological, and physical intent of a scene."""
         text = pillar["narrationText"].lower()
@@ -217,7 +223,7 @@ class CreativeOrchestrator:
             else f"What physical consequence illustrates '{core_idea[:45]}' before words finish?"
         )
 
-        return {
+        intent_res = {
             "sceneId": pillar["sceneId"],
             "startFrame": pillar["startFrame"],
             "endFrame": pillar["endFrame"],
@@ -230,12 +236,18 @@ class CreativeOrchestrator:
             "dominantMetaphor": metaphor,
             "compositionApproach": approach,
         }
+        if visual_concept and hasattr(visual_concept, "championCandidate"):
+            intent_res["visualMechanism"] = visual_concept.primaryMechanism
+            intent_res["visualConceptCandidate"] = visual_concept.championCandidate.conceptName
+            intent_res["centralTransformation"] = visual_concept.centralTransformation
+        return intent_res
 
     def evaluate_capabilities(
         self,
         intent: Dict[str, Any],
         prev_plan: Optional[Dict[str, Any]] = None,
         story_model: Optional[Any] = None,
+        visual_concept: Optional[Any] = None,
     ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], Dict[str, Any]]:
         """
         Multi-dimensional capability selection adhering to:
@@ -342,6 +354,14 @@ class CreativeOrchestrator:
                 candidates.add("F1")
             if sig_map.get("F5", {}).get("signal") == "HIGH":
                 candidates.add("F5")
+
+        # Ingest Visual Concept Translation required frontiers
+        if visual_concept and hasattr(visual_concept, "championCandidate"):
+            # The visual mechanism primarily drives scene_2_logic and applicable escalation/solution
+            if scene_id == "scene_2_logic" or (scene_id == "scene_3_solution" and tone != "sudden_epiphany"):
+                for req_f in visual_concept.championCandidate.requiredFrontiers:
+                    if req_f != "F_BASE" and req_f not in disabled_frontiers:
+                        candidates.add(req_f)
 
         # Add forced frontiers
         for f in forced_frontiers:
@@ -475,13 +495,18 @@ class CreativeOrchestrator:
                 })
 
             elif f_code == "F7":
+                f7_components = ["CausalWorld", "CausalNode", "ThresholdReactor", "useNodeState"]
+                if visual_concept and hasattr(visual_concept, "championCandidate"):
+                    for mc in visual_concept.championCandidate.mappedComponents:
+                        if mc not in f7_components:
+                            f7_components.append(mc)
                 active.append({
                     "frontierCode": "F7",
                     "capabilityConcept": "causal_state_machine_with_narrative_memory",
                     "intensity": "MEDIUM",
                     "scope": "SCENE_LEVEL",
                     "reason": "Discrete state transitions and narrative memory tracking cause-and-effect across frames.",
-                    "mappedComponents": ["CausalWorld", "CausalNode", "ThresholdReactor", "useNodeState"],
+                    "mappedComponents": f7_components,
                 })
 
         # -------------------------------------------------------------
@@ -497,10 +522,15 @@ class CreativeOrchestrator:
 
         # If score exceeds budget, prune lowest-priority non-forced capability
         if score > budget_cap:
-            # Sort active non-forced items by complexity weight descending
+            champion_reqs = set(visual_concept.championCandidate.requiredFrontiers) if visual_concept and hasattr(visual_concept, "championCandidate") else set()
             non_forced = [a for a in active if a["frontierCode"] not in forced_frontiers and a["frontierCode"] != "F_BASE"]
+            # Prune non-champion frontiers first, then by lower importance
+            non_forced.sort(key=lambda a: (
+                1 if a["frontierCode"] in champion_reqs else 0,
+                self.registry[a["frontierCode"]]["complexity_weight"] * INTENSITY_MULTIPLIERS.get(a["intensity"], 1.0)
+            ))
             if non_forced:
-                pruned = non_forced[-1] # lowest priority candidate
+                pruned = non_forced[0] # lowest priority candidate
                 active.remove(pruned)
                 p_code = pruned["frontierCode"]
                 rejected.append({
@@ -546,14 +576,21 @@ class CreativeOrchestrator:
             except Exception:
                 story_model = None
 
+        # Visual Concept Translation Layer
+        try:
+            vc_translator = VisualConceptTranslator()
+            visual_concept = vc_translator.translate(topic=topic, script=script, story_model=story_model)
+        except Exception:
+            visual_concept = None
+
         pillars = self.analyze_script_pillars(script, transcript, fps, story_model=story_model)
         scene_plans = []
         total_score = 0.0
 
         prev_plan = None
         for pillar in pillars:
-            intent = self.infer_scene_intent(pillar, topic, fps, story_model=story_model)
-            active, rejected, budget = self.evaluate_capabilities(intent, prev_plan, story_model=story_model)
+            intent = self.infer_scene_intent(pillar, topic, fps, story_model=story_model, visual_concept=visual_concept)
+            active, rejected, budget = self.evaluate_capabilities(intent, prev_plan, story_model=story_model, visual_concept=visual_concept)
             total_score += budget["calculatedScore"]
 
             primary_visual = "Editorial Hero Card + Judy Grounded Close-up" if pillar["sceneId"] == "scene_1_hook" else (
@@ -589,7 +626,7 @@ class CreativeOrchestrator:
 
         total_frames = pillars[-1]["endFrame"]
 
-        return {
+        plan_res = {
             "clipName": clip_name,
             "topic": topic,
             "totalFrames": total_frames,
@@ -598,12 +635,24 @@ class CreativeOrchestrator:
             "storyModel": story_model.to_dict() if hasattr(story_model, "to_dict") else story_model,
             "scenePlans": scene_plans,
         }
+        if visual_concept:
+            plan_res["visualConcept"] = visual_concept.to_dict()
+        return plan_res
 
     def format_plan_summary(self, plan: Dict[str, Any]) -> str:
         """Format the creative plan into a crisp, readable executive markdown summary."""
         lines = []
         lines.append(f"# 🎬 Frontier #0 Creative Plan: {plan['clipName']}")
         lines.append(f"**Topic**: \"{plan['topic']}\" | **Rating**: `{plan['overallComplexityRating']}` | **Frames**: {plan['totalFrames']} (60 FPS)\n")
+
+        if "visualConcept" in plan:
+            vc = plan["visualConcept"]
+            champ = vc.get("championCandidate", {})
+            lines.append(f"### 💡 Visual Concept Translation: **{champ.get('conceptName', 'Primary Concept')}**")
+            lines.append(f"- **Primary Mechanism**: `{vc.get('primaryMechanism', '').upper()}` ({champ.get('metaphorLevel', '')})")
+            lines.append(f"- **Central Transformation**: *{vc.get('centralTransformation', '')}*")
+            lines.append(f"- **Cause → Consequence**: *{vc.get('cause', '')}* ➔ *{vc.get('visibleConsequence', '')}*")
+            lines.append(f"- **Persistent State**: *{vc.get('persistentState', '')}*\n")
 
         for sp in plan["scenePlans"]:
             sc_id = sp["sceneId"].upper()

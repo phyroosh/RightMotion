@@ -10,6 +10,7 @@ import {
 import { WordTimestamp } from "../../types";
 import { AnimatedSlashStrike, CameraShake } from "../../components/kinetic_text";
 import { CinematicIllustrationCard } from "../../components/CinematicIllustrationCard";
+import { ThresholdBoundaryShift, ResistancePathway } from "../../components/transformation";
 
 interface CanvasProps {
   transcript: WordTimestamp[];
@@ -76,6 +77,7 @@ export const SmallCompromisesCanvas: React.FC<CanvasProps> = () => {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
+  const s3aNormSpring = springFast(1160);
   const baselineShiftProgress = interpolate(frame, [1170, 1220], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
@@ -273,63 +275,23 @@ export const SmallCompromisesCanvas: React.FC<CanvasProps> = () => {
           <div className="w-full max-w-[820px] flex flex-col gap-6">
             <div className="w-full flex items-center justify-between">
               <span className="text-[36px] font-mono font-bold text-slate-500 uppercase">
-                RULE DYNAMICS
+                MECHANISM // THRESHOLD RECALIBRATION
               </span>
               <span className="text-[36px] font-mono font-black text-rose-600 uppercase">
-                RECALIBRATION
+                ACTION OVER DISPLAY
               </span>
             </div>
 
-            {/* Main Interactive Standard Box */}
-            <div className="w-full p-8 rounded-3xl bg-white border-[3px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] flex flex-col gap-6">
-              <div className="flex items-center justify-between border-b-[2px] border-slate-100 pb-4">
-                <span className="text-[40px] font-mono font-black text-[#090d16] uppercase">
-                  ORIGINAL STANDARD
-                </span>
-                <span className="text-[36px] font-mono font-bold text-slate-500 uppercase">
-                  INITIAL STATE
-                </span>
-              </div>
-
-              {/* State 1 vs State 2 */}
-              <div className="w-full flex flex-col gap-4">
-                <div className="w-full p-5 rounded-2xl bg-slate-100 border-[2px] border-slate-300 flex items-center justify-between">
-                  <span className="text-[44px] font-black text-slate-700 uppercase">
-                    NON-NEGOTIABLE
-                  </span>
-                  <span className="text-[36px] font-mono font-bold text-slate-500">
-                    PRE-EXCEPTION
-                  </span>
-                </div>
-
-                {/* Mutated state: OPTIONAL (Frame 870) */}
-                {frame >= 810 && (
-                  <CameraShake
-                    triggerFrames={[870]}
-                    intensity={12}
-                  >
-                    <div
-                      className="w-full p-6 rounded-2xl bg-[#e11d48] border-[3px] border-slate-950 text-white flex items-center justify-between shadow-xl"
-                      style={{
-                        opacity: interpolate(s2bOptionalSpring, [0, 1], [0, 1]),
-                        transform: `scale(${interpolate(s2bOptionalSpring, [0, 1], [0.94, 1])})`,
-                      }}
-                    >
-                      <div className="flex flex-col">
-                        <span className="text-[36px] font-mono font-bold text-rose-200 uppercase">
-                          RECALIBRATED TO
-                        </span>
-                        <span className="text-[64px] font-black uppercase tracking-tight text-white">
-                          OPTIONAL
-                        </span>
-                      </div>
-                      <span className="text-[36px] font-mono font-black text-rose-200 uppercase">
-                        DOOR OPEN
-                      </span>
-                    </div>
-                  </CameraShake>
-                )}
-              </div>
+            {/* Live Physical Boundary Displacement Primitive */}
+            <div className="w-full p-8 pb-12 rounded-3xl bg-white border-[3px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] flex flex-col gap-6">
+              <ThresholdBoundaryShift
+                triggerFrame={800}
+                initialLabel="STRICT STANDARD"
+                impulseLabel="JUST THIS ONCE"
+                mutatedLabel="RECALIBRATED BASELINE"
+                displacementPx={170}
+                width={756}
+              />
             </div>
           </div>
         </div>
@@ -350,66 +312,44 @@ export const SmallCompromisesCanvas: React.FC<CanvasProps> = () => {
           <div className="w-full max-w-[820px] flex flex-col gap-6">
             <div className="w-full flex items-center justify-between">
               <span className="text-[36px] font-mono font-bold text-slate-500 uppercase">
-                RESISTANCE PROFILE
+                EROSION // WORN PATHWAY DYNAMICS
               </span>
-              <span className="text-[36px] font-mono font-black text-amber-600 uppercase">
-                FRICTION LOSS
+              <span className="text-[36px] font-mono font-black text-rose-600 uppercase">
+                −52% RESISTANCE
               </span>
             </div>
 
-            {/* Friction Comparison Card */}
-            <div className="w-full p-8 rounded-3xl bg-white border-[3px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] flex flex-col gap-6">
-              {/* Pass 01 */}
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[40px] font-black text-slate-700 uppercase">
-                    1ST COMPROMISE
-                  </span>
-                  <span className="text-[38px] font-mono font-black text-slate-900">
-                    100% FRICTION
-                  </span>
-                </div>
-                <div className="w-full h-8 rounded-full bg-slate-100 overflow-hidden border border-slate-300">
-                  <div className="h-full bg-slate-800 w-full" />
-                </div>
-              </div>
+            {/* Live Physical Resistance Pathway & Friction Decay Primitive */}
+            <ResistancePathway
+              pass1StartFrame={960}
+              pass1Duration={60}
+              pass2StartFrame={1040}
+              pass2Duration={40}
+              width={820}
+            />
 
-              {/* Pass 02: Collapses to 48% live on spoken audio (Frame 1040) */}
-              <div className="flex flex-col gap-2 pt-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[40px] font-black text-rose-600 uppercase">
-                    2ND COMPROMISE
-                  </span>
-                  <span className="text-[44px] font-mono font-black text-rose-600">
-                    {Math.round(frictionProgress)}% FRICTION
-                  </span>
-                </div>
-                <div className="w-full h-8 rounded-full bg-slate-100 overflow-hidden border border-slate-300">
-                  <div
-                    className="h-full bg-rose-600 transition-all"
-                    style={{ width: `${frictionProgress}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* Baseline shift notification (Frame 1170) */}
-              {frame >= 1170 && (
-                <div
-                  className="mt-2 p-5 rounded-2xl bg-slate-900 text-white flex items-center justify-between shadow-lg"
-                  style={{
-                    opacity: baselineShiftProgress,
-                    transform: `translateY(${(1 - baselineShiftProgress) * 15}px)`,
-                  }}
-                >
+            {/* Live Baseline Normalization Notification with Ghost Memory Line */}
+            {frame >= 1160 && (
+              <div
+                className="w-full p-6 rounded-2xl bg-slate-900 text-white border-[2.5px] border-slate-950 flex flex-col gap-2 shadow-2xl"
+                style={{
+                  opacity: interpolate(s3aNormSpring, [0, 1], [0, 1]),
+                  transform: `translateY(${interpolate(s3aNormSpring, [0, 1], [20, 0])}px)`,
+                }}
+              >
+                <div className="w-full flex items-center justify-between border-b border-slate-700 pb-2">
                   <span className="text-[36px] font-mono font-bold text-amber-400 uppercase">
-                    NEW BASELINE
+                    NORMALIZATION COMPLETE
                   </span>
-                  <span className="text-[40px] font-black uppercase text-white">
-                    EXCEPTION = STANDARD
+                  <span className="text-[36px] font-mono font-bold text-slate-400 uppercase">
+                    NEW STANDARD
                   </span>
                 </div>
-              )}
-            </div>
+                <div className="text-[44px] font-black uppercase text-white tracking-tight">
+                  THE EXCEPTION BECOMES THE BASELINE
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}

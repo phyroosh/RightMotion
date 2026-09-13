@@ -22,6 +22,7 @@ NC='\033[0m'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
+export PATH="$HOME/.local/bin:$PATH"
 
 MODE="full"
 for arg in "$@"; do
@@ -50,8 +51,10 @@ if [ "$MODE" = "direct" ]; then
     fi
 
     echo -e "${CYAN}=========================================================${NC}"
-    echo -e "${BOLD}⚡ Starting RightMotion Studio directly at http://localhost:4000${NC}"
+    echo -e "${BOLD}⚡ Starting RightMotion Studio & Remote Companion Server...${NC}"
     echo -e "${CYAN}=========================================================${NC}"
+    echo -e "Local URL:  ${CYAN}${BOLD}http://localhost:4000${NC}"
+    echo -e "Mobile URL: Remote Access & Tunnel initializing..."
     echo -e "Press ${BOLD}Ctrl+C${NC} at any time to stop the server."
     echo ""
 
@@ -120,6 +123,14 @@ else
     echo -e "  [✓] FFmpeg:   ${GREEN}${FFMPEG_VER}${NC}"
 fi
 
+# 5. Check Cloudflare Tunnel (cloudflared) for mobile remote connectivity
+if command -v cloudflared >/dev/null 2>&1; then
+    CF_VER=$(cloudflared --version 2>/dev/null | awk '{print $1, $2, $3}')
+    echo -e "  [✓] Remote Tunnel: ${GREEN}${CF_VER} (Ready for mobile phone connectivity)${NC}"
+else
+    echo -e "  [!] Remote Tunnel: ${YELLOW}cloudflared not detected (Local Hotspot LAN mode active)${NC}"
+fi
+
 # Halt if critical system tools are missing
 if [ $HAS_ERRORS -ne 0 ]; then
     echo ""
@@ -181,9 +192,10 @@ fi
 # 8. Launch Server
 echo ""
 echo -e "${GREEN}===================================================================${NC}"
-echo -e "${BOLD}✅ All dependencies verified! Starting RightMotion Studio Dashboard...${NC}"
+echo -e "${BOLD}✅ All dependencies verified! Starting RightMotion Studio & Companion...${NC}"
 echo -e "${GREEN}===================================================================${NC}"
-echo -e "Local URL:  ${CYAN}${BOLD}http://localhost:4000${NC}"
+echo -e "Local URL:   ${CYAN}${BOLD}http://localhost:4000${NC}"
+echo -e "Mobile URL:  Remote Access & Tunnel initializing automatically..."
 echo -e "Press ${BOLD}Ctrl+C${NC} at any time to stop the server."
 echo ""
 

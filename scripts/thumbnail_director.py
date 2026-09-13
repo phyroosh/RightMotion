@@ -57,15 +57,20 @@ class ThumbnailDirector:
 
         # Frontier S Contract (Section 36): Consume thumbnailSignals directly without re-reading
         if story_model is not None:
-            ts = getattr(story_model, "thumbnailSignals", None)
-            st = getattr(story_model, "story", None)
+            if isinstance(story_model, dict):
+                ts = story_model.get("thumbnailSignals")
+                st = story_model.get("story")
+            else:
+                ts = getattr(story_model, "thumbnailSignals", None)
+                st = getattr(story_model, "story", None)
+
             if ts and st:
-                curiosity_gap = ts.coreCuriosity if hasattr(ts, "coreCuriosity") else ts.get("coreCuriosity", "")
-                tension = ts.visualContradiction if hasattr(ts, "visualContradiction") else ts.get("visualContradiction", "")
-                core_idea = st.coreIdea if hasattr(st, "coreIdea") else st.get("coreIdea", "")
-                trans = ts.mostMemorableTransformation if hasattr(ts, "mostMemorableTransformation") else ts.get("mostMemorableTransformation", "")
-                hooks = ts.textHookCandidates if hasattr(ts, "textHookCandidates") else ts.get("textHookCandidates", [])
-                archetype = ts.recommendedArchetype if hasattr(ts, "recommendedArchetype") else ts.get("recommendedArchetype", "impossible_metaphor")
+                curiosity_gap = ts.get("coreCuriosity", "") if isinstance(ts, dict) else getattr(ts, "coreCuriosity", "")
+                tension = ts.get("visualContradiction", "") if isinstance(ts, dict) else getattr(ts, "visualContradiction", "")
+                core_idea = st.get("coreIdea", "") if isinstance(st, dict) else getattr(st, "coreIdea", "")
+                trans = ts.get("mostMemorableTransformation", "") if isinstance(ts, dict) else getattr(ts, "mostMemorableTransformation", "")
+                hooks = ts.get("textHookCandidates", []) if isinstance(ts, dict) else getattr(ts, "textHookCandidates", [])
+                archetype = ts.get("recommendedArchetype", "impossible_metaphor") if isinstance(ts, dict) else getattr(ts, "recommendedArchetype", "impossible_metaphor")
 
                 # Map to primary domain
                 combined = f"{clean_topic} {core_idea} {tension}".lower()
@@ -90,6 +95,8 @@ class ThumbnailDirector:
                     "niche": niche,
                     "textHookCandidates": hooks,
                     "transformation": trans,
+                    "recommendedArchetype": archetype,
+                    "hasStoryModel": True,
                 }
 
         clean_script = re.sub(r"\{\s*[^}]+\s*\}", "", script).strip()
@@ -157,9 +164,91 @@ class ThumbnailDirector:
         Generates 3 to 5 genuinely diverse visual concepts exploring distinct
         metaphors, composition archetypes, subject roles, and visual mechanisms.
         """
-        domain = foundation["domain"]
-        topic = foundation["topic"]
+        domain = foundation.get("domain", "subconscious_paradox")
+        topic = foundation.get("topic", "")
         concepts: List[Dict[str, Any]] = []
+
+        # -------------------------------------------------------------
+        # 0. FRONTIER S CONVERGENCE: Direct Story Model Consumption
+        # -------------------------------------------------------------
+        if foundation.get("hasStoryModel") and foundation.get("textHookCandidates"):
+            hooks = foundation.get("textHookCandidates", [])
+            hook_1 = hooks[0] if len(hooks) > 0 else "THE TRAP"
+            hook_2 = hooks[1] if len(hooks) > 1 else (hooks[0] if len(hooks) > 0 else "THE SHIFT")
+            hook_3 = hooks[2] if len(hooks) > 2 else (hooks[-1] if len(hooks) > 0 else "NEW RULE")
+
+            trans = foundation.get("transformation") or foundation.get("emotionalTension") or f"Visual manifestation of {topic}"
+            tension = foundation.get("emotionalTension", "")
+            gap = foundation.get("curiosityGap") or f"What unseen mechanism governs {topic}?"
+            rec_archetype = foundation.get("recommendedArchetype", "impossible_metaphor")
+
+            def _format_title(h: str, prefix: str = "The") -> str:
+                h_clean = h.strip()
+                if h_clean.lower().startswith(("the ", "a ", "an ")):
+                    return h_clean.title()
+                return f"{prefix} {h_clean.title()}"
+
+            # Concept 1: The Primary Impossible Story Metaphor (Highest Conviction)
+            concepts.append({
+                "conceptId": "concept_1_story_metaphor",
+                "title": _format_title(hook_1),
+                "archetype": rec_archetype,
+                "visualMetaphor": trans,
+                "viewerQuestion": gap,
+                "focalSubject": f"Physical narrative manifestation: {trans.split('.')[0]}",
+                "subjectRole": "experiencing_problem",
+                "hasPerson": True,
+                "personRole": "grounded_subject",
+                "textHook": hook_1,
+                "textStrategy": "minimal_punch_word",
+                "colorMood": "luminous_off_white_with_rose_accent" if foundation.get("niche") == "self_improvement" else "obsidian_void",
+                "accentColor": "#f43f5e" if any(k in domain for k in ["avoidance", "compromise", "boundary", "cognitive"]) else "#fbbf24",
+                "groundColor": "#f8fafc" if foundation.get("niche") == "self_improvement" else "#080c14",
+                "visualMechanism": "subconscious_threshold_shift",
+                "assetStrategy": "bespoke_ai_hero_illustration",
+            })
+
+            # Concept 2: Scale Constraint / Spatial Tension
+            concepts.append({
+                "conceptId": "concept_2_scale_constraint",
+                "title": _format_title(hook_2, prefix="The Unseen"),
+                "archetype": "scale_constraint",
+                "visualMetaphor": f"A micro-scale concession magnified into an overwhelming architectural divide: {tension}",
+                "viewerQuestion": "At what exact point did the exception become the rule?",
+                "focalSubject": "Severe architectural divergence showing micro-shift hardening into permanent boundary",
+                "subjectRole": "trapped_by_options",
+                "hasPerson": True,
+                "personRole": "small_protagonist",
+                "textHook": hook_2,
+                "textStrategy": "minimal_punch_word",
+                "colorMood": "obsidian_void_with_amber_burn" if foundation.get("niche") != "self_improvement" else "luminous_slate_with_contrast",
+                "accentColor": "#f59e0b",
+                "groundColor": "#080c14" if foundation.get("niche") != "self_improvement" else "#fbfbfd",
+                "visualMechanism": "scale_bifurcation",
+                "assetStrategy": "bespoke_ai_hero_illustration",
+            })
+
+            # Concept 3: Minimal Tactile Object (Pure Anomaly)
+            concepts.append({
+                "conceptId": "concept_3_minimal_object",
+                "title": _format_title(hook_3),
+                "archetype": "minimal_object",
+                "visualMetaphor": f"An ultra-clean tactile measurement gauge or stone block where a single micro-fracture permanently displaces the baseline.",
+                "viewerQuestion": "How does one small fracture compromise the entire structure?",
+                "focalSubject": "Tactile solitary subject with a glowing hairline displacement",
+                "subjectRole": "none",
+                "hasPerson": False,
+                "personRole": "none",
+                "textHook": hook_3,
+                "textStrategy": "minimal_punch_word",
+                "colorMood": "pure_minimal_apple_studio",
+                "accentColor": "#f43f5e",
+                "groundColor": "#ffffff",
+                "visualMechanism": "equilibrium_displacement",
+                "assetStrategy": "bespoke_ai_hero_illustration",
+            })
+
+            return concepts
 
         if domain == "cognitive_load":
             # Concept 1: Impossible Physical Metaphor (Cranial Overflow)
@@ -296,6 +385,61 @@ class ThumbnailDirector:
                 "accentColor": "#f43f5e",
                 "groundColor": "#ffffff",
                 "visualMechanism": "physical_breaking_point",
+                "assetStrategy": "bespoke_ai_hero_illustration",
+            })
+        elif domain == "avoidance_loop":
+            concepts.append({
+                "conceptId": "concept_1_micro_fracture",
+                "title": "The Microscopic Fault Line",
+                "archetype": "impossible_metaphor",
+                "visualMetaphor": "A massive architectural boundary wall splitting cleanly along an invisible hairline fracture caused by a single tiny concession.",
+                "viewerQuestion": "How does one tiny exception collapse the entire standard?",
+                "focalSubject": "Imposing monolithic wall splitting along glowing fracture",
+                "subjectRole": "experiencing_problem",
+                "hasPerson": True,
+                "personRole": "grounded_subject",
+                "textHook": "THE SLIPPAGE",
+                "textStrategy": "minimal_punch_word",
+                "colorMood": "luminous_off_white_with_rose_accent",
+                "accentColor": "#f43f5e",
+                "groundColor": "#f8fafc",
+                "visualMechanism": "fracturing_boundary",
+                "assetStrategy": "bespoke_ai_hero_illustration",
+            })
+            concepts.append({
+                "conceptId": "concept_2_domino_cascade",
+                "title": "The Silent Baseline Shift",
+                "archetype": "scale_constraint",
+                "visualMetaphor": "A pristine line of identical stone pillars where the first tilted block silently forces every subsequent pillar to adopt the tilted angle as the new normal.",
+                "viewerQuestion": "At what point did the exception become the rule?",
+                "focalSubject": "Curved path of pillars adopting a tilted baseline",
+                "subjectRole": "trapped_in_loop",
+                "hasPerson": True,
+                "personRole": "small_protagonist",
+                "textHook": "ONE COMPROMISE",
+                "textStrategy": "minimal_punch_word",
+                "colorMood": "obsidian_void_with_amber_burn",
+                "accentColor": "#f59e0b",
+                "groundColor": "#080c14",
+                "visualMechanism": "baseline_drift",
+                "assetStrategy": "bespoke_ai_hero_illustration",
+            })
+            concepts.append({
+                "conceptId": "concept_3_threshold_breach",
+                "title": "The Broken Standard",
+                "archetype": "minimal_object",
+                "visualMetaphor": "A single tactile measurement gauge where a single red micro-notch has permanently shifted the zero mark.",
+                "viewerQuestion": "Why is the baseline permanently moved?",
+                "focalSubject": "Tactile gauge with displaced baseline needle",
+                "subjectRole": "none",
+                "hasPerson": False,
+                "personRole": "none",
+                "textHook": "NEW BASELINE",
+                "textStrategy": "minimal_punch_word",
+                "colorMood": "apple_studio_white_with_rose",
+                "accentColor": "#f43f5e",
+                "groundColor": "#ffffff",
+                "visualMechanism": "baseline_reset",
                 "assetStrategy": "bespoke_ai_hero_illustration",
             })
 
@@ -440,8 +584,9 @@ class ThumbnailDirector:
         script: str = "",
         niche: str = "self_improvement",
         aspect_ratio: str = "9:16",
+        story_model: Optional[Any] = None,
     ) -> Dict[str, Any]:
-        foundation = self.analyze_concept_foundation(topic, script, niche)
+        foundation = self.analyze_concept_foundation(topic, script, niche, story_model=story_model)
         candidates = self.generate_candidate_concepts(foundation, aspect_ratio)
         critiqued = self.critique_and_score_concepts(candidates, foundation)
 
@@ -556,11 +701,11 @@ class ThumbnailDirector:
             "curiosityMechanism": {
                 "type": chosen["visualMechanism"],
                 "gap": chosen["viewerQuestion"],
-                "resolutionInVideo": "Video explains Zeigarnik effect and how offloading tasks to external paper closes mental tabs.",
+                "resolutionInVideo": f"Video resolves how {foundation['coreIdea'].lower()} operates through {chosen['visualMetaphor'].lower()}.",
             },
             "truthfulnessCheck": {
                 "isTruthful": True,
-                "rationale": "Directly symbolizes cognitive RAM depletion from open task loops without sensationalism or misleading claims.",
+                "rationale": f"Directly symbolizes {foundation['coreIdea'].lower()} through {chosen['visualMetaphor'].lower()} without sensationalism or misleading claims.",
             },
             "validationResults": {
                 "status": "APPROVED",
@@ -583,12 +728,26 @@ def main():
     parser.add_argument("--script", default="", help="Video voiceover text or hook")
     parser.add_argument("--niche", default="self_improvement", help="Channel niche")
     parser.add_argument("--aspect", choices=["9:16", "16:9"], default="9:16", help="Aspect ratio")
+    parser.add_argument("--story-model", default="", help="Optional path to story_model.json")
     parser.add_argument("--out", default="", help="Optional output JSON path")
     parser.add_argument("--json", action="store_true", help="Print JSON manifest to stdout")
     args = parser.parse_args()
 
+    story_model_data = None
+    if args.story_model and Path(args.story_model).exists():
+        try:
+            story_model_data = json.loads(Path(args.story_model).read_text(encoding="utf-8"))
+        except Exception as e:
+            print(f"Warning: Failed to load story model from {args.story_model}: {e}")
+
     director = ThumbnailDirector()
-    manifest = director.orchestrate(args.topic, script=args.script, niche=args.niche, aspect_ratio=args.aspect)
+    manifest = director.orchestrate(
+        args.topic,
+        script=args.script,
+        niche=args.niche,
+        aspect_ratio=args.aspect,
+        story_model=story_model_data,
+    )
 
     if args.out:
         out_path = Path(args.out)

@@ -1,0 +1,326 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "The internet convinced you dopamine is a fuel tank you drain by looking at your phone. That is pure fiction. Dopamine isn't pleasure—it is the molecule of anticipation. When you scroll, your brain isn't out of dopamine; algorithms artificially raised your baseline reward threshold. You didn't lose motivation; ordinary reality just cannot compete with instant novelty. Stop extreme seven-day detoxes. Simply delay your first high-stimulation app by sixty minutes every morning, and bundle effort before reward. Lower the threshold, and deep focus returns instantly.",
+    "topic": "Dopamine: Reality vs Internet Larp",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 84,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "2284c6de44a438d916cb56b6c008ca9d35750bccb912fecd9c9622bc30a18240"
+  },
+  "story": {
+    "coreIdea": "Action precedes neurochemical motivation rather than waiting for emotional readiness.",
+    "centralClaim": "Action creates motivation far more reliably than motivation creates action.",
+    "viewerPromise": "Learn how to bypass emotional resistance by lowering starting friction.",
+    "viewerQuestion": "Why does waiting to feel motivated guarantee inaction?",
+    "narrativeArchitecture": "MISCONCEPTION -> NEUROLOGICAL_INVERSION -> TACTICAL_SHIFT"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "The internet convinced you dopamine is a fuel tank you drain by looking at your phone.",
+      "sentenceIndices": [
+        0
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "Why does waiting to feel motivated guarantee inaction?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "That is pure fiction. Dopamine isn't pleasure—it is the molecule of anticipation. When you scroll, your brain isn't out of dopamine; algorithms artificially raised your baseline reward threshold.",
+      "sentenceIndices": [
+        1,
+        2,
+        3
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "You didn't lose motivation; ordinary reality just cannot compete with instant novelty. Stop extreme seven-day detoxes. Simply delay your first high-stimulation app by sixty minutes every morning, and bundle effort before reward.",
+      "sentenceIndices": [
+        4,
+        5,
+        6
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "Lower the threshold, and deep focus returns instantly.",
+      "sentenceIndices": [
+        7
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "Dopamine: Reality Vs Internet Larp"
+    ],
+    "entities": [
+      "Editorial Focus Card"
+    ],
+    "persistentObjects": []
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "The internet convinced you dopamine is a fuel tank you drain by looking at your phone.",
+        "type": "psychological"
+      },
+      {
+        "statement": "That is pure fiction.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Dopamine isn't pleasure—it is the molecule of anticipation.",
+        "type": "psychological"
+      },
+      {
+        "statement": "When you scroll, your brain isn't out of dopamine; algorithms artificially raised your baseline reward threshold.",
+        "type": "psychological"
+      },
+      {
+        "statement": "You didn't lose motivation; ordinary reality just cannot compete with instant novelty.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Stop extreme seven-day detoxes.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Simply delay your first high-stimulation app by sixty minutes every morning, and bundle effort before reward.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Lower the threshold, and deep focus returns instantly.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": []
+  },
+  "causalGraph": {
+    "nodes": [
+      {
+        "id": "cognitive_bandwidth",
+        "initialCondition": "NOMINAL",
+        "reversibility": "RECOVERABLE"
+      },
+      {
+        "id": "open_task_counter",
+        "initialCondition": "EMPTY",
+        "reversibility": "REVERSIBLE"
+      }
+    ],
+    "chains": [
+      {
+        "cause": "Unfinished task left open in attention",
+        "mechanism": "Subconscious loop continuously holds task memory active",
+        "event": "TASK_UNFINISHED",
+        "consequence": "Neural RAM leakage drains working memory capacity",
+        "resultingState": "STRAINED"
+      },
+      {
+        "cause": "Accumulation of 5+ unclosed loops",
+        "mechanism": "Bandwidth saturation exceeds processing capacity",
+        "event": "THRESHOLD_CROSSING",
+        "consequence": "System experiences cognitive paralysis / fatigue",
+        "resultingState": "CRITICAL"
+      }
+    ],
+    "thresholds": [
+      {
+        "source": "open_task_counter",
+        "condition": "count >= threshold_capacity",
+        "consequence": "Trigger SYSTEM_OVERLOAD and transition cognitive_bandwidth to CRITICAL"
+      }
+    ]
+  },
+  "stateModel": {
+    "initialState": "CONSCIOUS_AGENCY",
+    "intermediateStates": [
+      "UNNOTICED_EROSION",
+      "NORMALIZED_TOLERANCE"
+    ],
+    "finalState": "HARDENED_AUTOMATICITY",
+    "dynamics": "transformation"
+  },
+  "temporalModel": {
+    "pacing": "accelerating",
+    "hasRepetition": false,
+    "repetitionNature": "none",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "You didn't lose motivation; ordinary reality just cannot com",
+      "approximateTimestampSec": 16.1,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "DRAIN",
+      "Dopamine",
+      "BASELINE",
+      "Stop",
+      "Simply",
+      "Lower"
+    ],
+    "secondary": [
+      "instantly"
+    ]
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "contrast",
+      "physicalDescription": "A crisp horizontal baseline marker subtly shifting downward under a light weight",
+      "rationale": "Visually embodies the insidious nature of micro-concessions."
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "opportunityType": "reveal",
+      "physicalDescription": "Live marker cut slicing through text with AnimatedSlashStrike on the exact spoken realization",
+      "rationale": "Action over display: the viewer witnesses the rejection happening in real time."
+    }
+  ],
+  "visualAbsence": [],
+  "semanticImportance": {
+    "critical": [
+      "Action creates motivation far more reliably than motivation creates action.",
+      "Action precedes neurochemical motivation rather than waiting for emotional readiness.",
+      "The internet convinced you dopamine is a fuel tank you drain by looking at your phone."
+    ],
+    "important": [
+      "Learn how to bypass emotional resistance by lowering starting friction.",
+      "Why does waiting to feel motivated guarantee inaction?",
+      "That is pure fiction. Dopamine isn't pleasure—it is the molecule of anticipation. When you scroll, your brain isn't out of dopamine; algorithms artificially raised your baseline reward threshold.",
+      "Lower the threshold, and deep focus returns instantly."
+    ],
+    "supporting": [
+      "You didn't lose motivation; ordinary reality just cannot compete with instant novelty. Stop extreme seven-day detoxes. Simply delay your first high-stimulation app by sixty minutes every morning, and bundle effort before reward."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "At what exact moment does an unexamined concession cross into an unconscious habit?",
+    "visualContradiction": "You believed you made a single minor exception, but your subconscious made a permanent rule",
+    "mostMemorableTransformation": "A microscopic horizontal fault line widening into an immutable granite wall",
+    "textHookCandidates": [
+      "THE SLIPPAGE",
+      "NEW BASELINE",
+      "ONE COMPROMISE",
+      "FAULT LINE"
+    ],
+    "recommendedArchetype": "impossible_metaphor"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "LOW",
+        "rationale": "Intimate single-subject dialogue; camera flight would dilute message punch."
+      },
+      "F2": {
+        "signal": "LOW",
+        "rationale": "No physical deformation required; metric or definition scene."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "LOW",
+        "rationale": "Clean luminous light canvas with subtle radial depth is superior."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "VERY_HIGH",
+        "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": true,
+    "issues": [],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

@@ -23,6 +23,8 @@ const THUMBNAIL_MAP = {
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
   'promises_video.mp4': 'PromisesThumbnail',
+  'dopamine_reality_video.mp4': 'DopamineRealityThumbnail',
+  'how_cortisol_works_video.mp4': 'HowCortisolWorksThumbnail',
   'small_compromises_video.mp4': 'SmallCompromisesThumbnail',
   'smoke_test_frontier_s_video.mp4': 'SmokeTestFrontierSThumbnail',
   'open_brain_tabs_video.mp4': 'OpenBrainTabsThumbnail',

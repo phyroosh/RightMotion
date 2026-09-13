@@ -1,57 +1,57 @@
 {
   "topic": "How One Small Compromise Becomes a Habit Before You Notice",
-  "coreIdea": "Abundance of options paralyzes decision-making through cognitive friction.",
-  "viewerQuestion": "Which path actually moves forward?",
-  "thumbnailJob": "Visualize the crushing compression of divergent options suffocating action.",
+  "coreIdea": "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+  "viewerQuestion": "At what exact moment does an unexamined concession cross into an unconscious habit?",
+  "thumbnailJob": "Visually manifest 'A microscopic horizontal fault line widening into an immutable granite wall' to trigger immediate curiosity.",
   "chosenConcept": {
-    "conceptId": "concept_1_branching_maze",
-    "title": "The Suffocating Fork",
+    "conceptId": "concept_1_story_metaphor",
+    "title": "The Slippage",
     "archetype": "impossible_metaphor",
-    "visualMetaphor": "A person standing at a path that instantly fractures into 50 tiny, razor-sharp diverging glass staircases leading everywhere and nowhere.",
-    "focalSubject": "Fracturing architectural pathways overwhelming lone traveler",
-    "subjectRole": "frozen_in_place",
+    "visualMetaphor": "A microscopic horizontal fault line widening into an immutable granite wall",
+    "focalSubject": "Physical narrative manifestation: A microscopic horizontal fault line widening into an immutable granite wall",
+    "subjectRole": "experiencing_problem",
     "hasPerson": true,
-    "textHook": "TOO MANY",
+    "textHook": "THE SLIPPAGE",
     "textStrategy": "minimal_punch_word",
-    "colorMood": "monochrome_with_amber_focus",
-    "accentColor": "#fbbf24",
-    "groundColor": "#080c14",
-    "visualMechanism": "divergent_fracture",
+    "colorMood": "luminous_off_white_with_rose_accent",
+    "accentColor": "#f43f5e",
+    "groundColor": "#f8fafc",
+    "visualMechanism": "subconscious_threshold_shift",
     "assetStrategy": "bespoke_ai_hero_illustration",
-    "selectionReason": "Concept 'The Suffocating Fork' scored highest (9.49/10). Peak instant-read (9.4), highest curiosity (9.6), and unmatched mobile silhouette clarity."
+    "selectionReason": "Concept 'The Slippage' scored highest (9.49/10). Peak instant-read (9.4), highest curiosity (9.6), and unmatched mobile silhouette clarity."
   },
   "alternativeConcepts": [
     {
-      "conceptId": "concept_2_drowning_doors",
-      "title": "The Wall of 100 Doors",
+      "conceptId": "concept_2_scale_constraint",
+      "title": "The Unseen New Baseline",
       "archetype": "scale_constraint",
       "overallScore": 8.88,
       "rejectionReason": "Lower score (8.88) compared to winner (9.49)."
     },
     {
-      "conceptId": "concept_3_shattering_scale",
-      "title": "The Broken Balance Scale",
+      "conceptId": "concept_3_minimal_object",
+      "title": "The One Compromise",
       "archetype": "minimal_object",
       "overallScore": 8.78,
       "rejectionReason": "Lower score (8.78) compared to winner (9.49)."
     }
   ],
-  "primarySubject": "Fracturing architectural pathways overwhelming lone traveler",
-  "visualMetaphor": "A person standing at a path that instantly fractures into 50 tiny, razor-sharp diverging glass staircases leading everywhere and nowhere.",
+  "primarySubject": "Physical narrative manifestation: A microscopic horizontal fault line widening into an immutable granite wall",
+  "visualMetaphor": "A microscopic horizontal fault line widening into an immutable granite wall",
   "compositionStrategy": {
     "archetype": "impossible_metaphor",
     "aspectRatio": "9:16",
     "canvasWidth": 1080,
     "canvasHeight": 1920,
-    "ground": "#080c14",
+    "ground": "#f8fafc",
     "dominantMass": "Center-weighted vertical anchor",
     "negativeSpace": "Generous breathing room on upper 30% for high-impact hook word"
   },
   "textStrategy": {
-    "hookWord": "TOO MANY",
+    "hookWord": "THE SLIPPAGE",
     "font": "Montserrat Black",
     "fontSize": 104,
-    "color": "#ffffff",
+    "color": "#090d16",
     "role": "Single high-impact curiosity anchor; never an explanation",
     "bannedElements": [
       "categoryBadge",
@@ -60,15 +60,15 @@
       "articleParagraph"
     ]
   },
-  "focalPoint": "Fracturing architectural pathways overwhelming lone traveler",
+  "focalPoint": "Physical narrative manifestation: A microscopic horizontal fault line widening into an immutable granite wall",
   "hierarchy": {
-    "level1_hook": "Primary Hook: Fracturing architectural pathways overwhelming lone traveler (dominant silhouette, ~60% screen area)",
-    "level2_concept": "Concept: A person standing at a path that instantly fractures into 50 tiny, razor-sharp diverging glass staircases leading everywhere and nowhere.",
-    "level3_support": "Support: High-impact punch text 'TOO MANY' in inky contrast"
+    "level1_hook": "Primary Hook: Physical narrative manifestation: A microscopic horizontal fault line widening into an immutable granite wall (dominant silhouette, ~60% screen area)",
+    "level2_concept": "Concept: A microscopic horizontal fault line widening into an immutable granite wall",
+    "level3_support": "Support: High-impact punch text 'THE SLIPPAGE' in inky contrast"
   },
   "colorStrategy": {
-    "ground": "#080c14",
-    "accent": "#fbbf24",
+    "ground": "#f8fafc",
+    "accent": "#f43f5e",
     "textContrastRatio": "12:1",
     "rule": "Clean luminous ground or deep obsidian with exactly ONE saturated semantic accent"
   },
@@ -76,7 +76,7 @@
     "type": "bespoke_ai_hero_illustration",
     "targetPath": "public/how_one_small_compromise/assets/thumbnail_hero.png",
     "needsAiGeneration": true,
-    "promptDirective": "Editorial 2.5D conceptual visual: A person standing at a path that instantly fractures into 50 tiny, razor-sharp diverging glass staircases leading everywhere and nowhere.. Generous negative space, studio lighting, razor-sharp edges."
+    "promptDirective": "Editorial 2.5D conceptual visual: A microscopic horizontal fault line widening into an immutable granite wall. Generous negative space, studio lighting, razor-sharp edges."
   },
   "complexityBudget": {
     "maxTextElements": 1,
@@ -95,13 +95,13 @@
     "silhouetteSeparation": "Strong high-contrast boundary against clean ground"
   },
   "curiosityMechanism": {
-    "type": "divergent_fracture",
-    "gap": "Which path actually moves forward?",
-    "resolutionInVideo": "Video explains Zeigarnik effect and how offloading tasks to external paper closes mental tabs."
+    "type": "subconscious_threshold_shift",
+    "gap": "At what exact moment does an unexamined concession cross into an unconscious habit?",
+    "resolutionInVideo": "Video resolves how a repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal. operates through a microscopic horizontal fault line widening into an immutable granite wall."
   },
   "truthfulnessCheck": {
     "isTruthful": true,
-    "rationale": "Directly symbolizes cognitive RAM depletion from open task loops without sensationalism or misleading claims."
+    "rationale": "Directly symbolizes a repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal. through a microscopic horizontal fault line widening into an immutable granite wall without sensationalism or misleading claims."
   },
   "validationResults": {
     "status": "APPROVED",

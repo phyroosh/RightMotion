@@ -12,6 +12,7 @@ import { BoundariesComposition } from "./clips/boundaries";
 import boundariesTranscript from "./clips/boundaries/transcript.json";
 import { CutoutShowcase } from "./compositions/CutoutShowcase";
 import { PlatformSafeShowcase } from "./compositions/PlatformSafeShowcase";
+import { PrimitivesShowcase } from "./compositions/PrimitivesShowcase";
 import { DopamineResetComposition } from "./clips/dopamine_reset";
 import dopamineResetTranscript from "./clips/dopamine_reset/transcript.json";
 import { ShrinkingCircleComposition } from "./clips/shrinking_circle";
@@ -90,6 +91,10 @@ import { SmokeTestFrontierSComposition } from "./clips/smoke_test_frontier_s";
 import smoke_test_frontier_sTranscript from "./clips/smoke_test_frontier_s/transcript.json";
 import { SmallCompromisesComposition } from "./clips/small_compromises";
 import small_compromisesTranscript from "./clips/small_compromises/transcript.json";
+import { HowCortisolWorksComposition } from "./clips/how_cortisol_works";
+import how_cortisol_worksTranscript from "./clips/how_cortisol_works/transcript.json";
+import { DopamineRealityComposition } from "./clips/dopamine_reality";
+import dopamine_realityTranscript from "./clips/dopamine_reality/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -119,6 +124,8 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  DopamineRealityThumbnail,
+  HowCortisolWorksThumbnail,
   SmallCompromisesThumbnail,
   SmokeTestFrontierSThumbnail,
   OpenBrainTabsThumbnail,
@@ -275,6 +282,10 @@ export const RemotionRoot: React.FC = () => {
   const smoke_test_frontier_sDuration = calculateDurationInFrames(smoke_test_frontier_sTranscript as any[], fps);
   
   const small_compromisesDuration = calculateDurationInFrames(small_compromisesTranscript as any[], fps);
+  
+  const how_cortisol_worksDuration = calculateDurationInFrames(how_cortisol_worksTranscript as any[], fps);
+  
+  const dopamine_realityDuration = calculateDurationInFrames(dopamine_realityTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -660,6 +671,26 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
 
+      
+      <Composition
+        id="HowCortisolWorksVideo"
+        component={HowCortisolWorksComposition}
+        durationInFrames={how_cortisol_worksDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="DopamineRealityVideo"
+        component={DopamineRealityComposition}
+        durationInFrames={dopamine_realityDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
       {/* 0. Broken Promises & Self-Trust Video (9:16 Shorts) */}
       <Composition
         id="PromisesVideo"
@@ -950,6 +981,16 @@ export const RemotionRoot: React.FC = () => {
         component={PlatformSafeShowcase}
         durationInFrames={120}
         fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* Phase 2: Runtime Physical Primitives Showcase */}
+      <Composition
+        id="PrimitivesShowcase"
+        component={PrimitivesShowcase}
+        durationInFrames={1500}
+        fps={60}
         width={1080}
         height={1920}
       />
@@ -1287,6 +1328,20 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="SmallCompromisesThumbnail"
         component={SmallCompromisesThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="HowCortisolWorksThumbnail"
+        component={HowCortisolWorksThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="DopamineRealityThumbnail"
+        component={DopamineRealityThumbnail}
         width={1080}
         height={1920}
       />

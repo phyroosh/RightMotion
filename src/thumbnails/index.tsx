@@ -1003,24 +1003,40 @@ export const SmokeTestFrontierSThumbnail: React.FC = () => (
 );
 
 export const SmallCompromisesThumbnail: React.FC = () => (
-  <ThumbnailCard
-    title="JUST ONE COMPROMISE"
-    highlightWord="COMPROMISE"
-    highlightColor="rose"
-    subtitle="How One Small Exception Replaces The Rule"
-    categoryBadge="JUDY INSIGHTS • PSYCHOLOGY"
-    characterPose="character_pointing.png"
-    theme="apple_studio"
+  <ImpossibleMetaphorLayout
+    hookWord="THE SLIPPAGE"
+    accentWord="SLIPPAGE"
+    accentColor="#f43f5e"
+    heroImageSrc="small_compromises/assets/scene_illustration.png"
     aspectRatio="9:16"
-    extraBadge="BEHAVIORAL LAW"
-    visualGraphic={
-      <div className="w-full rounded-2xl overflow-hidden border-[2.5px] border-slate-900 shadow-xl">
-        <img
-          src={staticFile("small_compromises/assets/scene_illustration.png")}
-          alt="Scene Illustration"
-          className="w-full h-44 object-cover"
-        />
-      </div>
-    }
+    theme="apple_studio"
+    heroScale={1.02}
+  />
+);
+
+
+export const HowCortisolWorksThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="CORTISOL TRUTH"
+    accentWord="TRUTH"
+    accentColor="#f59e0b"
+    heroImageSrc="how_cortisol_works/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+    heroScale={1.02}
+  />
+);
+
+export const DopamineRealityThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="THE DOPAMINE MYTH"
+    accentWord="MYTH"
+    accentColor="#ef4444"
+    heroImageSrc="dopamine_reality/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+    cardFrame={false}
+    heroScale={1.15}
+    heroOffsetY={-20}
   />
 );

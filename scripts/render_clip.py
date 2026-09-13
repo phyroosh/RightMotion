@@ -84,6 +84,24 @@ def main():
     res = subprocess.run(cmd, env=env)
     dur = time.perf_counter() - t0
 
+    def emit_notif(status: bool, duration: float, error_msg: str = None):
+        try:
+            sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+            from notify import dispatch_notification
+            title_formatted = clean_name.replace("_", " ").title()
+            title = f"🎬 Render Complete: {title_formatted}" if status else f"❌ Render Failed: {title_formatted}"
+            body = f"Video rendered in {duration:.1f}s and is ready for preview." if status else f"Render error: {error_msg}"
+            dispatch_notification(
+                event_type="RENDER_COMPLETED" if status else "RENDER_FAILED",
+                title=title,
+                body=body,
+                clip=f"{clean_name}_video.mp4",
+                tab="studio",
+                category="render"
+            )
+        except Exception:
+            pass
+
     if res.returncode != 0:
         if args.mode == "production":
             print("\n⚠️  GPU ANGLE render failed. Attempting graceful fallback to SwiftShader (CPU)...")
@@ -94,11 +112,14 @@ def main():
             dur_fb = time.perf_counter() - t0_fb
             if res_fb.returncode == 0:
                 print(f"\n✅ Render completed successfully via CPU fallback in {dur_fb:.1f}s ({dur_fb/60:.2f} min).")
+                emit_notif(True, dur_fb)
                 sys.exit(0)
         print(f"\n❌ Render failed with exit code {res.returncode}")
+        emit_notif(False, dur, f"exit code {res.returncode}")
         sys.exit(res.returncode)
 
     print(f"\n✅ Render completed successfully in {dur:.1f}s ({dur/60:.2f} min).")
+    emit_notif(True, dur)
 
 
 if __name__ == "__main__":
