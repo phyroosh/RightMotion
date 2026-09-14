@@ -1,0 +1,116 @@
+{
+  "topic": "Your Brain Learns What You Repeatedly Tolerate",
+  "coreIdea": "Every unfinished task keeps subconscious neural RAM occupied, leaking cognitive bandwidth until the system exhausts itself.",
+  "viewerQuestion": "Why does the mind refuse to close what it hasn't finished, and what does that look like physically?",
+  "thumbnailJob": "Visually manifest 'Chaotic eruption of translucent tabs collapsing into clean external clarity' to trigger immediate curiosity.",
+  "chosenConcept": {
+    "conceptId": "concept_1_story_metaphor",
+    "title": "The 20 Tabs",
+    "archetype": "impossible_metaphor",
+    "visualMetaphor": "Chaotic eruption of translucent tabs collapsing into clean external clarity",
+    "focalSubject": "Physical narrative manifestation: Chaotic eruption of translucent tabs collapsing into clean external clarity",
+    "subjectRole": "experiencing_problem",
+    "hasPerson": true,
+    "textHook": "20 TABS",
+    "textStrategy": "minimal_punch_word",
+    "colorMood": "luminous_off_white_with_rose_accent",
+    "accentColor": "#f43f5e",
+    "groundColor": "#f8fafc",
+    "visualMechanism": "subconscious_threshold_shift",
+    "assetStrategy": "bespoke_ai_hero_illustration",
+    "selectionReason": "Concept 'The 20 Tabs' scored highest (9.49/10). Peak instant-read (9.4), highest curiosity (9.6), and unmatched mobile silhouette clarity."
+  },
+  "alternativeConcepts": [
+    {
+      "conceptId": "concept_2_scale_constraint",
+      "title": "The Unseen Brain Ram",
+      "archetype": "scale_constraint",
+      "overallScore": 8.88,
+      "rejectionReason": "Lower score (8.88) compared to winner (9.49)."
+    },
+    {
+      "conceptId": "concept_3_minimal_object",
+      "title": "The Open Loops",
+      "archetype": "minimal_object",
+      "overallScore": 8.78,
+      "rejectionReason": "Lower score (8.78) compared to winner (9.49)."
+    }
+  ],
+  "primarySubject": "Physical narrative manifestation: Chaotic eruption of translucent tabs collapsing into clean external clarity",
+  "visualMetaphor": "Chaotic eruption of translucent tabs collapsing into clean external clarity",
+  "compositionStrategy": {
+    "archetype": "impossible_metaphor",
+    "aspectRatio": "9:16",
+    "canvasWidth": 1080,
+    "canvasHeight": 1920,
+    "ground": "#f8fafc",
+    "dominantMass": "Center-weighted vertical anchor",
+    "negativeSpace": "Generous breathing room on upper 30% for high-impact hook word"
+  },
+  "textStrategy": {
+    "hookWord": "20 TABS",
+    "font": "Montserrat Black",
+    "fontSize": 104,
+    "color": "#090d16",
+    "role": "Single high-impact curiosity anchor; never an explanation",
+    "bannedElements": [
+      "categoryBadge",
+      "extraBadge",
+      "subtitleCard",
+      "articleParagraph"
+    ]
+  },
+  "focalPoint": "Physical narrative manifestation: Chaotic eruption of translucent tabs collapsing into clean external clarity",
+  "hierarchy": {
+    "level1_hook": "Primary Hook: Physical narrative manifestation: Chaotic eruption of translucent tabs collapsing into clean external clarity (dominant silhouette, ~60% screen area)",
+    "level2_concept": "Concept: Chaotic eruption of translucent tabs collapsing into clean external clarity",
+    "level3_support": "Support: High-impact punch text '20 TABS' in inky contrast"
+  },
+  "colorStrategy": {
+    "ground": "#f8fafc",
+    "accent": "#f43f5e",
+    "textContrastRatio": "12:1",
+    "rule": "Clean luminous ground or deep obsidian with exactly ONE saturated semantic accent"
+  },
+  "assetRequirements": {
+    "type": "bespoke_ai_hero_illustration",
+    "targetPath": "public/your_brain_learns_what_y/assets/thumbnail_hero.png",
+    "needsAiGeneration": true,
+    "promptDirective": "Editorial 2.5D conceptual visual: Chaotic eruption of translucent tabs collapsing into clean external clarity. Generous negative space, studio lighting, razor-sharp edges."
+  },
+  "complexityBudget": {
+    "maxTextElements": 1,
+    "maxWordCount": 2,
+    "pillBadgesAllowed": false,
+    "subtitleCardsAllowed": false,
+    "maxPrimarySubjects": 1,
+    "contrastRatioTarget": "7:1",
+    "safeZoneTop": "8%",
+    "safeZoneBottom": "10%"
+  },
+  "mobileConstraints": {
+    "targetScale": "360x640 preview",
+    "minSubjectPixelHeight": 750,
+    "minTextPixelHeight": 80,
+    "silhouetteSeparation": "Strong high-contrast boundary against clean ground"
+  },
+  "curiosityMechanism": {
+    "type": "subconscious_threshold_shift",
+    "gap": "Why does the mind refuse to close what it hasn't finished, and what does that look like physically?",
+    "resolutionInVideo": "Video resolves how every unfinished task keeps subconscious neural ram occupied, leaking cognitive bandwidth until the system exhausts itself. operates through chaotic eruption of translucent tabs collapsing into clean external clarity."
+  },
+  "truthfulnessCheck": {
+    "isTruthful": true,
+    "rationale": "Directly symbolizes every unfinished task keeps subconscious neural ram occupied, leaking cognitive bandwidth until the system exhausts itself. through chaotic eruption of translucent tabs collapsing into clean external clarity without sensationalism or misleading claims."
+  },
+  "validationResults": {
+    "status": "APPROVED",
+    "rulesPassed": [
+      "Rule 0: Autonomous creative production",
+      "Rule 4: Zero memes, high-resolution physical metaphor",
+      "Rule 5: Creative standard, minimum sufficient composition",
+      "Rule 5.5: Zero pill badges, zero subtitle cards, zero floating waist cuts",
+      "Rule 5.4: Ultra-high contrast (12:1), luminous clean ground"
+    ]
+  }
+}

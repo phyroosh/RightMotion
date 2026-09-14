@@ -95,6 +95,8 @@ import { HowCortisolWorksComposition } from "./clips/how_cortisol_works";
 import how_cortisol_worksTranscript from "./clips/how_cortisol_works/transcript.json";
 import { DopamineRealityComposition } from "./clips/dopamine_reality";
 import dopamine_realityTranscript from "./clips/dopamine_reality/transcript.json";
+import { WhatYouTolerateComposition } from "./clips/what_you_tolerate";
+import what_you_tolerateTranscript from "./clips/what_you_tolerate/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -124,6 +126,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  WhatYouTolerateThumbnail,
   DopamineRealityThumbnail,
   HowCortisolWorksThumbnail,
   SmallCompromisesThumbnail,
@@ -286,6 +289,8 @@ export const RemotionRoot: React.FC = () => {
   const how_cortisol_worksDuration = calculateDurationInFrames(how_cortisol_worksTranscript as any[], fps);
   
   const dopamine_realityDuration = calculateDurationInFrames(dopamine_realityTranscript as any[], fps);
+  
+  const what_you_tolerateDuration = calculateDurationInFrames(what_you_tolerateTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -686,6 +691,16 @@ export const RemotionRoot: React.FC = () => {
         id="DopamineRealityVideo"
         component={DopamineRealityComposition}
         durationInFrames={dopamine_realityDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
+      
+      <Composition
+        id="WhatYouTolerateVideo"
+        component={WhatYouTolerateComposition}
+        durationInFrames={what_you_tolerateDuration}
         fps={fps}
         width={1080}
         height={1920}
@@ -1342,6 +1357,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="DopamineRealityThumbnail"
         component={DopamineRealityThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="WhatYouTolerateThumbnail"
+        component={WhatYouTolerateThumbnail}
         width={1080}
         height={1920}
       />

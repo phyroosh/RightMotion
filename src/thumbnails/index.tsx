@@ -1040,3 +1040,17 @@ export const DopamineRealityThumbnail: React.FC = () => (
     heroOffsetY={-20}
   />
 );
+
+export const WhatYouTolerateThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="WHAT YOU TOLERATE"
+    accentWord="TOLERATE"
+    accentColor="#f43f5e"
+    heroImageSrc="what_you_tolerate/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+    cardFrame={false}
+    heroScale={1.15}
+    heroOffsetY={-20}
+  />
+);

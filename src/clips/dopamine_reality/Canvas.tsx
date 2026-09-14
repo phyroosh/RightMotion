@@ -150,7 +150,7 @@ export const DopamineRealityCanvas: React.FC<CanvasProps> = () => {
         const isFictionFired = frame >= fFictionStrike;
 
         return (
-          <CameraShake frame={frame} triggerFrame={fFictionStrike} intensity={14} decay={0.82}>
+          <CameraShake triggerFrames={[fFictionStrike]} intensity={14} decayRate={0.82}>
             <div
               className="w-full flex flex-col items-center"
               style={{
