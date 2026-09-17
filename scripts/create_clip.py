@@ -1605,43 +1605,38 @@ export const {pascal_name}Composition: React.FC = () => {{
 
 
 def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, format_type: str, niche: str = 'self_improvement', pinned_comment: str = None, script_text: str = None, story_model: Optional[Any] = None):
-    root_file = ROOT_DIR / "src" / "Root.tsx"
+    registry_file = ROOT_DIR / "src" / "clips" / "registry.ts"
     thumb_file = ROOT_DIR / "src" / "thumbnails" / "index.tsx"
     render_script = ROOT_DIR / "scripts" / "render_all_thumbnails.js"
     meta_file = ROOT_DIR / "studio" / "metadata.json"
 
-    # Register in Root.tsx if not already there
-    root_content = root_file.read_text(encoding="utf-8")
-    if f"{pascal_name}Composition" not in root_content:
-        import_stmt = f'import {{ {pascal_name}Composition }} from "./clips/{name}";\nimport {name}Transcript from "./clips/{name}/transcript.json";\n'
-        root_content = root_content.replace('import { PromisesComposition }', f'{import_stmt}import {{ PromisesComposition }}')
-        root_content = root_content.replace('PromisesThumbnail,', f'PromisesThumbnail,\n  {pascal_name}Thumbnail,')
-        
-        comp_code = f"""
-  const {name}Duration = calculateDurationInFrames({name}Transcript as any[], fps);"""
-        root_content = root_content.replace('const promisesDuration', f'{comp_code}\n  const promisesDuration')
-
-        jsx_comp = f"""
-      <Composition
-        id="{pascal_name}Video"
-        component={{{pascal_name}Composition}}
-        durationInFrames={{{name}Duration}}
-        fps={{fps}}
-        width={{{1080 if format_type == "shorts" else 1920}}}
-        height={{{1920 if format_type == "shorts" else 1080}}}
-      />"""
-        root_content = root_content.replace('{/* 0. Broken Promises', f'{jsx_comp}\n\n      {{/* 0. Broken Promises')
-
-        jsx_still = f"""
-      <Still
-        id="{pascal_name}Thumbnail"
-        component={{{pascal_name}Thumbnail}}
-        width={{{1080 if format_type == "shorts" else 1920}}}
-        height={{{1920 if format_type == "shorts" else 1080}}}
-      />"""
-        root_content = root_content.replace('</>\n  );', f'{jsx_still}\n    </>\n  );')
-        root_file.write_text(root_content, encoding="utf-8")
-        print("      Registered composition and still in src/Root.tsx")
+    # Register in structured clips registry (replaces brittle Root.tsx mutation)
+    if registry_file.exists():
+        reg_content = registry_file.read_text(encoding="utf-8")
+        if f'id: "{name}"' not in reg_content and f"id: '{name}'" not in reg_content:
+            comp_import = f'import {{ {pascal_name}Composition }} from "./{name}";\nimport {name}Transcript from "./{name}/transcript.json";\n'
+            reg_content = reg_content.replace(
+                "// 1. Clip Component & Transcript Imports\n// ============================================================================\n",
+                f"// 1. Clip Component & Transcript Imports\n// ============================================================================\n{comp_import}"
+            )
+            reg_content = reg_content.replace(
+                "} from \"../thumbnails\";",
+                f"  {pascal_name}Thumbnail,\n}} from \"../thumbnails\";"
+            )
+            new_entry = f"""  {{
+    id: "{name}",
+    pascalName: "{pascal_name}",
+    component: {pascal_name}Composition,
+    thumbnailComponent: {pascal_name}Thumbnail,
+    transcript: {name}Transcript as any[],
+    format: "{format_type}",
+  }},\n"""
+            reg_content = reg_content.replace(
+                "export const REGISTERED_CLIPS: ClipRegistration[] = [\n",
+                f"export const REGISTERED_CLIPS: ClipRegistration[] = [\n{new_entry}"
+            )
+            registry_file.write_text(reg_content, encoding="utf-8")
+            print("      Registered composition and still in structured registry (src/clips/registry.ts)")
 
     # Register in thumbnails/index.tsx (Frontier T: Thumbnail Intelligence)
     thumb_content = thumb_file.read_text(encoding="utf-8")
