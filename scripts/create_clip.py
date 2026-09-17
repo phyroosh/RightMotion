@@ -825,8 +825,8 @@ def _build_frontier_import_stubs(creative_plan: dict, product_meta: dict = None)
     if all_frontier_codes & TRANSFORMATION_IMPORTS:
         lines.append(
             '// Transformation bridges (pathway wear, boundary shift, causal coupling):\n'
-            '// import { KineticFurrow, ThresholdBoundary, PersistentMemoryStage } from "../../components/primitives";\n'
-            '// import { ThresholdBoundaryShift, ResistancePathway, CausalActionCoupling } from "../../components/transformation";'
+            '// import { KineticFurrow, ThresholdBoundary, PersistentMemoryStage, CausalActionCoupling } from "../../components/primitives";\n'
+            '// import { ThresholdBoundaryShift, ResistancePathway } from "../../components/transformation";'
         )
 
     if product_meta:
