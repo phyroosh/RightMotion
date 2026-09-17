@@ -115,5 +115,235 @@
     ],
     "lowResWarning": false,
     "status": "READY"
+  },
+  "universal_texture_39": {
+    "id": "universal_texture_39",
+    "filename": "universal_texture_39.jpg",
+    "path": "assets/universal_backgrounds/universal_texture_39.jpg",
+    "width": 736,
+    "height": 1472,
+    "aspectRatio": 0.5,
+    "format": "JPEG",
+    "fileSize": 249818,
+    "hash": "2fa568815a5dd05e076e09dd2fc857dccd76bf96186d7eed3b9af225bac3e99a",
+    "tone": "bright",
+    "colorTemp": "neutral",
+    "isMonochrome": true,
+    "saturation": 0.0,
+    "brightness": 0.838,
+    "contrast": 0.05,
+    "textureStrength": "high",
+    "edgeDensity": 11.17,
+    "visualComplexity": "low",
+    "entropy": 1.43,
+    "material": "studio_surface",
+    "moods": [
+      "calm",
+      "clean",
+      "editorial"
+    ],
+    "visualDensity": "sparse",
+    "textCompatibility": "excellent",
+    "presenterCompatibility": "good",
+    "graphicCompatibility": "excellent",
+    "textSafeRegions": {
+      "safeTop": true,
+      "safeCenter": true,
+      "safeBottom": true,
+      "safeLeft": true,
+      "safeRight": true
+    },
+    "focalCenter": [
+      0.496,
+      0.498
+    ],
+    "safeCropModes": [
+      "center"
+    ],
+    "motionSuitability": [
+      "static",
+      "slow_drift",
+      "zoom",
+      "parallax"
+    ],
+    "transitionSuitability": [
+      "dissolve",
+      "cut"
+    ],
+    "lowResWarning": true,
+    "status": "READY"
+  },
+  "universal_texture_40": {
+    "id": "universal_texture_40",
+    "filename": "universal_texture_40.jpg",
+    "path": "assets/universal_backgrounds/universal_texture_40.jpg",
+    "width": 555,
+    "height": 1110,
+    "aspectRatio": 0.5,
+    "format": "JPEG",
+    "fileSize": 100794,
+    "hash": "aa0e012ea9c43f947b1f7541466c2c7dd943b9ad2c4fe235ee5bfeef786637ed",
+    "tone": "dark",
+    "colorTemp": "neutral",
+    "isMonochrome": true,
+    "saturation": 0.0,
+    "brightness": 0.227,
+    "contrast": 0.042,
+    "textureStrength": "medium",
+    "edgeDensity": 7.12,
+    "visualComplexity": "low",
+    "entropy": 1.35,
+    "material": "matte_surface",
+    "moods": [
+      "cinematic",
+      "minimal",
+      "tactile"
+    ],
+    "visualDensity": "sparse",
+    "textCompatibility": "excellent",
+    "presenterCompatibility": "excellent",
+    "graphicCompatibility": "excellent",
+    "textSafeRegions": {
+      "safeTop": true,
+      "safeCenter": true,
+      "safeBottom": true,
+      "safeLeft": true,
+      "safeRight": true
+    },
+    "focalCenter": [
+      0.498,
+      0.511
+    ],
+    "safeCropModes": [
+      "center"
+    ],
+    "motionSuitability": [
+      "static",
+      "slow_drift",
+      "zoom",
+      "parallax"
+    ],
+    "transitionSuitability": [
+      "dissolve",
+      "cut",
+      "luma_wipe"
+    ],
+    "lowResWarning": true,
+    "status": "READY"
+  },
+  "universal_texture_41": {
+    "id": "universal_texture_41",
+    "filename": "universal_texture_41.jpg",
+    "path": "assets/universal_backgrounds/universal_texture_41.jpg",
+    "width": 675,
+    "height": 1200,
+    "aspectRatio": 0.5625,
+    "format": "JPEG",
+    "fileSize": 86671,
+    "hash": "26d2ef01b1605ab587174c982f98db4e19bda839fc0eac8865e660375ef5d27f",
+    "tone": "dark",
+    "colorTemp": "neutral",
+    "isMonochrome": true,
+    "saturation": 0.078,
+    "brightness": 0.099,
+    "contrast": 0.02,
+    "textureStrength": "medium",
+    "edgeDensity": 3.34,
+    "visualComplexity": "low",
+    "entropy": 1.11,
+    "material": "matte_surface",
+    "moods": [
+      "cinematic",
+      "minimal",
+      "tactile"
+    ],
+    "visualDensity": "sparse",
+    "textCompatibility": "excellent",
+    "presenterCompatibility": "excellent",
+    "graphicCompatibility": "excellent",
+    "textSafeRegions": {
+      "safeTop": true,
+      "safeCenter": true,
+      "safeBottom": true,
+      "safeLeft": true,
+      "safeRight": true
+    },
+    "focalCenter": [
+      0.501,
+      0.5
+    ],
+    "safeCropModes": [
+      "center"
+    ],
+    "motionSuitability": [
+      "static",
+      "slow_drift",
+      "zoom",
+      "parallax"
+    ],
+    "transitionSuitability": [
+      "dissolve",
+      "cut",
+      "luma_wipe"
+    ],
+    "lowResWarning": true,
+    "status": "READY"
+  },
+  "universal_texture_la_milagrosa": {
+    "id": "universal_texture_la_milagrosa",
+    "filename": "universal_texture_la_milagrosa.jpg",
+    "path": "assets/universal_backgrounds/universal_texture_la_milagrosa.jpg",
+    "width": 736,
+    "height": 1308,
+    "aspectRatio": 0.5627,
+    "format": "JPEG",
+    "fileSize": 92234,
+    "hash": "ab5dad76ed8a063c0dca39d99aebfd0bda2a990a756a2f49175844e2c4d42630",
+    "tone": "bright",
+    "colorTemp": "neutral",
+    "isMonochrome": true,
+    "saturation": 0.0,
+    "brightness": 0.938,
+    "contrast": 0.024,
+    "textureStrength": "medium",
+    "edgeDensity": 3.25,
+    "visualComplexity": "low",
+    "entropy": 1.17,
+    "material": "studio_surface",
+    "moods": [
+      "calm",
+      "clean",
+      "editorial"
+    ],
+    "visualDensity": "sparse",
+    "textCompatibility": "excellent",
+    "presenterCompatibility": "good",
+    "graphicCompatibility": "excellent",
+    "textSafeRegions": {
+      "safeTop": true,
+      "safeCenter": true,
+      "safeBottom": true,
+      "safeLeft": true,
+      "safeRight": true
+    },
+    "focalCenter": [
+      0.506,
+      0.511
+    ],
+    "safeCropModes": [
+      "center"
+    ],
+    "motionSuitability": [
+      "static",
+      "slow_drift",
+      "zoom",
+      "parallax"
+    ],
+    "transitionSuitability": [
+      "dissolve",
+      "cut"
+    ],
+    "lowResWarning": true,
+    "status": "READY"
   }
 }

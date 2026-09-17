@@ -1064,3 +1064,13 @@ export const TheArtOfEnvironmentThumbnail: React.FC = () => (
     theme="apple_studio"
   />
 );
+
+export const PriceOfInactionThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="PRICE INACTION"
+    accentColor="#fbbf24"
+    heroImageSrc="price_of_inaction/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);

@@ -1,0 +1,235 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "Every day you delay a difficult conversation, you pay compound interest in anxiety. The mind imagines catastrophic outcomes to protect you from temporary discomfort. But avoidance does not freeze the problem in place; it quietly rots the foundation. Speak the truth while the stakes are still manageable.",
+    "topic": "The Price of Inaction",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 47,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "06f6d9c3e98f5773876d5fe65181562b0959f26feef46e16729d0d65155ad7a5"
+  },
+  "story": {
+    "coreIdea": "Action precedes neurochemical motivation rather than waiting for emotional readiness.",
+    "centralClaim": "Action creates motivation far more reliably than motivation creates action.",
+    "viewerPromise": "Learn how to bypass emotional resistance by lowering starting friction.",
+    "viewerQuestion": "Why does waiting to feel motivated guarantee inaction?",
+    "narrativeArchitecture": "MISCONCEPTION -> NEUROLOGICAL_INVERSION -> TACTICAL_SHIFT"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "Every day you delay a difficult conversation, you pay compound interest in anxiety.",
+      "sentenceIndices": [
+        0
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "Why does waiting to feel motivated guarantee inaction?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "The mind imagines catastrophic outcomes to protect you from temporary discomfort. But avoidance does not freeze the problem in place; it quietly rots the foundation.",
+      "sentenceIndices": [
+        1,
+        2
+      ],
+      "coreMeaning": "Unpacks the hidden mechanism and systemic consequence.",
+      "visualQuestion": "Why does this happen beneath conscious awareness?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_resolution",
+      "role": "resolution",
+      "narrationText": "Speak the truth while the stakes are still manageable.",
+      "sentenceIndices": [
+        3
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "The Price Of Inaction"
+    ],
+    "entities": [
+      "Editorial Focus Card"
+    ],
+    "persistentObjects": []
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "Every day you delay a difficult conversation, you pay compound interest in anxiety.",
+        "type": "supporting"
+      },
+      {
+        "statement": "The mind imagines catastrophic outcomes to protect you from temporary discomfort.",
+        "type": "psychological"
+      },
+      {
+        "statement": "But avoidance does not freeze the problem in place; it quietly rots the foundation.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Speak the truth while the stakes are still manageable.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": []
+  },
+  "causalGraph": {
+    "nodes": [],
+    "chains": [],
+    "thresholds": []
+  },
+  "stateModel": {
+    "initialState": "OBSERVATION",
+    "intermediateStates": [],
+    "finalState": "INFORMED_ACTION",
+    "dynamics": "linear"
+  },
+  "temporalModel": {
+    "pacing": "sudden_snap",
+    "hasRepetition": true,
+    "repetitionNature": "behavioral_loop",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "The pivotal cognitive realization right before the solution",
+      "approximateTimestampSec": 9.0,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "But",
+      "Speak"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "contrast",
+      "physicalDescription": "High-contrast split editorial layout pairing Judy intimate bust with semantic hero anchor",
+      "rationale": "Establishes personal connection and curiosity on mobile screen."
+    }
+  ],
+  "visualAbsence": [],
+  "semanticImportance": {
+    "critical": [
+      "Action creates motivation far more reliably than motivation creates action.",
+      "Action precedes neurochemical motivation rather than waiting for emotional readiness.",
+      "Every day you delay a difficult conversation, you pay compound interest in anxiety."
+    ],
+    "important": [
+      "Learn how to bypass emotional resistance by lowering starting friction.",
+      "Why does waiting to feel motivated guarantee inaction?",
+      "The mind imagines catastrophic outcomes to protect you from temporary discomfort. But avoidance does not freeze the problem in place; it quietly rots the foundation.",
+      "Speak the truth while the stakes are still manageable."
+    ],
+    "supporting": [],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden mechanism and systemic consequence.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "Why does waiting to feel motivated guarantee inaction?",
+    "visualContradiction": "Action creates motivation far more reliably than motivation creates action.",
+    "mostMemorableTransformation": "State of confusion transforming into decisive structural sovereignty",
+    "textHookCandidates": [
+      "PRICE INACTION"
+    ],
+    "recommendedArchetype": "impossible_metaphor"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "LOW",
+        "rationale": "Intimate single-subject dialogue; camera flight would dilute message punch."
+      },
+      "F2": {
+        "signal": "LOW",
+        "rationale": "No physical deformation required; metric or definition scene."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "HIGH",
+        "rationale": "Architectural plinth provides grounding for habit foundations."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "LOW",
+        "rationale": "Pure observational statement without state mutations."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": false,
+    "issues": [
+      "Script too short (47 words). Aim for 70-100 words (25-35 seconds)."
+    ],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

@@ -1015,6 +1015,55 @@ export const {pascal_name}Background: React.FC = () => {{
 
     (clip_dir / "Background.tsx").write_text(bg_code, encoding="utf-8")
 
+    if niche == "finance":
+        card_class = "w-full p-8 rounded-3xl bg-[#0b0f19]/95 border-2 border-emerald-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
+        text_color = "text-white"
+        accent_color = "text-emerald-400"
+        sub_accent = "text-amber-400"
+        item_box = "p-4 rounded-2xl bg-[#111827]/90 border border-emerald-500/30 flex items-center justify-between text-left shadow-lg"
+        pill_box = "w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl font-black font-mono shrink-0"
+        sub_pill = "text-2xl font-mono text-emerald-300 font-bold"
+        status_box = "w-full p-4 rounded-2xl bg-black/70 border border-emerald-500/30 flex items-center justify-between text-2xl font-mono text-emerald-200"
+        status_alert = "text-amber-400 font-black tracking-wide"
+        glow_problem = "rose"
+        glow_solution = "emerald"
+    elif niche == "health":
+        card_class = "w-full p-8 rounded-3xl bg-[#0a1124]/95 border-2 border-cyan-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
+        text_color = "text-white"
+        accent_color = "text-cyan-400"
+        sub_accent = "text-rose-400"
+        item_box = "p-4 rounded-2xl bg-[#0e172f]/90 border border-cyan-500/40 flex items-center justify-between text-left shadow-lg"
+        pill_box = "w-12 h-12 rounded-xl bg-cyan-500/25 text-cyan-400 flex items-center justify-center text-3xl font-black font-mono shrink-0"
+        sub_pill = "text-2xl font-mono text-cyan-300 font-bold"
+        status_box = "w-full p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex items-center justify-between text-2xl font-mono text-cyan-200"
+        status_alert = "text-rose-400 font-black tracking-wide"
+        glow_problem = "rose"
+        glow_solution = "cyan"
+    elif niche == "facecam":
+        card_class = "w-full p-8 rounded-3xl bg-[#0b1120]/95 border-2 border-amber-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
+        text_color = "text-white"
+        accent_color = "text-amber-400"
+        sub_accent = "text-cyan-400"
+        item_box = "p-4 rounded-2xl bg-[#0f172a]/90 border border-amber-500/40 flex items-center justify-between text-left shadow-lg"
+        pill_box = "w-12 h-12 rounded-xl bg-amber-500/25 text-amber-400 flex items-center justify-center text-3xl font-black font-mono shrink-0"
+        sub_pill = "text-2xl font-mono text-amber-300 font-bold"
+        status_box = "w-full p-4 rounded-2xl bg-black/70 border border-amber-500/30 flex items-center justify-between text-2xl font-mono text-amber-200"
+        status_alert = "text-cyan-400 font-black tracking-wide"
+        glow_problem = "rose"
+        glow_solution = "amber"
+    else: # self_improvement
+        card_class = "w-full p-8 rounded-3xl bg-white/95 border-2 border-sky-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
+        text_color = "text-slate-950"
+        accent_color = "text-[#0071e3]"
+        sub_accent = "text-rose-500"
+        item_box = "p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg"
+        pill_box = "w-12 h-12 rounded-xl bg-[#0071e3]/15 text-[#0071e3] flex items-center justify-center text-3xl font-black font-mono shrink-0"
+        sub_pill = "text-2xl font-mono text-sky-700 font-bold"
+        status_box = "w-full p-4 rounded-2xl bg-slate-100/90 border border-sky-200 flex items-center justify-between text-2xl font-mono text-slate-800"
+        status_alert = "text-rose-500 font-black tracking-wide"
+        glow_problem = "rose"
+        glow_solution = "amber"
+
     # 2. Concept Segmentation & Word Timestamp Alignment
     concepts = parse_script_into_concepts(script_text)
     aligned = align_concepts(concepts, words_list, fps)
@@ -1410,16 +1459,18 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
     )
 
     if not product_meta:
-        canvas_code = generate_canvas_scaffold(
+        canvas_code = generate_lean_canvas_brief(
             pascal_name=pascal_name,
-            canvas_container_class=canvas_container_class,
-            s1_start=s1_start,
             s2_start=s2_start,
             s3_start=s3_start,
             total_frames=total_frames,
             topic=topic,
+            niche=niche,
             problem_cutout=problem_cutout,
             solution_cutout=solution_cutout,
+            creative_plan=creative_plan,
+            fps=fps,
+            product_meta=product_meta,
         )
     else:
         canvas_code = f"""import React from "react";

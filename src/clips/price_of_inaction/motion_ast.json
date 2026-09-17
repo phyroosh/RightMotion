@@ -1,0 +1,486 @@
+{
+  "version": "1.0.0",
+  "clipId": "price_of_inaction",
+  "fps": 60,
+  "totalFrames": 982,
+  "environment": {
+    "groundColor": "#030712",
+    "lightingTheme": "deep_atmospheric_dark",
+    "gridTexture": false,
+    "safeBounds": {
+      "top": 280,
+      "bottom": 1340,
+      "left": 80,
+      "right": 1000
+    },
+    "defaultBackgroundIntent": {
+      "mode": "universal",
+      "assetId": "dark_matte_spotlight_01",
+      "semanticRole": "cinematic_surface",
+      "cropStrategy": "center_focal",
+      "cropFocalPoint": [
+        0.471,
+        0.36
+      ],
+      "motion": "slow_zoom_in",
+      "motionScaleDelta": 1.04,
+      "opacity": 1.0,
+      "dimmingOverlay": null,
+      "transitionIn": {
+        "type": "fade",
+        "durationFrames": 10
+      },
+      "transitionOut": null,
+      "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)"
+    }
+  },
+  "persistentWorldMemory": [
+    {
+      "traceId": "scene_2_logic_ghost_baseline",
+      "originatingActorId": "scene_2_logic_standard_boundary",
+      "originatingSceneId": "scene_2_logic",
+      "appearance": "dashed_ghost_line",
+      "coordinates": {
+        "y": 620,
+        "startX": 120,
+        "endX": 960
+      },
+      "opacity": 0.35,
+      "persistsUntilEnd": true,
+      "semanticMeaning": "Visual memory of original uncompromised standard"
+    },
+    {
+      "traceId": "scene_3_solution_ghost_baseline",
+      "originatingActorId": "scene_3_solution_standard_boundary",
+      "originatingSceneId": "scene_3_solution",
+      "appearance": "dashed_ghost_line",
+      "coordinates": {
+        "y": 620,
+        "startX": 120,
+        "endX": 960
+      },
+      "opacity": 0.35,
+      "persistsUntilEnd": true,
+      "semanticMeaning": "Visual memory of original uncompromised standard"
+    }
+  ],
+  "scenes": [
+    {
+      "sceneId": "scene_1_hook",
+      "role": "hook",
+      "startFrame": 0,
+      "endFrame": 275,
+      "narrativeGoal": "Action precedes neurochemical motivation rather than waiting for emotional readiness.",
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "dark_matte_spotlight_01",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.471,
+          0.36
+        ],
+        "motion": "slow_zoom_in",
+        "motionScaleDelta": 1.04,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "fade",
+          "durationFrames": 10
+        },
+        "transitionOut": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)"
+      },
+      "actors": [
+        {
+          "id": "price_of_inaction_hero_illustration",
+          "semanticRole": "hook_curiosity_anchor",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "price_of_inaction/assets/scene_illustration.png",
+            "widthPx": 760,
+            "heightPx": 480
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 460,
+            "y": 660,
+            "width": 760,
+            "height": 480,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        },
+        {
+          "id": "scene_1_hook_presenter_host",
+          "semanticRole": "presenter_host",
+          "narrativeImportance": "SECONDARY",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+            "widthPx": 540,
+            "heightPx": 1200
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 760,
+            "y": 1320,
+            "width": 540,
+            "height": 1200,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [],
+      "mutations": [],
+      "causalCouplings": [],
+      "annotations": [
+        {
+          "annotationId": "scene_1_hook_headline",
+          "text": "EVERY DAY YOU DELAY A DIFFICULT CONVERSA",
+          "font": "Montserrat Black",
+          "fontSizePx": 68,
+          "color": "#ffffff",
+          "role": "hook_slam",
+          "staticPlacement": {
+            "x": 540,
+            "y": 340
+          },
+          "startFrame": 0,
+          "durationFrames": 120,
+          "inAnimation": "scale_pop"
+        }
+      ],
+      "compositionMetrics": {
+        "occupiedWidthPct": 88.7,
+        "occupiedHeightPct": 84.9,
+        "occupiedAreaPct": 75.3,
+        "bottomDeadZonePx": 0.0,
+        "semanticDensityScore": 0.83,
+        "densityStatus": "OPTIMAL"
+      }
+    },
+    {
+      "sceneId": "scene_2_logic",
+      "role": "mechanism",
+      "startFrame": 275,
+      "endFrame": 707,
+      "narrativeGoal": "Action precedes neurochemical motivation rather than waiting for emotional readiness.",
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "paper_warm_tactile_02",
+        "semanticRole": "tactile_stage",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.5,
+          0.5
+        ],
+        "motion": "static",
+        "motionScaleDelta": 1.0,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "dissolve",
+          "durationFrames": 16
+        },
+        "transitionOut": null,
+        "reason": "Selected 'paper_warm_tactile_02' (paper, bright) with score 0.84. Clean bright ground guarantees >7:1 dark text contrast; Clear text-safe zone verified at center"
+      },
+      "actors": [
+        {
+          "id": "scene_2_logic_standard_boundary",
+          "semanticRole": "the_sovereign_standard",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "continuous_boundary",
+            "orientation": "horizontal",
+            "lengthPx": 840,
+            "thicknessPx": 6,
+            "initialBaselineY": 620
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 740,
+            "width": 880,
+            "height": 480,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [
+        {
+          "forceId": "scene_2_logic_concession_impulse",
+          "targetActorId": "scene_2_logic_standard_boundary",
+          "type": "point_impulse",
+          "triggerFrame": 305,
+          "durationFrames": 45,
+          "magnitude": 180.0,
+          "directionDeg": 90.0,
+          "timingCurve": "viscoelastic_relax",
+          "semanticCause": "Challenging the standard alters systemic boundary"
+        }
+      ],
+      "mutations": [
+        {
+          "mutationId": "scene_2_logic_boundary_sag",
+          "actorId": "scene_2_logic_standard_boundary",
+          "type": "viscoelastic_sag",
+          "triggerFrame": 305,
+          "durationFrames": 45,
+          "stateBefore": "UNCOMPROMISED_TAUT",
+          "stateAfter": "DEFLECTED_SETTLED",
+          "physicalRationale": "OBSERVATION -> INFORMED_ACTION",
+          "parameters": {
+            "initialY": 620,
+            "settledY": 800,
+            "overshootPx": 45
+          },
+          "createsMemoryTrace": {
+            "traceId": "scene_2_logic_ghost_baseline",
+            "originatingActorId": "scene_2_logic_standard_boundary",
+            "originatingSceneId": "scene_2_logic",
+            "appearance": "dashed_ghost_line",
+            "coordinates": {
+              "y": 620,
+              "startX": 120,
+              "endX": 960
+            },
+            "opacity": 0.35,
+            "persistsUntilEnd": true,
+            "semanticMeaning": "Visual memory of original uncompromised standard"
+          }
+        }
+      ],
+      "causalCouplings": [
+        {
+          "couplingId": "scene_2_logic_impulse_coupling",
+          "sourceEvent": {
+            "actorId": "scene_2_logic_headline",
+            "stateChange": "IMPULSE_STRIKE",
+            "frame": 305
+          },
+          "propagationDelayFrames": 0,
+          "targetReaction": {
+            "actorId": "scene_2_logic_standard_boundary",
+            "resultingMutationId": "scene_2_logic_boundary_sag"
+          },
+          "physicalLaw": "Compromise impulse physically recalibrates baseline standard downward"
+        }
+      ],
+      "annotations": [
+        {
+          "annotationId": "scene_2_logic_headline",
+          "text": "THE MIND IMAGINES CATASTROPHIC OUTCOMES ",
+          "font": "Montserrat Black",
+          "fontSizePx": 68,
+          "color": "#ffffff",
+          "role": "thesis_statement",
+          "staticPlacement": {
+            "x": 540,
+            "y": 330
+          },
+          "startFrame": 275,
+          "durationFrames": 120,
+          "inAnimation": "scale_pop"
+        },
+        {
+          "annotationId": "scene_2_logic_consequence_label",
+          "text": "ALTERED BASELINE GOVERNS SUBSEQUENT CHOICES",
+          "font": "JetBrains Mono Bold",
+          "fontSizePx": 38,
+          "color": "#ffffff",
+          "role": "action_verb",
+          "staticPlacement": {
+            "x": 540,
+            "y": 1250
+          },
+          "startFrame": 310,
+          "durationFrames": 397,
+          "inAnimation": "fade_down"
+        }
+      ],
+      "compositionMetrics": {
+        "occupiedWidthPct": 86.7,
+        "occupiedHeightPct": 52.3,
+        "occupiedAreaPct": 45.4,
+        "bottomDeadZonePx": 90.0,
+        "semanticDensityScore": 0.81,
+        "densityStatus": "OPTIMAL"
+      }
+    },
+    {
+      "sceneId": "scene_3_solution",
+      "role": "resolution",
+      "startFrame": 707,
+      "endFrame": 982,
+      "narrativeGoal": "Action precedes neurochemical motivation rather than waiting for emotional readiness.",
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "dark_matte_spotlight_01",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.471,
+          0.36
+        ],
+        "motion": "slow_zoom_in",
+        "motionScaleDelta": 1.04,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "dissolve",
+          "durationFrames": 16
+        },
+        "transitionOut": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center"
+      },
+      "actors": [
+        {
+          "id": "scene_3_solution_standard_boundary",
+          "semanticRole": "the_sovereign_standard",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "continuous_boundary",
+            "orientation": "horizontal",
+            "lengthPx": 840,
+            "thicknessPx": 6,
+            "initialBaselineY": 620
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 740,
+            "width": 880,
+            "height": 480,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [
+        {
+          "forceId": "scene_3_solution_concession_impulse",
+          "targetActorId": "scene_3_solution_standard_boundary",
+          "type": "point_impulse",
+          "triggerFrame": 737,
+          "durationFrames": 45,
+          "magnitude": 180.0,
+          "directionDeg": 90.0,
+          "timingCurve": "viscoelastic_relax",
+          "semanticCause": "Challenging the standard alters systemic boundary"
+        }
+      ],
+      "mutations": [
+        {
+          "mutationId": "scene_3_solution_boundary_sag",
+          "actorId": "scene_3_solution_standard_boundary",
+          "type": "viscoelastic_sag",
+          "triggerFrame": 737,
+          "durationFrames": 45,
+          "stateBefore": "UNCOMPROMISED_TAUT",
+          "stateAfter": "DEFLECTED_SETTLED",
+          "physicalRationale": "OBSERVATION -> INFORMED_ACTION",
+          "parameters": {
+            "initialY": 620,
+            "settledY": 800,
+            "overshootPx": 45
+          },
+          "createsMemoryTrace": {
+            "traceId": "scene_3_solution_ghost_baseline",
+            "originatingActorId": "scene_3_solution_standard_boundary",
+            "originatingSceneId": "scene_3_solution",
+            "appearance": "dashed_ghost_line",
+            "coordinates": {
+              "y": 620,
+              "startX": 120,
+              "endX": 960
+            },
+            "opacity": 0.35,
+            "persistsUntilEnd": true,
+            "semanticMeaning": "Visual memory of original uncompromised standard"
+          }
+        }
+      ],
+      "causalCouplings": [
+        {
+          "couplingId": "scene_3_solution_impulse_coupling",
+          "sourceEvent": {
+            "actorId": "scene_3_solution_headline",
+            "stateChange": "IMPULSE_STRIKE",
+            "frame": 737
+          },
+          "propagationDelayFrames": 0,
+          "targetReaction": {
+            "actorId": "scene_3_solution_standard_boundary",
+            "resultingMutationId": "scene_3_solution_boundary_sag"
+          },
+          "physicalLaw": "Compromise impulse physically recalibrates baseline standard downward"
+        }
+      ],
+      "annotations": [
+        {
+          "annotationId": "scene_3_solution_headline",
+          "text": "SPEAK THE TRUTH WHILE THE STAKES ARE STI",
+          "font": "Montserrat Black",
+          "fontSizePx": 68,
+          "color": "#ffffff",
+          "role": "thesis_statement",
+          "staticPlacement": {
+            "x": 540,
+            "y": 330
+          },
+          "startFrame": 707,
+          "durationFrames": 120,
+          "inAnimation": "scale_pop"
+        },
+        {
+          "annotationId": "scene_3_solution_consequence_label",
+          "text": "ALTERED BASELINE GOVERNS SUBSEQUENT CHOICES",
+          "font": "JetBrains Mono Bold",
+          "fontSizePx": 38,
+          "color": "#ffffff",
+          "role": "action_verb",
+          "staticPlacement": {
+            "x": 540,
+            "y": 1250
+          },
+          "startFrame": 742,
+          "durationFrames": 240,
+          "inAnimation": "fade_down"
+        }
+      ],
+      "compositionMetrics": {
+        "occupiedWidthPct": 86.7,
+        "occupiedHeightPct": 52.3,
+        "occupiedAreaPct": 45.4,
+        "bottomDeadZonePx": 90.0,
+        "semanticDensityScore": 0.81,
+        "densityStatus": "OPTIMAL"
+      }
+    }
+  ]
+}
