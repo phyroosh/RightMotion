@@ -1,0 +1,708 @@
+{
+  "metadata": {
+    "total_files_to_delete": 98,
+    "total_bytes_to_delete": 20229928,
+    "phase1_count": 32,
+    "phase1_bytes": 1243256,
+    "phase2_count": 65,
+    "phase2_bytes": 18983768,
+    "phase5_count": 1,
+    "phase5_bytes": 2904,
+    "preserved_modified": [
+      "CLAUDE.md"
+    ],
+    "phase2_stubs_converted": [
+      "src/components/TacticalMemeCard.tsx",
+      "src/components/TacticalMemeFrame.tsx",
+      "src/components/MemeStickerOverlay.tsx"
+    ]
+  },
+  "files": [
+    {
+      "path": "generate_assets.py",
+      "phase": 1,
+      "size_bytes": 6448,
+      "lines": 162,
+      "sha256": "3822287167dc032ac9de1ba50ddb5f62abe19e4af362e73844cd7ea30b6c458c"
+    },
+    {
+      "path": "Direct_start_server.sh",
+      "phase": 1,
+      "size_bytes": 128,
+      "lines": 3,
+      "sha256": "bb2f43283d38d37d4076520b02083ac3c744b66971f0545865647a23f7e32bfd"
+    },
+    {
+      "path": "studio_earth_screen.png",
+      "phase": 1,
+      "size_bytes": 522927,
+      "lines": 0,
+      "sha256": "40db72c9ba2b6d1199a5d9502b54b885a7a38a73f174164a939a91668ae8c271"
+    },
+    {
+      "path": "src/transcript.json",
+      "phase": 1,
+      "size_bytes": 9816,
+      "lines": 702,
+      "sha256": "19c96626c625abfd23ed46f703391b495741d348a218c228fc5b249177f1fb45"
+    },
+    {
+      "path": "src/transcript_comparison.json",
+      "phase": 1,
+      "size_bytes": 10062,
+      "lines": 717,
+      "sha256": "a86bf0a237c53664396001f0e5863cf5e4ab2b5656cfb627fd38d2731c0b81cd"
+    },
+    {
+      "path": "public/voiceover.mp3",
+      "phase": 1,
+      "size_bytes": 281664,
+      "lines": 0,
+      "sha256": "abdd0cd785e1bf8a4e33c8b48555dc85c3b8b8623c31545903e28a3b80670396"
+    },
+    {
+      "path": "public/voiceover_comparison.mp3",
+      "phase": 1,
+      "size_bytes": 290592,
+      "lines": 0,
+      "sha256": "5d992edb1667d123d406d039bae93ff9929d434f68bc590758a28153c6bdd53d"
+    },
+    {
+      "path": "editing_rules.md",
+      "phase": 1,
+      "size_bytes": 13505,
+      "lines": 151,
+      "sha256": "6d198cf0c93774d14f2bc60841320f8620d71104702d663b9e6792556a559fe3"
+    },
+    {
+      "path": "studio/fix_palette.py",
+      "phase": 1,
+      "size_bytes": 4450,
+      "lines": 61,
+      "sha256": "bf9fd5b3c50e76966ffdfe44bc505084f6be30ef273e5962091811b56e25f9ca"
+    },
+    {
+      "path": "src/components/KineticCaptions.tsx",
+      "phase": 1,
+      "size_bytes": 5019,
+      "lines": 153,
+      "sha256": "7b77749b54c013d3a453a07898cfaaf88f6f46136417689b07951081e3f87c2e"
+    },
+    {
+      "path": "src/components/ProgressBar.tsx",
+      "phase": 1,
+      "size_bytes": 976,
+      "lines": 30,
+      "sha256": "6d8867807e35d41f16c75b4bace210c8e87ab7afdef3f9211a6e94a05e76c5fb"
+    },
+    {
+      "path": "src/components/Background.tsx",
+      "phase": 1,
+      "size_bytes": 2306,
+      "lines": 63,
+      "sha256": "caceb5caf9434798c8cf71fcbec9b11258181454bab6caeee44f50eb4d9f118a"
+    },
+    {
+      "path": "src/components/MotionCard.tsx",
+      "phase": 1,
+      "size_bytes": 11424,
+      "lines": 265,
+      "sha256": "1114f3a04cf1cf6eedaf63eb1b13cac34c3ecdcefb6f9d4d2af0bf6c5fd1e350"
+    },
+    {
+      "path": "scripts/generate_adhd_audio.py",
+      "phase": 1,
+      "size_bytes": 3455,
+      "lines": 99,
+      "sha256": "5aae298163c423c6887d9d449dbba5a9fd0b06358bffddb0c03b6791eb4ecbe2"
+    },
+    {
+      "path": "scripts/generate_environment_audio.py",
+      "phase": 1,
+      "size_bytes": 2840,
+      "lines": 79,
+      "sha256": "61c54d7e30a8aac3ae11469d8f21b8a47a4f47a2575975dcd2ed3543473b08d0"
+    },
+    {
+      "path": "scripts/generate_fresh_scripts.py",
+      "phase": 1,
+      "size_bytes": 4449,
+      "lines": 127,
+      "sha256": "e6d3dc1ebbdc5e6542c0ed135592266fa965f56f6fda92906536d7c094a36fec"
+    },
+    {
+      "path": "scripts/generate_lofi_transcript.py",
+      "phase": 1,
+      "size_bytes": 18093,
+      "lines": 409,
+      "sha256": "850603661119bacfa804ed345a1d2f40513f233f8a33e29c08d34888dcd180e6"
+    },
+    {
+      "path": "scripts/generate_loneliness_audio.py",
+      "phase": 1,
+      "size_bytes": 3354,
+      "lines": 82,
+      "sha256": "e716eb9d5ff450f28b1204df6ca51ce0a9bead6ea6feb898b372589dac3beb3d"
+    },
+    {
+      "path": "scripts/generate_longform_audio.py",
+      "phase": 1,
+      "size_bytes": 12000,
+      "lines": 484,
+      "sha256": "1718df86a1ce59da31a51ecd89c8aebe52886aabed407cd1fc21f0cc74921182"
+    },
+    {
+      "path": "scripts/generate_neuroproductivity_audio.py",
+      "phase": 1,
+      "size_bytes": 10244,
+      "lines": 438,
+      "sha256": "8db2b511cd98ff20272f737814906e8a256f8df2f3fe5362c9d9661b5b3d3739"
+    },
+    {
+      "path": "scripts/generate_new_clips.py",
+      "phase": 1,
+      "size_bytes": 4512,
+      "lines": 138,
+      "sha256": "b00a9dff5b898154f2ca5469f2fcaed615447b6299b8b07ac0be478f3c7ac99e"
+    },
+    {
+      "path": "scripts/generate_promises_assets.py",
+      "phase": 1,
+      "size_bytes": 3252,
+      "lines": 81,
+      "sha256": "9b3d5c6fe77c7ba6803339066a40c7b02142b40cc8bf7ca98ee4aee64dd609bc"
+    },
+    {
+      "path": "scripts/generate_saying_no_audio.py",
+      "phase": 1,
+      "size_bytes": 3211,
+      "lines": 91,
+      "sha256": "f4be747c391d1f115a061cb44c2ed9a1d125c4efe6fdb747c936effccc416ce3"
+    },
+    {
+      "path": "scripts/generate_shortform_audio.py",
+      "phase": 1,
+      "size_bytes": 4489,
+      "lines": 132,
+      "sha256": "51cf18b69601cea363d1f79db79e308d530790c3d9471baf34c9f6bffbaeeb4c"
+    },
+    {
+      "path": "scripts/generate_strength_clip.py",
+      "phase": 1,
+      "size_bytes": 4428,
+      "lines": 118,
+      "sha256": "99e3d2d97d40f3244be6a5cebd1954043687206b008e7dfeb529eb5016f8250f"
+    },
+    {
+      "path": "scripts/find_chapters.py",
+      "phase": 1,
+      "size_bytes": 1837,
+      "lines": 39,
+      "sha256": "00bc9cc20ad96b52051e3de8ba8128466cfddbabf13d57cdf2e45ce69de9bfe7"
+    },
+    {
+      "path": "scripts/find_neuro_timestamps.py",
+      "phase": 1,
+      "size_bytes": 2622,
+      "lines": 80,
+      "sha256": "3183a5308e218b03520c54b77602614e45cb227319ec625b521501a5d2e14b01"
+    },
+    {
+      "path": "scripts/process_lofi_audio.py",
+      "phase": 1,
+      "size_bytes": 3192,
+      "lines": 84,
+      "sha256": "efd1caa1ca41d20a8d67a3bc98ac87ac595f6bb41693006f55407dcdfc99072f"
+    },
+    {
+      "path": "scripts/inspect_keywords.py",
+      "phase": 1,
+      "size_bytes": 467,
+      "lines": 9,
+      "sha256": "7cfcd8962d915e7b79093d1c13577c65d3d315220a586e58fca7b1a98bd71748"
+    },
+    {
+      "path": "scripts/inspect_lofi_segments.py",
+      "phase": 1,
+      "size_bytes": 389,
+      "lines": 12,
+      "sha256": "742d055294bc1d60207cef3a943a82c79940462bed8f25b76ba236ed8dd3d642"
+    },
+    {
+      "path": "scripts/print_sentences.py",
+      "phase": 1,
+      "size_bytes": 788,
+      "lines": 27,
+      "sha256": "a9809fdcc216073b0a35148029b6d220c4170c74c09f13016d52150451334dfb"
+    },
+    {
+      "path": "scripts/list_female_voices.py",
+      "phase": 1,
+      "size_bytes": 317,
+      "lines": 12,
+      "sha256": "a9e282e1f7713be3202f1101fceb45e1a1bcf37d20d83e496d2909d41d331fa2"
+    },
+    {
+      "path": "scripts/build_meme_board.py",
+      "phase": 2,
+      "size_bytes": 35633,
+      "lines": 755,
+      "sha256": "42098ca640dd7d44cfc6cf47a9f0fe16584478b71ee0db46a5b2cebf5b35d0b1"
+    },
+    {
+      "path": "scripts/extract_meme_frame.py",
+      "phase": 2,
+      "size_bytes": 2033,
+      "lines": 66,
+      "sha256": "6dee578a61c8714839b81662cd255dd86328fce7c4076a32788a3dc5fff31c1c"
+    },
+    {
+      "path": "scripts/meme_matcher.py",
+      "phase": 2,
+      "size_bytes": 5367,
+      "lines": 143,
+      "sha256": "db043b91c4a696e43b767a08fd2e98c50b6fe876605661adf78c41dd74fe17be"
+    },
+    {
+      "path": "scripts/meme_sticker_matcher.py",
+      "phase": 2,
+      "size_bytes": 3188,
+      "lines": 98,
+      "sha256": "ce06988c11f16122d139d627f2ee5a01a3254fa929ded447b5b5a8db68c12464"
+    },
+    {
+      "path": "public/memes/MEME_BOARD.md",
+      "phase": 2,
+      "size_bytes": 16257,
+      "lines": 295,
+      "sha256": "54889dab82d919387abab3a058242531140f160e01484b3efb4f3695f4ae71c2"
+    },
+    {
+      "path": "public/memes/al_pacino_depressed_bench.mp4",
+      "phase": 2,
+      "size_bytes": 236243,
+      "lines": 0,
+      "sha256": "c307c805ac8c8624b96e63957aadf8f72f7056497723d09192012b031bcf4895"
+    },
+    {
+      "path": "public/memes/angry_grandpa_rage.mp4",
+      "phase": 2,
+      "size_bytes": 299287,
+      "lines": 0,
+      "sha256": "401ca5f08982377d929f76c30b394c24486c68d82dce2b5aafdd659118067644"
+    },
+    {
+      "path": "public/memes/bateman_iphone_inspection.mp4",
+      "phase": 2,
+      "size_bytes": 131861,
+      "lines": 0,
+      "sha256": "fbe590f2e070f5a160325910918a6a3880b990d02b0ee28aaaf4318063845af7"
+    },
+    {
+      "path": "public/memes/cat_laughing_pointing.mp4",
+      "phase": 2,
+      "size_bytes": 60604,
+      "lines": 0,
+      "sha256": "d69e9de566d79d1cbc7b919075ad712851dd94c8426da796430c7dbaaefbfc49"
+    },
+    {
+      "path": "public/memes/chrome_cyborg_overload.mp4",
+      "phase": 2,
+      "size_bytes": 1717709,
+      "lines": 0,
+      "sha256": "c2ceef30e1ebbc6ecec2dcabaec2d3c724fa363928bccaadb2f7886b4909c1a1"
+    },
+    {
+      "path": "public/memes/confused_kid.mp4",
+      "phase": 2,
+      "size_bytes": 236147,
+      "lines": 0,
+      "sha256": "0368d6f6152c2d7daa979dd3e47c34d41825601583b8b7b3e0c5091acb7ea1cc"
+    },
+    {
+      "path": "public/memes/courtroom_shout_me.mp4",
+      "phase": 2,
+      "size_bytes": 435457,
+      "lines": 0,
+      "sha256": "002792d2e5097a16ee3896072fce9efb396081f9a5f3719df576ba47ced16887"
+    },
+    {
+      "path": "public/memes/doctor_strange_loop.mp4",
+      "phase": 2,
+      "size_bytes": 188587,
+      "lines": 0,
+      "sha256": "3a93b9d3b04858c7da8ac1d6c8f3b4ee362b59bed7a182a0026d1060b77c3846"
+    },
+    {
+      "path": "public/memes/doctor_strange_multiverse.mp4",
+      "phase": 2,
+      "size_bytes": 438925,
+      "lines": 0,
+      "sha256": "797a4faeffdba58facb410ea26615c47ddc9fcce929088953d049ede079a4162"
+    },
+    {
+      "path": "public/memes/frames/al_pacino_depressed_bench.png",
+      "phase": 2,
+      "size_bytes": 295315,
+      "lines": 0,
+      "sha256": "ee00e07e60165e294615e482910fcc64da1b87442036eae0240e8e5c1a30f747"
+    },
+    {
+      "path": "public/memes/frames/angry_grandpa_rage.png",
+      "phase": 2,
+      "size_bytes": 168099,
+      "lines": 0,
+      "sha256": "6c9fc7af974ec190a633d18e2caeb5ceecfb0d018b33b64407aae17bc5320055"
+    },
+    {
+      "path": "public/memes/frames/bateman_iphone_inspection.png",
+      "phase": 2,
+      "size_bytes": 206540,
+      "lines": 0,
+      "sha256": "1c9262f78bcdc92eab2d9b55aa995483808f8ff408515bf08a8a95c9c6b43f4e"
+    },
+    {
+      "path": "public/memes/frames/cat_laughing_pointing.png",
+      "phase": 2,
+      "size_bytes": 206829,
+      "lines": 0,
+      "sha256": "df0c37d7955374d4f14f4bcde289a63e03d55dab4304922902aab12a62f9bf0d"
+    },
+    {
+      "path": "public/memes/frames/chrome_cyborg_overload.png",
+      "phase": 2,
+      "size_bytes": 638845,
+      "lines": 0,
+      "sha256": "b6bdb3571d3c844f67934196bd3cfb3d1bb7f812fb845245134e67041262767e"
+    },
+    {
+      "path": "public/memes/frames/confused_kid.png",
+      "phase": 2,
+      "size_bytes": 272704,
+      "lines": 0,
+      "sha256": "9ed19fabf3d00f4ff17bbebfa25a08fd64834a4d170d6221697f6c45680a200b"
+    },
+    {
+      "path": "public/memes/frames/courtroom_shout_me.png",
+      "phase": 2,
+      "size_bytes": 281689,
+      "lines": 0,
+      "sha256": "dd127a546bdae3ad88460ece857faac673072bf1ecc1b78a8ba796f5c067af4a"
+    },
+    {
+      "path": "public/memes/frames/doctor_strange_loop.png",
+      "phase": 2,
+      "size_bytes": 130821,
+      "lines": 0,
+      "sha256": "8ee71036117fe530d84aeb16f780340e8ba4665b911fbf360beef31bec5db06e"
+    },
+    {
+      "path": "public/memes/frames/doctor_strange_multiverse.png",
+      "phase": 2,
+      "size_bytes": 250674,
+      "lines": 0,
+      "sha256": "357be3f38f41c7e3c5600927edfa9dee42e10e9d3fc0c24834babb781b67f8d4"
+    },
+    {
+      "path": "public/memes/frames/ishowspeed_nodding_headphones.png",
+      "phase": 2,
+      "size_bytes": 150341,
+      "lines": 0,
+      "sha256": "4bafca887dee4d4d00042f2fabe504fdd35004c75e1b001fde27ad24a80962aa"
+    },
+    {
+      "path": "public/memes/frames/ishowspeed_stare.png",
+      "phase": 2,
+      "size_bytes": 290862,
+      "lines": 0,
+      "sha256": "136c91e38dff90c041d94ef9cd587896f1f7e54190ace72db82c57203d809d8d"
+    },
+    {
+      "path": "public/memes/frames/lego_bruce_flabbergasted.png",
+      "phase": 2,
+      "size_bytes": 489384,
+      "lines": 0,
+      "sha256": "5525484fe87535696d5b00cc84da3a818c15250d01b766d5d2fec2f588bef97c"
+    },
+    {
+      "path": "public/memes/frames/michael_jackson_popcorn.png",
+      "phase": 2,
+      "size_bytes": 255691,
+      "lines": 0,
+      "sha256": "987fb9bf25af125ef3d979e318b141b8929bb260ccd806bb47bb2a74ebe6cc46"
+    },
+    {
+      "path": "public/memes/frames/office_rage_smash.png",
+      "phase": 2,
+      "size_bytes": 152674,
+      "lines": 0,
+      "sha256": "92444cca3e9dec75877c717de56644e552d32596f6b04b437e9ba6c9975bddb6"
+    },
+    {
+      "path": "public/memes/frames/rdj_shocked_closeup.png",
+      "phase": 2,
+      "size_bytes": 292480,
+      "lines": 0,
+      "sha256": "a481b84323da18b2ef9940037db3d3d8f7391125094806981e3caa0a6e3530d6"
+    },
+    {
+      "path": "public/memes/frames/ronaldo_sipping_tea.png",
+      "phase": 2,
+      "size_bytes": 165933,
+      "lines": 0,
+      "sha256": "0a1487a1f8b3e42688e202a27bb38373052e9c8eec249a18012eff930bacfbc7"
+    },
+    {
+      "path": "public/memes/frames/rowley_innocent_wave.png",
+      "phase": 2,
+      "size_bytes": 290861,
+      "lines": 0,
+      "sha256": "62603d79f21feaf12ce13ad2fe6b4992d30d6702be74455cab6b20a326cb9dd1"
+    },
+    {
+      "path": "public/memes/frames/sweating_gamer.png",
+      "phase": 2,
+      "size_bytes": 138833,
+      "lines": 0,
+      "sha256": "e108c27656ce01e104c64d150ff697144c453348b301041188ac927fe0d25076"
+    },
+    {
+      "path": "public/memes/frames/tony_stark_explosion.png",
+      "phase": 2,
+      "size_bytes": 230864,
+      "lines": 0,
+      "sha256": "3ebbd24d76d844e48ad48f60f10b53a432e7914127e9180adb45f8d4a214a117"
+    },
+    {
+      "path": "public/memes/frames/walter_white_despair.png",
+      "phase": 2,
+      "size_bytes": 436894,
+      "lines": 0,
+      "sha256": "8012abd4d00c4c1524a44e3bbfa277cd5325e09e08747934b383bdc3d9e23a69"
+    },
+    {
+      "path": "public/memes/frames/wet_seal_cat.png",
+      "phase": 2,
+      "size_bytes": 220695,
+      "lines": 0,
+      "sha256": "678f8b010a3b32baffbf1fc3b04557baec41132bf3ba7a24ac6ea45f195e63df"
+    },
+    {
+      "path": "public/memes/ishowspeed_nodding_headphones.mp4",
+      "phase": 2,
+      "size_bytes": 83772,
+      "lines": 0,
+      "sha256": "180358d10812b82c649c209b313b991b32008cee7de713a103c3bb071b105b78"
+    },
+    {
+      "path": "public/memes/ishowspeed_stare.mp4",
+      "phase": 2,
+      "size_bytes": 263984,
+      "lines": 0,
+      "sha256": "56213883131f9552246e685c6bee3dbe19e8f8c569337af61d4970d95b780975"
+    },
+    {
+      "path": "public/memes/lego_bruce_flabbergasted.mp4",
+      "phase": 2,
+      "size_bytes": 424597,
+      "lines": 0,
+      "sha256": "e40e88a4d1c4d024285bbf9a02c27f0b1e046ad93f0b0bff79fb00eeec0cb989"
+    },
+    {
+      "path": "public/memes/michael_jackson_popcorn.mp4",
+      "phase": 2,
+      "size_bytes": 234046,
+      "lines": 0,
+      "sha256": "6cc1cd68afa420150fa24bfadbe5f0f1f7f940e4b559a3a3c2771d1f80044c7f"
+    },
+    {
+      "path": "public/memes/office_rage_smash.mp4",
+      "phase": 2,
+      "size_bytes": 323996,
+      "lines": 0,
+      "sha256": "23ae536d8007bbd0ac543cc0d9f053143a459e105e7d01e6b379a7583186db00"
+    },
+    {
+      "path": "public/memes/rdj_shocked_closeup.mp4",
+      "phase": 2,
+      "size_bytes": 337897,
+      "lines": 0,
+      "sha256": "de7255c13944ac9c98b1d2c6973578dbbef7c0bb40da0b489a1baada542bd771"
+    },
+    {
+      "path": "public/memes/registry.json",
+      "phase": 2,
+      "size_bytes": 38007,
+      "lines": 1497,
+      "sha256": "7fc62410441124581c24238d30b35c208f2cc047255840938782205107849388"
+    },
+    {
+      "path": "public/memes/ronaldo_sipping_tea.mp4",
+      "phase": 2,
+      "size_bytes": 143221,
+      "lines": 0,
+      "sha256": "98866aa1f6ccb0878e42352591d924f340e5fa68e211ba68cc7d8ebe12e3dac7"
+    },
+    {
+      "path": "public/memes/rowley_innocent_wave.mp4",
+      "phase": 2,
+      "size_bytes": 427810,
+      "lines": 0,
+      "sha256": "da848a6ae40f65223a264154f2fbe59809a0fb6d35e0ba0a6266eb7d45582ceb"
+    },
+    {
+      "path": "public/memes/stickers/STICKER_BOARD.md",
+      "phase": 2,
+      "size_bytes": 8139,
+      "lines": 127,
+      "sha256": "4776d61acc72218db0ee175658d76fe645976b9003e629ac02ec38589f14004a"
+    },
+    {
+      "path": "public/memes/stickers/anya_crying.png",
+      "phase": 2,
+      "size_bytes": 358768,
+      "lines": 0,
+      "sha256": "5c3d244042f91f907743b6819aaf9acd26342685dc35e2a93754e716f27c1d0f"
+    },
+    {
+      "path": "public/memes/stickers/anya_smug.png",
+      "phase": 2,
+      "size_bytes": 373885,
+      "lines": 0,
+      "sha256": "e9aab362cf9b407335017beb4c5d4916efdcda645d12c637b4688beec7e100ba"
+    },
+    {
+      "path": "public/memes/stickers/assignment_overload_cram.png",
+      "phase": 2,
+      "size_bytes": 223206,
+      "lines": 0,
+      "sha256": "62d35b1735c129b5e7ec3f2923e0350b2490b47a1ccb94be8b78956f07869bc3"
+    },
+    {
+      "path": "public/memes/stickers/crying_kid_homework.png",
+      "phase": 2,
+      "size_bytes": 434132,
+      "lines": 0,
+      "sha256": "b517d34c5e0186026420c3954308ca2e5fb1b25b373078a11272bdb4549fbab7"
+    },
+    {
+      "path": "public/memes/stickers/friends_dapping_laughing.png",
+      "phase": 2,
+      "size_bytes": 533122,
+      "lines": 0,
+      "sha256": "d4a40249b6e4958e3a1739301b2f42305afb8aa2d58b8c92f7b85942aeb8440d"
+    },
+    {
+      "path": "public/memes/stickers/girl_crying_at_desk.png",
+      "phase": 2,
+      "size_bytes": 428274,
+      "lines": 0,
+      "sha256": "32758489bae8184611efe5a6cdfee4d1cf5f6caf73d107cd807371a8cd743802"
+    },
+    {
+      "path": "public/memes/stickers/patrick_drool.png",
+      "phase": 2,
+      "size_bytes": 413274,
+      "lines": 0,
+      "sha256": "fbc7fb83a7678f24e0af008b825dea7e3d2e243fc6db5380bccd449b7529cde5"
+    },
+    {
+      "path": "public/memes/stickers/shannon_sharpe_suit_flex.png",
+      "phase": 2,
+      "size_bytes": 274570,
+      "lines": 0,
+      "sha256": "c854d35fc78e585390f8b1a6845aeb2ee41656bec688bb60f0d9437b1dc1462b"
+    },
+    {
+      "path": "public/memes/stickers/shaq_timeout_pause.png",
+      "phase": 2,
+      "size_bytes": 351989,
+      "lines": 0,
+      "sha256": "e035721787b14d164eaaf6eb1831e5521ae2b4e6284824860ff4009c5332b0aa"
+    },
+    {
+      "path": "public/memes/stickers/spiderman_scheming_chair.png",
+      "phase": 2,
+      "size_bytes": 424946,
+      "lines": 0,
+      "sha256": "f7d3072ac34d476ee1647a1c8bc987e59abd914ef4f01c1f0396571281a310d5"
+    },
+    {
+      "path": "public/memes/stickers/stickers_registry.json",
+      "phase": 2,
+      "size_bytes": 10839,
+      "lines": 275,
+      "sha256": "17d915876d9ef292340aacfe257f413a707de07e8464bfed73f4a76a459d1e2a"
+    },
+    {
+      "path": "public/memes/stickers/tai_lung_laptop_despair.png",
+      "phase": 2,
+      "size_bytes": 189029,
+      "lines": 0,
+      "sha256": "fbabb7c4c389f7cba49f754ca70049468c38c4bfbe7863706af7f1782bd5f7f3"
+    },
+    {
+      "path": "public/memes/stickers/talking_to_brick_wall.png",
+      "phase": 2,
+      "size_bytes": 464077,
+      "lines": 0,
+      "sha256": "6e4eb569d28d4b8a44681348ac2160d4a0d133e93d07607034430e767c65ae46"
+    },
+    {
+      "path": "public/memes/stickers/toddler_head_panic.png",
+      "phase": 2,
+      "size_bytes": 283699,
+      "lines": 0,
+      "sha256": "fb8bbc44dcd7c96bac8204ecd7609fd74f85f300cd7ce3e0598d17aa362dd41e"
+    },
+    {
+      "path": "public/memes/stickers/tom_holland_knuckle_bite.png",
+      "phase": 2,
+      "size_bytes": 416736,
+      "lines": 0,
+      "sha256": "92265d7f7629ec4cf43b670239b59a8648b4e68e7c1501f48e19899f510a6836"
+    },
+    {
+      "path": "public/memes/stickers/verne_turtle_shock.png",
+      "phase": 2,
+      "size_bytes": 510461,
+      "lines": 0,
+      "sha256": "cff0f104ec9ae36370dfbcc3c5e45fc80d77eaa67064c9aa480f7a272f282940"
+    },
+    {
+      "path": "public/memes/sweating_gamer.mp4",
+      "phase": 2,
+      "size_bytes": 85238,
+      "lines": 0,
+      "sha256": "654a88ea7cdc3aa6ae693a5c2727dbc593f9bbe818d970b4a22efaa4e575a4c9"
+    },
+    {
+      "path": "public/memes/tony_stark_explosion.mp4",
+      "phase": 2,
+      "size_bytes": 882300,
+      "lines": 0,
+      "sha256": "bf3ba37da71e7637b0c330d4ece7719f4c73c5920b1b45b9c6a4a8a4019eb7ac"
+    },
+    {
+      "path": "public/memes/walter_white_despair.mp4",
+      "phase": 2,
+      "size_bytes": 510943,
+      "lines": 0,
+      "sha256": "1486a071d6f25ccbd15868d3e223147d7f665ee50a22b7c1894ef216aab4434a"
+    },
+    {
+      "path": "public/memes/wet_seal_cat.mp4",
+      "phase": 2,
+      "size_bytes": 154485,
+      "lines": 0,
+      "sha256": "6f552ca970ccdfe4d235bd8fabe050753c624c43b05af2ec4257b2df7991575e"
+    },
+    {
+      "path": "src/components/transformation/CausalActionCoupling.tsx",
+      "phase": 5,
+      "size_bytes": 2904,
+      "lines": 86,
+      "sha256": "c5b249aa09bc1fd97821140238bb08e5fa54b1a6d14d575a2213312e6b6278c3"
+    }
+  ]
+}
