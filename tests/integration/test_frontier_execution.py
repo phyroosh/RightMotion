@@ -26,7 +26,7 @@ import sys
 import unittest
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(ROOT_DIR / "scripts"))
 
 from orchestrator import CreativeOrchestrator

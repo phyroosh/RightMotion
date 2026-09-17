@@ -5,7 +5,12 @@
   "scripts": {
     "start": "remotion preview",
     "typecheck": "tsc --noEmit",
-    "test:causal": "npx tsx scripts/test_causal_engine.ts",
+    "test": "npm run test:unit && npm run test:integration && npm run test:studio",
+    "test:unit": ".venv/bin/python3 -m unittest discover -s tests/unit -p 'test_*.py'",
+    "test:integration": ".venv/bin/python3 -m unittest discover -s tests/integration -p 'test_*.py' && npm run test:causal && npm run test:primitives",
+    "test:causal": "npx tsx tests/integration/test_causal_engine.ts",
+    "test:primitives": "npx tsx tests/integration/test_primitives_render.ts",
+    "test:studio": "node tests/studio/test_remote_access.js",
     "validate": "python3 scripts/validate_clip.py",
     "studio": "node studio/server.js",
     "render:thumbnails": "node scripts/render_all_thumbnails.js",

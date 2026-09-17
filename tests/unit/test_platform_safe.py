@@ -18,7 +18,7 @@ Executes all 10 required test cases and generates Section 25 Visual QA Reports:
 import sys
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(ROOT_DIR / "scripts"))
 
 from platform_safe_validator import (

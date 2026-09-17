@@ -15,9 +15,9 @@
 import fs from "fs";
 import path from "path";
 import { execSync } from "child_process";
-import * as primitives from "../src/components/primitives";
+import * as primitives from "../../src/components/primitives";
 
-const ROOT_DIR = path.resolve(__dirname, "..");
+const ROOT_DIR = path.resolve(__dirname, "../..");
 const OUT_DIR = path.join(ROOT_DIR, "out");
 
 // Banned container classes when applied to visual mechanism primitives

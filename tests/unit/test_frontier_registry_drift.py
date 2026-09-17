@@ -12,10 +12,12 @@ Verifies that:
 
 import unittest
 import json
+import sys
 import subprocess
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+sys.path.append(str(ROOT_DIR / "scripts"))
 MANIFEST_PATH = ROOT_DIR / "src" / "orchestrator" / "frontier_manifest.json"
 
 EXPECTED_FRONTIER_CODES = {

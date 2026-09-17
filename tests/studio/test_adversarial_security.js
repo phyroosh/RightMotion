@@ -666,8 +666,8 @@ async function runAdversarialSuite() {
     });
 
     await test('SEC-INF-004: Filesystem permissions & Git hygiene for sensitive stores', async () => {
-      const remoteDataDir = path.resolve(__dirname, '../studio/remote/data');
-      const gitignore = fs.readFileSync(path.resolve(__dirname, '../.gitignore'), 'utf-8');
+      const remoteDataDir = path.resolve(__dirname, '../../studio/remote/data');
+      const gitignore = fs.readFileSync(path.resolve(__dirname, '../../.gitignore'), 'utf-8');
 
       // Verify .gitignore entries
       assert.ok(gitignore.includes('studio/remote/data/'), '.gitignore must contain studio/remote/data/');

@@ -15,7 +15,7 @@ Verifies the canonical audio module (scripts/voiceover_engine.py):
 import unittest
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 
 import voiceover_engine
 import dialogue_engine

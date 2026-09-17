@@ -54,7 +54,7 @@ function clearEvents() {
 }
 
 async function runUITests() {
-  const outDir = path.resolve(__dirname, '../out');
+  const outDir = path.resolve(__dirname, '../../out');
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
   }

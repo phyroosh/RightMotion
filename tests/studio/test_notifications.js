@@ -189,7 +189,7 @@ async function runTests() {
 
   // TEST 10: CLI Notification Dispatcher (scripts/notify.py)
   await test('NOTIF-010: CLI scripts/notify.py dispatches event cleanly', async () => {
-    const rootDir = path.resolve(__dirname, '..');
+    const rootDir = path.resolve(__dirname, '../..');
     const cmd = `python3 ${path.join(rootDir, 'scripts/notify.py')} --event RENDER_COMPLETED --title "🎬 CLI Test Render" --message "Render via CLI notify.py completed" --clip "dopamine_reality_video.mp4" --tab "studio"`;
     const out = execSync(cmd, { encoding: 'utf8' });
     assert.ok(out.includes('Notification Sent') || out.includes('SUCCESS') || out.includes('Persisted notification'), `Unexpected output: ${out}`);

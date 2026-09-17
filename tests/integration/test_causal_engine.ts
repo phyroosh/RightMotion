@@ -4,8 +4,8 @@
  * Tests state transitions, threshold crossings, memory persistence, and determinism.
  */
 
-import { resolveCausalGraph } from "../src/causal/resolver";
-import { CausalGraphDefinition, RootTrigger } from "../src/causal/types";
+import { resolveCausalGraph } from "../../src/causal/resolver";
+import { CausalGraphDefinition, RootTrigger } from "../../src/causal/types";
 
 let totalTests = 0;
 let passedTests = 0;

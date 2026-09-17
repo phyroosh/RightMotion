@@ -384,7 +384,7 @@ Every element must answer: *"Does this help the viewer understand, feel, or reme
 **Platform Safe Pre-Flight Audit:**
 ```bash
 python3 scripts/platform_safe_validator.py <clip_name>
-python3 scripts/test_platform_safe.py
+python3 tests/unit/test_platform_safe.py
 ```
 
 ---

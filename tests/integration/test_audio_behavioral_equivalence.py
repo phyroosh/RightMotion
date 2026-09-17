@@ -28,7 +28,7 @@ import subprocess
 from pathlib import Path
 from typing import Tuple, List, Dict, Any
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(ROOT_DIR / "scripts"))
 
 import edge_tts

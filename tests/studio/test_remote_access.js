@@ -16,11 +16,11 @@ if (!fs.existsSync(TEST_DATA_DIR)) {
 
 // We will launch a lightweight Express app with the exact same middleware and routes
 const express = require('express');
-const { authContextMiddleware, requirePermission, Permissions } = require('../studio/remote/permissions');
-const remoteRouter = require('../studio/remote/routes');
-const store = require('../studio/remote/store');
-const auth = require('../studio/remote/auth');
-const { Roles, InviteStatus } = require('../studio/remote/types');
+const { authContextMiddleware, requirePermission, Permissions } = require('../../studio/remote/permissions');
+const remoteRouter = require('../../studio/remote/routes');
+const store = require('../../studio/remote/store');
+const auth = require('../../studio/remote/auth');
+const { Roles, InviteStatus } = require('../../studio/remote/types');
 
 const app = express();
 app.use(express.json());

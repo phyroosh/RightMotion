@@ -18,7 +18,7 @@ import json
 import sys
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(ROOT_DIR / "scripts"))
 
 from visual_concept import VisualConceptTranslator, VisualMechanism, MetaphorLevel

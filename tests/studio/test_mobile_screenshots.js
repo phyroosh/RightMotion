@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 async function runVisualTests() {
-  const outDir = path.resolve(__dirname, '../out');
+  const outDir = path.resolve(__dirname, '../../out');
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
   }
