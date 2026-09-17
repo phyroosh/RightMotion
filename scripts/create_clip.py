@@ -983,7 +983,7 @@ export const {pascal_name}Background: React.FC = () => {{
 """
     elif niche == "finance":
         bg_code = f"""import React from "react";
-import {{ FinanceBackground }} from "../../components/finance/FinanceBackground";
+import {{ FinanceBackground }} from "../../components/backgrounds";
 
 export const {pascal_name}Background: React.FC = () => {{
   return <FinanceBackground />;
@@ -991,7 +991,7 @@ export const {pascal_name}Background: React.FC = () => {{
 """
     elif niche == "health":
         bg_code = f"""import React from "react";
-import {{ HealthBackground }} from "../../components/health/HealthBackground";
+import {{ HealthBackground }} from "../../components/backgrounds";
 
 export const {pascal_name}Background: React.FC = () => {{
   return <HealthBackground />;
@@ -1006,7 +1006,7 @@ export const {pascal_name}Background: React.FC = () => {{
 """
     else: # self_improvement default (clean foundation canvas)
         bg_code = f"""import React from "react";
-import {{ ArchitecturalDraftingCanvas }} from "../../components/pure_graphics";
+import {{ ArchitecturalDraftingCanvas }} from "../../components/backgrounds";
 
 export const {pascal_name}Background: React.FC = () => {{
   return <ArchitecturalDraftingCanvas theme="light" />;
