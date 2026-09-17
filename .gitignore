@@ -30,17 +30,13 @@ studio/metadata.json
 studio/uploads.json
 studio/pipeline.json
 
-# Generated Audio Voiceovers & Transcripts (Keep public/assets, public/audio, and public/memes)
+# Generated Audio Voiceovers & Transcripts (Keep public/assets and public/audio)
 public/*/*.mp3
 public/**/*.mp3
 public/*/facecam.mp4
 public/**/*.mp4
 public/*/tts_temp/
 public/**/tts_temp/
-!public/memes/
-!public/memes/*
-!public/memes/*.mp4
-!public/memes/registry.json
 src/clips/*/transcript.json
 
 

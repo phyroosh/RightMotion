@@ -31,9 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const ROOT_PUBLIC_DIR = path.join(ROOT_DIR, 'public');
-const MEMES_REGISTRY_PATH = path.join(ROOT_PUBLIC_DIR, 'memes', 'registry.json');
 
-app.use('/memes', express.static(path.join(ROOT_PUBLIC_DIR, 'memes')));
 app.use('/public', express.static(ROOT_PUBLIC_DIR));
 
 const CLIENT_SECRETS_PATH = path.join(__dirname, 'client_secrets.json');
@@ -384,19 +382,6 @@ function classifyVideoNiche(filename, meta = {}) {
 
   return 'self_improvement';
 }
-
-// 0a. API: Get Tactical Meme Board Registry (21 internet culture memes)
-app.get('/api/memes', requirePermission(Permissions.VIEW_PROJECTS), (req, res) => {
-  if (fs.existsSync(MEMES_REGISTRY_PATH)) {
-    try {
-      const data = JSON.parse(fs.readFileSync(MEMES_REGISTRY_PATH, 'utf-8'));
-      return res.json(data);
-    } catch (err) {
-      console.error('Error reading memes registry:', err);
-    }
-  }
-  return res.json({ memes: [], total: 0 });
-});
 
 // 0b. API: Engine Telemetry & System Health
 app.get('/api/system/health', requirePermission(Permissions.VIEW_PROJECTS), (req, res) => {

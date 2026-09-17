@@ -2,7 +2,7 @@ import React from "react";
 import { interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 
 export interface PolishStickerFloatProps {
-  imageSrc: string; // e.g. "the_cortisol_inversion/assets/scene_illustration.png" or "memes/stickers/patrick_drool.png"
+  imageSrc: string; // e.g. "the_cortisol_inversion/assets/scene_illustration.png" or "assets/psychology/glowing_brain.png"
   startFrame: number;
   durationFrames?: number;
   width?: number; // default: 360

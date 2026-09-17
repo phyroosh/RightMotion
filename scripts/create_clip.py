@@ -978,8 +978,6 @@ def scaffold_clip_files(
     illustration_path: str = None,
     pinned_comment: str = None,
     is_duo: bool = False,
-    meme_meta: dict = None,
-    sticker_meta: dict = None,
     niche: str = None,
     creative_plan: dict = None,
     motion_ast: dict = None,
@@ -1278,11 +1276,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
             {"frame": s2_start, "type": "whoosh_fast", "volume": 0.34},
         ]
 
-    # 4a. Zero Memes Policy (Meme cards and reaction stickers permanently retired)
-    meme_jsx = ""
-    sticker_jsx = ""
-
-    # 4b. Interactive Engagement Pill (Seconds 18–22 / ~70% timeline to boost likes and comments)
+    # 4. Interactive Engagement Pill (Seconds 18–22 / ~70% timeline to boost likes and comments)
     pill_entrance = round(total_frames * 0.70)
     if pill_entrance < s2_start + 45:
         pill_entrance = s2_start + 45
@@ -1890,12 +1884,6 @@ async def main():
     parser.add_argument("--style", default=None, choices=["self_improvement", "finance", "health", "facecam"], help="Explicit editing style override")
     parser.add_argument("--duo", action="store_true", help="Enable Conversational Duo mode (Judy & Andrew)")
     parser.add_argument("--andrew", action="store_true", help="Include Andrew character (Conversational Duo mode with Judy, runtime up to 40s)")
-    parser.add_argument("--meme", default=None, help="Meme ID override (e.g. ishowspeed_stare) or 'auto'")
-    parser.add_argument("--meme-start", type=int, default=0, help="Meme start frame (default: 0 for instant opening hook)")
-    parser.add_argument("--meme-mode", choices=["video", "frame"], default="video", help="Meme display mode (video card or still frame)")
-    parser.add_argument("--sticker", default=None, help="Gen-Z meme reaction sticker ID (e.g. verne_turtle_shock) or 'none'")
-    parser.add_argument("--no-sticker", action="store_true", help="Disable mid-video Gen-Z meme reaction stickers")
-    parser.add_argument("--no-meme", action="store_true", help="Disable the opening tactical retention meme")
     parser.add_argument("--meta", action="store_true", help="Enable product PDF linking/extraction (default is organic/no-meta mode)")
     parser.add_argument("--illustration", default=None, help="Relative or absolute path to generated painterly illustration for Scene 1 (e.g. test_motion_illustration/assets/scene_illustration.png)")
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
@@ -2145,10 +2133,6 @@ async def main():
         print("=" * 70 + "\n")
 
     # Step 3: Scaffold & Register
-    # Zero Memes Policy: Memes and reaction stickers are permanently retired
-    meme_match = None
-    sticker_match = None
-
     illustration_path = args.illustration
     if illustration_path:
         p_ill = Path(illustration_path)
@@ -2170,8 +2154,6 @@ async def main():
     pascal_name = scaffold_clip_files(
         name, topic, args.format, duration_sec, clean_script, words, product_meta,
         illustration_path=illustration_path, pinned_comment=script_pinned_comment, is_duo=is_duo,
-        meme_meta=meme_match,
-        sticker_meta=sticker_match,
         niche=detected_niche,
         creative_plan=creative_plan,
         motion_ast=motion_ast,
