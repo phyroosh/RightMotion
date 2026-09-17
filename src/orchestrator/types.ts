@@ -14,7 +14,8 @@ export type FrontierCode =
   | "F4"
   | "F5"
   | "F6"
-  | "F7";
+  | "F7"
+  | "F_UBG";
 
 export type FrontierStatus =
   | "ACTIVE"
