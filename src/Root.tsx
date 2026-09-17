@@ -13,6 +13,7 @@ import boundariesTranscript from "./clips/boundaries/transcript.json";
 import { CutoutShowcase } from "./compositions/CutoutShowcase";
 import { PlatformSafeShowcase } from "./compositions/PlatformSafeShowcase";
 import { PrimitivesShowcase } from "./compositions/PrimitivesShowcase";
+import { UniversalBackgroundProof } from "./compositions/UniversalBackgroundProof";
 import { DopamineResetComposition } from "./clips/dopamine_reset";
 import dopamineResetTranscript from "./clips/dopamine_reset/transcript.json";
 import { ShrinkingCircleComposition } from "./clips/shrinking_circle";
@@ -97,6 +98,8 @@ import { DopamineRealityComposition } from "./clips/dopamine_reality";
 import dopamine_realityTranscript from "./clips/dopamine_reality/transcript.json";
 import { WhatYouTolerateComposition } from "./clips/what_you_tolerate";
 import what_you_tolerateTranscript from "./clips/what_you_tolerate/transcript.json";
+import { TheArtOfEnvironmentComposition } from "./clips/the_art_of_environment";
+import the_art_of_environmentTranscript from "./clips/the_art_of_environment/transcript.json";
 import { PromisesComposition } from "./clips/promises";
 import promisesTranscript from "./clips/promises/transcript.json";
 import { PatternsComposition } from "./clips/patterns";
@@ -126,6 +129,7 @@ import {
   StrengthThumbnail,
   ChaptersThumbnail,
   PromisesThumbnail,
+  TheArtOfEnvironmentThumbnail,
   WhatYouTolerateThumbnail,
   DopamineRealityThumbnail,
   HowCortisolWorksThumbnail,
@@ -291,6 +295,8 @@ export const RemotionRoot: React.FC = () => {
   const dopamine_realityDuration = calculateDurationInFrames(dopamine_realityTranscript as any[], fps);
   
   const what_you_tolerateDuration = calculateDurationInFrames(what_you_tolerateTranscript as any[], fps);
+  
+  const the_art_of_environmentDuration = calculateDurationInFrames(the_art_of_environmentTranscript as any[], fps);
   const promisesDuration = calculateDurationInFrames(promisesTranscript as any[], fps);
   const patternsDuration = calculateDurationInFrames(patternsTranscript as any[], fps);
   const teenageDuration = calculateDurationInFrames(teenageTranscript as any[], fps);
@@ -706,6 +712,16 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
       />
 
+      
+      <Composition
+        id="TheArtOfEnvironmentVideo"
+        component={TheArtOfEnvironmentComposition}
+        durationInFrames={the_art_of_environmentDuration}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+
       {/* 0. Broken Promises & Self-Trust Video (9:16 Shorts) */}
       <Composition
         id="PromisesVideo"
@@ -1006,6 +1022,16 @@ export const RemotionRoot: React.FC = () => {
         component={PrimitivesShowcase}
         durationInFrames={1500}
         fps={60}
+        width={1080}
+        height={1920}
+      />
+
+      {/* Universal Background Intelligence: Creative Proof Composition */}
+      <Composition
+        id="UniversalBackgroundProof"
+        component={UniversalBackgroundProof}
+        durationInFrames={300}
+        fps={30}
         width={1080}
         height={1920}
       />
@@ -1364,6 +1390,13 @@ export const RemotionRoot: React.FC = () => {
       <Still
         id="WhatYouTolerateThumbnail"
         component={WhatYouTolerateThumbnail}
+        width={1080}
+        height={1920}
+      />
+    
+      <Still
+        id="TheArtOfEnvironmentThumbnail"
+        component={TheArtOfEnvironmentThumbnail}
         width={1080}
         height={1920}
       />

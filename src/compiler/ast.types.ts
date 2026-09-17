@@ -36,6 +36,51 @@ export interface StageEnvironment {
     left: number;   // e.g. 80
     right: number;  // e.g. 1000 (clears interaction rail)
   };
+  defaultBackgroundIntent?: SceneBackgroundIntent;
+}
+
+export interface SceneBackgroundIntent {
+  mode: "universal" | "solid_ground" | "none";
+  assetId?: string;
+  semanticRole:
+    | "cinematic_surface"
+    | "material_foundation"
+    | "low_stim_reflective"
+    | "tactile_stage"
+    | "atmospheric_depth"
+    | "clarity_canvas"
+    | string;
+  cropStrategy:
+    | "center_focal"
+    | "preserve_light_falloff"
+    | "top_weighted"
+    | "bottom_weighted"
+    | "custom"
+    | string;
+  cropFocalPoint?: [number, number]; // [x, y] normalized (0.0 to 1.0)
+  motion:
+    | "static"
+    | "subtle_drift"
+    | "slow_zoom_in"
+    | "slow_zoom_out"
+    | "ambient_parallax"
+    | string;
+  motionScaleDelta?: number; // e.g. 1.0 -> 1.04
+  opacity: number; // 0.0 - 1.0
+  dimmingOverlay?: {
+    color: string; // e.g. "rgba(3,7,18,0.45)"
+    blurPx?: number;
+  };
+  transitionIn?: {
+    type: "cut" | "dissolve" | "luma_fade" | "fade" | "scale_in" | string;
+    durationFrames: number;
+  };
+  transitionOut?: {
+    type: "cut" | "dissolve" | "luma_fade" | "scale_out" | string;
+    durationFrames: number;
+  };
+  textSafeFocalRegion?: "safe_top" | "safe_center" | "safe_bottom" | "full" | string;
+  reason: string; // Semantic rationale for background presence or intentional suppression
 }
 
 export interface MotionSceneAST {
@@ -50,6 +95,7 @@ export interface MotionSceneAST {
   startFrame: number;
   endFrame: number;
   narrativeGoal: string; // Semantic statement: what the viewer must understand
+  backgroundIntent?: SceneBackgroundIntent;
   actors: MotionActor[];
   forces: PhysicalForce[];
   mutations: SpatialMutation[];

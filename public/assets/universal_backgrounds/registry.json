@@ -1,0 +1,119 @@
+{
+  "dark_matte_spotlight_01": {
+    "id": "dark_matte_spotlight_01",
+    "filename": "dark_matte_spotlight_01.jpg",
+    "path": "assets/universal_backgrounds/dark_matte_spotlight_01.jpg",
+    "width": 598,
+    "height": 1024,
+    "aspectRatio": 0.584,
+    "format": "JPEG",
+    "fileSize": 147309,
+    "hash": "0cc747a7215922953d1d7c9961ad66103571866a3f3ba2a099ea69987009fcb5",
+    "tone": "dark",
+    "colorTemp": "neutral",
+    "isMonochrome": false,
+    "saturation": 0.137,
+    "brightness": 0.074,
+    "contrast": 0.075,
+    "textureStrength": "medium",
+    "edgeDensity": 5.37,
+    "visualComplexity": "low",
+    "entropy": 1.42,
+    "material": "matte_surface",
+    "moods": [
+      "cinematic",
+      "minimal",
+      "tactile"
+    ],
+    "visualDensity": "sparse",
+    "textCompatibility": "excellent",
+    "presenterCompatibility": "excellent",
+    "graphicCompatibility": "excellent",
+    "textSafeRegions": {
+      "safeTop": true,
+      "safeCenter": true,
+      "safeBottom": true,
+      "safeLeft": true,
+      "safeRight": true
+    },
+    "focalCenter": [
+      0.471,
+      0.36
+    ],
+    "safeCropModes": [
+      "center",
+      "top_weighted"
+    ],
+    "motionSuitability": [
+      "static",
+      "slow_drift",
+      "zoom",
+      "parallax"
+    ],
+    "transitionSuitability": [
+      "dissolve",
+      "cut",
+      "luma_wipe"
+    ],
+    "lowResWarning": true,
+    "status": "READY"
+  },
+  "paper_warm_tactile_02": {
+    "id": "paper_warm_tactile_02",
+    "filename": "paper_warm_tactile_02.png",
+    "path": "assets/universal_backgrounds/paper_warm_tactile_02.png",
+    "width": 1080,
+    "height": 1920,
+    "aspectRatio": 0.5625,
+    "format": "PNG",
+    "fileSize": 1648164,
+    "hash": "bfb837b11099464aab0d43848bbd52d9c61351dda4e6d9118e5f1dd41f88f609",
+    "tone": "bright",
+    "colorTemp": "neutral",
+    "isMonochrome": true,
+    "saturation": 0.041,
+    "brightness": 0.948,
+    "contrast": 0.016,
+    "textureStrength": "medium",
+    "edgeDensity": 3.56,
+    "visualComplexity": "low",
+    "entropy": 1.03,
+    "material": "paper",
+    "moods": [
+      "calm",
+      "clean",
+      "editorial",
+      "tactile"
+    ],
+    "visualDensity": "sparse",
+    "textCompatibility": "excellent",
+    "presenterCompatibility": "good",
+    "graphicCompatibility": "excellent",
+    "textSafeRegions": {
+      "safeTop": true,
+      "safeCenter": true,
+      "safeBottom": true,
+      "safeLeft": true,
+      "safeRight": true
+    },
+    "focalCenter": [
+      0.5,
+      0.5
+    ],
+    "safeCropModes": [
+      "center"
+    ],
+    "motionSuitability": [
+      "static",
+      "slow_drift",
+      "zoom",
+      "parallax"
+    ],
+    "transitionSuitability": [
+      "dissolve",
+      "cut"
+    ],
+    "lowResWarning": false,
+    "status": "READY"
+  }
+}

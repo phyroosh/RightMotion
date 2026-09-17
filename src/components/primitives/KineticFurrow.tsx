@@ -278,11 +278,11 @@ export const KineticFurrow: React.FC<KineticFurrowProps> = ({
       {/* Pop-up Secondary Metric: -50% Friction (Reinforces visible speedup) */}
       {showFrictionStat && annotationProgress > 0 && (
         <div
-          className="absolute flex items-center gap-2"
+          className="absolute flex items-center justify-center whitespace-nowrap"
           style={{
-            left: (startX + endX) / 2 - 120,
-            top: y - 90,
-            transform: `scale(${annotationProgress})`,
+            left: "50%",
+            top: y - 80,
+            transform: `translateX(-50%) scale(${annotationProgress})`,
             opacity: Math.min(1, annotationProgress * 1.5),
           }}
         >

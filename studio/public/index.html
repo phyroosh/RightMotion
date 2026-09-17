@@ -8483,26 +8483,50 @@ window.sendTestNotification = async function() {
     rimLight.position.set(15, -8, -12);
     scene.add(rimLight);
 
-    // 1. Hero NASA Mars Planet (Compositionally framed top-right)
+    // 1. Hero NASA Earth Planet + Dynamic Cloud Atmosphere (Compositionally framed top-right)
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load('/assets/space/mars.jpg', (texture) => {
-        texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    const earthGroup = new THREE.Group();
+    earthGroup.position.set(11, 6, -6);
+    earthGroup.rotation.z = 0.41; // 23.5-degree axial tilt of Earth
+    scene.add(earthGroup);
+
+    textureLoader.load('/assets/space/earth.jpg', (earthTexture) => {
+        earthTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
         const geo = new THREE.SphereGeometry(6.8, 64, 64);
         const mat = new THREE.MeshStandardMaterial({
-            map: texture,
-            roughness: 0.75,
-            metalness: 0.15
+            map: earthTexture,
+            roughness: 0.55,
+            metalness: 0.1
         });
         const planet = new THREE.Mesh(geo, mat);
-        planet.position.set(11, 6, -6);
-        planet.rotation.z = 0.35;
-        scene.add(planet);
+        earthGroup.add(planet);
 
-        function rotatePlanet() {
-            planet.rotation.y += 0.0004;
-            requestAnimationFrame(rotatePlanet);
-        }
-        rotatePlanet();
+        // Separate animated cloud layer slightly above the surface
+        textureLoader.load('/assets/space/earth_clouds.png', (cloudTexture) => {
+            cloudTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+            const geoClouds = new THREE.SphereGeometry(6.86, 64, 64);
+            const matClouds = new THREE.MeshStandardMaterial({
+                map: cloudTexture,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.NormalBlending
+            });
+            const clouds = new THREE.Mesh(geoClouds, matClouds);
+            earthGroup.add(clouds);
+
+            function rotateEarth() {
+                planet.rotation.y += 0.00035;
+                clouds.rotation.y += 0.00048; // Clouds drift independently
+                requestAnimationFrame(rotateEarth);
+            }
+            rotateEarth();
+        }, undefined, () => {
+            function rotateEarth() {
+                planet.rotation.y += 0.00035;
+                requestAnimationFrame(rotateEarth);
+            }
+            rotateEarth();
+        });
     });
 
     // 2. Multi-layer Starfield

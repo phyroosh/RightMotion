@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "You blame your willpower for every bad habit, but you are not fighting your impulses. You are fighting your room. Every object in your visual field sends an unconscious micro-demand to your nervous system. A phone on your desk silently drains cognitive bandwidth even when face down. Your brain takes the path of lowest spatial friction every single time. Stop relying on discipline. Re-architect your physical perimeter. Increase friction by two steps for every distraction, and reduce friction to zero for the person you want to become.",
+    "topic": "The Art Of Environment: Why You Keep Losing to Your Room",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 87,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "34281410b7caaf103b1bcd0f6c0196d603f253bdbc83275458a11741c91c8f53"
+  },
+  "story": {
+    "coreIdea": "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+    "centralClaim": "Destructive patterns do not begin with catastrophic failures; they begin with unexamined micro-compromises.",
+    "viewerPromise": "Recognize the invisible shift where a single small concession hardens into an automatic habit.",
+    "viewerQuestion": "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+    "narrativeArchitecture": "OBSERVATION -> BASELINE_SHIFT -> ACCUMULATION -> CRITICAL_REVEAL"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "You blame your willpower for every bad habit, but you are not fighting your impulses. You are fighting your room.",
+      "sentenceIndices": [
+        0,
+        1
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "Every object in your visual field sends an unconscious micro-demand to your nervous system. A phone on your desk silently drains cognitive bandwidth even when face down.",
+      "sentenceIndices": [
+        2,
+        3
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "Your brain takes the path of lowest spatial friction every single time. Stop relying on discipline. Re-architect your physical perimeter.",
+      "sentenceIndices": [
+        4,
+        5,
+        6
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "Increase friction by two steps for every distraction, and reduce friction to zero for the person you want to become.",
+      "sentenceIndices": [
+        7
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "Baseline Drift",
+      "Micro-Concession",
+      "Behavioral Normalization"
+    ],
+    "entities": [
+      "Integrity Threshold Line",
+      "Subconscious Anchor",
+      "Marker Blade"
+    ],
+    "persistentObjects": [
+      "Integrity Threshold Line (tracks baseline deflection across scenes)"
+    ]
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "You blame your willpower for every bad habit, but you are not fighting your impulses.",
+        "type": "supporting"
+      },
+      {
+        "statement": "You are fighting your room.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Every object in your visual field sends an unconscious micro-demand to your nervous system.",
+        "type": "psychological"
+      },
+      {
+        "statement": "A phone on your desk silently drains cognitive bandwidth even when face down.",
+        "type": "causal"
+      },
+      {
+        "statement": "Your brain takes the path of lowest spatial friction every single time.",
+        "type": "psychological"
+      },
+      {
+        "statement": "Stop relying on discipline.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Re-architect your physical perimeter.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Increase friction by two steps for every distraction, and reduce friction to zero for the person you want to become.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": []
+  },
+  "causalGraph": {
+    "nodes": [
+      {
+        "id": "cognitive_bandwidth",
+        "initialCondition": "NOMINAL",
+        "reversibility": "RECOVERABLE"
+      },
+      {
+        "id": "open_task_counter",
+        "initialCondition": "EMPTY",
+        "reversibility": "REVERSIBLE"
+      }
+    ],
+    "chains": [
+      {
+        "cause": "Unfinished task left open in attention",
+        "mechanism": "Subconscious loop continuously holds task memory active",
+        "event": "TASK_UNFINISHED",
+        "consequence": "Neural RAM leakage drains working memory capacity",
+        "resultingState": "STRAINED"
+      },
+      {
+        "cause": "Accumulation of 5+ unclosed loops",
+        "mechanism": "Bandwidth saturation exceeds processing capacity",
+        "event": "THRESHOLD_CROSSING",
+        "consequence": "System experiences cognitive paralysis / fatigue",
+        "resultingState": "CRITICAL"
+      }
+    ],
+    "thresholds": [
+      {
+        "source": "open_task_counter",
+        "condition": "count >= threshold_capacity",
+        "consequence": "Trigger SYSTEM_OVERLOAD and transition cognitive_bandwidth to CRITICAL"
+      }
+    ]
+  },
+  "stateModel": {
+    "initialState": "CONSCIOUS_AGENCY",
+    "intermediateStates": [
+      "UNNOTICED_EROSION",
+      "NORMALIZED_TOLERANCE"
+    ],
+    "finalState": "HARDENED_AUTOMATICITY",
+    "dynamics": "transformation"
+  },
+  "temporalModel": {
+    "pacing": "accelerating",
+    "hasRepetition": false,
+    "repetitionNature": "none",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "Your brain takes the path of lowest spatial friction every s",
+      "approximateTimestampSec": 16.7,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "BANDWIDTH",
+      "Your",
+      "Stop",
+      "Re",
+      "Increase"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "contrast",
+      "physicalDescription": "A crisp horizontal baseline marker subtly shifting downward under a light weight",
+      "rationale": "Visually embodies the insidious nature of micro-concessions."
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "opportunityType": "reveal",
+      "physicalDescription": "Live marker cut slicing through text with AnimatedSlashStrike on the exact spoken realization",
+      "rationale": "Action over display: the viewer witnesses the rejection happening in real time."
+    }
+  ],
+  "visualAbsence": [],
+  "semanticImportance": {
+    "critical": [
+      "Destructive patterns do not begin with catastrophic failures; they begin with unexamined micro-compromises.",
+      "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+      "You blame your willpower for every bad habit, but you are not fighting your impulses. You are fighting your room."
+    ],
+    "important": [
+      "Recognize the invisible shift where a single small concession hardens into an automatic habit.",
+      "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+      "Every object in your visual field sends an unconscious micro-demand to your nervous system. A phone on your desk silently drains cognitive bandwidth even when face down.",
+      "Increase friction by two steps for every distraction, and reduce friction to zero for the person you want to become."
+    ],
+    "supporting": [
+      "Your brain takes the path of lowest spatial friction every single time. Stop relying on discipline. Re-architect your physical perimeter."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "At what exact moment does an unexamined concession cross into an unconscious habit?",
+    "visualContradiction": "You believed you made a single minor exception, but your subconscious made a permanent rule",
+    "mostMemorableTransformation": "A microscopic horizontal fault line widening into an immutable granite wall",
+    "textHookCandidates": [
+      "THE SLIPPAGE",
+      "NEW BASELINE",
+      "ONE COMPROMISE",
+      "FAULT LINE"
+    ],
+    "recommendedArchetype": "impossible_metaphor"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "HIGH",
+        "rationale": "Narrative invokes discrete spatial compartments and architectural flow."
+      },
+      "F2": {
+        "signal": "LOW",
+        "rationale": "No physical deformation required; metric or definition scene."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "LOW",
+        "rationale": "Clean luminous light canvas with subtle radial depth is superior."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "VERY_HIGH",
+        "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": true,
+    "issues": [],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

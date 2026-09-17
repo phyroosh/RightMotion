@@ -203,7 +203,31 @@ def validate_clip(name: str, render_still: bool = False) -> bool:
         else:
             if test_out.exists():
                 test_out.unlink()
-            print(f"   {GREEN}✓ Still thumbnail rendered successfully!{RESET}")
+    # 8. Anti-Cardification & Frontier Utilization Audit
+    try:
+        from frontier_utilization import FrontierUtilizationAuditor
+        if canvas_file.exists():
+            report = FrontierUtilizationAuditor.audit_clip_directory(clip_dir)
+            print(f"   {CYAN}📊 Frontier Utilization & Anti-Cardification Audit:{RESET}")
+            print(f"      • Cardification Score:      {report.overall_cardification_score:.1f} (Pass threshold: < 40.0)")
+            print(f"      • Presentation Cards:       {report.total_card_count}")
+            print(f"      • Physical Mechanisms:      {report.total_mechanism_count}")
+            print(f"      • Primary Mechanism Ratio:  {report.primary_mechanism_ratio * 100:.1f}%")
+            print(f"      • Mute Test:                {'PASSED' if report.mute_test_passed else 'FAILED'}")
+            print(f"      • Remove-Text Test:         {'PASSED' if report.remove_text_test_passed else 'FAILED'}")
+
+            if report.overall_cardification_score >= 40.0:
+                errors.append(
+                    f"Cardification Score excessive ({report.overall_cardification_score:.1f} >= 40.0). "
+                    f"Scene is dominated by card containers/pills rather than physical mechanisms. "
+                    f"Reasons: {', '.join(report.scenes[0].reasons)}"
+                )
+            elif not report.remove_text_test_passed and report.total_mechanism_count == 0:
+                warnings.append(
+                    "Scene lacks physical mechanism primitives; canvas relies heavily on typography."
+                )
+    except Exception as e:
+        warnings.append(f"Frontier utilization audit skipped: {e}")
 
     # Final Output Summary
     mode_str = "Judy & Andrew Duo (up to 40s)" if is_duo else "Solo Judy Insights (25-35s policy)"

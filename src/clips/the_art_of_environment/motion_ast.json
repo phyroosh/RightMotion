@@ -1,0 +1,383 @@
+{
+  "version": "1.0.0",
+  "clipId": "the_art_of_environment",
+  "fps": 60,
+  "totalFrames": 1686,
+  "environment": {
+    "groundColor": "#030712",
+    "lightingTheme": "deep_atmospheric_dark",
+    "gridTexture": false,
+    "safeBounds": {
+      "top": 280,
+      "bottom": 1340,
+      "left": 80,
+      "right": 1000
+    },
+    "defaultBackgroundIntent": {
+      "mode": "universal",
+      "assetId": "dark_matte_spotlight_01",
+      "semanticRole": "cinematic_surface",
+      "cropStrategy": "center_focal",
+      "cropFocalPoint": [
+        0.471,
+        0.36
+      ],
+      "motion": "slow_zoom_in",
+      "motionScaleDelta": 1.04,
+      "opacity": 1.0,
+      "dimmingOverlay": null,
+      "transitionIn": {
+        "type": "fade",
+        "durationFrames": 10
+      },
+      "transitionOut": null,
+      "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)"
+    }
+  },
+  "persistentWorldMemory": [],
+  "scenes": [
+    {
+      "sceneId": "scene_1_hook",
+      "role": "hook",
+      "startFrame": 0,
+      "endFrame": 472,
+      "narrativeGoal": "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "dark_matte_spotlight_01",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.471,
+          0.36
+        ],
+        "motion": "slow_zoom_in",
+        "motionScaleDelta": 1.04,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "fade",
+          "durationFrames": 10
+        },
+        "transitionOut": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)"
+      },
+      "actors": [
+        {
+          "id": "the_art_of_environment_hero_illustration",
+          "semanticRole": "hook_curiosity_anchor",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "the_art_of_environment/assets/scene_illustration.png",
+            "widthPx": 920,
+            "heightPx": 540
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 720,
+            "width": 920,
+            "height": 540,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [],
+      "mutations": [],
+      "causalCouplings": [],
+      "annotations": [
+        {
+          "annotationId": "scene_1_hook_headline",
+          "text": "YOU BLAME YOUR WILLPOWER FOR EVERY BAD H",
+          "font": "Montserrat Black",
+          "fontSizePx": 68,
+          "color": "#ffffff",
+          "role": "hook_slam",
+          "staticPlacement": {
+            "x": 540,
+            "y": 340
+          },
+          "startFrame": 0,
+          "durationFrames": 120,
+          "inAnimation": "scale_pop"
+        }
+      ],
+      "compositionMetrics": {
+        "occupiedWidthPct": 86.7,
+        "occupiedHeightPct": 36.5,
+        "occupiedAreaPct": 31.6,
+        "bottomDeadZonePx": 390.0,
+        "semanticDensityScore": 0.86,
+        "densityStatus": "OPTIMAL"
+      }
+    },
+    {
+      "sceneId": "scene_2_logic",
+      "role": "mechanism",
+      "startFrame": 472,
+      "endFrame": 1214,
+      "narrativeGoal": "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "dark_matte_spotlight_01",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.471,
+          0.36
+        ],
+        "motion": "static",
+        "motionScaleDelta": 1.0,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": null,
+        "transitionOut": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.90. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center"
+      },
+      "actors": [
+        {
+          "id": "scene_2_logic_concept_anchor",
+          "semanticRole": "physical_metaphor_anchor",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+            "widthPx": 680,
+            "heightPx": 420
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 610,
+            "width": 680,
+            "height": 420,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        },
+        {
+          "id": "scene_2_logic_mechanism_card",
+          "semanticRole": "explanatory_card",
+          "narrativeImportance": "SECONDARY",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+            "widthPx": 920,
+            "heightPx": 240
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 970,
+            "width": 920,
+            "height": 240,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [],
+      "mutations": [],
+      "causalCouplings": [],
+      "annotations": [
+        {
+          "annotationId": "scene_2_logic_headline",
+          "text": "EVERY OBJECT IN YOUR VISUAL FIELD SENDS ",
+          "font": "Montserrat Black",
+          "fontSizePx": 68,
+          "color": "#ffffff",
+          "role": "thesis_statement",
+          "staticPlacement": {
+            "x": 540,
+            "y": 330
+          },
+          "startFrame": 472,
+          "durationFrames": 120,
+          "inAnimation": "scale_pop"
+        }
+      ],
+      "compositionMetrics": {
+        "occupiedWidthPct": 86.7,
+        "occupiedHeightPct": 41.9,
+        "occupiedAreaPct": 36.3,
+        "bottomDeadZonePx": 290.0,
+        "semanticDensityScore": 0.76,
+        "densityStatus": "OPTIMAL"
+      }
+    },
+    {
+      "sceneId": "scene_3_solution",
+      "role": "resolution",
+      "startFrame": 1214,
+      "endFrame": 1686,
+      "narrativeGoal": "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "paper_warm_tactile_02",
+        "semanticRole": "tactile_stage",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.5,
+          0.5
+        ],
+        "motion": "slow_zoom_in",
+        "motionScaleDelta": 1.04,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "dissolve",
+          "durationFrames": 16
+        },
+        "transitionOut": null,
+        "reason": "Selected 'paper_warm_tactile_02' (paper, bright) with score 0.71. Clean bright ground guarantees >7:1 dark text contrast; Clear text-safe zone verified at center"
+      },
+      "actors": [
+        {
+          "id": "scene_3_solution_obsolete_paradigm",
+          "semanticRole": "negated_premise",
+          "narrativeImportance": "SECONDARY",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+            "widthPx": 920,
+            "heightPx": 160
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 530,
+            "width": 920,
+            "height": 160,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        },
+        {
+          "id": "scene_3_solution_rule_1",
+          "semanticRole": "protocol_rule_1",
+          "narrativeImportance": "SECONDARY",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+            "widthPx": 920,
+            "heightPx": 170
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 719,
+            "width": 920,
+            "height": 170,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        },
+        {
+          "id": "scene_3_solution_rule_2",
+          "semanticRole": "protocol_rule_2",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+            "widthPx": 920,
+            "heightPx": 190
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 923,
+            "width": 920,
+            "height": 190,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        },
+        {
+          "id": "scene_3_solution_closing_law",
+          "semanticRole": "sovereign_takeaway",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+            "widthPx": 920,
+            "heightPx": 90
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 1280,
+            "width": 920,
+            "height": 90,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [],
+      "mutations": [],
+      "causalCouplings": [],
+      "annotations": [
+        {
+          "annotationId": "scene_3_solution_headline",
+          "text": "INCREASE FRICTION BY TWO STEPS FOR EVERY",
+          "font": "Montserrat Black",
+          "fontSizePx": 68,
+          "color": "#ffffff",
+          "role": "thesis_statement",
+          "staticPlacement": {
+            "x": 540,
+            "y": 330
+          },
+          "startFrame": 1214,
+          "durationFrames": 120,
+          "inAnimation": "scale_pop"
+        }
+      ],
+      "compositionMetrics": {
+        "occupiedWidthPct": 86.7,
+        "occupiedHeightPct": 54.2,
+        "occupiedAreaPct": 46.9,
+        "bottomDeadZonePx": 55.0,
+        "semanticDensityScore": 0.72,
+        "densityStatus": "OPTIMAL"
+      }
+    }
+  ]
+}

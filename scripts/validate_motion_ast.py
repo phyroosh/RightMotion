@@ -137,6 +137,10 @@ class MotionASTValidator:
         else:
             self.result.add_error("INVALID_SAFE_BOUNDS", "safeBounds must be a dictionary", "root.environment.safeBounds")
 
+        default_bg = env.get("defaultBackgroundIntent")
+        if default_bg is not None:
+            self._validate_background_intent(default_bg, "root.environment.defaultBackgroundIntent")
+
     def _index_scenes_and_actors(self):
         scenes = self.ast.get("scenes")
         if not isinstance(scenes, list) or len(scenes) == 0:
@@ -208,6 +212,97 @@ class MotionASTValidator:
                     f"{path}.semanticMeaning",
                 )
 
+    def _validate_background_intent(self, intent: Dict[str, Any], path: str, scene: Optional[Dict[str, Any]] = None):
+        if not isinstance(intent, dict):
+            self.result.add_error("INVALID_BACKGROUND_INTENT", "backgroundIntent must be a dictionary", path)
+            return
+
+        mode = intent.get("mode")
+        if mode not in ["universal", "solid_ground", "none"]:
+            self.result.add_error(
+                "INVALID_BACKGROUND_MODE",
+                f"backgroundIntent mode must be 'universal', 'solid_ground', or 'none', got {mode}",
+                f"{path}.mode",
+            )
+            return
+
+        role = intent.get("semanticRole")
+        if not role or not isinstance(role, str):
+            self.result.add_error(
+                "MISSING_SEMANTIC_INTENT",
+                "backgroundIntent must specify a semanticRole",
+                f"{path}.semanticRole",
+            )
+        elif role.lower() in ["background", "bg", "image", "texture", "thing", "container"]:
+            self.result.add_error(
+                "GENERIC_SEMANTIC_ROLE",
+                f"backgroundIntent semanticRole '{role}' is too generic. Must describe creative role (e.g. 'cinematic_surface', 'tactile_stage')",
+                f"{path}.semanticRole",
+            )
+
+        reason = intent.get("reason")
+        if not reason or not isinstance(reason, str) or len(reason.strip()) < 5:
+            self.result.add_error(
+                "MISSING_SEMANTIC_INTENT",
+                "backgroundIntent must have an explanatory 'reason' field (min 5 chars)",
+                f"{path}.reason",
+            )
+
+        if mode == "universal":
+            asset_id = intent.get("assetId")
+            if not asset_id or not isinstance(asset_id, str):
+                self.result.add_error(
+                    "MISSING_BACKGROUND_ASSET",
+                    "backgroundIntent with mode='universal' requires a non-empty string assetId",
+                    f"{path}.assetId",
+                )
+
+            opacity = intent.get("opacity", 1.0)
+            if not isinstance(opacity, (int, float)) or not (0.0 <= opacity <= 1.0):
+                self.result.add_error(
+                    "INVALID_OPACITY",
+                    f"backgroundIntent opacity must be between 0.0 and 1.0, got {opacity}",
+                    f"{path}.opacity",
+                )
+
+            # Check transition bounds if scene provided
+            if scene:
+                scene_start = scene.get("startFrame", 0)
+                scene_end = scene.get("endFrame", 10000)
+                scene_dur = max(1, scene_end - scene_start)
+
+                t_in = intent.get("transitionIn")
+                if isinstance(t_in, dict):
+                    dur = t_in.get("durationFrames")
+                    if not isinstance(dur, int) or dur <= 0:
+                        self.result.add_error(
+                            "INVALID_TRANSITION_TIMING",
+                            "transitionIn durationFrames must be positive integer",
+                            f"{path}.transitionIn.durationFrames",
+                        )
+                    elif dur > scene_dur:
+                        self.result.add_error(
+                            "TRANSITION_EXCEEDS_SCENE",
+                            f"transitionIn durationFrames ({dur}) exceeds scene duration ({scene_dur})",
+                            f"{path}.transitionIn.durationFrames",
+                        )
+
+                t_out = intent.get("transitionOut")
+                if isinstance(t_out, dict):
+                    dur = t_out.get("durationFrames")
+                    if not isinstance(dur, int) or dur <= 0:
+                        self.result.add_error(
+                            "INVALID_TRANSITION_TIMING",
+                            "transitionOut durationFrames must be positive integer",
+                            f"{path}.transitionOut.durationFrames",
+                        )
+                    elif dur > scene_dur:
+                        self.result.add_error(
+                            "TRANSITION_EXCEEDS_SCENE",
+                            f"transitionOut durationFrames ({dur}) exceeds scene duration ({scene_dur})",
+                            f"{path}.transitionOut.durationFrames",
+                        )
+
     def _validate_scenes(self):
         scenes = self.ast.get("scenes", [])
         total_frames = self.ast.get("totalFrames", 100000)
@@ -254,6 +349,11 @@ class MotionASTValidator:
                     "Scene must have a descriptive 'narrativeGoal' (min 10 chars)",
                     f"{path}.narrativeGoal",
                 )
+
+            # 3. Background Intent (Universal Background Intelligence)
+            bg_intent = scene.get("backgroundIntent")
+            if bg_intent is not None:
+                self._validate_background_intent(bg_intent, f"{path}.backgroundIntent", scene)
 
             # Build in-scene entities
             local_actors = scene.get("actors", [])

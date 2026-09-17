@@ -10,23 +10,19 @@ import {
 import { WordTimestamp } from "../../types";
 import { AnimatedSlashStrike, CameraShake } from "../../components/kinetic_text";
 import {
-  ShieldAlert,
-  Sparkles,
-  AlertTriangle,
-  Brain,
-  Shield,
-  ArrowDown,
-  CheckCircle2,
-  Lock,
-  Zap,
-} from "lucide-react";
+  ThresholdBoundary,
+  KineticFurrow,
+  MechanismStage,
+  CausalActionCoupling,
+} from "../../components/primitives";
+import { Shield, ArrowDown, AlertTriangle } from "lucide-react";
 
 interface CanvasProps {
   transcript: WordTimestamp[];
 }
 
 /**
- * 🎬 RightMotion Bespoke Canvas — WhatYouTolerate
+ * 🎬 RightMotion Bespoke Canvas — WhatYouTolerate (Anti-Cardification Redesign)
  * Topic: "Your Brain Learns What You Repeatedly Tolerate"
  * Channel: Judy Insights (Apple Studio Razor-Sharp Editorial)
  *
@@ -34,25 +30,25 @@ interface CanvasProps {
  *   - Canvas: 1080x1920 @ 60 FPS
  *   - Safe Text Zone: y: 240px to y: 1340px
  *   - Caption Zone:   y: 1400px to y: 1560px (AppleKineticCaptions)
- *   - Max width: 840px centered
  *   - Zero percentage padding for vertical layout
  *
- * ⏱️ 60 FPS Dynamic Speech-Synchronized Timestamps:
- *   - Hook Intro:          0ms to 2500ms    (Frames 0 to 150)
- *   - Scene 1 Accumulation: 2500ms to 6500ms (Frames 150 to 390)
- *   - Scene 2 Neuroplasticity: 6500ms to 10800ms (Frames 390 to 648)
- *   - Scene 3 Downward Drift: 10800ms to 20300ms (Frames 648 to 1218)
- *   - Scene 4 Protocol & Rewire: 20300ms to end   (Frames 1218 to 1818)
+ * 🏛️ Frontier Mechanisms Active:
+ *   - Scene 1: F7/F4 ThresholdBoundary — Standard Line Viscoelastic Deflection & Ghost Trace
+ *   - Scene 2: F7 KineticFurrow — Groove Wear & Low-Resistance Channel Carving
+ *   - Scene 3: Open-Stage Dynamic Numerical Threshold Collapse
+ *   - Scene 4: Sovereign Boundary Reset with Setting Boundary Hand Cutout
+ *
+ * 🚫 ZERO CARDS: Open-canvas physical staging. Zero rounded-3xl container walls.
  */
 export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   // 60 FPS Boundary Triggers
-  const fHookEnd = 150;     // 2.50s (Judy Intro exits here)
-  const fS1End = 390;       // 6.50s
-  const fS2End = 648;       // 10.80s
-  const fS3End = 1218;      // 20.30s
+  const fHookEnd = 150; // 2.50s (Judy Intro exits here)
+  const fS1End = 390; // 6.50s
+  const fS2End = 648; // 10.80s
+  const fS3End = 1218; // 20.30s
 
   const isHookIntro = frame < fHookEnd;
   const isScene1 = frame >= fHookEnd && frame < fS1End;
@@ -60,72 +56,64 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
   const isScene3 = frame >= fS2End && frame < fS3End;
   const isScene4 = frame >= fS3End;
 
-  // Scene 1 Micro-beats:
-  const fCard1 = 150;
-  const fCard2 = 190;
-  const fCard3 = 230;
+  // Scene 1 Micro-beats (from transcript.json):
+  const fDisrespect = 160;
+  const fPromises = 205;
+  const fExcuses = 245;
   const fLogAcceptable = 270;
 
   // Scene 2 Micro-beats:
   const fNeuroEntry = 395;
   const fMoralitySlash = 460;
+  const fFurrowPass1 = 430;
   const fRepetitionSlam = 548;
+  const fFurrowPass2 = 550;
 
   // Scene 3 Micro-beats:
-  const fDownwardAdapt = 800;
-  const fThresholdDrop = 922;
-  const fAnxietyNumb = 995;
-  const fChaosBaseline = 1072;
+  const fDownwardAdapt = 780;
+  const fChaosBaseline = 1060;
 
   // Scene 4 Micro-beats:
   const fStopWaitSlash = 1250;
-  const fDefineStandard = 1381;
-  const fPushBack = 1525;
-  const fRewireEpiphany = 1669;
+  const fDefineStandard = 1380;
+  const fRewireEpiphany = 1660;
 
   return (
-    <div
-      className="absolute inset-x-0 flex flex-col items-center select-none pointer-events-none"
-      style={{
-        top: 240,
-        height: 1100,
-        maxWidth: 840,
-        left: "50%",
-        transform: "translateX(-50%)",
-      }}
-    >
+    <MechanismStage top={260} bottom={1340}>
       {/* ======================================================== */}
       {/* 1. HOOK INTRO (0s - 2.5s / Frames 0 to 150)              */}
       {/* Bespoke Illustration Card staged alongside Judy           */}
       {/* ======================================================== */}
       {isHookIntro && (() => {
-        const spHook = spring({
+        const spIntro = spring({
           frame,
           fps,
-          config: { damping: 16, mass: 0.8, stiffness: 140 },
+          config: { damping: 14, mass: 0.7, stiffness: 120 },
         });
 
         return (
           <div
-            className="w-full flex flex-col items-center"
+            className="w-full flex flex-col items-center select-none"
             style={{
-              opacity: interpolate(spHook, [0, 1], [0, 1]),
-              transform: `translateY(${interpolate(spHook, [0, 1], [25, 0])}px) scale(${interpolate(spHook, [0, 1], [0.94, 1])})`,
+              opacity: interpolate(spIntro, [0, 1], [0, 1]),
+              transform: `translateY(${interpolate(spIntro, [0, 1], [30, 0])}px)`,
             }}
           >
-            {/* Minimal Editorial Category Badge */}
-            <div className="flex items-center gap-3 px-6 py-2 rounded-full bg-slate-900 text-white shadow-md mb-3">
-              <Sparkles className="w-5 h-5 text-amber-300" />
-              <span className="text-xl font-mono font-bold tracking-wider uppercase">
-                NEUROLOGICAL BASELINE
+            {/* Top Hook Headline */}
+            <div className="w-full text-center px-4">
+              <span className="text-slate-500 font-mono text-xl font-bold uppercase tracking-widest">
+                NEUROLOGICAL PROTOCOL
               </span>
+              <h1 className="text-6xl font-black text-slate-950 tracking-tight leading-tight mt-1">
+                YOUR BRAIN LEARNS
+              </h1>
             </div>
 
-            {/* Editorial Card with Generated Bespoke Illustration */}
-            <div className="w-full rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.18)] p-5 flex flex-col items-center overflow-hidden">
-              <div className="w-full pb-3 px-2 flex justify-between items-center border-b border-slate-100">
-                <span className="text-slate-950 text-2xl font-black tracking-tight">
-                  THE SILENT COMPROMISE
+            {/* Editorial Card framing the bespoke illustration */}
+            <div className="w-[840px] rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.18)] p-6 mt-4 flex flex-col items-center">
+              <div className="w-full flex items-center justify-between px-2">
+                <span className="text-slate-500 font-mono text-base font-bold uppercase tracking-wider">
+                  SYSTEM ARCHITECTURE
                 </span>
                 <span className="text-rose-600 font-mono text-lg font-bold uppercase tracking-wide">
                   TOLERANCE LOOP
@@ -149,8 +137,9 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
       })()}
 
       {/* ======================================================== */}
-      {/* 2. SCENE 1: THE ACCUMULATION (Frames 150 to 390)         */}
-      {/* 3 stacked micro-reveals + live "PERMITTED" stamp impact  */}
+      {/* 2. SCENE 1: OPEN-STAGE PHYSICAL BOUNDARY DEFLECTION      */}
+      {/* Live ThresholdBoundary sagging under repeated concession */}
+      {/* (Anti-Cardification: ZERO CARDS, ZERO PILLS)             */}
       {/* ======================================================== */}
       {isScene1 && (() => {
         const spS1 = spring({
@@ -159,16 +148,10 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
           config: { damping: 15, mass: 0.8, stiffness: 130 },
         });
 
-        const showCard1 = frame >= fCard1;
-        const showCard2 = frame >= fCard2;
-        const showCard3 = frame >= fCard3;
+        const showDisrespect = frame >= fDisrespect;
+        const showPromises = frame >= fPromises;
+        const showExcuses = frame >= fExcuses;
         const isLogged = frame >= fLogAcceptable;
-
-        const spLog = spring({
-          frame: Math.max(0, frame - fLogAcceptable),
-          fps,
-          config: { damping: 12, mass: 0.6, stiffness: 200 },
-        });
 
         return (
           <CameraShake
@@ -177,114 +160,135 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
             className="w-full flex flex-col items-center"
           >
             <div
-              className="w-full flex flex-col items-center gap-4"
+              className="w-full flex flex-col items-center"
               style={{
                 opacity: interpolate(spS1, [0, 1], [0, 1]),
                 transform: `translateY(${interpolate(spS1, [0, 1], [20, 0])}px)`,
               }}
             >
-              {/* Scene Headline */}
-              <div className="w-full text-center">
+              {/* Scene Headline: Large inky typography (no capsule badges) */}
+              <div className="w-full text-center mt-2">
                 <span className="text-slate-500 font-mono text-xl font-bold uppercase tracking-widest">
-                  STAGE 01: THE ACCUMULATION
+                  STAGE 01: SYSTEM RECALIBRATION
                 </span>
-                <h2 className="text-5xl font-black text-slate-950 tracking-tight mt-1">
-                  WHAT YOUR BRAIN SEES
+                <h2 className="text-6xl font-black text-slate-950 tracking-tight mt-1">
+                  THE STANDARD DEFLECTS
                 </h2>
               </div>
 
-              {/* 3 Sequential Compromise Cards */}
-              <div className="w-full flex flex-col gap-3 mt-1">
-                {/* Item 1: Disrespect */}
-                {showCard1 && (
-                  <div className="w-full px-6 py-4 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-4 h-4 rounded-full bg-rose-500" />
-                      <span className="text-3xl font-black text-slate-900 tracking-tight">
-                        DISRESPECT
-                      </span>
-                    </div>
-                    <span className="text-xl font-mono font-bold text-rose-600 bg-rose-50 px-3.5 py-1 rounded-lg border border-rose-200">
-                      TOLERATED
-                    </span>
-                  </div>
-                )}
-
-                {/* Item 2: Broken Promises */}
-                {showCard2 && (
-                  <div className="w-full px-6 py-4 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-4 h-4 rounded-full bg-amber-500" />
-                      <span className="text-3xl font-black text-slate-900 tracking-tight">
-                        BROKEN PROMISES
-                      </span>
-                    </div>
-                    <span className="text-xl font-mono font-bold text-amber-700 bg-amber-50 px-3.5 py-1 rounded-lg border border-amber-200">
-                      ACCEPTED
-                    </span>
-                  </div>
-                )}
-
-                {/* Item 3: Your Own Excuses */}
-                {showCard3 && (
-                  <div className="w-full px-6 py-4 rounded-2xl bg-white border-[2.5px] border-slate-900 shadow-md flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-4 h-4 rounded-full bg-slate-400" />
-                      <span className="text-3xl font-black text-slate-900 tracking-tight">
-                        YOUR OWN EXCUSES
-                      </span>
-                    </div>
-                    <span className="text-xl font-mono font-bold text-slate-600 bg-slate-100 px-3.5 py-1 rounded-lg border border-slate-300">
-                      NORMALIZED
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Physical Cutout & Live System Log Mutation */}
-              {isLogged ? (
+              {/* Dynamic Concession Impulse Markers attached directly above boundary */}
+              <div className="w-[880px] flex justify-between items-center px-8 mt-4 h-12">
                 <div
-                  className="w-full rounded-3xl bg-slate-950 text-white border-[2.5px] border-slate-900 p-6 flex flex-col items-center shadow-2xl relative overflow-hidden mt-2"
+                  className="flex items-center gap-2 transition-all"
                   style={{
-                    transform: `scale(${interpolate(spLog, [0, 1], [0.88, 1])})`,
-                    opacity: interpolate(spLog, [0, 1], [0, 1]),
+                    opacity: showDisrespect ? 1 : 0.15,
+                    transform: showDisrespect ? "translateY(0)" : "translateY(-8px)",
                   }}
                 >
-                  <div className="absolute top-0 right-0 w-40 h-40 bg-rose-500/20 blur-3xl rounded-full pointer-events-none" />
-                  
-                  <div className="w-full flex items-center justify-between mb-2">
-                    <span className="text-lg font-mono text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                      SYSTEM LOGGED
-                    </span>
-                    <span className="text-sm font-mono text-slate-400">STATUS: ACTIVE</span>
-                  </div>
-
-                  <div className="text-4xl font-black tracking-tight text-white text-center">
-                    LOGGED AS ACCEPTABLE
-                  </div>
-
-                  <p className="text-xl font-sans text-slate-300 mt-2 text-center max-w-[660px]">
-                    Silence trains your neurology that this treatment is your default standard.
-                  </p>
+                  <ArrowDown className="w-6 h-6 text-rose-600" />
+                  <span className="font-mono text-xl font-black text-slate-900">
+                    DISRESPECT
+                  </span>
                 </div>
-              ) : (
-                /* Semantic Physical Cutout representing inner tangle */
-                <div className="w-full flex justify-center items-center mt-3">
-                  <Img
-                    src={staticFile("assets/psychology/tangled_confusion_chaos.png")}
-                    className="w-[480px] h-[340px] object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.22)]"
-                  />
+
+                <div
+                  className="flex items-center gap-2 transition-all"
+                  style={{
+                    opacity: showPromises ? 1 : 0.15,
+                    transform: showPromises ? "translateY(0)" : "translateY(-8px)",
+                  }}
+                >
+                  <ArrowDown className="w-6 h-6 text-amber-500" />
+                  <span className="font-mono text-xl font-black text-slate-900">
+                    BROKEN PROMISES
+                  </span>
                 </div>
-              )}
+
+                <div
+                  className="flex items-center gap-2 transition-all"
+                  style={{
+                    opacity: showExcuses ? 1 : 0.15,
+                    transform: showExcuses ? "translateY(0)" : "translateY(-8px)",
+                  }}
+                >
+                  <ArrowDown className="w-6 h-6 text-slate-500" />
+                  <span className="font-mono text-xl font-black text-slate-900">
+                    OWN EXCUSES
+                  </span>
+                </div>
+              </div>
+
+              {/* HERO PHYSICAL MECHANISM: ThresholdBoundary */}
+              <div className="w-full relative h-[360px] flex items-center justify-center">
+                <ThresholdBoundary
+                  frame={frame}
+                  fps={fps}
+                  startX={90}
+                  endX={990}
+                  initialBaselineY={80}
+                  settledBaselineY={240}
+                  strokeColor="#090d16"
+                  thicknessPx={8}
+                  triggerFrame={fLogAcceptable}
+                  impulseDurationFrames={45}
+                  showGhostTrace={true}
+                  ghostOpacity={0.4}
+                  label="SOVEREIGN STANDARD"
+                  labelColor="#090d16"
+                  subLabel="INITIAL BASELINE"
+                  showImpulseMarker={true}
+                />
+
+                {/* Causal Coupling link between headline demand and boundary deflection */}
+                <CausalActionCoupling
+                  frame={frame}
+                  fps={fps}
+                  startX={540}
+                  startY={10}
+                  endX={540}
+                  endY={160}
+                  triggerFrame={fLogAcceptable}
+                  propagationDurationFrames={20}
+                  color="#e11d48"
+                  sourceLabel=""
+                  targetLabel=""
+                  physicalLawLabel=""
+                />
+              </div>
+
+              {/* Action Consequence Readout: Clean inky mono label (NO card box) */}
+              <div className="w-full text-center mt-3">
+                <span
+                  className="font-mono text-2xl font-black tracking-wider uppercase transition-colors duration-300"
+                  style={{
+                    color: isLogged ? "#e11d48" : "#64748b",
+                  }}
+                >
+                  {isLogged
+                    ? "▼ SILENCE ENCODES THE LOWER BASELINE PERMANENTLY"
+                    : "UNCOMPROMISED RIGID STANDARD"}
+                </span>
+              </div>
+
+              {/* Anchoring 3D Tangled Chaos Cutout (Hero Size) */}
+              <div className="w-full flex justify-center items-center mt-2">
+                <Img
+                  src={staticFile("assets/psychology/tangled_confusion_chaos.png")}
+                  className="w-[460px] h-[300px] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.18)]"
+                  style={{
+                    transform: `translateY(${Math.sin(frame * 0.05) * 6}px)`,
+                  }}
+                />
+              </div>
             </div>
           </CameraShake>
         );
       })()}
 
       {/* ======================================================== */}
-      {/* 3. SCENE 2: NEUROPLASTICITY & REPETITION (Frames 390-648)*/}
-      {/* Live animated slash on morality + slam on repetition     */}
+      {/* 3. SCENE 2: OPEN-STAGE KINETIC FURROW & GROOVE WEAR      */}
+      {/* KineticFurrow carving habitual pathway across terrain    */}
+      {/* (Anti-Cardification: ZERO CARDS, ZERO PILLS)             */}
       {/* ======================================================== */}
       {isScene2 && (() => {
         const spS2 = spring({
@@ -296,37 +300,30 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
         const showSlash = frame >= fMoralitySlash;
         const showRepetition = frame >= fRepetitionSlam;
 
-        const spRep = spring({
-          frame: Math.max(0, frame - fRepetitionSlam),
-          fps,
-          config: { damping: 12, mass: 0.6, stiffness: 170 },
-        });
-
         return (
           <div
-            className="w-full flex flex-col items-center gap-4"
+            className="w-full flex flex-col items-center"
             style={{
               opacity: interpolate(spS2, [0, 1], [0, 1]),
               transform: `translateY(${interpolate(spS2, [0, 1], [20, 0])}px)`,
             }}
           >
-            {/* Headline */}
-            <div className="w-full text-center">
+            {/* Scene Headline */}
+            <div className="w-full text-center mt-2">
               <span className="text-slate-500 font-mono text-xl font-bold uppercase tracking-widest">
-                NEUROLOGICAL MECHANISM
+                STAGE 02: NEUROPLASTIC REPETITION
               </span>
               <h2 className="text-6xl font-black text-slate-950 tracking-tight mt-1">
                 NEUROPLASTICITY
               </h2>
             </div>
 
-            {/* Contradiction Block: Does NOT Judge Morality */}
-            <div className="w-full rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_18px_36px_-12px_rgba(0,0,0,0.14)] p-6 flex flex-col items-center">
-              <span className="text-lg font-mono text-slate-400 font-bold uppercase tracking-wider mb-2">
-                ASSUMPTION VS REALITY
+            {/* Contradiction: Open blade strike on Moral Judgment (NO card container) */}
+            <div className="w-full flex flex-col items-center my-3">
+              <span className="font-mono text-lg font-bold text-slate-400 uppercase tracking-wider mb-1">
+                THE AUTOMATIC LAW
               </span>
-
-              <div className="relative flex items-center justify-center my-2">
+              <div className="relative flex items-center justify-center">
                 <AnimatedSlashStrike
                   startFrame={fMoralitySlash}
                   durationFrames={9}
@@ -344,42 +341,41 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
                 </AnimatedSlashStrike>
               </div>
 
-              <span className="text-xl font-mono text-rose-600 font-bold mt-2">
-                {showSlash ? "✕ DOES NOT DISTINGUISH GOOD FROM BAD" : "ASSUMED FILTER"}
-              </span>
-            </div>
-
-            {/* Payoff Block: Optimizes for Repetition */}
-            {showRepetition && (
-              <div
-                className="w-full rounded-3xl bg-slate-950 text-white border-[2.5px] border-slate-900 shadow-2xl p-6 flex flex-col items-center relative overflow-hidden"
-                style={{
-                  transform: `scale(${interpolate(spRep, [0, 1], [0.92, 1])})`,
-                  opacity: interpolate(spRep, [0, 1], [0, 1]),
-                }}
-              >
-                <div className="absolute -top-10 -left-10 w-40 h-40 bg-amber-400/20 blur-3xl rounded-full pointer-events-none" />
-
-                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 font-mono text-base font-bold uppercase mb-2">
-                  <Brain className="w-4 h-4 text-amber-300" />
-                  THE ONLY RULE IT FOLLOWS
-                </div>
-
-                <div className="text-5xl font-black tracking-tight text-amber-300 text-center">
+              {showRepetition && (
+                <div className="text-5xl font-black text-rose-600 tracking-tight mt-2 text-center">
                   OPTIMIZES FOR REPETITION
                 </div>
+              )}
+            </div>
 
-                <p className="text-xl text-slate-300 mt-2 text-center">
-                  Whatever is repeated is reinforced. What is tolerated is encoded.
-                </p>
-              </div>
-            )}
+            {/* HERO PHYSICAL MECHANISM: KineticFurrow (Pathway Wear & Erosion) */}
+            <div className="w-full relative h-[300px] flex items-center justify-center mt-1">
+              <KineticFurrow
+                frame={frame}
+                fps={fps}
+                startX={100}
+                endX={980}
+                y={140}
+                initialWidthPx={4}
+                carvedWidthPx={16}
+                initialColor="#cbd5e1"
+                carvedColor="#090d16"
+                pass1TriggerFrame={fFurrowPass1}
+                pass1DurationFrames={65}
+                pass2TriggerFrame={fFurrowPass2}
+                pass2DurationFrames={30}
+                massSizePx={36}
+                massColor="#f43f5e"
+                showFrictionStat={true}
+                statText="-50% RESISTANCE // ENCODED"
+              />
+            </div>
 
             {/* Anchoring 3D Glowing Brain Cutout (Hero Size) */}
-            <div className="w-full flex justify-center items-center mt-1">
+            <div className="w-full flex justify-center items-center mt-2">
               <Img
                 src={staticFile("assets/psychology/hyperrealistic_3d_glowing_brain.png")}
-                className="w-[480px] h-[340px] object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.22)]"
+                className="w-[480px] h-[320px] object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.22)]"
                 style={{
                   transform: `translateY(${Math.sin(frame * 0.06) * 6}px)`,
                 }}
@@ -390,8 +386,8 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
       })()}
 
       {/* ======================================================== */}
-      {/* 4. SCENE 3: THE DOWNWARD THRESHOLD COLLAPSE (648-1218)   */}
-      {/* Downward threshold slider + numbing alert + chaos baseline*/}
+      {/* 4. SCENE 3: OPEN-STAGE THRESHOLD COLLAPSE (648 to 1218)  */}
+      {/* Open deflection scale & live baseline drop (ZERO CARDS)  */}
       {/* ======================================================== */}
       {isScene3 && (() => {
         const spS3 = spring({
@@ -400,7 +396,7 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
           config: { damping: 15, mass: 0.8, stiffness: 130 },
         });
 
-        // Dynamic threshold value dropping over time
+        // Dynamic threshold progress dropping 100% -> 15%
         const thresholdProgress = interpolate(
           frame,
           [fDownwardAdapt, fChaosBaseline],
@@ -408,121 +404,90 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
           { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
         );
 
-        const isNumbed = frame >= fAnxietyNumb;
         const isChaos = frame >= fChaosBaseline;
 
         return (
           <div
-            className="w-full flex flex-col items-center gap-4"
+            className="w-full flex flex-col items-center"
             style={{
               opacity: interpolate(spS3, [0, 1], [0, 1]),
               transform: `translateY(${interpolate(spS3, [0, 1], [20, 0])}px)`,
             }}
           >
             {/* Header */}
-            <div className="w-full text-center">
+            <div className="w-full text-center mt-2">
               <span className="text-rose-600 font-mono text-xl font-bold uppercase tracking-widest">
-                THE DOWNWARD ADAPTATION
+                STAGE 03: DOWNWARD ADAPTATION
               </span>
-              <h2 className="text-5xl font-black text-slate-950 tracking-tight mt-1">
+              <h2 className="text-6xl font-black text-slate-950 tracking-tight mt-1">
                 THRESHOLD COLLAPSE
               </h2>
             </div>
 
-            {/* Dynamic Interactive Gauge Card */}
-            <div className="w-full rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)] p-6 flex flex-col gap-4">
+            {/* Open-Stage Tolerance Readout & Mechanical Gauge Bar (NO CARD BOX) */}
+            <div className="w-[880px] flex flex-col gap-3 my-6">
               <div className="w-full flex items-center justify-between">
-                <span className="text-2xl font-mono font-bold text-slate-700">
+                <span className="font-mono text-3xl font-black text-slate-900">
                   TOLERANCE THRESHOLD
                 </span>
                 <span
-                  className={`text-4xl font-mono font-black ${
-                    thresholdProgress < 30 ? "text-rose-600" : "text-slate-950"
-                  }`}
+                  className="font-mono text-5xl font-black transition-colors"
+                  style={{
+                    color: thresholdProgress < 30 ? "#e11d48" : "#090d16",
+                  }}
                 >
                   {Math.round(thresholdProgress)}%
                 </span>
               </div>
 
-              {/* Descending Progress Track */}
-              <div className="w-full h-9 rounded-full bg-slate-100 border-2 border-slate-900 p-1 relative overflow-hidden">
+              {/* High-Contrast Mechanical Track */}
+              <div className="w-full h-8 rounded-full bg-slate-200 border-2 border-slate-900 p-1 relative overflow-hidden">
                 <div
-                  className={`h-full rounded-full transition-all duration-100 ${
-                    thresholdProgress < 30
-                      ? "bg-rose-500"
-                      : thresholdProgress < 60
-                      ? "bg-amber-500"
-                      : "bg-emerald-500"
-                  }`}
-                  style={{ width: `${thresholdProgress}%` }}
-                />
-              </div>
-
-              {/* Status Indicators */}
-              <div className="w-full grid grid-cols-2 gap-3 mt-1">
-                <div
-                  className={`p-3.5 rounded-xl border flex flex-col items-center text-center transition-colors ${
-                    isNumbed
-                      ? "bg-slate-900 text-white border-slate-900"
-                      : "bg-slate-50 text-slate-600 border-slate-200"
-                  }`}
-                >
-                  <span className="text-xs font-mono font-bold uppercase">ALARM SYSTEM</span>
-                  <span className="text-2xl font-black mt-1">
-                    {isNumbed ? "NUMBED" : "ALERTING"}
-                  </span>
-                </div>
-
-                <div
-                  className={`p-3.5 rounded-xl border flex flex-col items-center text-center transition-colors ${
-                    isChaos
-                      ? "bg-rose-600 text-white border-rose-700 shadow-md"
-                      : "bg-slate-50 text-slate-600 border-slate-200"
-                  }`}
-                >
-                  <span className="text-xs font-mono font-bold uppercase">NEW STANDARD</span>
-                  <span className="text-2xl font-black mt-1">
-                    {isChaos ? "CHAOS ACCEPTED" : "REJECTING"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Impact Banner or Cutout (Hero Size) */}
-            {isChaos ? (
-              <div className="w-full rounded-3xl bg-slate-950 text-white border-[2.5px] border-slate-900 p-6 flex items-center justify-between shadow-xl mt-1">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center">
-                    <AlertTriangle className="w-8 h-8 text-rose-400" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-mono text-rose-400 font-bold uppercase">
-                      BASELINE DRIFT
-                    </span>
-                    <span className="text-3xl font-black tracking-tight">
-                      CHAOS IS THE NEW NORMAL
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="w-full flex justify-center items-center mt-2">
-                <Img
-                  src={staticFile("assets/burnout/overwhelmed_mind_ripples.png")}
-                  className="w-[460px] h-[340px] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.20)]"
+                  className="h-full rounded-full transition-all duration-100"
                   style={{
-                    transform: `translateY(${Math.sin(frame * 0.05) * 5}px)`,
+                    width: `${thresholdProgress}%`,
+                    backgroundColor:
+                      thresholdProgress < 30
+                        ? "#e11d48"
+                        : thresholdProgress < 60
+                        ? "#f59e0b"
+                        : "#10b981",
                   }}
                 />
               </div>
-            )}
+
+              {/* Dynamic Consequence Callout */}
+              <div className="w-full text-center mt-2">
+                <span
+                  className="font-mono text-2xl font-black tracking-wider uppercase transition-colors"
+                  style={{
+                    color: isChaos ? "#e11d48" : "#475569",
+                  }}
+                >
+                  {isChaos
+                    ? "CHAOS IS NOW THE NEW NORMAL"
+                    : "ACTIVE NERVOUS SYSTEM REJECTION"}
+                </span>
+              </div>
+            </div>
+
+            {/* Anchoring 3D Ripple Mind Cutout (Hero Size) */}
+            <div className="w-full flex justify-center items-center mt-4">
+              <Img
+                src={staticFile("assets/burnout/overwhelmed_mind_ripples.png")}
+                className="w-[500px] h-[340px] object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.20)]"
+                style={{
+                  transform: `translateY(${Math.sin(frame * 0.05) * 5}px)`,
+                }}
+              />
+            </div>
           </div>
         );
       })()}
 
       {/* ======================================================== */}
-      {/* 5. SCENE 4: THE PROTOCOL & REWIRING (1218 to end)        */}
-      {/* Slash on motivation + Setting Boundary Hand + Self-worth */}
+      {/* 5. SCENE 4: THE SOVEREIGN RESET & BOUNDARY (1218 to end) */}
+      {/* Stop Hand Cutout + Clean Decisive Standard (ZERO CARDS)  */}
       {/* ======================================================== */}
       {isScene4 && (() => {
         const spS4 = spring({
@@ -535,132 +500,78 @@ export const WhatYouTolerateCanvas: React.FC<CanvasProps> = () => {
         const showBoundaryHand = frame >= fDefineStandard && frame < fRewireEpiphany;
         const showEpiphany = frame >= fRewireEpiphany;
 
-        const spEpiphany = spring({
-          frame: Math.max(0, frame - fRewireEpiphany),
-          fps,
-          config: { damping: 12, mass: 0.6, stiffness: 160 },
-        });
-
         return (
           <div
-            className="w-full flex flex-col items-center gap-4"
+            className="w-full flex flex-col items-center"
             style={{
               opacity: interpolate(spS4, [0, 1], [0, 1]),
               transform: `translateY(${interpolate(spS4, [0, 1], [20, 0])}px)`,
             }}
           >
-            {/* Pre-Epiphany Stage: The Protocol */}
-            {!showEpiphany && (
-              <>
-                <div className="w-full text-center">
-                  <span className="text-emerald-600 font-mono text-xl font-bold uppercase tracking-widest">
-                    THE REVERSAL PROTOCOL
-                  </span>
-                  <h2 className="text-5xl font-black text-slate-950 tracking-tight mt-1">
-                    DRAW THE BOUNDARY
-                  </h2>
-                </div>
+            {/* Protocol Header */}
+            <div className="w-full text-center mt-2">
+              <span className="text-emerald-600 font-mono text-xl font-bold uppercase tracking-widest">
+                THE REVERSAL PROTOCOL
+              </span>
+              <h2 className="text-6xl font-black text-slate-950 tracking-tight mt-1">
+                DRAW THE BOUNDARY
+              </h2>
+            </div>
 
-                {/* Sub-step 1: Slicing Motivation Myth */}
-                {showStopWait && (
-                  <div className="w-full rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.16)] p-6 flex flex-col items-center text-center">
-                    <span className="text-base font-mono text-slate-400 font-bold uppercase tracking-wider mb-2">
-                      FATAL HESITATION
+            {/* Sub-step 1: Slicing Motivation Myth (open blade) */}
+            {showStopWait && (
+              <div className="w-full flex flex-col items-center my-6">
+                <span className="font-mono text-lg font-bold text-slate-400 uppercase tracking-wider mb-2">
+                  FATAL HESITATION
+                </span>
+                <div className="relative my-2">
+                  <AnimatedSlashStrike
+                    startFrame={fStopWaitSlash}
+                    durationFrames={8}
+                    preset="blade_slash"
+                    color="rose"
+                    strokeWidth={8}
+                  >
+                    <span className="text-5xl font-black tracking-tight text-slate-950">
+                      WAITING FOR MOTIVATION
                     </span>
-                    <div className="relative my-2">
-                      <AnimatedSlashStrike
-                        startFrame={fStopWaitSlash}
-                        durationFrames={8}
-                        preset="blade_slash"
-                        color="rose"
-                        strokeWidth={8}
-                      >
-                        <span className="text-4xl font-black tracking-tight text-slate-950">
-                          WAITING FOR MOTIVATION
-                        </span>
-                      </AnimatedSlashStrike>
-                    </div>
-                    <span className="text-xl font-mono text-rose-600 font-bold mt-2">
-                      ACTION PRECEDES THE DESIRE
-                    </span>
-                  </div>
-                )}
-
-                {/* Sub-step 2: Define 1 Non-Negotiable Standard & Physical Hand Cutout (Hero Size) */}
-                {showBoundaryHand && (
-                  <div className="w-full flex flex-col items-center gap-3">
-                    <div className="w-full rounded-3xl bg-slate-950 text-white border-[2.5px] border-slate-900 shadow-2xl p-6 flex flex-col items-center text-center">
-                      <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-base font-bold uppercase mb-2">
-                        <Shield className="w-4 h-4 text-emerald-300" />
-                        RULE 01: NON-NEGOTIABLE
-                      </div>
-                      <div className="text-4xl font-black tracking-tight text-white">
-                        DEFINE ONE STANDARD TODAY
-                      </div>
-                      <p className="text-lg text-slate-300 mt-2">
-                        Draw a hard line against the single biggest drain on your peace.
-                      </p>
-                    </div>
-
-                    {/* Transparent Semantic Cutout: Setting Boundary Stop Hand (Hero 520px) */}
-                    <div className="w-full flex justify-center items-center">
-                      <Img
-                        src={staticFile("assets/relationships/setting_boundary_stop_hand.png")}
-                        className="w-[500px] h-[380px] object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.22)]"
-                        style={{
-                          transform: `translateY(${Math.sin(frame * 0.05) * 5}px)`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
-
-            {/* Final Sovereign Epiphany */}
-            {showEpiphany && (
-              <div
-                className="w-full flex flex-col items-center gap-4"
-                style={{
-                  transform: `scale(${interpolate(spEpiphany, [0, 1], [0.9, 1])})`,
-                  opacity: interpolate(spEpiphany, [0, 1], [0, 1]),
-                }}
-              >
-                {/* Epiphany Card */}
-                <div className="w-full rounded-3xl bg-slate-950 text-white border-[2.5px] border-slate-900 shadow-2xl p-7 flex flex-col items-center text-center relative overflow-hidden">
-                  <div className="absolute -top-12 -right-12 w-48 h-48 bg-emerald-500/20 blur-3xl rounded-full pointer-events-none" />
-
-                  <div className="flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-base font-bold uppercase mb-3">
-                    <Zap className="w-5 h-5 text-emerald-300" />
-                    THE NEUROLOGICAL SHIFT
-                  </div>
-
-                  <h1 className="text-5xl font-black tracking-tight text-white leading-tight">
-                    REWIRED SELF-WORTH
-                  </h1>
-
-                  <div className="w-full h-0.5 bg-slate-800 my-4" />
-
-                  <p className="text-2xl font-black tracking-tight text-emerald-400 uppercase leading-snug">
-                    WHAT YOU REFUSE TO TOLERATE DEFINES WHO YOU BECOME.
-                  </p>
+                  </AnimatedSlashStrike>
                 </div>
-
-                {/* Final Anchor: Enlightened Mind Insight Cutout (Hero 500px) */}
-                <div className="w-full flex justify-center items-center">
-                  <Img
-                    src={staticFile("assets/psychology/enlightened_mind_insight.png")}
-                    className="w-[480px] h-[380px] object-contain drop-shadow-[0_30px_48px_rgba(0,0,0,0.24)]"
-                    style={{
-                      transform: `translateY(${Math.sin(frame * 0.06) * 6}px)`,
-                    }}
-                  />
-                </div>
+                <span className="font-mono text-2xl font-bold text-rose-600 mt-2">
+                  ACTION PRECEDES THE DESIRE
+                </span>
               </div>
             )}
+
+            {/* Sub-step 2 & 3: Sovereign Standard Announcement */}
+            {(showBoundaryHand || showEpiphany) && (
+              <div className="w-full flex flex-col items-center text-center my-4">
+                <div className="flex items-center gap-2 text-emerald-600 font-mono text-xl font-bold uppercase mb-2">
+                  <Shield className="w-6 h-6 text-emerald-600" />
+                  RULE 01: NON-NEGOTIABLE
+                </div>
+                <div className="text-6xl font-black tracking-tight text-slate-950">
+                  DEFINE ONE STANDARD
+                </div>
+                <p className="text-2xl font-mono font-bold text-slate-600 mt-2">
+                  PUSH BACK AT THE VERY FIRST BOUNDARY CROSSING
+                </p>
+              </div>
+            )}
+
+            {/* Anchoring Setting Boundary Stop Hand Cutout (Hero Size) */}
+            <div className="w-full flex justify-center items-center mt-4">
+              <Img
+                src={staticFile("assets/relationships/setting_boundary_stop_hand.png")}
+                className="w-[520px] h-[360px] object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.22)]"
+                style={{
+                  transform: `translateY(${Math.sin(frame * 0.05) * 5}px)`,
+                }}
+              />
+            </div>
           </div>
         );
       })()}
-    </div>
+    </MechanismStage>
   );
 };

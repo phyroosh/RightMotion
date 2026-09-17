@@ -1054,3 +1054,13 @@ export const WhatYouTolerateThumbnail: React.FC = () => (
     heroOffsetY={-20}
   />
 );
+
+export const TheArtOfEnvironmentThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="YOUR ROOM"
+    accentColor="#f43f5e"
+    heroImageSrc="the_art_of_environment/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);

@@ -9,3 +9,9 @@ export type { KineticFurrowProps } from "./KineticFurrow";
 
 export { PersistentMemoryStage } from "./PersistentMemoryStage";
 export type { PersistentMemoryStageProps } from "./PersistentMemoryStage";
+
+export { CausalActionCoupling } from "./CausalActionCoupling";
+export type { CausalActionCouplingProps } from "./CausalActionCoupling";
+
+export { MechanismStage } from "./MechanismStage";
+export type { MechanismStageProps } from "./MechanismStage";

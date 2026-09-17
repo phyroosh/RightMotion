@@ -23,8 +23,12 @@ from typing import Dict, Any, List, Optional, Tuple
 ROOT_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(ROOT_DIR / "scripts"))
 
+from dataclasses import asdict
 from orchestrator_registry import FRONTIER_REGISTRY
 from visual_concept import VisualConceptTranslator, VisualConceptPlan
+from background_selector import BackgroundSelector, SceneContext
+from validate_motion_ast import validate_motion_ast
+from geometry_resolver import GeometryResolver
 
 # Maximum allowed complexity scores per scene role
 BUDGET_CAPS = {
@@ -43,6 +47,7 @@ class CreativeOrchestrator:
     def __init__(self, overrides: Optional[Dict[str, Any]] = None):
         self.registry = FRONTIER_REGISTRY
         self.overrides = overrides or {}
+        self.background_selector = BackgroundSelector()
 
     def analyze_script_pillars(
         self, script: str, transcript: Optional[List[Dict[str, Any]]] = None, fps: int = 60, story_model: Optional[Any] = None
@@ -99,7 +104,8 @@ class CreativeOrchestrator:
 
         # Calculate frame ranges
         if transcript and len(transcript) > 0:
-            total_duration_sec = transcript[-1].get("end", 30.0)
+            last_end = transcript[-1].get("end", 30.0)
+            total_duration_sec = last_end / 1000.0 if last_end > 300 else float(last_end)
             total_frames = round(total_duration_sec * fps)
             s2_start = round(total_frames * 0.28)
             s3_start = round(total_frames * 0.72)
@@ -248,6 +254,9 @@ class CreativeOrchestrator:
         prev_plan: Optional[Dict[str, Any]] = None,
         story_model: Optional[Any] = None,
         visual_concept: Optional[Any] = None,
+        prev_background_id: Optional[str] = None,
+        background_history: Optional[List[str]] = None,
+        niche: str = "self_improvement",
     ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], Dict[str, Any]]:
         """
         Multi-dimensional capability selection adhering to:
@@ -306,6 +315,11 @@ class CreativeOrchestrator:
                         "frontierCode": code,
                         "reason": f"Pure metric comparison requires centered minimalism and zero physics clutter. {self.registry[code]['name']} is unnecessary.",
                     })
+            if "F_UBG" not in forced_frontiers:
+                rejected.append({
+                    "frontierCode": "F_UBG",
+                    "reason": "Pure metric comparison requires centered minimalism and zero background texture.",
+                })
             return active, rejected, {
                 "level": "LOW",
                 "calculatedScore": 1.0,
@@ -413,6 +427,16 @@ class CreativeOrchestrator:
                 "reason": "Scene 1 Hook requires immediate presenter intimacy and static illustration grounding (Rule 0 / Rule 4); continuous camera translation dilutes opening personal connection.",
             })
 
+        # Rule 4.4: Defer heavy physical mechanisms (F4, F7) from Scene 1 Hook to Scene 2
+        if scene_id == "scene_1_hook":
+            for f in ["F4", "F7"]:
+                if f in candidates and f not in forced_frontiers:
+                    candidates.remove(f)
+                    rejected.append({
+                        "frontierCode": f,
+                        "reason": f"{self.registry[f]['name']} deferred to Scene 2 Logic; Scene 1 Hook requires immediate presenter intimacy and hero illustration staging.",
+                    })
+
         # -------------------------------------------------------------
         # STEP 5: Add Candidates to Active with Specific Concept & Intensity
         # -------------------------------------------------------------
@@ -510,6 +534,66 @@ class CreativeOrchestrator:
                 })
 
         # -------------------------------------------------------------
+        # STEP 5.5: Universal Background Intelligence (F_UBG)
+        # -------------------------------------------------------------
+        if "F_UBG" in disabled_frontiers:
+            rejected.append({
+                "frontierCode": "F_UBG",
+                "reason": "Explicitly disabled by human override.",
+            })
+        else:
+            is_cinematic_or_tense = (
+                tone in ["claustrophobic_pressure", "cognitive_dissonance", "sudden_epiphany"]
+                or any(k in intent["narrationText"].lower() for k in ["dark", "room", "shadow", "trap", "fail", "lose", "losing", "pressure", "environment", "willpower", "collapse", "burden"])
+            )
+            primary_text_color = "#ffffff" if (is_cinematic_or_tense or niche in ["finance", "health"]) else "#090d16"
+            scene_role = (
+                "hook" if scene_id == "scene_1_hook"
+                else "mechanism" if scene_id == "scene_2_logic"
+                else "resolution"
+            )
+            scene_tone = (
+                "tense" if tone == "claustrophobic_pressure"
+                else "cinematic" if is_cinematic_or_tense
+                else "analytical" if tone == "analytical_clarity"
+                else "reflective"
+            )
+
+            scene_ctx = SceneContext(
+                scene_id=scene_id,
+                role=scene_role,
+                script_text=intent["narrationText"],
+                emotional_tone=scene_tone,
+                visual_complexity_score=1.5,
+                has_presenter=(scene_id == "scene_1_hook"),
+                is_diagram_heavy=False,
+                is_pure_data_metric=False,
+                primary_text_color=primary_text_color,
+                expected_text_zone="center",
+                previous_background_id=prev_background_id,
+                background_usage_history=background_history or [],
+            )
+
+            bg_decision = self.background_selector.evaluate_scene(scene_ctx)
+
+            if bg_decision.mode == "universal":
+                active.append({
+                    "frontierCode": "F_UBG",
+                    "capabilityConcept": "universal_physical_background",
+                    "intensity": "MEDIUM",
+                    "scope": "SCENE_LEVEL",
+                    "reason": bg_decision.reason,
+                    "mappedComponents": ["UniversalBackground"],
+                    "decision": asdict(bg_decision),
+                })
+            else:
+                rejected.append({
+                    "frontierCode": "F_UBG",
+                    "reason": bg_decision.reason,
+                    "decision": asdict(bg_decision),
+                })
+
+        # -------------------------------------------------------------
         # STEP 6: Complexity Budget Scoring & Pruning
         # -------------------------------------------------------------
         score = 1.0 # Baseline F_BASE
@@ -523,7 +607,7 @@ class CreativeOrchestrator:
         # If score exceeds budget, prune lowest-priority non-forced capability
         if score > budget_cap:
             champion_reqs = set(visual_concept.championCandidate.requiredFrontiers) if visual_concept and hasattr(visual_concept, "championCandidate") else set()
-            non_forced = [a for a in active if a["frontierCode"] not in forced_frontiers and a["frontierCode"] != "F_BASE"]
+            non_forced = [a for a in active if a["frontierCode"] not in forced_frontiers and a["frontierCode"] != "F_BASE" and a["frontierCode"] != "F_UBG"]
             # Prune non-champion frontiers first, then by lower importance
             non_forced.sort(key=lambda a: (
                 1 if a["frontierCode"] in champion_reqs else 0,
@@ -588,10 +672,56 @@ class CreativeOrchestrator:
         total_score = 0.0
 
         prev_plan = None
+        background_history: List[str] = []
+        prev_background_id: Optional[str] = None
         for pillar in pillars:
             intent = self.infer_scene_intent(pillar, topic, fps, story_model=story_model, visual_concept=visual_concept)
-            active, rejected, budget = self.evaluate_capabilities(intent, prev_plan, story_model=story_model, visual_concept=visual_concept)
+            active, rejected, budget = self.evaluate_capabilities(
+                intent,
+                prev_plan,
+                story_model=story_model,
+                visual_concept=visual_concept,
+                prev_background_id=prev_background_id,
+                background_history=background_history,
+            )
             total_score += budget["calculatedScore"]
+
+            # Extract UBG decision and backgroundIntent
+            ubg_entry = next((a for a in active if a.get("frontierCode") == "F_UBG"), None)
+            if not ubg_entry:
+                ubg_entry = next((r for r in rejected if r.get("frontierCode") == "F_UBG"), None)
+
+            bg_dec = ubg_entry.get("decision") if ubg_entry else None
+
+            if bg_dec and bg_dec.get("mode") == "universal":
+                bg_intent = {
+                    "mode": "universal",
+                    "assetId": bg_dec["selected_asset_id"],
+                    "semanticRole": bg_dec["semantic_role"],
+                    "cropStrategy": bg_dec["crop_strategy"],
+                    "cropFocalPoint": bg_dec["crop_focal_point"],
+                    "motion": bg_dec["motion"],
+                    "motionScaleDelta": bg_dec.get("motion_scale_delta", 1.04),
+                    "opacity": bg_dec.get("opacity", 1.0),
+                    "dimmingOverlay": bg_dec.get("dimming_overlay"),
+                    "transitionIn": bg_dec.get("transition_in"),
+                    "transitionOut": bg_dec.get("transition_out"),
+                    "reason": bg_dec["reason"],
+                }
+                if bg_dec.get("selected_asset_id"):
+                    background_history.append(bg_dec["selected_asset_id"])
+                    prev_background_id = bg_dec["selected_asset_id"]
+            else:
+                bg_intent = {
+                    "mode": "none",
+                    "semanticRole": "clarity_canvas",
+                    "cropStrategy": "center_focal",
+                    "cropFocalPoint": [0.5, 0.5],
+                    "motion": "static",
+                    "motionScaleDelta": 1.0,
+                    "opacity": 1.0,
+                    "reason": bg_dec.get("reason", "Background suppressed for clean foundation canvas.") if bg_dec else "Default clean ground canvas.",
+                }
 
             primary_visual = "Editorial Hero Card + Judy Grounded Close-up" if pillar["sceneId"] == "scene_1_hook" else (
                 f"Physical {intent['dominantMetaphor'].replace('_', ' ').title()} Anchor"
@@ -600,6 +730,8 @@ class CreativeOrchestrator:
             plan_entry = {
                 "sceneId": pillar["sceneId"],
                 "intent": intent,
+                "backgroundDecision": bg_dec,
+                "backgroundIntent": bg_intent,
                 "complexityBudget": budget,
                 "activeCapabilities": active,
                 "rejectedCapabilities": rejected,
@@ -638,6 +770,426 @@ class CreativeOrchestrator:
         if visual_concept:
             plan_res["visualConcept"] = visual_concept.to_dict()
         return plan_res
+
+    def compile_motion_ast(
+        self, plan: Dict[str, Any], transcript: Optional[List[Dict[str, Any]]] = None
+    ) -> Dict[str, Any]:
+        """
+        Compile a VideoCreativePlan into a fully valid MotionStageAST.
+        Guarantees:
+        - Structural schema integrity
+        - SafeBounds adherence (x: 80-1000, y: 280-1340)
+        - SceneBackgroundIntent representation per scene
+        - Semantic roles and narrative goals preservation
+        """
+        clip_name = plan["clipName"]
+        fps = plan.get("fps", 60)
+        total_frames = plan["totalFrames"]
+        scene_plans = plan["scenePlans"]
+
+        has_dark_bg = any(
+            sp.get("backgroundIntent", {}).get("mode") == "universal"
+            and "dark" in sp.get("backgroundIntent", {}).get("assetId", "")
+            for sp in scene_plans
+        )
+        ground_color = "#030712" if has_dark_bg else "#f8fafc"
+        lighting_theme = "deep_atmospheric_dark" if has_dark_bg else "clean_studio_radial"
+
+        ast_scenes = []
+        persistent_traces = []
+
+        # Extract Visual Concept Translation champion candidate
+        vc = plan.get("visualConcept", {})
+        champ = vc.get("championCandidate", {})
+        primary_mech = (vc.get("primaryMechanism") or champ.get("primaryMechanism") or "").lower()
+        cause_event = vc.get("cause") or champ.get("causeEvent") or "Action triggers systemic physical reaction"
+        vis_trans = vc.get("centralTransformation") or champ.get("visibleTransformation") or "State A transitions visibly into State B"
+        vis_conseq = vc.get("visibleConsequence") or champ.get("visibleConsequence") or "New equilibrium established"
+
+        for sp in scene_plans:
+            sc_id = sp["sceneId"]
+            intent = sp["intent"]
+            s_role = "hook" if sc_id == "scene_1_hook" else "mechanism" if sc_id == "scene_2_logic" else "resolution"
+            narrative_goal = intent["coreIdea"]
+            if len(narrative_goal.strip()) < 10:
+                narrative_goal = f"Deliver {intent['emotionalTone']} lesson: {intent['narrationText'][:60]}"
+
+            bg_intent = sp.get("backgroundIntent")
+
+            raw_actors = []
+            forces = []
+            mutations = []
+            causal_couplings = []
+
+            raw_annotations = [{
+                "annotationId": f"{sc_id}_headline",
+                "text": intent["narrationText"][:40].upper(),
+                "fontSizePx": 68,
+                "color": "#ffffff" if has_dark_bg else "#090d16",
+            }]
+
+            if sc_id == "scene_1_hook":
+                raw_actors.append({
+                    "id": f"{clip_name}_hero_illustration",
+                    "semanticRole": "hook_curiosity_anchor",
+                    "narrativeImportance": "HERO",
+                    "assetPath": f"{clip_name}/assets/scene_illustration.png",
+                    "geometry": {
+                        "type": "semantic_cutout",
+                        "assetPath": f"{clip_name}/assets/scene_illustration.png",
+                        "widthPx": 760,
+                        "heightPx": 480,
+                    },
+                })
+            else:
+                # Compile First-Class Physical Mechanism from Visual Concept
+                # Prevents collapsing into empty cards / generic cutout
+                trigger_f = intent["startFrame"] + min(30, max(10, round((intent["endFrame"] - intent["startFrame"]) * 0.25)))
+
+                if any(m in primary_mech for m in ["displacement", "normalization", "threshold_crossing", "boundary"]):
+                    actor_id = f"{sc_id}_standard_boundary"
+                    raw_actors.append({
+                        "id": actor_id,
+                        "semanticRole": "the_sovereign_standard",
+                        "narrativeImportance": "HERO",
+                        "geometry": {
+                            "type": "continuous_boundary",
+                            "orientation": "horizontal",
+                            "lengthPx": 840,
+                            "thicknessPx": 6,
+                            "initialBaselineY": 620,
+                        },
+                    })
+                    forces.append({
+                        "forceId": f"{sc_id}_concession_impulse",
+                        "targetActorId": actor_id,
+                        "type": "point_impulse",
+                        "triggerFrame": trigger_f,
+                        "durationFrames": 45,
+                        "magnitude": 180.0,
+                        "directionDeg": 90.0,
+                        "timingCurve": "viscoelastic_relax",
+                        "semanticCause": cause_event,
+                    })
+                    mem_trace = {
+                        "traceId": f"{sc_id}_ghost_baseline",
+                        "originatingActorId": actor_id,
+                        "originatingSceneId": sc_id,
+                        "appearance": "dashed_ghost_line",
+                        "coordinates": {"y": 620, "startX": 120, "endX": 960},
+                        "opacity": 0.35,
+                        "persistsUntilEnd": True,
+                        "semanticMeaning": "Visual memory of original uncompromised standard",
+                    }
+                    mutations.append({
+                        "mutationId": f"{sc_id}_boundary_sag",
+                        "actorId": actor_id,
+                        "type": "viscoelastic_sag",
+                        "triggerFrame": trigger_f,
+                        "durationFrames": 45,
+                        "stateBefore": "UNCOMPROMISED_TAUT",
+                        "stateAfter": "DEFLECTED_SETTLED",
+                        "physicalRationale": vis_trans,
+                        "parameters": {"initialY": 620, "settledY": 800, "overshootPx": 45},
+                        "createsMemoryTrace": mem_trace,
+                    })
+                    causal_couplings.append({
+                        "couplingId": f"{sc_id}_impulse_coupling",
+                        "sourceEvent": {"actorId": f"{sc_id}_headline", "stateChange": "IMPULSE_STRIKE", "frame": trigger_f},
+                        "propagationDelayFrames": 0,
+                        "targetReaction": {"actorId": actor_id, "resultingMutationId": f"{sc_id}_boundary_sag"},
+                        "physicalLaw": "Compromise impulse physically recalibrates baseline standard downward",
+                    })
+                    persistent_traces.append(mem_trace)
+
+                elif any(m in primary_mech for m in ["erosion", "resistance", "reinforcement", "furrow"]):
+                    actor_id = f"{sc_id}_action_pathway"
+                    raw_actors.append({
+                        "id": actor_id,
+                        "semanticRole": "neural_action_pathway",
+                        "narrativeImportance": "HERO",
+                        "geometry": {
+                            "type": "conduit_pathway",
+                            "start": [140, 800],
+                            "end": [940, 800],
+                            "curvature": 0,
+                            "widthPx": 14,
+                        },
+                    })
+                    forces.append({
+                        "forceId": f"{sc_id}_friction_drag",
+                        "targetActorId": actor_id,
+                        "type": "continuous_drag",
+                        "triggerFrame": trigger_f,
+                        "durationFrames": 55,
+                        "magnitude": 0.85,
+                        "directionDeg": 0.0,
+                        "timingCurve": "linear_continuous",
+                        "semanticCause": cause_event,
+                    })
+                    mem_trace = {
+                        "traceId": f"{sc_id}_worn_furrow_trace",
+                        "originatingActorId": actor_id,
+                        "originatingSceneId": sc_id,
+                        "appearance": "worn_furrow",
+                        "coordinates": {"y": 800, "startX": 140, "endX": 940, "widthPx": 14},
+                        "opacity": 0.45,
+                        "persistsUntilEnd": True,
+                        "semanticMeaning": "Etched furrow permanently stamped into terrain",
+                    }
+                    mutations.append({
+                        "mutationId": f"{sc_id}_groove_wear",
+                        "actorId": actor_id,
+                        "type": "groove_wear",
+                        "triggerFrame": trigger_f,
+                        "durationFrames": 55,
+                        "stateBefore": "HIGH_FRICTION_UNTOUCHED",
+                        "stateAfter": "LOW_FRICTION_CARVED",
+                        "physicalRationale": vis_trans,
+                        "parameters": {"initialWidthPx": 4, "carvedWidthPx": 14, "frictionDelta": -0.5},
+                        "createsMemoryTrace": mem_trace,
+                    })
+                    causal_couplings.append({
+                        "couplingId": f"{sc_id}_furrow_coupling",
+                        "sourceEvent": {"actorId": actor_id, "stateChange": "PASS1_COMPLETE", "frame": trigger_f + 55},
+                        "propagationDelayFrames": 15,
+                        "targetReaction": {"actorId": actor_id, "resultingMutationId": f"{sc_id}_groove_wear"},
+                        "physicalLaw": "First traversal erodes path, enabling frictionless glide for subsequent repetition",
+                    })
+                    persistent_traces.append(mem_trace)
+
+                elif any(m in primary_mech for m in ["deformation", "fragmentation", "compression", "rupture", "fracture"]):
+                    actor_id = f"{sc_id}_bedrock_foundation"
+                    raw_actors.append({
+                        "id": actor_id,
+                        "semanticRole": "structural_bedrock",
+                        "narrativeImportance": "HERO",
+                        "geometry": {
+                            "type": "monolithic_foundation",
+                            "widthPx": 840,
+                            "heightPx": 420,
+                        },
+                    })
+                    forces.append({
+                        "forceId": f"{sc_id}_compressive_load",
+                        "targetActorId": actor_id,
+                        "type": "compressive_load",
+                        "triggerFrame": trigger_f,
+                        "durationFrames": 45,
+                        "magnitude": 1.0,
+                        "directionDeg": 90.0,
+                        "timingCurve": "spring_heavy",
+                        "semanticCause": cause_event,
+                    })
+                    cleave_f = trigger_f + 40
+                    mem_trace = {
+                        "traceId": f"{sc_id}_fracture_chasm_trace",
+                        "originatingActorId": actor_id,
+                        "originatingSceneId": sc_id,
+                        "appearance": "fracture_chasm",
+                        "coordinates": {"widthPx": 840, "heightPx": 420},
+                        "opacity": 0.5,
+                        "persistsUntilEnd": True,
+                        "semanticMeaning": "Permanent structural fracture chasm",
+                    }
+                    mutations.append({
+                        "mutationId": f"{sc_id}_brittle_cleavage",
+                        "actorId": actor_id,
+                        "type": "brittle_cleavage",
+                        "triggerFrame": cleave_f,
+                        "durationFrames": 15,
+                        "stateBefore": "PRISTINE_EQUILIBRIUM",
+                        "stateAfter": "CATASTROPHIC_FRACTURE",
+                        "physicalRationale": vis_trans,
+                        "parameters": {"shatterFrame": cleave_f, "crackCount": 8},
+                        "createsMemoryTrace": mem_trace,
+                    })
+                    causal_couplings.append({
+                        "couplingId": f"{sc_id}_rupture_coupling",
+                        "sourceEvent": {"actorId": actor_id, "stateChange": "LOAD_EXCEEDED", "frame": cleave_f},
+                        "propagationDelayFrames": 0,
+                        "targetReaction": {"actorId": actor_id, "resultingMutationId": f"{sc_id}_brittle_cleavage"},
+                        "physicalLaw": "Load beyond yield point triggers immediate brittle rupture",
+                    })
+                    persistent_traces.append(mem_trace)
+
+                else:
+                    # Equilibrium Fulcrum Beam / Balance Physics
+                    actor_id = f"{sc_id}_fulcrum_beam"
+                    raw_actors.append({
+                        "id": actor_id,
+                        "semanticRole": "systemic_equilibrium_beam",
+                        "narrativeImportance": "HERO",
+                        "geometry": {
+                            "type": "fulcrum_beam",
+                            "lengthPx": 820,
+                            "thicknessPx": 12,
+                        },
+                    })
+                    forces.append({
+                        "forceId": f"{sc_id}_mass_torque",
+                        "targetActorId": actor_id,
+                        "type": "torque_moment",
+                        "triggerFrame": trigger_f,
+                        "durationFrames": 35,
+                        "magnitude": 14.0,
+                        "directionDeg": 45.0,
+                        "timingCurve": "spring_snappy",
+                        "semanticCause": cause_event,
+                    })
+                    mutations.append({
+                        "mutationId": f"{sc_id}_torque_tilt",
+                        "actorId": actor_id,
+                        "type": "torque_tilt",
+                        "triggerFrame": trigger_f,
+                        "durationFrames": 35,
+                        "stateBefore": "BALANCED_HORIZONTAL",
+                        "stateAfter": "DEFLECTED_TILT",
+                        "physicalRationale": "Torque moment causes beam to tilt and settle into dynamic angle",
+                        "parameters": {"angleDeg": 14},
+                    })
+                    causal_couplings.append({
+                        "couplingId": f"{sc_id}_torque_coupling",
+                        "sourceEvent": {"actorId": f"{sc_id}_headline", "stateChange": "DEMAND_APPLIED", "frame": trigger_f},
+                        "propagationDelayFrames": 0,
+                        "targetReaction": {"actorId": actor_id, "resultingMutationId": f"{sc_id}_torque_tilt"},
+                        "physicalLaw": "Load arrival tilts systemic fulcrum balance",
+                    })
+
+            resolved_bounds, comp_metrics = GeometryResolver.resolve_scene_layout(
+                scene_id=sc_id,
+                role=s_role,
+                dominant_metaphor=intent.get("dominantMetaphor", "spatial_friction"),
+                actors_data=raw_actors,
+                annotations_data=raw_annotations,
+                has_presenter=(sc_id == "scene_1_hook"),
+            )
+
+            actors = []
+            for rb in resolved_bounds:
+                if rb.id.endswith("_headline") or rb.id.endswith("_consequence_label"):
+                    continue
+                matched_raw = next((ra for ra in raw_actors if ra["id"] == rb.id), None)
+                geom = matched_raw.get("geometry") if matched_raw else None
+                if not geom:
+                    asset_path = (
+                        matched_raw.get("assetPath", "assets/psychology/hyperrealistic_3d_glowing_brain.png")
+                        if matched_raw
+                        else "assets/psychology/hyperrealistic_3d_glowing_brain.png"
+                    )
+                    geom = {
+                        "type": "semantic_cutout",
+                        "assetPath": asset_path,
+                        "widthPx": int(rb.width),
+                        "heightPx": int(rb.height),
+                    }
+                actors.append({
+                    "id": rb.id,
+                    "semanticRole": rb.semantic_role,
+                    "narrativeImportance": "HERO" if rb.importance in ["HERO", "CRITICAL"] else "SECONDARY",
+                    "geometry": geom,
+                    "visualStyle": {
+                        "strokeColor": "#ffffff" if has_dark_bg else "#090d16",
+                        "opacity": 1.0,
+                    },
+                    "resolvedLayout": {
+                        "x": int(rb.x),
+                        "y": int(rb.y),
+                        "width": int(rb.width),
+                        "height": int(rb.height),
+                        "originAnchor": "center",
+                        "semanticPlacement": "dominant_center",
+                    },
+                    "zIndex": 10,
+                    "isPersistent": False,
+                })
+
+            annotations = []
+            for rb in resolved_bounds:
+                if rb.id.endswith("_headline"):
+                    annotations.append({
+                        "annotationId": rb.id,
+                        "text": rb.text_content or intent["narrationText"][:40].upper(),
+                        "font": "Montserrat Black",
+                        "fontSizePx": int(rb.font_size_px or 68),
+                        "color": "#ffffff" if has_dark_bg else "#090d16",
+                        "role": "hook_slam" if sc_id == "scene_1_hook" else "thesis_statement",
+                        "staticPlacement": {
+                            "x": int(rb.x),
+                            "y": int(rb.y),
+                        },
+                        "startFrame": intent["startFrame"],
+                        "durationFrames": min(120, intent["endFrame"] - intent["startFrame"]),
+                        "inAnimation": "scale_pop",
+                    })
+                elif rb.id.endswith("_consequence_label"):
+                    annotations.append({
+                        "annotationId": rb.id,
+                        "text": vis_conseq.upper()[:45],
+                        "font": "JetBrains Mono Bold",
+                        "fontSizePx": 38,
+                        "color": "#ffffff" if has_dark_bg else "#64748b",
+                        "role": "action_verb",
+                        "staticPlacement": {
+                            "x": int(rb.x),
+                            "y": int(rb.y),
+                        },
+                        "startFrame": intent["startFrame"] + 35,
+                        "durationFrames": intent["endFrame"] - (intent["startFrame"] + 35),
+                        "inAnimation": "fade_down",
+                    })
+
+            ast_scenes.append({
+                "sceneId": sc_id,
+                "role": s_role,
+                "startFrame": intent["startFrame"],
+                "endFrame": intent["endFrame"],
+                "narrativeGoal": narrative_goal,
+                "backgroundIntent": bg_intent,
+                "actors": actors,
+                "forces": forces,
+                "mutations": mutations,
+                "causalCouplings": causal_couplings,
+                "annotations": annotations,
+                "compositionMetrics": {
+                    "occupiedWidthPct": comp_metrics.occupied_width_pct,
+                    "occupiedHeightPct": comp_metrics.occupied_height_pct,
+                    "occupiedAreaPct": comp_metrics.occupied_area_pct,
+                    "bottomDeadZonePx": comp_metrics.bottom_dead_zone_px,
+                    "semanticDensityScore": comp_metrics.semantic_density_score,
+                    "densityStatus": comp_metrics.density_status,
+                },
+            })
+
+        default_bg_intent = scene_plans[0].get("backgroundIntent") if scene_plans else None
+
+        motion_ast = {
+            "version": "1.0.0",
+            "clipId": clip_name,
+            "fps": fps,
+            "totalFrames": total_frames,
+            "environment": {
+                "groundColor": ground_color,
+                "lightingTheme": lighting_theme,
+                "gridTexture": not has_dark_bg,
+                "safeBounds": {
+                    "top": 280,
+                    "bottom": 1340,
+                    "left": 80,
+                    "right": 1000,
+                },
+                "defaultBackgroundIntent": default_bg_intent,
+            },
+            "persistentWorldMemory": persistent_traces,
+            "scenes": ast_scenes,
+        }
+
+        val_result = validate_motion_ast(motion_ast)
+        if not val_result.is_valid:
+            err_msgs = [f"[{e.code}] {e.path}: {e.message}" for e in val_result.errors]
+            raise ValueError(f"Compiled MotionStageAST failed semantic validation:\n" + "\n".join(err_msgs))
+
+        return motion_ast
 
     def format_plan_summary(self, plan: Dict[str, Any]) -> str:
         """Format the creative plan into a crisp, readable executive markdown summary."""

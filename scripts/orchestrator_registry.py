@@ -317,5 +317,37 @@ FRONTIER_REGISTRY: Dict[str, Dict[str, Any]] = {
         "conflicts_with": [],
         "default_intensity": "MEDIUM",
     },
+    "F_UBG": {
+        "id": "F_UBG",
+        "code": "F_UBG",
+        "name": "Universal Background Intelligence",
+        "status": "ACTIVE",
+        "purpose": "Autonomous selection, framing, and layering of reusable physical backgrounds and environments.",
+        "creative_strengths": [
+            "Provides tactile grounding and cinematic atmosphere",
+            "Eliminates sterile white-canvas feeling without adding clutter",
+            "Context-aware 9:16 crop and text-safe region alignment",
+            "Intelligent rejection when foreground mechanisms need visual calm",
+        ],
+        "best_use_situations": [
+            "Cinematic and philosophical narratives",
+            "High-contrast minimalist typography scenes",
+            "Material transformations and tactile surfaces",
+            "Multi-chapter tonal shifts",
+        ],
+        "anti_use_situations": [
+            "Multi-chamber spatial blueprints (F1) where background textures compete",
+            "High-density data/diagram HUDs requiring absolute canvas clarity",
+        ],
+        "dependencies": ["components/backgrounds/UniversalBackground.tsx"],
+        "exported_components": ["UniversalBackground"],
+        "performance_cost": "ZERO",
+        "complexity_weight": 0.5,
+        "mobile_risk": "LOW",
+        "synergistic_with": ["F_BASE", "F2", "F4", "F6", "F7"],
+        "conflicts_with": [],
+        "default_intensity": "MEDIUM",
+    },
 }
+
 

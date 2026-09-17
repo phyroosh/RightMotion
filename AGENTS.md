@@ -221,20 +221,48 @@ Two fonts only: **Montserrat** (headlines, display, slam words) + **JetBrains Mo
 
 ---
 
-### 5.5 — Banned Visual Patterns
+### 5.5 — Banned Visual Patterns & The Anti-Cardification Standard
 
 > [!CRITICAL]
-> **These are hard bans. They produce small, cluttered, illegible results that fail on mobile.**
+> **THE CORE LAW OF FRONTIER EXECUTION:**
+> **WHEN A FRONTIER IS SELECTED, ITS MECHANISM IS THE PRIMARY VISUAL EVENT ON SCREEN.**
+> RightMotion rejects cardification. The AI agent must never substitute an editorial card, floating panel, or labeled container for a physical mechanism. Components are implementation tools, not card templates.
 
-1. **Pill/capsule badges** — `● PROTOCOL // 5 PILLARS`, `THE CONDITIONING`, numbered capsules (`01 // CIRCADIAN ARCHITECTURE`), `NON-NEGOTIABLE`/`MANDATORY` chips, status tags, icon+capsule pairings. RightMotion is motion design, not a mobile app UI.
-2. **Dashboard/list-card rows** — 3–5 stacked rows each with a number, title, sub-description, and right-side badge. This is a dashboard layout. Design a different scene — do not resize the list.
-3. **Sub-descriptions inside cards** — 2–3 lines of body text inside a card element. Audio carries the information load.
-4. **3+ simultaneous floating text elements** — unless scale contrast makes hierarchy unmistakable.
-5. **Icon + micro-text pairings** — icon < 40px paired with label < 40px. Make the icon a primary visual or remove it.
-6. **HUD/dashboard/telemetry panels** — stat rows, floating metric boxes with small type, thin-border data panels, game-HUD aesthetics.
-7. **Memes & reaction stickers** — opening memes (`TacticalMemeCard`, `TacticalMemeFrame`) and sticker pops (`MemeStickerOverlay`) are completely banned. Focus 100% on semantic cutouts and Judy character poses.
+#### The 11 Anti-Cardification Hard Rules:
+1. **Rule A (Card Container Ban):** Cards are forbidden as default containers for information. A card may ONLY be used when the narrative object is literally a physical card, document, device screen, or blueprint/worksheet proof (`ProductPageShowcase`, hook hero illustration).
+2. **Rule B (Primary Mechanism Ratio >= 0.60):** In every non-hook scene, at least 60% of visible screen real estate and attention must be occupied by active physical mechanisms (`ThresholdBoundary`, `KineticFurrow`, `CausalActionCoupling`, `StressFractureEngine`, `KineticFulcrumBeam`, `DioramaPlinth`, etc.).
+3. **Rule C (Cardification Score < 35.0):** Every clip must pass `scripts/frontier_utilization.py` with a Cardification Score < 35.0. Scores >= 40.0 strictly fail `validate_clip.py` pre-flight checks.
+4. **Rule D (Zero Pill/Capsule Badges):** BANNED: `● PROTOCOL // 5 PILLARS`, numbered capsules (`01 // CIRCADIAN ARCHITECTURE`), status chips (`TOLERATED`, `ACCEPTED`), and icon+capsule pairings.
+5. **Rule E (Zero Explanatory Paragraphs in Boxes):** Audio carries the informational load. The screen displays large kinetic typography (80–110px) and live physical mechanics. Never put 2-3 lines of body text inside a card.
+6. **Rule F (Live In-Scene Mutation):** Actions (deflection, carving, fracture, viscoelastic relaxation) must occur live in real time on screen. Never show a static finished state when the action can be performed live.
+7. **Rule G (Causal Action-Reaction Coupling):** Every premise that causes a consequence must physically transmit an impulse to the reaction target (`CausalActionCoupling`). Action → Propagation → Reaction.
+8. **Rule H (Persistent World Memory):** Irreversible mutations (scars, deflections, worn furrows) must leave ghost traces or permanent marks across subsequent scenes (`persistentWorldMemory`).
+9. **Rule I (Open-Stage Safe Layout):** Stage physical mechanisms inside `<MechanismStage>` (top: 280, bottom: 1340, width: 1080) without container walls, borders, or box outlines.
+10. **Rule J (Spoken-Word Frame Alignment):** Spoken words trigger physical forces and mutations within +/- 3 frames of audio events from `transcript.json`.
+11. **Rule K (Mute Test & Remove-the-Text Test):** Every scene must pass both tests:
+    - *Mute Test*: Remove audio — the physical transformation alone communicates the idea.
+    - *Remove-the-Text Test*: Strip all text — an active physical mechanism remains on screen, not empty colored rectangles.
 
-**The alternative to all of these: fewer things, much larger, much bolder, razor-sharp contrast, anchored by physical semantic cutouts.**
+#### The 7 Creative Gate Questions (Mandatory Pre-JSX Audit):
+Before writing any JSX, the agent must answer all 7 questions:
+1. *What is the primary visual mechanism of this scene?* (Must name a physical entity, not a card or layout).
+2. *If all text were removed, what would the viewer see happen?* (Must describe a physical event).
+3. *What is State A, what is the trigger, and what is State B?* (Must define a physical transformation).
+4. *Does this scene contain any card containers? If yes, why is it literally a physical document or device screen?*
+5. *How does this mechanism connect to the previous scene and the next scene?* (Continuous physical trace).
+6. *Is the Primary Mechanism Ratio >= 0.60?*
+7. *Would someone describe this visual to a friend tomorrow?*
+
+---
+
+### 5.5b — Other Banned Visual Patterns
+1. **Dashboard/list-card rows** — 3–5 stacked rows each with a number, title, sub-description, and right-side badge. This is a dashboard layout. Design a different scene — do not resize the list.
+2. **3+ simultaneous floating text elements** — unless scale contrast makes hierarchy unmistakable.
+3. **Icon + micro-text pairings** — icon < 40px paired with label < 40px. Make the icon a primary visual or remove it.
+4. **HUD/dashboard/telemetry panels** — stat rows, floating metric boxes with small type, thin-border data panels, game-HUD aesthetics.
+5. **Memes & reaction stickers** — opening memes (`TacticalMemeCard`, `TacticalMemeFrame`) and sticker pops (`MemeStickerOverlay`) are completely banned. Focus 100% on semantic cutouts and Judy character poses.
+
+**The alternative to all of these: open-canvas physical mechanisms, fewer things, much larger, much bolder, razor-sharp contrast, anchored by physical semantic cutouts.**
 
 ---
 

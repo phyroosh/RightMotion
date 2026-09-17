@@ -37,6 +37,8 @@ from extract_product_page import extract_product_page
 from generate_script import generate_script_and_metadata, check_script_hygiene
 from dialogue_engine import process_dialogue
 from script_intelligence import ScriptIntelligence
+from orchestrator import CreativeOrchestrator
+from geometry_resolver import GeometryResolver, ActorBounds
 
 def sanitize_tags(text: str) -> str:
     if not text:
@@ -671,174 +673,317 @@ def extract_scene_typo_ladders(script_text: str, topic: str = "") -> list:
     return results
 
 
-def generate_canvas_scaffold(
+def generate_lean_canvas_brief(
     pascal_name: str,
-    canvas_container_class: str,
-    s1_start: int,
     s2_start: int,
     s3_start: int,
     total_frames: int,
     topic: str = "",
+    niche: str = "self_improvement",
     problem_cutout: str = "",
     solution_cutout: str = "",
+    creative_plan: dict = None,
+    fps: int = 30,
+    product_meta: dict = None,
 ) -> str:
-    """Generate a clean, high-contrast Canvas.tsx scaffold focused on semantic cutouts (Zero Memes)."""
+    """
+    Emit a lean Creative Brief Canvas.tsx with ZERO hardcoded visual content.
+
+    The brief encodes:
+    - Visual concept mechanism, transformation, and frontier recommendations
+    - Frame anchors from transcript timing
+    - Semantic cutout asset paths (as options, not prescriptions)
+    - Design-first scene prompts — what to COMMUNICATE, not what to RENDER
+    - Commented frontier import stubs for the orchestrator's selections
+
+    The agent reads this brief and designs bespoke scenes. No card templates.
+    No pre-written JSX. No hardcoded text strings. No default visual objects.
+    """
     registry = load_asset_registry()
     p_meta = registry.get(problem_cutout, {})
     s_meta = registry.get(solution_cutout, {})
     p_path = p_meta.get("path", "assets/psychology/tangled_confusion_chaos.png")
     s_path = s_meta.get("path", "assets/psychology/enlightened_mind_insight.png")
 
-    f_b1 = s2_start + 20
-    f_b2 = s2_start + 50
-    f_slash = s2_start + 75
-    f_insight = s2_start + 90
+    # Extract creative plan fields (graceful fallback when plan is absent)
+    vc = {}
+    champ = {}
+    scene_plans = []
+    if creative_plan:
+        vc = creative_plan.get("visualConcept", {})
+        champ = vc.get("championCandidate", {})
+        scene_plans = creative_plan.get("scenePlans", [])
+
+    primary_mechanism = vc.get("primaryMechanism", "semantic_accumulation").upper().replace("_", " ")
+    central_transformation = vc.get("centralTransformation", "State A transitions visibly to State B")
+    cause_event = vc.get("cause", "")
+    visible_consequence = vc.get("visibleConsequence", "")
+    persistent_state = vc.get("persistentState", "")
+    concept_name = champ.get("conceptName", topic)
+    physical_description = champ.get("physicalDescription", "")
+    visible_transformation = champ.get("visibleTransformation", "")
+
+    # Scene narrations from plan
+    def _narration(scene_id: str) -> str:
+        for sp in scene_plans:
+            if sp.get("sceneId") == scene_id:
+                return sp.get("intent", {}).get("narrationText", "")
+        return ""
+
+    hook_narration = _narration("scene_1_hook")
+    logic_narration = _narration("scene_2_logic")
+    solution_narration = _narration("scene_3_solution")
+
+    # Active frontier codes per scene
+    def _frontiers(scene_id: str) -> str:
+        for sp in scene_plans:
+            if sp.get("sceneId") == scene_id:
+                caps = sp.get("activeCapabilities", [])
+                entries = [f"{c['frontierCode']} ({c.get('capabilityConcept','')[:40]})" for c in caps if c['frontierCode'] not in ("F_BASE", "F_UBG")]
+                return ", ".join(entries) if entries else "F_BASE only"
+        return ""
+
+    hook_frontiers = _frontiers("scene_1_hook")
+    logic_frontiers = _frontiers("scene_2_logic")
+    solution_frontiers = _frontiers("scene_3_solution")
+
+    # Build frontier import stubs from all active capabilities across all scenes
+    frontier_stubs = _build_frontier_import_stubs(creative_plan, product_meta=product_meta)
+
+    # Timing display
+    hook_dur = f"{s2_start/fps:.1f}s"
+    mech_dur = f"{(s3_start - s2_start)/fps:.1f}s"
+    res_dur = f"{(total_frames - s3_start)/fps:.1f}s"
+
+    # Niche safe-zone color note
+    niche_bg = {
+        "self_improvement": "#f8fafc (light studio)",
+        "finance": "#030712 (dark obsidian)",
+        "health": "#060913 (bio-navy)",
+        "facecam": "#070b14 (cinematic dark)",
+    }.get(niche, "#f8fafc")
+
+    product_section = ""
+    if product_meta:
+        prod_path = product_meta.get("public_path", "")
+        prod_page = product_meta.get("page", 1)
+        prod_title = product_meta.get("exercise_title", "Blueprint Protocol")
+        product_section = f"""
+ * ════════════════════════════════════════════════════════════
+ * MODE A PRODUCT ASSET (Exercise / Blueprint Visual Proof)
+ * ════════════════════════════════════════════════════════════
+ *  Asset Path:   {prod_path}
+ *  Page Number:  {prod_page}
+ *  Exercise:     {prod_title}
+ *  Component:    <ProductPageShowcase imageSrc="{prod_path}" pageNum={{{prod_page}}} ... />
+ *  Guidance:     Ground the resolution scene in physical visual proof of the worksheet/blueprint.
+ *                Do NOT wrap in a generic card panel or dashboard box."""
 
     return f'''import React from "react";
 import {{ interpolate, spring, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
 import {{ WordTimestamp }} from "../../types";
-import {{ AnimatedSlashStrike, KineticHighlighter }} from "../../components/kinetic_text";
-import {{ CinematicIllustrationCard }} from "../../components/CinematicIllustrationCard";
+// Kinetic text tools (always available):
+import {{ AnimatedSlashStrike, KineticHighlighter, CameraShake }} from "../../components/kinetic_text";
+{frontier_stubs}
 
 interface CanvasProps {{
   transcript: WordTimestamp[];
 }}
 
 /**
- * 🎬 RightMotion Canvas — {pascal_name}
- * Topic: "{topic}"
+ * ╔══════════════════════════════════════════════════════════════════╗
+ * ║  🎬 CREATIVE BRIEF — {pascal_name}Canvas
+ * ║  Topic: "{topic}"
+ * ║  Niche background: {niche_bg}
+ * ╚══════════════════════════════════════════════════════════════════╝
  *
- * 📐 Safe Zones:
- *   - Primary graphics: top: 6% to top: 68% (y: 115px to 1320px)
- *   - Captions:         top: 73% to top: 81%
- *   - Zero overlap with captions!
+ * ════════════════════════════════════════════════════════════
+ * VISUAL CONCEPT  (source: creative_plan.json › visualConcept)
+ * ════════════════════════════════════════════════════════════
+ *  Primary Mechanism:       {primary_mechanism}
+ *  Central Transformation:  {central_transformation}
+ *  Concept:                 {concept_name}
+ *  Physical Description:    {physical_description}
+ *  Cause Event:             {cause_event}
+ *  Visible Transformation:  {visible_transformation}
+ *  Visible Consequence:     {visible_consequence}
+ *  Persistent State:        {persistent_state}
  *
- * 🎭 Physical Cutout Assets & Presenter Grounding (Zero Memes Policy):
- *   - Opening Hero Illustration (0–75): staticFile("scene_illustration.png") staged in CinematicIllustrationCard
- *   - Problem Cutout (75–{s2_start}): staticFile("{p_path}") (400–750px, crisp shadow)
- *   - Solution Cutout ({s3_start}–{total_frames}): staticFile("{s_path}") (400–750px, crisp shadow)
- *   - Presenter Judy: Handled in Presenter.tsx (GlossyJudyIntro 0–75, baseHeight: 1280px).
- *     *CRITICAL*: Never place floating, severed Judy torsos in Canvas.tsx.
+ * ════════════════════════════════════════════════════════════
+ * SCENE PLAN  (60 FPS, safe zone: y 280 → 1340px, x 60 → 1020px)
+ * ════════════════════════════════════════════════════════════
+ *  HOOK        frames 0 → {s2_start}  ({hook_dur})
+ *    Narration:  "{hook_narration}"
+ *    Frontiers:  {hook_frontiers}
+ *    Brief:      Establish the visual question and initial state described by
+ *                the Creative Brief. Choose the strongest visual representation
+ *                for what the narration MEANS. Do not default to a card.
+ *                If the concept has a causal/physical setup, begin establishing
+ *                that mechanism during the hook.
+ *                Valid approaches: presenter grounding, visual question,
+ *                semantic cutout, kinetic typography, environmental setup,
+ *                or a frontier mechanism in initial state.
  *
- * ⏱️ Progressive Micro-Choreography & Timing:
- *   - Scene 1 (Hook / Problem): frames {s1_start} → {s2_start} (Hero illustration 0–75, Cutout 75–{s2_start})
- *   - Scene 2 (Logic / Breakdown): frames {s2_start} → {s3_start} (Sequential block reveals + real-time AnimatedSlashStrike)
- *   - Scene 3 (Solution / Shift): frames {s3_start} → {total_frames} (Solution cutout + sovereign realization)
+ *  MECHANISM   frames {s2_start} → {s3_start}  ({mech_dur})
+ *    Narration:  "{logic_narration}"
+ *    Frontiers:  {logic_frontiers}
+ *    Brief:      Execute the PRIMARY MECHANISM as a live physical event on screen.
+ *                The viewer must SEE the transformation happen — not read about it.
+ *                Use frontier components from the import stubs above.
+ *                Anti-card law: Zero card containers as the primary visual.
+ *                If multiple beats exist, choreograph them sequentially from
+ *                transcript.json word timestamps — never all at once.
  *
- * 💎 Visual Standard (Ultra-High Contrast & Razor-Sharp):
- *   - Pure white (#ffffff) cards with inky black (#090d16) text (min 7:1 contrast).
- *   - Razor-sharp dark borders: border-[2.5px] border-slate-900.
- *   - Deep drop shadows: shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)].
- *   - Zero dirty film grain, gray haze, or washed-out blur boxes.
+ *  RESOLUTION  frames {s3_start} → {total_frames}  ({res_dur})
+ *    Narration:  "{solution_narration}"
+ *    Frontiers:  {solution_frontiers}
+ *    Brief:      Show STATE B — the visible consequence of the transformation.
+ *                "{visible_consequence}"
+ *                Persistent state: "{persistent_state}"
+ *                Decisive. No new information. One dominant impression.{product_section}
+ *
+ * ════════════════════════════════════════════════════════════
+ * SEMANTIC CUTOUT ASSETS  (optional anchors, not prescriptions)
+ * ════════════════════════════════════════════════════════════
+ *  Problem anchor:  {problem_cutout} → staticFile("{p_path}")
+ *  Solution anchor: {solution_cutout} → staticFile("{s_path}")
+ *  Full library: public/assets/registry.json  (40+ transparent PNGs)
+ *  Size rule: 400–750px. Physical presence, not decoration.
+ *
+ * ════════════════════════════════════════════════════════════
+ * DESIGN CONSTRAINTS (NO HIDDEN VISUAL DEFAULTS)
+ * ════════════════════════════════════════════════════════════
+ *  ✗ NO rounded-3xl / rounded-2xl card containers as primary visual
+ *  ✗ NO dashboard list rows with numbered pills and sub-labels
+ *  ✗ NO floating metric boxes, HUD panels, status bars
+ *  ✗ NO hardcoded text strings inherited from this scaffold
+ *  ✗ NO pill/capsule badges
+ *  ✗ NO prescription of mandatory visual components
+ *  ✓ YES frontier mechanism as the dominant visual event
+ *  ✓ YES large semantic cutouts (400–750px) as primary actors
+ *  ✓ YES kinetic typography at 80–110px as visual object
+ *  ✓ YES open-canvas spatial composition without container walls
+ *  ✓ YES STATE A → transformation → STATE B story arc
+ *
+ *  Follow Rule 5.1 Design-First Sequence (AGENTS.md) before writing JSX.
+ *  Read transcript.json for exact word-frame timestamps.
+ *  Read creative_plan.json › scenePlans for the full orchestrator output.
  */
 export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const frame = useCurrentFrame();
   const {{ fps }} = useVideoConfig();
-  void fps;
 
-  // Scene triggers
-  const isScene1 = frame >= {s1_start} && frame < {s2_start};
-  const isHookIntro = frame < 75;
+  // ═══ FRAME BOUNDARIES (from transcript.json timing) ═══
+  // Hook:       frames 0       → {s2_start}   ({hook_dur})
+  // Mechanism:  frames {s2_start} → {s3_start}  ({mech_dur})
+  // Resolution: frames {s3_start} → {total_frames}   ({res_dur})
+  // Word-precise micro-beats: read src/clips/*/transcript.json
 
-  const isScene2 = frame >= {s2_start} && frame < {s3_start};
-  const fB1 = {f_b1};
-  const fB2 = {f_b2};
-  const fSlash = {f_slash};
-  const fInsight = {f_insight};
-
-  const isScene3 = frame >= {s3_start} && frame < {total_frames};
+  const isHook = frame < {s2_start};
+  const isMechanism = frame >= {s2_start} && frame < {s3_start};
+  const isResolution = frame >= {s3_start};
 
   return (
-    <div className="absolute inset-0 overflow-hidden select-none">
-      {{/* ======================================================== */}}
-      {{/* SCENE 1: HOOK & THE PROBLEM (Frames {s1_start} to {s2_start})           */}}
-      {{/* ======================================================== */}}
-      {{isScene1 && (
-        <div className="absolute inset-0 flex flex-col items-center justify-start pt-[12%] px-8">
-          {{isHookIntro ? (
-            /* Mandatory ~2.5s Hook Intro: bespoke illustration inside editorial card */
-            <div className="w-full max-w-[940px] flex flex-col items-center">
-              <CinematicIllustrationCard
-                imageSrc={{staticFile("scene_illustration.png")}}
-                width={{920}}
-                height={{520}}
-              />
-            </div>
-          ) : (
-            /* High-definition physical cutout anchor (450–700px, crisp shadow) */
-            <div className="w-full max-w-[940px] flex flex-col items-center justify-center mt-8">
-              <img
-                src={{staticFile("{p_path}")}}
-                alt="Problem Cutout"
-                className="w-[520px] h-auto object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.22)]"
-              />
-            </div>
-          )}}
-        </div>
-      )}}
+    <div
+      className="absolute inset-x-0 flex flex-col items-center select-none pointer-events-none px-6"
+      style={{{{ top: 280, height: 1060, maxWidth: 960, left: "50%", transform: "translateX(-50%)" }}}}
+    >
+      {{/* ═══ HOOK (frames 0 → {s2_start}) ════════════════════════════════
+       * COMMUNICATE: {hook_narration}
+       * Establish the visual question and initial state described by the Creative Brief.
+       * Choose the strongest visual representation for the narration. Do not default to a card.
+       * If the concept has a causal/physical setup, begin establishing that mechanism during the hook.
+       */}}
+      {{isHook && (null /* TODO: Design and implement hook scene */)}}
 
-      {{/* ======================================================== */}}
-      {{/* SCENE 2: PROGRESSIVE MICRO-CHOREOGRAPHY & REAL-TIME SLASH */}}
-      {{/* ======================================================== */}}
-      {{isScene2 && (
-        <div className="absolute inset-0 flex flex-col items-center justify-start pt-[14%] px-8">
-          <div className="w-full max-w-[920px] flex flex-col gap-6">
-            {{/* Block 1: Appears on audio cue */}}
-            {{frame >= fB1 && (
-              <div className="w-full p-6 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.14)] flex items-center justify-between">
-                <span className="text-4xl font-black text-[#090d16] uppercase">FAMILIAR PATTERN</span>
-                <span className="text-2xl font-mono font-bold text-slate-500 uppercase">STATE 01</span>
-              </div>
-            )}}
+      {{/* ═══ MECHANISM (frames {s2_start} → {s3_start}) ════════════════════
+       * COMMUNICATE: {logic_narration}
+       * PRIMARY MECHANISM: {primary_mechanism}
+       * Physical event: {physical_description}
+       * Transformation: {visible_transformation}
+       * Execute this as a live physical event. Use frontier components above.
+       */}}
+      {{isMechanism && (null /* TODO: Design and implement mechanism scene */)}}
 
-            {{/* Block 2: Appears on audio cue, then gets slashed in real-time on spoken contradiction */}}
-            {{frame >= fB2 && (
-              <div className="relative w-full p-6 rounded-3xl bg-white border-[2.5px] border-slate-900 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.14)] flex items-center justify-between overflow-hidden">
-                <AnimatedSlashStrike
-                  startFrame={{fSlash}}
-                  durationFrames={{7}}
-                  preset="blade_slash"
-                  color="rose"
-                  strokeWidth={{7}}
-                >
-                  <span className="text-4xl font-black text-[#090d16] uppercase">NOT YOUR VALUES</span>
-                </AnimatedSlashStrike>
-                <span className="text-2xl font-mono font-bold text-rose-600 uppercase">REJECT</span>
-              </div>
-            )}}
-
-            {{/* Core Insight: Slams down after the slash */}}
-            {{frame >= fInsight && (
-              <div className="w-full p-6 rounded-3xl bg-[#090d16] border-[2.5px] border-slate-900 shadow-2xl flex flex-col gap-2 text-white">
-                <div className="text-2xl font-mono text-emerald-400 font-bold uppercase tracking-wider">CORE INSIGHT</div>
-                <div className="text-4xl font-black leading-tight">COMFORT IS NOT CONVICTION</div>
-              </div>
-            )}}
-          </div>
-        </div>
-      )}}
-
-      {{/* ======================================================== */}}
-      {{/* SCENE 3: THE RESOLUTION / SOVEREIGN PROTOCOL             */}}
-      {{/* ======================================================== */}}
-      {{isScene3 && (
-        <div className="absolute inset-0 flex flex-col items-center justify-start pt-[12%] px-8">
-          <div className="w-full max-w-[920px] flex flex-col items-center justify-center">
-            <img
-              src={{staticFile("{s_path}")}}
-              alt="Solution Cutout"
-              className="w-[560px] h-auto object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.20)]"
-            />
-          </div>
-        </div>
-      )}}
+      {{/* ═══ RESOLUTION (frames {s3_start} → {total_frames}) ═════════════════
+       * COMMUNICATE: {solution_narration}
+       * Show STATE B: {visible_consequence}
+       * Decisive. One dominant impression. No new information stacks.
+       */}}
+      {{isResolution && (null /* TODO: Design and implement resolution scene */)}}
     </div>
   );
 }};
 '''
 
 
-def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_sec: float, raw_script: str, words_list: list = None, product_meta: dict = None, illustration_path: str = None, pinned_comment: str = None, is_duo: bool = False, meme_meta: dict = None, sticker_meta: dict = None, niche: str = None):
+def _build_frontier_import_stubs(creative_plan: dict, product_meta: dict = None) -> str:
+    """Build commented frontier import stubs from the orchestrator's active capabilities."""
+    all_frontier_codes = set()
+    if creative_plan:
+        for sp in creative_plan.get("scenePlans", []):
+            for cap in sp.get("activeCapabilities", []):
+                code = cap.get("frontierCode", "")
+                if code and code not in ("F_BASE", "F_UBG"):
+                    all_frontier_codes.add(code)
+
+    FRONTIER_IMPORTS = {
+        "F1": '// F1 — Infinite World (spatial expansion, infinite canvas):\n// import { InfiniteWorldCanvas } from "../../components/world";',
+        "F2": '// F2 — Materiality (brittle rupture, absorption, viscoelastic strain):\n// import { StressFractureEngine, CapillaryInkBleed, ViscoelasticDeformation } from "../../components/physics/materiality";',
+        "F4": '// F4 — Semantic Mass Physics (fulcrum balance, tether, impulse response):\n// import { KineticFulcrumBeam, SemanticMassNode, TensileStructuralTether } from "../../components/physics/consequence";',
+        "F5": '// F5 — Environmental Worlds (diorama stage, bedrock foundation, cantilever):\n// import { DioramaPlinth, BedrockFoundation, MonolithicCantilever } from "../../components/environment";',
+        "F6": '// F6 — Temporal Manipulation (dramatic breath hold, micro-freeze):\n// import { WorldCameraBreathHold } from "../../components/temporal";',
+        "F7": '// F7 — Causal State Machines (causal world, node graph, threshold reactor):\n// import { CausalWorld, CausalNode, ThresholdReactor } from "../../causal";',
+    }
+    TRANSFORMATION_IMPORTS = {
+        "F1", "F4", "F7",
+    }
+
+    lines = ["// ═══ FRONTIER IMPORT STUBS (from orchestrator active capabilities) ═══",
+             "// Uncomment what the Visual Concept mechanism requires.",
+             "// Delete what you don't use. See docs/FRONTIER_GALLERY.md for usage.",
+             "// DO NOT default to card containers when a frontier is recommended."]
+
+    for code in sorted(all_frontier_codes):
+        if code in FRONTIER_IMPORTS:
+            lines.append(FRONTIER_IMPORTS[code])
+
+    if all_frontier_codes & TRANSFORMATION_IMPORTS:
+        lines.append(
+            '// Transformation bridges (pathway wear, boundary shift, causal coupling):\n'
+            '// import { KineticFurrow, ThresholdBoundary, PersistentMemoryStage } from "../../components/primitives";\n'
+            '// import { ThresholdBoundaryShift, ResistancePathway, CausalActionCoupling } from "../../components/transformation";'
+        )
+
+    if product_meta:
+        lines.append(
+            '// Mode A Product Showcase:\n'
+            '// import { ProductPageShowcase } from "../../components/ProductPageShowcase";'
+        )
+
+    if not all_frontier_codes and not product_meta:
+        lines.append("// No non-base frontiers selected for this clip.")
+
+    return "\n".join(lines)
+
+
+def scaffold_clip_files(
+    name: str,
+    raw_topic: str,
+    format_type: str,
+    duration_sec: float,
+    raw_script: str,
+    words_list: list = None,
+    product_meta: dict = None,
+    illustration_path: str = None,
+    pinned_comment: str = None,
+    is_duo: bool = False,
+    meme_meta: dict = None,
+    sticker_meta: dict = None,
+    niche: str = None,
+    creative_plan: dict = None,
+    motion_ast: dict = None,
+):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
     print(f"🎨 [3/4] Scaffolding Remotion composition files in src/clips/{name}/...")
@@ -876,7 +1021,95 @@ def scaffold_clip_files(name: str, raw_topic: str, format_type: str, duration_se
     meta_package = generate_full_metadata(raw_topic, niche=niche, script=script_text, pinned_comment=pinned_comment or "")
     concept_term, concept_def, concept_badge = extract_concept_keyword(script_text, topic, niche)
 
-    if niche == "finance":
+    # Universal Background Intelligence Integration
+    ubg_scenes = []
+    if motion_ast and "scenes" in motion_ast:
+        for sc in motion_ast["scenes"]:
+            bgi = sc.get("backgroundIntent")
+            if bgi and bgi.get("mode") == "universal" and bgi.get("assetId"):
+                ubg_scenes.append((sc, bgi))
+    elif creative_plan and "scenePlans" in creative_plan:
+        for sp in creative_plan["scenePlans"]:
+            bgi = sp.get("backgroundIntent")
+            if bgi and bgi.get("mode") == "universal" and bgi.get("assetId"):
+                ubg_scenes.append((sp["intent"], bgi))
+
+    if ubg_scenes:
+        all_same_asset = (
+            len(set(b[1]["assetId"] for b in ubg_scenes)) == 1
+            and len(ubg_scenes) == (len(motion_ast["scenes"]) if motion_ast and "scenes" in motion_ast else len(creative_plan["scenePlans"]))
+        )
+        if all_same_asset:
+            first_sc, first_bgi = ubg_scenes[0]
+            asset_id = first_bgi["assetId"]
+            sem_role = first_bgi.get("semanticRole", "cinematic_surface")
+            crop_strat = first_bgi.get("cropStrategy", "center_focal")
+            motion_type = first_bgi.get("motion", "slow_zoom_in")
+            scale_delta = first_bgi.get("motionScaleDelta", 1.04)
+            opacity_val = first_bgi.get("opacity", 1.0)
+            t_in = first_bgi.get("transitionIn")
+            t_in_prop = f'transitionIn={{{json.dumps(t_in)}}}' if t_in else ""
+            t_out = first_bgi.get("transitionOut")
+            t_out_prop = f'transitionOut={{{json.dumps(t_out)}}}' if t_out else ""
+            jsx_body = f"""      <UniversalBackground
+        assetId="{asset_id}"
+        semanticRole="{sem_role}"
+        cropStrategy="{crop_strat}"
+        motion="{motion_type}"
+        motionScaleDelta={{{scale_delta}}}
+        opacity={{{opacity_val}}}
+        {t_in_prop}
+        {t_out_prop}
+        sceneStartFrame={{0}}
+      />"""
+        else:
+            bg_elements = []
+            for sc, bgi in ubg_scenes:
+                asset_id = bgi["assetId"]
+                sem_role = bgi.get("semanticRole", "cinematic_surface")
+                crop_strat = bgi.get("cropStrategy", "center_focal")
+                motion_type = bgi.get("motion", "slow_zoom_in")
+                scale_delta = bgi.get("motionScaleDelta", 1.04)
+                opacity_val = bgi.get("opacity", 1.0)
+                t_in = bgi.get("transitionIn")
+                t_in_prop = f'transitionIn={{{json.dumps(t_in)}}}' if t_in else ""
+                t_out = bgi.get("transitionOut")
+                t_out_prop = f'transitionOut={{{json.dumps(t_out)}}}' if t_out else ""
+                s_start = sc.get("startFrame", 0)
+                s_end = sc.get("endFrame", round(duration_sec * 60))
+                s_dur = s_end - s_start
+
+                bg_elements.append(f"""      {{frame >= {s_start} && frame < {s_end} && (
+        <UniversalBackground
+          assetId="{asset_id}"
+          semanticRole="{sem_role}"
+          cropStrategy="{crop_strat}"
+          motion="{motion_type}"
+          motionScaleDelta={{{scale_delta}}}
+          opacity={{{opacity_val}}}
+          {t_in_prop}
+          {t_out_prop}
+          sceneStartFrame={{{s_start}}}
+          sceneDurationFrames={{{s_dur}}}
+        />
+      )}}""")
+            jsx_body = "\n".join(bg_elements)
+
+        bg_code = f"""import React from "react";
+import {{ useCurrentFrame }} from "remotion";
+import {{ UniversalBackground }} from "../../components/backgrounds";
+
+export const {pascal_name}Background: React.FC = () => {{
+  const frame = useCurrentFrame();
+
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-[#030712]">
+{jsx_body}
+    </div>
+  );
+}};
+"""
+    elif niche == "finance":
         bg_code = f"""import React from "react";
 import {{ FinanceBackground }} from "../../components/finance/FinanceBackground";
 
@@ -884,17 +1117,6 @@ export const {pascal_name}Background: React.FC = () => {{
   return <FinanceBackground />;
 }};
 """
-        card_class = "w-full p-8 rounded-3xl bg-[#0b0f19]/95 border-2 border-emerald-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
-        text_color = "text-white"
-        accent_color = "text-emerald-400"
-        sub_accent = "text-amber-400"
-        item_box = "p-4 rounded-2xl bg-[#111827]/90 border border-emerald-500/30 flex items-center justify-between text-left shadow-lg"
-        pill_box = "w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl font-black font-mono shrink-0"
-        sub_pill = "text-2xl font-mono text-emerald-300 font-bold"
-        status_box = "w-full p-4 rounded-2xl bg-black/70 border border-emerald-500/30 flex items-center justify-between text-2xl font-mono text-emerald-200"
-        status_alert = "text-amber-400 font-black tracking-wide"
-        glow_problem = "rose"
-        glow_solution = "emerald"
     elif niche == "health":
         bg_code = f"""import React from "react";
 import {{ HealthBackground }} from "../../components/health/HealthBackground";
@@ -903,17 +1125,6 @@ export const {pascal_name}Background: React.FC = () => {{
   return <HealthBackground />;
 }};
 """
-        card_class = "w-full p-8 rounded-3xl bg-[#0a1124]/95 border-2 border-cyan-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
-        text_color = "text-white"
-        accent_color = "text-cyan-400"
-        sub_accent = "text-rose-400"
-        item_box = "p-4 rounded-2xl bg-[#0e172f]/90 border border-cyan-500/40 flex items-center justify-between text-left shadow-lg"
-        pill_box = "w-12 h-12 rounded-xl bg-cyan-500/25 text-cyan-400 flex items-center justify-center text-3xl font-black font-mono shrink-0"
-        sub_pill = "text-2xl font-mono text-cyan-300 font-bold"
-        status_box = "w-full p-4 rounded-2xl bg-black/70 border border-cyan-500/30 flex items-center justify-between text-2xl font-mono text-cyan-200"
-        status_alert = "text-rose-400 font-black tracking-wide"
-        glow_problem = "rose"
-        glow_solution = "cyan"
     elif niche == "facecam":
         bg_code = f"""import React from "react";
 
@@ -921,18 +1132,7 @@ export const {pascal_name}Background: React.FC = () => {{
   return <div className="absolute inset-0 bg-[#070b14]" />;
 }};
 """
-        card_class = "w-full p-8 rounded-3xl bg-[#0b1120]/95 border-2 border-amber-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
-        text_color = "text-white"
-        accent_color = "text-amber-400"
-        sub_accent = "text-cyan-400"
-        item_box = "p-4 rounded-2xl bg-[#0f172a]/90 border border-amber-500/40 flex items-center justify-between text-left shadow-lg"
-        pill_box = "w-12 h-12 rounded-xl bg-amber-500/25 text-amber-400 flex items-center justify-center text-3xl font-black font-mono shrink-0"
-        sub_pill = "text-2xl font-mono text-amber-300 font-bold"
-        status_box = "w-full p-4 rounded-2xl bg-black/70 border border-amber-500/30 flex items-center justify-between text-2xl font-mono text-amber-200"
-        status_alert = "text-cyan-400 font-black tracking-wide"
-        glow_problem = "rose"
-        glow_solution = "amber"
-    else: # self_improvement
+    else: # self_improvement default (clean foundation canvas)
         bg_code = f"""import React from "react";
 import {{ ArchitecturalDraftingCanvas }} from "../../components/pure_graphics";
 
@@ -940,17 +1140,6 @@ export const {pascal_name}Background: React.FC = () => {{
   return <ArchitecturalDraftingCanvas theme="light" />;
 }};
 """
-        card_class = "w-full p-8 rounded-3xl bg-white/95 border-2 border-sky-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center text-center gap-6"
-        text_color = "text-slate-950"
-        accent_color = "text-[#0071e3]"
-        sub_accent = "text-rose-500"
-        item_box = "p-4 rounded-2xl bg-slate-50/90 border border-sky-200/80 flex items-center justify-between text-left shadow-lg"
-        pill_box = "w-12 h-12 rounded-xl bg-[#0071e3]/15 text-[#0071e3] flex items-center justify-center text-3xl font-black font-mono shrink-0"
-        sub_pill = "text-2xl font-mono text-sky-700 font-bold"
-        status_box = "w-full p-4 rounded-2xl bg-slate-100/90 border border-sky-200 flex items-center justify-between text-2xl font-mono text-slate-800"
-        status_alert = "text-rose-500 font-black tracking-wide"
-        glow_problem = "rose"
-        glow_solution = "amber"
 
     (clip_dir / "Background.tsx").write_text(bg_code, encoding="utf-8")
 
@@ -1070,7 +1259,10 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
   );
 }};
 """
-    (clip_dir / "Presenter.tsx").write_text(pres_code, encoding="utf-8")
+    if not (clip_dir / "Presenter.tsx").exists():
+        (clip_dir / "Presenter.tsx").write_text(pres_code, encoding="utf-8")
+    else:
+        print(f"      Preserving bespoke Presenter.tsx at {clip_dir / 'Presenter.tsx'}")
 
     accent_choice = "cyan" if niche == "health" else ("emerald" if niche == "finance" else "blue")
 
@@ -1456,8 +1648,11 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   );
 }};
 """
-    (clip_dir / "Canvas.tsx").write_text(canvas_code, encoding="utf-8")
-    assert_valid_canvas_scaffold(canvas_code, pres_code)
+    if not (clip_dir / "Canvas.tsx").exists():
+        (clip_dir / "Canvas.tsx").write_text(canvas_code, encoding="utf-8")
+        assert_valid_canvas_scaffold(canvas_code, pres_code)
+    else:
+        print(f"      Preserving bespoke Canvas.tsx at {clip_dir / 'Canvas.tsx'}")
 
     # 5. index.tsx with Multi-Layered Sound Design
     sfx_json = json.dumps(sfx_cues, indent=2)
@@ -1706,6 +1901,8 @@ async def main():
     parser.add_argument("--no-render", action="store_true", help="Skip final MP4/PNG render")
     parser.add_argument("--render", action="store_true", help="Render final MP4/PNG immediately (default: False, AI Agent should edit Canvas.tsx first)")
     parser.add_argument("--inspect-intelligence", action="store_true", help="Print Frontier S Script Intelligence inspection report")
+    parser.add_argument("--inspect-visual-pipeline", action="store_true", help="Print end-to-end visual pipeline diagnostic trace (Script -> Visual Concept -> F0 -> UBG -> Motion AST -> Compiler)")
+    parser.add_argument("--inspect-composition", action="store_true", help="Print Section 25 mobile composition and visual density audit report")
 
     args = parser.parse_args()
     
@@ -1860,6 +2057,93 @@ async def main():
         await synthesize_speech(clean_script, audio_path, voice_to_use)
         words, duration_sec = transcribe_audio(audio_path, transcript_path)
 
+    # Frontier #0: Creative Intelligence Orchestration & Motion AST Compilation
+    print(f"🎬 [Frontier #0] Orchestrating creative capabilities and compiling Motion AST...")
+    orchestrator = CreativeOrchestrator()
+    creative_plan = orchestrator.generate_plan(
+        clip_name=name,
+        topic=topic,
+        script=clean_script,
+        transcript=words,
+        fps=60,
+        story_model=story_model,
+    )
+    motion_ast = orchestrator.compile_motion_ast(creative_plan, transcript=words)
+
+    creative_plan_path = ROOT_DIR / "src" / "clips" / name / "creative_plan.json"
+    creative_plan_path.write_text(json.dumps(creative_plan, indent=2), encoding="utf-8")
+    print(f"      Creative Plan saved to: {creative_plan_path}")
+
+    motion_ast_path = ROOT_DIR / "src" / "clips" / name / "motion_ast.json"
+    motion_ast_path.write_text(json.dumps(motion_ast, indent=2), encoding="utf-8")
+    print(f"      Motion AST saved to: {motion_ast_path}")
+
+    if getattr(args, "inspect_visual_pipeline", False):
+        print("\n" + "=" * 70)
+        print("🔍 [INSPECT VISUAL PIPELINE] End-to-End Diagnostic Trace")
+        print("=" * 70)
+        print(f"1. Script & Topic:")
+        print(f"   Topic:  \"{topic}\"")
+        print(f"   Niche:  {detected_niche}")
+        print(f"   Script: \"{clean_script[:100]}...\"")
+        print(f"\n2. Frontier S (Story Model):")
+        print(f"   Core Idea: {story_model.story.coreIdea if hasattr(story_model, 'story') else 'N/A'}")
+        print(f"\n3. Frontier #0 (Creative Orchestration):")
+        print(f"   Overall Complexity: {creative_plan['overallComplexityRating']}")
+        for sp in creative_plan['scenePlans']:
+            sc_id = sp['sceneId']
+            acts = [a['frontierCode'] for a in sp['activeCapabilities']]
+            rejs = [r['frontierCode'] for r in sp['rejectedCapabilities']]
+            bgi = sp.get('backgroundIntent', {})
+            print(f"   - {sc_id}:")
+            print(f"     Active:     {', '.join(acts)}")
+            print(f"     Rejected:   {', '.join(rejs)}")
+            print(f"     Background: mode={bgi.get('mode')}, asset={bgi.get('assetId')}, role={bgi.get('semanticRole')}, motion={bgi.get('motion')}")
+            print(f"     Reason:     {bgi.get('reason')}")
+        print(f"\n4. Motion AST Compilation:")
+        print(f"   Version:      {motion_ast['version']}")
+        print(f"   Total Frames: {motion_ast['totalFrames']}")
+        print(f"   Scenes:       {len(motion_ast['scenes'])}")
+        print(f"   Ground Color: {motion_ast['environment']['groundColor']}")
+        print("=" * 70 + "\n")
+
+    if getattr(args, "inspect_composition", False) or getattr(args, "inspect_visual_pipeline", False):
+        print("\n" + "=" * 70)
+        print("📐 [INSPECT COMPOSITION] 9:16 Mobile Density & Dead-Space Audit")
+        print("=" * 70)
+        for sc in motion_ast["scenes"]:
+            sc_id = sc["sceneId"]
+            actors = []
+            for act in sc.get("actors", []):
+                layout = act.get("resolvedLayout", {})
+                actors.append(ActorBounds(
+                    id=act["id"],
+                    semantic_role=act.get("semanticRole", "actor"),
+                    importance=act.get("narrativeImportance", "SECONDARY"),
+                    x=layout.get("x", 540),
+                    y=layout.get("y", 680),
+                    width=layout.get("width", 500),
+                    height=layout.get("height", 300),
+                    origin_anchor=layout.get("originAnchor", "center"),
+                ))
+            for ann in sc.get("annotations", []):
+                sp = ann.get("staticPlacement", {})
+                actors.append(ActorBounds(
+                    id=ann.get("annotationId", "headline"),
+                    semantic_role="scene_headline",
+                    importance="CRITICAL",
+                    x=sp.get("x", 540),
+                    y=sp.get("y", 340),
+                    width=GeometryResolver.SAFE_WIDTH,
+                    height=90,
+                    origin_anchor="center",
+                    font_size_px=ann.get("fontSizePx", 68),
+                    text_content=ann.get("text", ""),
+                ))
+            metrics = GeometryResolver.calculate_metrics(actors)
+            print(GeometryResolver.format_diagnostic_report(sc_id, metrics, actors))
+        print("=" * 70 + "\n")
+
     # Step 3: Scaffold & Register
     # Zero Memes Policy: Memes and reaction stickers are permanently retired
     meme_match = None
@@ -1888,7 +2172,9 @@ async def main():
         illustration_path=illustration_path, pinned_comment=script_pinned_comment, is_duo=is_duo,
         meme_meta=meme_match,
         sticker_meta=sticker_match,
-        niche=detected_niche
+        niche=detected_niche,
+        creative_plan=creative_plan,
+        motion_ast=motion_ast,
     )
     register_composition_and_thumbnail(
         name,
