@@ -35,7 +35,12 @@ sys.path.append(str(ROOT_DIR / "scripts"))
 
 from extract_product_page import extract_product_page
 from generate_script import generate_script_and_metadata, check_script_hygiene
-from dialogue_engine import process_dialogue
+from voiceover_engine import (
+    generate_voiceover,
+    transcribe_audio,
+    extract_facecam_audio,
+    process_dialogue,
+)
 from script_intelligence import ScriptIntelligence
 from orchestrator import CreativeOrchestrator
 from geometry_resolver import GeometryResolver, ActorBounds
@@ -198,137 +203,6 @@ def select_cutout_assets(topic: str, script: str):
 
     return problem_id, solution_id
 
-def split_body_and_closing_question(text: str) -> Tuple[str, str]:
-    """
-    Separates the main narrative from the final reflective question.
-    """
-    clean = text.strip()
-    sentences = [s.strip() for s in re.split(r'(?<=[.!?])\s+', clean) if s.strip()]
-    if len(sentences) >= 2:
-        last = sentences[-1]
-        if last.endswith("?") or any(last.lower().startswith(p) for p in ["tell me", "drop your", "drop a", "be honest", "question for you", "what would you", "have you ever"]):
-            body = " ".join(sentences[:-1])
-            question = last
-            return body, question
-    return clean, ""
-
-async def synthesize_speech(text: str, output_path: Path, voice: str = "en-US-AvaMultilingualNeural"):
-    import edge_tts
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    body_text, closing_question = split_body_and_closing_question(text)
-
-    if closing_question:
-        print(f"🎙️ [1/4] Synthesizing neural speech with intimate 220ms reflection breath before closing question...")
-        work_dir = output_path.parent / "tts_temp"
-        work_dir.mkdir(parents=True, exist_ok=True)
-        body_raw = work_dir / "body_raw.mp3"
-        body_norm = work_dir / "body_norm.mp3"
-        q_raw = work_dir / "q_raw.mp3"
-        q_norm = work_dir / "q_norm.mp3"
-        pause_gap = work_dir / "pause_220ms.mp3"
-
-        # Synthesize body
-        comm_b = edge_tts.Communicate(text=body_text.replace("…", ",").replace("...", ","), voice=voice, rate="+8%")
-        await comm_b.save(str(body_raw))
-        subprocess.run([
-            "ffmpeg", "-y", "-i", str(body_raw),
-            "-af", "silenceremove=stop_periods=-1:stop_duration=0.18:stop_threshold=-35dB:detection=peak",
-            "-ar", "44100", "-ac", "2", "-b:a", "192k", str(body_norm)
-        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-
-        # Synthesize closing question
-        comm_q = edge_tts.Communicate(text=closing_question.replace("…", ",").replace("...", ","), voice=voice, rate="+6%")
-        await comm_q.save(str(q_raw))
-        subprocess.run([
-            "ffmpeg", "-y", "-i", str(q_raw),
-            "-af", "silenceremove=stop_periods=-1:stop_duration=0.18:stop_threshold=-35dB:detection=peak",
-            "-ar", "44100", "-ac", "2", "-b:a", "192k", str(q_norm)
-        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-
-        # Generate 220ms breath pause gap
-        subprocess.run([
-            "ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
-            "-t", "0.22", "-ar", "44100", "-ac", "2", "-b:a", "192k", str(pause_gap)
-        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-
-        # Concat with demuxer
-        concat_list = work_dir / "concat.txt"
-        concat_list.write_text(f"file '{body_norm.resolve().as_posix()}'\nfile '{pause_gap.resolve().as_posix()}'\nfile '{q_norm.resolve().as_posix()}'\n", encoding="utf-8")
-        subprocess.run([
-            "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_list),
-            "-c:a", "libmp3lame", "-b:a", "192k", "-ar", "44100", "-ac", "2", str(output_path)
-        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-        print(f"      Seamless master audio saved with 220ms breath pause to: {output_path}")
-    else:
-        raw_path = output_path.with_name("raw_" + output_path.name)
-        print(f"🎙️ [1/4] Synthesizing neural speech with voice '{voice}' (rate=+8% for retention)...")
-        norm_text = text.replace("…", ",").replace("...", ",").replace("\r\n", "\n").replace("\n\n", " ").replace("\n", " ").strip()
-        communicate = edge_tts.Communicate(text=norm_text, voice=voice, rate="+8%")
-        await communicate.save(str(raw_path))
-
-        # Compress pauses > 0.20s
-        try:
-            cmd = [
-                "ffmpeg", "-y", "-i", str(raw_path),
-                "-af", "silenceremove=stop_periods=-1:stop_duration=0.20:stop_threshold=-35dB:detection=peak",
-                "-ar", "44100", "-ac", "2", "-b:a", "192k",
-                str(output_path)
-            ]
-            subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            print(f"      Pause-compressed master audio saved to: {output_path}")
-        except Exception as e:
-            print(f"      Pause compression fallback: {e}")
-            shutil.copy2(str(raw_path), str(output_path))
-
-def transcribe_audio(audio_path: Path, output_json: Path):
-    from faster_whisper import WhisperModel
-    import ctranslate2
-
-    print("📝 [2/4] Extracting word timestamps with faster-whisper...")
-    output_json.parent.mkdir(parents=True, exist_ok=True)
-
-    device = "cpu"
-    comp_type = "int8"
-    segments = None
-    if ctranslate2.get_cuda_device_count() > 0:
-        try:
-            model = WhisperModel("base.en", device="cuda", compute_type="float16")
-            seg_gen, info = model.transcribe(str(audio_path), word_timestamps=True, language="en", beam_size=5)
-            segments = list(seg_gen)
-            device = "cuda"
-            comp_type = "float16"
-        except Exception as e:
-            print(f"      CUDA runtime ({e}), using CPU int8...")
-            model = WhisperModel("base.en", device="cpu", compute_type="int8")
-            seg_gen, info = model.transcribe(str(audio_path), word_timestamps=True, language="en", beam_size=5)
-            segments = list(seg_gen)
-            device = "cpu"
-            comp_type = "int8"
-    else:
-        model = WhisperModel("base.en", device="cpu", compute_type="int8")
-        seg_gen, info = model.transcribe(str(audio_path), word_timestamps=True, language="en", beam_size=5)
-        segments = list(seg_gen)
-
-    print(f"      Transcribing on compute device: {device} ({comp_type})")
-
-    words_list = []
-    for s in segments:
-        for w in s.words:
-            word_clean = w.word.strip()
-            if word_clean:
-                words_list.append({
-                    "word": word_clean,
-                    "start": round(w.start * 1000),
-                    "end": round(w.end * 1000),
-                    "confidence": round(w.probability, 3)
-                })
-
-    with open(output_json, "w", encoding="utf-8") as f:
-        json.dump(words_list, f, indent=2, ensure_ascii=False)
-
-    duration_sec = words_list[-1]["end"] / 1000.0 if words_list else 5.0
-    print(f"      Transcribed {len(words_list)} words -> {output_json} ({duration_sec:.2f}s)")
-    return words_list, duration_sec
 
 def extract_concept_keyword(script_text: str, topic: str = "", niche: str = "self_improvement") -> Tuple[str, str, str]:
     """
@@ -2024,26 +1898,15 @@ async def main():
 
     # Step 1: Audio setup (Extract from facecam, Synthesize Conversational Duo, or Standard TTS)
     if is_facecam and video_source:
-        import shutil
-        print(f"🎬 [1/4] Extracting native voice audio from video: {video_source}...")
-        audio_path.parent.mkdir(parents=True, exist_ok=True)
         dest_video = ROOT_DIR / "public" / name / "facecam.mp4"
-        shutil.copy2(str(video_source), str(dest_video))
-        cmd = [
-            "ffmpeg", "-y", "-i", str(video_source),
-            "-vn", "-ar", "44100", "-ac", "2", "-b:a", "192k",
-            str(audio_path)
-        ]
-        subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        print(f"      Native master audio saved to: {audio_path}")
-        print(f"      Facecam video saved to: {dest_video}")
+        extract_facecam_audio(video_source, dest_video, audio_path)
         words, duration_sec = transcribe_audio(audio_path, transcript_path)
     elif is_duo:
         print(f"🎙️ [1/4] Synthesizing Conversational Duo speech (Judy & Andrew)...")
         words, turn_timings, duration_sec = await process_dialogue(vo_text or clean_script, name, root_dir=ROOT_DIR)
     else:
-        await synthesize_speech(clean_script, audio_path, voice_to_use)
-        words, duration_sec = transcribe_audio(audio_path, transcript_path)
+        print(f"🎙️ [1/4] Synthesizing neural speech with voice '{voice_to_use}' (rate=+8% for retention)...")
+        words, duration_sec = await generate_voiceover(clean_script, audio_path, transcript_path, voice=voice_to_use)
 
     # Frontier #0: Creative Intelligence Orchestration & Motion AST Compilation
     print(f"🎬 [Frontier #0] Orchestrating creative capabilities and compiling Motion AST...")
