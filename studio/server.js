@@ -484,16 +484,20 @@ app.get('/api/videos', requirePermission(Permissions.VIEW_PROJECTS), async (req,
       const isUploaded = ytUploaded || igUploaded;
       const isScheduled = ytIsScheduled;
 
-      const isLongForm =
-        filename.includes('procrastination') ||
-        filename.includes('neuroproductivity') ||
-        filename.includes('lofi_song') ||
-        (meta.title && (meta.title.includes('Visual Essay') || meta.title.includes('Masterclass') || meta.title.includes('Lyric Video'))) ||
-        (meta.topic && (meta.topic.includes('essay') || meta.topic.includes('neuroproductivity') || meta.topic.includes('lofi'))) ||
-        stats.size > 50 * 1024 * 1024; // > 50MB typically long form
-
       const rawBase = filename.replace(/\.mp4$/i, '');
       const cleanBase = rawBase.replace(/_video$/i, '');
+
+      // Canonical 16:9 widescreen long-form masterclass compositions
+      const KNOWN_LONG_FORM_IDS = new Set(['procrastination', 'neuroproductivity', 'lofi_song']);
+
+      const isLongForm =
+        meta.format === 'longform' ||
+        (meta.format !== 'shorts' && (
+          KNOWN_LONG_FORM_IDS.has(cleanBase) ||
+          KNOWN_LONG_FORM_IDS.has(rawBase) ||
+          (meta.title && (meta.title.includes('Visual Essay') || meta.title.includes('Masterclass') || meta.title.includes('Lyric Video'))) ||
+          (meta.topic && (meta.topic.toLowerCase() === 'masterclass' || meta.topic.toLowerCase() === 'visual essay'))
+        ));
       const thumbCandidates = [
         `${rawBase}_thumbnail.png`,
         `${cleanBase}_thumbnail.png`,
