@@ -4,6 +4,7 @@ import { CutoutShowcase } from "./compositions/CutoutShowcase";
 import { PlatformSafeShowcase } from "./compositions/PlatformSafeShowcase";
 import { PrimitivesShowcase } from "./compositions/PrimitivesShowcase";
 import { UniversalBackgroundProof } from "./compositions/UniversalBackgroundProof";
+import { MotionStagePlayerShowcase } from "./compositions/MotionStagePlayerShowcase";
 import { REGISTERED_CLIPS, calculateDurationInFrames } from "./clips/registry";
 import { WordTimestamp } from "./types";
 import "./style.css";
@@ -54,6 +55,14 @@ export const RemotionRoot: React.FC = () => {
         id="UniversalBackgroundProof"
         component={UniversalBackgroundProof}
         durationInFrames={720}
+        fps={fps}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="MotionStagePlayerShowcase"
+        component={MotionStagePlayerShowcase}
+        durationInFrames={982}
         fps={fps}
         width={1080}
         height={1920}
