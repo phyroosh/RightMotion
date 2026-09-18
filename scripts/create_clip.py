@@ -284,7 +284,7 @@ def parse_script_into_concepts(script_text: str):
                 concepts.append(p)
     return concepts
 
-def generate_illustration_beats(s1_words, s1_start, s2_start, topic, hook_text, problem_text, accent_color="cyan", fps=30):
+def generate_illustration_beats(s1_words, s1_start, s2_start, topic, hook_text, problem_text, accent_color="cyan", fps=60):
     beats = []
     s1_frames = s2_start - s1_start
     if not s1_words or s1_frames < 45:
@@ -439,7 +439,7 @@ def generate_engagement_pill_text(topic: str, niche: str) -> str:
             return "Double tap to lock in your promise 🔒"
         return "Have you felt this? Drop your thoughts 👇"
 
-def align_concepts(concepts, words_list, fps=30):
+def align_concepts(concepts, words_list, fps=60):
     aligned = []
     curr_idx = 0
     total_words = len(words_list) if words_list else 0
@@ -557,7 +557,7 @@ def generate_lean_canvas_brief(
     problem_cutout: str = "",
     solution_cutout: str = "",
     creative_plan: dict = None,
-    fps: int = 30,
+    fps: int = 60,
     product_meta: dict = None,
 ) -> str:
     """
@@ -862,7 +862,7 @@ def scaffold_clip_files(
     clip_dir = ROOT_DIR / "src" / "clips" / name
     clip_dir.mkdir(parents=True, exist_ok=True)
 
-    fps = 30
+    fps = 60
     total_frames = round(duration_sec * fps)
     pascal_name = "".join(w.capitalize() for w in re.split(r"[_\-\s]+", name))
     problem_cutout, solution_cutout = select_cutout_assets(topic, script_text)
@@ -1656,41 +1656,9 @@ export const {pascal_name}Composition: React.FC = () => {{
 
 
 def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, format_type: str, niche: str = 'self_improvement', pinned_comment: str = None, script_text: str = None, story_model: Optional[Any] = None):
-    registry_file = ROOT_DIR / "src" / "clips" / "registry.ts"
-    thumb_file = ROOT_DIR / "src" / "thumbnails" / "index.tsx"
-    render_script = ROOT_DIR / "scripts" / "render_all_thumbnails.js"
     meta_file = ROOT_DIR / "studio" / "metadata.json"
 
-    # Register in structured clips registry (replaces brittle Root.tsx mutation)
-    if registry_file.exists():
-        reg_content = registry_file.read_text(encoding="utf-8")
-        if f'id: "{name}"' not in reg_content and f"id: '{name}'" not in reg_content:
-            comp_import = f'import {{ {pascal_name}Composition }} from "./{name}";\nimport {name}Transcript from "./{name}/transcript.json";\n'
-            reg_content = reg_content.replace(
-                "// 1. Clip Component & Transcript Imports\n// ============================================================================\n",
-                f"// 1. Clip Component & Transcript Imports\n// ============================================================================\n{comp_import}"
-            )
-            reg_content = reg_content.replace(
-                "} from \"../thumbnails\";",
-                f"  {pascal_name}Thumbnail,\n}} from \"../thumbnails\";"
-            )
-            new_entry = f"""  {{
-    id: "{name}",
-    pascalName: "{pascal_name}",
-    component: {pascal_name}Composition,
-    thumbnailComponent: {pascal_name}Thumbnail,
-    transcript: {name}Transcript as any[],
-    format: "{format_type}",
-  }},\n"""
-            reg_content = reg_content.replace(
-                "export const REGISTERED_CLIPS: ClipRegistration[] = [\n",
-                f"export const REGISTERED_CLIPS: ClipRegistration[] = [\n{new_entry}"
-            )
-            registry_file.write_text(reg_content, encoding="utf-8")
-            print("      Registered composition and still in structured registry (src/clips/registry.ts)")
-
-    # Register in thumbnails/index.tsx (Frontier T: Thumbnail Intelligence)
-    thumb_content = thumb_file.read_text(encoding="utf-8")
+    # 1. Orchestrate Frontier T: Thumbnail Intelligence
     from thumbnail_director import ThumbnailDirector
     t_director = ThumbnailDirector()
     aspect_str = "9:16" if format_type == "shorts" else "16:9"
@@ -1708,35 +1676,30 @@ def register_composition_and_thumbnail(name: str, pascal_name: str, topic: str, 
         (clip_dir / "thumbnail_plan.json").write_text(json.dumps(t_manifest, indent=2), encoding="utf-8")
         print(f"      [Frontier T] Persisted thumbnail_plan.json in {clip_dir}")
 
-    if f"{pascal_name}Thumbnail" not in thumb_content:
-        chosen_concept = t_manifest["chosenConcept"]
-        hook_word = chosen_concept["textHook"]
-        accent_color = chosen_concept["accentColor"]
-        theme = "apple_studio" if niche == "self_improvement" else ("obsidian" if niche in ["finance", "facecam"] else "biotech_cyan")
+    chosen_concept = t_manifest["chosenConcept"]
+    hook_word = chosen_concept["textHook"]
+    accent_color = chosen_concept["accentColor"]
+    theme = "apple_studio" if niche == "self_improvement" else ("obsidian" if niche in ["finance", "facecam"] else "biotech_cyan")
 
-        thumb_decl = f"""
-export const {pascal_name}Thumbnail: React.FC = () => (
-  <ImpossibleMetaphorLayout
-    hookWord="{hook_word}"
-    accentColor="{accent_color}"
-    heroImageSrc="{name}/assets/scene_illustration.png"
-    aspectRatio="{ "9:16" if format_type == "shorts" else "16:9" }"
-    theme="{theme}"
-  />
-);
-"""
-        thumb_content += thumb_decl
-        thumb_file.write_text(thumb_content, encoding="utf-8")
-        print("      [Frontier T] Registered bespoke thumbnail component in src/thumbnails/index.tsx")
+    # 2. Structured Thumbnail Registration (src/thumbnails/index.tsx)
+    from clip_registry import register_clip_composition, register_clip_thumbnail
+    register_clip_thumbnail(
+        clip_id=name,
+        pascal_name=pascal_name,
+        hook_word=hook_word,
+        accent_color=accent_color,
+        format_type=format_type,
+        theme=theme
+    )
+    print("      [Frontier T] Registered bespoke thumbnail component in src/thumbnails/index.tsx")
 
-    # Register in render_all_thumbnails.js
-    render_content = render_script.read_text(encoding="utf-8")
-    if f"{name}_video.mp4" not in render_content:
-        render_content = render_content.replace(
-            "'promises_video.mp4': 'PromisesThumbnail',",
-            f"'promises_video.mp4': 'PromisesThumbnail',\n  '{name}_video.mp4': '{pascal_name}Thumbnail',"
-        )
-        render_script.write_text(render_content, encoding="utf-8")
+    # 3. Structured Clip & Composition Registration (src/clips/registry.ts)
+    register_clip_composition(
+        clip_id=name,
+        pascal_name=pascal_name,
+        format_type=format_type
+    )
+    print("      Registered composition and still in structured registry (src/clips/registry.ts)")
 
     # Add metadata
     if meta_file.exists():

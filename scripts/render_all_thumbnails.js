@@ -7,67 +7,39 @@ if (!fs.existsSync(OUT_DIR)) {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 }
 
-// Map video filename to thumbnail Still composition ID
-const THUMBNAIL_MAP = {
-  'neuroproductivity_video.mp4': 'NeuroproductivityThumbnail',
-  'procrastination_video.mp4': 'ProcrastinationThumbnail',
-  'lofi_song_video.mp4': 'LofiSongThumbnail',
-  'adhd_video.mp4': 'ADHDThumbnail',
-  'goggins_video.mp4': 'GogginsThumbnail',
-  'breaks_video.mp4': 'BreaksThumbnail',
-  'motivation_video.mp4': 'MotivationThumbnail',
-  'maturity_video.mp4': 'MaturityThumbnail',
-  'comparison_video.mp4': 'ComparisonThumbnail',
-  'habit_video.mp4': 'HabitThumbnail',
-  'emotions_video.mp4': 'EmotionsThumbnail',
-  'strength_video.mp4': 'StrengthThumbnail',
-  'chapters_video.mp4': 'ChaptersThumbnail',
-  'promises_video.mp4': 'PromisesThumbnail',
-  'price_of_inaction_video.mp4': 'PriceOfInactionThumbnail',
-  'the_art_of_environment_video.mp4': 'TheArtOfEnvironmentThumbnail',
-  'what_you_tolerate_video.mp4': 'WhatYouTolerateThumbnail',
-  'dopamine_reality_video.mp4': 'DopamineRealityThumbnail',
-  'how_cortisol_works_video.mp4': 'HowCortisolWorksThumbnail',
-  'small_compromises_video.mp4': 'SmallCompromisesThumbnail',
-  'smoke_test_frontier_s_video.mp4': 'SmokeTestFrontierSThumbnail',
-  'open_brain_tabs_video.mp4': 'OpenBrainTabsThumbnail',
-  'the_architecture_of_pressure_video.mp4': 'TheArchitectureOfPressureThumbnail',
-  'the_law_of_the_counterweight_video.mp4': 'TheLawOfTheCounterweightThumbnail',
-  'the_threshold_effect_video.mp4': 'TheThresholdEffectThumbnail',
-  'the_law_of_structural_load_video.mp4': 'TheLawOfStructuralLoadThumbnail',
-  'the_architecture_of_focus_video.mp4': 'TheArchitectureOfFocusThumbnail',
-  'brain_tolerance_video.mp4': 'BrainToleranceThumbnail',
-  'the_person_you_never_chose_video.mp4': 'ThePersonYouNeverChoseThumbnail',
-  'choice_overload_video.mp4': 'ChoiceOverloadThumbnail',
-  'how_to_ruin_your_teens_video.mp4': 'HowToRuinYourTeensThumbnail',
-  'the_mask_you_mistake_video.mp4': 'TheMaskYouMistakeThumbnail',
-  'sleep_debt_trap_video.mp4': 'SleepDebtTrapThumbnail',
-  'goggins_strategy_system_video.mp4': 'GogginsStrategySystemThumbnail',
-  'train_your_brain_video.mp4': 'TrainYourBrainThumbnail',
-  'the_self_image_trap_video.mp4': 'TheSelfImageTrapThumbnail',
-  'the_truth_about_sleep_video.mp4': 'TheTruthAboutSleepThumbnail',
-  'cortisol_energy_engine_video.mp4': 'CortisolEnergyEngineThumbnail',
-  'the_cortisol_inversion_video.mp4': 'TheCortisolInversionThumbnail',
-  'the_procrastination_loop_video.mp4': 'TheProcrastinationLoopThumbnail',
-  'true_relationships_video.mp4': 'TrueRelationshipsThumbnail',
-  'stop_comparing_video.mp4': 'StopComparingThumbnail',
-  'teenage_relationships_video.mp4': 'TeenageRelationshipsThumbnail',
-  'test_autonomous_mode_b_video.mp4': 'TestAutonomousModeBThumbnail',
-  'test_autonomous_mode_a_video.mp4': 'TestAutonomousModeAThumbnail',
-  'you_are_not_alone_video.mp4': 'YouAreNotAloneThumbnail',
-  'map_the_gap_video.mp4': 'MapTheGapThumbnail',
-  'photon_minimum_viable_day_video.mp4': 'PhotonMinimumViableDayThumbnail',
-  'photon_dopamine_worksheet_video.mp4': 'PhotonDopamineWorksheetThumbnail',
-  'holding_grudges_video.mp4': 'HoldingGrudgesThumbnail',
-  'shrinking_circle_video.mp4': 'ShrinkingCircleThumbnail',
-  'dopamine_reset_video.mp4': 'DopamineResetThumbnail',
-  'boundaries_video.mp4': 'BoundariesThumbnail',
-  'patterns_video.mp4': 'PatternsThumbnail',
-  'teenage_video.mp4': 'TeenageThumbnail',
-  'environment_video.mp4': 'EnvironmentThumbnail',
-  'loneliness_video.mp4': 'LonelinessThumbnail',
-  'saying_no_video.mp4': 'SayingNoThumbnail',
-};
+/**
+ * Dynamically extracts registered clips and thumbnails from canonical src/clips/registry.ts.
+ * Eliminates brittle hardcoded THUMBNAIL_MAP and source-text mutation.
+ */
+function getThumbnailMapFromRegistry() {
+  const registryPath = path.resolve(__dirname, '..', 'src', 'clips', 'registry.ts');
+  if (!fs.existsSync(registryPath)) {
+    throw new Error(`Canonical clips registry not found at ${registryPath}`);
+  }
+  const content = fs.readFileSync(registryPath, 'utf8');
+  const thumbnailMap = {};
+
+  const arrayMatch = content.match(/export\s+const\s+REGISTERED_CLIPS[^{]*=\s*\[([\s\S]*?)\n\];/);
+  if (!arrayMatch) {
+    throw new Error('Unable to parse REGISTERED_CLIPS array from src/clips/registry.ts');
+  }
+
+  const entries = arrayMatch[1].match(/\{([^{}]+)\}/g) || [];
+  for (const entry of entries) {
+    const idMatch = entry.match(/id:\s*["']([^"']+)["']/);
+    const pascalMatch = entry.match(/pascalName:\s*["']([^"']+)["']/);
+    const thumbMatch = entry.match(/thumbnailComponent:\s*([^,\s]+)/);
+
+    if (idMatch && pascalMatch) {
+      const id = idMatch[1];
+      const pascalName = pascalMatch[1];
+      const thumbId = (thumbMatch && thumbMatch[1] !== 'undefined') ? thumbMatch[1] : `${pascalName}Thumbnail`;
+      thumbnailMap[`${id}_video.mp4`] = thumbId;
+    }
+  }
+
+  return thumbnailMap;
+}
 
 // Target single video or all
 const targetArg = process.argv[2];
@@ -76,6 +48,9 @@ async function main() {
   console.log('\n=============================================================');
   console.log('🎨 RightMotion Automated High-Converting Thumbnail Engine');
   console.log('=============================================================\n');
+
+  const THUMBNAIL_MAP = getThumbnailMapFromRegistry();
+  console.log(`📋 Loaded ${Object.keys(THUMBNAIL_MAP).length} clips from canonical src/clips/registry.ts\n`);
 
   let entries = Object.entries(THUMBNAIL_MAP);
   if (targetArg) {

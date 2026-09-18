@@ -138,7 +138,7 @@ def audit_clip(name: str, render_still: bool = False) -> Tuple[bool, List[str], 
     summary_data["is_duo"] = is_duo
     summary_data["duration_sec"] = duration_sec
     summary_data["word_count"] = transcript_word_count
-    summary_data["total_frames"] = int(duration_sec * 30)
+    summary_data["total_frames"] = int(round(duration_sec * 60))
 
     # 5. Zero Memes Policy Audit
     if canvas_file.exists():
