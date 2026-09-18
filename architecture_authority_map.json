@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RightMotion Canonical Architecture Authority Map",
+  "description": "Defines the authoritative single owner, consumers, forbidden override paths, and boundary rules for every major decision in RightMotion.",
+  "version": "1.0.0",
+  "decisions": {
+    "semantic_story_modeling": {
+      "concept": "Script Analysis, Core Idea, Narrative Segmentation, Causal Extraction",
+      "canonical_owner": "scripts/script_intelligence.py (Frontier S: NormalizedStoryModel)",
+      "consumers": [
+        "scripts/visual_concept.py (VCT)",
+        "scripts/orchestrator.py (Frontier #0)",
+        "scripts/thumbnail_director.py (Frontier T)"
+      ],
+      "forbidden_overrides": [
+        "Remotion Canvas must never re-parse script text to deduce semantic intent",
+        "Orchestrator must never alter semantic segments or claims determined by Frontier S",
+        "Thumbnail director must never re-invent core curiosity or emotional tension"
+      ],
+      "persistence_artifact": "src/clips/<name>/story_model.json",
+      "status": "AUTHORITATIVE"
+    },
+    "visual_concept_translation": {
+      "concept": "Physical Metaphor Selection, Mechanism Choice, Transformation Modeling, Rejection Scoring",
+      "canonical_owner": "scripts/visual_concept.py (VisualConceptTranslator -> VisualConceptPlan)",
+      "consumers": [
+        "scripts/orchestrator.py (Frontier #0)",
+        "scripts/create_clip.py (scaffold briefing)",
+        "AI Agent (Scene Design Planning)"
+      ],
+      "forbidden_overrides": [
+        "Remotion components must not downgrade chosen mechanism to UI presentation cards",
+        "Orchestrator must respect championCandidate mechanism and required frontiers",
+        "Agent must not visualize elements explicitly marked in whatIsIntentionallyNotVisualized"
+      ],
+      "persistence_artifact": "src/clips/<name>/creative_plan.json (visualConcept section)",
+      "status": "AUTHORITATIVE"
+    },
+    "capability_orchestration": {
+      "concept": "Frontier Capability Selection, Complexity Budget Enforcement, Intensity Allocation",
+      "canonical_owner": "scripts/orchestrator.py (CreativeOrchestrator)",
+      "source_of_truth_manifest": "src/orchestrator/frontier_manifest.json",
+      "consumers": [
+        "scripts/orchestrator.py (compile_motion_ast)",
+        "scripts/create_clip.py (frontier import stubs)",
+        "scripts/frontier_utilization.py (audit validation)"
+      ],
+      "forbidden_overrides": [
+        "No script or component may reactivate dormant F3",
+        "Complexity budgets (2.5 hook, 4.5 logic, 3.0 solution) cannot be bypassed",
+        "F_UBG must not be pruned as a complexity effect"
+      ],
+      "persistence_artifact": "src/clips/<name>/creative_plan.json",
+      "status": "AUTHORITATIVE"
+    },
+    "motion_specification_ast": {
+      "concept": "Physical Entity Definition, Geometry, Forces, State Mutations, World Memory",
+      "canonical_owner": "scripts/orchestrator.py (compile_motion_ast) validated by scripts/validate_motion_ast.py",
+      "type_definition": "src/compiler/ast.types.ts",
+      "consumers": [
+        "src/clips/<name>/Canvas.tsx (Remotion Execution)",
+        "scripts/frontier_utilization.py (Anti-cardification audit)"
+      ],
+      "forbidden_overrides": [
+        "Canvas.tsx must not invent actors or forces that violate ast.types.ts schema",
+        "No actor may have geometry type in BANNED_GEOMETRY_TYPES (card, panel, dashboard)",
+        "No mutation may occur without spoken-word temporal anchoring"
+      ],
+      "persistence_artifact": "src/clips/<name>/motion_ast.json",
+      "status": "DISCONNECTED_SHADOW (Target: Authoritative Remotion Runtime Input)"
+    },
+    "spatial_geometry_resolution": {
+      "concept": "Mobile 9:16 Inset Safe Zones, Actor Bounds, Dead Space Elimination, Font Scale Floors",
+      "canonical_owner": "scripts/geometry_resolver.py (GeometryResolver)",
+      "parameters": {
+        "canvas_width": 1080,
+        "canvas_height": 1920,
+        "safe_top": 280,
+        "safe_bottom": 1340,
+        "safe_left": 72,
+        "safe_right": 1008,
+        "captions_start_y": 1380,
+        "absolute_font_floor_px": 36
+      },
+      "consumers": [
+        "scripts/platform_safe_validator.py",
+        "src/compiler/ast.types.ts",
+        "src/components/primitives/MechanismStage.tsx"
+      ],
+      "forbidden_overrides": [
+        "No headline text below 56px, no body text below 36px",
+        "No interactive or hero content inside hazard zones y:[0, 230] or y:[1560, 1920]",
+        "Components must not define independent conflicting safe bounds"
+      ],
+      "status": "SPLIT_AUTHORITY (Target: Single Unified Geometry Module)"
+    },
+    "audio_synthesis_and_transcription": {
+      "concept": "Neural TTS Voice Synthesis, Pause Compression, Conversational Turns, Faster-Whisper Timestamps",
+      "canonical_owner": "scripts/voiceover_engine.py",
+      "voice_mapping": {
+        "judy": "en-US-AvaMultilingualNeural (rate=+8%)",
+        "andrew": "en-US-SteffanNeural (rate=+7%)"
+      },
+      "consumers": [
+        "scripts/create_clip.py",
+        "scripts/orchestrator.py",
+        "src/clips/<name>/index.tsx (SFX & Audio)",
+        "src/clips/<name>/transcript.json"
+      ],
+      "forbidden_overrides": [
+        "dialogue_engine.py is deprecated compatibility shim; no new audio logic permitted there",
+        "No script may synthesize audio without running word-level Whisper transcription",
+        "No audio may be played without corresponding transcript.json mapping"
+      ],
+      "persistence_artifacts": [
+        "public/<name>/voiceover.mp3",
+        "src/clips/<name>/transcript.json"
+      ],
+      "status": "AUTHORITATIVE"
+    },
+    "background_intelligence_and_selection": {
+      "concept": "Universal Background Asset Discovery, Computer Vision Analysis, Registry Indexing, Semantic Selection",
+      "canonical_owner": "scripts/background_intelligence.py (Analysis/Registry) + scripts/background_selector.py (Creative Selection)",
+      "asset_directory": "public/assets/universal_backgrounds/",
+      "registry_path": "public/assets/universal_backgrounds/registry.json",
+      "consumers": [
+        "scripts/orchestrator.py (injects backgroundIntent)",
+        "src/components/backgrounds/UniversalBackgroundLibrary.ts",
+        "src/components/backgrounds/UniversalBackground.tsx"
+      ],
+      "forbidden_overrides": [
+        "Specialized backgrounds (Finance/Health) must not be forced into universal background registry",
+        "Backgrounds must never be selected purely for decorative fill without semantic rationale",
+        "Assets must never be loaded from outside canonical directory (path traversal protected)"
+      ],
+      "status": "AUTHORITATIVE"
+    },
+    "channel_routing_and_identities": {
+      "concept": "Channel Visual DNA, Colors, Persona Roles, Publishing Tags, Target Audience",
+      "canonical_owner": "studio/channels.json (Multi-Channel Registry) + AGENTS.md (Creative Rules)",
+      "channels": {
+        "self_improvement": {
+          "brand": "Judy Insights",
+          "tag": "{Self Improvement}",
+          "palette": "#f8fafc light canvas, #090d16 inky text, Judy presenter",
+          "presenter_mode": "Judy bust (waist-up grounded) or solo mechanism"
+        },
+        "finance": {
+          "brand": "Apex Wealth",
+          "tag": "{Finance}",
+          "palette": "#030712 dark obsidian, #10b981 emerald, no presenter",
+          "presenter_mode": "None (pure motion & capital telemetry)"
+        },
+        "health": {
+          "brand": "BioMatrix",
+          "tag": "{Health}",
+          "palette": "#060913 bio-navy, #06b6d4 biotech cyan, no presenter",
+          "presenter_mode": "None (pure biological mechanics & telemetry)"
+        },
+        "facecam": {
+          "brand": "Creator Facecam",
+          "tag": "{facecam}",
+          "palette": "#070b14 cinematic dark, dynamic zoom punch-ins",
+          "presenter_mode": "Real speaker facecam layer"
+        }
+      },
+      "consumers": [
+        "scripts/create_clip.py",
+        "scripts/metadata_engine.py",
+        "scripts/script_intelligence.py",
+        "studio/server.js",
+        "studio/multi_channel_manager.js"
+      ],
+      "forbidden_overrides": [
+        "Do not hardcode channel color matrices into Express route handlers (server.js)",
+        "Do not invent new routing tags without updating channels.json",
+        "Do not mix channel identities (e.g. Judy presenter on Apex Wealth)"
+      ],
+      "status": "DUPLICATED (Target: Single Canonical Channel Store in config/channels.json)"
+    },
+    "clip_registration_and_manifest": {
+      "concept": "Project Inventory, Clip Metadata, Remotion Composition ID, Thumbnail Still Binding",
+      "canonical_owner": "src/clips/registry.ts (ClipRegistration[])",
+      "consumers": [
+        "src/Root.tsx (Composition & Still generator)",
+        "scripts/render_clip.py (Remotion render target)",
+        "studio/server.js (via api/videos)",
+        "scripts/validate_clip.py (Integrity check)"
+      ],
+      "forbidden_overrides": [
+        "Python scripts must not textually mutate registry.ts using string replace",
+        "Root.tsx must not contain hardcoded clip compositions",
+        "render_all_thumbnails.js must not maintain a duplicate hardcoded map"
+      ],
+      "status": "TEXTUAL_MUTATION_HAZARD (Target: Manifest-driven dynamic registration)"
+    },
+    "thumbnail_intelligence_and_rendering": {
+      "concept": "Curiosity Gap Extraction, Hook Word Synthesis, Archetype Selection, Layout Generation",
+      "canonical_owner": "scripts/thumbnail_director.py (Frontier T)",
+      "consumers": [
+        "src/thumbnails/index.tsx",
+        "scripts/render_all_thumbnails.js",
+        "studio/server.js (api/render-thumbnail)"
+      ],
+      "forbidden_overrides": [
+        "Thumbnails must never display page numbers or PDF names",
+        "Thumbnails must never use banned patterns (pill badges, subtitle cards, explanatory paragraphs)",
+        "Text hooks must never exceed 3 words"
+      ],
+      "persistence_artifact": "src/clips/<name>/thumbnail_plan.json",
+      "status": "AUTHORITATIVE_PLAN_BUT_MANUAL_TSX"
+    },
+    "anti_cardification_and_quality_audit": {
+      "concept": "Cardification Scoring, Primary Mechanism Ratio, Mute Test, Spoken-Word Coupling, Depth Audit",
+      "canonical_owner": "scripts/frontier_utilization.py (FrontierUtilizationAuditor)",
+      "consumers": [
+        "scripts/validate_clip.py",
+        "tests/integration/test_frontier_execution.py"
+      ],
+      "thresholds": {
+        "max_cardification_score": 35.0,
+        "min_primary_mechanism_ratio": 0.60,
+        "min_frontier_depth": 3,
+        "dormant_f3": true
+      },
+      "forbidden_overrides": [
+        "Never approve a clip with Cardification Score >= 40.0",
+        "Never bypass the Mute Test or Remove-Text Test",
+        "Never permit PhysicalCard to serve as a general-purpose information container"
+      ],
+      "status": "AUTHORITATIVE_DIAGNOSTIC (Target: AST-native inspection instead of regex)"
+    },
+    "render_pipeline_and_hardware_acceleration": {
+      "concept": "Remotion Headless Execution, Concurrency, Hardware ANGLE GPU / SwiftShader Fallback, Notification",
+      "canonical_owner": "scripts/render_clip.py",
+      "configuration": "remotion.config.ts",
+      "consumers": [
+        "CLI users",
+        "AI agents",
+        "studio/server.js"
+      ],
+      "parameters": {
+        "default_renderer": "angle",
+        "fallback_renderer": "swiftshader",
+        "default_concurrency": 4,
+        "dimensions": "1080x1920 (9:16) or 1920x1080 (16:9)",
+        "video_format": "jpeg-in-mp4 (yuv420p, h264)"
+      },
+      "forbidden_overrides": [
+        "Do not invoke remotion render directly without going through render_clip.py",
+        "Do not run CPU-only render if GPU is available unless explicitly requested",
+        "Do not exceed concurrency 4 on consumer GPU memory setups"
+      ],
+      "status": "AUTHORITATIVE"
+    },
+    "studio_security_and_remote_access": {
+      "concept": "Local Owner Capability, Visitor Invite RBAC, Cloudflare Tunnel, Origin & Header Hardening",
+      "canonical_owner": "studio/remote/permissions.js + studio/remote/store.js + studio/remote/auth.js",
+      "consumers": [
+        "studio/server.js",
+        "studio/remote/routes.js",
+        "studio/public/index.html"
+      ],
+      "forbidden_overrides": [
+        "Never treat a request with proxy headers as local owner",
+        "Never permit visitor sessions to access owner routes (channels, credentials, secrets)",
+        "Never bypass token verification when cloud tunnel is enabled"
+      ],
+      "status": "AUTHORITATIVE"
+    },
+    "event_notifications": {
+      "concept": "System Alerts, Render Completions, Publishing Status, Studio UI Live Feed",
+      "canonical_owner": "studio/notifications/service.js (Studio) + scripts/notify.py (CLI/Render Dispatcher)",
+      "store": "studio/notifications/data/notifications.json",
+      "consumers": [
+        "scripts/render_clip.py",
+        "studio/server.js",
+        "studio/public/index.html"
+      ],
+      "forbidden_overrides": [
+        "Do not write unvalidated schemas into notifications.json",
+        "Do not bypass notificationService when studio server is alive"
+      ],
+      "status": "CONCURRENT_WRITE_HAZARD (Target: Unified SQLite or Mutex Store)"
+    }
+  }
+}
