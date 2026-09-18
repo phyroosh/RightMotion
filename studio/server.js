@@ -2583,28 +2583,46 @@ app.listen(PORT, async () => {
     const ownerCap = store.getOrCreateOwnerCapability();
     const state = store.getRemoteState();
 
-    const transport = getTransport(state.transportType || 'auto');
-    console.log(`🌐 Initializing Remote Access Transport (${transport.name})...`);
+    const enableCloudTunnel = process.env.ENABLE_CLOUD_TUNNEL === '1' || process.env.ENABLE_CLOUD_TUNNEL === 'true';
 
-    const startResult = await transport.start(PORT);
-    store.updateRemoteState({
-      enabled: true,
-      transportType: transport.name || 'cloudflare',
-      publicUrl: startResult.publicUrl,
-      transportStatus: startResult.success ? 'online' : 'error',
-      transportError: startResult.error || null,
-      enabledAt: new Date().toISOString(),
-      killSwitchActivated: false,
-    });
+    if (enableCloudTunnel) {
+      const transport = getTransport(state.transportType || 'auto');
+      console.log(`🌐 Initializing Remote Access Transport (${transport.name})...`);
 
-    console.log(`\n📱 SMART PHONE COMPANION ACCESS (1-Tap Host Login):`);
-    console.log(`   ⚡ Local Hotspot / Direct LAN:`);
-    console.log(`      http://${localIp}:${PORT}/?auth=${ownerCap.ownerToken}`);
-    if (startResult.publicUrl) {
-      console.log(`   🌍 Worldwide Secure HTTPS Tunnel:`);
-      console.log(`      ${startResult.publicUrl}/?auth=${ownerCap.ownerToken}`);
+      const startResult = await transport.start(PORT);
+      store.updateRemoteState({
+        enabled: true,
+        transportType: transport.name || 'cloudflare',
+        publicUrl: startResult.publicUrl,
+        transportStatus: startResult.success ? 'online' : 'error',
+        transportError: startResult.error || null,
+        enabledAt: new Date().toISOString(),
+        killSwitchActivated: false,
+      });
+
+      console.log(`\n📱 SMART PHONE COMPANION ACCESS (1-Tap Host Login):`);
+      console.log(`   ⚡ Local Hotspot / Direct LAN:`);
+      console.log(`      http://${localIp}:${PORT}/?auth=${ownerCap.ownerToken}`);
+      if (startResult.publicUrl) {
+        console.log(`   🌍 Worldwide Secure HTTPS Tunnel:`);
+        console.log(`      ${startResult.publicUrl}/?auth=${ownerCap.ownerToken}`);
+      }
+      console.log(`===================================================================\n`);
+    } else {
+      store.updateRemoteState({
+        enabled: false,
+        publicUrl: null,
+        transportStatus: 'offline',
+        transportError: null,
+      });
+
+      console.log(`\n📱 LOCAL ACCESS MODE (Cloud Server Offline):`);
+      console.log(`   ⚡ Localhost: http://localhost:${PORT}`);
+      console.log(`   ⚡ Local LAN:  http://${localIp}:${PORT}/?auth=${ownerCap.ownerToken}`);
+      console.log(`   🔒 Remote invite link system is currently offline.`);
+      console.log(`   (Tip: You can enable Cloud Server from Studio UI or launch with --cloud)`);
+      console.log(`===================================================================\n`);
     }
-    console.log(`===================================================================\n`);
   } catch (err) {
     console.warn('[RemoteStartup] Remote transport notice:', err.message);
   }
@@ -2617,8 +2635,10 @@ function handleStudioShutdown() {
     const { getTransport } = require('./remote/transport');
     const store = require('./remote/store');
     const state = store.getRemoteState();
-    const transport = getTransport(state.transportType);
-    transport.stop(PORT).catch(() => {});
+    if (state.transportType && state.transportType !== 'none') {
+      const transport = getTransport(state.transportType);
+      transport.stop(PORT).catch(() => {});
+    }
   } catch (e) {}
   process.exit(0);
 }

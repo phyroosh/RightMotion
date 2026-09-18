@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=RightMotion Studio
+Comment=Launch RightMotion Studio Video Production Environment
+Exec=bash -c "cd '/home/phyroosh/TopProducts/RightClips' && ./start_studio.sh"
+Path=/home/phyroosh/TopProducts/RightClips
+Terminal=true
+Icon=video-display
+Categories=Development;AudioVideo;Video;
+StartupNotify=true

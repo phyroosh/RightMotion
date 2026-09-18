@@ -1,0 +1,325 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "Every time you postpone uncomfortable work, you aren't just losing time—you're rewiring your brain to make quitting automatic. Delaying a task triggers an immediate drop in stress hormones. Your brain misinterprets this sudden relief as survival, cementing a dopamine reward loop for avoidance. The more you delay, the deeper this neural pathway carves into your habits. To break the cycle, decouple the task from anxiety. Shrink your starting threshold to just ninety seconds of friction. Lower the perceived threat, and the urge to flee evaporates.",
+    "topic": "Why Procrastination Gets Easier Every Time You Do It",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 85,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "fac67af0bb58be23935b59cfee768439cd42834181ab9fe4cb1b8dacaed51e5f"
+  },
+  "story": {
+    "coreIdea": "Every unfinished task keeps subconscious neural RAM occupied, leaking cognitive bandwidth until the system exhausts itself.",
+    "centralClaim": "Mental exhaustion is not caused by the work you are doing, but by the unresolved loops you leave open.",
+    "viewerPromise": "Understand why your mind feels cluttered even when sitting still, and how to close invisible neural loops.",
+    "viewerQuestion": "Why does unfinished work keep returning to attention and draining energy?",
+    "narrativeArchitecture": "PARADOX -> HIDDEN_MECHANISM -> ESCALATION -> RELEASE"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "Every time you postpone uncomfortable work, you aren't just losing time—you're rewiring your brain to make quitting automatic.",
+      "sentenceIndices": [
+        0
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "Why does unfinished work keep returning to attention and draining energy?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "Delaying a task triggers an immediate drop in stress hormones. Your brain misinterprets this sudden relief as survival, cementing a dopamine reward loop for avoidance.",
+      "sentenceIndices": [
+        1,
+        2
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "The more you delay, the deeper this neural pathway carves into your habits. To break the cycle, decouple the task from anxiety. Shrink your starting threshold to just ninety seconds of friction.",
+      "sentenceIndices": [
+        3,
+        4,
+        5
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "Lower the perceived threat, and the urge to flee evaporates.",
+      "sentenceIndices": [
+        6
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "Cognitive Load",
+      "Zeigarnik Effect",
+      "Working Memory"
+    ],
+    "entities": [
+      "Translucent Neural Browser Tab",
+      "Open Loop Alert",
+      "External Notebook"
+    ],
+    "persistentObjects": [
+      "Neural Browser Tab (travels from Hook into Resolution)"
+    ]
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "Every time you postpone uncomfortable work, you aren't just losing time—you're rewiring your brain to make quitting automatic.",
+        "type": "psychological"
+      },
+      {
+        "statement": "Delaying a task triggers an immediate drop in stress hormones.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Your brain misinterprets this sudden relief as survival, cementing a dopamine reward loop for avoidance.",
+        "type": "psychological"
+      },
+      {
+        "statement": "The more you delay, the deeper this neural pathway carves into your habits.",
+        "type": "supporting"
+      },
+      {
+        "statement": "To break the cycle, decouple the task from anxiety.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Shrink your starting threshold to just ninety seconds of friction.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Lower the perceived threat, and the urge to flee evaporates.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": []
+  },
+  "causalGraph": {
+    "nodes": [
+      {
+        "id": "cognitive_bandwidth",
+        "initialCondition": "NOMINAL",
+        "reversibility": "RECOVERABLE"
+      },
+      {
+        "id": "open_task_counter",
+        "initialCondition": "EMPTY",
+        "reversibility": "REVERSIBLE"
+      }
+    ],
+    "chains": [
+      {
+        "cause": "Unfinished task left open in attention",
+        "mechanism": "Subconscious loop continuously holds task memory active",
+        "event": "TASK_UNFINISHED",
+        "consequence": "Neural RAM leakage drains working memory capacity",
+        "resultingState": "STRAINED"
+      },
+      {
+        "cause": "Accumulation of 5+ unclosed loops",
+        "mechanism": "Bandwidth saturation exceeds processing capacity",
+        "event": "THRESHOLD_CROSSING",
+        "consequence": "System experiences cognitive paralysis / fatigue",
+        "resultingState": "CRITICAL"
+      }
+    ],
+    "thresholds": [
+      {
+        "source": "open_task_counter",
+        "condition": "count >= threshold_capacity",
+        "consequence": "Trigger SYSTEM_OVERLOAD and transition cognitive_bandwidth to CRITICAL"
+      }
+    ]
+  },
+  "stateModel": {
+    "initialState": "CONSCIOUS_AGENCY",
+    "intermediateStates": [
+      "UNNOTICED_EROSION",
+      "NORMALIZED_TOLERANCE"
+    ],
+    "finalState": "HARDENED_AUTOMATICITY",
+    "dynamics": "transformation"
+  },
+  "temporalModel": {
+    "pacing": "sudden_snap",
+    "hasRepetition": true,
+    "repetitionNature": "behavioral_loop",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "The more you delay, the deeper this neural pathway carves in",
+      "approximateTimestampSec": 16.3,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "Delaying",
+      "Your",
+      "LOOP",
+      "To",
+      "Shrink",
+      "Lower"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "accumulation",
+      "physicalDescription": "Physical translucent neural browser tabs stacking and crowding mental space",
+      "rationale": "Externalizes internal cognitive RAM leak into an unmistakable tactile object."
+    },
+    {
+      "segmentId": "seg_3_resolution",
+      "opportunityType": "transformation",
+      "physicalDescription": "Externalized offloading: floating clutter collapses into a singular grounded notebook",
+      "rationale": "Physical resolution of open loop via externalization."
+    }
+  ],
+  "visualAbsence": [],
+  "semanticImportance": {
+    "critical": [
+      "Mental exhaustion is not caused by the work you are doing, but by the unresolved loops you leave open.",
+      "Every unfinished task keeps subconscious neural RAM occupied, leaking cognitive bandwidth until the system exhausts itself.",
+      "Every time you postpone uncomfortable work, you aren't just losing time—you're rewiring your brain to make quitting automatic."
+    ],
+    "important": [
+      "Understand why your mind feels cluttered even when sitting still, and how to close invisible neural loops.",
+      "Why does unfinished work keep returning to attention and draining energy?",
+      "Delaying a task triggers an immediate drop in stress hormones. Your brain misinterprets this sudden relief as survival, cementing a dopamine reward loop for avoidance.",
+      "Lower the perceived threat, and the urge to flee evaporates."
+    ],
+    "supporting": [
+      "The more you delay, the deeper this neural pathway carves into your habits. To break the cycle, decouple the task from anxiety. Shrink your starting threshold to just ninety seconds of friction."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Accumulation Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Accumulation Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Accumulation Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "Why does the mind refuse to close what it hasn't finished, and what does that look like physically?",
+    "visualContradiction": "Sitting in absolute physical silence while mental RAM burns at 100% capacity",
+    "mostMemorableTransformation": "Chaotic eruption of translucent tabs collapsing into clean external clarity",
+    "textHookCandidates": [
+      "20 TABS",
+      "BRAIN RAM",
+      "OPEN LOOPS",
+      "MENTAL CLUTTER"
+    ],
+    "recommendedArchetype": "impossible_metaphor"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "HIGH",
+        "rationale": "Narrative invokes discrete spatial compartments and architectural flow."
+      },
+      "F2": {
+        "signal": "HIGH",
+        "rationale": "Physical strain, compression, or brittle rupture directly expresses the core tension."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "LOW",
+        "rationale": "Clean luminous light canvas with subtle radial depth is superior."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "VERY_HIGH",
+        "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": true,
+    "issues": [],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

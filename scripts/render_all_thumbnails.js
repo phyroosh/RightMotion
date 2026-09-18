@@ -23,6 +23,7 @@ const THUMBNAIL_MAP = {
   'strength_video.mp4': 'StrengthThumbnail',
   'chapters_video.mp4': 'ChaptersThumbnail',
   'promises_video.mp4': 'PromisesThumbnail',
+  'why_procrastination_gets_easier_video.mp4': 'WhyProcrastinationGetsEasierThumbnail',
   'price_of_inaction_video.mp4': 'PriceOfInactionThumbnail',
   'the_art_of_environment_video.mp4': 'TheArtOfEnvironmentThumbnail',
   'what_you_tolerate_video.mp4': 'WhatYouTolerateThumbnail',

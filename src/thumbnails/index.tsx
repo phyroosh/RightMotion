@@ -1074,3 +1074,13 @@ export const PriceOfInactionThumbnail: React.FC = () => (
     theme="apple_studio"
   />
 );
+
+export const WhyProcrastinationGetsEasierThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="REWIRED"
+    accentColor="#f43f5e"
+    heroImageSrc="why_procrastination_gets_easier/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);

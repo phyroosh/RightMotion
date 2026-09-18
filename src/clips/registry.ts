@@ -35,6 +35,8 @@ export const calculateDurationInFrames = (transcript: any[], fps: number): numbe
 // ============================================================================
 // 1. Clip Component & Transcript Imports
 // ============================================================================
+import { WhyProcrastinationGetsEasierComposition } from "./why_procrastination_gets_easier";
+import why_procrastination_gets_easierTranscript from "./why_procrastination_gets_easier/transcript.json";
 import { PriceOfInactionComposition } from "./price_of_inaction";
 import price_of_inactionTranscript from "./price_of_inaction/transcript.json";
 import { ADHDComposition } from "./adhd";
@@ -232,12 +234,21 @@ import {
   EmotionsThumbnail,
   ChaptersThumbnail,
   PriceOfInactionThumbnail,
+  WhyProcrastinationGetsEasierThumbnail,
 } from "../thumbnails";
 
 // ============================================================================
 // 3. Canonical Clip Registry Array
 // ============================================================================
 export const REGISTERED_CLIPS: ClipRegistration[] = [
+  {
+    id: "why_procrastination_gets_easier",
+    pascalName: "WhyProcrastinationGetsEasier",
+    component: WhyProcrastinationGetsEasierComposition,
+    thumbnailComponent: WhyProcrastinationGetsEasierThumbnail,
+    transcript: why_procrastination_gets_easierTranscript as any[],
+    format: "shorts",
+  },
   {
     id: "price_of_inaction",
     pascalName: "PriceOfInaction",
