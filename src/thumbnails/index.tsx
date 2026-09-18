@@ -1074,3 +1074,13 @@ export const PriceOfInactionThumbnail: React.FC = () => (
     theme="apple_studio"
   />
 );
+
+export const TheMomentumTrapThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="MOMENTUM TRAP"
+    accentColor="#f43f5e"
+    heroImageSrc="the_momentum_trap/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);

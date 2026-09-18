@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "Notice how you wait to feel ready before you begin. You believe action requires motivation, but neurology proves the exact opposite. When you wait for emotional comfort, you train your neural circuitry to require a dopamine bribe before moving. Every hesitation wears a deeper groove of avoidance, turning temporary friction into a permanent standard. The friction is not a stop sign. It is the physical toll of entry. Move first, and the neurochemistry follows.",
+    "topic": "The Momentum Trap",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 74,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "6bbba46196344eb54620eca65e1bf409219864e35afc9b8869ffc27fdf7ec8bb"
+  },
+  "story": {
+    "coreIdea": "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+    "centralClaim": "Destructive patterns do not begin with catastrophic failures; they begin with unexamined micro-compromises.",
+    "viewerPromise": "Recognize the invisible shift where a single small concession hardens into an automatic habit.",
+    "viewerQuestion": "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+    "narrativeArchitecture": "OBSERVATION -> BASELINE_SHIFT -> ACCUMULATION -> CRITICAL_REVEAL"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "Notice how you wait to feel ready before you begin. You believe action requires motivation, but neurology proves the exact opposite.",
+      "sentenceIndices": [
+        0,
+        1
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "When you wait for emotional comfort, you train your neural circuitry to require a dopamine bribe before moving. Every hesitation wears a deeper groove of avoidance, turning temporary friction into a permanent standard.",
+      "sentenceIndices": [
+        2,
+        3
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "The friction is not a stop sign. It is the physical toll of entry.",
+      "sentenceIndices": [
+        4,
+        5
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "Move first, and the neurochemistry follows.",
+      "sentenceIndices": [
+        6
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "The Momentum Trap"
+    ],
+    "entities": [
+      "Editorial Focus Card"
+    ],
+    "persistentObjects": []
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "Notice how you wait to feel ready before you begin.",
+        "type": "supporting"
+      },
+      {
+        "statement": "You believe action requires motivation, but neurology proves the exact opposite.",
+        "type": "supporting"
+      },
+      {
+        "statement": "When you wait for emotional comfort, you train your neural circuitry to require a dopamine bribe before moving.",
+        "type": "psychological"
+      },
+      {
+        "statement": "Every hesitation wears a deeper groove of avoidance, turning temporary friction into a permanent standard.",
+        "type": "supporting"
+      },
+      {
+        "statement": "The friction is not a stop sign.",
+        "type": "supporting"
+      },
+      {
+        "statement": "It is the physical toll of entry.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Move first, and the neurochemistry follows.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": [
+      {
+        "presumed": "Intuitive assumption",
+        "actual": "you wait to feel ready before you begin",
+        "revealLocation": "opening_observation"
+      }
+    ]
+  },
+  "causalGraph": {
+    "nodes": [
+      {
+        "id": "behavioral_baseline",
+        "initialCondition": "STRICT_INTEGRITY",
+        "reversibility": "PARTIALLY_REVERSIBLE"
+      },
+      {
+        "id": "compromise_accumulator",
+        "initialCondition": "ZERO",
+        "reversibility": "DECAYING"
+      }
+    ],
+    "chains": [
+      {
+        "cause": "First small unnoticed concession",
+        "mechanism": "Absence of immediate pain reduces perceived risk",
+        "event": "TRIGGER",
+        "consequence": "Internal threshold adjusts slightly downward",
+        "resultingState": "ERODING"
+      },
+      {
+        "cause": "Repeated concession over time",
+        "mechanism": "Neural adaptation normalizes the lower standard",
+        "event": "ACCUMULATION",
+        "consequence": "Compromise becomes the default subconscious baseline",
+        "resultingState": "HARDENED_HABIT"
+      }
+    ],
+    "thresholds": [
+      {
+        "source": "compromise_accumulator",
+        "condition": "repetitions >= habit_threshold",
+        "consequence": "Behavior shifts from conscious choice to automatic default"
+      }
+    ]
+  },
+  "stateModel": {
+    "initialState": "OBSERVATION",
+    "intermediateStates": [],
+    "finalState": "INFORMED_ACTION",
+    "dynamics": "linear"
+  },
+  "temporalModel": {
+    "pacing": "accelerating",
+    "hasRepetition": false,
+    "repetitionNature": "none",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "The friction is not a stop sign. It is the physical toll of ",
+      "approximateTimestampSec": 14.2,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "ACTION",
+      "It",
+      "Move"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "contrast",
+      "physicalDescription": "High-contrast split editorial layout pairing Judy intimate bust with semantic hero anchor",
+      "rationale": "Establishes personal connection and curiosity on mobile screen."
+    }
+  ],
+  "visualAbsence": [
+    {
+      "textSpan": "notice how",
+      "recommendedTreatment": "spoken_only",
+      "reason": "Rhetorical glue; animating this creates visual noise without adding narrative meaning."
+    }
+  ],
+  "semanticImportance": {
+    "critical": [
+      "Destructive patterns do not begin with catastrophic failures; they begin with unexamined micro-compromises.",
+      "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+      "Notice how you wait to feel ready before you begin. You believe action requires motivation, but neurology proves the exact opposite."
+    ],
+    "important": [
+      "Recognize the invisible shift where a single small concession hardens into an automatic habit.",
+      "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+      "When you wait for emotional comfort, you train your neural circuitry to require a dopamine bribe before moving. Every hesitation wears a deeper groove of avoidance, turning temporary friction into a permanent standard.",
+      "Move first, and the neurochemistry follows."
+    ],
+    "supporting": [
+      "The friction is not a stop sign. It is the physical toll of entry."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+    "visualContradiction": "Intuitive assumption vs you wait to feel ready before you begin",
+    "mostMemorableTransformation": "State of confusion transforming into decisive structural sovereignty",
+    "textHookCandidates": [
+      "MOMENTUM TRAP"
+    ],
+    "recommendedArchetype": "impossible_metaphor"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "LOW",
+        "rationale": "Intimate single-subject dialogue; camera flight would dilute message punch."
+      },
+      "F2": {
+        "signal": "MEDIUM",
+        "rationale": "Capillary ink absorption expresses irreversible psychological commitment."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "LOW",
+        "rationale": "Clean luminous light canvas with subtle radial depth is superior."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "VERY_HIGH",
+        "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": true,
+    "issues": [],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

@@ -559,6 +559,8 @@ def generate_lean_canvas_brief(
     creative_plan: dict = None,
     fps: int = 60,
     product_meta: dict = None,
+    motion_ast: dict = None,
+    name: str = "",
 ) -> str:
     """
     Emit a lean Creative Brief Canvas.tsx with ZERO hardcoded visual content.
@@ -653,12 +655,12 @@ def generate_lean_canvas_brief(
  *  Guidance:     Ground the resolution scene in physical visual proof of the worksheet/blueprint.
  *                Do NOT wrap in a generic card panel or dashboard box."""
 
+    hero_actor_id = f"{name}_hero_illustration" if name else "hero_illustration"
+
     return f'''import React from "react";
-import {{ interpolate, spring, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
+import {{ MotionStagePlayer }} from "../../compiler";
+import motionAst from "./motion_ast.json";
 import {{ WordTimestamp }} from "../../types";
-// Kinetic text tools (always available):
-import {{ AnimatedSlashStrike, KineticHighlighter, CameraShake }} from "../../components/kinetic_text";
-{frontier_stubs}
 
 interface CanvasProps {{
   transcript: WordTimestamp[];
@@ -666,126 +668,56 @@ interface CanvasProps {{
 
 /**
  * ╔══════════════════════════════════════════════════════════════════╗
- * ║  🎬 CREATIVE BRIEF — {pascal_name}Canvas
+ * ║  🎬 CANONICAL MOTION AST CANVAS — {pascal_name}Canvas
  * ║  Topic: "{topic}"
+ * ║  Primary Mechanism: {primary_mechanism}
  * ║  Niche background: {niche_bg}
  * ╚══════════════════════════════════════════════════════════════════╝
  *
  * ════════════════════════════════════════════════════════════
- * VISUAL CONCEPT  (source: creative_plan.json › visualConcept)
+ * PRODUCTION PIPELINE TRACE
  * ════════════════════════════════════════════════════════════
+ *  script → S (story_model.json) → VCT → F0 (creative_plan.json) → Motion AST (motion_ast.json) → MotionStagePlayer
+ *
+ *  Concept:                 {concept_name}
  *  Primary Mechanism:       {primary_mechanism}
  *  Central Transformation:  {central_transformation}
- *  Concept:                 {concept_name}
  *  Physical Description:    {physical_description}
  *  Cause Event:             {cause_event}
- *  Visible Transformation:  {visible_transformation}
  *  Visible Consequence:     {visible_consequence}
  *  Persistent State:        {persistent_state}
  *
  * ════════════════════════════════════════════════════════════
- * SCENE PLAN  (60 FPS, safe zone: y 280 → 1340px, x 60 → 1020px)
+ * SCENE PLAN  (60 FPS, safe zone: y 280 → 1340px, x 80 → 1000px)
  * ════════════════════════════════════════════════════════════
  *  HOOK        frames 0 → {s2_start}  ({hook_dur})
  *    Narration:  "{hook_narration}"
  *    Frontiers:  {hook_frontiers}
- *    Brief:      Establish the visual question and initial state described by
- *                the Creative Brief. Choose the strongest visual representation
- *                for what the narration MEANS. Do not default to a card.
- *                If the concept has a causal/physical setup, begin establishing
- *                that mechanism during the hook.
- *                Valid approaches: presenter grounding, visual question,
- *                semantic cutout, kinetic typography, environmental setup,
- *                or a frontier mechanism in initial state.
  *
  *  MECHANISM   frames {s2_start} → {s3_start}  ({mech_dur})
  *    Narration:  "{logic_narration}"
  *    Frontiers:  {logic_frontiers}
- *    Brief:      Execute the PRIMARY MECHANISM as a live physical event on screen.
- *                The viewer must SEE the transformation happen — not read about it.
- *                Use frontier components from the import stubs above.
- *                Anti-card law: Zero card containers as the primary visual.
- *                If multiple beats exist, choreograph them sequentially from
- *                transcript.json word timestamps — never all at once.
  *
  *  RESOLUTION  frames {s3_start} → {total_frames}  ({res_dur})
  *    Narration:  "{solution_narration}"
- *    Frontiers:  {solution_frontiers}
- *    Brief:      Show STATE B — the visible consequence of the transformation.
- *                "{visible_consequence}"
- *                Persistent state: "{persistent_state}"
- *                Decisive. No new information. One dominant impression.{product_section}
+ *    Frontiers:  {solution_frontiers}{product_section}
  *
- * ════════════════════════════════════════════════════════════
- * SEMANTIC CUTOUT ASSETS  (optional anchors, not prescriptions)
- * ════════════════════════════════════════════════════════════
- *  Problem anchor:  {problem_cutout} → staticFile("{p_path}")
- *  Solution anchor: {solution_cutout} → staticFile("{s_path}")
- *  Full library: public/assets/registry.json  (40+ transparent PNGs)
- *  Size rule: 400–750px. Physical presence, not decoration.
- *
- * ════════════════════════════════════════════════════════════
- * DESIGN CONSTRAINTS (NO HIDDEN VISUAL DEFAULTS)
- * ════════════════════════════════════════════════════════════
- *  ✗ NO rounded-3xl / rounded-2xl card containers as primary visual
- *  ✗ NO dashboard list rows with numbered pills and sub-labels
- *  ✗ NO floating metric boxes, HUD panels, status bars
- *  ✗ NO hardcoded text strings inherited from this scaffold
- *  ✗ NO pill/capsule badges
- *  ✗ NO prescription of mandatory visual components
- *  ✓ YES frontier mechanism as the dominant visual event
- *  ✓ YES large semantic cutouts (400–750px) as primary actors
- *  ✓ YES kinetic typography at 80–110px as visual object
- *  ✓ YES open-canvas spatial composition without container walls
- *  ✓ YES STATE A → transformation → STATE B story arc
- *
- *  Follow Rule 5.1 Design-First Sequence (AGENTS.md) before writing JSX.
- *  Read transcript.json for exact word-frame timestamps.
- *  Read creative_plan.json › scenePlans for the full orchestrator output.
+ * Controlled escape hatches (sceneOverrides / actorOverrides) are preserved below
+ * for bespoke fine-tuning, while ensuring Motion AST remains the canonical creative
+ * and physical execution authority.
  */
 export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
-  const frame = useCurrentFrame();
-  const {{ fps }} = useVideoConfig();
-
-  // ═══ FRAME BOUNDARIES (from transcript.json timing) ═══
-  // Hook:       frames 0       → {s2_start}   ({hook_dur})
-  // Mechanism:  frames {s2_start} → {s3_start}  ({mech_dur})
-  // Resolution: frames {s3_start} → {total_frames}   ({res_dur})
-  // Word-precise micro-beats: read src/clips/*/transcript.json
-
-  const isHook = frame < {s2_start};
-  const isMechanism = frame >= {s2_start} && frame < {s3_start};
-  const isResolution = frame >= {s3_start};
-
   return (
-    <div
-      className="absolute inset-x-0 flex flex-col items-center select-none pointer-events-none px-6"
-      style={{{{ top: 280, height: 1060, maxWidth: 960, left: "50%", transform: "translateX(-50%)" }}}}
-    >
-      {{/* ═══ HOOK (frames 0 → {s2_start}) ════════════════════════════════
-       * COMMUNICATE: {hook_narration}
-       * Establish the visual question and initial state described by the Creative Brief.
-       * Choose the strongest visual representation for the narration. Do not default to a card.
-       * If the concept has a causal/physical setup, begin establishing that mechanism during the hook.
-       */}}
-      {{isHook && (null /* TODO: Design and implement hook scene */)}}
-
-      {{/* ═══ MECHANISM (frames {s2_start} → {s3_start}) ════════════════════
-       * COMMUNICATE: {logic_narration}
-       * PRIMARY MECHANISM: {primary_mechanism}
-       * Physical event: {physical_description}
-       * Transformation: {visible_transformation}
-       * Execute this as a live physical event. Use frontier components above.
-       */}}
-      {{isMechanism && (null /* TODO: Design and implement mechanism scene */)}}
-
-      {{/* ═══ RESOLUTION (frames {s3_start} → {total_frames}) ═════════════════
-       * COMMUNICATE: {solution_narration}
-       * Show STATE B: {visible_consequence}
-       * Decisive. One dominant impression. No new information stacks.
-       */}}
-      {{isResolution && (null /* TODO: Design and implement resolution scene */)}}
-    </div>
+    <MotionStagePlayer
+      ast={{motionAst as any}}
+      // Controlled escape hatches:
+      // sceneOverrides={{{{
+      //   "scene_1_hook": (scene, frame) => {{ /* bespoke scene override */ }},
+      // }}}}
+      // actorOverrides={{{{
+      //   "{hero_actor_id}": (actor, scene, frame) => {{ /* bespoke actor override */ }},
+      // }}}}
+    />
   );
 }};
 '''
@@ -1471,6 +1403,8 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
             creative_plan=creative_plan,
             fps=fps,
             product_meta=product_meta,
+            motion_ast=motion_ast,
+            name=name,
         )
     else:
         canvas_code = f"""import React from "react";

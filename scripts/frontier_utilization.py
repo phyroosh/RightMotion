@@ -107,6 +107,7 @@ class FrontierUtilizationAuditor:
         canvas_code: str,
         creative_plan: Optional[Dict[str, Any]] = None,
         clip_name: str = "unknown",
+        motion_ast: Optional[Dict[str, Any]] = None,
     ) -> VideoUtilizationReport:
         # Strip comments
         clean_code = re.sub(r"/\*.*?\*/", "", canvas_code, flags=re.DOTALL)
@@ -117,6 +118,34 @@ class FrontierUtilizationAuditor:
         for prim, f_code in MECHANISM_PRIMITIVES.items():
             if f"<{prim}" in clean_code:
                 detected_mechanisms.append((prim, f_code))
+
+        # Check if Canvas is powered directly by MotionStagePlayer + MotionStageAST
+        is_ast_driven = "<MotionStagePlayer" in clean_code and motion_ast is not None
+        ast_prims = []
+        if is_ast_driven:
+            scenes = motion_ast.get("scenes", [])
+            for sc in scenes:
+                for actor in sc.get("actors", []):
+                    geom_type = actor.get("geometry", {}).get("type", "")
+                    if geom_type == "continuous_boundary":
+                        ast_prims.append(("ThresholdBoundary", "F7"))
+                    elif geom_type == "conduit_pathway":
+                        ast_prims.append(("KineticFurrow", "F7"))
+                    elif geom_type == "fulcrum_beam":
+                        ast_prims.append(("KineticFulcrumBeam", "F4"))
+                    elif geom_type == "monolithic_foundation":
+                        ast_prims.append(("BedrockFoundation", "F5"))
+                if sc.get("causalCouplings"):
+                    ast_prims.append(("CausalActionCoupling", "F7"))
+            if motion_ast.get("persistentWorldMemory"):
+                ast_prims.append(("PersistentMemoryStage", "F7"))
+            bgi = motion_ast.get("environment", {}).get("defaultBackgroundIntent") or (scenes[0].get("backgroundIntent") if scenes else None)
+            if bgi and bgi.get("mode") == "universal":
+                ast_prims.append(("UniversalBackground", "F_UBG"))
+
+            for ap in ast_prims:
+                if ap not in detected_mechanisms:
+                    detected_mechanisms.append(ap)
 
         # 2. Count presentation card containers
         # Patterns for card containers:
@@ -170,6 +199,8 @@ class FrontierUtilizationAuditor:
                 "carvedExtentX",
                 "shatterFrame",
             ]
+        ) or (
+            is_ast_driven and any(len(sc.get("mutations", [])) > 0 for sc in motion_ast.get("scenes", []))
         )
 
         # Causal interactions detected
@@ -185,6 +216,8 @@ class FrontierUtilizationAuditor:
                 "useCausalConsequence",
                 "triggerFrame",
             ]
+        ) or (
+            is_ast_driven and any(len(sc.get("causalCouplings", [])) > 0 for sc in motion_ast.get("scenes", []))
         )
 
         # Calculate Cardification Score:
@@ -248,7 +281,7 @@ class FrontierUtilizationAuditor:
         how_score = max(1.0, min(10.0, how_score))
 
         # 3. Frontier Activation Depths (Levels 0-5)
-        frontier_depths = cls._evaluate_frontier_depths(clean_code, creative_plan)
+        frontier_depths = cls._evaluate_frontier_depths(clean_code, creative_plan, ast_prims=ast_prims)
 
         # Overall verdict
         if is_cardified:
@@ -293,6 +326,7 @@ class FrontierUtilizationAuditor:
         cls,
         clean_code: str,
         creative_plan: Optional[Dict[str, Any]],
+        ast_prims: Optional[List[Tuple[str, str]]] = None,
     ) -> Dict[str, FrontierDepthScore]:
         frontiers = ["F1", "F2", "F4", "F5", "F6", "F7", "F_UBG"]
         results = {}
@@ -316,10 +350,14 @@ class FrontierUtilizationAuditor:
         for f_code in frontiers:
             is_selected = f_code in plan_selected
 
-            # Check presence in clean_code
+            # Check presence in clean_code or executed from Motion AST
             matching_prims = [
                 p for p, fc in MECHANISM_PRIMITIVES.items() if fc == f_code and f"<{p}" in clean_code
             ]
+            if ast_prims:
+                for p, fc in ast_prims:
+                    if fc == f_code and p not in matching_prims:
+                        matching_prims.append(p)
 
             if not is_selected and not matching_prims:
                 results[f_code] = FrontierDepthScore(
@@ -353,13 +391,13 @@ class FrontierUtilizationAuditor:
                     depth = 4
             elif f_code == "F2":
                 if "StressFractureEngine" in matching_prims or "ViscoelasticDeformation" in matching_prims:
-                    depth = 5 if "ThresholdBoundary" not in clean_code else 4
+                    depth = 5 if "ThresholdBoundary" not in clean_code and not any(p == "ThresholdBoundary" for p in matching_prims) else 4
                     has_primary = (depth == 5)
                 else:
                     depth = 3
             elif f_code == "F4":
                 if "KineticFulcrumBeam" in matching_prims or "SemanticMassNode" in matching_prims:
-                    depth = 5 if "ThresholdBoundary" not in clean_code else 4
+                    depth = 5 if "ThresholdBoundary" not in clean_code and not any(p == "ThresholdBoundary" for p in matching_prims) else 4
                     has_primary = (depth == 5)
                 else:
                     depth = 3
@@ -401,7 +439,15 @@ class FrontierUtilizationAuditor:
             except Exception:
                 pass
 
-        return cls.audit_canvas_code(canvas_code, creative_plan=plan, clip_name=clip_dir.name)
+        ast = None
+        ast_file = clip_dir / "motion_ast.json"
+        if ast_file.exists():
+            try:
+                ast = json.loads(ast_file.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
+        return cls.audit_canvas_code(canvas_code, creative_plan=plan, clip_name=clip_dir.name, motion_ast=ast)
 
     @classmethod
     def format_report_markdown(cls, report: VideoUtilizationReport) -> str:

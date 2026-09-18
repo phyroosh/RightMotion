@@ -35,6 +35,8 @@ export const calculateDurationInFrames = (transcript: any[], fps: number): numbe
 // ============================================================================
 // 1. Clip Component & Transcript Imports
 // ============================================================================
+import { TheMomentumTrapComposition } from "./the_momentum_trap";
+import the_momentum_trapTranscript from "./the_momentum_trap/transcript.json";
 import { PriceOfInactionComposition } from "./price_of_inaction";
 import price_of_inactionTranscript from "./price_of_inaction/transcript.json";
 import { ADHDComposition } from "./adhd";
@@ -232,12 +234,21 @@ import {
   EmotionsThumbnail,
   ChaptersThumbnail,
   PriceOfInactionThumbnail,
+  TheMomentumTrapThumbnail,
 } from "../thumbnails";
 
 // ============================================================================
 // 3. Canonical Clip Registry Array
 // ============================================================================
 export const REGISTERED_CLIPS: ClipRegistration[] = [
+  {
+    id: "the_momentum_trap",
+    pascalName: "TheMomentumTrap",
+    component: TheMomentumTrapComposition,
+    thumbnailComponent: TheMomentumTrapThumbnail,
+    transcript: the_momentum_trapTranscript as any[],
+    format: "shorts",
+  },
   {
     id: "price_of_inaction",
     pascalName: "PriceOfInaction",

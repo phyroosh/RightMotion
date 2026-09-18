@@ -20,6 +20,7 @@ import {
 } from "../components/primitives";
 import { UniversalBackground } from "../components/backgrounds/UniversalBackground";
 import { ProCutout } from "../components/ProCutout";
+import { KineticFulcrumBeam } from "../components/physics/consequence/KineticFulcrumBeam";
 
 export interface MotionStagePlayerProps {
   ast: MotionStageAST;
@@ -105,21 +106,28 @@ export const MotionStagePlayer: React.FC<MotionStagePlayerProps> = ({
         scene.startFrame + 30;
 
       const initialBaselineY =
-        (geometry as any).initialBaselineY ?? resolvedLayout?.y ?? 620;
+        (geometry as any).initialBaselineY ??
+        matchingMutation?.parameters?.initialY ??
+        620;
 
-      const deflectionDelta =
-        matchingMutation?.parameters?.deflectionPx ??
-        (matchingForce ? Math.round(matchingForce.magnitude * 2) : 180);
+      const settledBaselineY =
+        matchingMutation?.parameters?.settledY ??
+        (initialBaselineY + (matchingMutation?.parameters?.deflectionPx ?? 180));
 
-      const settledBaselineY = initialBaselineY + deflectionDelta;
+      const width = resolvedLayout?.width ?? 840;
+      const startX =
+        resolvedLayout?.originAnchor === "center"
+          ? (resolvedLayout?.x ?? 540) - width / 2
+          : (resolvedLayout?.x ?? 120);
+      const endX = startX + width;
 
       return (
         <ThresholdBoundary
           key={actor.id}
           frame={frame}
           fps={fps}
-          startX={resolvedLayout?.x ?? 120}
-          endX={(resolvedLayout?.x ?? 120) + (resolvedLayout?.width ?? 840)}
+          startX={startX}
+          endX={endX}
           initialBaselineY={initialBaselineY}
           settledBaselineY={settledBaselineY}
           strokeColor={visualStyle?.strokeColor ?? "#090d16"}
@@ -142,11 +150,15 @@ export const MotionStagePlayer: React.FC<MotionStagePlayerProps> = ({
       const pass1Duration = grooveMutation?.durationFrames ?? 60;
       const pass2Trigger = pass1Trigger + pass1Duration + 30;
 
+      const furrowWidth = resolvedLayout?.width ?? 800;
       const startX =
-        (geometry as any).start?.[0] ?? resolvedLayout?.x ?? 140;
+        (geometry as any).start?.[0] ??
+        (resolvedLayout?.originAnchor === "center"
+          ? (resolvedLayout?.x ?? 540) - furrowWidth / 2
+          : (resolvedLayout?.x ?? 140));
       const endX =
         (geometry as any).end?.[0] ??
-        (resolvedLayout?.x ?? 140) + (resolvedLayout?.width ?? 800);
+        startX + furrowWidth;
 
       return (
         <KineticFurrow
@@ -178,15 +190,26 @@ export const MotionStagePlayer: React.FC<MotionStagePlayerProps> = ({
         config: { damping: 13, stiffness: 140, mass: 0.6 },
       });
 
+      const w = resolvedLayout?.width ?? 480;
+      const h = resolvedLayout?.height ?? 480;
+      const left =
+        resolvedLayout?.originAnchor === "center"
+          ? (resolvedLayout?.x ?? 540) - w / 2
+          : (resolvedLayout?.x ?? 200);
+      const top =
+        resolvedLayout?.originAnchor === "center"
+          ? (resolvedLayout?.y ?? 680) - h / 2
+          : (resolvedLayout?.y ?? 450);
+
       return (
         <div
           key={actor.id}
           className="absolute flex items-center justify-center pointer-events-none"
           style={{
-            left: resolvedLayout?.x ?? 200,
-            top: resolvedLayout?.y ?? 450,
-            width: resolvedLayout?.width ?? 480,
-            height: resolvedLayout?.height ?? 480,
+            left,
+            top,
+            width: w,
+            height: h,
             transform: `scale(${interpolate(entranceSpring, [0, 1], [0.8, 1])})`,
             opacity: Math.min(1, entranceSpring * 1.2),
             zIndex: actor.zIndex ?? 10,
@@ -195,10 +218,76 @@ export const MotionStagePlayer: React.FC<MotionStagePlayerProps> = ({
           <ProCutout
             assetId={assetPath}
             src={assetPath}
-            width={resolvedLayout?.width ?? 480}
-            height={resolvedLayout?.height ?? 480}
+            width={w}
+            height={h}
             animation="pop_spring"
             glowColor="cyan"
+          />
+        </div>
+      );
+    }
+
+    // --- FULCRUM BEAM (KineticFulcrumBeam) ---
+    if (geomType === "fulcrum_beam") {
+      const tiltMutation = scene.mutations?.find(
+        (m) => m.actorId === actor.id && m.type === "torque_tilt"
+      );
+      const torqueForce = scene.forces?.find(
+        (f) => f.targetActorId === actor.id
+      );
+
+      const triggerFrame =
+        tiltMutation?.triggerFrame ??
+        torqueForce?.triggerFrame ??
+        scene.startFrame + 30;
+
+      const beamWidth = (geometry as any).lengthPx ?? resolvedLayout?.width ?? 820;
+      const maxAngle =
+        tiltMutation?.parameters?.angleDeg ??
+        torqueForce?.magnitude ??
+        14;
+
+      const loads = [
+        {
+          id: `${actor.id}_left_anchor`,
+          arm: "left" as const,
+          mass: 1.0,
+          distance: 280,
+          landFrame: scene.startFrame,
+          label: "EQUILIBRIUM",
+        },
+        {
+          id: `${actor.id}_right_impulse`,
+          arm: "right" as const,
+          mass: 3.2,
+          distance: 280,
+          landFrame: triggerFrame,
+          label: "IMPULSE",
+        },
+      ];
+
+      const left =
+        resolvedLayout?.originAnchor === "center"
+          ? (resolvedLayout?.x ?? 540) - beamWidth / 2
+          : (resolvedLayout?.x ?? 130);
+      const top = resolvedLayout?.y ?? 720;
+
+      return (
+        <div
+          key={actor.id}
+          className="absolute flex items-center justify-center pointer-events-none"
+          style={{
+            left,
+            top,
+            width: beamWidth,
+            height: 120,
+            zIndex: actor.zIndex ?? 15,
+          }}
+        >
+          <KineticFulcrumBeam
+            width={beamWidth}
+            maxAngleDeg={maxAngle}
+            loads={loads}
           />
         </div>
       );
@@ -333,7 +422,7 @@ export const MotionStagePlayer: React.FC<MotionStagePlayerProps> = ({
       groundColor={ast.environment?.groundColor ?? "#f8fafc"}
       lightingTheme={ast.environment?.lightingTheme ?? "clean_studio_radial"}
       gridTexture={ast.environment?.gridTexture ?? true}
-      className={className}
+      className={`absolute inset-0 ${className}`.trim()}
       style={style}
     >
       {/* 1. Universal Background Layer (if active) */}

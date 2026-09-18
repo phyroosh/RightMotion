@@ -786,14 +786,19 @@ class CreativeOrchestrator:
         fps = plan.get("fps", 60)
         total_frames = plan["totalFrames"]
         scene_plans = plan["scenePlans"]
+        niche = plan.get("niche", "self_improvement")
 
-        has_dark_bg = any(
-            sp.get("backgroundIntent", {}).get("mode") == "universal"
-            and "dark" in sp.get("backgroundIntent", {}).get("assetId", "")
-            for sp in scene_plans
-        )
-        ground_color = "#030712" if has_dark_bg else "#f8fafc"
-        lighting_theme = "deep_atmospheric_dark" if has_dark_bg else "clean_studio_radial"
+        bg_reg_path = ROOT_DIR / "public" / "assets" / "universal_backgrounds" / "registry.json"
+        bg_reg = {}
+        if bg_reg_path.exists():
+            try:
+                with open(bg_reg_path, "r", encoding="utf-8") as f:
+                    bg_reg = json.load(f)
+            except Exception:
+                pass
+
+        ground_color = "#030712" if (niche in ["finance", "health"]) else "#f8fafc"
+        lighting_theme = "deep_atmospheric_dark" if (niche in ["finance", "health"]) else "clean_studio_radial"
 
         ast_scenes = []
         persistent_traces = []
@@ -814,29 +819,62 @@ class CreativeOrchestrator:
             if len(narrative_goal.strip()) < 10:
                 narrative_goal = f"Deliver {intent['emotionalTone']} lesson: {intent['narrationText'][:60]}"
 
-            bg_intent = sp.get("backgroundIntent")
+            bg_intent = sp.get("backgroundIntent") or {}
+            bg_asset_id = bg_intent.get("assetId", "")
+            bg_info = bg_reg.get(bg_asset_id, {})
+            bg_tone = bg_info.get("tone")
+            if bg_tone == "dark" or any(k in bg_asset_id.lower() for k in ["dark", "obsidian", "black", "navy", "shadow"]):
+                scene_has_dark_bg = True
+            elif bg_tone == "bright" or any(k in bg_asset_id.lower() for k in ["paper", "white", "bright", "light"]):
+                scene_has_dark_bg = False
+            else:
+                scene_has_dark_bg = (niche in ["finance", "health"])
 
             raw_actors = []
             forces = []
             mutations = []
             causal_couplings = []
 
+            def _format_headline(text: str, max_chars: int = 54) -> str:
+                cleaned = text.split(".")[0].strip()
+                if len(cleaned) <= max_chars:
+                    return cleaned.upper()
+                words = cleaned.split()
+                chosen = []
+                curr_len = 0
+                for w in words:
+                    if curr_len + len(w) + 1 > max_chars:
+                        break
+                    chosen.append(w)
+                    curr_len += len(w) + 1
+                return " ".join(chosen).upper() if chosen else cleaned[:max_chars].upper()
+
             raw_annotations = [{
                 "annotationId": f"{sc_id}_headline",
-                "text": intent["narrationText"][:40].upper(),
+                "text": _format_headline(intent["narrationText"]),
                 "fontSizePx": 68,
-                "color": "#ffffff" if has_dark_bg else "#090d16",
+                "color": "#ffffff" if scene_has_dark_bg else "#090d16",
             }]
 
             if sc_id == "scene_1_hook":
+                ill_rel = f"{clip_name}/assets/scene_illustration.png"
+                ill_full = ROOT_DIR / "public" / clip_name / "assets" / "scene_illustration.png"
+                if not ill_full.exists():
+                    alt_full = ROOT_DIR / "public" / clip_name / "scene_illustration.png"
+                    if alt_full.exists():
+                        ill_rel = f"{clip_name}/scene_illustration.png"
+                    else:
+                        p_meta = plan.get("semanticAssets", {}).get("problemCutout", {})
+                        ill_rel = p_meta.get("path", "assets/psychology/tangled_confusion_chaos.png")
+
                 raw_actors.append({
                     "id": f"{clip_name}_hero_illustration",
                     "semanticRole": "hook_curiosity_anchor",
                     "narrativeImportance": "HERO",
-                    "assetPath": f"{clip_name}/assets/scene_illustration.png",
+                    "assetPath": ill_rel,
                     "geometry": {
                         "type": "semantic_cutout",
-                        "assetPath": f"{clip_name}/assets/scene_illustration.png",
+                        "assetPath": ill_rel,
                         "widthPx": 760,
                         "heightPx": 480,
                     },
@@ -1069,6 +1107,9 @@ class CreativeOrchestrator:
             for rb in resolved_bounds:
                 if rb.id.endswith("_headline") or rb.id.endswith("_consequence_label"):
                     continue
+                if rb.id.endswith("_presenter_host"):
+                    # Presenter host is mounted natively by Presenter.tsx (GlossyJudyIntro)
+                    continue
                 matched_raw = next((ra for ra in raw_actors if ra["id"] == rb.id), None)
                 geom = matched_raw.get("geometry") if matched_raw else None
                 if not geom:
@@ -1089,7 +1130,7 @@ class CreativeOrchestrator:
                     "narrativeImportance": "HERO" if rb.importance in ["HERO", "CRITICAL"] else "SECONDARY",
                     "geometry": geom,
                     "visualStyle": {
-                        "strokeColor": "#ffffff" if has_dark_bg else "#090d16",
+                        "strokeColor": "#ffffff" if scene_has_dark_bg else "#090d16",
                         "opacity": 1.0,
                     },
                     "resolvedLayout": {
@@ -1109,17 +1150,17 @@ class CreativeOrchestrator:
                 if rb.id.endswith("_headline"):
                     annotations.append({
                         "annotationId": rb.id,
-                        "text": rb.text_content or intent["narrationText"][:40].upper(),
+                        "text": rb.text_content or _format_headline(intent["narrationText"]),
                         "font": "Montserrat Black",
                         "fontSizePx": int(rb.font_size_px or 68),
-                        "color": "#ffffff" if has_dark_bg else "#090d16",
+                        "color": "#ffffff" if scene_has_dark_bg else "#090d16",
                         "role": "hook_slam" if sc_id == "scene_1_hook" else "thesis_statement",
                         "staticPlacement": {
                             "x": int(rb.x),
                             "y": int(rb.y),
                         },
                         "startFrame": intent["startFrame"],
-                        "durationFrames": min(120, intent["endFrame"] - intent["startFrame"]),
+                        "durationFrames": intent["endFrame"] - intent["startFrame"],
                         "inAnimation": "scale_pop",
                     })
                 elif rb.id.endswith("_consequence_label"):
@@ -1128,7 +1169,7 @@ class CreativeOrchestrator:
                         "text": vis_conseq.upper()[:45],
                         "font": "JetBrains Mono Bold",
                         "fontSizePx": 38,
-                        "color": "#ffffff" if has_dark_bg else "#64748b",
+                        "color": "#ffffff" if scene_has_dark_bg else "#090d16",
                         "role": "action_verb",
                         "staticPlacement": {
                             "x": int(rb.x),
@@ -1171,7 +1212,7 @@ class CreativeOrchestrator:
             "environment": {
                 "groundColor": ground_color,
                 "lightingTheme": lighting_theme,
-                "gridTexture": not has_dark_bg,
+                "gridTexture": not (niche in ["finance", "health"]),
                 "safeBounds": {
                     "top": 280,
                     "bottom": 1340,

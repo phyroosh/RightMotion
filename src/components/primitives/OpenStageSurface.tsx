@@ -45,9 +45,12 @@ export const OpenStageSurface: React.FC<OpenStageSurfaceProps> = ({
     backgroundStyle = { backgroundColor: groundColor };
   }
 
+  const isAbsolute = className.includes("absolute");
+  const positionClass = isAbsolute ? "" : "relative";
+
   return (
     <div
-      className={`relative w-[1080px] h-[1920px] overflow-hidden select-none ${className}`}
+      className={`${positionClass} w-[1080px] h-[1920px] overflow-hidden select-none ${className}`.trim()}
       style={{
         ...backgroundStyle,
         ...style,
