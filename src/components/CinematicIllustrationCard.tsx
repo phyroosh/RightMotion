@@ -29,7 +29,8 @@ export type IllustrationColor =
   | "emerald"
   | "violet"
   | "blue"
-  | "rose";
+  | "rose"
+  | "sky";
 
 export interface IllustrationBeat {
   /** Spoken cue frame when this overlay activates */
@@ -60,6 +61,14 @@ export interface CinematicIllustrationCardProps {
   title?: string;
   /** Secondary diagnostic subtitle (optional) */
   subtitle?: string;
+  /** Optional caption alias for subtitle */
+  caption?: string;
+  /** Optional frame alias */
+  frame?: number;
+  /** Optional startFrame alias for entranceFrame */
+  startFrame?: number;
+  /** Optional visual variant */
+  variant?: string;
   /** Telemetry badge text (optional, strictly opt-in) */
   badgeLabel?: string;
   /** Color theme for neon accents & glow */
@@ -93,9 +102,13 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
   imageSrc,
   title,
   subtitle,
+  caption,
+  frame: propFrame,
+  startFrame,
+  variant,
   badgeLabel,
   accentColor = "cyan",
-  entranceFrame = 0,
+  entranceFrame: propEntranceFrame = 0,
   subtitleFrame,
   highlightFrame,
   beats = [],
@@ -108,6 +121,8 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
   showTitle = false,
   enableKenBurns = true,
 }) => {
+  const entranceFrame = startFrame ?? propEntranceFrame;
+  const cardSubtitle = subtitle ?? caption;
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -259,6 +274,18 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
       spotlightGlow: "shadow-[0_0_35px_rgba(244,63,94,0.6)]",
       stampBg: "bg-rose-950/90",
       stampBorder: "border-rose-500/80",
+    },
+    sky: {
+      border: "border-sky-500/50",
+      glowBg: "from-sky-500/25 via-blue-600/15 to-transparent",
+      badgeText: "text-sky-400",
+      badgeBg: "bg-sky-500/15 border-sky-500/40",
+      accentText: "text-sky-300",
+      pulseColor: "bg-sky-400",
+      spotlightBorder: "border-sky-400",
+      spotlightGlow: "shadow-[0_0_35px_rgba(14,165,233,0.6)]",
+      stampBg: "bg-sky-950/90",
+      stampBorder: "border-sky-500/80",
     },
   };
 
@@ -455,7 +482,7 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
               <h2 className="text-5xl font-black text-white tracking-tight leading-tight">
                 {title}
               </h2>
-              {subtitle && isSubtitleActive && (
+              {cardSubtitle && isSubtitleActive && (
                 <div
                   style={{
                     opacity: Math.min(1, spSubtitle * 1.3),
@@ -463,7 +490,7 @@ export const CinematicIllustrationCard: React.FC<CinematicIllustrationCardProps>
                   }}
                 >
                   <p className={`text-3xl font-bold ${currentTheme.accentText} mt-2 tracking-wide`}>
-                    {subtitle}
+                    {cardSubtitle}
                   </p>
                 </div>
               )}

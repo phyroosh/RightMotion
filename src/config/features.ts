@@ -33,3 +33,8 @@ export const FEATURES = {
  * Change this to `true` to re-enable Frontier #3.
  */
 export const ENABLE_CINEMATIC_CAMERA_V3: boolean = FEATURES.ENABLE_CINEMATIC_CAMERA_V3;
+
+/**
+ * Canonical composition frame rate across RightMotion video pipelines.
+ */
+export const CANONICAL_FPS: number = 60;

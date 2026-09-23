@@ -1,0 +1,445 @@
+{
+  "version": "1.0.0",
+  "clipId": "emotional_distance",
+  "topic": "Emotional Distance",
+  "niche": "self_improvement",
+  "fps": 60,
+  "totalFrames": 1439,
+  "story": {
+    "coreIdea": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+    "centralClaim": "Burnout is not gradual depletion; it is a structural snapping point triggered by ignored baseline fatigue.",
+    "viewerPromise": "Understand the physical threshold between productive stress and systemic collapse.",
+    "narrativeArc": "Problem -> Mechanism -> Resolution"
+  },
+  "emotionalArc": {
+    "overall": "Curiosity -> Tension & Cognitive Friction -> Epiphany Release -> Grounded Peace",
+    "segments": [
+      {
+        "segmentId": "seg_1_hook",
+        "role": "hook",
+        "startFrame": 0,
+        "endFrame": 360,
+        "emotion": "curiosity_and_recognition",
+        "intensity": 0.9,
+        "attentionSpike": true
+      },
+      {
+        "segmentId": "seg_2_mechanism",
+        "role": "mechanism",
+        "startFrame": 360,
+        "endFrame": 720,
+        "emotion": "analytical_clarity",
+        "intensity": 0.75,
+        "attentionSpike": false
+      },
+      {
+        "segmentId": "seg_3_escalation",
+        "role": "mechanism",
+        "startFrame": 720,
+        "endFrame": 1079,
+        "emotion": "cognitive_tension",
+        "intensity": 0.95,
+        "attentionSpike": true
+      },
+      {
+        "segmentId": "seg_4_resolution",
+        "role": "resolution",
+        "startFrame": 1079,
+        "endFrame": 1439,
+        "emotion": "grounded_confidence",
+        "intensity": 0.75,
+        "attentionSpike": false
+      }
+    ]
+  },
+  "visualConcept": {
+    "conceptName": "Progressive Stress Fracture to Brittle Rupture",
+    "primaryMechanism": "fragmentation",
+    "centralTransformation": "OBSERVATION -> INFORMED_ACTION",
+    "physicalDescription": "A high-contrast structural bedrock supports increasing weight nodes. Micro-cracks propagate silently across the surface. At the critical limit, the structure catastrophically fractures into split shards with a shockwave.",
+    "visibleTransformation": "Pristine structure -> hairline fracture propagation -> structural snap -> split bedrock",
+    "visibleConsequence": "Irreversible fracture forces involuntary pause",
+    "persistentState": "Settled baseline state",
+    "whyThisMechanism": "Candidate 'Progressive Stress Fracture to Brittle Rupture' achieved highest composite score (0.93) with superior semantic clarity (0.95) and mobile readability (0.88). Employs LEVEL_2_PHYSICAL_PROCESS depth to express 'fragmentation' as a live physical event rather than static card text.",
+    "intentionallyNotVisualized": [
+      "Peripheral narration filler words (spoken-only audio load)",
+      "Redundant stat gauges and numerical labels (action precedes notation)",
+      "Decorative background particles and arbitrary floating icons"
+    ],
+    "metaphorDepth": "PHYSICAL_PROCESS"
+  },
+  "shots": [
+    {
+      "shotId": "shot_1_hook",
+      "frameRange": [
+        0,
+        450
+      ],
+      "narrativePurpose": "[HOOK] Establishes the intuitive friction or observable paradox.",
+      "visualObjective": "Establish hero subject and immediate question in high contrast open stage. Ground viewer immediately.",
+      "primaryVisualIdea": "Hero editorial subject introduces Progressive Stress Fracture to Brittle Rupture in an open, high-contrast visual field.",
+      "secondaryVisualSupport": "Subtle host grounding along bottom screen margin.",
+      "visualFocus": {
+        "primary": "Hero illustration card",
+        "secondary": "Subtle host grounding along bottom screen margin.",
+        "backgroundRole": "Pristine ambient canvas; zero competing visual targets or distracting motion"
+      },
+      "visualDensity": "LOW",
+      "componentBudget": 1,
+      "simplificationDirective": "Do not stack multiple floating cards or badges; let the hero illustration and presenter establish focus.",
+      "emotionalState": "High curiosity & tension",
+      "pacingMode": "ACCELERATE",
+      "subject": "Hero illustration & grounded host avatar",
+      "visualQuestion": "What causes the sudden drop from functioning to complete burnout?",
+      "visualMechanism": {
+        "type": "editorial_framing",
+        "confidence": "OPTIONAL"
+      },
+      "suggestedComponents": [
+        {
+          "component": "CinematicIllustrationCard",
+          "confidence": "RECOMMENDED",
+          "reason": "Opening 2.5s hero editorial framing (Rule 4)",
+          "importPath": "../../components/CinematicIllustrationCard",
+          "visualComplexity": "LOW",
+          "bestUse": "single_subject"
+        },
+        {
+          "component": "GlossyJudyIntro",
+          "confidence": "RECOMMENDED",
+          "reason": "Grounded presenter connection on mobile screens",
+          "importPath": "../../components/pure_graphics",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system"
+        }
+      ],
+      "composition": {
+        "mode": "open_canvas",
+        "focalPoint": "upper_third_narrative",
+        "confidence": "RECOMMENDED"
+      },
+      "camera": {
+        "mode": "handheld_drift",
+        "movement": "Subtle organic drift with intimate presenter/hero framing",
+        "confidence": "RECOMMENDED"
+      },
+      "stateChange": {
+        "whatExistsAtBeginning": "Uninitiated baseline / untouched space",
+        "whatHappens": "Initial friction introduced; subject confronts the core question",
+        "whatVisiblyChanges": "Hero visual or presenter establishes the scene; primary question surfaces",
+        "whatExistsAtEnd": "State A: Problem space actively engaged",
+        "whyChangeMatters": "Captures curiosity in the first 2.5s before the viewer scrolls away"
+      },
+      "transitionToNext": {
+        "type": "hard_cut",
+        "motivation": "Sharp cognitive break matching narrative pivot"
+      },
+      "soundCues": [
+        {
+          "type": "whoosh_deep",
+          "frame": 4,
+          "purpose": "Opening scene presence"
+        }
+      ],
+      "captionBehavior": {
+        "visibility": "normal",
+        "emphasisWords": [
+          "MOST",
+          "PAINFUL",
+          "KIND"
+        ]
+      }
+    },
+    {
+      "shotId": "shot_2_mechanism",
+      "frameRange": [
+        450,
+        919
+      ],
+      "narrativePurpose": "[MECHANISM] Unpacks the hidden causal mechanism driving the paradox.",
+      "visualObjective": "Execute FRAGMENTATION: A high-contrast structural bedrock supports increasing weight nodes. Micro-cracks propagate silently across the surface. At the critical limit, the structure catastrophically fractures into split shards with a shockwave.. Viewer must observe physical state changing live.",
+      "primaryVisualIdea": "One active fragmentation system evolves: Pristine structure -> hairline fracture propagation -> structural snap -> split bedrock.",
+      "secondaryVisualSupport": "A single ghost trace or subtle load indicator.",
+      "visualFocus": {
+        "primary": "Active mechanical transformation",
+        "secondary": "A single ghost trace or subtle load indicator.",
+        "backgroundRole": "Pristine ambient canvas; zero competing visual targets or distracting motion"
+      },
+      "visualDensity": "MEDIUM",
+      "componentBudget": 1,
+      "simplificationDirective": "Do not combine with secondary dials, multiple charts, or decorative floating particles. One deforming system carries the scene.",
+      "emotionalState": "Active cause-and-effect physical propagation",
+      "pacingMode": "ACCELERATE",
+      "subject": "Active fragmentation mechanism (Progressive Stress Fracture to Brittle Rupture)",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "visualMechanism": {
+        "type": "fragmentation",
+        "confidence": "RECOMMENDED"
+      },
+      "suggestedComponents": [
+        {
+          "component": "KineticFurrow",
+          "confidence": "OPTIONAL",
+          "reason": "Carves repeated groove pathway illustrating habitual ease",
+          "importPath": "../../components/primitives",
+          "visualComplexity": "LOW",
+          "bestUse": "single_subject"
+        }
+      ],
+      "composition": {
+        "mode": "open_canvas",
+        "focalPoint": "center_mechanism",
+        "confidence": "RECOMMENDED"
+      },
+      "camera": {
+        "mode": "lateral_pan",
+        "movement": "Tracking focal point as resistance builds",
+        "confidence": "RECOMMENDED"
+      },
+      "stateChange": {
+        "whatExistsAtBeginning": "System under rising load (State A)",
+        "whatHappens": "Live execution of linear: Pristine structure -> hairline fracture propagation -> structural snap -> split bedrock",
+        "whatVisiblyChanges": "Live physical deformation, worn furrow deepening, or threshold approaching breaking point",
+        "whatExistsAtEnd": "System at tipping threshold or undergoing phase change",
+        "whyChangeMatters": "Allows the viewer to SEE the invisible psychology physically operate"
+      },
+      "transitionToNext": {
+        "type": "hard_cut",
+        "motivation": "Sharp cognitive break matching narrative pivot"
+      },
+      "soundCues": [
+        {
+          "type": "click",
+          "frame": 458,
+          "purpose": "Mechanical state shift engagement"
+        },
+        {
+          "type": "marker_scribble",
+          "frame": 495,
+          "purpose": "Annotation or pathway emphasis"
+        }
+      ],
+      "captionBehavior": {
+        "visibility": "normal",
+        "emphasisWords": [
+          "LAUGH",
+          "JOKES",
+          "CONVERSATIONS"
+        ]
+      },
+      "continuity": {
+        "inheritFromShot": "shot_1_hook",
+        "preserveElements": [
+          "boundary_axis",
+          "tension_vector"
+        ],
+        "persistentTrace": "Ghost outline of untouched baseline"
+      }
+    },
+    {
+      "shotId": "shot_3_escalation",
+      "frameRange": [
+        919,
+        1326
+      ],
+      "narrativePurpose": "[ESCALATION] Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualObjective": "Execute FRAGMENTATION: A high-contrast structural bedrock supports increasing weight nodes. Micro-cracks propagate silently across the surface. At the critical limit, the structure catastrophically fractures into split shards with a shockwave.. Viewer must observe physical state changing live.",
+      "primaryVisualIdea": "One active fragmentation system evolves: Pristine structure -> hairline fracture propagation -> structural snap -> split bedrock.",
+      "secondaryVisualSupport": "A single ghost trace or subtle load indicator.",
+      "visualFocus": {
+        "primary": "Active mechanical transformation",
+        "secondary": "A single ghost trace or subtle load indicator.",
+        "backgroundRole": "Pristine ambient canvas; zero competing visual targets or distracting motion"
+      },
+      "visualDensity": "MEDIUM",
+      "componentBudget": 1,
+      "simplificationDirective": "Do not combine with secondary dials, multiple charts, or decorative floating particles. One deforming system carries the scene.",
+      "emotionalState": "Pregnant pause: visual breath before the tipping point",
+      "pacingMode": "HOLD",
+      "subject": "Active fragmentation mechanism (Progressive Stress Fracture to Brittle Rupture)",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "visualMechanism": {
+        "type": "fragmentation",
+        "confidence": "RECOMMENDED"
+      },
+      "suggestedComponents": [
+        {
+          "component": "KineticFurrow",
+          "confidence": "OPTIONAL",
+          "reason": "Carves repeated groove pathway illustrating habitual ease",
+          "importPath": "../../components/primitives",
+          "visualComplexity": "LOW",
+          "bestUse": "single_subject"
+        }
+      ],
+      "composition": {
+        "mode": "centered_minimalism",
+        "focalPoint": "center_mechanism",
+        "confidence": "RECOMMENDED"
+      },
+      "camera": {
+        "mode": "static",
+        "movement": "Sudden arrest of visual drift, tension hold",
+        "confidence": "RECOMMENDED"
+      },
+      "stateChange": {
+        "whatExistsAtBeginning": "System under rising load (State A)",
+        "whatHappens": "Live execution of linear: Pristine structure -> hairline fracture propagation -> structural snap -> split bedrock",
+        "whatVisiblyChanges": "Live physical deformation, worn furrow deepening, or threshold approaching breaking point",
+        "whatExistsAtEnd": "System at tipping threshold or undergoing phase change",
+        "whyChangeMatters": "Allows the viewer to SEE the invisible psychology physically operate"
+      },
+      "transitionToNext": {
+        "type": "fade_hold",
+        "motivation": "Decompression after impact; quiet settling into sovereign clarity"
+      },
+      "soundCues": [
+        {
+          "type": "click",
+          "frame": 927,
+          "purpose": "Mechanical state shift engagement"
+        },
+        {
+          "type": "marker_scribble",
+          "frame": 964,
+          "purpose": "Annotation or pathway emphasis"
+        }
+      ],
+      "captionBehavior": {
+        "visibility": "reduced",
+        "emphasisWords": [
+          "SOLITUDE",
+          "PEACEFUL",
+          "DISCONNECTION"
+        ]
+      },
+      "continuity": {
+        "inheritFromShot": "shot_2_mechanism",
+        "preserveElements": [
+          "boundary_axis",
+          "tension_vector"
+        ],
+        "persistentTrace": "Ghost outline of untouched baseline"
+      }
+    },
+    {
+      "shotId": "shot_4_resolution",
+      "frameRange": [
+        1326,
+        1439
+      ],
+      "narrativePurpose": "[RESOLUTION] The decisive operational takeaway or sovereign resolution.",
+      "visualObjective": "Present settled sovereign state. Zero cluttered dashboard cards; one decisive visual impression.",
+      "primaryVisualIdea": "One quiet, grounded sovereign state settles with generous negative breathing room.",
+      "secondaryVisualSupport": "A single permanent baseline mark or settled status label.",
+      "visualFocus": {
+        "primary": "Settled sovereign baseline",
+        "secondary": "A single permanent baseline mark or settled status label.",
+        "backgroundRole": "Pristine ambient canvas; zero competing visual targets or distracting motion"
+      },
+      "visualDensity": "LOW",
+      "componentBudget": 1,
+      "simplificationDirective": "Do not build a dashboard summary. End on a clean, grounded baseline with generous negative space.",
+      "emotionalState": "Clarity, sovereign recalibration, grounded closure",
+      "pacingMode": "RELEASE",
+      "subject": "Grounded sovereign state / persistent artifact",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "visualMechanism": {
+        "type": "editorial_framing",
+        "confidence": "OPTIONAL"
+      },
+      "suggestedComponents": [
+        {
+          "component": "PersistentMemoryStage",
+          "confidence": "OPTIONAL",
+          "reason": "Leaves persistent ghost trace of the journey",
+          "importPath": "../../components/primitives",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system"
+        }
+      ],
+      "composition": {
+        "mode": "centered_minimalism",
+        "focalPoint": "upper_third_narrative",
+        "confidence": "RECOMMENDED"
+      },
+      "camera": {
+        "mode": "static",
+        "movement": "Steady grounded wide observation, zero unnecessary camera travel",
+        "confidence": "RECOMMENDED"
+      },
+      "stateChange": {
+        "whatExistsAtBeginning": "Decompressed post-epiphany space",
+        "whatHappens": "Stabilization; sovereign boundary grounded; persistent memory trace settles",
+        "whatVisiblyChanges": "Deliberate calm; environment reflects Settled baseline state",
+        "whatExistsAtEnd": "State B: INFORMED_ACTION",
+        "whyChangeMatters": "Leaves the viewer with an unforgettable decisive takeaway and emotional peace"
+      },
+      "soundCues": [
+        {
+          "type": "whoosh_cinematic",
+          "frame": 1331,
+          "purpose": "Settling into final resolution"
+        }
+      ],
+      "captionBehavior": {
+        "visibility": "normal",
+        "emphasisWords": [
+          "AUTHENTIC",
+          "CONNECTION",
+          "BEGINS"
+        ]
+      },
+      "continuity": {
+        "inheritFromShot": "shot_3_escalation",
+        "preserveElements": [
+          "ground_recalibrated_line"
+        ],
+        "persistentTrace": "Permanent mark of Settled baseline state"
+      }
+    }
+  ],
+  "visualLanguage": {
+    "activeFrontiers": [
+      "F_BASE",
+      "F5",
+      "F_UBG",
+      "F1",
+      "F2",
+      "F7"
+    ],
+    "forbiddenPatterns": [
+      "Dashboard/list-card rows with numbered pills",
+      "Empty colored container boxes replacing physical mechanisms",
+      "Body paragraphs rendered in text boxes",
+      "Unmotivated bobbing or constant spinning",
+      "Meme cards or reaction stickers"
+    ],
+    "referenceClips": [
+      "the_law_of_structural_load",
+      "the_threshold_effect",
+      "small_compromises"
+    ],
+    "groundColor": "#f8fafc",
+    "accentColor": "#0284c7"
+  },
+  "assets": {
+    "illustration": "emotional_distance/assets/scene_illustration.png",
+    "problemCutout": {
+      "id": "tangled_confusion_chaos",
+      "path": "assets/psychology/tangled_confusion_chaos.png"
+    },
+    "solutionCutout": {
+      "id": "enlightened_mind_insight",
+      "path": "assets/psychology/enlightened_mind_insight.png"
+    }
+  },
+  "agentContract": {
+    "instructions": "READ THIS BRIEF BEFORE IMPLEMENTING Canvas.tsx. The Shot Director defines WHAT the viewer must see; you as the AI editor decide HOW to realize it. Do not default to cards or slideshows. Ground ideas in physical mechanisms, open-stage choreography, and deliberate editorial rhythm. CLARITY OVER COMPLEXITY \u00b7 SIMPLICITY OVER SPECTACLE.",
+    "confidenceHierarchy": "REQUIRED: Narrative purpose, visual objective, primary visual idea, and 5-question visual state change.\nRECOMMENDED: Primary visual mechanism, composition mode, camera movement, and visual focus.\nOPTIONAL: Suggested components (mutually optional options, NOT ingredients. Budget: 1).",
+    "visualHierarchy": "PRIMARY (one dominant visual idea) -> SECONDARY (at most one supporting detail) -> AMBIENT (context only; zero competition). Never multiple competing targets at once.",
+    "componentRestraint": "suggestedComponents are MUTUALLY OPTIONAL candidates, NOT ingredients. Component budget defaults to 1 (max 2 for complex mechanisms). Prefer the smallest number of visual systems.",
+    "fiveQuestionsRule": "For every shot, you must satisfy: 1) What exists at the beginning? 2) What happens? 3) What visibly changes? 4) What exists at the end? 5) Why does that change matter? If only text changes, redesign the scene around physical or spatial transformation.",
+    "minimalityPass": "Before finalizing every major shot, execute the 'Remove One Thing' pass: What can be removed without losing meaning? Strip decorative particles, redundant metrics, and extra badges. If the physical motion already explains the idea, stop adding things."
+  }
+}

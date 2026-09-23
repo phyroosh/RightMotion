@@ -1,0 +1,116 @@
+{
+  "topic": "Emotional Distance",
+  "coreIdea": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+  "viewerQuestion": "What causes the sudden drop from functioning to complete burnout?",
+  "thumbnailJob": "Visually manifest 'State of confusion transforming into decisive structural sovereignty' to trigger immediate curiosity.",
+  "chosenConcept": {
+    "conceptId": "concept_1_story_metaphor",
+    "title": "The Emotional Distance",
+    "archetype": "impossible_metaphor",
+    "visualMetaphor": "State of confusion transforming into decisive structural sovereignty",
+    "focalSubject": "Physical narrative manifestation: State of confusion transforming into decisive structural sovereignty",
+    "subjectRole": "experiencing_problem",
+    "hasPerson": true,
+    "textHook": "EMOTIONAL DISTANCE",
+    "textStrategy": "minimal_punch_word",
+    "colorMood": "luminous_off_white_with_rose_accent",
+    "accentColor": "#f43f5e",
+    "groundColor": "#f8fafc",
+    "visualMechanism": "subconscious_threshold_shift",
+    "assetStrategy": "bespoke_ai_hero_illustration",
+    "selectionReason": "Concept 'The Emotional Distance' scored highest (9.49/10). Peak instant-read (9.4), highest curiosity (9.6), and unmatched mobile silhouette clarity."
+  },
+  "alternativeConcepts": [
+    {
+      "conceptId": "concept_2_scale_constraint",
+      "title": "The Unseen Emotional Distance",
+      "archetype": "scale_constraint",
+      "overallScore": 8.88,
+      "rejectionReason": "Lower score (8.88) compared to winner (9.49)."
+    },
+    {
+      "conceptId": "concept_3_minimal_object",
+      "title": "The Emotional Distance",
+      "archetype": "minimal_object",
+      "overallScore": 8.78,
+      "rejectionReason": "Lower score (8.78) compared to winner (9.49)."
+    }
+  ],
+  "primarySubject": "Physical narrative manifestation: State of confusion transforming into decisive structural sovereignty",
+  "visualMetaphor": "State of confusion transforming into decisive structural sovereignty",
+  "compositionStrategy": {
+    "archetype": "impossible_metaphor",
+    "aspectRatio": "9:16",
+    "canvasWidth": 1080,
+    "canvasHeight": 1920,
+    "ground": "#f8fafc",
+    "dominantMass": "Center-weighted vertical anchor",
+    "negativeSpace": "Generous breathing room on upper 30% for high-impact hook word"
+  },
+  "textStrategy": {
+    "hookWord": "EMOTIONAL DISTANCE",
+    "font": "Montserrat Black",
+    "fontSize": 104,
+    "color": "#090d16",
+    "role": "Single high-impact curiosity anchor; never an explanation",
+    "bannedElements": [
+      "categoryBadge",
+      "extraBadge",
+      "subtitleCard",
+      "articleParagraph"
+    ]
+  },
+  "focalPoint": "Physical narrative manifestation: State of confusion transforming into decisive structural sovereignty",
+  "hierarchy": {
+    "level1_hook": "Primary Hook: Physical narrative manifestation: State of confusion transforming into decisive structural sovereignty (dominant silhouette, ~60% screen area)",
+    "level2_concept": "Concept: State of confusion transforming into decisive structural sovereignty",
+    "level3_support": "Support: High-impact punch text 'EMOTIONAL DISTANCE' in inky contrast"
+  },
+  "colorStrategy": {
+    "ground": "#f8fafc",
+    "accent": "#f43f5e",
+    "textContrastRatio": "12:1",
+    "rule": "Clean luminous ground or deep obsidian with exactly ONE saturated semantic accent"
+  },
+  "assetRequirements": {
+    "type": "bespoke_ai_hero_illustration",
+    "targetPath": "public/emotional_distance/assets/thumbnail_hero.png",
+    "needsAiGeneration": true,
+    "promptDirective": "Editorial 2.5D conceptual visual: State of confusion transforming into decisive structural sovereignty. Generous negative space, studio lighting, razor-sharp edges."
+  },
+  "complexityBudget": {
+    "maxTextElements": 1,
+    "maxWordCount": 2,
+    "pillBadgesAllowed": false,
+    "subtitleCardsAllowed": false,
+    "maxPrimarySubjects": 1,
+    "contrastRatioTarget": "7:1",
+    "safeZoneTop": "8%",
+    "safeZoneBottom": "10%"
+  },
+  "mobileConstraints": {
+    "targetScale": "360x640 preview",
+    "minSubjectPixelHeight": 750,
+    "minTextPixelHeight": 80,
+    "silhouetteSeparation": "Strong high-contrast boundary against clean ground"
+  },
+  "curiosityMechanism": {
+    "type": "subconscious_threshold_shift",
+    "gap": "What causes the sudden drop from functioning to complete burnout?",
+    "resolutionInVideo": "Video resolves how endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture. operates through state of confusion transforming into decisive structural sovereignty."
+  },
+  "truthfulnessCheck": {
+    "isTruthful": true,
+    "rationale": "Directly symbolizes endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture. through state of confusion transforming into decisive structural sovereignty without sensationalism or misleading claims."
+  },
+  "validationResults": {
+    "status": "APPROVED",
+    "rulesPassed": [
+      "Rule 0: Autonomous creative production",
+      "Rule 4: Zero memes, high-resolution physical metaphor",
+      "Rule 5: Creative standard, minimum sufficient composition",
+      "Rule 5.5: Zero pill badges, zero subtitle cards, zero floating waist cuts",
+      "Rule 5.4: Ultra-high contrast (12:1), luminous clean ground"
+    ]
+  }
+}

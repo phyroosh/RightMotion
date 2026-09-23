@@ -1,0 +1,341 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "Starting a new habit feels physically exhausting. That isn't a lack of discipline. It's surface friction. The first time you take an action, the ground resists. But each repetition carves a deeper physical groove. The edges smooth out. The furrow deepens. Over time, resistance drops to zero. You don't need endless motivation. You just need to carve the track until momentum takes over.",
+    "topic": "How Habits Are Physically Carved",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 63,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "a70d7f0551cfa74b2d697b40b7aebf0ab2db0be21653ac2f9a363055b7653707"
+  },
+  "story": {
+    "coreIdea": "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+    "centralClaim": "Destructive patterns do not begin with catastrophic failures; they begin with unexamined micro-compromises.",
+    "viewerPromise": "Recognize the invisible shift where a single small concession hardens into an automatic habit.",
+    "viewerQuestion": "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+    "narrativeArchitecture": "OBSERVATION -> BASELINE_SHIFT -> ACCUMULATION -> CRITICAL_REVEAL"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "Starting a new habit feels physically exhausting.",
+      "sentenceIndices": [
+        0
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "That isn't a lack of discipline. It's surface friction. The first time you take an action, the ground resists. But each repetition carves a deeper physical groove.",
+      "sentenceIndices": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "The edges smooth out. The furrow deepens. Over time, resistance drops to zero. You don't need endless motivation.",
+      "sentenceIndices": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "You just need to carve the track until momentum takes over.",
+      "sentenceIndices": [
+        9
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "Baseline Drift",
+      "Micro-Concession",
+      "Behavioral Normalization"
+    ],
+    "entities": [
+      "Integrity Threshold Line",
+      "Subconscious Anchor",
+      "Marker Blade"
+    ],
+    "persistentObjects": [
+      "Integrity Threshold Line (tracks baseline deflection across scenes)"
+    ]
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "Starting a new habit feels physically exhausting.",
+        "type": "supporting"
+      },
+      {
+        "statement": "That isn't a lack of discipline.",
+        "type": "supporting"
+      },
+      {
+        "statement": "It's surface friction.",
+        "type": "supporting"
+      },
+      {
+        "statement": "The first time you take an action, the ground resists.",
+        "type": "supporting"
+      },
+      {
+        "statement": "But each repetition carves a deeper physical groove.",
+        "type": "supporting"
+      },
+      {
+        "statement": "The edges smooth out.",
+        "type": "supporting"
+      },
+      {
+        "statement": "The furrow deepens.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Over time, resistance drops to zero.",
+        "type": "supporting"
+      },
+      {
+        "statement": "You don't need endless motivation.",
+        "type": "supporting"
+      },
+      {
+        "statement": "You just need to carve the track until momentum takes over.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": []
+  },
+  "causalGraph": {
+    "nodes": [
+      {
+        "id": "behavioral_baseline",
+        "initialCondition": "STRICT_INTEGRITY",
+        "reversibility": "PARTIALLY_REVERSIBLE"
+      },
+      {
+        "id": "compromise_accumulator",
+        "initialCondition": "ZERO",
+        "reversibility": "DECAYING"
+      }
+    ],
+    "chains": [
+      {
+        "cause": "First small unnoticed concession",
+        "mechanism": "Absence of immediate pain reduces perceived risk",
+        "event": "TRIGGER",
+        "consequence": "Internal threshold adjusts slightly downward",
+        "resultingState": "ERODING"
+      },
+      {
+        "cause": "Repeated concession over time",
+        "mechanism": "Neural adaptation normalizes the lower standard",
+        "event": "ACCUMULATION",
+        "consequence": "Compromise becomes the default subconscious baseline",
+        "resultingState": "HARDENED_HABIT"
+      }
+    ],
+    "thresholds": [
+      {
+        "source": "compromise_accumulator",
+        "condition": "repetitions >= habit_threshold",
+        "consequence": "Behavior shifts from conscious choice to automatic default"
+      }
+    ]
+  },
+  "stateModel": {
+    "initialState": "CONSCIOUS_AGENCY",
+    "intermediateStates": [
+      "UNNOTICED_EROSION",
+      "NORMALIZED_TOLERANCE"
+    ],
+    "finalState": "HARDENED_AUTOMATICITY",
+    "dynamics": "transformation"
+  },
+  "temporalModel": {
+    "pacing": "sudden_snap",
+    "hasRepetition": false,
+    "repetitionNature": "none",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "The edges smooth out. The furrow deepens. Over time, resista",
+      "approximateTimestampSec": 12.1,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "Starting",
+      "It",
+      "ACTION",
+      "But",
+      "Over"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "contrast",
+      "physicalDescription": "A crisp horizontal baseline marker subtly shifting downward under a light weight",
+      "rationale": "Visually embodies the insidious nature of micro-concessions."
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "opportunityType": "reveal",
+      "physicalDescription": "Live marker cut slicing through text with AnimatedSlashStrike on the exact spoken realization",
+      "rationale": "Action over display: the viewer witnesses the rejection happening in real time."
+    }
+  ],
+  "visualAbsence": [],
+  "semanticImportance": {
+    "critical": [
+      "Destructive patterns do not begin with catastrophic failures; they begin with unexamined micro-compromises.",
+      "A repeated low-cost concession quietly alters the system baseline until an abnormal compromise becomes the new unconscious normal.",
+      "Starting a new habit feels physically exhausting."
+    ],
+    "important": [
+      "Recognize the invisible shift where a single small concession hardens into an automatic habit.",
+      "How does a tiny, harmless compromise turn into an automatic habit before you notice?",
+      "That isn't a lack of discipline. It's surface friction. The first time you take an action, the ground resists. But each repetition carves a deeper physical groove.",
+      "You just need to carve the track until momentum takes over."
+    ],
+    "supporting": [
+      "The edges smooth out. The furrow deepens. Over time, resistance drops to zero. You don't need endless motivation."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "At what exact moment does an unexamined concession cross into an unconscious habit?",
+    "visualContradiction": "You believed you made a single minor exception, but your subconscious made a permanent rule",
+    "mostMemorableTransformation": "A microscopic horizontal fault line widening into an immutable granite wall",
+    "textHookCandidates": [
+      "THE SLIPPAGE",
+      "NEW BASELINE",
+      "ONE COMPROMISE",
+      "FAULT LINE"
+    ],
+    "recommendedArchetype": "impossible_metaphor"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "LOW",
+        "rationale": "Intimate single-subject dialogue; camera flight would dilute message punch."
+      },
+      "F2": {
+        "signal": "MEDIUM",
+        "rationale": "Capillary ink absorption expresses irreversible psychological commitment."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "HIGH",
+        "rationale": "Architectural plinth provides grounding for habit foundations."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "VERY_HIGH",
+        "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": false,
+    "issues": [
+      "Script too short (63 words). Aim for 70-100 words (25-35 seconds)."
+    ],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

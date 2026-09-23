@@ -1,0 +1,327 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "You can hold a small weight for a minute without feeling it. But hold that same weight for an hour, and your arm starts to ache. Hold it for a day, and your muscle gives out. The weight never changed. What changed was the duration. Burnout is rarely caused by a catastrophic collapse. It is the quiet accumulation of pressure you convinced yourself was too small to put down. Set the weight down before the structure breaks.",
+    "topic": "Structural Pressure",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 77,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "3052bbd3d97253854efb5ee0244cd32ec783edc8d409c16c776daab13adb1a1e"
+  },
+  "story": {
+    "coreIdea": "Capacity deforms under continuous unacknowledged pressure before structural rupture occurs.",
+    "centralClaim": "Resilience is not infinite absorption; without release, sustained pressure produces irreversible deformation.",
+    "viewerPromise": "See where systemic pressure accumulates before physical breakdown happens.",
+    "viewerQuestion": "Why does pressure suddenly feel unbearable even when the last addition was tiny?",
+    "narrativeArchitecture": "TENSION -> COMPRESSION -> THRESHOLD -> DEFLECTION"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "You can hold a small weight for a minute without feeling it.",
+      "sentenceIndices": [
+        0
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "Why does pressure suddenly feel unbearable even when the last addition was tiny?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "But hold that same weight for an hour, and your arm starts to ache. Hold it for a day, and your muscle gives out. The weight never changed.",
+      "sentenceIndices": [
+        1,
+        2,
+        3
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "What changed was the duration. Burnout is rarely caused by a catastrophic collapse. It is the quiet accumulation of pressure you convinced yourself was too small to put down.",
+      "sentenceIndices": [
+        4,
+        5,
+        6
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "Set the weight down before the structure breaks.",
+      "sentenceIndices": [
+        7
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "Tensile Load",
+      "Elastic Capacity",
+      "Brittle Cleavage"
+    ],
+    "entities": [
+      "Load Block",
+      "Stress Fracture",
+      "Ground Plinth"
+    ],
+    "persistentObjects": [
+      "Load Block (accumulates mass across Scene 1 and Scene 2)"
+    ]
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "You can hold a small weight for a minute without feeling it.",
+        "type": "supporting"
+      },
+      {
+        "statement": "But hold that same weight for an hour, and your arm starts to ache.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Hold it for a day, and your muscle gives out.",
+        "type": "supporting"
+      },
+      {
+        "statement": "The weight never changed.",
+        "type": "supporting"
+      },
+      {
+        "statement": "What changed was the duration.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Burnout is rarely caused by a catastrophic collapse.",
+        "type": "supporting"
+      },
+      {
+        "statement": "It is the quiet accumulation of pressure you convinced yourself was too small to put down.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Set the weight down before the structure breaks.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": []
+  },
+  "causalGraph": {
+    "nodes": [
+      {
+        "id": "structural_integrity",
+        "initialCondition": "UNSTRESSED",
+        "reversibility": "PARTIALLY_REVERSIBLE"
+      },
+      {
+        "id": "accumulated_load",
+        "initialCondition": "MINIMAL",
+        "reversibility": "REVERSIBLE"
+      }
+    ],
+    "chains": [
+      {
+        "cause": "Silent acquiescence / accepting extra burden",
+        "mechanism": "Elastic capacity absorbs load through compressive strain",
+        "event": "DEFORMATION",
+        "consequence": "Material deflection and internal stress accumulate",
+        "resultingState": "HIGH_TENSION"
+      },
+      {
+        "cause": "Load exceeds ultimate tensile strength",
+        "mechanism": "Brittle cleavage along microscopic fault lines",
+        "event": "FAILURE",
+        "consequence": "Instantaneous catastrophic fracture / systemic halt",
+        "resultingState": "RUPTURED"
+      }
+    ],
+    "thresholds": [
+      {
+        "source": "accumulated_load",
+        "condition": "load >= elastic_limit",
+        "consequence": "Trigger brittle stress fracture rupture"
+      }
+    ]
+  },
+  "stateModel": {
+    "initialState": "OBSERVATION",
+    "intermediateStates": [],
+    "finalState": "INFORMED_ACTION",
+    "dynamics": "linear"
+  },
+  "temporalModel": {
+    "pacing": "accelerating",
+    "hasRepetition": false,
+    "repetitionNature": "none",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "What changed was the duration. Burnout is rarely caused by a",
+      "approximateTimestampSec": 14.8,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "But",
+      "Hold",
+      "What",
+      "Burnout",
+      "It",
+      "PRESSURE"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "constraint",
+      "physicalDescription": "Viscoelastic compressive strain bulging laterally under vertical burden",
+      "rationale": "Makes the unacknowledged weight visceral on screen."
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "opportunityType": "threshold",
+      "physicalDescription": "Brittle stress fracture propagation across container surface at peak tension",
+      "rationale": "Visual threshold crossing communicating non-linear system failure."
+    }
+  ],
+  "visualAbsence": [],
+  "semanticImportance": {
+    "critical": [
+      "Resilience is not infinite absorption; without release, sustained pressure produces irreversible deformation.",
+      "Capacity deforms under continuous unacknowledged pressure before structural rupture occurs.",
+      "You can hold a small weight for a minute without feeling it."
+    ],
+    "important": [
+      "See where systemic pressure accumulates before physical breakdown happens.",
+      "Why does pressure suddenly feel unbearable even when the last addition was tiny?",
+      "But hold that same weight for an hour, and your arm starts to ache. Hold it for a day, and your muscle gives out. The weight never changed.",
+      "Set the weight down before the structure breaks."
+    ],
+    "supporting": [
+      "What changed was the duration. Burnout is rarely caused by a catastrophic collapse. It is the quiet accumulation of pressure you convinced yourself was too small to put down."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Constraint Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Constraint Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Constraint Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "Why did the system collapse under a feather-light addition?",
+    "visualContradiction": "Feeling proud of absorbing infinite pressure right before sudden structural fracture",
+    "mostMemorableTransformation": "Pristine load-bearing plinth developing sudden violent brittle cleavage",
+    "textHookCandidates": [
+      "THE SNAP",
+      "LOAD LIMIT",
+      "HIDDEN PRESSURE",
+      "BRITTLE BREAK"
+    ],
+    "recommendedArchetype": "minimal_object"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "LOW",
+        "rationale": "Intimate single-subject dialogue; camera flight would dilute message punch."
+      },
+      "F2": {
+        "signal": "HIGH",
+        "rationale": "Physical strain, compression, or brittle rupture directly expresses the core tension."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "HIGH",
+        "rationale": "Architectural plinth provides grounding for habit foundations."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "VERY_HIGH",
+        "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": true,
+    "issues": [],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

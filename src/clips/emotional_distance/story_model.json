@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "The most painful kind of loneliness is not being physically alone. It is standing in a room full of people and realizing that none of them actually see you. You laugh at the jokes, nod in the conversations, and match the room's energy. But internally, the emotional distance is expanding. Solitude is peaceful. Disconnection in a crowd is exhausting. Stop trying to shrink the gap with people who never cross it. Authentic connection begins when you stop performing.",
+    "topic": "Emotional Distance",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 78,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "c1f9b71a25296f6dfc36453bc8fe090a0df0576e5cf22d4cd21b01ff630222c6"
+  },
+  "story": {
+    "coreIdea": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+    "centralClaim": "Burnout is not gradual depletion; it is a structural snapping point triggered by ignored baseline fatigue.",
+    "viewerPromise": "Understand the physical threshold between productive stress and systemic collapse.",
+    "viewerQuestion": "What causes the sudden drop from functioning to complete burnout?",
+    "narrativeArchitecture": "PROBLEM -> HIDDEN_CAUSE -> ESCALATION -> BREAKPOINT -> RESOLUTION"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "The most painful kind of loneliness is not being physically alone. It is standing in a room full of people and realizing that none of them actually see you.",
+      "sentenceIndices": [
+        0,
+        1
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "What causes the sudden drop from functioning to complete burnout?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "You laugh at the jokes, nod in the conversations, and match the room's energy. But internally, the emotional distance is expanding.",
+      "sentenceIndices": [
+        2,
+        3
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "Solitude is peaceful. Disconnection in a crowd is exhausting. Stop trying to shrink the gap with people who never cross it.",
+      "sentenceIndices": [
+        4,
+        5,
+        6
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "Authentic connection begins when you stop performing.",
+      "sentenceIndices": [
+        7
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "Emotional Distance"
+    ],
+    "entities": [
+      "Editorial Focus Card"
+    ],
+    "persistentObjects": []
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "The most painful kind of loneliness is not being physically alone.",
+        "type": "supporting"
+      },
+      {
+        "statement": "It is standing in a room full of people and realizing that none of them actually see you.",
+        "type": "supporting"
+      },
+      {
+        "statement": "You laugh at the jokes, nod in the conversations, and match the room's energy.",
+        "type": "supporting"
+      },
+      {
+        "statement": "But internally, the emotional distance is expanding.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Solitude is peaceful.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Disconnection in a crowd is exhausting.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Stop trying to shrink the gap with people who never cross it.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Authentic connection begins when you stop performing.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": []
+  },
+  "causalGraph": {
+    "nodes": [],
+    "chains": [],
+    "thresholds": []
+  },
+  "stateModel": {
+    "initialState": "OBSERVATION",
+    "intermediateStates": [],
+    "finalState": "INFORMED_ACTION",
+    "dynamics": "linear"
+  },
+  "temporalModel": {
+    "pacing": "accelerating",
+    "hasRepetition": false,
+    "repetitionNature": "none",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "Solitude is peaceful. Disconnection in a crowd is exhausting",
+      "approximateTimestampSec": 15.0,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "It",
+      "But",
+      "Solitude",
+      "Disconnection",
+      "Stop",
+      "Authentic"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "contrast",
+      "physicalDescription": "High-contrast split editorial layout pairing Judy intimate bust with semantic hero anchor",
+      "rationale": "Establishes personal connection and curiosity on mobile screen."
+    }
+  ],
+  "visualAbsence": [],
+  "semanticImportance": {
+    "critical": [
+      "Burnout is not gradual depletion; it is a structural snapping point triggered by ignored baseline fatigue.",
+      "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+      "The most painful kind of loneliness is not being physically alone. It is standing in a room full of people and realizing that none of them actually see you."
+    ],
+    "important": [
+      "Understand the physical threshold between productive stress and systemic collapse.",
+      "What causes the sudden drop from functioning to complete burnout?",
+      "You laugh at the jokes, nod in the conversations, and match the room's energy. But internally, the emotional distance is expanding.",
+      "Authentic connection begins when you stop performing."
+    ],
+    "supporting": [
+      "Solitude is peaceful. Disconnection in a crowd is exhausting. Stop trying to shrink the gap with people who never cross it."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "What causes the sudden drop from functioning to complete burnout?",
+    "visualContradiction": "Burnout is not gradual depletion; it is a structural snapping point triggered by ignored baseline fatigue.",
+    "mostMemorableTransformation": "State of confusion transforming into decisive structural sovereignty",
+    "textHookCandidates": [
+      "EMOTIONAL DISTANCE"
+    ],
+    "recommendedArchetype": "impossible_metaphor"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "HIGH",
+        "rationale": "Narrative invokes discrete spatial compartments and architectural flow."
+      },
+      "F2": {
+        "signal": "LOW",
+        "rationale": "No physical deformation required; metric or definition scene."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "LOW",
+        "rationale": "Clean luminous light canvas with subtle radial depth is superior."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "LOW",
+        "rationale": "Pure observational statement without state mutations."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": true,
+    "issues": [],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

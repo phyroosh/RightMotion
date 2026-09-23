@@ -1,0 +1,318 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "You think you're analyzing a problem. In reality, your brain is caught in a rumination loop. Real reflection moves in a straight line toward a decision. But rumination bends back on itself. Each repeated thought feeds the original anxiety, spinning the circuit faster while solving nothing. To break the cycle, you don't fight the thought. You change your physical environment. Movement forces the closed circuit to open into reality.",
+    "topic": "How Rumination Traps Your Brain",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 69,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "11beb50a31f48455c927e284420d42ee5a282f71c81706ae2f73e7474855e3fd"
+  },
+  "story": {
+    "coreIdea": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+    "centralClaim": "Burnout is not gradual depletion; it is a structural snapping point triggered by ignored baseline fatigue.",
+    "viewerPromise": "Understand the physical threshold between productive stress and systemic collapse.",
+    "viewerQuestion": "What causes the sudden drop from functioning to complete burnout?",
+    "narrativeArchitecture": "PROBLEM -> HIDDEN_CAUSE -> ESCALATION -> BREAKPOINT -> RESOLUTION"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "You think you're analyzing a problem.",
+      "sentenceIndices": [
+        0
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "What causes the sudden drop from functioning to complete burnout?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "In reality, your brain is caught in a rumination loop. Real reflection moves in a straight line toward a decision. But rumination bends back on itself.",
+      "sentenceIndices": [
+        1,
+        2,
+        3
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "Each repeated thought feeds the original anxiety, spinning the circuit faster while solving nothing. To break the cycle, you don't fight the thought. You change your physical environment.",
+      "sentenceIndices": [
+        4,
+        5,
+        6
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "Movement forces the closed circuit to open into reality.",
+      "sentenceIndices": [
+        7
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "How Rumination Traps Your Brain"
+    ],
+    "entities": [
+      "Editorial Focus Card"
+    ],
+    "persistentObjects": []
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "You think you're analyzing a problem.",
+        "type": "supporting"
+      },
+      {
+        "statement": "In reality, your brain is caught in a rumination loop.",
+        "type": "psychological"
+      },
+      {
+        "statement": "Real reflection moves in a straight line toward a decision.",
+        "type": "supporting"
+      },
+      {
+        "statement": "But rumination bends back on itself.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Each repeated thought feeds the original anxiety, spinning the circuit faster while solving nothing.",
+        "type": "supporting"
+      },
+      {
+        "statement": "To break the cycle, you don't fight the thought.",
+        "type": "supporting"
+      },
+      {
+        "statement": "You change your physical environment.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Movement forces the closed circuit to open into reality.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": []
+  },
+  "causalGraph": {
+    "nodes": [
+      {
+        "id": "structural_integrity",
+        "initialCondition": "UNSTRESSED",
+        "reversibility": "PARTIALLY_REVERSIBLE"
+      },
+      {
+        "id": "accumulated_load",
+        "initialCondition": "MINIMAL",
+        "reversibility": "REVERSIBLE"
+      }
+    ],
+    "chains": [
+      {
+        "cause": "Silent acquiescence / accepting extra burden",
+        "mechanism": "Elastic capacity absorbs load through compressive strain",
+        "event": "DEFORMATION",
+        "consequence": "Material deflection and internal stress accumulate",
+        "resultingState": "HIGH_TENSION"
+      },
+      {
+        "cause": "Load exceeds ultimate tensile strength",
+        "mechanism": "Brittle cleavage along microscopic fault lines",
+        "event": "FAILURE",
+        "consequence": "Instantaneous catastrophic fracture / systemic halt",
+        "resultingState": "RUPTURED"
+      }
+    ],
+    "thresholds": [
+      {
+        "source": "accumulated_load",
+        "condition": "load >= elastic_limit",
+        "consequence": "Trigger brittle stress fracture rupture"
+      }
+    ]
+  },
+  "stateModel": {
+    "initialState": "UNAWARE_STATE",
+    "intermediateStates": [
+      "EXPOSED_MECHANISM",
+      "CRITICAL_PIVOT"
+    ],
+    "finalState": "SOVEREIGN_ACTION",
+    "dynamics": "transformation"
+  },
+  "temporalModel": {
+    "pacing": "cyclic_loop",
+    "hasRepetition": true,
+    "repetitionNature": "behavioral_loop",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "Each repeated thought feeds the original anxiety, spinning t",
+      "approximateTimestampSec": 13.2,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "In",
+      "LOOP",
+      "Real",
+      "But",
+      "Each",
+      "To"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "contrast",
+      "physicalDescription": "High-contrast split editorial layout pairing Judy intimate bust with semantic hero anchor",
+      "rationale": "Establishes personal connection and curiosity on mobile screen."
+    }
+  ],
+  "visualAbsence": [],
+  "semanticImportance": {
+    "critical": [
+      "Burnout is not gradual depletion; it is a structural snapping point triggered by ignored baseline fatigue.",
+      "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+      "You think you're analyzing a problem."
+    ],
+    "important": [
+      "Understand the physical threshold between productive stress and systemic collapse.",
+      "What causes the sudden drop from functioning to complete burnout?",
+      "In reality, your brain is caught in a rumination loop. Real reflection moves in a straight line toward a decision. But rumination bends back on itself.",
+      "Movement forces the closed circuit to open into reality."
+    ],
+    "supporting": [
+      "Each repeated thought feeds the original anxiety, spinning the circuit faster while solving nothing. To break the cycle, you don't fight the thought. You change your physical environment."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "Why did the system collapse under a feather-light addition?",
+    "visualContradiction": "Feeling proud of absorbing infinite pressure right before sudden structural fracture",
+    "mostMemorableTransformation": "Pristine load-bearing plinth developing sudden violent brittle cleavage",
+    "textHookCandidates": [
+      "THE SNAP",
+      "LOAD LIMIT",
+      "HIDDEN PRESSURE",
+      "BRITTLE BREAK"
+    ],
+    "recommendedArchetype": "minimal_object"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "LOW",
+        "rationale": "Intimate single-subject dialogue; camera flight would dilute message punch."
+      },
+      "F2": {
+        "signal": "HIGH",
+        "rationale": "Physical strain, compression, or brittle rupture directly expresses the core tension."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "LOW",
+        "rationale": "Clean luminous light canvas with subtle radial depth is superior."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "VERY_HIGH",
+        "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": true,
+    "issues": [],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

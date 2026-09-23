@@ -1,0 +1,1571 @@
+{
+  "clipName": "rumination_loop",
+  "topic": "How Rumination Traps Your Brain",
+  "totalFrames": 1330,
+  "fps": 60,
+  "overallComplexityRating": "INTENSE",
+  "storyModel": {
+    "meta": {
+      "sourceType": "user_script",
+      "originalInput": "You think you're analyzing a problem. In reality, your brain is caught in a rumination loop. Real reflection moves in a straight line toward a decision. But rumination bends back on itself. Each repeated thought feeds the original anxiety, spinning the circuit faster while solving nothing. To break the cycle, you don't fight the thought. You change your physical environment. Movement forces the closed circuit to open into reality.",
+      "topic": "How Rumination Traps Your Brain",
+      "channel": "self_improvement",
+      "mode": "B",
+      "isDuo": false,
+      "wordCount": 69,
+      "intelligenceVersion": "1.0.1",
+      "contentHash": "11beb50a31f48455c927e284420d42ee5a282f71c81706ae2f73e7474855e3fd"
+    },
+    "story": {
+      "coreIdea": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+      "centralClaim": "Burnout is not gradual depletion; it is a structural snapping point triggered by ignored baseline fatigue.",
+      "viewerPromise": "Understand the physical threshold between productive stress and systemic collapse.",
+      "viewerQuestion": "What causes the sudden drop from functioning to complete burnout?",
+      "narrativeArchitecture": "PROBLEM -> HIDDEN_CAUSE -> ESCALATION -> BREAKPOINT -> RESOLUTION"
+    },
+    "segments": [
+      {
+        "segmentId": "seg_1_hook",
+        "role": "hook",
+        "narrationText": "You think you're analyzing a problem.",
+        "sentenceIndices": [
+          0
+        ],
+        "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+        "visualQuestion": "What causes the sudden drop from functioning to complete burnout?",
+        "semanticWeight": "CRITICAL"
+      },
+      {
+        "segmentId": "seg_2_mechanism",
+        "role": "mechanism",
+        "narrationText": "In reality, your brain is caught in a rumination loop. Real reflection moves in a straight line toward a decision. But rumination bends back on itself.",
+        "sentenceIndices": [
+          1,
+          2,
+          3
+        ],
+        "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+        "visualQuestion": "How does this hidden dynamic actually function?",
+        "semanticWeight": "IMPORTANT"
+      },
+      {
+        "segmentId": "seg_3_escalation",
+        "role": "escalation",
+        "narrationText": "Each repeated thought feeds the original anxiety, spinning the circuit faster while solving nothing. To break the cycle, you don't fight the thought. You change your physical environment.",
+        "sentenceIndices": [
+          4,
+          5,
+          6
+        ],
+        "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+        "visualQuestion": "What happens when this condition crosses the threshold?",
+        "semanticWeight": "CRITICAL"
+      },
+      {
+        "segmentId": "seg_4_resolution",
+        "role": "resolution",
+        "narrationText": "Movement forces the closed circuit to open into reality.",
+        "sentenceIndices": [
+          7
+        ],
+        "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+        "visualQuestion": "How does the system return to equilibrium or agency?",
+        "semanticWeight": "CRITICAL"
+      }
+    ],
+    "entitiesAndConcepts": {
+      "concepts": [
+        "How Rumination Traps Your Brain"
+      ],
+      "entities": [
+        "Editorial Focus Card"
+      ],
+      "persistentObjects": []
+    },
+    "claimsAndEvidence": {
+      "claims": [
+        {
+          "statement": "You think you're analyzing a problem.",
+          "type": "supporting"
+        },
+        {
+          "statement": "In reality, your brain is caught in a rumination loop.",
+          "type": "psychological"
+        },
+        {
+          "statement": "Real reflection moves in a straight line toward a decision.",
+          "type": "supporting"
+        },
+        {
+          "statement": "But rumination bends back on itself.",
+          "type": "supporting"
+        },
+        {
+          "statement": "Each repeated thought feeds the original anxiety, spinning the circuit faster while solving nothing.",
+          "type": "supporting"
+        },
+        {
+          "statement": "To break the cycle, you don't fight the thought.",
+          "type": "supporting"
+        },
+        {
+          "statement": "You change your physical environment.",
+          "type": "supporting"
+        },
+        {
+          "statement": "Movement forces the closed circuit to open into reality.",
+          "type": "conclusion"
+        }
+      ],
+      "evidence": [],
+      "misconceptions": []
+    },
+    "causalGraph": {
+      "nodes": [
+        {
+          "id": "structural_integrity",
+          "initialCondition": "UNSTRESSED",
+          "reversibility": "PARTIALLY_REVERSIBLE"
+        },
+        {
+          "id": "accumulated_load",
+          "initialCondition": "MINIMAL",
+          "reversibility": "REVERSIBLE"
+        }
+      ],
+      "chains": [
+        {
+          "cause": "Silent acquiescence / accepting extra burden",
+          "mechanism": "Elastic capacity absorbs load through compressive strain",
+          "event": "DEFORMATION",
+          "consequence": "Material deflection and internal stress accumulate",
+          "resultingState": "HIGH_TENSION"
+        },
+        {
+          "cause": "Load exceeds ultimate tensile strength",
+          "mechanism": "Brittle cleavage along microscopic fault lines",
+          "event": "FAILURE",
+          "consequence": "Instantaneous catastrophic fracture / systemic halt",
+          "resultingState": "RUPTURED"
+        }
+      ],
+      "thresholds": [
+        {
+          "source": "accumulated_load",
+          "condition": "load >= elastic_limit",
+          "consequence": "Trigger brittle stress fracture rupture"
+        }
+      ]
+    },
+    "stateModel": {
+      "initialState": "UNAWARE_STATE",
+      "intermediateStates": [
+        "EXPOSED_MECHANISM",
+        "CRITICAL_PIVOT"
+      ],
+      "finalState": "SOVEREIGN_ACTION",
+      "dynamics": "transformation"
+    },
+    "temporalModel": {
+      "pacing": "cyclic_loop",
+      "hasRepetition": true,
+      "repetitionNature": "behavioral_loop",
+      "breathHoldWindow": {
+        "suggested": true,
+        "narrativeAnchor": "Each repeated thought feeds the original anxiety, spinning t",
+        "approximateTimestampSec": 13.2,
+        "durationFrames": 18,
+        "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+      }
+    },
+    "emotionalTrajectory": [
+      {
+        "segmentId": "seg_1_hook",
+        "emotion": "curiosity_and_recognition",
+        "attentionSpike": true
+      },
+      {
+        "segmentId": "seg_2_mechanism",
+        "emotion": "analytical_clarity",
+        "attentionSpike": false
+      },
+      {
+        "segmentId": "seg_3_escalation",
+        "emotion": "cognitive_tension",
+        "attentionSpike": true
+      },
+      {
+        "segmentId": "seg_4_resolution",
+        "emotion": "grounded_confidence",
+        "attentionSpike": false
+      }
+    ],
+    "emphasisMap": {
+      "primary": [
+        "In",
+        "LOOP",
+        "Real",
+        "But",
+        "Each",
+        "To"
+      ],
+      "secondary": []
+    },
+    "visualOpportunities": [
+      {
+        "segmentId": "seg_1_hook",
+        "opportunityType": "contrast",
+        "physicalDescription": "High-contrast split editorial layout pairing Judy intimate bust with semantic hero anchor",
+        "rationale": "Establishes personal connection and curiosity on mobile screen."
+      }
+    ],
+    "visualAbsence": [],
+    "semanticImportance": {
+      "critical": [
+        "Burnout is not gradual depletion; it is a structural snapping point triggered by ignored baseline fatigue.",
+        "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+        "You think you're analyzing a problem."
+      ],
+      "important": [
+        "Understand the physical threshold between productive stress and systemic collapse.",
+        "What causes the sudden drop from functioning to complete burnout?",
+        "In reality, your brain is caught in a rumination loop. Real reflection moves in a straight line toward a decision. But rumination bends back on itself.",
+        "Movement forces the closed circuit to open into reality."
+      ],
+      "supporting": [
+        "Each repeated thought feeds the original anxiety, spinning the circuit faster while solving nothing. To break the cycle, you don't fight the thought. You change your physical environment."
+      ],
+      "decorative": [
+        "ambient studio radial glow",
+        "crisp vector grid texture",
+        "drop-shadow depth planes"
+      ]
+    },
+    "sceneCandidates": [
+      {
+        "candidateId": "candidate_scene_1",
+        "suggestedBoundary": "Frames corresponding to segment 'hook'",
+        "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+        "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+      },
+      {
+        "candidateId": "candidate_scene_2",
+        "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+        "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+        "dominantVisualAnchor": "Physical Contrast Metaphor"
+      },
+      {
+        "candidateId": "candidate_scene_3",
+        "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+        "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+        "dominantVisualAnchor": "Physical Contrast Metaphor"
+      },
+      {
+        "candidateId": "candidate_scene_4",
+        "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+        "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+        "dominantVisualAnchor": "Physical Contrast Metaphor"
+      }
+    ],
+    "thumbnailSignals": {
+      "coreCuriosity": "Why did the system collapse under a feather-light addition?",
+      "visualContradiction": "Feeling proud of absorbing infinite pressure right before sudden structural fracture",
+      "mostMemorableTransformation": "Pristine load-bearing plinth developing sudden violent brittle cleavage",
+      "textHookCandidates": [
+        "THE SNAP",
+        "LOAD LIMIT",
+        "HIDDEN PRESSURE",
+        "BRITTLE BREAK"
+      ],
+      "recommendedArchetype": "minimal_object"
+    },
+    "frontierSignals": {
+      "signals": {
+        "F1": {
+          "signal": "LOW",
+          "rationale": "Intimate single-subject dialogue; camera flight would dilute message punch."
+        },
+        "F2": {
+          "signal": "HIGH",
+          "rationale": "Physical strain, compression, or brittle rupture directly expresses the core tension."
+        },
+        "F3": {
+          "signal": "DORMANT_DISABLED",
+          "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+        },
+        "F4": {
+          "signal": "LOW",
+          "rationale": "No balance or torque mechanic present."
+        },
+        "F5": {
+          "signal": "LOW",
+          "rationale": "Clean luminous light canvas with subtle radial depth is superior."
+        },
+        "F6": {
+          "signal": "HIGH",
+          "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+        },
+        "F7": {
+          "signal": "VERY_HIGH",
+          "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+        },
+        "T": {
+          "signal": "HIGH",
+          "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+        }
+      }
+    },
+    "diagnostics": {
+      "hygieneValid": true,
+      "issues": [],
+      "unsupportedClaims": [],
+      "structuralNotes": []
+    }
+  },
+  "scenePlans": [
+    {
+      "sceneId": "scene_1_hook",
+      "intent": {
+        "sceneId": "scene_1_hook",
+        "startFrame": 0,
+        "endFrame": 372,
+        "durationSeconds": 6.2,
+        "narrationText": "You think you're analyzing a problem.",
+        "coreIdea": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+        "emotionalTone": "cognitive_dissonance",
+        "viewerReaction": "Experience clear physical resonance with How Rumination Traps Your Brain",
+        "visualQuestion": "What causes the sudden drop from functioning to complete burnout?",
+        "dominantMetaphor": "sovereign_clarity",
+        "compositionApproach": "centered_minimalism",
+        "visualMechanism": "fragmentation",
+        "visualConceptCandidate": "Progressive Stress Fracture to Brittle Rupture",
+        "centralTransformation": "UNAWARE_STATE -> EXPOSED_MECHANISM -> CRITICAL_PIVOT -> SOVEREIGN_ACTION"
+      },
+      "backgroundDecision": {
+        "scene_id": "scene_1_hook",
+        "mode": "universal",
+        "selected_asset_id": "dark_matte_spotlight_01",
+        "semantic_role": "cinematic_surface",
+        "crop_strategy": "center_focal",
+        "crop_focal_point": [
+          0.471,
+          0.36
+        ],
+        "motion": "slow_zoom_in",
+        "motion_scale_delta": 1.04,
+        "opacity": 1.0,
+        "dimming_overlay": null,
+        "transition_in": {
+          "type": "fade",
+          "durationFrames": 10
+        },
+        "transition_out": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)",
+        "candidate_scores": [
+          {
+            "asset_id": "dark_matte_spotlight_01",
+            "semantic_fit": 0.95,
+            "contrast_fit": 1.0,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 1.0,
+            "continuity_fit": 0.9,
+            "composite_score": 0.965,
+            "reasons": [
+              "Dark tone aligns with cinematic/reflective narrative",
+              "Deep black/dark ground guarantees >7:1 white text contrast",
+              "Clear text-safe zone verified at center",
+              "High presenter edge separation (no silhouette washout)"
+            ],
+            "penalties": []
+          },
+          {
+            "asset_id": "universal_texture_41",
+            "semantic_fit": 0.95,
+            "contrast_fit": 1.0,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 1.0,
+            "continuity_fit": 0.9,
+            "composite_score": 0.965,
+            "reasons": [
+              "Dark tone aligns with cinematic/reflective narrative",
+              "Deep black/dark ground guarantees >7:1 white text contrast",
+              "Clear text-safe zone verified at center",
+              "High presenter edge separation (no silhouette washout)"
+            ],
+            "penalties": []
+          },
+          {
+            "asset_id": "universal_texture_40",
+            "semantic_fit": 0.95,
+            "contrast_fit": 0.75,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 1.0,
+            "continuity_fit": 0.9,
+            "composite_score": 0.902,
+            "reasons": [
+              "Dark tone aligns with cinematic/reflective narrative",
+              "Clear text-safe zone verified at center",
+              "High presenter edge separation (no silhouette washout)"
+            ],
+            "penalties": []
+          },
+          {
+            "asset_id": "paper_warm_tactile_02",
+            "semantic_fit": 0.25,
+            "contrast_fit": 0.1,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.485,
+            "reasons": [
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": [
+              "Bright tone clashes with cinematic/reflective scene",
+              "Bright ground causes critical contrast collision with light text"
+            ]
+          },
+          {
+            "asset_id": "universal_texture_39",
+            "semantic_fit": 0.25,
+            "contrast_fit": 0.1,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.485,
+            "reasons": [
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": [
+              "Bright tone clashes with cinematic/reflective scene",
+              "Bright ground causes critical contrast collision with light text"
+            ]
+          },
+          {
+            "asset_id": "universal_texture_la_milagrosa",
+            "semantic_fit": 0.25,
+            "contrast_fit": 0.1,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.485,
+            "reasons": [
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": [
+              "Bright tone clashes with cinematic/reflective scene",
+              "Bright ground causes critical contrast collision with light text"
+            ]
+          }
+        ],
+        "rejected_reasons": [
+          "Rejected paper_warm_tactile_02 (score 0.48): Bright tone clashes with cinematic/reflective scene, Bright ground causes critical contrast collision with light text"
+        ]
+      },
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "dark_matte_spotlight_01",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.471,
+          0.36
+        ],
+        "motion": "slow_zoom_in",
+        "motionScaleDelta": 1.04,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "fade",
+          "durationFrames": 10
+        },
+        "transitionOut": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)"
+      },
+      "complexityBudget": {
+        "level": "MEDIUM",
+        "calculatedScore": 2.25,
+        "maxScoreAllowed": 2.5
+      },
+      "activeCapabilities": [
+        {
+          "frontierCode": "F_BASE",
+          "capabilityConcept": "progressive_kinetic_choreography",
+          "intensity": "HIGH",
+          "scope": "SCENE_LEVEL",
+          "reason": "Baseline high-contrast typographic hierarchy and semantic cutout delivery.",
+          "mappedComponents": [
+            "AnimatedSlashStrike",
+            "KineticHighlighter",
+            "CinematicIllustrationCard"
+          ]
+        },
+        {
+          "frontierCode": "F2",
+          "capabilityConcept": "capillary_ink_absorption",
+          "intensity": "LOW",
+          "scope": "EVENT_LEVEL",
+          "reason": "Permanent debossed inscription reinforces irreversible decision.",
+          "mappedComponents": [
+            "CapillaryInkBleed"
+          ]
+        },
+        {
+          "frontierCode": "F_UBG",
+          "capabilityConcept": "universal_physical_background",
+          "intensity": "MEDIUM",
+          "scope": "SCENE_LEVEL",
+          "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)",
+          "mappedComponents": [
+            "UniversalBackground"
+          ],
+          "decision": {
+            "scene_id": "scene_1_hook",
+            "mode": "universal",
+            "selected_asset_id": "dark_matte_spotlight_01",
+            "semantic_role": "cinematic_surface",
+            "crop_strategy": "center_focal",
+            "crop_focal_point": [
+              0.471,
+              0.36
+            ],
+            "motion": "slow_zoom_in",
+            "motion_scale_delta": 1.04,
+            "opacity": 1.0,
+            "dimming_overlay": null,
+            "transition_in": {
+              "type": "fade",
+              "durationFrames": 10
+            },
+            "transition_out": null,
+            "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)",
+            "candidate_scores": [
+              {
+                "asset_id": "dark_matte_spotlight_01",
+                "semantic_fit": 0.95,
+                "contrast_fit": 1.0,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 1.0,
+                "continuity_fit": 0.9,
+                "composite_score": 0.965,
+                "reasons": [
+                  "Dark tone aligns with cinematic/reflective narrative",
+                  "Deep black/dark ground guarantees >7:1 white text contrast",
+                  "Clear text-safe zone verified at center",
+                  "High presenter edge separation (no silhouette washout)"
+                ],
+                "penalties": []
+              },
+              {
+                "asset_id": "universal_texture_41",
+                "semantic_fit": 0.95,
+                "contrast_fit": 1.0,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 1.0,
+                "continuity_fit": 0.9,
+                "composite_score": 0.965,
+                "reasons": [
+                  "Dark tone aligns with cinematic/reflective narrative",
+                  "Deep black/dark ground guarantees >7:1 white text contrast",
+                  "Clear text-safe zone verified at center",
+                  "High presenter edge separation (no silhouette washout)"
+                ],
+                "penalties": []
+              },
+              {
+                "asset_id": "universal_texture_40",
+                "semantic_fit": 0.95,
+                "contrast_fit": 0.75,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 1.0,
+                "continuity_fit": 0.9,
+                "composite_score": 0.902,
+                "reasons": [
+                  "Dark tone aligns with cinematic/reflective narrative",
+                  "Clear text-safe zone verified at center",
+                  "High presenter edge separation (no silhouette washout)"
+                ],
+                "penalties": []
+              },
+              {
+                "asset_id": "paper_warm_tactile_02",
+                "semantic_fit": 0.25,
+                "contrast_fit": 0.1,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.485,
+                "reasons": [
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": [
+                  "Bright tone clashes with cinematic/reflective scene",
+                  "Bright ground causes critical contrast collision with light text"
+                ]
+              },
+              {
+                "asset_id": "universal_texture_39",
+                "semantic_fit": 0.25,
+                "contrast_fit": 0.1,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.485,
+                "reasons": [
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": [
+                  "Bright tone clashes with cinematic/reflective scene",
+                  "Bright ground causes critical contrast collision with light text"
+                ]
+              },
+              {
+                "asset_id": "universal_texture_la_milagrosa",
+                "semantic_fit": 0.25,
+                "contrast_fit": 0.1,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.485,
+                "reasons": [
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": [
+                  "Bright tone clashes with cinematic/reflective scene",
+                  "Bright ground causes critical contrast collision with light text"
+                ]
+              }
+            ],
+            "rejected_reasons": [
+              "Rejected paper_warm_tactile_02 (score 0.48): Bright tone clashes with cinematic/reflective scene, Bright ground causes critical contrast collision with light text"
+            ]
+          }
+        }
+      ],
+      "rejectedCapabilities": [
+        {
+          "frontierCode": "F3",
+          "reason": "F3 is DORMANT_EXPERIMENTAL in features.ts. Optical rack focus and depth stratification are disabled. Replaced by high-contrast 2.5D layered composition."
+        },
+        {
+          "frontierCode": "F7",
+          "reason": "Visual State Machines & Causal Storytelling deferred to Scene 2 Logic; Scene 1 Hook requires immediate presenter intimacy and hero illustration staging."
+        },
+        {
+          "frontierCode": "F1",
+          "reason": "InfiniteWorldCanvas is unnecessary for 'sovereign_clarity' metaphor."
+        },
+        {
+          "frontierCode": "F4",
+          "reason": "Semantic Mass & Physical Consequence is unnecessary for 'sovereign_clarity' metaphor."
+        },
+        {
+          "frontierCode": "F5",
+          "reason": "Environmental / Diorama Worlds is unnecessary for 'sovereign_clarity' metaphor."
+        },
+        {
+          "frontierCode": "F6",
+          "reason": "Temporal Manipulation is unnecessary for 'sovereign_clarity' metaphor."
+        }
+      ],
+      "primaryVisual": "Editorial Hero Card + Judy Grounded Close-up",
+      "secondarySupport": "Ambient studio radial lighting + deep contrast drop-shadows",
+      "mobileConstraints": [
+        "Platform Safe zone: y: 280px to 1340px (clearing top 0-240px nav, avoiding top 6% legacy hazard)",
+        "Captions safe zone: top 73% to top 81% (zero overlap)",
+        "Right engagement rail clearance: max-width 880px (clearing x: 910-1080px)",
+        "Typography minimum: 56px for headlines, 36px for labels",
+        "Cutouts scaled to 400\u2013750px; 7:1 contrast floor",
+        "Zero micro-particles or sub-pixel wireframes (<2.5px)"
+      ],
+      "performanceNotes": [
+        "100% CPU SwiftShader mandate: no GPU/CUDA assumptions",
+        "Deterministic spring physics and closed-form torque (zero physics engine stalls)"
+      ]
+    },
+    {
+      "sceneId": "scene_2_logic",
+      "intent": {
+        "sceneId": "scene_2_logic",
+        "startFrame": 372,
+        "endFrame": 958,
+        "durationSeconds": 9.77,
+        "narrationText": "In reality, your brain is caught in a rumination loop. Real reflection moves in a straight line toward a decision. But rumination bends back on itself. Each repeated thought feeds the original anxiety, spinning the circuit faster while solving nothing. To break the cycle, you don't fight the thought. You change your physical environment.",
+        "coreIdea": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+        "emotionalTone": "claustrophobic_pressure",
+        "viewerReaction": "Experience clear physical resonance with How Rumination Traps Your Brain",
+        "visualQuestion": "What physical consequence illustrates 'Endurance systems exhibit non-linear failure:' before words finish?",
+        "dominantMetaphor": "brittle_rupture",
+        "compositionApproach": "asymmetric_editorial",
+        "visualMechanism": "fragmentation",
+        "visualConceptCandidate": "Progressive Stress Fracture to Brittle Rupture",
+        "centralTransformation": "UNAWARE_STATE -> EXPOSED_MECHANISM -> CRITICAL_PIVOT -> SOVEREIGN_ACTION"
+      },
+      "backgroundDecision": {
+        "scene_id": "scene_2_logic",
+        "mode": "universal",
+        "selected_asset_id": "universal_texture_41",
+        "semantic_role": "cinematic_surface",
+        "crop_strategy": "center_focal",
+        "crop_focal_point": [
+          0.501,
+          0.5
+        ],
+        "motion": "static",
+        "motion_scale_delta": 1.0,
+        "opacity": 1.0,
+        "dimming_overlay": null,
+        "transition_in": {
+          "type": "dissolve",
+          "durationFrames": 16
+        },
+        "transition_out": null,
+        "reason": "Selected 'universal_texture_41' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center",
+        "candidate_scores": [
+          {
+            "asset_id": "universal_texture_41",
+            "semantic_fit": 0.95,
+            "contrast_fit": 1.0,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.92,
+            "reasons": [
+              "Dark tone aligns with cinematic/reflective narrative",
+              "Deep black/dark ground guarantees >7:1 white text contrast",
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": []
+          },
+          {
+            "asset_id": "dark_matte_spotlight_01",
+            "semantic_fit": 0.95,
+            "contrast_fit": 1.0,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.7,
+            "composite_score": 0.9,
+            "reasons": [
+              "Dark tone aligns with cinematic/reflective narrative",
+              "Deep black/dark ground guarantees >7:1 white text contrast",
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": []
+          },
+          {
+            "asset_id": "universal_texture_40",
+            "semantic_fit": 0.95,
+            "contrast_fit": 0.75,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.857,
+            "reasons": [
+              "Dark tone aligns with cinematic/reflective narrative",
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": []
+          },
+          {
+            "asset_id": "paper_warm_tactile_02",
+            "semantic_fit": 0.25,
+            "contrast_fit": 0.1,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.485,
+            "reasons": [
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": [
+              "Bright tone clashes with cinematic/reflective scene",
+              "Bright ground causes critical contrast collision with light text"
+            ]
+          },
+          {
+            "asset_id": "universal_texture_39",
+            "semantic_fit": 0.25,
+            "contrast_fit": 0.1,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.485,
+            "reasons": [
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": [
+              "Bright tone clashes with cinematic/reflective scene",
+              "Bright ground causes critical contrast collision with light text"
+            ]
+          },
+          {
+            "asset_id": "universal_texture_la_milagrosa",
+            "semantic_fit": 0.25,
+            "contrast_fit": 0.1,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.485,
+            "reasons": [
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": [
+              "Bright tone clashes with cinematic/reflective scene",
+              "Bright ground causes critical contrast collision with light text"
+            ]
+          }
+        ],
+        "rejected_reasons": [
+          "Rejected paper_warm_tactile_02 (score 0.48): Bright tone clashes with cinematic/reflective scene, Bright ground causes critical contrast collision with light text"
+        ]
+      },
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "universal_texture_41",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.501,
+          0.5
+        ],
+        "motion": "static",
+        "motionScaleDelta": 1.0,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "dissolve",
+          "durationFrames": 16
+        },
+        "transitionOut": null,
+        "reason": "Selected 'universal_texture_41' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center"
+      },
+      "complexityBudget": {
+        "level": "HIGH",
+        "calculatedScore": 7.25,
+        "maxScoreAllowed": 4.5
+      },
+      "activeCapabilities": [
+        {
+          "frontierCode": "F_BASE",
+          "capabilityConcept": "progressive_kinetic_choreography",
+          "intensity": "HIGH",
+          "scope": "SCENE_LEVEL",
+          "reason": "Baseline high-contrast typographic hierarchy and semantic cutout delivery.",
+          "mappedComponents": [
+            "AnimatedSlashStrike",
+            "KineticHighlighter",
+            "CinematicIllustrationCard"
+          ]
+        },
+        {
+          "frontierCode": "F2",
+          "capabilityConcept": "brittle_stress_fracture_rupture",
+          "intensity": "HIGH",
+          "scope": "EVENT_LEVEL",
+          "eventWindow": {
+            "startFrame": 724,
+            "endFrame": 958
+          },
+          "reason": "Physical rupture at threshold makes the breaking point visceral on screen.",
+          "mappedComponents": [
+            "StressFractureEngine"
+          ]
+        },
+        {
+          "frontierCode": "F4",
+          "capabilityConcept": "closed_form_fulcrum_torque_balance",
+          "intensity": "MEDIUM",
+          "scope": "SCENE_LEVEL",
+          "reason": "Action-to-consequence propagation: load arrival directly tilts systemic balance.",
+          "mappedComponents": [
+            "KineticFulcrumBeam",
+            "SemanticMassNode",
+            "TensileStructuralTether"
+          ]
+        },
+        {
+          "frontierCode": "F7",
+          "capabilityConcept": "causal_state_machine_with_narrative_memory",
+          "intensity": "MEDIUM",
+          "scope": "SCENE_LEVEL",
+          "reason": "Discrete state transitions and narrative memory tracking cause-and-effect across frames.",
+          "mappedComponents": [
+            "CausalWorld",
+            "CausalNode",
+            "ThresholdReactor",
+            "useNodeState",
+            "StressFractureEngine",
+            "CameraShake"
+          ]
+        },
+        {
+          "frontierCode": "F_UBG",
+          "capabilityConcept": "universal_physical_background",
+          "intensity": "MEDIUM",
+          "scope": "SCENE_LEVEL",
+          "reason": "Selected 'universal_texture_41' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center",
+          "mappedComponents": [
+            "UniversalBackground"
+          ],
+          "decision": {
+            "scene_id": "scene_2_logic",
+            "mode": "universal",
+            "selected_asset_id": "universal_texture_41",
+            "semantic_role": "cinematic_surface",
+            "crop_strategy": "center_focal",
+            "crop_focal_point": [
+              0.501,
+              0.5
+            ],
+            "motion": "static",
+            "motion_scale_delta": 1.0,
+            "opacity": 1.0,
+            "dimming_overlay": null,
+            "transition_in": {
+              "type": "dissolve",
+              "durationFrames": 16
+            },
+            "transition_out": null,
+            "reason": "Selected 'universal_texture_41' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center",
+            "candidate_scores": [
+              {
+                "asset_id": "universal_texture_41",
+                "semantic_fit": 0.95,
+                "contrast_fit": 1.0,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.92,
+                "reasons": [
+                  "Dark tone aligns with cinematic/reflective narrative",
+                  "Deep black/dark ground guarantees >7:1 white text contrast",
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": []
+              },
+              {
+                "asset_id": "dark_matte_spotlight_01",
+                "semantic_fit": 0.95,
+                "contrast_fit": 1.0,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.7,
+                "composite_score": 0.9,
+                "reasons": [
+                  "Dark tone aligns with cinematic/reflective narrative",
+                  "Deep black/dark ground guarantees >7:1 white text contrast",
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": []
+              },
+              {
+                "asset_id": "universal_texture_40",
+                "semantic_fit": 0.95,
+                "contrast_fit": 0.75,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.857,
+                "reasons": [
+                  "Dark tone aligns with cinematic/reflective narrative",
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": []
+              },
+              {
+                "asset_id": "paper_warm_tactile_02",
+                "semantic_fit": 0.25,
+                "contrast_fit": 0.1,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.485,
+                "reasons": [
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": [
+                  "Bright tone clashes with cinematic/reflective scene",
+                  "Bright ground causes critical contrast collision with light text"
+                ]
+              },
+              {
+                "asset_id": "universal_texture_39",
+                "semantic_fit": 0.25,
+                "contrast_fit": 0.1,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.485,
+                "reasons": [
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": [
+                  "Bright tone clashes with cinematic/reflective scene",
+                  "Bright ground causes critical contrast collision with light text"
+                ]
+              },
+              {
+                "asset_id": "universal_texture_la_milagrosa",
+                "semantic_fit": 0.25,
+                "contrast_fit": 0.1,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.485,
+                "reasons": [
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": [
+                  "Bright tone clashes with cinematic/reflective scene",
+                  "Bright ground causes critical contrast collision with light text"
+                ]
+              }
+            ],
+            "rejected_reasons": [
+              "Rejected paper_warm_tactile_02 (score 0.48): Bright tone clashes with cinematic/reflective scene, Bright ground causes critical contrast collision with light text"
+            ]
+          }
+        }
+      ],
+      "rejectedCapabilities": [
+        {
+          "frontierCode": "F3",
+          "reason": "F3 is DORMANT_EXPERIMENTAL in features.ts. Optical rack focus and depth stratification are disabled. Replaced by high-contrast 2.5D layered composition."
+        },
+        {
+          "frontierCode": "F6",
+          "reason": "Exceeded scene complexity budget cap (8.0 > 4.5). Pruned to prevent effect soup."
+        },
+        {
+          "frontierCode": "F1",
+          "reason": "InfiniteWorldCanvas is unnecessary for 'brittle_rupture' metaphor."
+        },
+        {
+          "frontierCode": "F5",
+          "reason": "Environmental / Diorama Worlds is unnecessary for 'brittle_rupture' metaphor."
+        }
+      ],
+      "primaryVisual": "Physical Brittle Rupture Anchor",
+      "secondarySupport": "Ambient studio radial lighting + deep contrast drop-shadows",
+      "mobileConstraints": [
+        "Platform Safe zone: y: 280px to 1340px (clearing top 0-240px nav, avoiding top 6% legacy hazard)",
+        "Captions safe zone: top 73% to top 81% (zero overlap)",
+        "Right engagement rail clearance: max-width 880px (clearing x: 910-1080px)",
+        "Typography minimum: 56px for headlines, 36px for labels",
+        "Cutouts scaled to 400\u2013750px; 7:1 contrast floor",
+        "Zero micro-particles or sub-pixel wireframes (<2.5px)"
+      ],
+      "performanceNotes": [
+        "100% CPU SwiftShader mandate: no GPU/CUDA assumptions",
+        "Deterministic spring physics and closed-form torque (zero physics engine stalls)"
+      ]
+    },
+    {
+      "sceneId": "scene_3_solution",
+      "intent": {
+        "sceneId": "scene_3_solution",
+        "startFrame": 958,
+        "endFrame": 1330,
+        "durationSeconds": 6.2,
+        "narrationText": "Movement forces the closed circuit to open into reality.",
+        "coreIdea": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+        "emotionalTone": "stoic_resolution",
+        "viewerReaction": "Experience clear physical resonance with How Rumination Traps Your Brain",
+        "visualQuestion": "What physical consequence illustrates 'Endurance systems exhibit non-linear failure:' before words finish?",
+        "dominantMetaphor": "sovereign_clarity",
+        "compositionApproach": "centered_minimalism",
+        "visualMechanism": "fragmentation",
+        "visualConceptCandidate": "Progressive Stress Fracture to Brittle Rupture",
+        "centralTransformation": "UNAWARE_STATE -> EXPOSED_MECHANISM -> CRITICAL_PIVOT -> SOVEREIGN_ACTION"
+      },
+      "backgroundDecision": {
+        "scene_id": "scene_3_solution",
+        "mode": "universal",
+        "selected_asset_id": "dark_matte_spotlight_01",
+        "semantic_role": "cinematic_surface",
+        "crop_strategy": "center_focal",
+        "crop_focal_point": [
+          0.471,
+          0.36
+        ],
+        "motion": "slow_zoom_in",
+        "motion_scale_delta": 1.04,
+        "opacity": 1.0,
+        "dimming_overlay": null,
+        "transition_in": {
+          "type": "dissolve",
+          "durationFrames": 16
+        },
+        "transition_out": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center",
+        "candidate_scores": [
+          {
+            "asset_id": "dark_matte_spotlight_01",
+            "semantic_fit": 0.95,
+            "contrast_fit": 1.0,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.92,
+            "reasons": [
+              "Dark tone aligns with cinematic/reflective narrative",
+              "Deep black/dark ground guarantees >7:1 white text contrast",
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": []
+          },
+          {
+            "asset_id": "universal_texture_41",
+            "semantic_fit": 0.95,
+            "contrast_fit": 1.0,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.7,
+            "composite_score": 0.9,
+            "reasons": [
+              "Dark tone aligns with cinematic/reflective narrative",
+              "Deep black/dark ground guarantees >7:1 white text contrast",
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": []
+          },
+          {
+            "asset_id": "universal_texture_40",
+            "semantic_fit": 0.95,
+            "contrast_fit": 0.75,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.857,
+            "reasons": [
+              "Dark tone aligns with cinematic/reflective narrative",
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": []
+          },
+          {
+            "asset_id": "paper_warm_tactile_02",
+            "semantic_fit": 0.25,
+            "contrast_fit": 0.1,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.485,
+            "reasons": [
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": [
+              "Bright tone clashes with cinematic/reflective scene",
+              "Bright ground causes critical contrast collision with light text"
+            ]
+          },
+          {
+            "asset_id": "universal_texture_39",
+            "semantic_fit": 0.25,
+            "contrast_fit": 0.1,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.485,
+            "reasons": [
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": [
+              "Bright tone clashes with cinematic/reflective scene",
+              "Bright ground causes critical contrast collision with light text"
+            ]
+          },
+          {
+            "asset_id": "universal_texture_la_milagrosa",
+            "semantic_fit": 0.25,
+            "contrast_fit": 0.1,
+            "text_safe_fit": 0.95,
+            "presenter_fit": 0.7,
+            "continuity_fit": 0.9,
+            "composite_score": 0.485,
+            "reasons": [
+              "Clear text-safe zone verified at center"
+            ],
+            "penalties": [
+              "Bright tone clashes with cinematic/reflective scene",
+              "Bright ground causes critical contrast collision with light text"
+            ]
+          }
+        ],
+        "rejected_reasons": [
+          "Rejected paper_warm_tactile_02 (score 0.48): Bright tone clashes with cinematic/reflective scene, Bright ground causes critical contrast collision with light text"
+        ]
+      },
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "dark_matte_spotlight_01",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.471,
+          0.36
+        ],
+        "motion": "slow_zoom_in",
+        "motionScaleDelta": 1.04,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "dissolve",
+          "durationFrames": 16
+        },
+        "transitionOut": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center"
+      },
+      "complexityBudget": {
+        "level": "HIGH",
+        "calculatedScore": 5.75,
+        "maxScoreAllowed": 3.0
+      },
+      "activeCapabilities": [
+        {
+          "frontierCode": "F_BASE",
+          "capabilityConcept": "progressive_kinetic_choreography",
+          "intensity": "HIGH",
+          "scope": "SCENE_LEVEL",
+          "reason": "Baseline high-contrast typographic hierarchy and semantic cutout delivery.",
+          "mappedComponents": [
+            "AnimatedSlashStrike",
+            "KineticHighlighter",
+            "CinematicIllustrationCard"
+          ]
+        },
+        {
+          "frontierCode": "F2",
+          "capabilityConcept": "capillary_ink_absorption",
+          "intensity": "LOW",
+          "scope": "EVENT_LEVEL",
+          "reason": "Permanent debossed inscription reinforces irreversible decision.",
+          "mappedComponents": [
+            "CapillaryInkBleed"
+          ]
+        },
+        {
+          "frontierCode": "F4",
+          "capabilityConcept": "closed_form_fulcrum_torque_balance",
+          "intensity": "MEDIUM",
+          "scope": "SCENE_LEVEL",
+          "reason": "Action-to-consequence propagation: load arrival directly tilts systemic balance.",
+          "mappedComponents": [
+            "KineticFulcrumBeam",
+            "SemanticMassNode",
+            "TensileStructuralTether"
+          ]
+        },
+        {
+          "frontierCode": "F7",
+          "capabilityConcept": "causal_state_machine_with_narrative_memory",
+          "intensity": "MEDIUM",
+          "scope": "SCENE_LEVEL",
+          "reason": "Discrete state transitions and narrative memory tracking cause-and-effect across frames.",
+          "mappedComponents": [
+            "CausalWorld",
+            "CausalNode",
+            "ThresholdReactor",
+            "useNodeState",
+            "StressFractureEngine",
+            "CameraShake"
+          ]
+        },
+        {
+          "frontierCode": "F_UBG",
+          "capabilityConcept": "universal_physical_background",
+          "intensity": "MEDIUM",
+          "scope": "SCENE_LEVEL",
+          "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center",
+          "mappedComponents": [
+            "UniversalBackground"
+          ],
+          "decision": {
+            "scene_id": "scene_3_solution",
+            "mode": "universal",
+            "selected_asset_id": "dark_matte_spotlight_01",
+            "semantic_role": "cinematic_surface",
+            "crop_strategy": "center_focal",
+            "crop_focal_point": [
+              0.471,
+              0.36
+            ],
+            "motion": "slow_zoom_in",
+            "motion_scale_delta": 1.04,
+            "opacity": 1.0,
+            "dimming_overlay": null,
+            "transition_in": {
+              "type": "dissolve",
+              "durationFrames": 16
+            },
+            "transition_out": null,
+            "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center",
+            "candidate_scores": [
+              {
+                "asset_id": "dark_matte_spotlight_01",
+                "semantic_fit": 0.95,
+                "contrast_fit": 1.0,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.92,
+                "reasons": [
+                  "Dark tone aligns with cinematic/reflective narrative",
+                  "Deep black/dark ground guarantees >7:1 white text contrast",
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": []
+              },
+              {
+                "asset_id": "universal_texture_41",
+                "semantic_fit": 0.95,
+                "contrast_fit": 1.0,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.7,
+                "composite_score": 0.9,
+                "reasons": [
+                  "Dark tone aligns with cinematic/reflective narrative",
+                  "Deep black/dark ground guarantees >7:1 white text contrast",
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": []
+              },
+              {
+                "asset_id": "universal_texture_40",
+                "semantic_fit": 0.95,
+                "contrast_fit": 0.75,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.857,
+                "reasons": [
+                  "Dark tone aligns with cinematic/reflective narrative",
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": []
+              },
+              {
+                "asset_id": "paper_warm_tactile_02",
+                "semantic_fit": 0.25,
+                "contrast_fit": 0.1,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.485,
+                "reasons": [
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": [
+                  "Bright tone clashes with cinematic/reflective scene",
+                  "Bright ground causes critical contrast collision with light text"
+                ]
+              },
+              {
+                "asset_id": "universal_texture_39",
+                "semantic_fit": 0.25,
+                "contrast_fit": 0.1,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.485,
+                "reasons": [
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": [
+                  "Bright tone clashes with cinematic/reflective scene",
+                  "Bright ground causes critical contrast collision with light text"
+                ]
+              },
+              {
+                "asset_id": "universal_texture_la_milagrosa",
+                "semantic_fit": 0.25,
+                "contrast_fit": 0.1,
+                "text_safe_fit": 0.95,
+                "presenter_fit": 0.7,
+                "continuity_fit": 0.9,
+                "composite_score": 0.485,
+                "reasons": [
+                  "Clear text-safe zone verified at center"
+                ],
+                "penalties": [
+                  "Bright tone clashes with cinematic/reflective scene",
+                  "Bright ground causes critical contrast collision with light text"
+                ]
+              }
+            ],
+            "rejected_reasons": [
+              "Rejected paper_warm_tactile_02 (score 0.48): Bright tone clashes with cinematic/reflective scene, Bright ground causes critical contrast collision with light text"
+            ]
+          }
+        }
+      ],
+      "rejectedCapabilities": [
+        {
+          "frontierCode": "F3",
+          "reason": "F3 is DORMANT_EXPERIMENTAL in features.ts. Optical rack focus and depth stratification are disabled. Replaced by high-contrast 2.5D layered composition."
+        },
+        {
+          "frontierCode": "F6",
+          "reason": "Exceeded scene complexity budget cap (6.5 > 3.0). Pruned to prevent effect soup."
+        },
+        {
+          "frontierCode": "F1",
+          "reason": "InfiniteWorldCanvas is unnecessary for 'sovereign_clarity' metaphor."
+        },
+        {
+          "frontierCode": "F5",
+          "reason": "Environmental / Diorama Worlds is unnecessary for 'sovereign_clarity' metaphor."
+        }
+      ],
+      "primaryVisual": "Physical Sovereign Clarity Anchor",
+      "secondarySupport": "Ambient studio radial lighting + deep contrast drop-shadows",
+      "mobileConstraints": [
+        "Platform Safe zone: y: 280px to 1340px (clearing top 0-240px nav, avoiding top 6% legacy hazard)",
+        "Captions safe zone: top 73% to top 81% (zero overlap)",
+        "Right engagement rail clearance: max-width 880px (clearing x: 910-1080px)",
+        "Typography minimum: 56px for headlines, 36px for labels",
+        "Cutouts scaled to 400\u2013750px; 7:1 contrast floor",
+        "Zero micro-particles or sub-pixel wireframes (<2.5px)"
+      ],
+      "performanceNotes": [
+        "100% CPU SwiftShader mandate: no GPU/CUDA assumptions",
+        "Deterministic spring physics and closed-form torque (zero physics engine stalls)"
+      ]
+    }
+  ],
+  "visualConcept": {
+    "topic": "How Rumination Traps Your Brain",
+    "coreIdea": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+    "centralTransformation": "UNAWARE_STATE -> EXPOSED_MECHANISM -> CRITICAL_PIVOT -> SOVEREIGN_ACTION",
+    "primaryMechanism": "fragmentation",
+    "championCandidate": {
+      "candidateId": "cand_brittle_fracture_rupture",
+      "conceptName": "Progressive Stress Fracture to Brittle Rupture",
+      "primaryMechanism": "fragmentation",
+      "secondaryMechanism": "threshold_crossing",
+      "metaphorLevel": "LEVEL_2_PHYSICAL_PROCESS",
+      "physicalDescription": "A high-contrast structural bedrock supports increasing weight nodes. Micro-cracks propagate silently across the surface. At the critical limit, the structure catastrophically fractures into split shards with a shockwave.",
+      "causeEvent": "Cumulative unacknowledged load exceeds shear threshold",
+      "visibleTransformation": "Pristine structure -> hairline fracture propagation -> structural snap -> split bedrock",
+      "visibleConsequence": "Irreversible fracture forces involuntary pause",
+      "persistentMemory": "Fractured bedrock remains visible with severed gap in resolution",
+      "visualAbsence": [
+        "No medical symptom checklists",
+        "No glowing battery icons"
+      ],
+      "requiredFrontiers": [
+        "F2",
+        "F7",
+        "F4"
+      ],
+      "mappedComponents": [
+        "StressFractureEngine",
+        "CausalWorld",
+        "CameraShake"
+      ],
+      "evaluation": {
+        "semanticClarity": 0.95,
+        "memorability": 0.96,
+        "originality": 0.9,
+        "mobileReadability": 0.88,
+        "complexityWithinBudget": 0.85,
+        "frontierSynergy": 0.98,
+        "antiFailureModeScore": 1.0,
+        "penalties": [],
+        "compositeScore": 0.932
+      }
+    },
+    "alternativeCandidates": [
+      {
+        "candidateId": "cand_fulcrum_torque_overload",
+        "conceptName": "Closed-Form Fulcrum Balance to Catastrophic Tilt",
+        "primaryMechanism": "collision",
+        "secondaryMechanism": "transfer",
+        "metaphorLevel": "LEVEL_2_PHYSICAL_PROCESS",
+        "physicalDescription": "A balanced fulcrum beam holds agency on one side. A heavy mass drops onto the opposing arm, causing immediate torque rotation that slams the beam into the ground plane.",
+        "causeEvent": "Sudden load imbalance overwhelms restoring force",
+        "visibleTransformation": "Horizontal balance -> torque acceleration -> ground impact with bounce",
+        "visibleConsequence": "Beam rests at permanent tilted angle",
+        "persistentMemory": "Tilted beam angle preserved",
+        "visualAbsence": [
+          "No generic weight scales with icons",
+          "No balance sheet tables"
+        ],
+        "requiredFrontiers": [
+          "F4",
+          "F7",
+          "F_BASE"
+        ],
+        "mappedComponents": [
+          "KineticFulcrumBeam",
+          "SemanticMassNode",
+          "CausalWorld"
+        ],
+        "evaluation": {
+          "semanticClarity": 0.95,
+          "memorability": 0.78,
+          "originality": 0.9,
+          "mobileReadability": 0.88,
+          "complexityWithinBudget": 0.85,
+          "frontierSynergy": 0.98,
+          "antiFailureModeScore": 1.0,
+          "penalties": [],
+          "compositeScore": 0.902
+        }
+      },
+      {
+        "candidateId": "cand_viscoelastic_compressive_sag",
+        "conceptName": "Viscoelastic Compressive Strain & Bulge",
+        "primaryMechanism": "compression",
+        "secondaryMechanism": "deformation",
+        "metaphorLevel": "LEVEL_2_PHYSICAL_PROCESS",
+        "physicalDescription": "A solid rectangular foundation block slowly compresses vertically while bulging laterally under continuous load, demonstrating internal material distress before visible failure.",
+        "causeEvent": "Continuous sustained load without recovery interval",
+        "visibleTransformation": "Rectangular geometry -> vertical thinning -> lateral bulging -> severe deflection",
+        "visibleConsequence": "Distorted geometry communicates chronic strain",
+        "persistentMemory": "Compressed block height maintained into final scene",
+        "visualAbsence": [
+          "No cartoon sweat drops",
+          "No red flashing alarm badges"
+        ],
+        "requiredFrontiers": [
+          "F2",
+          "F4",
+          "F_BASE"
+        ],
+        "mappedComponents": [
+          "ViscoelasticDeformation",
+          "OpticallyStableText",
+          "CausalWorld"
+        ],
+        "evaluation": {
+          "semanticClarity": 0.95,
+          "memorability": 0.78,
+          "originality": 0.9,
+          "mobileReadability": 0.88,
+          "complexityWithinBudget": 0.85,
+          "frontierSynergy": 0.9,
+          "antiFailureModeScore": 1.0,
+          "penalties": [],
+          "compositeScore": 0.895
+        }
+      }
+    ],
+    "cause": "Cumulative unacknowledged load exceeds shear threshold",
+    "visibleConsequence": "Irreversible fracture forces involuntary pause",
+    "persistentState": "Fractured bedrock remains visible with severed gap in resolution",
+    "selectedFrontiers": [
+      "F2",
+      "F7",
+      "F4"
+    ],
+    "whyThisMechanism": "Candidate 'Progressive Stress Fracture to Brittle Rupture' achieved highest composite score (0.93) with superior semantic clarity (0.95) and mobile readability (0.88). Employs LEVEL_2_PHYSICAL_PROCESS depth to express 'fragmentation' as a live physical event rather than static card text.",
+    "whatIsIntentionallyNotVisualized": [
+      "Peripheral narration filler words (spoken-only audio load)",
+      "Redundant stat gauges and numerical labels (action precedes notation)",
+      "Decorative background particles and arbitrary floating icons"
+    ],
+    "inspectableReport": "============================================================\n\ud83c\udfac VISUAL CONCEPT TRANSLATION REPORT (\u00a7Rule 36)\n============================================================\nCore idea:\n  Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.\n\nCentral transformation:\n  UNAWARE_STATE -> EXPOSED_MECHANISM -> CRITICAL_PIVOT -> SOVEREIGN_ACTION\n\nPrimary mechanism:\n  FRAGMENTATION (Progressive Stress Fracture to Brittle Rupture)\n  Metaphor Depth: LEVEL_2_PHYSICAL_PROCESS\n\nAlternative mechanisms evaluated:\n  - Closed-Form Fulcrum Balance to Catastrophic Tilt [collision] (Score: 0.90)\n  - Viscoelastic Compressive Strain & Bulge [compression] (Score: 0.90)\n\nCause:\n  Cumulative unacknowledged load exceeds shear threshold\n\nVisible consequence:\n  Irreversible fracture forces involuntary pause\n\nPersistent state:\n  Fractured bedrock remains visible with severed gap in resolution\n\nSelected frontiers:\n  F2, F7, F4\nMapped components:\n  StressFractureEngine, CausalWorld, CameraShake\n\nWhy this mechanism:\n  Candidate 'Progressive Stress Fracture to Brittle Rupture' achieved highest composite score (0.93) with superior semantic clarity (0.95) and mobile readability (0.88). Employs LEVEL_2_PHYSICAL_PROCESS depth to express 'fragmentation' as a live physical event rather than static card text.\n\nWhat is intentionally NOT visualized:\n  - Peripheral narration filler words (spoken-only audio load)\n  - Redundant stat gauges and numerical labels (action precedes notation)\n  - Decorative background particles and arbitrary floating icons\n============================================================\n"
+  }
+}

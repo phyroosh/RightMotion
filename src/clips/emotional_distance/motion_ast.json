@@ -1,0 +1,476 @@
+{
+  "version": "1.0.0",
+  "clipId": "emotional_distance",
+  "fps": 60,
+  "totalFrames": 1439,
+  "environment": {
+    "groundColor": "#030712",
+    "lightingTheme": "deep_atmospheric_dark",
+    "gridTexture": false,
+    "safeBounds": {
+      "top": 280,
+      "bottom": 1340,
+      "left": 80,
+      "right": 1000
+    },
+    "defaultBackgroundIntent": {
+      "mode": "universal",
+      "assetId": "dark_matte_spotlight_01",
+      "semanticRole": "cinematic_surface",
+      "cropStrategy": "center_focal",
+      "cropFocalPoint": [
+        0.471,
+        0.36
+      ],
+      "motion": "slow_zoom_in",
+      "motionScaleDelta": 1.04,
+      "opacity": 1.0,
+      "dimmingOverlay": null,
+      "transitionIn": {
+        "type": "fade",
+        "durationFrames": 10
+      },
+      "transitionOut": null,
+      "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)"
+    }
+  },
+  "persistentWorldMemory": [
+    {
+      "traceId": "scene_2_logic_fracture_chasm_trace",
+      "originatingActorId": "scene_2_logic_bedrock_foundation",
+      "originatingSceneId": "scene_2_logic",
+      "appearance": "fracture_chasm",
+      "coordinates": {
+        "widthPx": 840,
+        "heightPx": 420
+      },
+      "opacity": 0.5,
+      "persistsUntilEnd": true,
+      "semanticMeaning": "Permanent structural fracture chasm"
+    },
+    {
+      "traceId": "scene_3_solution_fracture_chasm_trace",
+      "originatingActorId": "scene_3_solution_bedrock_foundation",
+      "originatingSceneId": "scene_3_solution",
+      "appearance": "fracture_chasm",
+      "coordinates": {
+        "widthPx": 840,
+        "heightPx": 420
+      },
+      "opacity": 0.5,
+      "persistsUntilEnd": true,
+      "semanticMeaning": "Permanent structural fracture chasm"
+    }
+  ],
+  "scenes": [
+    {
+      "sceneId": "scene_1_hook",
+      "role": "hook",
+      "startFrame": 0,
+      "endFrame": 403,
+      "narrativeGoal": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "dark_matte_spotlight_01",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.471,
+          0.36
+        ],
+        "motion": "slow_zoom_in",
+        "motionScaleDelta": 1.04,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "fade",
+          "durationFrames": 10
+        },
+        "transitionOut": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.96. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center; High presenter edge separation (no silhouette washout)"
+      },
+      "actors": [
+        {
+          "id": "emotional_distance_hero_illustration",
+          "semanticRole": "hook_curiosity_anchor",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "emotional_distance/assets/scene_illustration.png",
+            "widthPx": 760,
+            "heightPx": 480
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 460,
+            "y": 660,
+            "width": 760,
+            "height": 480,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        },
+        {
+          "id": "scene_1_hook_presenter_host",
+          "semanticRole": "presenter_host",
+          "narrativeImportance": "SECONDARY",
+          "geometry": {
+            "type": "semantic_cutout",
+            "assetPath": "assets/psychology/hyperrealistic_3d_glowing_brain.png",
+            "widthPx": 540,
+            "heightPx": 1200
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 760,
+            "y": 1320,
+            "width": 540,
+            "height": 1200,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [],
+      "mutations": [],
+      "causalCouplings": [],
+      "annotations": [
+        {
+          "annotationId": "scene_1_hook_headline",
+          "text": "THE MOST PAINFUL KIND OF LONELINESS IS N",
+          "font": "Montserrat Black",
+          "fontSizePx": 68,
+          "color": "#ffffff",
+          "role": "hook_slam",
+          "staticPlacement": {
+            "x": 540,
+            "y": 340
+          },
+          "startFrame": 0,
+          "durationFrames": 120,
+          "inAnimation": "scale_pop"
+        }
+      ],
+      "compositionMetrics": {
+        "occupiedWidthPct": 88.7,
+        "occupiedHeightPct": 84.9,
+        "occupiedAreaPct": 75.3,
+        "bottomDeadZonePx": 0.0,
+        "semanticDensityScore": 0.83,
+        "densityStatus": "OPTIMAL"
+      }
+    },
+    {
+      "sceneId": "scene_2_logic",
+      "role": "mechanism",
+      "startFrame": 403,
+      "endFrame": 1036,
+      "narrativeGoal": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "universal_texture_41",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.501,
+          0.5
+        ],
+        "motion": "slow_zoom_in",
+        "motionScaleDelta": 1.04,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "dissolve",
+          "durationFrames": 16
+        },
+        "transitionOut": null,
+        "reason": "Selected 'universal_texture_41' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center"
+      },
+      "actors": [
+        {
+          "id": "scene_2_logic_bedrock_foundation",
+          "semanticRole": "structural_bedrock",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "monolithic_foundation",
+            "widthPx": 840,
+            "heightPx": 420
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 740,
+            "width": 840,
+            "height": 420,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [
+        {
+          "forceId": "scene_2_logic_compressive_load",
+          "targetActorId": "scene_2_logic_bedrock_foundation",
+          "type": "compressive_load",
+          "triggerFrame": 433,
+          "durationFrames": 45,
+          "magnitude": 1.0,
+          "directionDeg": 90.0,
+          "timingCurve": "spring_heavy",
+          "semanticCause": "Cumulative unacknowledged load exceeds shear threshold"
+        }
+      ],
+      "mutations": [
+        {
+          "mutationId": "scene_2_logic_brittle_cleavage",
+          "actorId": "scene_2_logic_bedrock_foundation",
+          "type": "brittle_cleavage",
+          "triggerFrame": 473,
+          "durationFrames": 15,
+          "stateBefore": "PRISTINE_EQUILIBRIUM",
+          "stateAfter": "CATASTROPHIC_FRACTURE",
+          "physicalRationale": "OBSERVATION -> INFORMED_ACTION",
+          "parameters": {
+            "shatterFrame": 473,
+            "crackCount": 8
+          },
+          "createsMemoryTrace": {
+            "traceId": "scene_2_logic_fracture_chasm_trace",
+            "originatingActorId": "scene_2_logic_bedrock_foundation",
+            "originatingSceneId": "scene_2_logic",
+            "appearance": "fracture_chasm",
+            "coordinates": {
+              "widthPx": 840,
+              "heightPx": 420
+            },
+            "opacity": 0.5,
+            "persistsUntilEnd": true,
+            "semanticMeaning": "Permanent structural fracture chasm"
+          }
+        }
+      ],
+      "causalCouplings": [
+        {
+          "couplingId": "scene_2_logic_rupture_coupling",
+          "sourceEvent": {
+            "actorId": "scene_2_logic_bedrock_foundation",
+            "stateChange": "LOAD_EXCEEDED",
+            "frame": 473
+          },
+          "propagationDelayFrames": 0,
+          "targetReaction": {
+            "actorId": "scene_2_logic_bedrock_foundation",
+            "resultingMutationId": "scene_2_logic_brittle_cleavage"
+          },
+          "physicalLaw": "Load beyond yield point triggers immediate brittle rupture"
+        }
+      ],
+      "annotations": [
+        {
+          "annotationId": "scene_2_logic_headline",
+          "text": "YOU LAUGH AT THE JOKES, NOD IN THE CONVE",
+          "font": "Montserrat Black",
+          "fontSizePx": 68,
+          "color": "#ffffff",
+          "role": "thesis_statement",
+          "staticPlacement": {
+            "x": 540,
+            "y": 330
+          },
+          "startFrame": 403,
+          "durationFrames": 120,
+          "inAnimation": "scale_pop"
+        },
+        {
+          "annotationId": "scene_2_logic_consequence_label",
+          "text": "IRREVERSIBLE FRACTURE FORCES INVOLUNTARY PAUS",
+          "font": "JetBrains Mono Bold",
+          "fontSizePx": 38,
+          "color": "#ffffff",
+          "role": "action_verb",
+          "staticPlacement": {
+            "x": 540,
+            "y": 1250
+          },
+          "startFrame": 438,
+          "durationFrames": 598,
+          "inAnimation": "fade_down"
+        }
+      ],
+      "compositionMetrics": {
+        "occupiedWidthPct": 86.7,
+        "occupiedHeightPct": 52.3,
+        "occupiedAreaPct": 45.4,
+        "bottomDeadZonePx": 90.0,
+        "semanticDensityScore": 0.71,
+        "densityStatus": "OPTIMAL"
+      }
+    },
+    {
+      "sceneId": "scene_3_solution",
+      "role": "resolution",
+      "startFrame": 1036,
+      "endFrame": 1439,
+      "narrativeGoal": "Endurance systems exhibit non-linear failure: performance remains flat until sudden brittle fracture.",
+      "backgroundIntent": {
+        "mode": "universal",
+        "assetId": "dark_matte_spotlight_01",
+        "semanticRole": "cinematic_surface",
+        "cropStrategy": "center_focal",
+        "cropFocalPoint": [
+          0.471,
+          0.36
+        ],
+        "motion": "slow_zoom_in",
+        "motionScaleDelta": 1.04,
+        "opacity": 1.0,
+        "dimmingOverlay": null,
+        "transitionIn": {
+          "type": "dissolve",
+          "durationFrames": 16
+        },
+        "transitionOut": null,
+        "reason": "Selected 'dark_matte_spotlight_01' (matte_surface, dark) with score 0.92. Dark tone aligns with cinematic/reflective narrative; Deep black/dark ground guarantees >7:1 white text contrast; Clear text-safe zone verified at center"
+      },
+      "actors": [
+        {
+          "id": "scene_3_solution_bedrock_foundation",
+          "semanticRole": "structural_bedrock",
+          "narrativeImportance": "HERO",
+          "geometry": {
+            "type": "monolithic_foundation",
+            "widthPx": 840,
+            "heightPx": 420
+          },
+          "visualStyle": {
+            "strokeColor": "#ffffff",
+            "opacity": 1.0
+          },
+          "resolvedLayout": {
+            "x": 540,
+            "y": 740,
+            "width": 840,
+            "height": 420,
+            "originAnchor": "center",
+            "semanticPlacement": "dominant_center"
+          },
+          "zIndex": 10,
+          "isPersistent": false
+        }
+      ],
+      "forces": [
+        {
+          "forceId": "scene_3_solution_compressive_load",
+          "targetActorId": "scene_3_solution_bedrock_foundation",
+          "type": "compressive_load",
+          "triggerFrame": 1066,
+          "durationFrames": 45,
+          "magnitude": 1.0,
+          "directionDeg": 90.0,
+          "timingCurve": "spring_heavy",
+          "semanticCause": "Cumulative unacknowledged load exceeds shear threshold"
+        }
+      ],
+      "mutations": [
+        {
+          "mutationId": "scene_3_solution_brittle_cleavage",
+          "actorId": "scene_3_solution_bedrock_foundation",
+          "type": "brittle_cleavage",
+          "triggerFrame": 1106,
+          "durationFrames": 15,
+          "stateBefore": "PRISTINE_EQUILIBRIUM",
+          "stateAfter": "CATASTROPHIC_FRACTURE",
+          "physicalRationale": "OBSERVATION -> INFORMED_ACTION",
+          "parameters": {
+            "shatterFrame": 1106,
+            "crackCount": 8
+          },
+          "createsMemoryTrace": {
+            "traceId": "scene_3_solution_fracture_chasm_trace",
+            "originatingActorId": "scene_3_solution_bedrock_foundation",
+            "originatingSceneId": "scene_3_solution",
+            "appearance": "fracture_chasm",
+            "coordinates": {
+              "widthPx": 840,
+              "heightPx": 420
+            },
+            "opacity": 0.5,
+            "persistsUntilEnd": true,
+            "semanticMeaning": "Permanent structural fracture chasm"
+          }
+        }
+      ],
+      "causalCouplings": [
+        {
+          "couplingId": "scene_3_solution_rupture_coupling",
+          "sourceEvent": {
+            "actorId": "scene_3_solution_bedrock_foundation",
+            "stateChange": "LOAD_EXCEEDED",
+            "frame": 1106
+          },
+          "propagationDelayFrames": 0,
+          "targetReaction": {
+            "actorId": "scene_3_solution_bedrock_foundation",
+            "resultingMutationId": "scene_3_solution_brittle_cleavage"
+          },
+          "physicalLaw": "Load beyond yield point triggers immediate brittle rupture"
+        }
+      ],
+      "annotations": [
+        {
+          "annotationId": "scene_3_solution_headline",
+          "text": "AUTHENTIC CONNECTION BEGINS WHEN YOU STO",
+          "font": "Montserrat Black",
+          "fontSizePx": 68,
+          "color": "#ffffff",
+          "role": "thesis_statement",
+          "staticPlacement": {
+            "x": 540,
+            "y": 330
+          },
+          "startFrame": 1036,
+          "durationFrames": 120,
+          "inAnimation": "scale_pop"
+        },
+        {
+          "annotationId": "scene_3_solution_consequence_label",
+          "text": "IRREVERSIBLE FRACTURE FORCES INVOLUNTARY PAUS",
+          "font": "JetBrains Mono Bold",
+          "fontSizePx": 38,
+          "color": "#ffffff",
+          "role": "action_verb",
+          "staticPlacement": {
+            "x": 540,
+            "y": 1250
+          },
+          "startFrame": 1071,
+          "durationFrames": 368,
+          "inAnimation": "fade_down"
+        }
+      ],
+      "compositionMetrics": {
+        "occupiedWidthPct": 86.7,
+        "occupiedHeightPct": 52.3,
+        "occupiedAreaPct": 45.4,
+        "bottomDeadZonePx": 90.0,
+        "semanticDensityScore": 0.71,
+        "densityStatus": "OPTIMAL"
+      }
+    }
+  ]
+}

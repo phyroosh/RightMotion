@@ -172,9 +172,16 @@ def validate_clip(name: str, render_still: bool = False) -> bool:
 
     # 6. Remotion Root & Thumbnails Registration
     root_file = ROOT_DIR / "src" / "Root.tsx"
+    registry_file = ROOT_DIR / "src" / "clips" / "registry.ts"
     thumb_file = ROOT_DIR / "src" / "thumbnails" / "index.tsx"
 
-    if root_file.exists():
+    registered_in_registry = False
+    if registry_file.exists():
+        reg_content = registry_file.read_text(encoding="utf-8")
+        if f'pascalName: "{pascal_name}"' in reg_content or f'id: "{name}"' in reg_content:
+            registered_in_registry = True
+
+    if root_file.exists() and not registered_in_registry:
         root_content = root_file.read_text(encoding="utf-8")
         if f'id="{pascal_name}Video"' not in root_content:
             errors.append(f"Composition '{pascal_name}Video' not registered in src/Root.tsx")

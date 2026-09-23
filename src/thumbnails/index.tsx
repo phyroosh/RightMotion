@@ -1074,3 +1074,134 @@ export const PriceOfInactionThumbnail: React.FC = () => (
     theme="apple_studio"
   />
 );
+
+export const TheFocusParadoxThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="FOCUS PARADOX"
+    accentColor="#f43f5e"
+    heroImageSrc="the_focus_paradox/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const EmotionallyExpensiveThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="TOMORROW BECAUSE"
+    accentColor="#fbbf24"
+    heroImageSrc="emotionally_expensive/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const TheCostOfCompromiseThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="THE SLIPPAGE"
+    accentColor="#f43f5e"
+    heroImageSrc="the_cost_of_compromise/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const TheToleranceTrapThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="TOLERATED"
+    accentColor="#0284c7"
+    heroImageSrc="the_tolerance_trap/assets/scene_illustration.png"
+    heroScale={0.65}
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const DistractionNoiseThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="ACCUMULATING DISTRACTIONS"
+    accentColor="#f43f5e"
+    heroImageSrc="distraction_noise/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const StructuralPressureThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="LOAD LIMIT"
+    accentColor="#f59e0b"
+    heroImageSrc="structural_pressure/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const EmotionalDistanceThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="EMOTIONAL DISTANCE"
+    accentColor="#f43f5e"
+    heroImageSrc="emotional_distance/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const MentalOverloadThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="MENTAL OVERLOAD"
+    accentColor="#0284c7"
+    heroImageSrc="mental_overload/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const RuminationLoopThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="LOAD LIMIT"
+    accentColor="#f59e0b"
+    heroImageSrc="rumination_loop/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const HabitGrooveThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="THE SLIPPAGE"
+    accentColor="#f43f5e"
+    heroImageSrc="habit_groove/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const SocialExhaustionThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="LOAD LIMIT"
+    accentColor="#f59e0b"
+    heroImageSrc="social_exhaustion/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const BehindTheScenesThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="COMPARING BEHIND"
+    accentColor="#f43f5e"
+    heroImageSrc="behind_the_scenes/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);
+
+export const ScreenTimeTrapThumbnail: React.FC = () => (
+  <ImpossibleMetaphorLayout
+    hookWord="PHONE TRAP"
+    accentColor="#0284c7"
+    heroImageSrc="screen_time_trap/assets/scene_illustration.png"
+    aspectRatio="9:16"
+    theme="apple_studio"
+  />
+);

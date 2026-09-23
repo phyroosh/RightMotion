@@ -35,6 +35,32 @@ export const calculateDurationInFrames = (transcript: any[], fps: number): numbe
 // ============================================================================
 // 1. Clip Component & Transcript Imports
 // ============================================================================
+import { ScreenTimeTrapComposition } from "./screen_time_trap";
+import screen_time_trapTranscript from "./screen_time_trap/transcript.json";
+import { BehindTheScenesComposition } from "./behind_the_scenes";
+import behind_the_scenesTranscript from "./behind_the_scenes/transcript.json";
+import { SocialExhaustionComposition } from "./social_exhaustion";
+import social_exhaustionTranscript from "./social_exhaustion/transcript.json";
+import { HabitGrooveComposition } from "./habit_groove";
+import habit_grooveTranscript from "./habit_groove/transcript.json";
+import { RuminationLoopComposition } from "./rumination_loop";
+import rumination_loopTranscript from "./rumination_loop/transcript.json";
+import { MentalOverloadComposition } from "./mental_overload";
+import mental_overloadTranscript from "./mental_overload/transcript.json";
+import { EmotionalDistanceComposition } from "./emotional_distance";
+import emotional_distanceTranscript from "./emotional_distance/transcript.json";
+import { StructuralPressureComposition } from "./structural_pressure";
+import structural_pressureTranscript from "./structural_pressure/transcript.json";
+import { DistractionNoiseComposition } from "./distraction_noise";
+import distraction_noiseTranscript from "./distraction_noise/transcript.json";
+import { TheToleranceTrapComposition } from "./the_tolerance_trap";
+import the_tolerance_trapTranscript from "./the_tolerance_trap/transcript.json";
+import { TheCostOfCompromiseComposition } from "./the_cost_of_compromise";
+import the_cost_of_compromiseTranscript from "./the_cost_of_compromise/transcript.json";
+import { EmotionallyExpensiveComposition } from "./emotionally_expensive";
+import emotionally_expensiveTranscript from "./emotionally_expensive/transcript.json";
+import { TheFocusParadoxComposition } from "./the_focus_paradox";
+import the_focus_paradoxTranscript from "./the_focus_paradox/transcript.json";
 import { PriceOfInactionComposition } from "./price_of_inaction";
 import price_of_inactionTranscript from "./price_of_inaction/transcript.json";
 import { ADHDComposition } from "./adhd";
@@ -232,12 +258,129 @@ import {
   EmotionsThumbnail,
   ChaptersThumbnail,
   PriceOfInactionThumbnail,
+  TheFocusParadoxThumbnail,
+  EmotionallyExpensiveThumbnail,
+  TheCostOfCompromiseThumbnail,
+  TheToleranceTrapThumbnail,
+  DistractionNoiseThumbnail,
+  StructuralPressureThumbnail,
+  EmotionalDistanceThumbnail,
+  MentalOverloadThumbnail,
+  RuminationLoopThumbnail,
+  HabitGrooveThumbnail,
+  SocialExhaustionThumbnail,
+  BehindTheScenesThumbnail,
+  ScreenTimeTrapThumbnail,
 } from "../thumbnails";
 
 // ============================================================================
 // 3. Canonical Clip Registry Array
 // ============================================================================
 export const REGISTERED_CLIPS: ClipRegistration[] = [
+  {
+    id: "screen_time_trap",
+    pascalName: "ScreenTimeTrap",
+    component: ScreenTimeTrapComposition,
+    thumbnailComponent: ScreenTimeTrapThumbnail,
+    transcript: screen_time_trapTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "behind_the_scenes",
+    pascalName: "BehindTheScenes",
+    component: BehindTheScenesComposition,
+    thumbnailComponent: BehindTheScenesThumbnail,
+    transcript: behind_the_scenesTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "social_exhaustion",
+    pascalName: "SocialExhaustion",
+    component: SocialExhaustionComposition,
+    thumbnailComponent: SocialExhaustionThumbnail,
+    transcript: social_exhaustionTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "habit_groove",
+    pascalName: "HabitGroove",
+    component: HabitGrooveComposition,
+    thumbnailComponent: HabitGrooveThumbnail,
+    transcript: habit_grooveTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "rumination_loop",
+    pascalName: "RuminationLoop",
+    component: RuminationLoopComposition,
+    thumbnailComponent: RuminationLoopThumbnail,
+    transcript: rumination_loopTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "mental_overload",
+    pascalName: "MentalOverload",
+    component: MentalOverloadComposition,
+    thumbnailComponent: MentalOverloadThumbnail,
+    transcript: mental_overloadTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "emotional_distance",
+    pascalName: "EmotionalDistance",
+    component: EmotionalDistanceComposition,
+    thumbnailComponent: EmotionalDistanceThumbnail,
+    transcript: emotional_distanceTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "structural_pressure",
+    pascalName: "StructuralPressure",
+    component: StructuralPressureComposition,
+    thumbnailComponent: StructuralPressureThumbnail,
+    transcript: structural_pressureTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "distraction_noise",
+    pascalName: "DistractionNoise",
+    component: DistractionNoiseComposition,
+    thumbnailComponent: DistractionNoiseThumbnail,
+    transcript: distraction_noiseTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "the_tolerance_trap",
+    pascalName: "TheToleranceTrap",
+    component: TheToleranceTrapComposition,
+    thumbnailComponent: TheToleranceTrapThumbnail,
+    transcript: the_tolerance_trapTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "the_cost_of_compromise",
+    pascalName: "TheCostOfCompromise",
+    component: TheCostOfCompromiseComposition,
+    thumbnailComponent: TheCostOfCompromiseThumbnail,
+    transcript: the_cost_of_compromiseTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "emotionally_expensive",
+    pascalName: "EmotionallyExpensive",
+    component: EmotionallyExpensiveComposition,
+    thumbnailComponent: EmotionallyExpensiveThumbnail,
+    transcript: emotionally_expensiveTranscript as any[],
+    format: "shorts",
+  },
+  {
+    id: "the_focus_paradox",
+    pascalName: "TheFocusParadox",
+    component: TheFocusParadoxComposition,
+    thumbnailComponent: TheFocusParadoxThumbnail,
+    transcript: the_focus_paradoxTranscript as any[],
+    format: "shorts",
+  },
   {
     id: "price_of_inaction",
     pascalName: "PriceOfInaction",

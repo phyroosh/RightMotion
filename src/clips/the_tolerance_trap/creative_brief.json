@@ -1,0 +1,391 @@
+{
+  "version": "1.0.0",
+  "clipId": "the_tolerance_trap",
+  "topic": "Your brain learns what you repeatedly tolerate!",
+  "niche": "self_improvement",
+  "fps": 60,
+  "totalFrames": 1950,
+  "story": {
+    "coreIdea": "Every unfinished task keeps subconscious neural RAM occupied, leaking cognitive bandwidth until the system exhausts itself.",
+    "centralClaim": "Mental exhaustion is not caused by the work you are doing, but by the unresolved loops you leave open.",
+    "viewerPromise": "Understand why your mind feels cluttered even when sitting still, and how to close invisible neural loops.",
+    "narrativeArc": "Problem -> Mechanism -> Resolution"
+  },
+  "emotionalArc": {
+    "overall": "Curiosity -> Tension & Cognitive Friction -> Epiphany Release -> Grounded Peace",
+    "segments": [
+      {
+        "segmentId": "seg_1_hook",
+        "role": "hook",
+        "startFrame": 0,
+        "endFrame": 488,
+        "emotion": "curiosity_and_recognition",
+        "intensity": 0.9,
+        "attentionSpike": true
+      },
+      {
+        "segmentId": "seg_2_mechanism",
+        "role": "mechanism",
+        "startFrame": 488,
+        "endFrame": 975,
+        "emotion": "analytical_clarity",
+        "intensity": 0.75,
+        "attentionSpike": false
+      },
+      {
+        "segmentId": "seg_3_escalation",
+        "role": "mechanism",
+        "startFrame": 975,
+        "endFrame": 1462,
+        "emotion": "cognitive_tension",
+        "intensity": 0.95,
+        "attentionSpike": true
+      },
+      {
+        "segmentId": "seg_4_resolution",
+        "role": "resolution",
+        "startFrame": 1462,
+        "endFrame": 1950,
+        "emotion": "grounded_confidence",
+        "intensity": 0.75,
+        "attentionSpike": false
+      }
+    ]
+  },
+  "visualConcept": {
+    "conceptName": "Physical Boundary Displacement & Baseline Recalibration",
+    "primaryMechanism": "displacement",
+    "centralTransformation": "CONSCIOUS_AGENCY -> UNNOTICED_EROSION -> NORMALIZED_TOLERANCE -> HARDENED_AUTOMATICITY",
+    "physicalDescription": "An architectural integrity line spans the canvas horizontally. When a tiny impulse ('just this once') impacts it, the boundary physically deflects downward with a viscoelastic sag. The original baseline remains as a faded ghost line, while the deflected line solidifies into the new ground normal.",
+    "visibleTransformation": "Original boundary (100% integrity) -> downward sag -> ghost line remains -> recalibrates to optional ground plane",
+    "visibleConsequence": "The exception physically occupies the position previously held by the standard",
+    "persistentState": "Settled baseline state",
+    "whyThisMechanism": "Candidate 'Physical Boundary Displacement & Baseline Recalibration' achieved highest composite score (0.94) with superior semantic clarity (0.95) and mobile readability (0.95). Employs LEVEL_2_PHYSICAL_PROCESS depth to express 'displacement' as a live physical event rather than static card text.",
+    "intentionallyNotVisualized": [
+      "Peripheral narration filler words (spoken-only audio load)",
+      "Redundant stat gauges and numerical labels (action precedes notation)",
+      "Decorative background particles and arbitrary floating icons"
+    ],
+    "metaphorDepth": "PHYSICAL_PROCESS"
+  },
+  "shots": [
+    {
+      "shotId": "shot_1_hook",
+      "frameRange": [
+        0,
+        288
+      ],
+      "narrativePurpose": "[HOOK] Establishes the intuitive friction or observable paradox.",
+      "visualObjective": "Establish hero subject and immediate question in high contrast open stage. Ground viewer immediately.",
+      "emotionalState": "High curiosity & tension",
+      "pacingMode": "ACCELERATE",
+      "subject": "Hero illustration & grounded host avatar",
+      "visualQuestion": "Why does unfinished work keep returning to attention and draining energy?",
+      "visualMechanism": {
+        "type": "editorial_framing",
+        "confidence": "OPTIONAL"
+      },
+      "suggestedComponents": [
+        {
+          "component": "CinematicIllustrationCard",
+          "confidence": "RECOMMENDED",
+          "reason": "Opening 2.5s hero editorial framing (Rule 4)",
+          "importPath": "../../components/CinematicIllustrationCard"
+        },
+        {
+          "component": "GlossyJudyIntro",
+          "confidence": "RECOMMENDED",
+          "reason": "Grounded presenter connection on mobile screens",
+          "importPath": "../../components/pure_graphics"
+        }
+      ],
+      "composition": {
+        "mode": "open_canvas",
+        "focalPoint": "upper_third_narrative",
+        "confidence": "RECOMMENDED"
+      },
+      "camera": {
+        "mode": "handheld_drift",
+        "movement": "Subtle organic drift with intimate presenter/hero framing",
+        "confidence": "RECOMMENDED"
+      },
+      "stateChange": {
+        "whatExistsAtBeginning": "Uninitiated baseline / untouched space",
+        "whatHappens": "Initial friction introduced; subject confronts the core question",
+        "whatVisiblyChanges": "Hero visual or presenter establishes the scene; primary question surfaces",
+        "whatExistsAtEnd": "State A: Problem space actively engaged",
+        "whyChangeMatters": "Captures curiosity in the first 2.5s before the viewer scrolls away"
+      },
+      "transitionToNext": {
+        "type": "hard_cut",
+        "motivation": "Sharp cognitive break matching narrative pivot"
+      },
+      "soundCues": [
+        {
+          "type": "whoosh_deep",
+          "frame": 4,
+          "purpose": "Opening scene presence"
+        }
+      ],
+      "captionBehavior": {
+        "visibility": "normal",
+        "emphasisWords": [
+          "EVERY",
+          "BOUNDARY",
+          "REFUSE"
+        ]
+      }
+    },
+    {
+      "shotId": "shot_2_mechanism",
+      "frameRange": [
+        288,
+        910
+      ],
+      "narrativePurpose": "[MECHANISM] Unpacks the hidden causal mechanism driving the paradox.",
+      "visualObjective": "Execute DISPLACEMENT: An architectural integrity line spans the canvas horizontally. When a tiny impulse ('just this once') impacts it, the boundary physically deflects downward with a viscoelastic sag. The original baseline remains as a faded ghost line, while the deflected line solidifies into the new ground normal.. Viewer must observe physical state changing live.",
+      "emotionalState": "Active cause-and-effect physical propagation",
+      "pacingMode": "ACCELERATE",
+      "subject": "Active displacement mechanism (Physical Boundary Displacement & Baseline Recalibration)",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "visualMechanism": {
+        "type": "displacement",
+        "confidence": "RECOMMENDED"
+      },
+      "suggestedComponents": [
+        {
+          "component": "KineticFurrow",
+          "confidence": "OPTIONAL",
+          "reason": "Carves repeated groove pathway illustrating habitual ease",
+          "importPath": "../../components/primitives"
+        }
+      ],
+      "composition": {
+        "mode": "open_canvas",
+        "focalPoint": "center_mechanism",
+        "confidence": "RECOMMENDED"
+      },
+      "camera": {
+        "mode": "lateral_pan",
+        "movement": "Tracking focal point as resistance builds",
+        "confidence": "RECOMMENDED"
+      },
+      "stateChange": {
+        "whatExistsAtBeginning": "System under rising load (State A)",
+        "whatHappens": "Live execution of transformation: Original boundary (100% integrity) -> downward sag -> ghost line remains -> recalibrates to optional ground plane",
+        "whatVisiblyChanges": "Live physical deformation, worn furrow deepening, or threshold approaching breaking point",
+        "whatExistsAtEnd": "System at tipping threshold or undergoing phase change",
+        "whyChangeMatters": "Allows the viewer to SEE the invisible psychology physically operate"
+      },
+      "transitionToNext": {
+        "type": "hard_cut",
+        "motivation": "Sharp cognitive break matching narrative pivot"
+      },
+      "soundCues": [
+        {
+          "type": "click",
+          "frame": 296,
+          "purpose": "Mechanical state shift engagement"
+        },
+        {
+          "type": "marker_scribble",
+          "frame": 333,
+          "purpose": "Annotation or pathway emphasis"
+        }
+      ],
+      "captionBehavior": {
+        "visibility": "normal",
+        "emphasisWords": [
+          "NEUROPLASTICITY",
+          "MORAL",
+          "PURELY"
+        ]
+      },
+      "continuity": {
+        "inheritFromShot": "shot_1_hook",
+        "preserveElements": [
+          "boundary_axis",
+          "tension_vector"
+        ],
+        "persistentTrace": "Ghost outline of untouched baseline"
+      }
+    },
+    {
+      "shotId": "shot_3_escalation",
+      "frameRange": [
+        910,
+        1718
+      ],
+      "narrativePurpose": "[ESCALATION] Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualObjective": "Execute DISPLACEMENT: An architectural integrity line spans the canvas horizontally. When a tiny impulse ('just this once') impacts it, the boundary physically deflects downward with a viscoelastic sag. The original baseline remains as a faded ghost line, while the deflected line solidifies into the new ground normal.. Viewer must observe physical state changing live.",
+      "emotionalState": "Pregnant pause: visual breath before the tipping point",
+      "pacingMode": "HOLD",
+      "subject": "Active displacement mechanism (Physical Boundary Displacement & Baseline Recalibration)",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "visualMechanism": {
+        "type": "displacement",
+        "confidence": "RECOMMENDED"
+      },
+      "suggestedComponents": [
+        {
+          "component": "KineticFurrow",
+          "confidence": "OPTIONAL",
+          "reason": "Carves repeated groove pathway illustrating habitual ease",
+          "importPath": "../../components/primitives"
+        }
+      ],
+      "composition": {
+        "mode": "centered_minimalism",
+        "focalPoint": "center_mechanism",
+        "confidence": "RECOMMENDED"
+      },
+      "camera": {
+        "mode": "static",
+        "movement": "Sudden arrest of visual drift, tension hold",
+        "confidence": "RECOMMENDED"
+      },
+      "stateChange": {
+        "whatExistsAtBeginning": "System under rising load (State A)",
+        "whatHappens": "Live execution of transformation: Original boundary (100% integrity) -> downward sag -> ghost line remains -> recalibrates to optional ground plane",
+        "whatVisiblyChanges": "Live physical deformation, worn furrow deepening, or threshold approaching breaking point",
+        "whatExistsAtEnd": "System at tipping threshold or undergoing phase change",
+        "whyChangeMatters": "Allows the viewer to SEE the invisible psychology physically operate"
+      },
+      "transitionToNext": {
+        "type": "fade_hold",
+        "motivation": "Decompression after impact; quiet settling into sovereign clarity"
+      },
+      "soundCues": [
+        {
+          "type": "click",
+          "frame": 918,
+          "purpose": "Mechanical state shift engagement"
+        },
+        {
+          "type": "marker_scribble",
+          "frame": 955,
+          "purpose": "Annotation or pathway emphasis"
+        }
+      ],
+      "captionBehavior": {
+        "visibility": "reduced",
+        "emphasisWords": [
+          "ORIGINALLY",
+          "TRIGGERED",
+          "TENSION"
+        ]
+      },
+      "continuity": {
+        "inheritFromShot": "shot_2_mechanism",
+        "preserveElements": [
+          "boundary_axis",
+          "tension_vector"
+        ],
+        "persistentTrace": "Ghost outline of untouched baseline"
+      }
+    },
+    {
+      "shotId": "shot_4_resolution",
+      "frameRange": [
+        1718,
+        1950
+      ],
+      "narrativePurpose": "[RESOLUTION] The decisive operational takeaway or sovereign resolution.",
+      "visualObjective": "Present settled sovereign state. Zero cluttered dashboard cards; one decisive visual impression.",
+      "emotionalState": "Clarity, sovereign recalibration, grounded closure",
+      "pacingMode": "RELEASE",
+      "subject": "Grounded sovereign state / persistent artifact",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "visualMechanism": {
+        "type": "editorial_framing",
+        "confidence": "OPTIONAL"
+      },
+      "suggestedComponents": [
+        {
+          "component": "PersistentMemoryStage",
+          "confidence": "OPTIONAL",
+          "reason": "Leaves persistent ghost trace of the journey",
+          "importPath": "../../components/primitives"
+        }
+      ],
+      "composition": {
+        "mode": "centered_minimalism",
+        "focalPoint": "upper_third_narrative",
+        "confidence": "RECOMMENDED"
+      },
+      "camera": {
+        "mode": "static",
+        "movement": "Steady grounded wide observation, zero unnecessary camera travel",
+        "confidence": "RECOMMENDED"
+      },
+      "stateChange": {
+        "whatExistsAtBeginning": "Decompressed post-epiphany space",
+        "whatHappens": "Stabilization; sovereign boundary grounded; persistent memory trace settles",
+        "whatVisiblyChanges": "Deliberate calm; environment reflects Settled baseline state",
+        "whatExistsAtEnd": "State B: HARDENED_AUTOMATICITY",
+        "whyChangeMatters": "Leaves the viewer with an unforgettable decisive takeaway and emotional peace"
+      },
+      "soundCues": [
+        {
+          "type": "whoosh_cinematic",
+          "frame": 1723,
+          "purpose": "Settling into final resolution"
+        }
+      ],
+      "captionBehavior": {
+        "visibility": "normal",
+        "emphasisWords": [
+          "DEFEND",
+          "BOUNDARY",
+          "INSTANTLY"
+        ]
+      },
+      "continuity": {
+        "inheritFromShot": "shot_3_escalation",
+        "preserveElements": [
+          "ground_recalibrated_line"
+        ],
+        "persistentTrace": "Permanent mark of Settled baseline state"
+      }
+    }
+  ],
+  "visualLanguage": {
+    "activeFrontiers": [
+      "F_BASE",
+      "F_UBG",
+      "F2",
+      "F4",
+      "F7"
+    ],
+    "forbiddenPatterns": [
+      "Dashboard/list-card rows with numbered pills",
+      "Empty colored container boxes replacing physical mechanisms",
+      "Body paragraphs rendered in text boxes",
+      "Unmotivated bobbing or constant spinning",
+      "Meme cards or reaction stickers"
+    ],
+    "referenceClips": [
+      "the_threshold_effect",
+      "the_law_of_structural_load",
+      "small_compromises"
+    ],
+    "groundColor": "#f8fafc",
+    "accentColor": "#0284c7"
+  },
+  "assets": {
+    "illustration": "the_tolerance_trap/assets/scene_illustration.png",
+    "problemCutout": {
+      "id": "tangled_confusion_chaos",
+      "path": "assets/psychology/tangled_confusion_chaos.png"
+    },
+    "solutionCutout": {
+      "id": "enlightened_mind_insight",
+      "path": "assets/psychology/enlightened_mind_insight.png"
+    }
+  },
+  "agentContract": {
+    "instructions": "READ THIS BRIEF BEFORE IMPLEMENTING Canvas.tsx. The Shot Director defines WHAT the viewer must see; you as the AI editor decide HOW to realize it. Do not default to cards or slideshows. Ground ideas in physical mechanisms, open-stage choreography, and deliberate editorial rhythm.",
+    "confidenceHierarchy": "REQUIRED: Narrative purpose, visual objective, and 5-question visual state change.\nRECOMMENDED: Primary visual mechanism, composition mode, and camera movement.\nOPTIONAL: Suggested components (you may invent or use better components).",
+    "fiveQuestionsRule": "For every shot, you must satisfy: 1) What exists at the beginning? 2) What happens? 3) What visibly changes? 4) What exists at the end? 5) Why does that change matter? If only text changes, redesign the scene around physical or spatial transformation."
+  }
+}

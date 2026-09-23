@@ -2,6 +2,32 @@
 
 ---
 
+> [!IMPORTANT]
+> ### 🎯 THE RIGHTMOTION CREATIVE MANTRA & RETENTION LAW
+> **RIGHTMOTION DOES NOT TRY TO LOOK CREATIVE.**
+> **RIGHTMOTION TRIES TO MAKE THE IDEA CLEAR.**
+> 
+> * **SIMPLE FRAME. RICH TIMELINE.** Keep the screen simple. Keep the timeline alive.
+> * Creativity comes from finding the simplest visual metaphor that makes the idea unforgettable.
+> * One excellent visual idea is worth more than ten impressive effects.
+> * `visualDensity ≠ attentionIntensity`. A clean frame can generate extreme tension through anticipation and micro-events.
+> * Anticipation is as important as payoff.
+> * The viewer's attention is a limited resource. Spend it deliberately.
+> * When the visual is already explaining the idea, stop adding things.
+
+---
+
+> [!IMPORTANT]
+> ### 🏛️ CREATIVE HIERARCHY OF AUTHORITY
+> In any creative or visual decision, this precedence order is absolute:
+> 1. **`RIGHTMOTION_CREATIVE_CONSTITUTION.md`** — Supreme creative law, foundational principles, visual thinking tests, and card-escape logic.
+> 2. **`creative_brief.json`** — Authoritative shot plan, attention plan, pacing modes, micro-events, visual state changes, and pedagogical references.
+> 3. **Shot Directives & Attention Plan** — Scene-by-scene primary visual idea, focal hierarchy, micro-events, and mechanical action.
+> 4. **Component Index** — Candidate implementation tools (optional choices, never mandatory ingredients).
+> 5. **Agent Implementation** — Bespoke `Canvas.tsx` execution adhering to the above.
+
+---
+
 ## 🚀 RULE 0: MANDATORY AUTONOMOUS PRODUCTION
 
 > [!CRITICAL]
@@ -20,17 +46,23 @@
 >    ```bash
 >    .venv/bin/python3 scripts/create_clip.py --name "<name>" --topic "<topic>" --script "<script>" [--andrew] [--meta]
 >    ```
->    Produces: neural audio, `transcript.json` (word-level timestamps), cutout asset staging, `Root.tsx` registration, starter `Canvas.tsx`.
 > 3. **Design & implement** `src/clips/<name>/Canvas.tsx` & `Presenter.tsx`:
+>    - **MANDATORY CONSTITUTION & BRIEF READING**: You MUST read `RIGHTMOTION_CREATIVE_CONSTITUTION.md` and `src/clips/<name>/creative_brief.json` before writing any JSX. It contains the Shot Director's authoritative shot plan, pedagogical reference deconstruction, pacing modes (HOLD, BUILD, IMPACT, etc.), and the 5-question visual state changes. Review the RIGHTMOTION CREATIVE MISSION header at the top of `Canvas.tsx`.
 >    - **Mandatory ~2.5s Hook Intro (frames 0 to ~75)**: Showcase the created picture (`scene_illustration.png`) inside an editorial card alongside Judy close-up/near to the screen (`baseHeight: 1250–1360px`, `position="right"` or intimate waist-up) so viewers on a 6-inch mobile screen feel immediately connected.
->    - Read `transcript.json` for frame-accurate word timing. Anchor subsequent scenes with large transparent semantic cutouts (`400–750px`) from `public/assets/`. See Rule 5 for the creative standard.
-> 4. **Visual audit**:
->    ```bash
->    npx remotion still src/index.ts <PascalName>Video out/<name>_hook.png --frame=35
->    npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=120
->    npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=350
->    ```
->    Inspect each still via `view_file`. Confirm razor-sharp contrast, zero dirty grain on light mode, and zero caption overlap.
+>    - Read `transcript.json` for frame-accurate word timing. Anchor subsequent scenes with large transparent semantic cutouts (`400–750px`) from `public/assets/` or open-canvas physical mechanisms. See Rule 5 for the creative standard.
+> 4. **Visual audit & Editorial Critique**:
+>    - Run structural critique:
+>      ```bash
+>      .venv/bin/python3 scripts/visual_critic.py --clip "<name>"
+>      ```
+>      Inspect `src/clips/<name>/visual_critique.md` via `view_file` to address actionable editorial advice (no unmotivated cardification, physical mechanisms, 5 visual state questions).
+>    - Generate and inspect stills:
+>      ```bash
+>      npx remotion still src/index.ts <PascalName>Video out/<name>_hook.png --frame=35
+>      npx remotion still src/index.ts <PascalName>Video out/<name>_scene1.png --frame=120
+>      npx remotion still src/index.ts <PascalName>Video out/<name>_scene2.png --frame=350
+>      ```
+>      Inspect each still via `view_file`. Confirm razor-sharp contrast, zero dirty grain on light mode, and zero caption overlap.
 > 5. **Render (Optimized High-Throughput Production Path)**:
 >    ```bash
 >    python3 scripts/render_clip.py --name "<name>" [--concurrency=4]
@@ -125,6 +157,208 @@ RightMotion DNA: **premium · modern · clean · sharp · editorial · minimal �
 
 ---
 
+### 5.0 — The Minimalist Visual Storytelling Standard
+
+> [!CRITICAL]
+> **CLARITY OVER COMPLEXITY · SIMPLICITY OVER SPECTACLE · MEANING OVER DECORATION · ONE STRONG VISUAL IDEA BEATS FIVE COMPETING IDEAS.**
+> 
+> RightMotion behaves like an exceptional motion designer explaining a difficult concept to someone in the simplest possible visual language.
+> The goal is NOT to maximize: component usage, motion, visual density, camera movement, effects, typography, physical systems, or simultaneous animations.
+> The goal IS to maximize: **How quickly and effortlessly the viewer understands the visual idea.**
+> 
+> *"RightMotion does not try to look creative. RightMotion tries to make the idea clear."*
+
+#### 1. The Visual Hierarchy:
+Every shot must strictly adhere to:
+```text
+PRIMARY (Exactly ONE dominant visual idea — thing viewer looks at first)
+   ↓
+SECONDARY (At most 1 subtle supporting cue: label, secondary object, subtle environmental cue)
+   ↓
+AMBIENT (Pristine backdrop / context that improves the primary idea; ZERO competition)
+```
+**STRICT BAN**: Never allow `PRIMARY + SECONDARY x 3 + TEXT + ICON + PRESENTER + CHART + DECORATION + PARTICLES` all demanding attention at once.
+
+#### 2. Visual Clarity Budget:
+- Every shot defines `visualDensity`: `"LOW" | "MEDIUM" | "HIGH"`
+- **`LOW` (DEFAULT)**: explanations, setup, emotional moments, conceptual metaphors, visual holds, reflection.
+- **`MEDIUM`**: mechanisms, accumulation, transitions, escalating systems, multi-step explanations.
+- **`HIGH`**: temporary ONLY for major impact, climax, rupture, reveal, transformation. Never maintain HIGH across a video!
+
+#### 3. One Visual Idea Per Shot:
+- Every shot must answer: *"What is the one thing I want the viewer to understand visually?"*
+- `primaryVisualIdea`: Must be understandable in one simple sentence.
+  - *Good*: "Each distraction adds another weight to the character."
+  - *Bad*: "Show the character, phone, notifications, dopamine graph, clock, thought bubbles, productivity chart, and several labels to communicate distraction."
+
+#### 4. Component Suggestions Are Options, NOT Ingredients:
+- `suggestedComponents` are mutually optional candidates, NOT a checklist.
+- The agent must prefer the smallest number of visual systems capable of clearly communicating the shot.
+- `componentBudget`: Default: **1**. Maximum recommended: **2**. Exceed only when story genuinely requires it.
+
+#### 5. Ban Visual Over-Explanation:
+- Stop explaining the same idea multiple times visually.
+- If the physical motion itself explains the sentence, do NOT add giant redundant typography slamming over it.
+
+#### 6. Motion Must Communicate Meaning:
+- Every significant movement must have a semantic reason:
+  - Object grows → accumulation
+  - Space shrinks → constraint
+  - Camera pushes in → pressure / intimacy
+  - Object moves away → emotional distance
+  - Crack spreads → consequence
+  - Structure bends → increasing load
+- **Banned motion**: bouncing because bouncing looks cool; camera rotating because 3D is available; particles floating because canvas looks empty; text flying in because the library supports it.
+
+#### 7. Minimalism Does Not Mean Static:
+- The target is: **Minimal composition + meaningful motion**.
+- A shot with one object, one clean ground, and one transformation is far more cinematic than five simultaneous effects.
+
+#### 8. Visual Focus & Negative Space as a Feature:
+- `visualFocus`: `{ primary: string, secondary?: string, backgroundRole: string }`.
+- Negative space isolates the subject, increases emotional weight, improves readability, and creates breathing room. Empty space is NOT a rendering failure.
+
+#### 9. The "Remove One Thing" Pass:
+- Before finalizing every shot, ask: *"What can I remove without losing meaning?"*
+- Categorize into Primary, Supporting, Decorative. Strip decorative elements. Remove unnecessary supporting elements.
+
+#### 10. Visual Breathing Model:
+- Alternate naturally: `QUIET → BUILD → IMPACT → QUIET` (or `OBSERVE → BUILD → RELEASE`). Viewer attention is a limited resource.
+
+#### 11. Simple Visual Storytelling Default:
+- Prefer one evolving object/system over many separate objects (e.g. 1 structure deforming over 5 separate illustrations; 1 path wearing down over 4 UI cards; 1 character moving into negative space over multiple charts).
+- Visual grammar: `STATE → EVENT → CHANGE → CONSEQUENCE`.
+
+#### 12. Reduce Simultaneous Motion:
+- Only the primary visual system moves significantly. Secondary motion is subtle and restrained.
+
+#### 13. Camera, Typography & Presenter Restraint:
+- Camera movement is not decoration: a static camera with an excellent transformation is better than unnecessary camera drift.
+- Typography supports, not competes: caption system already handles spoken words. Extra typography is only for emphasis, label, or concept naming.
+- Presenter supports the story: use Judy when emotional intimacy matters; remove Judy when a physical mechanism explains the concept.
+
+#### 14. Frame-Level Quality Checks:
+- **Blur Test**: At small scale / blurred, can I still identify the primary subject?
+- **Squint Test**: Is there one obvious focal point?
+- **One-Sentence Test**: Can I describe the visual in one simple sentence?
+- **Caption-Off Test**: Does the visual still communicate if captions disappear?
+- **Remove-One Test**: Can something be removed without reducing clarity?
+- **Motion Test**: Can I explain why each major movement exists?
+
+---
+
+### 5.0.1 — Simple Frame, Rich Timeline & The Retention Choreographer
+
+> [!CRITICAL]
+> **RIGHTMOTION PRINCIPLE — SIMPLE FRAME, RICH TIMELINE**
+> 
+> A frame should be easy to understand at a glance.
+> A sequence should remain dynamically interesting over time.
+> 
+> Do not increase visual complexity merely to increase stimulation.
+> Create retention through anticipation, timing, transformation, camera choreography, micro-events, contrast, reveals, impacts, resets, and visual state changes.
+> 
+> **Keep the screen simple. Keep the timeline alive.**
+
+#### 1. Retention is Not Visual Density (`visualDensity ≠ attentionIntensity`):
+- A shot can have **LOW visual complexity** and **HIGH attention intensity** (e.g. one red boundary slowly moving toward a character with rising sound cue, deceleration, breath-hold, and sudden snap).
+- Never add clutter, extra icons, floating text, or background noise to make a scene "feel more active".
+
+#### 2. Temporal Complexity Over Spatial Clutter:
+- Prefer **one object with many meaningful states** over **many objects with one simple state**.
+- *Example*: One structural beam holding baseline $\rightarrow$ bending $\rightarrow$ micro-cracking $\rightarrow$ fracturing $\rightarrow$ settling.
+- Choreograph the timeline with frame-accurate precision rather than filling canvas coordinates with widgets.
+
+#### 3. The Micro-Event System:
+- A micro-event is a small meaningful event that keeps the timeline alive without making the frame crowded.
+- Examples: object nudges, subtle accelerations, camera micro-punches, highlights, state mutations, sound accents, brief freezes, reversals, shape snaps.
+- **Every micro-event MUST have a reason**: `progression`, `anticipation`, `emphasis`, `causality`, `escalation`, `contrast`, `emotional_change`, `reveal`, or `punctuation`.
+- Do NOT generate micro-events just for random jitter or visual noise.
+
+#### 4. Anticipation & Payoff:
+- **Anticipation is a first-class tool**: Before an important event, create a brief anticipation state (movement slows, tension tightens, camera creeps forward, sound cue rises).
+- **Payoffs must exist**: A meaningful setup must receive a payoff (fracture snap, clean rebound, sovereign release). The viewer must feel: *"Ah. That was leading somewhere."*
+
+#### 5. Micro-Resets & Contrast:
+- Contrast creates retention: `quiet → build → impact → breath → reset`.
+- Use intentional visual resets (hard cut, momentary stillness, background simplification, sound drop) to refresh attention between major phases.
+- Do not make every second busy; viewers need dynamic contrast to stay engaged.
+
+#### 6. Simultaneous Motion Budget:
+- **Primary moving system**: Exactly **1** (e.g. active physical mechanism or host presenter).
+- **Secondary subtle motion**: At most **0–1** (e.g. subtle camera drift or gentle rim highlight).
+- **Strict Ban**: Never animate presenter + mechanism + camera drift + text slam + floating badges + background particles simultaneously.
+
+#### 7. Effects Must Serve Retention:
+- Effects are allowed ONLY when they perform a clear narrative function:
+  - *Camera punch* $\rightarrow$ emphasizes impact.
+  - *Glow / highlight* $\rightarrow$ directs attention to a changing metric or node.
+  - *Motion blur* $\rightarrow$ communicates acceleration.
+  - *Shake* $\rightarrow$ communicates physical collision.
+  - *Flash* $\rightarrow$ punctuation.
+  - *Sound hit* $\rightarrow$ tactile impact.
+  - *Zoom* $\rightarrow$ intimacy or pressure.
+  - *Freeze* $\rightarrow$ realization or shock.
+- Banned: random particles, decorative spin, extra ambient glow, or camera orbit for its own sake.
+
+#### 8. Camera Choreography:
+- **Micro-movement**: Subtle 1–2% drift or push to maintain visual life.
+- **Significant movement**: Reveal, impact, or transformation on major story beats.
+- **Static hold**: Locked tripod when the viewer needs cognitive breathing room to absorb the concept.
+
+#### 9. Captions Remain Protected:
+- `AppleKineticCaptions` remains the dedicated spoken word system.
+- Retention is driven by the physical and camera choreography on the canvas, not by making captions more chaotic.
+
+#### 10. The 11-Point Retention Check:
+Before finalizing any shot, verify:
+1. **Clarity**: What is the viewer looking at?
+2. **Meaning**: What is the visual communicating?
+3. **Motion**: Why is it moving?
+4. **Attention**: Why does the viewer want to keep watching?
+5. **Anticipation**: Is something worth waiting for?
+6. **Change**: What becomes different?
+7. **Payoff**: Does the setup lead somewhere?
+8. **Contrast**: Does the rhythm change?
+9. **Reset**: Does the edit occasionally refresh attention?
+10. **Restraint**: Could the same result be achieved with fewer simultaneous elements?
+11. **Satisfaction**: Does the timeline feel choreographed?
+
+---
+
+### 5.0.2 — The Multi-Layer Editing Composition Standard & Mobile Scale Law
+
+> [!CRITICAL]
+> **RIGHTMOTION IS AN EDITING SYSTEM, NOT A COMPONENT LIBRARY.**
+> Do not merely place components on screen. Direct and edit the idea through:
+> `IDEA → VISUAL METAPHOR → EDITING LAYERS → TIMING / INTERACTION → PAYOFF`
+
+#### 1. The 11 Editing Layers:
+The agent directs shots by selecting and composing appropriate editing layers (see [`docs/EDITING_LAYERS_PLAYBOOK.md`](file:///home/phyroosh/TopProducts/RightClips/docs/EDITING_LAYERS_PLAYBOOK.md)):
+1. **Physical & Visual Metaphors**: Deforming matter, beam deflection, fracture engines, furrows, fulcrums, bespoke SVG curves.
+2. **Causal State Machines**: `CausalWorld`, deterministic trigger-cascade graphs, threshold reactors.
+3. **Camera Choreography**: `CameraCanvas` AE 2.5D push-ins, tracking, Dutch tilts, and organic handheld drift.
+4. **Tactile Sound Design**: `SoundDesignEngine` with frame-accurate cues (`click`, `whoosh_fast`, `whoosh_deep`, `impact_hit`, `tape_snap`).
+5. **Open-Canvas Staging**: `MechanismStage` providing safe bounds (y: 260–1340px) with ZERO card walls.
+6. **Micro-Animation & Secondary Motion**: `SecondaryMotion`, `SquashAndStretch`, chronic load tremors.
+7. **Continuity & Persistent Memory Traces**: `PersistentMemoryStage` with dashed ghost lines and permanent ground scars.
+8. **AppleKineticCaptions Interaction**: Visual impulse frames aligned to exact word timestamps; bottom 19% kept clear.
+9. **Transitions & Visual Transformations**: `AnimatedSlashStrike`, `KineticHighlighter`, sovereign clarity blooms.
+10. **Retention Choreographer**: Micro-events every 45–75 frames, anticipation pauses, decisive payoffs.
+11. **Semantic Asset Cutouts & Presenters**: High-res 400–750px cutouts; Judy bottom-bezel grounded.
+
+#### 2. The Mobile Scale Law (Simple Frame ≠ Small Visuals):
+Viewers watch 9:16 Shorts on 6-inch phone screens at ~720p effective resolution:
+- **PRIMARY Visual Subject**: Must occupy **400px–750px** width/height, with **6px–14px** SVG strokes. Must be instantly recognizable in a split second. Never draw 100–250px tiny shapes.
+- **SECONDARY Visual Support**: **150px–300px**, clearly subordinated.
+- **TYPOGRAPHY**: Hero words **80px–110px**, scene titles **56px–72px**, absolute floor **36px**. Never use tiny web body copy.
+
+#### 3. Prevention of Generic Fallback:
+- ❌ **STRICTLY REJECT**: Converting a dynamic physical/causal concept into a static white card + paragraph + Lucide icon.
+- ✅ **MANDATORY**: If the narration discusses pressure, deform a structure live on screen. If it discusses habit formation, carve a furrow. If it discusses balance, tilt a fulcrum.
+
+---
+
 ### 5.1 — Design-First Sequence
 
 Before writing any JSX, execute strictly in this order:
@@ -190,11 +424,11 @@ one element transforming into another · cause-effect chains · progressive cons
 
 ### 5.4 — Background, Color, Typography & Sharpness Standard
 
-**Ultra-High Contrast & Sharpness Law (No Rough/Hazy Aesthetics):**
-- **Clean Luminous Ground:** On light canvas (`#f8fafc` / `#fbfbfd`), do NOT overlay dirty 35mm film grain or gray texture haze. Keep backgrounds pristine, clean, and razor-sharp.
-- **Deep Inky Contrast:** Headlines and primary text must use inky deep black (`#090d16` or `#000000`). Minimum **7:1 contrast ratio** against backgrounds.
-- **Zero Muddy Tone-on-Tone:** BANNED: amber text on amber background, red text on pink background, light gray text on white. High-impact color means crisp white text on bold saturated blocks, or deep dark text with solid high-contrast accents.
-- **Razor-Sharp Edge Geometry:** Containers must be solid `#ffffff` with high-definition dark borders (`border-[2.5px] border-slate-900` or crisp solid borders) and razor drop shadows (`shadow-[0_24px_48px_-12px_rgba(0,0,0,0.16)]`). No hazy, diffuse, washed-out blur boxes.
+**Visual Clarity & Contrast Standard:**
+- **Clean Intentional Ground:** On light canvas (`#f8fafc` / `#fbfbfd`) or dark surfaces, keep backgrounds pristine and readable. Do NOT overlay dirty random noise or muddy texture haze.
+- **High Visual Hierarchy & Contrast:** Headlines and primary text must maintain strong contrast against backgrounds (minimum 7:1 for hero display) so they remain immediately legible at 720p on 6-inch mobile screens.
+- **Zero Muddy Tone-on-Tone:** BANNED: amber text on amber background, red text on pink background, light gray text on white. High-impact color means clear separation between visual subject and background.
+- **Crisp Definition:** Visual elements should have intentional geometry and clean edge definition. No hazy, diffuse, washed-out blur boxes.
 
 **Background** (characteristics, not recipes): subtle vector grid structures · clean studio radial lighting · crisp spatial depth · atmospheric lighting · elegant geometry · dark cinematic surfaces (Finance/Health).
 
@@ -221,17 +455,35 @@ Two fonts only: **Montserrat** (headlines, display, slam words) + **JetBrains Mo
 
 ---
 
-### 5.5 — Banned Visual Patterns & The Anti-Cardification Standard
+### 5.5 — The Law of No Unmotivated Cardification & Visual Decision Tree
 
 > [!CRITICAL]
-> **THE CORE LAW OF FRONTIER EXECUTION:**
-> **WHEN A FRONTIER IS SELECTED, ITS MECHANISM IS THE PRIMARY VISUAL EVENT ON SCREEN.**
-> RightMotion rejects cardification. The AI agent must never substitute an editorial card, floating panel, or labeled container for a physical mechanism. Components are implementation tools, not card templates.
+> **THE LAW OF NO UNMOTIVATED CARDIFICATION:**
+> Cards are permitted ONLY when they genuinely improve clarity or serve a justified narrative purpose (e.g. hero illustration card, product page worksheet proof, physical smartphone screen, blueprint).
+> **A card must NEVER be used as a lazy default wrapper around text or icons.**
+> When explaining a concept, prefer open-canvas physical mechanisms, spatial transformations, or bold kinetic typography.
 
-#### The 11 Anti-Cardification Hard Rules:
-1. **Rule A (Card Container Ban):** Cards are forbidden as default containers for information. A card may ONLY be used when the narrative object is literally a physical card, document, device screen, or blueprint/worksheet proof (`ProductPageShowcase`, hook hero illustration).
-2. **Rule B (Primary Mechanism Ratio >= 0.60):** In every non-hook scene, at least 60% of visible screen real estate and attention must be occupied by active physical mechanisms (`ThresholdBoundary`, `KineticFurrow`, `CausalActionCoupling`, `StressFractureEngine`, `KineticFulcrumBeam`, `DioramaPlinth`, etc.).
-3. **Rule C (Cardification Score < 35.0):** Every clip must pass `scripts/frontier_utilization.py` with a Cardification Score < 35.0. Scores >= 40.0 strictly fail `validate_clip.py` pre-flight checks.
+#### Visual Solution Decision Tree:
+```text
+Does this scene have a clear physical or spatial metaphor?
+├── YES → Stage an open-canvas physical/spatial mechanism (e.g. deflection, carving, expansion, fracture, scale tension).
+└── NO → Is there a concrete real-world object (device, document, body part, cutout)?
+    ├── YES → Ground the physical object boldly (400-750px) with live transformation.
+    └── NO → Does this convey an abstract cognitive or emotional shift?
+        ├── YES → Use spatial typography or kinetic contrast typography.
+        └── NO → Is a card genuinely required (document proof, physical card, UI screen)?
+            ├── YES → Render a motivated card with high intentionality.
+            └── NO → STOP. Do not default to a card. Reframe into a physical mechanism or kinetic typography.
+```
+
+#### The Anti-Cardification Rules:
+1. **Rule A (No Unmotivated Cards):** Cards are forbidden as default containers for information. A card may ONLY be used when the narrative object is literally a physical card, document, device screen, or blueprint/worksheet proof (`ProductPageShowcase`, hook hero illustration).
+2. **Rule B (Primary Mechanism Dominance):** In every non-hook scene, the primary visual idea (mechanism, spatial transformation, or bold kinetic subject) must dominate screen real estate and viewer focus.
+3. **Rule C (Qualitative Purity Check):** Check that every scene has:
+   - ✅ clear focal hierarchy
+   - ⚠ no generic card fallback
+   - ⚠ no decorative motion
+   - ✅ meaningful state progression
 4. **Rule D (Zero Pill/Capsule Badges):** BANNED: `● PROTOCOL // 5 PILLARS`, numbered capsules (`01 // CIRCADIAN ARCHITECTURE`), status chips (`TOLERATED`, `ACCEPTED`), and icon+capsule pairings.
 5. **Rule E (Zero Explanatory Paragraphs in Boxes):** Audio carries the informational load. The screen displays large kinetic typography (80–110px) and live physical mechanics. Never put 2-3 lines of body text inside a card.
 6. **Rule F (Live In-Scene Mutation):** Actions (deflection, carving, fracture, viscoelastic relaxation) must occur live in real time on screen. Never show a static finished state when the action can be performed live.
@@ -245,12 +497,12 @@ Two fonts only: **Montserrat** (headlines, display, slam words) + **JetBrains Mo
 
 #### The 7 Creative Gate Questions (Mandatory Pre-JSX Audit):
 Before writing any JSX, the agent must answer all 7 questions:
-1. *What is the primary visual mechanism of this scene?* (Must name a physical entity, not a card or layout).
-2. *If all text were removed, what would the viewer see happen?* (Must describe a physical event).
-3. *What is State A, what is the trigger, and what is State B?* (Must define a physical transformation).
-4. *Does this scene contain any card containers? If yes, why is it literally a physical document or device screen?*
+1. *What is the primary visual mechanism of this scene?* (Must name a physical or spatial entity, not a card or layout).
+2. *If all text were removed, what would the viewer see happen?* (Must describe a physical or visual event).
+3. *What is State A, what is the trigger, and what is State B?* (Must define a transformation).
+4. *Does this scene contain any card containers? If yes, what is its narrative justification (is it literally a document, proof, or device)?*
 5. *How does this mechanism connect to the previous scene and the next scene?* (Continuous physical trace).
-6. *Is the Primary Mechanism Ratio >= 0.60?*
+6. *Does the primary visual idea dominate the viewer's focus?*
 7. *Would someone describe this visual to a friend tomorrow?*
 
 ---

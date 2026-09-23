@@ -1,0 +1,595 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "version": "1.0.0",
+  "description": "RightMotion Machine-Readable Component Capability Index. Maps semantic narrative concepts to concrete Remotion components.",
+  "capabilities": [
+    {
+      "concept": "pressure_and_load",
+      "semanticPurpose": "Show increasing physical compression, strain, or cognitive burden on an environment or subject",
+      "components": [
+        {
+          "name": "ViscoelasticDeformation",
+          "importPath": "../../components/physics/materiality",
+          "frontier": "F2",
+          "props": [
+            "loadProgress",
+            "materialType",
+            "deformationAxis",
+            "strainIntensity"
+          ],
+          "limitations": "Best for continuous progressive strain rather than sudden snaps",
+          "performanceNotes": "Lightweight SVG spline interpolation",
+          "exampleUsage": "<ViscoelasticDeformation loadProgress={strain} materialType=\"structural_polymer\" />",
+          "exampleClip": "the_law_of_structural_load",
+          "visualComplexity": "MEDIUM",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Use when one structure needs to visibly deform under load. Do NOT combine with multiple competing diagrams, dials, or cards. Let the single deforming body be the primary focal event."
+        },
+        {
+          "name": "KineticTensionDial",
+          "importPath": "../../components/pure_graphics",
+          "frontier": "F_BASE",
+          "props": [
+            "value",
+            "maxValue",
+            "label",
+            "theme"
+          ],
+          "limitations": "Rotational meter; combine with open-stage mechanics",
+          "performanceNotes": "Pure SVG path rendering",
+          "exampleUsage": "<KineticTensionDial value={internalLoad} maxValue={100} label=\"ALLOSTATIC LOAD\" />",
+          "exampleClip": "cortisol_energy_engine",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Use as a minimal secondary gauge when rotational magnitude is essential. Do NOT pair with complex physical simulations."
+        }
+      ]
+    },
+    {
+      "concept": "breaking_point_and_fracture",
+      "semanticPurpose": "Show structural failure, cleavage, or reaching a breaking point under unsustainable tension",
+      "components": [
+        {
+          "name": "StressFractureEngine",
+          "importPath": "../../components/physics/materiality",
+          "frontier": "F2",
+          "props": [
+            "fractureProgress",
+            "branchComplexity",
+            "originPoint",
+            "glowAccents"
+          ],
+          "limitations": "Requires trigger frame to initiate fissure growth",
+          "performanceNotes": "Procedural multi-branch SVG cleavage",
+          "exampleUsage": "<StressFractureEngine fractureProgress={rupture} originPoint={{ x: 540, y: 800 }} />",
+          "exampleClip": "the_law_of_structural_load",
+          "visualComplexity": "MEDIUM",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Use for progressive structural cleavage. Ensure the fracture happens live on screen without competing background animations."
+        },
+        {
+          "name": "AnimatedSlashStrike",
+          "importPath": "../../components/kinetic_text",
+          "frontier": "F_BASE",
+          "props": [
+            "triggerFrame",
+            "color",
+            "strokeWidth",
+            "angle"
+          ],
+          "limitations": "Single-impact strike line; best for text negation or line severance",
+          "performanceNotes": "Instant spring-driven SVG path animation",
+          "exampleUsage": "<AnimatedSlashStrike triggerFrame={120} color=\"#ef4444\" />",
+          "exampleClip": "small_compromises",
+          "visualComplexity": "LOW",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Use for instant cognitive negation or severance. Deliver with a single clean whoosh/impact sound."
+        }
+      ]
+    },
+    {
+      "concept": "accumulation_and_overflow",
+      "semanticPurpose": "Show elements piling up, stacking, or crossing a storage/capacity threshold",
+      "components": [
+        {
+          "name": "CausalWorld",
+          "importPath": "../../causal",
+          "frontier": "F7",
+          "props": [
+            "graph",
+            "rootTriggers",
+            "children"
+          ],
+          "limitations": "Requires upfront causal graph definition in JSON",
+          "performanceNotes": "Compiled deterministic timeline; binary search O(log E)",
+          "exampleUsage": "<CausalWorld graph={pressureGraph} rootTriggers={triggers}>{children}</CausalWorld>",
+          "exampleClip": "open_brain_tabs",
+          "visualComplexity": "HIGH",
+          "bestUse": "complex_sequence",
+          "restraintGuidance": "Use for multi-step causal propagation chains. Keep node visuals minimal; avoid combining with external floating cards."
+        },
+        {
+          "name": "DynamicSankeyFlow",
+          "importPath": "../../components/pure_graphics",
+          "frontier": "F_BASE",
+          "props": [
+            "inflowRate",
+            "nodes",
+            "flowColor"
+          ],
+          "limitations": "Represents flow distribution rather than physical mass",
+          "performanceNotes": "B\u00e9zier stream mesh",
+          "exampleUsage": "<DynamicSankeyFlow inflowRate={dopamineSurge} flowColor=\"#06b6d4\" />",
+          "exampleClip": "the_dopamine_sugar_trap",
+          "visualComplexity": "MEDIUM",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Use when the core idea is resource redistribution or dopamine routing. Do not clutter with auxiliary metric readouts."
+        }
+      ]
+    },
+    {
+      "concept": "threshold_and_boundary",
+      "semanticPurpose": "Show standards receding, boundaries shifting, or lines being crossed",
+      "components": [
+        {
+          "name": "ThresholdBoundary",
+          "importPath": "../../components/primitives",
+          "frontier": "F_BASE",
+          "props": [
+            "baselineOffset",
+            "deflectionIntensity",
+            "ghostTrace",
+            "statusLabel"
+          ],
+          "limitations": "Renders open-stage horizontal datum line",
+          "performanceNotes": "Zero box cardification; open SVG surface",
+          "exampleUsage": "<ThresholdBoundary baselineOffset={shiftY} deflectionIntensity={drag} />",
+          "exampleClip": "the_threshold_effect",
+          "visualComplexity": "LOW",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Open-stage datum line. Excellent minimal metaphor for receding standards. Keep surrounding negative space generous."
+        },
+        {
+          "name": "ThresholdBoundaryShift",
+          "importPath": "../../components/transformation",
+          "frontier": "F_BASE",
+          "props": [
+            "recalibrationDelta",
+            "triggerFrame",
+            "resistanceLevel"
+          ],
+          "limitations": "Animates a step change in acceptable tolerance",
+          "performanceNotes": "Spring-interpolated baseline mutation",
+          "exampleUsage": "<ThresholdBoundaryShift recalibrationDelta={180} triggerFrame={60} />",
+          "exampleClip": "small_compromises",
+          "visualComplexity": "LOW",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Spring-interpolated baseline mutation. Use as the sole visual subject during a tolerance reset."
+        }
+      ]
+    },
+    {
+      "concept": "resistance_and_habit_groove",
+      "semanticPurpose": "Show repeated actions wearing down resistance or carving a permanent channel",
+      "components": [
+        {
+          "name": "KineticFurrow",
+          "importPath": "../../components/primitives",
+          "frontier": "F_BASE",
+          "props": [
+            "depthProgress",
+            "passCount",
+            "glowTheme",
+            "recessedShadow"
+          ],
+          "limitations": "Vertical linear carved channel",
+          "performanceNotes": "Multi-layer inset shadow with SVG groove",
+          "exampleUsage": "<KineticFurrow depthProgress={repetition} passCount={2} />",
+          "exampleClip": "small_compromises",
+          "visualComplexity": "LOW",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Carved linear habit groove. Do NOT surround with multiple cards or text labels; the depth of the groove communicates the habit."
+        },
+        {
+          "name": "ResistancePathway",
+          "importPath": "../../components/transformation",
+          "frontier": "F_BASE",
+          "props": [
+            "dragCoefficient",
+            "traversalProgress",
+            "pathShape"
+          ],
+          "limitations": "Visualizes low-friction vs high-friction pathways",
+          "performanceNotes": "Pure SVG path stroke dash animation",
+          "exampleUsage": "<ResistancePathway dragCoefficient={friction} traversalProgress={prog} />",
+          "exampleClip": "small_compromises",
+          "visualComplexity": "LOW",
+          "bestUse": "single_subject",
+          "restraintGuidance": "High vs low friction pathways. Keep geometry clean and centered."
+        }
+      ]
+    },
+    {
+      "concept": "balance_and_tradeoff",
+      "semanticPurpose": "Show conflicting priorities, asymmetric investment, or loss of equilibrium",
+      "components": [
+        {
+          "name": "KineticFulcrumBeam",
+          "importPath": "../../components/physics/consequence",
+          "frontier": "F4",
+          "props": [
+            "tiltAngle",
+            "leftMass",
+            "rightMass",
+            "beamLength"
+          ],
+          "limitations": "Physical seesaw lever mechanism",
+          "performanceNotes": "Hardware-accelerated CSS rotation around central pivot",
+          "exampleUsage": "<KineticFulcrumBeam tiltAngle={torque} leftMass={workLoad} rightMass={restCapacity} />",
+          "exampleClip": "the_architecture_of_pressure",
+          "visualComplexity": "MEDIUM",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Seesaw lever tradeoff. Keep masses clear and uncrowded."
+        },
+        {
+          "name": "GlossyBalanceScale",
+          "importPath": "../../components/pure_graphics",
+          "frontier": "F_BASE",
+          "props": [
+            "tiltAngle",
+            "leftLabel",
+            "rightLabel"
+          ],
+          "limitations": "Higher-level editorial styling",
+          "performanceNotes": "Lightweight 2.5D tilt",
+          "exampleUsage": "<GlossyBalanceScale tiltAngle={imbalance} leftLabel=\"Short-term Comfort\" rightLabel=\"Long-term Vision\" />",
+          "exampleClip": "holding_grudges",
+          "visualComplexity": "LOW",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Editorial balance comparison. Limit text to concise anchor words on either pan."
+        }
+      ]
+    },
+    {
+      "concept": "spatial_journey_and_chambers",
+      "semanticPurpose": "Navigate across distinct spatial coordinates on a continuous canvas without cutting",
+      "components": [
+        {
+          "name": "InfiniteWorldCanvas",
+          "importPath": "../../components/camera3d",
+          "frontier": "F1",
+          "props": [
+            "cameraPosition",
+            "worldExtent",
+            "children"
+          ],
+          "limitations": "Requires defining world entities at explicit (x, y) coordinates",
+          "performanceNotes": "Single matrix transform wrapping virtual coordinates",
+          "exampleUsage": "<InfiniteWorldCanvas cameraPosition={cameraPos}>{worldChambers}</InfiniteWorldCanvas>",
+          "exampleClip": "the_law_of_structural_load",
+          "visualComplexity": "HIGH",
+          "bestUse": "complex_sequence",
+          "restraintGuidance": "Spatial journey. Ensure only one chamber is active at a time to prevent eye confusion."
+        },
+        {
+          "name": "CameraCanvas",
+          "importPath": "../../components",
+          "frontier": "F_BASE",
+          "props": [
+            "currentMs",
+            "keyframes",
+            "children",
+            "enableDrift"
+          ],
+          "limitations": "2.5D After Effects camera rig; best with keyframed focus targets",
+          "performanceNotes": "Matrix translation + scale with procedural breathing wiggle",
+          "exampleUsage": "<CameraCanvas currentMs={ms} keyframes={cameraKeyframes}>{children}</CameraCanvas>",
+          "exampleClip": "the_threshold_effect",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Camera drift/zoom rig. Movement should be subtle (1.0 to 1.05); never overwhelm the primary subject."
+        }
+      ]
+    },
+    {
+      "concept": "temporal_breath_and_hold",
+      "semanticPurpose": "Create pregnant pauses, visual stillness, or dramatic micro-freezes before key revelations",
+      "components": [
+        {
+          "name": "WorldCameraBreathHold",
+          "importPath": "../../components/temporal",
+          "frontier": "F6",
+          "props": [
+            "freezeStartFrame",
+            "freezeDurationFrames",
+            "subBassHumOpacity"
+          ],
+          "limitations": "Should only be used when narration pauses for profound realization",
+          "performanceNotes": "Zero velocity clamp",
+          "exampleUsage": "<WorldCameraBreathHold freezeStartFrame={240} freezeDurationFrames={20} />",
+          "exampleClip": "smoke_test_frontier_s",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Dramatic stillness hold before epiphany. Zero velocity clamp."
+        }
+      ]
+    },
+    {
+      "concept": "irreversibility_and_stain",
+      "semanticPurpose": "Show consequences that cannot be undone, leaving permanent markings or scars",
+      "components": [
+        {
+          "name": "CapillaryInkBleed",
+          "importPath": "../../components/physics/materiality",
+          "frontier": "F2",
+          "props": [
+            "bleedRadius",
+            "originPoint",
+            "inkColor",
+            "surfaceAbsorption"
+          ],
+          "limitations": "Radial fluid percolation effect",
+          "performanceNotes": "Layered SVG blur filters",
+          "exampleUsage": "<CapillaryInkBleed bleedRadius={radius} originPoint={{ x: 540, y: 700 }} />",
+          "exampleClip": "the_law_of_structural_load",
+          "visualComplexity": "MEDIUM",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Irreversible fluid percolation or stain. Best on pristine light ground."
+        },
+        {
+          "name": "PersistentMemoryStage",
+          "importPath": "../../components/primitives",
+          "frontier": "F_BASE",
+          "props": [
+            "ghostTraceId",
+            "opacity",
+            "mutationSummary"
+          ],
+          "limitations": "Preserves visual ghosting into subsequent scenes",
+          "performanceNotes": "Low-opacity static SVG overlay",
+          "exampleUsage": "<PersistentMemoryStage ghostTraceId=\"original_boundary\" opacity={0.3} />",
+          "exampleClip": "the_threshold_effect",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Faint ghost trace of earlier baseline. Keep opacity low (0.15-0.25)."
+        }
+      ]
+    },
+    {
+      "concept": "clarity_and_epiphany_strike",
+      "semanticPurpose": "Highlight breakthrough realizations, decisive action, or cutting through confusion",
+      "components": [
+        {
+          "name": "KineticHighlighter",
+          "importPath": "../../components/kinetic_text",
+          "frontier": "F_BASE",
+          "props": [
+            "triggerFrame",
+            "color",
+            "height",
+            "skew"
+          ],
+          "limitations": "Underlines or highlights a single focus word/phrase",
+          "performanceNotes": "SVG path length interpolation",
+          "exampleUsage": "<KineticHighlighter triggerFrame={180} color=\"#38bdf8\" />",
+          "exampleClip": "smoke_test_frontier_s",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Draws stroke behind single focus word. Do not highlight full sentences."
+        },
+        {
+          "name": "CameraShake",
+          "importPath": "../../components/kinetic_text",
+          "frontier": "F_BASE",
+          "props": [
+            "triggerFrame",
+            "intensity",
+            "durationFrames",
+            "children"
+          ],
+          "limitations": "Short camera shockwave (10-15 frames)",
+          "performanceNotes": "Damped sinusoidal transform displacement",
+          "exampleUsage": "<CameraShake triggerFrame={90} intensity={8}>{sceneContent}</CameraShake>",
+          "exampleClip": "small_compromises",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Short 8-12 frame impact shockwave. Use only on peak realization beat."
+        }
+      ]
+    },
+    {
+      "concept": "grounded_presenter_intimacy",
+      "semanticPurpose": "Host engagement on small mobile screens with proper bottom-bezel grounding",
+      "components": [
+        {
+          "name": "GlossyJudyIntro",
+          "importPath": "../../components/pure_graphics",
+          "frontier": "F_BASE",
+          "props": [
+            "startFrame",
+            "exitFrame",
+            "pose",
+            "baseHeight",
+            "position"
+          ],
+          "limitations": "Strictly grounded to bottom bezel (waist-up 1250-1360px)",
+          "performanceNotes": "High-res PNG with reflection and spring entrance",
+          "exampleUsage": "<GlossyJudyIntro startFrame={0} exitFrame={75} pose=\"open\" baseHeight={1280} position=\"right\" />",
+          "exampleClip": "small_compromises",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Grounded host connection. Stage in opening 2.5s hook. Remove when mechanical metaphor begins."
+        },
+        {
+          "name": "CharacterKeyframeAnimator",
+          "importPath": "../../components",
+          "frontier": "F_BASE",
+          "props": [
+            "currentMs",
+            "keyframes",
+            "baseHeight",
+            "baseWidth"
+          ],
+          "limitations": "Multi-beat character keyframing across time intervals",
+          "performanceNotes": "Pose cross-fades and breathing sway",
+          "exampleUsage": "<CharacterKeyframeAnimator currentMs={ms} keyframes={poseKeyframes} />",
+          "exampleClip": "loneliness",
+          "visualComplexity": "MEDIUM",
+          "bestUse": "single_subject",
+          "restraintGuidance": "Multi-beat character poses. Avoid simultaneous moving props."
+        }
+      ]
+    },
+    {
+      "concept": "camera_choreography_and_framing",
+      "semanticPurpose": "Guide viewer attention, build psychological tension with slow pushes, or punch impact with rotational tilts and shakes",
+      "editingLayerArchetype": "camera_choreography",
+      "mobileScaleGuidance": "Camera movement must remain subtle (zoom 1.0 to 1.05-1.08) in 9:16 vertical shorts. Keep subject centered within the 1080x1920 canvas.",
+      "components": [
+        {
+          "name": "CameraCanvas",
+          "importPath": "../../components/CameraCanvas",
+          "frontier": "F_BASE",
+          "props": [
+            "currentMs",
+            "keyframes",
+            "children",
+            "width",
+            "height",
+            "enableDrift",
+            "driftIntensity"
+          ],
+          "limitations": "2.5D After Effects camera rig; define keyframes across timeMs. In 9:16 vertical shorts, pass width={1080} height={1920}",
+          "performanceNotes": "Matrix translation + scale with procedural breathing wiggle",
+          "exampleUsage": "<CameraCanvas currentMs={currentMs} keyframes={cameraKeyframes} width={1080} height={1920}>{children}</CameraCanvas>",
+          "exampleClip": "smoke_test_frontier_s",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Camera drift/zoom rig. Movement should be subtle (1.0 to 1.06); never overwhelm the primary subject."
+        }
+      ]
+    },
+    {
+      "concept": "sound_punctuation_and_tactile_impact",
+      "semanticPurpose": "Punctuate mechanical contact points, state changes, threshold breaches, and resolution snaps with tactile frame-accurate sound",
+      "editingLayerArchetype": "sound_punctuation",
+      "mobileScaleGuidance": "Audio cues reinforce visual size and weight at phone speaker volumes.",
+      "components": [
+        {
+          "name": "SoundDesignEngine",
+          "importPath": "../../components/SoundDesignEngine",
+          "frontier": "F_BASE",
+          "props": [
+            "cues"
+          ],
+          "limitations": "Requires array of frame-synchronized cues (click, whoosh_fast, whoosh_deep, whoosh_sparkle, impact_hit, tape_snap, marker_scribble)",
+          "performanceNotes": "Sequenced Remotion Audio elements",
+          "exampleUsage": "<SoundDesignEngine cues={SFX_CUES} />",
+          "exampleClip": "distraction_noise",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Punctuate key mechanical contact points and transitions. Do NOT wallpaper every frame with noise."
+        }
+      ]
+    },
+    {
+      "concept": "open_stage_and_foundations",
+      "semanticPurpose": "Provide calibrated platform-safe bounds (y: 280 to 1340px) for open physical mechanisms with zero box cardification",
+      "editingLayerArchetype": "open_stage_staging",
+      "mobileScaleGuidance": "Full 1080px horizontal span with safe clearance above captions (y: 1340px).",
+      "components": [
+        {
+          "name": "MechanismStage",
+          "importPath": "../../components/primitives",
+          "frontier": "F_BASE",
+          "props": [
+            "children",
+            "top",
+            "bottom",
+            "showGuides"
+          ],
+          "limitations": "Open stage container for physical mechanisms",
+          "performanceNotes": "Zero box cardification; pure open staging space",
+          "exampleUsage": "<MechanismStage top={260} bottom={1340}>{children}</MechanismStage>",
+          "exampleClip": "price_of_inaction",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Default staging ground for all physical mechanisms. Clears header and captions automatically."
+        }
+      ]
+    },
+    {
+      "concept": "micro_motion_and_elasticity",
+      "semanticPurpose": "Deliver volume-preserving squash and stretch, inertial follow-through, and chronic strain tremors",
+      "editingLayerArchetype": "micro_motion",
+      "mobileScaleGuidance": "Deformations and tremors must be large enough to perceive on mobile (4px-8px deflection/rebound).",
+      "components": [
+        {
+          "name": "SquashAndStretch",
+          "importPath": "../../components/physics",
+          "frontier": "F_BASE",
+          "props": [
+            "progress",
+            "intensity",
+            "axis",
+            "children"
+          ],
+          "limitations": "Best on impact and launch frames",
+          "performanceNotes": "Lightweight CSS transform scale",
+          "exampleUsage": "<SquashAndStretch progress={spImpact} intensity={0.15}>{children}</SquashAndStretch>",
+          "exampleClip": "small_compromises",
+          "visualComplexity": "LOW",
+          "bestUse": "supporting_system",
+          "restraintGuidance": "Use on impact frames for tactile elasticity. Do not run continuously."
+        }
+      ]
+    },
+    {
+      "concept": "deprecated_meme_components",
+      "semanticPurpose": "DEPRECATED: Banned by Zero Memes Policy (\u00a7Rule 4). Retained only for audit traceability.",
+      "components": [
+        {
+          "name": "TacticalMemeCard",
+          "importPath": "../../components",
+          "frontier": "NONE",
+          "status": "DEPRECATED",
+          "reason": "Opening video memes strictly banned by Zero Memes Policy",
+          "replacement": "Use CinematicIllustrationCard with bespoke AI illustration or open-stage physical primitives",
+          "visualComplexity": "HIGH",
+          "bestUse": "deprecated",
+          "restraintGuidance": "STRICTLY BANNED by Zero Memes Policy (\u00a7Rule 4)."
+        },
+        {
+          "name": "TacticalMemeFrame",
+          "importPath": "../../components",
+          "frontier": "NONE",
+          "status": "DEPRECATED",
+          "reason": "Meme framing strictly banned",
+          "replacement": "Use OpenStageSurface or MechanismStage",
+          "visualComplexity": "HIGH",
+          "bestUse": "deprecated",
+          "restraintGuidance": "STRICTLY BANNED by Zero Memes Policy (\u00a7Rule 4)."
+        },
+        {
+          "name": "MemeStickerOverlay",
+          "importPath": "../../components",
+          "frontier": "NONE",
+          "status": "DEPRECATED",
+          "reason": "Reaction stickers strictly banned",
+          "replacement": "Use high-res semantic cutouts from public/assets/",
+          "visualComplexity": "HIGH",
+          "bestUse": "deprecated",
+          "restraintGuidance": "STRICTLY BANNED by Zero Memes Policy (\u00a7Rule 4)."
+        }
+      ]
+    }
+  ],
+  "principlesOfRestraint": [
+    "Prefer one evolving object or system over many separate objects.",
+    "suggestedComponents are MUTUALLY OPTIONAL tools, NOT ingredients. Component budget defaults to 1 (max 2).",
+    "Never combine multiple complex visual systems simultaneously without clear temporal hierarchy.",
+    "If the motion of one physical object communicates the sentence, stop adding secondary elements.",
+    "Negative space is a feature. Do not fill empty canvas space with unmotivated particles, cards, or metrics.",
+    "SIMPLE FRAME != SMALL VISUALS. Primary visual subject must occupy 400px-750px with 6px-14px strokes for instant mobile recognition."
+  ]
+}

@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "sourceType": "user_script",
+    "originalInput": "Notice how you try to force concentration the second your mind begins to wander. You believe focus is an act of sheer willpower, but cognitive neuroscience proves it is an act of aggressive elimination. When you fight distraction directly, you feed the exact neural loops that scatter your attention. Strip the friction. Close the secondary tabs. Clear the room. Focus isn't something you force into existence. Focus is simply what remains when everything else is gone.",
+    "topic": "The Focus Paradox",
+    "channel": "self_improvement",
+    "mode": "B",
+    "isDuo": false,
+    "wordCount": 76,
+    "intelligenceVersion": "1.0.1",
+    "contentHash": "33c842b743f03e11ffb043a83723daf01d97cabff6954f4af28bbf859ec5f1f6"
+  },
+  "story": {
+    "coreIdea": "Every unfinished task keeps subconscious neural RAM occupied, leaking cognitive bandwidth until the system exhausts itself.",
+    "centralClaim": "Mental exhaustion is not caused by the work you are doing, but by the unresolved loops you leave open.",
+    "viewerPromise": "Understand why your mind feels cluttered even when sitting still, and how to close invisible neural loops.",
+    "viewerQuestion": "Why does unfinished work keep returning to attention and draining energy?",
+    "narrativeArchitecture": "PARADOX -> HIDDEN_MECHANISM -> ESCALATION -> RELEASE"
+  },
+  "segments": [
+    {
+      "segmentId": "seg_1_hook",
+      "role": "hook",
+      "narrationText": "Notice how you try to force concentration the second your mind begins to wander. You believe focus is an act of sheer willpower, but cognitive neuroscience proves it is an act of aggressive elimination.",
+      "sentenceIndices": [
+        0,
+        1
+      ],
+      "coreMeaning": "Establishes the intuitive friction or observable paradox.",
+      "visualQuestion": "Why does unfinished work keep returning to attention and draining energy?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "role": "mechanism",
+      "narrationText": "When you fight distraction directly, you feed the exact neural loops that scatter your attention. Strip the friction.",
+      "sentenceIndices": [
+        2,
+        3
+      ],
+      "coreMeaning": "Unpacks the hidden causal mechanism driving the paradox.",
+      "visualQuestion": "How does this hidden dynamic actually function?",
+      "semanticWeight": "IMPORTANT"
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "role": "escalation",
+      "narrationText": "Close the secondary tabs. Clear the room. Focus isn't something you force into existence.",
+      "sentenceIndices": [
+        4,
+        5,
+        6
+      ],
+      "coreMeaning": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "visualQuestion": "What happens when this condition crosses the threshold?",
+      "semanticWeight": "CRITICAL"
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "role": "resolution",
+      "narrationText": "Focus is simply what remains when everything else is gone.",
+      "sentenceIndices": [
+        7
+      ],
+      "coreMeaning": "The decisive operational takeaway or sovereign resolution.",
+      "visualQuestion": "How does the system return to equilibrium or agency?",
+      "semanticWeight": "CRITICAL"
+    }
+  ],
+  "entitiesAndConcepts": {
+    "concepts": [
+      "Cognitive Load",
+      "Zeigarnik Effect",
+      "Working Memory"
+    ],
+    "entities": [
+      "Translucent Neural Browser Tab",
+      "Open Loop Alert",
+      "External Notebook"
+    ],
+    "persistentObjects": [
+      "Neural Browser Tab (travels from Hook into Resolution)"
+    ]
+  },
+  "claimsAndEvidence": {
+    "claims": [
+      {
+        "statement": "Notice how you try to force concentration the second your mind begins to wander.",
+        "type": "psychological"
+      },
+      {
+        "statement": "You believe focus is an act of sheer willpower, but cognitive neuroscience proves it is an act of aggressive elimination.",
+        "type": "supporting"
+      },
+      {
+        "statement": "When you fight distraction directly, you feed the exact neural loops that scatter your attention.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Strip the friction.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Close the secondary tabs.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Clear the room.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Focus isn't something you force into existence.",
+        "type": "supporting"
+      },
+      {
+        "statement": "Focus is simply what remains when everything else is gone.",
+        "type": "conclusion"
+      }
+    ],
+    "evidence": [],
+    "misconceptions": [
+      {
+        "presumed": "Intuitive assumption",
+        "actual": "you try to force concentration the second your mind begins to wander",
+        "revealLocation": "opening_observation"
+      }
+    ]
+  },
+  "causalGraph": {
+    "nodes": [
+      {
+        "id": "cognitive_bandwidth",
+        "initialCondition": "NOMINAL",
+        "reversibility": "RECOVERABLE"
+      },
+      {
+        "id": "open_task_counter",
+        "initialCondition": "EMPTY",
+        "reversibility": "REVERSIBLE"
+      }
+    ],
+    "chains": [
+      {
+        "cause": "Unfinished task left open in attention",
+        "mechanism": "Subconscious loop continuously holds task memory active",
+        "event": "TASK_UNFINISHED",
+        "consequence": "Neural RAM leakage drains working memory capacity",
+        "resultingState": "STRAINED"
+      },
+      {
+        "cause": "Accumulation of 5+ unclosed loops",
+        "mechanism": "Bandwidth saturation exceeds processing capacity",
+        "event": "THRESHOLD_CROSSING",
+        "consequence": "System experiences cognitive paralysis / fatigue",
+        "resultingState": "CRITICAL"
+      }
+    ],
+    "thresholds": [
+      {
+        "source": "open_task_counter",
+        "condition": "count >= threshold_capacity",
+        "consequence": "Trigger SYSTEM_OVERLOAD and transition cognitive_bandwidth to CRITICAL"
+      }
+    ]
+  },
+  "stateModel": {
+    "initialState": "OBSERVATION",
+    "intermediateStates": [],
+    "finalState": "INFORMED_ACTION",
+    "dynamics": "linear"
+  },
+  "temporalModel": {
+    "pacing": "accelerating",
+    "hasRepetition": false,
+    "repetitionNature": "none",
+    "breathHoldWindow": {
+      "suggested": true,
+      "narrativeAnchor": "Close the secondary tabs. Clear the room. Focus isn't someth",
+      "approximateTimestampSec": 14.6,
+      "durationFrames": 18,
+      "rationale": "Micro-freeze halting visual drift to give the viewer cognitive stillness before the epiphany lands."
+    }
+  },
+  "emotionalTrajectory": [
+    {
+      "segmentId": "seg_1_hook",
+      "emotion": "curiosity_and_recognition",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_2_mechanism",
+      "emotion": "analytical_clarity",
+      "attentionSpike": false
+    },
+    {
+      "segmentId": "seg_3_escalation",
+      "emotion": "cognitive_tension",
+      "attentionSpike": true
+    },
+    {
+      "segmentId": "seg_4_resolution",
+      "emotion": "grounded_confidence",
+      "attentionSpike": false
+    }
+  ],
+  "emphasisMap": {
+    "primary": [
+      "Strip",
+      "Close",
+      "Clear",
+      "Focus",
+      "Focus"
+    ],
+    "secondary": []
+  },
+  "visualOpportunities": [
+    {
+      "segmentId": "seg_1_hook",
+      "opportunityType": "contrast",
+      "physicalDescription": "High-contrast split editorial layout pairing Judy intimate bust with semantic hero anchor",
+      "rationale": "Establishes personal connection and curiosity on mobile screen."
+    }
+  ],
+  "visualAbsence": [
+    {
+      "textSpan": "notice how",
+      "recommendedTreatment": "spoken_only",
+      "reason": "Rhetorical glue; animating this creates visual noise without adding narrative meaning."
+    }
+  ],
+  "semanticImportance": {
+    "critical": [
+      "Mental exhaustion is not caused by the work you are doing, but by the unresolved loops you leave open.",
+      "Every unfinished task keeps subconscious neural RAM occupied, leaking cognitive bandwidth until the system exhausts itself.",
+      "Notice how you try to force concentration the second your mind begins to wander. You believe focus is an act of sheer willpower, but cognitive neuroscience proves it is an act of aggressive elimination."
+    ],
+    "important": [
+      "Understand why your mind feels cluttered even when sitting still, and how to close invisible neural loops.",
+      "Why does unfinished work keep returning to attention and draining energy?",
+      "When you fight distraction directly, you feed the exact neural loops that scatter your attention. Strip the friction.",
+      "Focus is simply what remains when everything else is gone."
+    ],
+    "supporting": [
+      "Close the secondary tabs. Clear the room. Focus isn't something you force into existence."
+    ],
+    "decorative": [
+      "ambient studio radial glow",
+      "crisp vector grid texture",
+      "drop-shadow depth planes"
+    ]
+  },
+  "sceneCandidates": [
+    {
+      "candidateId": "candidate_scene_1",
+      "suggestedBoundary": "Frames corresponding to segment 'hook'",
+      "narrativeFunction": "Establishes the intuitive friction or observable paradox.",
+      "dominantVisualAnchor": "Editorial Hero Card + Judy Grounded Close-up"
+    },
+    {
+      "candidateId": "candidate_scene_2",
+      "suggestedBoundary": "Frames corresponding to segment 'mechanism'",
+      "narrativeFunction": "Unpacks the hidden causal mechanism driving the paradox.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_3",
+      "suggestedBoundary": "Frames corresponding to segment 'escalation'",
+      "narrativeFunction": "Demonstrates the consequence when the mechanism runs unchecked.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    },
+    {
+      "candidateId": "candidate_scene_4",
+      "suggestedBoundary": "Frames corresponding to segment 'resolution'",
+      "narrativeFunction": "The decisive operational takeaway or sovereign resolution.",
+      "dominantVisualAnchor": "Physical Contrast Metaphor"
+    }
+  ],
+  "thumbnailSignals": {
+    "coreCuriosity": "Why does unfinished work keep returning to attention and draining energy?",
+    "visualContradiction": "Intuitive assumption vs you try to force concentration the second your mind begins to wander",
+    "mostMemorableTransformation": "State of confusion transforming into decisive structural sovereignty",
+    "textHookCandidates": [
+      "FOCUS PARADOX"
+    ],
+    "recommendedArchetype": "impossible_metaphor"
+  },
+  "frontierSignals": {
+    "signals": {
+      "F1": {
+        "signal": "HIGH",
+        "rationale": "Narrative invokes discrete spatial compartments and architectural flow."
+      },
+      "F2": {
+        "signal": "LOW",
+        "rationale": "No physical deformation required; metric or definition scene."
+      },
+      "F3": {
+        "signal": "DORMANT_DISABLED",
+        "rationale": "Frontier #3 remains strictly DORMANT_EXPERIMENTAL in features.ts. Replaced by high-contrast 2.5D layered composition."
+      },
+      "F4": {
+        "signal": "LOW",
+        "rationale": "No balance or torque mechanic present."
+      },
+      "F5": {
+        "signal": "LOW",
+        "rationale": "Clean luminous light canvas with subtle radial depth is superior."
+      },
+      "F6": {
+        "signal": "HIGH",
+        "rationale": "Narrative contains a high-value epiphany preceded by an 18-frame breath-hold micro-freeze."
+      },
+      "F7": {
+        "signal": "VERY_HIGH",
+        "rationale": "Explicit cause-and-effect loop with discrete state transitions (nominal -> strained -> resolved)."
+      },
+      "T": {
+        "signal": "HIGH",
+        "rationale": "Strong conceptual contradiction and curiosity gap extracted for thumbnail design."
+      }
+    }
+  },
+  "diagnostics": {
+    "hygieneValid": true,
+    "issues": [],
+    "unsupportedClaims": [],
+    "structuralNotes": []
+  }
+}

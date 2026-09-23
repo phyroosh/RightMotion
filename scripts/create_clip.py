@@ -559,6 +559,7 @@ def generate_lean_canvas_brief(
     creative_plan: dict = None,
     fps: int = 30,
     product_meta: dict = None,
+    creative_brief: dict = None,
 ) -> str:
     """
     Emit a lean Creative Brief Canvas.tsx with ZERO hardcoded visual content.
@@ -653,23 +654,25 @@ def generate_lean_canvas_brief(
  *  Guidance:     Ground the resolution scene in physical visual proof of the worksheet/blueprint.
  *                Do NOT wrap in a generic card panel or dashboard box."""
 
-    return f'''import React from "react";
-import {{ interpolate, spring, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
-import {{ WordTimestamp }} from "../../types";
-// Kinetic text tools (always available):
-import {{ AnimatedSlashStrike, KineticHighlighter, CameraShake }} from "../../components/kinetic_text";
-{frontier_stubs}
-
-interface CanvasProps {{
-  transcript: WordTimestamp[];
-}}
-
-/**
+    if creative_brief:
+        from creative_brief_compiler import CreativeBriefCompiler
+        header_block = CreativeBriefCompiler(fps=fps).format_canvas_mission_header(
+            pascal_name=pascal_name,
+            brief=creative_brief,
+            s2_start=s2_start,
+            s3_start=s3_start,
+            total_frames=total_frames,
+        )
+    else:
+        header_block = f'''/**
  * ╔══════════════════════════════════════════════════════════════════╗
  * ║  🎬 CREATIVE BRIEF — {pascal_name}Canvas
  * ║  Topic: "{topic}"
  * ║  Niche background: {niche_bg}
  * ╚══════════════════════════════════════════════════════════════════╝
+ *
+ * 🏛️ CREATIVE CONSTITUTION (Supreme Law): Read RIGHTMOTION_CREATIVE_CONSTITUTION.md
+ *    Precedence: CONSTITUTION > BRIEF > SHOT DIRECTIVES > COMPONENT INDEX > AGENT IMPLEMENTATION.
  *
  * ════════════════════════════════════════════════════════════
  * VISUAL CONCEPT  (source: creative_plan.json › visualConcept)
@@ -704,7 +707,8 @@ interface CanvasProps {{
  *    Brief:      Execute the PRIMARY MECHANISM as a live physical event on screen.
  *                The viewer must SEE the transformation happen — not read about it.
  *                Use frontier components from the import stubs above.
- *                Anti-card law: Zero card containers as the primary visual.
+ *                Law of No Unmotivated Cardification: Never wrap in cards unless
+ *                narratively justified (e.g. document proof, phone screen).
  *                If multiple beats exist, choreograph them sequentially from
  *                transcript.json word timestamps — never all at once.
  *
@@ -742,10 +746,27 @@ interface CanvasProps {{
  *  Follow Rule 5.1 Design-First Sequence (AGENTS.md) before writing JSX.
  *  Read transcript.json for exact word-frame timestamps.
  *  Read creative_plan.json › scenePlans for the full orchestrator output.
- */
+ */'''
+
+    return f'''import React from "react";
+import {{ interpolate, spring, staticFile, useCurrentFrame, useVideoConfig }} from "remotion";
+import {{ WordTimestamp }} from "../../types";
+// Core Editing Layers (always available):
+import {{ MechanismStage }} from "../../components/primitives";
+import {{ CameraCanvas, CameraKeyframe }} from "../../components/CameraCanvas";
+import {{ SoundDesignEngine, SfxCue }} from "../../components/SoundDesignEngine";
+import {{ AnimatedSlashStrike, KineticHighlighter, CameraShake }} from "../../components/kinetic_text";
+{frontier_stubs}
+
+interface CanvasProps {{
+  transcript: WordTimestamp[];
+}}
+
+{header_block}
 export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const frame = useCurrentFrame();
   const {{ fps }} = useVideoConfig();
+  const currentMs = (frame / fps) * 1000;
 
   // ═══ FRAME BOUNDARIES (from transcript.json timing) ═══
   // Hook:       frames 0       → {s2_start}   ({hook_dur})
@@ -757,35 +778,60 @@ export const {pascal_name}Canvas: React.FC<CanvasProps> = () => {{
   const isMechanism = frame >= {s2_start} && frame < {s3_start};
   const isResolution = frame >= {s3_start};
 
+  // ═══ EDITING LAYER 1: CAMERA CHOREOGRAPHY ═══
+  // Subtle 2.5D push-in on rising tension (1.0 -> 1.05); adjust or customize keyframes as concept demands
+  const cameraKeyframes: CameraKeyframe[] = [
+    {{ timeMs: 0, x: 540, y: 960, zoom: 1.0, rotate: 0 }},
+    {{ timeMs: {s2_start / fps * 1000:.0f}, x: 540, y: 940, zoom: 1.03, rotate: 0 }},
+    {{ timeMs: {s3_start / fps * 1000:.0f}, x: 540, y: 920, zoom: 1.06, rotate: 0.5 }},
+    {{ timeMs: {total_frames / fps * 1000:.0f}, x: 540, y: 960, zoom: 1.0, rotate: 0 }},
+  ];
+
+  // ═══ EDITING LAYER 2: TACTILE SOUND PUNCTUATION ═══
+  // Sync frame-accurate SFX to key visual contacts, state shifts, and resolution snaps
+  const bespokeSfxCues: SfxCue[] = [
+    {{ frame: {s2_start}, type: "whoosh_fast", volume: 0.24 }},
+    {{ frame: {s3_start}, type: "impact_hit", volume: 0.30 }},
+  ];
+
   return (
-    <div
-      className="absolute inset-x-0 flex flex-col items-center select-none pointer-events-none px-6"
-      style={{{{ top: 280, height: 1060, maxWidth: 960, left: "50%", transform: "translateX(-50%)" }}}}
+    <CameraCanvas
+      currentMs={{currentMs}}
+      keyframes={{cameraKeyframes}}
+      width={{1080}}
+      height={{1920}}
+      enableDrift={{true}}
+      driftIntensity={{0.5}}
     >
-      {{/* ═══ HOOK (frames 0 → {s2_start}) ════════════════════════════════
-       * COMMUNICATE: {hook_narration}
-       * Establish the visual question and initial state described by the Creative Brief.
-       * Choose the strongest visual representation for the narration. Do not default to a card.
-       * If the concept has a causal/physical setup, begin establishing that mechanism during the hook.
-       */}}
-      {{isHook && (null /* TODO: Design and implement hook scene */)}}
+      <SoundDesignEngine cues={{bespokeSfxCues}} />
 
-      {{/* ═══ MECHANISM (frames {s2_start} → {s3_start}) ════════════════════
-       * COMMUNICATE: {logic_narration}
-       * PRIMARY MECHANISM: {primary_mechanism}
-       * Physical event: {physical_description}
-       * Transformation: {visible_transformation}
-       * Execute this as a live physical event. Use frontier components above.
-       */}}
-      {{isMechanism && (null /* TODO: Design and implement mechanism scene */)}}
+      {{/* ═══ OPEN STAGE (Safe bounds: y 260 → 1340px, NO container cards) ═══ */}}
+      <MechanismStage top={{260}} bottom={{1340}}>
+        {{/* ═══ HOOK (frames 0 → {s2_start}) ════════════════════════════════
+         * COMMUNICATE: {hook_narration}
+         * Stage hero illustration card + grounded Judy intro (frames 0-75).
+         * Primary visual scale: 400px–750px.
+         */}}
+        {{isHook && (null /* TODO: Design bespoke hook scene */)}}
 
-      {{/* ═══ RESOLUTION (frames {s3_start} → {total_frames}) ═════════════════
-       * COMMUNICATE: {solution_narration}
-       * Show STATE B: {visible_consequence}
-       * Decisive. One dominant impression. No new information stacks.
-       */}}
-      {{isResolution && (null /* TODO: Design and implement resolution scene */)}}
-    </div>
+        {{/* ═══ MECHANISM (frames {s2_start} → {s3_start}) ════════════════════
+         * COMMUNICATE: {logic_narration}
+         * PRIMARY MECHANISM: {primary_mechanism}
+         * Physical event: {physical_description}
+         * Transformation: {visible_transformation}
+         * MOBILE SCALE: Primary subject must occupy 400px–750px with 6px–14px strokes.
+         * NO UNMOTIVATED CARDS: Keep open vector staging. Deform matter live.
+         */}}
+        {{isMechanism && (null /* TODO: Design bespoke physical mechanism */)}}
+
+        {{/* ═══ RESOLUTION (frames {s3_start} → {total_frames}) ═════════════════
+         * COMMUNICATE: {solution_narration}
+         * Show STATE B: {visible_consequence}
+         * Decisive sovereign payoff. Elastic snap, fracture settling, or clarity bloom.
+         */}}
+        {{isResolution && (null /* TODO: Design bespoke resolution scene */)}}
+      </MechanismStage>
+    </CameraCanvas>
   );
 }};
 '''
@@ -855,6 +901,7 @@ def scaffold_clip_files(
     niche: str = None,
     creative_plan: dict = None,
     motion_ast: dict = None,
+    creative_brief: dict = None,
 ):
     topic = sanitize_tags(raw_topic)
     script_text = sanitize_tags(raw_script)
@@ -1471,6 +1518,7 @@ export const {pascal_name}Presenter: React.FC<PresenterProps> = () => {{
             creative_plan=creative_plan,
             fps=fps,
             product_meta=product_meta,
+            creative_brief=creative_brief,
         )
     else:
         canvas_code = f"""import React from "react";
@@ -2060,12 +2108,35 @@ async def main():
                 print(f"🎨 [Illustration] Found bespoke scene illustration: {illustration_path}")
                 break
 
+    # Phase 1 & 2: Compile Canonical Creative Brief, Shot Directives & Retention Choreography
+    print(f"📋 [Creative Brief & Retention Choreographer] Compiling structured Shot Directives & Attention Plan...")
+    from creative_brief_compiler import CreativeBriefCompiler
+    brief_compiler = CreativeBriefCompiler(fps=60)
+    creative_brief = brief_compiler.compile_brief(
+        clip_name=name,
+        topic=topic,
+        niche=detected_niche,
+        clean_script=clean_script,
+        words=words,
+        story_model=story_model,
+        creative_plan=creative_plan,
+        motion_ast=motion_ast,
+        duration_sec=duration_sec,
+        illustration_path=illustration_path,
+        problem_cutout=None,
+        solution_cutout=None,
+    )
+    creative_brief_path = ROOT_DIR / "src" / "clips" / name / "creative_brief.json"
+    creative_brief_path.write_text(json.dumps(creative_brief, indent=2), encoding="utf-8")
+    print(f"      Canonical Creative Brief saved to: {creative_brief_path}")
+
     pascal_name = scaffold_clip_files(
         name, topic, args.format, duration_sec, clean_script, words, product_meta,
         illustration_path=illustration_path, pinned_comment=script_pinned_comment, is_duo=is_duo,
         niche=detected_niche,
         creative_plan=creative_plan,
         motion_ast=motion_ast,
+        creative_brief=creative_brief,
     )
     register_composition_and_thumbnail(
         name,
@@ -2102,11 +2173,13 @@ async def main():
         print(f"✨ Audio, transcript timestamps, and registered composition are ready!")
         print(f"📁 Starter Canvas: src/clips/{name}/Canvas.tsx")
         print(f"🧠 Story Intelligence: src/clips/{name}/story_model.json")
+        print(f"📋 Master Creative Brief: src/clips/{name}/creative_brief.json")
         print("\n👉 MANDATORY AI AGENT ACTION:")
-        print(f"1. Open src/clips/{name}/Canvas.tsx.")
-        print(f"2. Write 100% bespoke Remotion motion graphics tailored to '{topic}'.")
-        print(f"3. Verify stills: npx remotion still src/index.ts {pascal_name}Video out/{name}_scene1.png --frame=80")
-        print(f"4. Render video: npx remotion render src/index.ts {pascal_name}Video out/{name}_video.mp4")
+        print(f"1. READ src/clips/{name}/creative_brief.json for authoritative shot plan & 5-question state changes.")
+        print(f"2. Open src/clips/{name}/Canvas.tsx and review the RIGHTMOTION CREATIVE MISSION header.")
+        print(f"3. Write 100% bespoke Remotion motion graphics tailored to '{topic}' using physical mechanisms.")
+        print(f"4. Verify stills: npx remotion still src/index.ts {pascal_name}Video out/{name}_scene1.png --frame=80")
+        print(f"5. Render video: npx remotion render src/index.ts {pascal_name}Video out/{name}_video.mp4")
         print("=" * 80 + "\n")
 
 if __name__ == "__main__":
